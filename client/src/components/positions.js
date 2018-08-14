@@ -3,8 +3,8 @@ import React, { Component } from "react";
 class Position extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>Hello World</h1>
+      <div className="position">
+        <h1>Position</h1>
       </div>
     );
   }

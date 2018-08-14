@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import SideBar from "./subComponents/sidebar";
+import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 
 class ResumeList extends Component {
   render() {
     return (
       <div className="Form">
-        <h1 className="Header">Welcome!</h1>
+        <h1 className="Header">Resumes</h1>
         <resumeCard />
         <Route exact path="/Resumes/:id" />
       </div>
