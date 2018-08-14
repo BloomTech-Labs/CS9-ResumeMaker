@@ -19,6 +19,10 @@ const server = express();
 server.use(express.json());
 server.use(cors({}));
 
+// Route for editing/adding/deleting users
+const UserRouter = require("./user/UserRoutes.js");
+server.use("/users", UserRouter);
+
 // Initial GET route
 server.get("/", (req, res) => {
   res.json({ Message: "Hello World" });
