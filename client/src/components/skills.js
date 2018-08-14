@@ -4,7 +4,7 @@ class Skills extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
+        <h1>Skills</h1>
       </div>
     );
   }
