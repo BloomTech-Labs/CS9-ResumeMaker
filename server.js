@@ -7,5 +7,8 @@ require("dotenv").config();
 
 const server = express();
 
+server.use(express.json());
+server.use(cors({}));
+
 const port = process.env.PORT || 3333;
-server.listen(port, () => console.log(`Server running on port: ${port}`))
+server.listen(port, () => console.log(`Server running on port: ${port}`));
