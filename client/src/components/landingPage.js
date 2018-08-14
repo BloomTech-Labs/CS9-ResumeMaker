@@ -1,21 +1,19 @@
 // register, login, nav bar, landing page component
-
+import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import Templates from "./Templates";
+import LoginButton from "./subComponents/loginButton";
+import RegisterButton from "./subComponents/registerButton";
 
-class LandingPage extends Component {  
-    render() {
-        return (
-          <div className="App">
-            <h1 className="Header">Resume Maker</h1>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/Templates" component={Templates} />
-          </div>
-        );
-      }
-    }
-    
-    export default LandingPage;
+class LandingPage extends Component {
+  render() {
+    return (
+      <div className="App">
+        <LoginButton />
+        <RegisterButton />
+        <h1 className="Header">Resume Maker</h1>
+      </div>
+    );
+  }
+}
+
+export default LandingPage;

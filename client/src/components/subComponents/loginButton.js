@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-class Skills extends Component {
+class LoginButton extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
+        <p>Login Button</p>
       </div>
     );
   }
 }
 
-export default Skills;
+export default LoginButton;

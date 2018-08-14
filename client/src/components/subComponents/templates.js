@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Skills extends Component {
+class Templates extends Component {
   render() {
     return (
       <div className="App">
@@ -10,4 +10,4 @@ class Skills extends Component {
   }
 }
 
-export default Skills;
+export default Templates;
