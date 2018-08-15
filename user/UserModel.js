@@ -45,16 +45,8 @@ User.pre("save", function(next) {
   });
 });
 
-// Simpler way to compare hashed passes but can't get this version to throw errors correctly
-// User.methods.checkPassword = function(passwordGuess) {
-//   return bcrypt.compare(passwordGuess, this.password);
-// };
-
-User.methods.checkPassword = function(plainTextPW, callBack) {
-  bcrypt.compare(plainTextPW, this.password, (err, isMatch) => {
-    if (err) return callBack(err);
-    callBack(null, isMatch);
-  });
+User.methods.checkPassword = function(passwordGuess) {
+  return bcrypt.compareSync(passwordGuess, this.password);
 };
 
 module.exports = mongoose.model("User", User);
