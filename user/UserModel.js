@@ -46,10 +46,10 @@ const User = new mongoose.Schema(
           },
           location: String,
           from: {
-            type: Date,
+            type: String,
             required: true
           },
-          to: Date,
+          to: String,
           description: String
         }
       ],
@@ -68,10 +68,10 @@ const User = new mongoose.Schema(
             required: true
           },
           from: {
-            type: Date,
+            type: String,
             required: true
           },
-          to: Date,
+          to: String,
           current: {
             type: Boolean,
             default: false
