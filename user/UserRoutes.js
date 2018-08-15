@@ -1,11 +1,30 @@
 const express = require("express");
 const UserRouter = express.Router();
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const User = require("./UserModel.js");
 
+const authenticate = (req, res, next) => {
+  let token = req.get("Authorization");
+  if (token != undefined) token = token.replace("Bearer ", "");
+  if (token) {
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) return res.status(422).json(err);
+      req.decoded = decoded;
+      next();
+    });
+  } else {
+    console.log("Repelled Invader", token);
+    return res.status(403).json({
+      error: "You're not allowed in here!"
+    });
+  }
+};
+
 // GET /users
 // Should get all the users
-UserRouter.get("/", (req, res) => {
+UserRouter.get("/", authenticate, (req, res) => {
   User.find()
     .then(users => {
       res.status(200).json(users);
@@ -19,16 +38,37 @@ UserRouter.get("/", (req, res) => {
 // Register a new user
 // Make sure to send confirmation email
 UserRouter.post("/register", (req, res) => {
-  const { username, password, email } = req.body;
-  const newUser = new User({ username, password, email });
-
-  newUser
-    .save()
+  const userData = req.body;
+  User.findOne({ email: userData.email })
     .then(user => {
-      res.status(201).json({ user });
+      if (user) {
+        res.status(500).json({
+          Error:
+            "This email is already in use. Please choose the forgot password option to reset your password."
+        });
+      } else {
+        const newUser = new User(userData);
+        newUser
+          .save()
+          .then(user => {
+            const payload = {
+              username: user.username,
+              id: user._id
+            };
+            const token = jwt.sign(payload, process.env.SECRET);
+            res.status(201).json({ user, token });
+          })
+          .catch(err => {
+            res.status(500).json({
+              Error: "There was an error in account creation, please try again."
+            });
+          });
+      }
     })
     .catch(err => {
-      res.status(500).json({ Error: "Unsuccessful Post" });
+      return res.status(500).json({
+        Error: "There was an error in account creation, please try again."
+      });
     });
 });
 
@@ -36,25 +76,19 @@ UserRouter.post("/register", (req, res) => {
 // Login with a registered user
 UserRouter.post("/login", (req, res) => {
   const { username, password } = req.body;
-  User.findOne({ username }, (err, user) => {
-    if (err) {
-      return res.status(500).json({ error: "Error finding user." });
-    }
+  User.findOne({ username }).then(user => {
     if (!user) {
-      return res.status(422).json({ error: "Invalid username." });
+      return res.status(422).json({ error: "Invalid credentials." });
     }
-    user.checkPassword(password, (err, isMatch) => {
-      if (err) throw err;
-      if (isMatch) {
-        const userData = {
-          id: user._id,
-          username: user.username
-        };
-        res.json({ userData });
-      } else {
-        return res.status(422).json({ error: "Invalid password." });
-      }
-    });
+    const verified = user.checkPassword(password);
+    if (verified) {
+      const payload = {
+        username: user.username,
+        id: user._id
+      };
+      const token = jwt.sign(payload, process.env.SECRET);
+      res.json({ token });
+    } else res.status(422).json({ error: "Invalid Credentials." });
   });
 });
 
@@ -74,6 +108,8 @@ UserRouter.delete("/:id", (req, res) => {
 
 // PUT users/:id
 // Update user information
+
+// This doesn't work correctly anymore, it just changes every field listed to null no matter what
 UserRouter.put("/:id", (req, res) => {
   const { id } = req.params;
   const { password, linkedin, github, phonenumber, portfolio, name } = req.body;
@@ -88,5 +124,36 @@ UserRouter.put("/:id", (req, res) => {
       res.status(500).json({ Error: err });
     });
 });
+
+// Attempt at using authenticate, doesn't work and also responds with user data regardless of what token is given so long as the token is valid for someone
+// UserRouter.put("/:id", authenticate, (req, res) => {
+//   const id = req.params.id;
+//   const changes = req.body;
+//   const options = {
+//     new: true
+//   };
+
+//   User.findById(id)
+//     .then(user => {
+//       User.findByIdAndUpdate(id, changes, options)
+//         .then(user => {
+//           if (!user) {
+//             return res
+//               .status(404)
+//               .json({ errorMessage: "No user with that id could be found." });
+//           } else res.status(200).json(user);
+//         })
+//         .catch(err => {
+//           res
+//             .status(500)
+//             .json({ errorMessage: "Could not update a user with that id." });
+//         });
+//     })
+//     .catch(err => {
+//       res
+//         .status(404)
+//         .json({ errorMessage: "Could not get a user for that id." });
+//     });
+// });
 
 module.exports = UserRouter;
