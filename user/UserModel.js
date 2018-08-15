@@ -18,21 +18,14 @@ const User = new mongoose.Schema(
       required: true,
       unique: true
     },
-    phonenumber: {
-      type: String
-    },
-    name: {
-      type: String
-    },
-    linkedin: {
-      type: String
-    },
-    github: {
-      type: String
-    },
-    portfolio: {
-      type: String
-    }
+    phoneNumber: {
+      type: Number,
+      minlength: 10
+    }, 
+    name: String,
+    linkedin: String,
+    github: String,
+    portfolio: String
   },
   { timestamps: true }
 );
