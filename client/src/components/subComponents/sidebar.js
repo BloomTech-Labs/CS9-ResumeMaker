@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import Summary from "../summary";
 import Positions from "../position";
 import Education from "../education";
@@ -8,21 +9,35 @@ import Resumes from "../resumes";
 import Billing from "../billing";
 import Settings from "../settings";
 // import "./Sidebar.css";
+=======
+import "./CSS/sidebar.css";
+>>>>>>> eb76f6bbd30867d01ba5640ac0fbb95bfb38fa7d
 
 class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sidebarOpen: true
+    };
+  }
+
+  onSetSidebarOpen = (open) => {
+    this.setState({ sidebarOpen: open });
+  }
+
   render() {
     return (
-      <div className="Sidebar">
-        <Link to="/summary">{Summary}</Link>
-        <Link to="/positions">{Positions}</Link>
-        <Link to="/education">{Education}</Link>
-        <Link to="/skills">{Skills}</Link>
-        <Link to="/resumes">{Resumes}</Link>
-        <Link to="/billing">{Billing}</Link>
-        <Link to="/settings">{Settings}</Link>
+      <div className="test-div">
+        <Link to="/templates" className="sidebar-button"> Templates</Link>
+        <Link to="/positions" className="sidebar-button"> Positions</Link>
+        <Link to="/education" className="sidebar-button"> Education</Link>
+        <Link to="/skills" className="sidebar-button"> Skills</Link>
+        <Link to="/resumes" className="sidebar-button"> Resumes</Link>
+        <Link to="/billing" className="sidebar-button"> Billing</Link>
+        <Link to="/settings" className="sidebar-button"> Settings</Link>
       </div>
     );
   }
 }
 
-export default Sidebar;
+export default Sidebar; 

@@ -4,7 +4,7 @@ class Register extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
+        <h1>Please create an account. </h1>
       </div>
     );
   }
