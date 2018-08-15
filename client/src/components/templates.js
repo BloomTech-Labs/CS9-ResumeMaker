@@ -6,7 +6,7 @@ class Templates extends Component {
   render() {
     return (
       <div>
-        <Navbar breadcrumbs={["positions", "education"]} />
+        <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/templates", title: "Templates" }]} />
         <div className="component-div">
           <Sidebar />
           <div className="title-div">

@@ -7,7 +7,7 @@ class Navbar extends Component {
     return (
       <nav class="navbar sticky-top navbar-dark bg-primary">
         <ol class="breadcrumb">
-          {this.props.breadcrumbs.map(item => <li class="breadcrumb-item"><Link to={"/" + item} className="sidebar-button">{item}</Link></li>)}
+          {this.props.breadcrumbs.map(item => <li class="breadcrumb-item"><Link to={item.link} className="sidebar-button">{item.title}</Link></li>)}
         </ol>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />

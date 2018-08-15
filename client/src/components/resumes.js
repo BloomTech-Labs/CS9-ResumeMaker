@@ -6,11 +6,15 @@ import Navbar from "./subComponents/navbar";
 class ResumeList extends Component {
   render() {
     return (
-      <div className="Form">
-        <Sidebar />
-        <h1 className="Header">Resumes</h1>
-        <resumeCard />
-        <Route exact path="/Resumes/:id" />
+      <div>
+        <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/resumes", title: "Resumes" }]} />
+        <div className="component-div">
+          <Sidebar />
+          <div className="title-div">
+            <h1 className="Header">Resumes</h1>
+            <resumeCard />
+          </div>
+        </div>
       </div>
     );
   }
