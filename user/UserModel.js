@@ -18,20 +18,71 @@ const User = new mongoose.Schema(
       required: true,
       unique: true
     },
-    phonenumber: {
-      type: String
+    name: String,
+    phoneNumber: {
+      type: Number,
+      min: 10
     },
-    name: {
-      type: String
+    links: {
+      linkedin: String,
+      github: String,
+      portfolio: String
     },
-    linkedin: {
-      type: String
-    },
-    github: {
-      type: String
-    },
-    portfolio: {
-      type: String
+    sections: {
+      summary: [
+        {
+          type: String
+        }
+      ],
+      experience: [
+        {
+          title: {
+            type: String,
+            required: true
+          },
+          company: {
+            type: String,
+            required: true
+          },
+          location: String,
+          from: {
+            type: String,
+            required: true
+          },
+          to: String,
+          description: String
+        }
+      ],
+      education: [
+        {
+          school: {
+            type: String,
+            required: true
+          },
+          degree: {
+            type: String,
+            required: true
+          },
+          fieldofstudy: {
+            type: String,
+            required: true
+          },
+          from: {
+            type: String,
+            required: true
+          },
+          to: String,
+          current: {
+            type: Boolean,
+            default: false
+          }
+        }
+      ],
+      skills: [
+        {
+          type: String
+        }
+      ]
     }
   },
   { timestamps: true }
