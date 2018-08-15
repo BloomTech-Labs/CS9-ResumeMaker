@@ -106,11 +106,16 @@ UserRouter.delete("/:id", (req, res) => {
     });
 });
 
-// PUT users/:id
+// PUT users/info/:id
 // Update user information
-UserRouter.put("/:id", (req, res) => {
+UserRouter.put("/info/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
+
+  delete changes.username;
+  delete changes.password;
+  delete changes.email;
+
   const options = {
     new: true
   };
@@ -128,5 +133,13 @@ UserRouter.put("/:id", (req, res) => {
         .json({ errorMessage: "Could not update a user with that id." });
     });
 });
+
+// PUT users/email/:id
+// Update user email
+UserRouter.put("/email/:id", (req, res) => {});
+
+// PUT users/password/:id
+// Update user password
+UserRouter.put("/password/:id", (req, res) => {});
 
 module.exports = UserRouter;
