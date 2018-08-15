@@ -6,6 +6,7 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const User = require("./UserModel.js");
 require("dotenv").config();
 const options = {
+  usernameField: "email",
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.SECRET
 };
