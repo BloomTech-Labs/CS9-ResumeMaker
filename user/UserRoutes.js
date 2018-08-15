@@ -50,10 +50,12 @@ UserRouter.post("/register", (req, res) => {
           .save()
           .then(user => {
             const payload = {
-              // username: user.username,
-              id: user._id
+              id: user._id,
+              email: user.email
             };
-            const token = jwt.sign(payload, process.env.SECRET);
+            const token = jwt.sign(payload, process.env.SECRET, {
+              expiresIn: 604800
+            });
             res.status(201).json({ user, token });
           })
           .catch(err => {
@@ -73,8 +75,8 @@ UserRouter.post("/register", (req, res) => {
 // POST users/login
 // Login with a registered user
 UserRouter.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  User.findOne({ username })
+  const { email, password } = req.body;
+  User.findOne({ email })
     .then(user => {
       if (!user) {
         return res.status(422).json({ error: "Invalid credentials." });
@@ -82,10 +84,12 @@ UserRouter.post("/login", (req, res) => {
       const verified = user.checkPassword(password);
       if (verified) {
         const payload = {
-          username: user.username,
-          id: user._id
+          id: user._id,
+          email: user.email
         };
-        const token = jwt.sign(payload, process.env.SECRET);
+        const token = jwt.sign(payload, process.env.SECRET, {
+          expiresIn: 604800
+        });
         res.json({ token });
       } else return res.status(422).json({ error: "Invalid credentials." });
     })
