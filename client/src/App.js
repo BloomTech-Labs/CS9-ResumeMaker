@@ -10,7 +10,7 @@ import Settings from "./components/settings";
 import Positions from "./components/positions";
 import Login from "./components/login";
 import Register from "./components/register";
-import Templates from "./components/subComponents/templates";
+import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
 import "./App.css";
 
