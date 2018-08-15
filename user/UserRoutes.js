@@ -11,6 +11,7 @@ UserRouter.get(
   "/currentuser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log(req.user);
     res.status(200).json({
       id: req.user.id,
       username: req.user.username,
@@ -19,7 +20,7 @@ UserRouter.get(
   }
 );
 
-// GET /users
+// A test route for GETTING /users
 // Should get all the users
 UserRouter.get("/", (req, res) => {
   User.find()
@@ -27,7 +28,7 @@ UserRouter.get("/", (req, res) => {
       res.status(200).json(users);
     })
     .catch(err => {
-      res.status(500).json({ Error: "Unsuccessful" });
+      res.status(500).json({ error: "Get unsuccessful." });
     });
 });
 
@@ -40,7 +41,7 @@ UserRouter.post("/register", (req, res) => {
     .then(user => {
       if (user) {
         res.status(500).json({
-          Error:
+          error:
             "This email is already in use. Please choose the forgot password option to reset your password."
         });
       } else {
@@ -57,14 +58,14 @@ UserRouter.post("/register", (req, res) => {
           })
           .catch(err => {
             res.status(500).json({
-              Error: "There was an error in account creation, please try again."
+              error: "There was an error in account creation, please try again."
             });
           });
       }
     })
     .catch(err => {
       return res.status(500).json({
-        Error: "There was an error in account creation, please try again."
+        error: "There was an error in account creation, please try again."
       });
     });
 });
@@ -95,44 +96,61 @@ UserRouter.post("/login", (req, res) => {
 
 // DELETE users/:id
 // Make sure to send confirmation email for deleting
-UserRouter.delete("/:id", (req, res) => {
-  const id = req.params.id;
-
-  User.findByIdAndRemove(id)
-    .then(user => {
-      res.status(200).send("Successfully deleted.");
-    })
-    .catch(err => {
-      res.status(404).json(err);
-    });
-});
+UserRouter.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const id = req.params.id;
+    if (id === req.user.id) {
+      User.findByIdAndRemove(id)
+        .then(user => {
+          res.status(200).send("Successfully deleted.");
+        })
+        .catch(err => {
+          res.status(404).json(err);
+        });
+    } else {
+      res.status(500).json({ error: "You do not have access to this user!" });
+    }
+  }
+);
 
 // PUT users/info/:id
 // Update user information
-UserRouter.put("/info/:id", (req, res) => {
-  const id = req.params.id;
-  delete req.body.username;
-  delete req.body.password;
-  delete req.body.email;
-  const changes = req.body;
+UserRouter.put(
+  "/info/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log(req.user);
+    const id = req.params.id;
+    if (id === req.user.id) {
+      delete req.body.username;
+      delete req.body.password;
+      delete req.body.email;
+      const changes = req.body;
 
-  const options = {
-    new: true
-  };
-  User.findByIdAndUpdate(id, changes, options)
-    .then(user => {
-      if (!user) {
-        return res
-          .status(404)
-          .json({ errorMessage: "No user with that id could be found." });
-      } else res.status(200).json(user);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ errorMessage: "Could not update a user with that id." });
-    });
-});
+      const options = {
+        new: true
+      };
+
+      User.findByIdAndUpdate(id, changes, options)
+        .then(user => {
+          if (!user) {
+            return res
+              .status(404)
+              .json({ error: "No user with that id could be found." });
+          } else res.status(200).json(user);
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: "Could not update a user with that id." });
+        });
+    } else {
+      res.status(500).json({ error: "You do not have access to this user!" });
+    }
+  }
+);
 
 // PUT users/email/:id
 // Update user email
