@@ -76,11 +76,9 @@ UserRouter.delete("/:id", (req, res) => {
 // Update user information
 UserRouter.put("/:id", (req, res) => {
   const { id } = req.params;
-  const { password, linkedin, github, phonenumber, portfolio, name } = req.body;
-  const newInfo = { password, linkedin, github, phonenumber, portfolio, name };
   const options = { new: true };
 
-  User.findByIdAndUpdate(id, newInfo, options)
+  User.findByIdAndUpdate(id, req.body, options)
     .then(user => {
       res.status(200).json({ user });
     })
