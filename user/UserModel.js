@@ -29,8 +29,22 @@ const User = new mongoose.Schema(
       portfolio: String,
     },
     resume: {
-      position: [{
-        type: String
+      experience: [{
+        title: {
+          type: String,
+          required: true
+        },
+        company: {
+          type: String,
+          required: true
+        },
+        location: String,
+        from: {
+          type: Date,
+          required: true
+        },
+        to: Date,
+        description: String
       }],
       summary: [{
         type: String
