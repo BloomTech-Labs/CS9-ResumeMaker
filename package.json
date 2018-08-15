@@ -28,5 +28,7 @@
   }, 
   "devDependencies": {
     "nodemon": "^1.18.3"
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
   }
 }
