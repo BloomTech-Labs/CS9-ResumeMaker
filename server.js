@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const passport = require("passport");
 require("dotenv").config();
 
 // Connect To mLab
@@ -14,6 +15,10 @@ mongoose
 
 // Initialize Server
 const server = express();
+
+// Initialize passport authentification
+server.use(passport.initialize());
+require("./user/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
