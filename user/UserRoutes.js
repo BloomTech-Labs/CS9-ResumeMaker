@@ -1,30 +1,27 @@
 const express = require("express");
 const UserRouter = express.Router();
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 require("dotenv").config();
 
 const User = require("./UserModel.js");
 
-const authenticate = (req, res, next) => {
-  let token = req.get("Authorization");
-  if (token != undefined) token = token.replace("Bearer ", "");
-  if (token) {
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
-      if (err) return res.status(422).json(err);
-      req.decoded = decoded;
-      next();
-    });
-  } else {
-    console.log("Repelled Invader", token);
-    return res.status(403).json({
-      error: "You're not allowed in here!"
+// Route to find id, username and email of current user
+UserRouter.get(
+  "/currentuser",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.status(200).json({
+      id: req.user.id,
+      username: req.user.username,
+      email: req.user.email
     });
   }
-};
+);
 
 // GET /users
 // Should get all the users
-UserRouter.get("/", authenticate, (req, res) => {
+UserRouter.get("/", (req, res) => {
   User.find()
     .then(users => {
       res.status(200).json(users);
@@ -52,7 +49,7 @@ UserRouter.post("/register", (req, res) => {
           .save()
           .then(user => {
             const payload = {
-              username: user.username,
+              // username: user.username,
               id: user._id
             };
             const token = jwt.sign(payload, process.env.SECRET);
@@ -76,20 +73,24 @@ UserRouter.post("/register", (req, res) => {
 // Login with a registered user
 UserRouter.post("/login", (req, res) => {
   const { username, password } = req.body;
-  User.findOne({ username }).then(user => {
-    if (!user) {
-      return res.status(422).json({ error: "Invalid credentials." });
-    }
-    const verified = user.checkPassword(password);
-    if (verified) {
-      const payload = {
-        username: user.username,
-        id: user._id
-      };
-      const token = jwt.sign(payload, process.env.SECRET);
-      res.json({ token });
-    } else res.status(422).json({ error: "Invalid Credentials." });
-  });
+  User.findOne({ username })
+    .then(user => {
+      if (!user) {
+        return res.status(422).json({ error: "Invalid credentials." });
+      }
+      const verified = user.checkPassword(password);
+      if (verified) {
+        const payload = {
+          username: user.username,
+          id: user._id
+        };
+        const token = jwt.sign(payload, process.env.SECRET);
+        res.json({ token });
+      } else return res.status(422).json({ error: "Invalid credentials." });
+    })
+    .catch(err => {
+      res.status(500).json({ error: "Could not log in." });
+    });
 });
 
 // DELETE users/:id
@@ -110,11 +111,10 @@ UserRouter.delete("/:id", (req, res) => {
 // Update user information
 UserRouter.put("/info/:id", (req, res) => {
   const id = req.params.id;
+  delete req.body.username;
+  delete req.body.password;
+  delete req.body.email;
   const changes = req.body;
-
-  delete changes.username;
-  delete changes.password;
-  delete changes.email;
 
   const options = {
     new: true
