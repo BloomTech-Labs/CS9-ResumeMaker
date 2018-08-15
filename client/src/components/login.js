@@ -4,7 +4,7 @@ class Login extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
+        <h1>Please log in to view your resumes.</h1>
       </div>
     );
   }
