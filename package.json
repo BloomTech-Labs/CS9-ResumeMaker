@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lambda-School-Labs/CS9-ResumeMaker.git"
@@ -29,6 +26,6 @@
     "passport-jwt": "^4.0.0"
   }, 
   "devDependencies": {
-    "nodemon": "^1.18.3",
+    "nodemon": "^1.18.3"
   }
 }
