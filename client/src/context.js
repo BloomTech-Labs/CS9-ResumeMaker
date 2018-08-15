@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+/*import React, { Component } from 'react'
+
 
 const UserContext = React.createContext({
   isLoggedIn: true // TODO:need this to access user data while user is logged in
 })
+
 
 export class UserContextProvider extends Component {
   constructor(props) {
@@ -23,11 +25,15 @@ export class UserContextProvider extends Component {
   }
 }
 
+<UserContext.Consumer>
+  
+</UserContext.Consumer>
+
 const SidebarContext = React.createContext({
   showSidebar: true
 })
 
-export class SidebarContext extends Component {
+export class SidebarContextProvider extends Component {
   constructor(props) {
     super(props)
 
@@ -47,4 +53,4 @@ export class SidebarContext extends Component {
 
 }
 
-export default UserContext; SidebarContext
+export default UserContext; SidebarContext */

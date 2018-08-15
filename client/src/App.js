@@ -11,11 +11,14 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Templates from "./components/subComponents/templates";
 import "./App.css";
+import AuthProvider, {AuthContext} from "./contexts/AuthProvider";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <AuthProvider>
+          <AuthContext.Consumer>
         <h1>Hello World!</h1>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/summaries" component={Summaries} />
@@ -27,6 +30,9 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/templates" component={Templates} />
+    
+          </AuthContext.Consumer>
+        </AuthProvider>
       </div>
     );
   }
