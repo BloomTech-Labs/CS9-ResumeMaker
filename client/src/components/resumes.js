@@ -5,18 +5,19 @@ import  AuthProvider, {AuthContext} from "../contexts/AuthProvider";
 //import Navbar from "./subComponents/navbar";
 import Sidebar from "./subComponents/sidebar"
 import Navbar from "./subComponents/navbar";
+import ResumeCard from "./subComponents/resumeCard"
 
 class ResumeList extends Component {
   render() {
     return (
      
       <div className="Form">
-       <AuthContext.Provider>
+       <AuthProvider>
         <AuthContext.Consumer>
-          {props =>
+          {auth =>
           <React.Fragment>
         <h1 className="Header">Welcome!</h1>
-        //ResumeCard/>
+        <ResumeCard auth={auth}/>
         <Sidebar />
         <h1 className="Header">Resumes</h1>
         <resumeCard />
@@ -24,7 +25,7 @@ class ResumeList extends Component {
         </React.Fragment>
           }
           </AuthContext.Consumer>
-        </AuthContext.Provider>
+        </AuthProvider>
         </div>
     );
   }

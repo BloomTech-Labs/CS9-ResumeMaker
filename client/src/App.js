@@ -19,14 +19,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-<<<<<<< HEAD
         <AuthProvider>
           <AuthContext.Consumer>
           {props => 
             <React.Fragment>
         <h1>Hello World!</h1>
-=======
->>>>>>> eb76f6bbd30867d01ba5640ac0fbb95bfb38fa7d
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/summaries" component={Summaries} />
         <Route exact path="/positions" component={Positions} />
@@ -38,15 +35,12 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/templates" component={Templates} />
-<<<<<<< HEAD
         </React.Fragment>
       }
 
           </AuthContext.Consumer>
         </AuthProvider>
-=======
         <Route exact path="/sidebar" component={Sidebar} />
->>>>>>> eb76f6bbd30867d01ba5640ac0fbb95bfb38fa7d
       </div>
     );
   }

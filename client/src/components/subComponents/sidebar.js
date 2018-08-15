@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import Summary from "../summary";
-import Positions from "../position";
+import Positions from "../positions";
 import Education from "../education";
 import Skills from "../skills";
 import Resumes from "../resumes";
 import Billing from "../billing";
 import Settings from "../settings";
 // import "./Sidebar.css";
-=======
 import "./CSS/sidebar.css";
->>>>>>> eb76f6bbd30867d01ba5640ac0fbb95bfb38fa7d
 
 class Sidebar extends Component {
   constructor(props) {
