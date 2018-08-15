@@ -22,59 +22,67 @@ const User = new mongoose.Schema(
     phoneNumber: {
       type: Number,
       min: 10
-    }, 
+    },
     links: {
       linkedin: String,
       github: String,
-      portfolio: String,
+      portfolio: String
     },
-    resume: {
-      summary: [{
-        type: String
-      }],
-      experience: [{
-        title: {
-          type: String,
-          required: true
-        },
-        company: {
-          type: String,
-          required: true
-        },
-        location: String,
-        from: {
-          type: Date,
-          required: true
-        },
-        to: Date,
-        description: String
-      }],
-      education: [{
-        school: {
-          type: String,
-          required: true
-        },
-        degree: {
-          type: String,
-          required: true
-        },
-        fieldofstudy: {
-          type: String,
-          required: true
-        }, 
-        from: {
-          type: Date,
-          required: true
-        }, 
-        to: Date,
-        current: {
-          type: Boolean,
-          default: false
+    sections: {
+      summary: [
+        {
+          type: String
         }
-      }],
-      skills: [{
-        type: String
-      }]
+      ],
+      experience: [
+        {
+          title: {
+            type: String,
+            required: true
+          },
+          company: {
+            type: String,
+            required: true
+          },
+          location: String,
+          from: {
+            type: Date,
+            required: true
+          },
+          to: Date,
+          description: String
+        }
+      ],
+      education: [
+        {
+          school: {
+            type: String,
+            required: true
+          },
+          degree: {
+            type: String,
+            required: true
+          },
+          fieldofstudy: {
+            type: String,
+            required: true
+          },
+          from: {
+            type: Date,
+            required: true
+          },
+          to: Date,
+          current: {
+            type: Boolean,
+            default: false
+          }
+        }
+      ],
+      skills: [
+        {
+          type: String
+        }
+      ]
     }
   },
   { timestamps: true }
@@ -90,6 +98,6 @@ User.pre("save", function(next) {
 
 User.methods.checkPassword = function(passwordGuess) {
   return bcrypt.compareSync(passwordGuess, this.password);
- };
+};
 
 module.exports = mongoose.model("User", User);
