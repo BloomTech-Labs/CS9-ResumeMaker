@@ -108,52 +108,25 @@ UserRouter.delete("/:id", (req, res) => {
 
 // PUT users/:id
 // Update user information
-
-// This doesn't work correctly anymore, it just changes every field listed to null no matter what
 UserRouter.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const { password, linkedin, github, phonenumber, portfolio, name } = req.body;
-  const newInfo = { password, linkedin, github, phonenumber, portfolio, name };
-  const options = { new: true };
-
-  User.findByIdAndUpdate(id, newInfo, options)
+  const id = req.params.id;
+  const changes = req.body;
+  const options = {
+    new: true
+  };
+  User.findByIdAndUpdate(id, changes, options)
     .then(user => {
-      res.status(200).json({ user });
+      if (!user) {
+        return res
+          .status(404)
+          .json({ errorMessage: "No user with that id could be found." });
+      } else res.status(200).json(user);
     })
     .catch(err => {
-      res.status(500).json({ Error: err });
+      res
+        .status(500)
+        .json({ errorMessage: "Could not update a user with that id." });
     });
 });
-
-// Attempt at using authenticate, doesn't work and also responds with user data regardless of what token is given so long as the token is valid for someone
-// UserRouter.put("/:id", authenticate, (req, res) => {
-//   const id = req.params.id;
-//   const changes = req.body;
-//   const options = {
-//     new: true
-//   };
-
-//   User.findById(id)
-//     .then(user => {
-//       User.findByIdAndUpdate(id, changes, options)
-//         .then(user => {
-//           if (!user) {
-//             return res
-//               .status(404)
-//               .json({ errorMessage: "No user with that id could be found." });
-//           } else res.status(200).json(user);
-//         })
-//         .catch(err => {
-//           res
-//             .status(500)
-//             .json({ errorMessage: "Could not update a user with that id." });
-//         });
-//     })
-//     .catch(err => {
-//       res
-//         .status(404)
-//         .json({ errorMessage: "Could not get a user for that id." });
-//     });
-// });
 
 module.exports = UserRouter;
