@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import Sidebar from "./subComponents/sidebar"
+import Sidebar from "./subComponents/sidebar";
+import Navbar from "./subComponents/navbar";
 
 class Billing extends Component {
   render() {
     return (
-      <div className="App">
-        <Sidebar />
-        <h1>Billing</h1>
+      <div>
+        <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/templates", title: "Templates" }]} />
+        <div className="component-div">
+          <Sidebar />
+          <div className="title-div">
+            <h1>Billing</h1>
+          </div>
+        </div>
       </div>
     );
   }

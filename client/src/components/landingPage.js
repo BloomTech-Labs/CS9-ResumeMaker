@@ -1,16 +1,16 @@
 // register, login, nav bar, landing page component
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import LoginButton from "./subComponents/loginButton";
-import RegisterButton from "./subComponents/registerButton";
+import { Link } from "react-router-dom";
+import "./CSS/landingpage.css"
 
 class LandingPage extends Component {
   render() {
     return (
       <div className="App">
-        <LoginButton />
-        <RegisterButton />
         <h1 className="Header">Resume Maker</h1>
+        <p>(Will redirect to resumes page if logged in)</p>
+        <Link className="landing-button" to="/login"><button type="button" class="btn btn-primary">Login</button></Link>
+        <Link className="landing-button" to="/register"><button type="button" class="btn btn-primary">Register</button></Link>
       </div>
     );
   }
