@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Summary from "../summary";
 import Positions from "../position";
 import Education from "../education";
@@ -25,4 +25,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default Sidebar; 

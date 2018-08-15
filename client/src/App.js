@@ -19,6 +19,8 @@ class App extends Component {
       <div className="App">
         <AuthProvider>
           <AuthContext.Consumer>
+          {props => 
+            <React.Fragment>
         <h1>Hello World!</h1>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/summaries" component={Summaries} />
@@ -30,7 +32,9 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/templates" component={Templates} />
-    
+        </React.Fragment>
+      }
+
           </AuthContext.Consumer>
         </AuthProvider>
       </div>

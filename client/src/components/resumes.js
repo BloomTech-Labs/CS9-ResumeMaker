@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import SideBar from "./subComponents/sidebar";
-import Navbar from "./subComponents/navbar";
+import  AuthProvider, {AuthContext} from "../contexts/AuthProvider";
+//import SideBar from "./subComponents/sidebar";
+//import Navbar from "./subComponents/navbar";
 
 class ResumeList extends Component {
   render() {
     return (
+     
       <div className="Form">
+       <AuthContext.Provider>
+        <AuthContext.Consumer>
+          {props =>
+          <React.Fragment>
         <h1 className="Header">Welcome!</h1>
-        <resumeCard />
+        //ResumeCard/>
         <Route exact path="/Resumes/:id" />
-      </div>
+        </React.Fragment>
+          }
+          </AuthContext.Consumer>
+        </AuthContext.Provider>
+        </div>
     );
   }
 }
