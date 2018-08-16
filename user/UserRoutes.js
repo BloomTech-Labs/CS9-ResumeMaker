@@ -91,7 +91,7 @@ UserRouter.post("/login", (req, res) => {
         const token = jwt.sign(payload, process.env.SECRET, {
           expiresIn: 604800
         });
-        res.json({ token });
+        res.json({ token, user });
       } else return res.status(422).json({ error: "Invalid credentials." });
     })
     .catch(err => {
