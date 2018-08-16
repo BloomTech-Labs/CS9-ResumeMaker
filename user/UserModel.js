@@ -19,7 +19,6 @@ const validatePhone = number => {
     Must have at least 1 lowercase
     Must have at least 1 special character
 */
-
 const checkPasswordStrength = password => {
   const minlength = 6;
 
@@ -30,6 +29,8 @@ const checkPasswordStrength = password => {
   if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)) return false;
   return true;
 }
+
+
 
 const User = new mongoose.Schema(
   {
@@ -51,9 +52,18 @@ const User = new mongoose.Schema(
       validate: [validateEmail, "Invalid Email"]
     },
     name: {
-      firstname: String,
-      middlename: String,
-      lastname: String
+      firstname: {
+        type: String,
+        maxlength: 20
+      },
+      middlename: {
+        type: String,
+        maxlength: 20
+      },
+      lastname: {
+        type: String,
+        maxlength: 20
+      }
     },
     phonenumber: {
       type: String,
