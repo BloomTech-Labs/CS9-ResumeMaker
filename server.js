@@ -23,25 +23,20 @@ require("./user/config_passport.js")(passport);
 // Middleware
 server.use(express.json());
 
-const whitelist = ['https://labs-resume-maker.firebaseapp.com/', "http://localhost:3333/"];
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
- 
-server.use(cors(corsOptions));
+// const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     whitelist.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Access Denied'))
+//   }
+// }
+// server.use(cors(corsOptions));
 
 // Route for editing/adding/deleting users
 const UserRouter = require("./user/UserRoutes.js");
 server.use("/users", UserRouter);
 
 // Initial GET route
-server.get("/", cors(corsOptions), (req, res) => {
+server.get("/", (req, res) => {
   res.json({ Message: "Hello World" });
 });
 
