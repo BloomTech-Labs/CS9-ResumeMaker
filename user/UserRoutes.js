@@ -11,7 +11,7 @@ UserRouter.get(
   "/currentuser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     res.status(200).json({
       id: req.user.id,
       username: req.user.username,
@@ -125,7 +125,7 @@ UserRouter.put(
   "/info/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     const id = req.params.id;
     if (id === req.user.id) {
       delete req.body.username;

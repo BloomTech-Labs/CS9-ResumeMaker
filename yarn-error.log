@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn
+  /usr/local/bin/node /usr/local/bin/yarn server
 
 PATH: 
   /usr/local/bin:/usr/local/sbin:/Users/kevintan/.yarn/bin:/Users/kevintan/.config/yarn/global/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/Users/kevintan/.yarn/bin:/Users/kevintan/.config/yarn/global/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/3.6/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/kevintan/git/Lambda_Labs/CS9-ResumeMaker/package.json: Unexpected string in JSON at position 743
+  SyntaxError: /Users/kevintan/git/Lambda_Labs/CS9-ResumeMaker/package.json: Unexpected string in JSON at position 268
       at JSON.parse (<anonymous>)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:1130:59
       at Generator.next (<anonymous>)
@@ -28,13 +28,13 @@ npm manifest:
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "scripts": {
-      "start": "nodemon server.js"
-    },
     "repository": {
       "type": "git",
       "url": "git+https://github.com/Lambda-School-Labs/CS9-ResumeMaker.git"
     },
+    "scripts": {
+      "server": "nodemon server.js"
+    }
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -49,12 +49,12 @@ npm manifest:
       "express": "^4.16.3",
       "helmet": "^3.13.0",
       "jsonwebtoken": "^8.3.0",
-      "mongoose": "^5.2.8"
+      "mongoose": "^5.2.8",
+      "passport": "^0.4.0",
+      "passport-jwt": "^4.0.0"
     }, 
     "devDependencies": {
       "nodemon": "^1.18.3"
-      "passport": "^0.4.0",
-      "passport-jwt": "^4.0.0"
     }
   }
 
