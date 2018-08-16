@@ -31,12 +31,12 @@ const checkPasswordStrength = password => {
 }
 
 const validateLinkedIn = url => {
-  const re = /^(linkedin\.com\/in\/[\w-]+)$/;
+  const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
 }
 
 const validateGithub = url => {
-  const re = /^(https?\:\/\/github\.com\/[\w\d-!+@#$]+)$/;
+  const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
 }
 
