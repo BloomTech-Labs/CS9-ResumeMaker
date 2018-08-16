@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const User = require("./UserModel.js");
 
+// GET users/currentuser
 // Route to find id, username and email of current user
 UserRouter.get(
   "/currentuser",
@@ -20,7 +21,7 @@ UserRouter.get(
   }
 );
 
-// A test route for GETTING /users
+// GET users
 // Should get all the users
 UserRouter.get("/", (req, res) => {
   User.find()
@@ -122,10 +123,10 @@ UserRouter.delete(
 // PUT users/info/:id
 // Update user information
 UserRouter.put(
-  "/info/:id",
-  passport.authenticate("jwt", { session: false }),
+  "/info/:id", 
+  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     const id = req.params.id;
     if (id === req.user.id) {
       delete req.body.username;
@@ -134,7 +135,8 @@ UserRouter.put(
       const changes = req.body;
 
       const options = {
-        new: true
+        new: true,
+        runValidators: true
       };
 
       User.findByIdAndUpdate(id, changes, options)
@@ -148,7 +150,7 @@ UserRouter.put(
         .catch(err => {
           res
             .status(500)
-            .json({ error: "Could not update a user with that id." });
+            .json({ error: "Could not update" });
         });
     } else {
       res.status(500).json({ error: "You do not have access to this user!" });
