@@ -16,13 +16,20 @@ mongoose
 // Initialize Server
 const server = express();
 
-// Initialize passport authentification
+// Initialize passport authentication
 server.use(passport.initialize());
 require("./user/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
-server.use(cors({}));
+
+const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    whitelist.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Not allowed by CORS'))
+  }
+}
+server.use(cors(corsOptions));
 
 // Route for editing/adding/deleting users
 const UserRouter = require("./user/UserRoutes.js");
