@@ -36,7 +36,7 @@ const UserRouter = require("./user/UserRoutes.js");
 server.use("/users", UserRouter);
 
 // Initial GET route
-server.get("/", (req, res) => {
+server.get("/", cors(corsOptions), (req, res) => {
   res.json({ Message: "Hello World" });
 });
 
