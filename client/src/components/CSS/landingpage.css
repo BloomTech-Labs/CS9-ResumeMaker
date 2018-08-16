@@ -1,4 +1,14 @@
 .landing-button {
-    text-decoration: none;
-    color: white;
+    padding: 1px; 
+}
+
+
+.LandingPage {
+    height: 100vh; 
+    background-image: url(Buildings.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover; 
+    padding-top: 30vh; 
 }

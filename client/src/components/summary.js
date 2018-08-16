@@ -33,7 +33,8 @@ class Summary extends Component {
             <form>
               <div className="form-group">
                 <label form="formGroupExampleInput2">“Make the most of yourself....for that is all there is of you.”
-― Ralph Waldo Emerson</label>
+― Ralph Waldo Emerson
+                </label>
                 <input type="text" className="form-control" id="formGroupExampleInput2" placeholder="Tell us about yourself" />
               </div>
             </form>
