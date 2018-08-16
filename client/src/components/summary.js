@@ -24,7 +24,7 @@ class Summary extends Component {
   render() {
     return (
       <div>
-        {console.log("this.props.auth: ", this.props)}
+        {console.log("this.props.context.userInfo: ", this.props.context.userInfo)}
         <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/summary", title: "Summary" }]} />
         <div className="component-div">
           <Sidebar />

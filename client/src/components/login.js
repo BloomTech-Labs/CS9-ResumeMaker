@@ -26,10 +26,6 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
 
     axios
       .post("https://easy-resume.herokuapp.com/users/login",
