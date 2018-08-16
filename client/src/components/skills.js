@@ -16,13 +16,13 @@ class Skills extends Component {
           <Sidebar />
           <div className="title-div">
             <h1>Skills</h1>
-            {
-              // this.data.skillGroup.skills.map((skill) => {
-              //   <div key={skill.key}>
-              //     <button onClick={this.handleSkillChanged.bind(this, skill.key)} />
-              //   </div>
-              // })
-            }
+            <form>
+              <div className="form-group">
+                <label form="formGroupExampleInput2">“Success is skill inside out.”
+― Matshona Dhliwayo </label>
+                <input type="text" className="form-control" id="formGroupExampleInput2" placeholder="List your Skills" />
+              </div>
+            </form>
           </div>
         </div>
       </div>

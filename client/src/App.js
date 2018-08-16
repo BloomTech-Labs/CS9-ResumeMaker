@@ -21,24 +21,24 @@ class App extends Component {
       <div className="App">
         <AuthProvider>
           <AuthContext.Consumer>
-            {auth => 
-            <React.Fragment>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/summary" component={Summaries} />
-        <Route exact path="/positions" component={Positions} />
-        <Route exact path="/education" component={Education} />
-        <Route exact path="/skills" component={Skills} />
-        <Route exact path="/resumes" component={Resumes} />
-        <Route exact path="/billing" component={Billing} />
-        <Route exact path="/settings" component={Settings} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/templates" component={Templates} />
-        <Route exact path="/sidebar" component={Sidebar} />
+            {auth => (
+              <React.Fragment>
+                <Route exact path="/" render={(props) => <LandingPage {...props} auth={auth} />} />
+                <Route exact path="/summary" render={(props) => <Summaries {...props} auth={auth} />} />
+                <Route exact path="/positions" render={(props) => <Positions {...props} auth={auth} />} />
+                <Route exact path="/education" render={(props) => <Education {...props} auth={auth} />} />
+                <Route exact path="/skills" render={(props) => <Skills {...props} auth={auth} />} />
+                <Route exact path="/resumes" render={(props) => <Resumes {...props} auth={auth} />} />
+                <Route exact path="/billing" render={(props) => <Billing {...props} auth={auth} />} />
+                <Route exact path="/settings" render={(props) => <Settings {...props} auth={auth} />} />
+                <Route exact path="/login" render={(props) => <Login {...props} auth={auth} />} />
+                <Route exact path="/register" render={(props) => <Register {...props} auth={auth} />} />
+                <Route exact path="/templates" render={(props) => <Templates {...props} auth={auth} />} />
+                <Route exact path="/sidebar" render={(props) => <Sidebar {...props} auth={auth} />} />
               </React.Fragment>
-            }
-              </AuthContext.Consumer>
-            </AuthProvider>  
+            )}
+          </AuthContext.Consumer>
+        </AuthProvider>
       </div>
     );
   }
