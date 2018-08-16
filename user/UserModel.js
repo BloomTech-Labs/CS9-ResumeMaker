@@ -7,6 +7,12 @@ const validateEmail = email => {
   return re.test(email);
 }
 
+const validatePhone = number => {
+  let re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
+  return re.test(number);
+}
+
+
 const User = new mongoose.Schema(
   {
     username: {
@@ -25,10 +31,14 @@ const User = new mongoose.Schema(
       unique: true,
       validate: [validateEmail, "Invalid Email"]
     },
-    name: String,
-    phoneNumber: {
-      type: Number,
-      min: 10
+    name: {
+      firstname: String,
+      middlename: String,
+      lastname: String
+    },
+    phonenumber: {
+      type: String,
+      validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: String,
