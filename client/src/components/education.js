@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar"
-import axios from "axios"
 import Navbar from "./subComponents/navbar";
 // import { Consumer } from '../../context';
 
@@ -16,9 +15,9 @@ class Education extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = async (dispatch, e) => {
+  onSubmit = async (e) => {
     e.preventDefault();
-    const newSchool = Object.assign({}, this.state);
+    // const newSchool = Object.assign({}, this.state);
 
     // * Error Checking
     if (this.state.school === '') {
@@ -42,7 +41,7 @@ class Education extends Component {
 
 
   render() {
-    const { school, location, degree, errors } = this.state;
+    // const { school, location, degree, errors } = this.state;
 
     return (
       <div>

@@ -10,4 +10,5 @@ class RegisterButton extends Component {
   }
 }
 
+
 export default RegisterButton;
