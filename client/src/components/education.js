@@ -51,45 +51,15 @@ class Education extends Component {
           <Sidebar />
           <div className="title-div">
             <h1>Education History</h1>
-            {value => {
-              const { dispatch } = value;
-              <div className="card mb-3">
-                <div className="card-header">Add Education</div>
-                <div className="card-body">
-                  <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                    <input
-                      label="School"
-                      name="school"
-                      placeholder="School Name"
-                      value={school}
-                      onChange={this.onInputChange}
-                      error={errors.school}
-                    />
-                    <input
-                      label="Location"
-                      name="location"
-                      placeholder="Location"
-                      value={location}
-                      onChange={this.onInputChange}
-                      error={errors.location}
-                    />
-                    <input
-                      label="Degree"
-                      name="Degree"
-                      placeholder="Degree Number"
-                      value={degree}
-                      onChange={this.onInputChange}
-                      error={errors.degree}
-                    />
-                    <input
-                      type="submit"
-                      value="Add School"
-                      className="btn btn-light btn-block"
-                    />
-                  </form>
-                </div>
+            <form>
+              <div className="form-group">
+                <label form="formGroupExampleInput2">“Intelligence plus character-that is the goal of true education.”
+― Martin Luther King Jr.</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Degree or Certificate" />
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Name of Institution" />
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Date" />
               </div>
-            }}
+            </form>
           </div>
         </div>
       </div>

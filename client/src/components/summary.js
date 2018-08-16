@@ -6,7 +6,7 @@ class Summary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Please complete you summary here.'
+      value: 'Please complete your summary here.'
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,15 +24,17 @@ class Summary extends Component {
   render() {
     return (
       <div>
+        {console.log("this.props.auth: ", this.props)}
         <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/summary", title: "Summary" }]} />
         <div className="component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Personal Summary</h1>
             <form>
-              <div class="form-group">
-                <label for="formGroupExampleInput2">Tell us about yourself..</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" />
+              <div className="form-group">
+                <label form="formGroupExampleInput2">“Make the most of yourself....for that is all there is of you.”
+― Ralph Waldo Emerson</label>
+                <input type="text" className="form-control" id="formGroupExampleInput2" placeholder="Tell us about yourself" />
               </div>
             </form>
           </div>
