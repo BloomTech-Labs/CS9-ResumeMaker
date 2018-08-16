@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/Lambda-School-Labs/CS9-ResumeMaker.git"
   },
+  "scripts": {
+    "server": "nodemon server"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
