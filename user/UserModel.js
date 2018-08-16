@@ -12,6 +12,16 @@ const validatePhone = number => {
   return re.test(number);
 }
 
+const checkPasswordStrength = password => {
+  const minlength = 6;
+
+  if (password.length < minlength) return false;
+  if (!password.match(/[A-Z]/)) return false;
+  if (!password.match(/[a-z]/)) return false;
+  if (!password.match(/\d/)) return false;
+  if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)) return false;
+  return true;
+}
 
 const User = new mongoose.Schema(
   {
@@ -23,7 +33,8 @@ const User = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      validate: [checkPasswordStrength, "Password Too Weak"]
     },
     email: {
       type: String,
