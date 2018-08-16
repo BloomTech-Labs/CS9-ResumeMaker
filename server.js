@@ -23,7 +23,7 @@ require("./user/config_passport.js")(passport);
 // Middleware
 server.use(express.json());
 
-const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
+const whitelist = ['https://labs-resume-maker.firebaseapp.com/', "http://localhost:3333/"];
 const corsOptions = {
   origin: function (origin, callback) {
     whitelist.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Not allowed by CORS'))
