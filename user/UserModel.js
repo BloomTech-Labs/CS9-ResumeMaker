@@ -12,10 +12,18 @@ const validatePhone = number => {
   return re.test(number);
 }
 
+/* 
+  Password Requirements:
+    Must be longer than 6 characters
+    Must have at least 1 uppercase
+    Must have at least 1 lowercase
+    Must have at least 1 special character
+*/
+
 const checkPasswordStrength = password => {
   const minlength = 6;
 
-  if (password.length < minlength) return false;
+  if (password.length < minlength) return false; 
   if (!password.match(/[A-Z]/)) return false;
   if (!password.match(/[a-z]/)) return false;
   if (!password.match(/\d/)) return false;
