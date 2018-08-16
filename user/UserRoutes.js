@@ -123,8 +123,8 @@ UserRouter.delete(
 // PUT users/info/:id
 // Update user information
 UserRouter.put(
-  "/info/:id", 
-  passport.authenticate("jwt", { session: false }), 
+  "/info/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // console.log(req.user);
     const id = req.params.id;
@@ -148,9 +148,7 @@ UserRouter.put(
           } else res.status(200).json(user);
         })
         .catch(err => {
-          res
-            .status(500)
-            .json({ error: "Could not update" });
+          res.status(500).json({ error: "Could not update" });
         });
     } else {
       res.status(500).json({ error: "You do not have access to this user!" });
