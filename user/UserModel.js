@@ -31,7 +31,7 @@ const checkPasswordStrength = password => {
 }
 
 const validateLinkedIn = url => {
-  const re = /^(https?:\/\/[w]{3}\.linkedin\.com\/in\/[\w-?]+\/)$/;
+  const re = /^(linkedin\.com\/in\/[\w-]+)$/;
   return re.test(url);
 }
 
