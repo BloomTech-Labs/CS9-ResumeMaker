@@ -6,25 +6,15 @@ class Summary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Please complete your summary here.'
+      values: props.context.userInfo.summary,
+      errors: {}
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
-    alert('Summary submitted: ' + this.state.value);
-    event.preventDefault();
-  }
   render() {
     return (
       <div>
-        {console.log("this.props.context.userInfo: ", this.props.context.userInfo)}
+        {console.log("this.props.context: ", this.props.context)}
         <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/summary", title: "Summary" }]} />
         <div className="component-div">
           <Sidebar />
@@ -41,8 +31,7 @@ class Summary extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
-
 export default Summary;
