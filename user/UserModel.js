@@ -3,12 +3,12 @@ const bcrypt = require("bcrypt");
 
 // Validation
 const validateEmail = email => {
-  let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
 }
 
 const validatePhone = number => {
-  let re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
+  const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
   return re.test(number);
 }
 
@@ -28,6 +28,16 @@ const checkPasswordStrength = password => {
   if (!password.match(/\d/)) return false;
   if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)) return false;
   return true;
+}
+
+const validateLinkedIn = url => {
+  const re = /^(https?:\/\/[w]{3}\.linkedin\.com\/in\/[\w-?]+\/)$/;
+  return re.test(url);
+}
+
+const validateGithub = url => {
+  const re = /^(https?\:\/\/github\.com\/[\w\d-!+@#$]+)$/;
+  return re.test(url);
 }
 
 
@@ -70,8 +80,14 @@ const User = new mongoose.Schema(
       validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
-      linkedin: String,
-      github: String,
+      linkedin: {
+        type: String,
+        validate: [validateLinkedIn, "Invalid Linkedin"]
+      },
+      github: {
+        type: String,
+        validate: [validateGithub, "Invalid github"]
+      },
       portfolio: String
     },
     sections: {
