@@ -40,8 +40,6 @@ const validateGithub = url => {
   return re.test(url);
 }
 
-
-
 const User = new mongoose.Schema(
   {
     username: {
