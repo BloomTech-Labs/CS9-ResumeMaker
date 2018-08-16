@@ -16,7 +16,7 @@ mongoose
 // Initialize Server
 const server = express();
 
-// Initialize passport authentification
+// Initialize passport authentication
 server.use(passport.initialize());
 require("./user/config_passport.js")(passport);
 
