@@ -6,13 +6,13 @@ require("dotenv").config();
 
 const User = require("./UserModel.js");
 
-// GET users/currentuser
+// GET users/currentuser (TEST ROUTE --- WILL REMOVE)
 // Route to find id, username and email of current user
 UserRouter.get(
   "/currentuser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     res.status(200).json({
       id: req.user.id,
       username: req.user.username,
@@ -21,7 +21,7 @@ UserRouter.get(
   }
 );
 
-// GET users
+// GET users (TEST ROUTE --- WILL REMOVE)
 // Should get all the users
 UserRouter.get("/", (req, res) => {
   User.find()
