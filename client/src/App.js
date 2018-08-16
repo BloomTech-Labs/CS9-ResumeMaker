@@ -13,11 +13,16 @@ import Register from "./components/register";
 import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
 import "./App.css";
+import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <AuthProvider>
+          <AuthContext.Consumer>
+            {auth => 
+            <React.Fragment>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/summary" component={Summaries} />
         <Route exact path="/positions" component={Positions} />
@@ -30,6 +35,10 @@ class App extends Component {
         <Route exact path="/register" component={Register} />
         <Route exact path="/templates" component={Templates} />
         <Route exact path="/sidebar" component={Sidebar} />
+              </React.Fragment>
+            }
+              </AuthContext.Consumer>
+            </AuthProvider>  
       </div>
     );
   }
