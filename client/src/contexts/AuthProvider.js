@@ -4,20 +4,29 @@ export const AuthContext = React.createContext({});
 class AuthProvider extends Component {
   state = {
     auth: false,
-    firstName: "Chris",
-    lastName: "LastName",
-
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    links: [],
+    education: [],
+    experience: [],
+    summary: []
   };
 
   toggleAuth = () => {
     this.setState({ auth: !this.state.auth });
   };
 
+  setContext = (title, value) => {
+    this.setState({ title: value });
+  }
+
   render() {
-    const { auth } = this.state;
+    const context = this.state;
     return (
       <AuthContext.Provider
-        value={{ auth, actions: { toggleAuth: this.toggleAuth } }}
+        value={{ context, actions: { toggleAuth: this.toggleAuth, setContext: this.setContext } }}
       >
         {this.props.children}
       </AuthContext.Provider>
