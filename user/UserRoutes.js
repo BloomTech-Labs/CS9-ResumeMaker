@@ -3,6 +3,8 @@ const UserRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
+const base64url = require("base64url");
+const crypto = require("crypto");
 let websiteName = "";
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
@@ -10,6 +12,7 @@ if (process.env.SITE_NAME) {
 require("dotenv").config();
 
 const User = require("./UserModel.js");
+const EmailConfirmation = require("./EmailConfirmationModel.js");
 
 // GET users/currentuser (TEST ROUTE --- WILL REMOVE)
 // Route to find id, username and email of current user
@@ -63,9 +66,21 @@ UserRouter.post("/register", (req, res) => {
               expiresIn: 604800
             });
 
+            // creates a hash
+            const hash = crypto.createHash("sha256");
+            // adds data to the hash
+            hash.update(user.id + process.env.SECRET + token);
+
+            // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
+            const newEmailConfirmation = new EmailConfirmation({
+              hash: base64url(hash.digest("hex")),
+              user: user._id
+            });
+            newEmailConfirmation.save();
+            // console.log("HASH IS ", newEmailConfirmation.hash);
+
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
-              console.log("SENDITBOI");
               // create reusable transporter object using the default SMTP transport
               let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
@@ -85,10 +100,10 @@ UserRouter.post("/register", (req, res) => {
                 subject: `Confirm your registration to ${websiteName}!`,
                 text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
                   "host"
-                )}${req.baseUrl}/confirmemail/${user._id}`,
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
                 html: `Thank you for signing up! Please click this <a href=${req.get(
                   "host"
-                )}${req.baseUrl}/confirmemail/${user._id}
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
                 }>link</a>.`
               };
 
@@ -206,8 +221,8 @@ UserRouter.put(
 
 // PUT users/email/:id
 // Update user email
-UserRouter.get("/confirmemail/:id", (req, res) => {
-  const id = req.params.id;
+UserRouter.get("/confirmemail/:hash", (req, res) => {
+  const hash = req.params.hash;
   const changes = {
     active: true
   };
@@ -215,9 +230,13 @@ UserRouter.get("/confirmemail/:id", (req, res) => {
     new: true
   };
 
-  User.findOne({ _id: id, active: false }).then(user => {
-    if (user) {
-      User.findOneAndUpdate({ _id: id, active: false }, changes, options)
+  EmailConfirmation.findOne({ hash: hash }).then(emailconfirmation => {
+    if (emailconfirmation) {
+      User.findOneAndUpdate(
+        { _id: emailconfirmation.user, active: false },
+        changes,
+        options
+      )
         .then(user => {
           res.status(200).json("You have successfully signed up!");
         })
