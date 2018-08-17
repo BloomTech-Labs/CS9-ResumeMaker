@@ -6,7 +6,12 @@ class Billing extends Component {
   render() {
     return (
       <div>
-        <Navbar breadcrumbs={[{ link: "/", title: "Home" }, { link: "/templates", title: "Templates" }]} />
+        <Navbar
+          breadcrumbs={[
+            { link: "/", title: "Home" },
+            { link: "/templates", title: "Templates" }
+          ]}
+        />
         <div className="component-div">
           <Sidebar />
           <div className="title-div">

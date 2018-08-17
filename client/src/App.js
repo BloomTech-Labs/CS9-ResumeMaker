@@ -7,11 +7,13 @@ import Skills from "./components/skills";
 import Resumes from "./components/resumes";
 import Billing from "./components/billing";
 import Settings from "./components/settings";
-import Positions from "./components/positions";
+import Experience from "./components/experience";
 import Login from "./components/login";
 import Register from "./components/register";
 import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
+import SummaryCreate from "./components/summaryCreate";
+import EducationCreate from "./components/educationCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 
@@ -21,20 +23,82 @@ class App extends Component {
       <div className="App">
         <AuthProvider>
           <AuthContext.Consumer>
-            {auth => (
+            {context => (
               <React.Fragment>
-                <Route exact path="/" render={(props) => <LandingPage {...props} auth={auth} />} />
-                <Route exact path="/summary" render={(props) => <Summaries {...props} auth={auth} />} />
-                <Route exact path="/positions" render={(props) => <Positions {...props} auth={auth} />} />
-                <Route exact path="/education" render={(props) => <Education {...props} auth={auth} />} />
-                <Route exact path="/skills" render={(props) => <Skills {...props} auth={auth} />} />
-                <Route exact path="/resumes" render={(props) => <Resumes {...props} auth={auth} />} />
-                <Route exact path="/billing" render={(props) => <Billing {...props} auth={auth} />} />
-                <Route exact path="/settings" render={(props) => <Settings {...props} auth={auth} />} />
-                <Route exact path="/login" render={(props) => <Login {...props} auth={auth} />} />
-                <Route exact path="/register" render={(props) => <Register {...props} auth={auth} />} />
-                <Route exact path="/templates" render={(props) => <Templates {...props} auth={auth} />} />
-                <Route exact path="/sidebar" render={(props) => <Sidebar {...props} auth={auth} />} />
+                <Route
+                  exact
+                  path="/"
+                  render={props => <LandingPage {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/summary"
+                  render={props => <Summaries {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/summary/create"
+                  render={props => (
+                    <SummaryCreate {...props} context={context} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/experience"
+                  render={props => <Experience {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/education"
+                  render={props => <Education {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/education/create"
+                  render={props => (
+                    <EducationCreate {...props} context={context} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/skills"
+                  render={props => <Skills {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/resumes"
+                  render={props => <Resumes {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/billing"
+                  render={props => <Billing {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/settings"
+                  render={props => <Settings {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/login"
+                  render={props => <Login {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/register"
+                  render={props => <Register {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/templates"
+                  render={props => <Templates {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/sidebar"
+                  render={props => <Sidebar {...props} context={context} />}
+                />
               </React.Fragment>
             )}
           </AuthContext.Consumer>
