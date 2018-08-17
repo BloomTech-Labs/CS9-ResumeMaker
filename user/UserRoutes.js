@@ -238,6 +238,11 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
         options
       )
         .then(user => {
+          // Deletes the now useless email confirmation if it still exists for some reason
+          EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
+            .then()
+            .catch();
+
           if (user !== null) {
             res.status(200).json("You have successfully signed up!");
           } else
