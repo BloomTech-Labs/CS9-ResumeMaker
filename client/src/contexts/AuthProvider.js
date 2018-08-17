@@ -24,6 +24,8 @@ class AuthProvider extends Component {
     this.setState({ [title]: value });
   };
 
+  setSummary = index => {};
+
   setLogin = userData => {
     this.setState({
       auth: true,

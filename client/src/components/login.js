@@ -8,8 +8,8 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      email: "testemail@gmail.com",
-      password: "testpass",
+      email: "bobbert@gmail.com",
+      password: "bobbert",
       invalidCredentials: false
     };
   }
@@ -22,26 +22,27 @@ export default class Login extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
     const setLogin = this.props.context.actions.setLogin;
 
     axios
-      .post("https://easy-resume.herokuapp.com/users/login",
-        { email: this.state.email, password: this.state.password })
+      .post("https://easy-resume.herokuapp.com/users/login", {
+        email: this.state.email,
+        password: this.state.password
+      })
       .then(response => {
         if (response.data.token) {
           const userData = response.data.user;
-          console.log(userData)
+          console.log(userData);
           localStorage.setItem("token", response.data.token);
           setLogin(userData);
 
           console.log(this.props.context.userInfo);
           this.props.history.push("/resumes");
-        }
-        else this.setState({ invalidCredentials: true, password: "" });
+        } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {
         console.log("err", err);
@@ -80,11 +81,8 @@ export default class Login extends Component {
             Login
           </Button>
         </form>
-        {this.state.invalidCredentials ? (
-          <h3>Invalid Credentials</h3>
-        ) : null}
+        {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
       </div>
     );
   }
 }
-

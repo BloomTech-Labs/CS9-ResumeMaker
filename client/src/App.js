@@ -7,11 +7,13 @@ import Skills from "./components/skills";
 import Resumes from "./components/resumes";
 import Billing from "./components/billing";
 import Settings from "./components/settings";
-import Positions from "./components/positions";
+import Experience from "./components/experience";
 import Login from "./components/login";
 import Register from "./components/register";
 import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
+import SummaryCreate from "./components/summaryCreate";
+import EducationCreate from "./components/educationCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 
@@ -35,13 +37,27 @@ class App extends Component {
                 />
                 <Route
                   exact
-                  path="/positions"
-                  render={props => <Positions {...props} context={context} />}
+                  path="/summary/create"
+                  render={props => (
+                    <SummaryCreate {...props} context={context} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/experience"
+                  render={props => <Experience {...props} context={context} />}
                 />
                 <Route
                   exact
                   path="/education"
                   render={props => <Education {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/education/create"
+                  render={props => (
+                    <EducationCreate {...props} context={context} />
+                  )}
                 />
                 <Route
                   exact
