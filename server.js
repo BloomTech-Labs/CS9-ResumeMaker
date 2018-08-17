@@ -22,7 +22,14 @@ require("./user/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
-server.use(cors({}));
+
+// const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     whitelist.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Access Denied'))
+//   }
+// }
+// server.use(cors(corsOptions));
 
 // const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
 // const corsOptions = {
