@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 
-class Billing extends Component {
+class Templates extends Component {
   render() {
     return (
       <div>
@@ -10,7 +10,7 @@ class Billing extends Component {
         <div className="component-div">
           <Sidebar />
           <div className="title-div">
-            <h1>Billing</h1>
+            <h1>Content Here</h1>
           </div>
         </div>
       </div>
@@ -18,4 +18,4 @@ class Billing extends Component {
   }
 }
 
-export default Billing;
+export default Templates;

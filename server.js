@@ -31,6 +31,14 @@ server.use(express.json());
 // }
 // server.use(cors(corsOptions));
 
+// const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     whitelist.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Access Denied'))
+//   }
+// }
+// server.use(cors(corsOptions));
+
 // Route for editing/adding/deleting users
 const UserRouter = require("./user/UserRoutes.js");
 server.use("/users", UserRouter);
