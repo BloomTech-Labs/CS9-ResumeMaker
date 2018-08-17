@@ -5,12 +5,12 @@ const bcrypt = require("bcrypt");
 const validateEmail = email => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
-}
+};
 
 const validatePhone = number => {
   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
   return re.test(number);
-}
+};
 
 /* 
   Password Requirements:
@@ -22,26 +22,33 @@ const validatePhone = number => {
 const checkPasswordStrength = password => {
   const minlength = 6;
 
-  if (password.length < minlength) return false; 
+  if (password.length < minlength) return false;
   if (!password.match(/[A-Z]/)) return false;
   if (!password.match(/[a-z]/)) return false;
   if (!password.match(/\d/)) return false;
-  if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)) return false;
+  if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+    return false;
   return true;
-}
+};
 
 const validateLinkedIn = url => {
   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
-}
+};
 
 const validateGithub = url => {
   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
-}
+};
 
 const User = new mongoose.Schema(
   {
+    // This is to see if the user has confirmed their email
+    active: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     username: {
       type: String,
       required: true,
@@ -50,8 +57,8 @@ const User = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
-      validate: [checkPasswordStrength, "Password Too Weak"]
+      required: true
+      // validate: [checkPasswordStrength, "Password Too Weak"]
     },
     email: {
       type: String,

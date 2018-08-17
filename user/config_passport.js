@@ -17,8 +17,10 @@ module.exports = passport => {
       User.findById(jwt_payload.id)
         .then(user => {
           if (user) {
-            // * null param = errors
-            return done(null, user);
+            if (user.active === true) {
+              // * null param = errors
+              return done(null, user);
+            }
           }
           return done(null, false);
         })

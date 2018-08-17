@@ -2,6 +2,12 @@ const express = require("express");
 const UserRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const nodemailer = require("nodemailer");
+const server = require("../server.js");
+let websiteName = "";
+if (process.env.SITE_NAME) {
+  websiteName = process.env.SITE_NAME;
+} else websiteName = "easy-resume.com";
 require("dotenv").config();
 
 const User = require("./UserModel.js");
@@ -57,6 +63,48 @@ UserRouter.post("/register", (req, res) => {
             const token = jwt.sign(payload, process.env.SECRET, {
               expiresIn: 604800
             });
+
+            // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+            nodemailer.createTestAccount((err, account) => {
+              console.log("SENDITBOI");
+              // create reusable transporter object using the default SMTP transport
+              let transporter = nodemailer.createTransport({
+                host: "smtp.ethereal.email",
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                  user: account.user, // generated ethereal user
+                  pass: account.pass // generated ethereal password
+                }
+              });
+
+              // console.log(req.get("host"));
+              // console.log(req.baseUrl);
+              let mailOptions = {
+                from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
+                to: `${user.email}`,
+                subject: `Confirm your registration to ${websiteName}!`,
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${user._id}`,
+                html: `Thank you for signing up! Please click this <a href=${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${user._id}
+                }>link</a>.`
+              };
+
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  return console.log(error);
+                }
+                console.log("Message sent: %s", info.messageId);
+                console.log(
+                  "Preview URL: %s",
+                  nodemailer.getTestMessageUrl(info)
+                );
+              });
+            });
+
             res.status(201).json({ user, token });
           })
           .catch(err => {
@@ -135,8 +183,8 @@ UserRouter.put(
       const changes = req.body;
 
       const options = {
-        new: true,
-        runValidators: true
+        new: true
+        // runValidators: true
       };
 
       User.findByIdAndUpdate(id, changes, options)
@@ -158,7 +206,32 @@ UserRouter.put(
 
 // PUT users/email/:id
 // Update user email
-UserRouter.put("/email/:id", (req, res) => {});
+UserRouter.get("/confirmemail/:id", (req, res) => {
+  const id = req.params.id;
+  const changes = {
+    active: true
+  };
+  const options = {
+    new: true
+  };
+
+  User.findOne({ _id: id, active: false }).then(user => {
+    if (user) {
+      User.findOneAndUpdate({ _id: id, active: false }, changes, options)
+        .then(user => {
+          res.status(200).json("You have successfully signed up!");
+        })
+        .catch(err => {
+          res.status(500).json({
+            error: "Your account has already been activated or does not exist."
+          });
+        });
+    } else
+      res.status(500).json({
+        error: "Your account has already been activated or does not exist."
+      });
+  });
+});
 
 // PUT users/password/:id
 // Update user password
