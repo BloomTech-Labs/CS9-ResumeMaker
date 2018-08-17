@@ -238,7 +238,13 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
         options
       )
         .then(user => {
-          res.status(200).json("You have successfully signed up!");
+          if (user !== null) {
+            res.status(200).json("You have successfully signed up!");
+          } else
+            res.status(404).json({
+              error:
+                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+            });
         })
         .catch(err => {
           res.status(500).json({
