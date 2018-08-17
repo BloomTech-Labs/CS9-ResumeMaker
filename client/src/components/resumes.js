@@ -14,7 +14,8 @@ export class PersonalInfo extends Component {
       phone: "",
       email: "",
       location: "",
-      title: ""
+      title: "",
+      errors: []
     };
   }
 
@@ -27,6 +28,7 @@ export class PersonalInfo extends Component {
   };
 
   handleSubmit = e => {
+    this.setState({ errors: [] });
     const {
       firstName,
       lastName,
@@ -47,22 +49,23 @@ export class PersonalInfo extends Component {
           phone: "",
           location: "",
           title: "",
-          errors: {}
+          errors: []
         });
       })
       .catch(err => {
         if (firstName === "") {
-          this.setState({ errors: { firstName: "First name is required." } });
+          errors.push("First name is required.");
         }
         if (lastName === "") {
-          this.setState({ errors: { lastName: "Last name is required." } });
+          errors.push("Last name is required.");
         }
         if (email === "") {
-          this.setState({ errors: { email: "Email address is required." } });
+          errors.push("Email is required.");
         }
         if (phone === "") {
-          this.setState({ errors: "Phone number is required." });
+          errors.push("Phone number is required.");
         }
+        this.setState({ errors: errors });
         console.log("oops", err.message);
         alert("try again");
       });
