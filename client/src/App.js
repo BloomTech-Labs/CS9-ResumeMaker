@@ -14,6 +14,7 @@ import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
 import SummaryCreate from "./components/summaryCreate";
 import EducationCreate from "./components/educationCreate";
+import ExperienceCreate from "./components/experienceCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 
@@ -46,6 +47,13 @@ class App extends Component {
                   exact
                   path="/experience"
                   render={props => <Experience {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/experience/create"
+                  render={props => (
+                    <ExperienceCreate {...props} context={context} />
+                  )}
                 />
                 <Route
                   exact

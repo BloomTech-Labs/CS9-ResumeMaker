@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import { Link } from "react-router-dom";
-// import { Consumer } from '../../context';
 import "./CSS/summary.css";
 
 class Education extends Component {
