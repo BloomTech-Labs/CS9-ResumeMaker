@@ -52,8 +52,8 @@ class Education extends Component {
             <h1>Education History</h1>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">“Intelligence plus character-that is the goal of true education.”
-― Martin Luther King Jr.</label>
+                <label form="formGroupExampleInput2">“Intelligence plus character-that is the goal of true education.” ― Martin Luther King Jr.
+                </label>
                 <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Degree or Certificate" />
                 <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Name of Institution" />
                 <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Date" />
