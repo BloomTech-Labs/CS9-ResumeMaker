@@ -3,7 +3,6 @@ const UserRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
-const server = require("../server.js");
 let websiteName = "";
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
@@ -180,6 +179,7 @@ UserRouter.put(
       delete req.body.username;
       delete req.body.password;
       delete req.body.email;
+      delete req.body.active;
       const changes = req.body;
 
       const options = {
