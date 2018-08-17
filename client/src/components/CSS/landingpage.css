@@ -1,14 +1,13 @@
 .landing-button {
-    padding: 1px; 
+  padding: 1px;
 }
 
-
 .LandingPage {
-    height: 100vh; 
-    background-image: url(Buildings.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
-    background-size: cover; 
-    padding-top: 30vh; 
+  height: 100vh;
+  background-image: url(Buildings.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-top: 30vh;
 }
