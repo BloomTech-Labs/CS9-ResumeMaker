@@ -10,21 +10,45 @@ class Sidebar extends Component {
     };
   }
 
-  onSetSidebarOpen = (open) => {
+  onSetSidebarOpen = open => {
     this.setState({ sidebarOpen: open });
-  }
+  };
 
   render() {
     return (
       <div className="test-div">
-        <Link to="/resumes" className="sidebar-button"> Resumes</Link>
-        <Link to="/summary" className="sidebar-button"> Summary</Link>
-        <Link to="/skills" className="sidebar-button"> Skills</Link>
-        <Link to="/education" className="sidebar-button"> Education</Link>
-        <Link to="/positions" className="sidebar-button"> Positions</Link>
-        <Link to="/templates" className="sidebar-button"> Templates</Link>
-        <Link to="/billing" className="sidebar-button"> Billing</Link>
-        <Link to="/settings" className="sidebar-button"> Settings</Link>
+        <Link to="/resumes" className="sidebar-button">
+          {" "}
+          Resumes
+        </Link>
+        <Link to="/summary" className="sidebar-button">
+          {" "}
+          Summary
+        </Link>
+        <Link to="/skills" className="sidebar-button">
+          {" "}
+          Skills
+        </Link>
+        <Link to="/education" className="sidebar-button">
+          {" "}
+          Education
+        </Link>
+        <Link to="/experience" className="sidebar-button">
+          {" "}
+          Experience
+        </Link>
+        <Link to="/templates" className="sidebar-button">
+          {" "}
+          Templates
+        </Link>
+        <Link to="/billing" className="sidebar-button">
+          {" "}
+          Billing
+        </Link>
+        <Link to="/settings" className="sidebar-button">
+          {" "}
+          Settings
+        </Link>
       </div>
     );
   }
