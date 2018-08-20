@@ -76,7 +76,7 @@ UserRouter.post("/register", (req, res) => {
 
             // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
             const newEmailConfirmation = new EmailConfirmation({
-              hash: base64url(hash.digest("hex")),
+              hash: base64url(hash.digest("hex")) + "$",
               user: user._id
             });
             newEmailConfirmation.save();
@@ -295,7 +295,7 @@ UserRouter.put("/forgotpassword", (req, res) => {
 
       // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
       const newEmailConfirmation = new EmailConfirmation({
-        hash: base64url(hash.digest("hex")),
+        hash: base64url(hash.digest("hex")) + "!",
         user: user._id
       });
       newEmailConfirmation.save();
