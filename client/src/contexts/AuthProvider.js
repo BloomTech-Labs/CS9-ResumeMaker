@@ -39,7 +39,8 @@ class AuthProvider extends Component {
         : [],
       skills: userData.sections.skills ? userData.sections.skills : [],
       summary: userData.sections.summary ? userData.sections.summary : [],
-      userName: userData.username ? userData.username : ""
+      userName: userData.username ? userData.username : "",
+      id: userData._id ? userData._id : null
     });
   };
 
