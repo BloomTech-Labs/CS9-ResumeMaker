@@ -60,7 +60,8 @@ UserRouter.post("/register", (req, res) => {
           .then(user => {
             const payload = {
               id: user._id,
-              email: user.email
+              email: user.email,
+              password: user.password
             };
             const token = jwt.sign(payload, process.env.SECRET, {
               expiresIn: 604800
@@ -152,7 +153,8 @@ UserRouter.post("/login", (req, res) => {
       if (verified) {
         const payload = {
           id: user._id,
-          email: user.email
+          email: user.email,
+          password: user.password
         };
         const token = jwt.sign(payload, process.env.SECRET, {
           expiresIn: 604800
