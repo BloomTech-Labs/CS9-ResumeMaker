@@ -63,8 +63,8 @@ const User = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
-      validate: [validateEmail, "Invalid Email"]
+      unique: true
+      // validate: [validateEmail, "Invalid Email"]
     },
     name: {
       firstname: {
@@ -81,17 +81,17 @@ const User = new mongoose.Schema(
       }
     },
     phonenumber: {
-      type: String,
-      validate: [validatePhone, "Invalid Phone Number"]
+      type: String
+      // validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
-        type: String,
-        validate: [validateLinkedIn, "Invalid Linkedin"]
+        type: String
+        // validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
-        type: String,
-        validate: [validateGithub, "Invalid github"]
+        type: String
+        // validate: [validateGithub, "Invalid github"]
       },
       portfolio: String
     },
