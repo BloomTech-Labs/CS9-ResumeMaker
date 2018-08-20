@@ -21,13 +21,8 @@ class Education extends Component {
             <div className="link-hide">
               <Link
                 to={{
-<<<<<<< HEAD
                   pathname: "/education/create", // component being Linked to
                   state: { educationIndex: false } // Setting Index passed into educationCreate component - false means new
-=======
-                  pathname: "/education/create",
-                  state: { educationIndex: false }
->>>>>>> 2a7c5a3b5391c378b07e22f51643076f0a1d9278
                 }}
               >
                 <img

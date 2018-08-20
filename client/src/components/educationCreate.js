@@ -8,22 +8,14 @@ class EducationCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values:
-        props.context.userInfo.education[
-<<<<<<< HEAD
-          props.location.state.educationIndex
-        ] === undefined
-          ? [""]
-          : props.context.userInfo.education[
-              props.location.state.educationIndex
-=======
-          this.props.location.state.educationIndex
-        ] === undefined
-          ? [""]
-          : props.context.userInfo.education[
-              this.props.location.state.educationIndex
->>>>>>> 2a7c5a3b5391c378b07e22f51643076f0a1d9278
-            ],
+      values: "",
+      // props.context.userInfo.education[
+      //   props.location.state.educationIndex
+      // ] === undefined
+      //   ? [""]
+      //   : props.context.userInfo.education[
+      //       props.location.state.educationIndex
+      //     ],
       errors: []
     };
   }
@@ -33,46 +25,54 @@ class EducationCreate extends Component {
   };
 
   handleSubmit = e => {
-    this.setState({ errors: [] });
-    const errors = [];
-    const { school, location, degree, field, from, to } = this.state;
-    //TODO: render any conditions before axios call
-    axios
-      .post("localhost:3000", this.state)
-      .then(response => {
-        this.setState({
-          school: "",
-          location: "",
-          degree: "",
-          field: "",
-          from: "",
-          to: ""
-        });
-      })
-      .catch(err => {
-        if (school === "") {
-          errors.push("School is required");
-        }
-        if (location === "") {
-          errors.push("Location is required");
-        }
-        if (degree === "") {
-          errors.push("Degree is required");
-        }
-        if (field === "") {
-          errors.push("Field is required");
-        }
-        if (from === "") {
-          errors.push("A Begin Date is required");
-        }
-        if (to === "") {
-          errors.push("An End Date is required");
-        }
-      });
+    // this.setState({ errors: [] });
+    // const errors = [];
+    // const { school, location, degree, field, from, to } = this.state;
+    // //TODO: render any conditions before axios call
+    // axios
+    //   .post("localhost:3000", this.state)
+    //   .then(response => {
+    //     this.setState({
+    //       school: "",
+    //       location: "",
+    //       degree: "",
+    //       field: "",
+    //       from: "",
+    //       to: ""
+    //     });
+    //   })
+    //   .catch(err => {
+    //     if (school === "") {
+    //       errors.push("School is required");
+    //     }
+    //     if (location === "") {
+    //       errors.push("Location is required");
+    //     }
+    //     if (degree === "") {
+    //       errors.push("Degree is required");
+    //     }
+    //     if (field === "") {
+    //       errors.push("Field is required");
+    //     }
+    //     if (from === "") {
+    //       errors.push("A Begin Date is required");
+    //     }
+    //     if (to === "") {
+    //       errors.push("An End Date is required");
+    //     }
+    //   });
+
+    this.props.context.actions.addElement("education", "Education Stuff");
+    this.props.context.actions.setElement(
+      0,
+      "education",
+      "Education Stuff edited"
+    );
   };
 
   render() {
     const { school, location, degree, field, from, to } = this.state;
+    console.log(this.props.context.userInfo);
 
     return (
       <div>
@@ -94,9 +94,7 @@ class EducationCreate extends Component {
                   education.” ― Martin Luther King Jr.
                 </label>
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
+                  value={this.state.values[0]}
                   title="values[0]"
                   onChange={this.handleSubmit}
                   type="text"
@@ -105,9 +103,7 @@ class EducationCreate extends Component {
                   placeholder="Name of Institution"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
+                  value={this.state.values[0]}
                   title="values[0]"
                   onChange={this.handleSubmit}
                   type="text"
@@ -116,9 +112,7 @@ class EducationCreate extends Component {
                   placeholder="Location"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
+                  value={this.state.values[0]}
                   title="values[0]"
                   onChange={this.handleSubmit}
                   type="text"
@@ -127,9 +121,7 @@ class EducationCreate extends Component {
                   placeholder="Degree or Certificate"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
+                  value={this.state.values[0]}
                   title="values[0]"
                   onChange={this.handleSubmit}
                   type="text"
@@ -138,9 +130,7 @@ class EducationCreate extends Component {
                   placeholder="Field of Study"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
+                  value={this.state.values[0]}
                   title="values[0]"
                   onChange={this.handleSubmit}
                   type="text"
@@ -149,9 +139,7 @@ class EducationCreate extends Component {
                   placeholder="Start Date"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
+                  value={this.state.values[0]}
                   title="values[0]"
                   onChange={this.handleSubmit}
                   type="text"
@@ -161,6 +149,7 @@ class EducationCreate extends Component {
                 />
               </div>
             </form>
+            <button onClick={this.handleSubmit} />
           </div>
         </div>
       </div>

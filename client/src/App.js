@@ -15,6 +15,7 @@ import Sidebar from "./components/subComponents/sidebar";
 import SummaryCreate from "./components/summaryCreate";
 import EducationCreate from "./components/educationCreate";
 import ExperienceCreate from "./components/experienceCreate";
+import SkillsCreate from "./components/skillsCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 
@@ -71,6 +72,13 @@ class App extends Component {
                   exact
                   path="/skills"
                   render={props => <Skills {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/skills/create"
+                  render={props => (
+                    <SkillsCreate {...props} context={context} />
+                  )}
                 />
                 <Route
                   exact
