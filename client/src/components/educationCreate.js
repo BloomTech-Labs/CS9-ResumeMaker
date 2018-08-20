@@ -10,11 +10,11 @@ class EducationCreate extends Component {
     this.state = {
       values:
         props.context.userInfo.education[
-          this.props.location.state.educationIndex
+          props.location.state.educationIndex
         ] === undefined
           ? [""]
           : props.context.userInfo.education[
-              this.props.location.state.educationIndex
+              props.location.state.educationIndex
             ],
       errors: []
     };
