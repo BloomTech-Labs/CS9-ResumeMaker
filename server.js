@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const hbs = require('hbs');
+const stripe = require('stripe')(process.env.SECRET_KEY);
 require("dotenv").config();
 
 // Connect To mLab
@@ -16,12 +18,16 @@ mongoose
 // Initialize Server
 const server = express();
 
+server.set('view engine', 'hbs');
+server.engine('hbs', __dirname + 'views');
+
 // Initialize passport authentication
 server.use(passport.initialize());
 require("./user/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
 
 // const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
 // const corsOptions = {
