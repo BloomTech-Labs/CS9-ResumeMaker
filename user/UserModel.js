@@ -2,11 +2,18 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 // Validation
+
+/*
+  Email example: test@service.com
+*/
 const validateEmail = email => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
 }
 
+/*
+  Phone Number example: 123-456-7890
+*/
 const validatePhone = number => {
   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
   return re.test(number);
@@ -18,6 +25,7 @@ const validatePhone = number => {
     Must have at least 1 uppercase
     Must have at least 1 lowercase
     Must have at least 1 special character
+    Must have at least 1 digit
 */
 const checkPasswordStrength = password => {
   const minlength = 6;
@@ -30,11 +38,17 @@ const checkPasswordStrength = password => {
   return true;
 }
 
+/*
+  Linkedin example: linkedin.com/in/test/ (allows some special characters)
+*/
 const validateLinkedIn = url => {
   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
 }
 
+/*
+  GitHub example: github.com/test/ (allows some special characters)
+*/
 const validateGithub = url => {
   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
