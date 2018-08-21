@@ -24,8 +24,6 @@ class AuthProvider extends Component {
     this.setState({ [title]: value });
   };
 
-  setSummary = index => {};
-
   setLogin = userData => {
     this.setState({
       auth: true,
@@ -41,9 +39,21 @@ class AuthProvider extends Component {
         : [],
       skills: userData.sections.skills ? userData.sections.skills : [],
       summary: userData.sections.summary ? userData.sections.summary : [],
-      userName: userData.username ? userData.username : ""
+      userName: userData.username ? userData.username : "",
+      id: userData._id ? userData._id : null
     });
-    console.log();
+  };
+
+  setElement = (index, elementName, elementValue) => {
+    const temp = this.state;
+    temp[elementName][index] = elementValue;
+    this.setState(temp);
+  };
+
+  addElement = (elementName, elementValue) => {
+    const temp = this.state;
+    temp[elementName].push(elementValue);
+    this.setState(temp);
   };
 
   render() {
@@ -55,7 +65,9 @@ class AuthProvider extends Component {
           actions: {
             toggleAuth: this.toggleAuth,
             setContext: this.setContext,
-            setLogin: this.setLogin
+            setLogin: this.setLogin,
+            setElement: this.setElement,
+            addElement: this.addElement
           }
         }}
       >
