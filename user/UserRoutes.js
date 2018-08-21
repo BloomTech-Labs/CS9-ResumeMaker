@@ -203,28 +203,6 @@ UserRouter.put(
       delete req.body.username;
       delete req.body.email;
       delete req.body.active;
-
-      // this will be filled out if the password is changed
-      if (req.body.oldpassword) {
-        const verified = req.user.checkPassword(req.body.oldpassword);
-        if (verified && req.body.newpassword) {
-          User.findById(req.user.id)
-            .then(user => {
-              if (user !== null) {
-                user.password = req.body.newpassword;
-                user.save(function(err) {
-                  if (err) {
-                    console.log("Error saving user:", err);
-                  }
-                });
-              }
-            })
-            .catch(err => {
-              console.log("Error finding user:", err);
-            });
-        }
-      }
-
       // Delete this to ensure the password isn't changed manually
       delete req.body.password;
 
@@ -244,20 +222,40 @@ UserRouter.put(
           } else {
             // If the password was changed then return a new token as well
             if (req.body.oldpassword && req.body.newpassword) {
-              const payload = {
-                id: user._id,
-                email: user.email,
-                password: user.password
-              };
-              const token = jwt.sign(payload, process.env.SECRET, {
-                expiresIn: 604800
-              });
-              res.status(200).json({ user, token });
+              const verified = req.user.checkPassword(req.body.oldpassword);
+              if (verified) {
+                user.password = req.body.newpassword;
+                user.save(function(err) {
+                  if (err) {
+                    res
+                      .status(200)
+                      .json({
+                        user,
+                        errorMessage: "Could not save new password.",
+                        error: err
+                      });
+                  } else {
+                    const payload = {
+                      id: user._id,
+                      email: user.email,
+                      password: user.password
+                    };
+                    const token = jwt.sign(payload, process.env.SECRET, {
+                      expiresIn: 604800
+                    });
+                    res.json({ token, user });
+                  }
+                });
+              } else
+                res.status(200).json({
+                  user,
+                  errorMessage: "The old password entered was invalid."
+                });
             } else res.status(200).json({ user });
           }
         })
         .catch(err => {
-          res.status(500).json({ errorMessage: "Could not update" });
+          res.status(500).json({ errorMessage: "Could not update." });
         });
     } else {
       res
