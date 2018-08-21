@@ -7,5 +7,22 @@
     </head>
     <body>
         <div>Hello World</div>
+        <br>
+        <form action="/monthly" method="POST">
+            <script
+                src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ process.env.PUBLIC_KEY }}"
+                data-amount="499"
+                data-name="Monthly"
+                data-description="Subscription"
+                data-locale="auto"
+                data-label="Monthly Subscription"
+            >
+            </script>
+        </form>
+        <br>
     </body>
 </html>
+
+
