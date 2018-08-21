@@ -8,7 +8,6 @@ const validateEmail = email => {
 };
 
 const validatePhone = number => {
-  if (!number || number == "") return true;
   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
   return re.test(number);
 };
@@ -33,13 +32,11 @@ const checkPasswordStrength = password => {
 };
 
 const validateLinkedIn = url => {
-  if (!url || url == "") return true;
   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
 };
 
 const validateGithub = url => {
-  if (!url || url == "") return true;
   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
 };
@@ -61,13 +58,13 @@ const User = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      validate: [checkPasswordStrength, "Password Too Weak"]
+      validate: [checkPasswordStrength, "Password too weak."]
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      validate: [validateEmail, "Invalid Email"]
+      validate: [validateEmail, "Invalid email."]
     },
     name: {
       firstname: {
@@ -85,16 +82,16 @@ const User = new mongoose.Schema(
     },
     phonenumber: {
       type: String,
-      validate: [validatePhone, "Invalid Phone Number"]
+      validate: [validatePhone, "Invalid phone number."]
     },
     links: {
       linkedin: {
         type: String,
-        validate: [validateLinkedIn, "Invalid Linkedin"]
+        validate: [validateLinkedIn, "Invalid Linkedin."]
       },
       github: {
         type: String,
-        validate: [validateGithub, "Invalid github"]
+        validate: [validateGithub, "Invalid Github."]
       },
       portfolio: String
     },

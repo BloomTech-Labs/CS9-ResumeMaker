@@ -37,7 +37,7 @@ UserRouter.get("/", (req, res) => {
       res.status(200).json(users);
     })
     .catch(err => {
-      res.status(500).json({ errorMessage: "Get unsuccessful." });
+      res.status(500).json({ errorMessage: "Get unsuccessful.", error: err });
     });
 });
 
@@ -51,7 +51,8 @@ UserRouter.post("/register", (req, res) => {
       if (user) {
         res.status(500).json({
           errorMessage:
-            "This email is already in use. Please choose the forgot password option to reset your password."
+            "This email is already in use. Please choose the forgot password option to reset your password.",
+          error: err
         });
       } else {
         const newUser = new User(userData);
@@ -127,7 +128,8 @@ UserRouter.post("/register", (req, res) => {
           .catch(err => {
             res.status(500).json({
               errorMessage:
-                "There was an error in account creation, please try again."
+                "There was an error in account creation, please try again.",
+              error: err
             });
           });
       }
@@ -135,7 +137,8 @@ UserRouter.post("/register", (req, res) => {
     .catch(err => {
       return res.status(500).json({
         errorMessage:
-          "There was an error in account creation, please try again."
+          "There was an error in account creation, please try again.",
+        error: err
       });
     });
 });
@@ -164,7 +167,7 @@ UserRouter.post("/login", (req, res) => {
         return res.status(422).json({ errorMessage: "Invalid credentials." });
     })
     .catch(err => {
-      res.status(500).json({ errorMessage: "Could not log in." });
+      res.status(500).json({ errorMessage: "Could not log in.", error: err });
     });
 });
 
@@ -181,7 +184,7 @@ UserRouter.delete(
           res.status(200).send("Successfully deleted.");
         })
         .catch(err => {
-          res.status(404).json(err);
+          res.status(404).json({ error: err });
         });
     } else {
       res
@@ -227,13 +230,11 @@ UserRouter.put(
                 user.password = req.body.newpassword;
                 user.save(function(err) {
                   if (err) {
-                    res
-                      .status(200)
-                      .json({
-                        user,
-                        errorMessage: "Could not save new password.",
-                        error: err
-                      });
+                    res.status(200).json({
+                      user,
+                      errorMessage: "Could not save new password.",
+                      error: err
+                    });
                   } else {
                     const payload = {
                       id: user._id,
@@ -255,7 +256,9 @@ UserRouter.put(
           }
         })
         .catch(err => {
-          res.status(500).json({ errorMessage: "Could not update." });
+          res
+            .status(500)
+            .json({ errorMessage: "Could not update.", error: err });
         });
     } else {
       res
@@ -300,7 +303,8 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
         .catch(err => {
           res.status(500).json({
             errorMessage:
-              "Your account has already been activated or does not exist."
+              "Your account has already been activated or does not exist.",
+            error: err
           });
         });
     } else
@@ -375,9 +379,10 @@ UserRouter.put("/forgotpassword", (req, res) => {
       res.status(200).json(user.email);
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ errorMessage: "Could not change password. Please try again." });
+      res.status(500).json({
+        errorMessage: "Could not change password. Please try again.",
+        error: err
+      });
     });
 });
 
@@ -405,24 +410,27 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
                     "There was an error setting the temporary password.",
                   error: err
                 });
-              } else res.status(200).json("Temporary password set successfully!");
+              } else res.status(200).json({ message: "Temporary password set successfully!", password: hash });
             });
           } else
             res.status(404).json({
               errorMessage:
-                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes.",
+              error: err
             });
         })
         .catch(err => {
           res.status(500).json({
             errorMessage:
-              "Your account has already been activated or does not exist."
+              "Your account has already been activated or does not exist.",
+            error: err
           });
         });
     } else
       res.status(500).json({
         errorMessage:
-          "Your account has already been activated or does not exist."
+          "Your account has already been activated or does not exist.",
+        error: err
       });
   });
 });
