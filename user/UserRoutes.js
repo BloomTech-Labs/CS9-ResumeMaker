@@ -212,7 +212,6 @@ UserRouter.put(
       delete req.body.password;
 
       const changes = req.body;
-      console.log("REQ > BODY IS THIS ", req.body);
       const options = {
         new: true
         // runValidators: true
@@ -225,101 +224,108 @@ UserRouter.put(
               .status(404)
               .json({ errorMessage: "No user with that id could be found." });
           } else {
-            const verified = req.user.checkPassword(req.body.oldpassword);
-            // If the password was changed then return a new token as well
-            // If the user edited their email, then this if statement sends an email confirmation to their new email to make sure
-            if (email && email !== req.user.email && verified) {
-              // pseudo random seed to make each hash different
-              const random = crypto.randomBytes(20).toString("hex");
-              // creates a hash
-              const hash = crypto.createHash("sha256");
-              // adds user id, secret and the randomly generated string to make a unique hash
-              hash.update(user.id + process.env.SECRET + random);
-
-              // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
-              const newEmailConfirmation = new EmailConfirmation({
-                hash: base64url(hash.digest("hex")) + "!",
-                user: user._id,
-                newemail: email
-              });
-              newEmailConfirmation
-                .save()
-                .then(emailconfirmation => {
-                  // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-                  nodemailer.createTestAccount((err, account) => {
-                    // create reusable transporter object using the default SMTP transport
-                    let transporter = nodemailer.createTransport({
-                      host: "smtp.ethereal.email",
-                      port: 587,
-                      secure: false, // true for 465, false for other ports
-                      auth: {
-                        user: account.user, // generated ethereal user
-                        pass: account.pass // generated ethereal password
-                      }
-                    });
-                    let mailOptions = {
-                      from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
-                      to: `${req.user.email}`,
-                      subject: `Confirm your account email change for ${websiteName}!`,
-                      text: `Please go to this link to make this your new account email address: ${req.get(
-                        "host"
-                      )}${req.baseUrl}/changeemail/${
-                        newEmailConfirmation.hash
-                      }`,
-                      html: `Please click this <a href=${req.get("host")}${
-                        req.baseUrl
-                      }/changeemail/${newEmailConfirmation.hash}
-                    }>link</a> to make this your new account email address.`
-                    };
-
-                    transporter.sendMail(mailOptions, (error, info) => {
-                      if (error) {
-                        console.log(error);
-                      } else {
-                        console.log("Message sent: %s", info.messageId);
-                        console.log(
-                          "Preview URL: %s",
-                          nodemailer.getTestMessageUrl(info)
-                        );
-                      }
-                    });
-                  });
-                })
-                .catch(err => {
-                  console.log({
-                    errorMessage: "Could not save email confirmation.",
-                    error: err
-                  });
-                });
-            }
-            if (req.body.oldpassword && req.body.newpassword) {
+            if (req.body.oldpassword) {
+              const verified = req.user.checkPassword(req.body.oldpassword);
               if (verified) {
-                user.password = req.body.newpassword;
-                user.save(function(err) {
-                  if (err) {
-                    res.status(200).json({
-                      user,
-                      errorMessage: "Could not save new password.",
-                      error: err
+                // If the password was changed then return a new token as well
+                // If the user edited their email, then this if statement sends an email confirmation to their new email to make sure
+                if (email && email !== req.user.email) {
+                  // pseudo random seed to make each hash different
+                  const random = crypto.randomBytes(20).toString("hex");
+                  // creates a hash
+                  const hash = crypto.createHash("sha256");
+                  // adds user id, secret and the randomly generated string to make a unique hash
+                  hash.update(user.id + process.env.SECRET + random);
+
+                  // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
+                  const newEmailConfirmation = new EmailConfirmation({
+                    hash: base64url(hash.digest("hex")) + "!",
+                    user: user._id,
+                    newemail: email
+                  });
+                  newEmailConfirmation
+                    .save()
+                    .then(emailconfirmation => {
+                      // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+                      nodemailer.createTestAccount((err, account) => {
+                        // create reusable transporter object using the default SMTP transport
+                        let transporter = nodemailer.createTransport({
+                          host: "smtp.ethereal.email",
+                          port: 587,
+                          secure: false, // true for 465, false for other ports
+                          auth: {
+                            user: account.user, // generated ethereal user
+                            pass: account.pass // generated ethereal password
+                          }
+                        });
+                        let mailOptions = {
+                          from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
+                          to: `${req.user.email}`,
+                          subject: `Confirm your account email change for ${websiteName}!`,
+                          text: `Please go to this link to make this your new account email address: ${req.get(
+                            "host"
+                          )}${req.baseUrl}/changeemail/${
+                            newEmailConfirmation.hash
+                          }`,
+                          html: `Please click this <a href=${req.get("host")}${
+                            req.baseUrl
+                          }/changeemail/${newEmailConfirmation.hash}
+                    }>link</a> to make this your new account email address.`
+                        };
+
+                        transporter.sendMail(mailOptions, (error, info) => {
+                          if (error) {
+                            console.log(error);
+                          } else {
+                            console.log("Message sent: %s", info.messageId);
+                            console.log(
+                              "Preview URL: %s",
+                              nodemailer.getTestMessageUrl(info)
+                            );
+                          }
+                        });
+                      });
+                    })
+                    .catch(err => {
+                      console.log({
+                        errorMessage: "Could not save email confirmation.",
+                        error: err
+                      });
                     });
-                  } else {
-                    const payload = {
-                      id: user._id,
-                      email: user.email,
-                      password: user.password
-                    };
-                    const token = jwt.sign(payload, process.env.SECRET, {
-                      expiresIn: 604800
-                    });
-                    user.password = null;
-                    res.json({ token, user });
-                  }
-                });
+                }
+                if (req.body.newpassword) {
+                  user.password = req.body.newpassword;
+                  user.save(function(err) {
+                    if (err) {
+                      user.password = null;
+                      res.status(200).json({
+                        user,
+                        errorMessage: "Could not save new password.",
+                        error: err
+                      });
+                    } else {
+                      const payload = {
+                        id: user._id,
+                        email: user.email,
+                        password: user.password
+                      };
+                      const token = jwt.sign(payload, process.env.SECRET, {
+                        expiresIn: 604800
+                      });
+                      user.password = null;
+                      res.json({ token, user });
+                    }
+                  });
+                } else {
+                  user.password = null;
+                  res.status(200).json({ user });
+                }
               } else {
                 user.password = null;
                 res.status(200).json({
                   user,
-                  errorMessage: "The old password entered was invalid."
+                  errorMessage:
+                    "The password you entered was invalid. To update your email or password please enter your current password."
                 });
               }
             } else {
@@ -351,8 +357,6 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
 
   EmailConfirmation.findOne({ hash: hash })
     .then(emailconfirmation => {
-      console.log(emailconfirmation);
-
       if (emailconfirmation && emailconfirmation.newemail) {
         User.findOneAndUpdate(
           { _id: emailconfirmation.user },
