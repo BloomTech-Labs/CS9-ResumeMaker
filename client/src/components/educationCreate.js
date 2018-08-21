@@ -2,22 +2,48 @@ import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
 import Navbar from "./subComponents/navbar";
+import { Redirect } from "react-router-dom";
 // import { Consumer } from '../../context';
 
 class EducationCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values:
-        props.context.userInfo.education[
-          props.location.state.educationIndex
-        ] === undefined
-          ? [""]
-          : props.context.userInfo.education[
-              props.location.state.educationIndex
-            ],
-      errors: []
+      school: "",
+      degree: "",
+      fieldofstudy: "",
+      from: "",
+      to: "",
+      success: false
     };
+  }
+
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    }
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.location.state.educationIndex !== false
+    )
+      this.setState({
+        school: this.props.context.userInfo.education[
+          this.props.location.state.educationIndex
+        ].school,
+        degree: this.props.context.userInfo.education[
+          this.props.location.state.educationIndex
+        ].degree,
+        fieldofstudy: this.props.context.userInfo.education[
+          this.props.location.state.educationIndex
+        ].fieldofstudy,
+        from: this.props.context.userInfo.education[
+          this.props.location.state.educationIndex
+        ].from,
+        to: this.props.context.userInfo.education[
+          this.props.location.state.educationIndex
+        ].to
+      });
   }
 
   onInputChange = e => {
@@ -29,10 +55,11 @@ class EducationCreate extends Component {
 
     if (this.props.location.state.educationIndex === false) {
       this.props.context.actions.addElement("education", {
-        school: "created",
-        degree: "created",
-        fieldofstudy: "created",
-        from: "created"
+        school: this.state.school,
+        degree: this.state.degree,
+        fieldofstudy: this.state.fieldofstudy,
+        from: this.state.from,
+        to: this.state.to
       });
     } // if creating
     else {
@@ -40,10 +67,11 @@ class EducationCreate extends Component {
         this.props.location.state.educationIndex,
         "education",
         {
-          school: "edited",
-          degree: "edited",
-          fieldofstudy: "edited",
-          from: "Edited"
+          school: this.state.school,
+          degree: this.state.degree,
+          fieldofstudy: this.state.fieldofstudy,
+          from: this.state.from,
+          to: this.state.to
         }
       );
     } // if editing
@@ -62,7 +90,7 @@ class EducationCreate extends Component {
       )
       .then(response => {
         console.log(response);
-        return ({ history }) => history.push("/resumes");
+        this.setState({ success: true });
       })
       .catch(err => {
         console.log("err", err);
@@ -70,11 +98,9 @@ class EducationCreate extends Component {
   };
 
   render() {
-    const { school, location, degree, field, from, to } = this.state.values;
-    console.log(this.props.context.userInfo.education);
-
     return (
       <div>
+        {this.state.success ? <Redirect to="/education" /> : null}
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },
@@ -93,73 +119,42 @@ class EducationCreate extends Component {
                   education.” ― Martin Luther King Jr.
                 </label>
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
-                  title="values"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.school}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="school"
                   placeholder="Name of Institution"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
-                  title="values"
-                  onChange={this.handleSubmit}
-                  type="text"
-                  className="form-control"
-                  name="location"
-                  placeholder="Location"
-                />
-                <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
-                  title="values"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.degree}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="degree"
                   placeholder="Degree or Certificate"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
-                  title="values"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.fieldofstudy}
+                  onChange={this.onInputChange}
                   className="form-control"
-                  name="field"
+                  name="fieldofstudy"
                   placeholder="Field of Study"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
-                  title="values"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.from}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="from"
                   placeholder="Start Date"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.educationIndex]
-                  }
-                  title="values"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.to}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="to"
                   placeholder="End Date"
                 />
               </div>
-              <button onClick={this.handleSubmit}>Submit</button>
+              <button onClick={e => this.handleSubmit(e)}>Submit</button>
             </form>
           </div>
         </div>

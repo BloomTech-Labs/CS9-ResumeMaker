@@ -9,7 +9,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "bobbert@gmail.com",
-      password: "bobbert",
+      password:
+        "OTUxYWU1OWI0ZDJlOTkyN2E2Y2FkODQ5ZjA3NjZkNjhiYTIwZmM1ZDAxNGYzNWJhMDc4YWFlODM4OTc0OTA0OQ!",
       invalidCredentials: false
     };
   }
@@ -26,7 +27,6 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const setLogin = this.props.context.actions.setLogin;
 
     axios
       .post("https://easy-resume.herokuapp.com/users/login", {
@@ -38,7 +38,7 @@ export default class Login extends Component {
           const userData = response.data.user;
           console.log(userData);
           localStorage.setItem("token", response.data.token);
-          setLogin(userData);
+          this.props.context.actions.setLogin(userData);
 
           console.log(this.props.context.userInfo);
           this.props.history.push("/resumes");
