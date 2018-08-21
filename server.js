@@ -3,7 +3,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const hbs = require('hbs');
-const stripe = require('stripe')(process.env.SECRET_KEY);
 require("dotenv").config();
 
 // Connect To mLab
