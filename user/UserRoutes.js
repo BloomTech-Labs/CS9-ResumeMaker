@@ -20,7 +20,6 @@ UserRouter.get(
   "/currentuser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // console.log(req.user);
     req.user.password = null;
     res.status(200).json(req.user);
   }
@@ -78,54 +77,50 @@ UserRouter.post("/register", (req, res) => {
             });
             newEmailConfirmation
               .save()
-              .then()
+              .then(emailconfirmation => {
+                // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+                nodemailer.createTestAccount((err, account) => {
+                  // create reusable transporter object using the default SMTP transport
+                  let transporter = nodemailer.createTransport({
+                    host: "smtp.ethereal.email",
+                    port: 587,
+                    secure: false, // true for 465, false for other ports
+                    auth: {
+                      user: account.user, // generated ethereal user
+                      pass: account.pass // generated ethereal password
+                    }
+                  });
+                  let mailOptions = {
+                    from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
+                    to: `${user.email}`,
+                    subject: `Confirm your registration to ${websiteName}!`,
+                    text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
+                      "host"
+                    )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
+                    html: `Thank you for signing up! Please click this <a href=${req.get(
+                      "host"
+                    )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
+                }>link</a>.`
+                  };
+
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      return console.log(error);
+                    }
+                    console.log("Message sent: %s", info.messageId);
+                    console.log(
+                      "Preview URL: %s",
+                      nodemailer.getTestMessageUrl(info)
+                    );
+                  });
+                });
+              })
               .catch(err => {
                 console.log({
                   errorMessage: "Could not save email confirmation.",
                   error: err
                 });
               });
-            // console.log("HASH IS ", newEmailConfirmation.hash);
-
-            // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-            nodemailer.createTestAccount((err, account) => {
-              // create reusable transporter object using the default SMTP transport
-              let transporter = nodemailer.createTransport({
-                host: "smtp.ethereal.email",
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                auth: {
-                  user: account.user, // generated ethereal user
-                  pass: account.pass // generated ethereal password
-                }
-              });
-
-              // console.log(req.get("host"));
-              // console.log(req.baseUrl);
-              let mailOptions = {
-                from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
-                to: `${user.email}`,
-                subject: `Confirm your registration to ${websiteName}!`,
-                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
-                html: `Thank you for signing up! Please click this <a href=${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
-                }>link</a>.`
-              };
-
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  return console.log(error);
-                }
-                console.log("Message sent: %s", info.messageId);
-                console.log(
-                  "Preview URL: %s",
-                  nodemailer.getTestMessageUrl(info)
-                );
-              });
-            });
             user.password = null;
             res.status(201).json({ user, token });
           })
@@ -205,7 +200,6 @@ UserRouter.put(
   "/info/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // console.log(req.user);
     const id = req.params.id;
     if (id === req.user.id) {
       delete req.body.username;
@@ -250,54 +244,53 @@ UserRouter.put(
               });
               newEmailConfirmation
                 .save()
-                .then()
+                .then(emailconfirmation => {
+                  // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+                  nodemailer.createTestAccount((err, account) => {
+                    // create reusable transporter object using the default SMTP transport
+                    let transporter = nodemailer.createTransport({
+                      host: "smtp.ethereal.email",
+                      port: 587,
+                      secure: false, // true for 465, false for other ports
+                      auth: {
+                        user: account.user, // generated ethereal user
+                        pass: account.pass // generated ethereal password
+                      }
+                    });
+                    let mailOptions = {
+                      from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
+                      to: `${req.user.email}`,
+                      subject: `Confirm your account email change for ${websiteName}!`,
+                      text: `Please go to this link to make this your new account email address: ${req.get(
+                        "host"
+                      )}${req.baseUrl}/changeemail/${
+                        newEmailConfirmation.hash
+                      }`,
+                      html: `Please click this <a href=${req.get("host")}${
+                        req.baseUrl
+                      }/changeemail/${newEmailConfirmation.hash}
+                    }>link</a> to make this your new account email address.`
+                    };
+
+                    transporter.sendMail(mailOptions, (error, info) => {
+                      if (error) {
+                        console.log(error);
+                      } else {
+                        console.log("Message sent: %s", info.messageId);
+                        console.log(
+                          "Preview URL: %s",
+                          nodemailer.getTestMessageUrl(info)
+                        );
+                      }
+                    });
+                  });
+                })
                 .catch(err => {
                   console.log({
                     errorMessage: "Could not save email confirmation.",
                     error: err
                   });
                 });
-
-              // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-              nodemailer.createTestAccount((err, account) => {
-                // create reusable transporter object using the default SMTP transport
-                let transporter = nodemailer.createTransport({
-                  host: "smtp.ethereal.email",
-                  port: 587,
-                  secure: false, // true for 465, false for other ports
-                  auth: {
-                    user: account.user, // generated ethereal user
-                    pass: account.pass // generated ethereal password
-                  }
-                });
-
-                // console.log(req.get("host"));
-                // console.log(req.baseUrl);
-                let mailOptions = {
-                  from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
-                  to: `${req.user.email}`,
-                  subject: `Confirm your account email change for ${websiteName}!`,
-                  text: `Please go to this link to make this your new account email address: ${req.get(
-                    "host"
-                  )}${req.baseUrl}/changeemail/${newEmailConfirmation.hash}`,
-                  html: `Please click this <a href=${req.get("host")}${
-                    req.baseUrl
-                  }/changeemail/${newEmailConfirmation.hash}
-                    }>link</a> to make this your new account email address.`
-                };
-
-                transporter.sendMail(mailOptions, (error, info) => {
-                  if (error) {
-                    console.log(error);
-                  } else {
-                    console.log("Message sent: %s", info.messageId);
-                    console.log(
-                      "Preview URL: %s",
-                      nodemailer.getTestMessageUrl(info)
-                    );
-                  }
-                });
-              });
             }
             if (req.body.oldpassword && req.body.newpassword) {
               if (verified) {
@@ -494,50 +487,50 @@ UserRouter.put("/forgotpassword", (req, res) => {
       });
       newEmailConfirmation
         .save()
-        .then()
+        .then(emailconfirmation => {
+          // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+          nodemailer.createTestAccount((err, account) => {
+            // create reusable transporter object using the default SMTP transport
+            let transporter = nodemailer.createTransport({
+              host: "smtp.ethereal.email",
+              port: 587,
+              secure: false, // true for 465, false for other ports
+              auth: {
+                user: account.user, // generated ethereal user
+                pass: account.pass // generated ethereal password
+              }
+            });
+            let mailOptions = {
+              from: `"Fredegar Fu 👻" <forgotpassword@${websiteName}>`,
+              to: `${user.email}`,
+              subject: `Confirm your password change for ${websiteName}!`,
+              text: `Please go to this link to reset your password: ${req.get(
+                "host"
+              )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
+              html: `Please click this <a href=${req.get("host")}${
+                req.baseUrl
+              }/resetpassword/${newEmailConfirmation.hash}
+          }>link</a> to reset your password.`
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log("Message sent: %s", info.messageId);
+              console.log(
+                "Preview URL: %s",
+                nodemailer.getTestMessageUrl(info)
+              );
+            });
+          });
+        })
         .catch(err => {
           console.log({
             errorMessage: "Could not save email confirmation.",
             error: err
           });
         });
-
-      // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-      nodemailer.createTestAccount((err, account) => {
-        // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-          host: "smtp.ethereal.email",
-          port: 587,
-          secure: false, // true for 465, false for other ports
-          auth: {
-            user: account.user, // generated ethereal user
-            pass: account.pass // generated ethereal password
-          }
-        });
-
-        // console.log(req.get("host"));
-        // console.log(req.baseUrl);
-        let mailOptions = {
-          from: `"Fredegar Fu 👻" <forgotpassword@${websiteName}>`,
-          to: `${user.email}`,
-          subject: `Confirm your password change for ${websiteName}!`,
-          text: `Please go to this link to reset your password: ${req.get(
-            "host"
-          )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
-          html: `Please click this <a href=${req.get("host")}${
-            req.baseUrl
-          }/resetpassword/${newEmailConfirmation.hash}
-          }>link</a> to reset your password.`
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            return console.log(error);
-          }
-          console.log("Message sent: %s", info.messageId);
-          console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        });
-      });
 
       res.status(200).json(user.email);
     })
@@ -552,7 +545,6 @@ UserRouter.put("/forgotpassword", (req, res) => {
 // PUT users/info/:id
 // Update user information
 UserRouter.get("/resetpassword/:hash", (req, res) => {
-  // console.log(req.user);
   const hash = req.params.hash;
 
   EmailConfirmation.findOne({ hash: hash })
