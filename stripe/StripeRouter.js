@@ -161,30 +161,36 @@ router.post(
     @desc   Allows the user to unsubscribe
     @access Private
 */
-router.post('/unsubscribe', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post(
+  "/unsubscribe",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
     const { email } = req.user;
 
-    User
-    .findOne({ email })
-    .then(user => {
+    User.findOne({ email })
+      .then(user => {
         if (user.membership && user.subscription) {
-            stripe.subscriptions.del(
-                user.subscription,
-                (err, confirmation) => {
-                    if (err) res.status(400).json("Unable to unsubscribe at this time");
-                    else {
-                        user.subscription = null;
-                        user.membership = false;
-                        user.save();
-                        res.status(201).json("Thank you for your business. We hope to work with you again.");
-                    }
-                }
-            )
+          stripe.subscriptions.del(user.subscription, (err, confirmation) => {
+            if (err) res.status(400).json("Unable to unsubscribe at this time");
+            else {
+              user.subscription = null;
+              user.membership = false;
+              user.save();
+              res
+                .status(201)
+                .json(
+                  "Thank you for your business. We hope to work with you again."
+                );
+            }
+          });
+        } else {
+          res.status(400).json("You're not a member");
         }
-    })
-    .catch(err => {
+      })
+      .catch(err => {
         res.status(400).json(err);
-    })
-})
+      });
+  }
+);
 
 module.exports = router;
