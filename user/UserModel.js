@@ -159,7 +159,12 @@ const User = new mongoose.Schema(
           type: String
         }
       ]
-    }
+    },
+    membership: {
+      type: Boolean,
+      default: false
+    },
+    subscription: String,
   },
   { timestamps: true }
 );
