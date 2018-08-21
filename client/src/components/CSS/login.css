@@ -1,4 +1,10 @@
 .Login {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.Login .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

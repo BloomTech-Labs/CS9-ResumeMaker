@@ -55,7 +55,7 @@ class Register extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="username" bsSize="large">
+          <FormGroup controlId="username" bsSize="small">
             <ControlLabel>Username</ControlLabel>
             <FormControl
               autoFocus
@@ -84,7 +84,7 @@ class Register extends Component {
           <FormGroup controlId="confirmPassword" bsSize="large">
             <ControlLabel>Confirm password</ControlLabel>
             <FormControl
-              type="confirmPassword"
+              type="password"
               value={this.state.confirmPassword}
               onChange={this.handleChange}
             />
