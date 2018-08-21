@@ -103,9 +103,9 @@ UserRouter.post("/register", (req, res) => {
                 }>link</a>.`
                   };
 
-                  transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                      return console.log(error);
+                  transporter.sendMail(mailOptions, (err, info) => {
+                    if (err) {
+                      return console.log(err);
                     }
                     console.log("Message sent: %s", info.messageId);
                     console.log(
@@ -149,7 +149,7 @@ UserRouter.post("/login", (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        return res.status(422).json({ errorMessage: "Invalid credentials." });
+        return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
       const verified = user.checkPassword(password);
       if (verified) {
@@ -164,7 +164,7 @@ UserRouter.post("/login", (req, res) => {
         user.password = null;
         res.json({ token, user });
       } else
-        return res.status(422).json({ errorMessage: "Invalid credentials." });
+        return res.status(401).json({ errorMessage: "Invalid credentials." });
     })
     .catch(err => {
       res.status(500).json({ errorMessage: "Could not log in.", error: err });
@@ -181,10 +181,13 @@ UserRouter.delete(
     if (id === req.user.id) {
       User.findByIdAndRemove(id)
         .then(user => {
-          res.status(200).send("Successfully deleted.");
+          res.status(200).send("User successfully deleted.");
         })
         .catch(err => {
-          res.status(404).json({ error: err });
+          res.status(404).json({
+            errorMessage: "Could not find and delete user.",
+            error: err
+          });
         });
     } else {
       res
@@ -273,9 +276,9 @@ UserRouter.put(
                     }>link</a> to make this your new account email address.`
                         };
 
-                        transporter.sendMail(mailOptions, (error, info) => {
-                          if (error) {
-                            console.log(error);
+                        transporter.sendMail(mailOptions, (err, info) => {
+                          if (err) {
+                            console.log(err);
                           } else {
                             console.log("Message sent: %s", info.messageId);
                             console.log(
@@ -370,7 +373,7 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
               .then()
               .catch(err => {
                 console.log({
-                  errorMessage: "Could not save email confirmation.",
+                  errorMessage: "Could not delete email confirmation.",
                   error: err
                 });
               });
@@ -448,7 +451,9 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
               });
 
             if (user !== null) {
-              res.status(200).json("You have successfully signed up!");
+              res
+                .status(200)
+                .json({ message: "You have successfully signed up!" });
             } else
               res.status(404).json({
                 errorMessage:
@@ -483,7 +488,7 @@ UserRouter.put("/forgotpassword", (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        return res.status(422).json({ errorMessage: "Invalid credentials." });
+        return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
 
       // pseudo random seed to make each hash different
@@ -526,15 +531,20 @@ UserRouter.put("/forgotpassword", (req, res) => {
           }>link</a> to reset your password.`
             };
 
-            transporter.sendMail(mailOptions, (error, info) => {
-              if (error) {
-                return console.log(error);
+            transporter.sendMail(mailOptions, (err, info) => {
+              if (err) {
+                return res
+                  .status(500)
+                  .json({ errorMessage: "Could not send email.", error: err });
               }
               console.log("Message sent: %s", info.messageId);
               console.log(
                 "Preview URL: %s",
                 nodemailer.getTestMessageUrl(info)
               );
+              res
+                .status(200)
+                .json({ message: "Email confirmation saved and email sent." });
             });
           });
         })
