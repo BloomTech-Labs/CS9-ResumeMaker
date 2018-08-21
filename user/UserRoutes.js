@@ -51,8 +51,7 @@ UserRouter.post("/register", (req, res) => {
       if (user) {
         res.status(500).json({
           errorMessage:
-            "This email is already in use. Please choose the forgot password option to reset your password.",
-          error: err
+            "This email is already in use. Please choose the forgot password option to reset your password."
         });
       } else {
         const newUser = new User(userData);
@@ -415,8 +414,7 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
           } else
             res.status(404).json({
               errorMessage:
-                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes.",
-              error: err
+                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
             });
         })
         .catch(err => {
@@ -429,8 +427,7 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
     } else
       res.status(500).json({
         errorMessage:
-          "Your account has already been activated or does not exist.",
-        error: err
+          "Your account has already been activated or does not exist."
       });
   });
 });
