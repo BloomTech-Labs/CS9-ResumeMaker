@@ -76,7 +76,15 @@ UserRouter.post("/register", (req, res) => {
               hash: base64url(hash.digest("hex")) + "$",
               user: user._id
             });
-            newEmailConfirmation.save();
+            newEmailConfirmation
+              .save()
+              .then()
+              .catch(err => {
+                console.log({
+                  errorMessage: "Could not save email confirmation.",
+                  error: err
+                });
+              });
             // console.log("HASH IS ", newEmailConfirmation.hash);
 
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -240,7 +248,15 @@ UserRouter.put(
                 user: user._id,
                 newemail: email
               });
-              newEmailConfirmation.save();
+              newEmailConfirmation
+                .save()
+                .then()
+                .catch(err => {
+                  console.log({
+                    errorMessage: "Could not save email confirmation.",
+                    error: err
+                  });
+                });
 
               // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
               nodemailer.createTestAccount((err, account) => {
@@ -272,13 +288,14 @@ UserRouter.put(
 
                 transporter.sendMail(mailOptions, (error, info) => {
                   if (error) {
-                    return console.log(error);
+                    console.log(error);
+                  } else {
+                    console.log("Message sent: %s", info.messageId);
+                    console.log(
+                      "Preview URL: %s",
+                      nodemailer.getTestMessageUrl(info)
+                    );
                   }
-                  console.log("Message sent: %s", info.messageId);
-                  console.log(
-                    "Preview URL: %s",
-                    nodemailer.getTestMessageUrl(info)
-                  );
                 });
               });
             }
@@ -339,46 +356,59 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
     new: true
   };
 
-  EmailConfirmation.findOne({ hash: hash }).then(emailconfirmation => {
-    console.log(emailconfirmation);
+  EmailConfirmation.findOne({ hash: hash })
+    .then(emailconfirmation => {
+      console.log(emailconfirmation);
 
-    if (emailconfirmation && emailconfirmation.newemail) {
-      User.findOneAndUpdate(
-        { _id: emailconfirmation.user },
-        { email: emailconfirmation.newemail },
-        options
-      )
-        .then(user => {
-          // Deletes the now useless email confirmation if it still exists for some reason
-          const oldemail = emailconfirmation.oldemail;
-          EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-            .then()
-            .catch();
+      if (emailconfirmation && emailconfirmation.newemail) {
+        User.findOneAndUpdate(
+          { _id: emailconfirmation.user },
+          { email: emailconfirmation.newemail },
+          options
+        )
+          .then(user => {
+            // Deletes the now useless email confirmation if it still exists for some reason
+            const oldemail = emailconfirmation.oldemail;
+            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
+              .then()
+              .catch(err => {
+                console.log({
+                  errorMessage: "Could not save email confirmation.",
+                  error: err
+                });
+              });
 
-          if (user !== null) {
-            res.status(200).json({
-              message: "You have successfully changed your email address!",
-              email: oldemail
-            });
-          } else
-            res.status(404).json({
+            if (user !== null) {
+              res.status(200).json({
+                message: "You have successfully changed your email address!",
+                email: oldemail
+              });
+            } else
+              res.status(404).json({
+                errorMessage:
+                  "Your email could not be changed for some reason. Please try again."
+              });
+          })
+          .catch(err => {
+            res.status(500).json({
               errorMessage:
-                "Your email could not be changed for some reason. Please try again."
+                "Your email could not be changed for some reason. Please try again.",
+              error: err
             });
-        })
-        .catch(err => {
-          res.status(500).json({
-            errorMessage:
-              "Your email could not be changed for some reason. Please try again.",
-            error: err
           });
+      } else
+        res.status(500).json({
+          errorMessage:
+            "Your email could not be changed for some reason. Please try again."
         });
-    } else
+    })
+    .catch(err => {
       res.status(500).json({
         errorMessage:
-          "Your email could not be changed for some reason. Please try again."
+          "Email confirmation could not be found. Please try again.",
+        error: err
       });
-  });
+    });
 });
 
 // PUT users/confirmemail/:hash
@@ -403,7 +433,12 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
           // Deletes the now useless email confirmation if it still exists for some reason
           EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
             .then()
-            .catch();
+            .catch(err => {
+              console.log({
+                errorMessage: "Could not delete email confirmation.",
+                error: err
+              });
+            });
 
           if (user !== null) {
             res.status(200).json("You have successfully signed up!");
@@ -450,7 +485,15 @@ UserRouter.put("/forgotpassword", (req, res) => {
         hash: base64url(hash.digest("hex")) + "!",
         user: user._id
       });
-      newEmailConfirmation.save();
+      newEmailConfirmation
+        .save()
+        .then()
+        .catch(err => {
+          console.log({
+            errorMessage: "Could not save email confirmation.",
+            error: err
+          });
+        });
 
       // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
       nodemailer.createTestAccount((err, account) => {
@@ -512,7 +555,12 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
           // Deletes the now useless email confirmation if it still exists for some reason
           EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
             .then()
-            .catch();
+            .catch(err => {
+              console.log({
+                errorMessage: "Could not delete email confirmation.",
+                error: err
+              });
+            });
 
           if (user !== null) {
             user.password = hash;
