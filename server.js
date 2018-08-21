@@ -19,7 +19,7 @@ mongoose
 const server = express();
 
 server.set('view engine', 'hbs');
-server.engine('hbs', __dirname + 'views');
+server.set('views', __dirname + 'views');
 
 // Initialize passport authentication
 server.use(passport.initialize());
@@ -40,6 +40,10 @@ server.use(express.urlencoded({ extended: false }));
 // Route for editing/adding/deleting users
 const UserRouter = require("./user/UserRoutes.js");
 server.use("/users", UserRouter);
+
+// Route for Stripe
+const StripeRouter = require("./stripe/StripeRouter.js");
+server.use('/pay', StripeRouter);
 
 // Initial GET route
 server.get("/", (req, res) => {
