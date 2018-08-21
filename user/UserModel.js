@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const validateEmail = email => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
-}
+};
 
 /*
   Phone Number example: 123-456-7890
@@ -17,7 +17,7 @@ const validateEmail = email => {
 const validatePhone = number => {
   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
   return re.test(number);
-}
+};
 
 /* 
   Password Requirements:
@@ -30,13 +30,14 @@ const validatePhone = number => {
 const checkPasswordStrength = password => {
   const minlength = 6;
 
-  if (password.length < minlength) return false; 
+  if (password.length < minlength) return false;
   if (!password.match(/[A-Z]/)) return false;
   if (!password.match(/[a-z]/)) return false;
   if (!password.match(/\d/)) return false;
-  if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)) return false;
+  if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+    return false;
   return true;
-}
+};
 
 /*
   Linkedin example: linkedin.com/in/test/ (allows some special characters)
@@ -44,7 +45,7 @@ const checkPasswordStrength = password => {
 const validateLinkedIn = url => {
   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
-}
+};
 
 /*
   GitHub example: github.com/test/ (allows some special characters)
@@ -52,7 +53,7 @@ const validateLinkedIn = url => {
 const validateGithub = url => {
   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
-}
+};
 
 const User = new mongoose.Schema(
   {
@@ -147,11 +148,7 @@ const User = new mongoose.Schema(
             type: String,
             required: true
           },
-          to: String,
-          current: {
-            type: Boolean,
-            default: false
-          }
+          to: String
         }
       ],
       skills: [
@@ -164,7 +161,7 @@ const User = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    subscription: String,
+    subscription: String
   },
   { timestamps: true }
 );
