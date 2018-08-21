@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-require('dotenv').config()
+require("dotenv").config();
 const stripe = require("stripe")(process.env.SECRET_KEY);
 
 const User = require("../user/UserModel");
@@ -27,12 +27,37 @@ router.get("/paid", (req, res) => {
 /*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
-    @access Private (Production)
+    @access Private source: 'tok_visa', email = req.body | Private source: token, email = req.user
 */
 router.post(
   "/monthly",
-  passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    // const { email } = req.body;
+    // const token = req.body.stripeToken;
+
+    // stripe.customers.create(
+    //   {
+    //     email: email,
+    //     source: token
+    //   },
+    //   (err, customer) => {
+    //     if (err) res.status(400).json("Unable to create a user");
+    //     else {
+    //       const { id } = customer;
+    //       stripe.subscriptions.create({
+    //         customer: id,
+    //         items: [
+    //           {
+    //             plan: "Monthly"
+    //           }
+    //         ]
+    //       });
+    //     }
+    //     res.redirect('paid')
+    //   }
+    // );
+
     const { email } = req.user;
 
     User.findOne({ email })
@@ -77,5 +102,11 @@ router.post(
       });
   }
 );
+
+/* 
+    @route  POST pay/yearly
+    @desc   Allow user to subscribe to a yearly plan
+    @access Private source: 'tok_visa' | Private (Production) source: token
+*/
 
 module.exports = router;
