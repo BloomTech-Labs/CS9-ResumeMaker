@@ -19,7 +19,7 @@ mongoose
 const server = express();
 
 server.set('view engine', 'hbs');
-server.set('views', __dirname + 'views');
+server.set('views', __dirname + '/views');
 
 // Initialize passport authentication
 server.use(passport.initialize());
