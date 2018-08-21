@@ -22,6 +22,8 @@ require("./user/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
+// To allow testing using localhost as the server with a local client
+server.use(cors({}));
 
 // const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
 // const corsOptions = {
