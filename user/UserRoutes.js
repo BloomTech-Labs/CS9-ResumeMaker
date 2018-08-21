@@ -201,13 +201,16 @@ UserRouter.put(
     const id = req.params.id;
     if (id === req.user.id) {
       delete req.body.username;
+      // This is to allow editing the email if the password requirements are met
+      // and the inputted email is different from the user email stored in the database
+      const email = req.body.email;
       delete req.body.email;
       delete req.body.active;
       // Delete this to ensure the password isn't changed manually
       delete req.body.password;
 
       const changes = req.body;
-
+      console.log("REQ > BODY IS THIS ", req.body);
       const options = {
         new: true
         // runValidators: true
@@ -220,9 +223,66 @@ UserRouter.put(
               .status(404)
               .json({ errorMessage: "No user with that id could be found." });
           } else {
+            const verified = req.user.checkPassword(req.body.oldpassword);
             // If the password was changed then return a new token as well
+            // If the user edited their email, then this if statement sends an email confirmation to their new email to make sure
+            if (email && email !== req.user.email && verified) {
+              // pseudo random seed to make each hash different
+              const random = crypto.randomBytes(20).toString("hex");
+              // creates a hash
+              const hash = crypto.createHash("sha256");
+              // adds user id, secret and the randomly generated string to make a unique hash
+              hash.update(user.id + process.env.SECRET + random);
+
+              // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
+              const newEmailConfirmation = new EmailConfirmation({
+                hash: base64url(hash.digest("hex")) + "!",
+                user: user._id,
+                newemail: email
+              });
+              newEmailConfirmation.save();
+
+              // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+              nodemailer.createTestAccount((err, account) => {
+                // create reusable transporter object using the default SMTP transport
+                let transporter = nodemailer.createTransport({
+                  host: "smtp.ethereal.email",
+                  port: 587,
+                  secure: false, // true for 465, false for other ports
+                  auth: {
+                    user: account.user, // generated ethereal user
+                    pass: account.pass // generated ethereal password
+                  }
+                });
+
+                // console.log(req.get("host"));
+                // console.log(req.baseUrl);
+                let mailOptions = {
+                  from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
+                  to: `${req.user.email}`,
+                  subject: `Confirm your account email change for ${websiteName}!`,
+                  text: `Please go to this link to make this your new account email address: ${req.get(
+                    "host"
+                  )}${req.baseUrl}/changeemail/${newEmailConfirmation.hash}`,
+                  html: `Please click this <a href=${req.get("host")}${
+                    req.baseUrl
+                  }/changeemail/${newEmailConfirmation.hash}
+                    }>link</a> to make this your new account email address.`
+                };
+
+                transporter.sendMail(mailOptions, (error, info) => {
+                  if (error) {
+                    return console.log(error);
+                  }
+                  console.log("Message sent: %s", info.messageId);
+                  console.log(
+                    "Preview URL: %s",
+                    nodemailer.getTestMessageUrl(info)
+                  );
+                });
+              });
+            }
             if (req.body.oldpassword && req.body.newpassword) {
-              const verified = req.user.checkPassword(req.body.oldpassword);
               if (verified) {
                 user.password = req.body.newpassword;
                 user.save(function(err) {
@@ -273,6 +333,56 @@ UserRouter.put(
 
 // PUT users/email/:id
 // Update user email
+UserRouter.get("/changeemail/:hash", (req, res) => {
+  const hash = req.params.hash;
+  const options = {
+    new: true
+  };
+
+  EmailConfirmation.findOne({ hash: hash }).then(emailconfirmation => {
+    console.log(emailconfirmation);
+
+    if (emailconfirmation && emailconfirmation.newemail) {
+      User.findOneAndUpdate(
+        { _id: emailconfirmation.user },
+        { email: emailconfirmation.newemail },
+        options
+      )
+        .then(user => {
+          // Deletes the now useless email confirmation if it still exists for some reason
+          const oldemail = emailconfirmation.oldemail;
+          EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
+            .then()
+            .catch();
+
+          if (user !== null) {
+            res.status(200).json({
+              message: "You have successfully changed your email address!",
+              email: oldemail
+            });
+          } else
+            res.status(404).json({
+              errorMessage:
+                "Your email could not be changed for some reason. Please try again."
+            });
+        })
+        .catch(err => {
+          res.status(500).json({
+            errorMessage:
+              "Your email could not be changed for some reason. Please try again.",
+            error: err
+          });
+        });
+    } else
+      res.status(500).json({
+        errorMessage:
+          "Your email could not be changed for some reason. Please try again."
+      });
+  });
+});
+
+// PUT users/confirmemail/:hash
+// Confirm user signup with an email
 UserRouter.get("/confirmemail/:hash", (req, res) => {
   const hash = req.params.hash;
   const changes = {
@@ -318,8 +428,8 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
   });
 });
 
-// PUT users/password/:id
-// Update user password
+// PUT users/forgotpassword/:id
+// Create a temporary password if the user forgot theirs
 UserRouter.put("/forgotpassword", (req, res) => {
   const email = req.body.email;
   User.findOne({ email })
