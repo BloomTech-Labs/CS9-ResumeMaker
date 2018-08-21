@@ -1,73 +1,105 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
 import Navbar from "./subComponents/navbar";
-// import { Consumer } from '../../context';
 
 class ExperienceCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values:
-        props.context.userInfo.education[
-          this.props.location.state.experienceIndex
-        ] === undefined
-          ? [""]
-          : props.context.userInfo.experience[
-              this.props.location.state.experienceIndex
-            ],
-      errors: []
+      title: "",
+      company: "",
+      description: "",
+      from: "",
+      to: "",
+      success: false
     };
+  }
+
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    }
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.location.state.experienceIndex !== false
+    )
+      this.setState({
+        title: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ].title,
+        company: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ].company,
+        from: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ].from,
+        to: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ].to,
+        description: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ].description
+      });
   }
 
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
-    this.setState({ errors: [] });
-    const errors = [];
-    const { title, company, location, from, to, description } = this.state;
-    //TODO: render any conditions before axios call
+  handleSubmit = event => {
+    event.preventDefault();
+
+    if (this.props.location.state.experienceIndex === false) {
+      this.props.context.actions.addElement("experience", {
+        title: this.state.title,
+        company: this.state.company,
+        description: this.state.description,
+        from: this.state.from,
+        to: this.state.to
+      });
+    } // if creating
+    else {
+      this.props.context.actions.setElement(
+        this.props.location.state.experienceIndex,
+        "experience",
+        {
+          title: this.state.title,
+          company: this.state.company,
+          description: this.state.description,
+          from: this.state.from,
+          to: this.state.to
+        }
+      );
+    } // if editing
+
+    const tempObj = {
+      "sections.experience": this.props.context.userInfo.experience
+    };
     axios
-      .post("localhost:3000", this.state)
+      .put(
+        "https://easy-resume.herokuapp.com/users/info/" +
+          this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
       .then(response => {
-        this.setState({
-          title: "",
-          company: "",
-          location: "",
-          from: "",
-          to: "",
-          description: ""
-        });
+        console.log(response);
+        this.setState({ success: true });
       })
       .catch(err => {
-        if (title === "") {
-          errors.push("Title is required");
-        }
-        if (company === "") {
-          errors.push("Company is required");
-        }
-        if (location === "") {
-          errors.push("Location is required");
-        }
-        if (from === "") {
-          errors.push("A Begin Date is required");
-        }
-        if (to === "") {
-          errors.push("An End Date is required");
-        }
-        if (description === "") {
-          errors.push("A description is required");
-        }
+        console.log("err", err);
       });
   };
 
   render() {
-    const { title, company, location, from, to, description } = this.state;
-
     return (
       <div>
+        {this.state.success ? <Redirect to="/experience" /> : null}
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },
@@ -86,72 +118,42 @@ class ExperienceCreate extends Component {
                   work hard at work worth doing.” –Theodore Roosevelt.
                 </label>
                 <input
-                  value={
-                    this.state.values[this.props.location.state.experienceIndex]
-                  }
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.title}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="title"
                   placeholder="Position Title"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.experienceIndex]
-                  }
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.company}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="company"
                   placeholder="Company Name"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.experienceIndex]
-                  }
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.description}
+                  onChange={this.onInputChange}
                   className="form-control"
-                  name="location"
-                  placeholder="Location"
+                  name="description"
+                  placeholder="Position Description"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.experienceIndex]
-                  }
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.from}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="from"
                   placeholder="Start Date"
                 />
                 <input
-                  value={
-                    this.state.values[this.props.location.state.experienceIndex]
-                  }
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.to}
+                  onChange={this.onInputChange}
                   className="form-control"
                   name="to"
                   placeholder="End Date"
                 />
-                <input
-                  value={
-                    this.state.values[this.props.location.state.experienceIndex]
-                  }
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
-                  className="form-control"
-                  name="description"
-                  placeholder="Position Description"
-                />
               </div>
+              <button onClick={e => this.handleSubmit(e)}>Submit</button>
             </form>
           </div>
         </div>
