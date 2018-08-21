@@ -57,6 +57,12 @@ const validateGithub = url => {
 
 const User = new mongoose.Schema(
   {
+    // This is to see if the user has confirmed their email
+    active: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     username: {
       type: String,
       required: true,
@@ -101,7 +107,7 @@ const User = new mongoose.Schema(
       },
       github: {
         type: String,
-        validate: [validateGithub, "Invalid github"]
+        validate: [validateGithub, "Invalid GitHub"]
       },
       portfolio: String
     },
