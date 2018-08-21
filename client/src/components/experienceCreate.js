@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
 import Navbar from "./subComponents/navbar";
-// import { Consumer } from '../../context';
 
 class ExperienceCreate extends Component {
   constructor(props) {
@@ -99,6 +99,7 @@ class ExperienceCreate extends Component {
   render() {
     return (
       <div>
+        {this.state.success ? <Redirect to="/experience" /> : null}
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },

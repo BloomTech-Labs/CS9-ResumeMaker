@@ -12,7 +12,7 @@ class Experience extends Component {
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/experience", title: "experience" }
+            { link: "/experience", title: "Experience" }
           ]}
         />
         <div className="component-div">
