@@ -7,7 +7,7 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-
+console.log(userInfo)
     return (
       <div>
         <Navbar
@@ -19,8 +19,9 @@ export class TemplateOne extends Component {
         />
         <div className="component-div">
           <Sidebar />
+          <div className="border page-div">
           <div className="title-div">
-            <h1>Templates</h1>
+            <h1>Template 1</h1>
             <section id="about">
               <div className="row">
                 <div className="two columns">
@@ -31,31 +32,27 @@ export class TemplateOne extends Component {
                 <div className="row">
                   <div className="names">
                     <span>
+                      John Doe
                       {userInfo.firstName} {userInfo.lastName}
+                    
                     </span>
                     <span>{userInfo.title}</span>
                   </div>
                   <div className="columns contact-details">
-                    // <h2>Contact Details</h2>
+                    <h2>Contact Details</h2>
                     <p className="location">
                       <span>{userInfo.location}</span>
                     </p>
                     <p>
-                      {/* <a href={`mailto:${email}`}>
+                      <a href={`mailto:${userInfo.email}`}>
                         <span>{userInfo.email}</span>
-                      </a> */}
+                      </a>
                       <span>{userInfo.phoneNumber}</span>
                     </p>
                   </div>
                 </div>
                 <div className="blurb">
-                  {userInfo.summary.map(function(content, index) {
-                    return (
-                      <div>
-                        <p key={index}>{content}</p>
-                      </div>
-                    );
-                  })}
+                  {userInfo.summary}
                 </div>
               </div>
             </section>
@@ -63,14 +60,15 @@ export class TemplateOne extends Component {
               <div className="experience">
                 {experience.map(function(content, index) {
                   return (
-                    <div>
-                      <p key={index}>{experience.title} </p>
-                      <p>{experience.company}</p>
-                      <p>{experience.location}</p>
+                    <div key={index}>
+                    {console.log(content)}
+                      <p>{content.title} </p>
+                      <p>{content.company}</p>
+                      <p>{content.location}</p>
                       <p>
-                        {experience.from} - {experience.to}
+                        {content.from} - {content.to}
                       </p>
-                      <h3>{experience.description} </h3>
+                      <h3>{content.description} </h3>
                     </div>
                   );
                 })}
@@ -80,14 +78,14 @@ export class TemplateOne extends Component {
               <div className="education">
                 {education.map(function(content, index) {
                   return (
-                    <div>
-                      <p key={index}>{education.school} </p>
-                      <p>{education.location}</p>
+                    <div key={index}>
+                      <p>{content.school} </p>
+                      <p>{content.location}</p>
                       <p>
-                        {experience.degree} {experience.field}
+                        {content.degree} {content.field}
                       </p>
                       <p>
-                        {experience.from} - {experience.to}
+                        {content.from} - {content.to}
                       </p>
                     </div>
                   );
@@ -96,15 +94,14 @@ export class TemplateOne extends Component {
             </section>
             <section id="skills">
               <div className="skills">
-                {userInfo.skills.map(function(content, index) {
-                  return (
-                    <div>
-                      <p key={index}>{content}</p>
-                    </div>
-                  );
-                })}
+                {userInfo.skills.map((content, index) =>
+                      <div key={index}>
+                      <p>{content}</p>
+                      </div>
+                  )}
               </div>
             </section>
+            </div>
           </div>
         </div>
       </div>
