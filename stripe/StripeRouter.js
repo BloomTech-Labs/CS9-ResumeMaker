@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
+
+const User = require('../user/UserModel');
 
 /*
     @route  GET pay
@@ -17,6 +20,15 @@ router.get("/", (req, res) => {
 */
 router.get('/paid', (req, res) => {
     res.render('success', {});
+})
+
+/*
+    @route  POST pay/monthly
+    @desc   Allows user to subscribe to a monthly plan
+    @access Private (Production)
+*/
+router.post('/monthly', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { email } = req.user;
 })
 
 module.exports = router;
