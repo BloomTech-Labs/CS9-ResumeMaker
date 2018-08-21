@@ -376,9 +376,18 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
               });
 
             if (user !== null) {
+              const payload = {
+                id: user._id,
+                email: user.email,
+                password: user.password
+              };
+              const token = jwt.sign(payload, process.env.SECRET, {
+                expiresIn: 604800
+              });
               res.status(200).json({
                 message: "You have successfully changed your email address!",
-                email: oldemail
+                email: oldemail,
+                token
               });
             } else
               res.status(404).json({
