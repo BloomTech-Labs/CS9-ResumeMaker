@@ -21,11 +21,8 @@ UserRouter.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // console.log(req.user);
-    res.status(200).json({
-      id: req.user.id,
-      username: req.user.username,
-      email: req.user.email
-    });
+    req.user.password = null;
+    res.status(200).json(req.user);
   }
 );
 
@@ -121,7 +118,7 @@ UserRouter.post("/register", (req, res) => {
                 );
               });
             });
-
+            user.password = null;
             res.status(201).json({ user, token });
           })
           .catch(err => {
@@ -161,6 +158,7 @@ UserRouter.post("/login", (req, res) => {
         const token = jwt.sign(payload, process.env.SECRET, {
           expiresIn: 604800
         });
+        user.password = null;
         res.json({ token, user });
       } else
         return res.status(422).json({ errorMessage: "Invalid credentials." });
@@ -243,15 +241,21 @@ UserRouter.put(
                     const token = jwt.sign(payload, process.env.SECRET, {
                       expiresIn: 604800
                     });
+                    user.password = null;
                     res.json({ token, user });
                   }
                 });
-              } else
+              } else {
+                user.password = null;
                 res.status(200).json({
                   user,
                   errorMessage: "The old password entered was invalid."
                 });
-            } else res.status(200).json({ user });
+              }
+            } else {
+              user.password = null;
+              res.status(200).json({ user });
+            }
           }
         })
         .catch(err => {
