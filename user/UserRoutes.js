@@ -422,45 +422,52 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
     new: true
   };
 
-  EmailConfirmation.findOne({ hash: hash }).then(emailconfirmation => {
-    if (emailconfirmation) {
-      User.findOneAndUpdate(
-        { _id: emailconfirmation.user, active: false },
-        changes,
-        options
-      )
-        .then(user => {
-          // Deletes the now useless email confirmation if it still exists for some reason
-          EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-            .then()
-            .catch(err => {
-              console.log({
-                errorMessage: "Could not delete email confirmation.",
-                error: err
+  EmailConfirmation.findOne({ hash: hash })
+    .then(emailconfirmation => {
+      if (emailconfirmation) {
+        User.findOneAndUpdate(
+          { _id: emailconfirmation.user, active: false },
+          changes,
+          options
+        )
+          .then(user => {
+            // Deletes the now useless email confirmation if it still exists for some reason
+            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
+              .then()
+              .catch(err => {
+                console.log({
+                  errorMessage: "Could not delete email confirmation.",
+                  error: err
+                });
               });
-            });
 
-          if (user !== null) {
-            res.status(200).json("You have successfully signed up!");
-          } else
-            res.status(404).json({
+            if (user !== null) {
+              res.status(200).json("You have successfully signed up!");
+            } else
+              res.status(404).json({
+                errorMessage:
+                  "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+              });
+          })
+          .catch(err => {
+            res.status(500).json({
               errorMessage:
-                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+                "Your account has already been activated or does not exist.",
+              error: err
             });
-        })
-        .catch(err => {
-          res.status(500).json({
-            errorMessage:
-              "Your account has already been activated or does not exist.",
-            error: err
           });
+      } else
+        res.status(500).json({
+          errorMessage:
+            "Your account has already been activated or does not exist."
         });
-    } else
-      res.status(500).json({
-        errorMessage:
-          "Your account has already been activated or does not exist."
-      });
-  });
+    })
+    .catch(err =>
+      res.status(404).json({
+        errorMessage: "Could not find email confirmation in database.",
+        error: err
+      })
+    );
 });
 
 // PUT users/forgotpassword/:id
@@ -548,50 +555,57 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
   // console.log(req.user);
   const hash = req.params.hash;
 
-  EmailConfirmation.findOne({ hash: hash }).then(emailconfirmation => {
-    if (emailconfirmation) {
-      User.findById(emailconfirmation.user)
-        .then(user => {
-          // Deletes the now useless email confirmation if it still exists for some reason
-          EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-            .then()
-            .catch(err => {
-              console.log({
-                errorMessage: "Could not delete email confirmation.",
-                error: err
-              });
-            });
-
-          if (user !== null) {
-            user.password = hash;
-            user.save(function(err) {
-              if (err) {
-                res.status(500).json({
-                  errorMessage:
-                    "There was an error setting the temporary password.",
+  EmailConfirmation.findOne({ hash: hash })
+    .then(emailconfirmation => {
+      if (emailconfirmation) {
+        User.findById(emailconfirmation.user)
+          .then(user => {
+            // Deletes the now useless email confirmation if it still exists for some reason
+            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
+              .then()
+              .catch(err => {
+                console.log({
+                  errorMessage: "Could not delete email confirmation.",
                   error: err
                 });
-              } else res.status(200).json({ message: "Temporary password set successfully!", password: hash });
-            });
-          } else
-            res.status(404).json({
+              });
+
+            if (user !== null) {
+              user.password = hash;
+              user.save(function(err) {
+                if (err) {
+                  res.status(500).json({
+                    errorMessage:
+                      "There was an error setting the temporary password.",
+                    error: err
+                  });
+                } else res.status(200).json({ message: "Temporary password set successfully!", password: hash });
+              });
+            } else
+              res.status(404).json({
+                errorMessage:
+                  "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+              });
+          })
+          .catch(err => {
+            res.status(500).json({
               errorMessage:
-                "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+                "Your account has already been activated or does not exist.",
+              error: err
             });
-        })
-        .catch(err => {
-          res.status(500).json({
-            errorMessage:
-              "Your account has already been activated or does not exist.",
-            error: err
           });
+      } else
+        res.status(500).json({
+          errorMessage:
+            "Your account has already been activated or does not exist."
         });
-    } else
+    })
+    .catch(err => {
       res.status(500).json({
-        errorMessage:
-          "Your account has already been activated or does not exist."
+        errorMessage: "Your password could not be reset for some reason.",
+        error: err
       });
-  });
+    });
 });
 
 module.exports = UserRouter;
