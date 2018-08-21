@@ -11,7 +11,7 @@ class Education extends Component {
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/education", title: "education" }
+            { link: "/education", title: "Education" }
           ]}
         />
         <div className="component-div">
