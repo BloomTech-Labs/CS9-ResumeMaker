@@ -87,6 +87,8 @@ const User = new mongoose.Schema(
         maxlength: 20
       }
     },
+    location: String,
+    title: String,
     phonenumber: {
       type: String,
       validate: [validatePhone, "Invalid Phone Number"]
