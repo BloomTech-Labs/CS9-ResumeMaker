@@ -2,11 +2,18 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 // Validation
+
+/*
+  Email example: test@service.com
+*/
 const validateEmail = email => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
 };
 
+/*
+  Phone Number example: 123-456-7890
+*/
 const validatePhone = number => {
   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
   return re.test(number);
@@ -18,6 +25,7 @@ const validatePhone = number => {
     Must have at least 1 uppercase
     Must have at least 1 lowercase
     Must have at least 1 special character
+    Must have at least 1 digit
 */
 const checkPasswordStrength = password => {
   const minlength = 6;
@@ -31,11 +39,17 @@ const checkPasswordStrength = password => {
   return true;
 };
 
+/*
+  Linkedin example: linkedin.com/in/test/ (allows some special characters)
+*/
 const validateLinkedIn = url => {
   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
 };
 
+/*
+  GitHub example: github.com/test/ (allows some special characters)
+*/
 const validateGithub = url => {
   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
   return re.test(url);
@@ -58,13 +72,13 @@ const User = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      validate: [checkPasswordStrength, "Password too weak."]
+      validate: [checkPasswordStrength, "Password Too Weak"]
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      validate: [validateEmail, "Invalid email."]
+      validate: [validateEmail, "Invalid Email"]
     },
     name: {
       firstname: {
@@ -80,18 +94,20 @@ const User = new mongoose.Schema(
         maxlength: 20
       }
     },
+    location: String,
+    title: String,
     phonenumber: {
       type: String,
-      validate: [validatePhone, "Invalid phone number."]
+      validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
         type: String,
-        validate: [validateLinkedIn, "Invalid Linkedin."]
+        validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
         type: String,
-        validate: [validateGithub, "Invalid Github."]
+        validate: [validateGithub, "Invalid GitHub"]
       },
       portfolio: String
     },
@@ -138,11 +154,7 @@ const User = new mongoose.Schema(
             type: String,
             required: true
           },
-          to: String,
-          current: {
-            type: Boolean,
-            default: false
-          }
+          to: String
         }
       ],
       skills: [
@@ -150,7 +162,12 @@ const User = new mongoose.Schema(
           type: String
         }
       ]
-    }
+    },
+    membership: {
+      type: Boolean,
+      default: false
+    },
+    subscription: String
   },
   { timestamps: true }
 );

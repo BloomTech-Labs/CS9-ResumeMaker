@@ -200,8 +200,8 @@ UserRouter.delete(
 // PUT users/info/:id
 // Update user information
 UserRouter.put(
-  "/info/:id",
-  passport.authenticate("jwt", { session: false }),
+  "/info/:id", 
+  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     const id = req.params.id;
     if (id === req.user.id) {
