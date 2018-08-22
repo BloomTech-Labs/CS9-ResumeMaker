@@ -5,6 +5,8 @@ import Navbar from "./subComponents/navbar";
 import { Redirect } from "react-router-dom";
 // import { Consumer } from '../../context';
 
+const urls = require("../config.json");
+
 class EducationCreate extends Component {
   constructor(props) {
     super(props);
@@ -81,8 +83,7 @@ class EducationCreate extends Component {
     };
     axios
       .put(
-        "https://easy-resume.herokuapp.com/users/info/" +
-          this.props.context.userInfo.id,
+        `${urls[urls.basepath]}/users/info/` + this.props.context.userInfo.id,
         tempObj,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }

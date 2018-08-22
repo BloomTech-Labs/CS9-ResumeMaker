@@ -4,6 +4,8 @@ import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
 import Navbar from "./subComponents/navbar";
 
+const urls = require("../config.json");
+
 class ExperienceCreate extends Component {
   constructor(props) {
     super(props);
@@ -80,8 +82,7 @@ class ExperienceCreate extends Component {
     };
     axios
       .put(
-        "https://easy-resume.herokuapp.com/users/info/" +
-          this.props.context.userInfo.id,
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
         tempObj,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }

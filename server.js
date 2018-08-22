@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const hbs = require('hbs');
 require("dotenv").config();
 
 // Connect To mLab
@@ -16,20 +17,17 @@ mongoose
 // Initialize Server
 const server = express();
 
+server.set('view engine', 'hbs');
+server.set('views', __dirname + '/views');
+
 // Initialize passport authentication
 server.use(passport.initialize());
 require("./user/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
-
-// const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     whitelist.indexOf(origin) !== -1 ? callback(null, true) : callback(new Error('Access Denied'))
-//   }
-// }
-// server.use(cors(corsOptions));
+server.use(express.urlencoded({ extended: false }));
+server.use(cors());
 
 // const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
 // const corsOptions = {
@@ -42,6 +40,10 @@ server.use(express.json());
 // Route for editing/adding/deleting users
 const UserRouter = require("./user/UserRoutes.js");
 server.use("/users", UserRouter);
+
+// Route for Stripe
+const StripeRouter = require("./stripe/StripeRouter.js");
+server.use('/pay', StripeRouter);
 
 // Initial GET route
 server.get("/", (req, res) => {
