@@ -18,6 +18,7 @@ import ExperienceCreate from "./components/experienceCreate";
 import SkillsCreate from "./components/skillsCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
+import { TemplateOne } from "./components/templates/template1";
 
 class App extends Component {
   render() {
@@ -109,6 +110,13 @@ class App extends Component {
                   exact
                   path="/templates"
                   render={props => <Templates {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/templates/template-1"
+                  render={props => (
+                    <TemplateOne {...props} context={context} />
+                  )}
                 />
                 <Route
                   exact

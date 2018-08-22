@@ -1,50 +1,77 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
 import Navbar from "./subComponents/navbar";
-// import { Consumer } from '../../context';
 
 class SkillsCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values:
-        props.context.userInfo.skills[props.location.state.skillsIndex] ===
-        undefined
-          ? [""]
-          : props.context.userInfo.skills[props.location.state.skillsIndex],
-      errors: []
+      skill: "",
+      success: false
     };
+  }
+
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    }
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.location.state.skillsIndex !== false
+    )
+      this.setState({
+        skill: this.props.context.userInfo.skills[
+          this.props.location.state.skillsIndex
+        ]
+      });
   }
 
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
-    this.setState({ errors: [] });
-    const errors = [];
-    const { skills } = this.state;
-    //TODO: render any conditions before axios call
+  handleSubmit = event => {
+    event.preventDefault();
+
+    if (this.props.location.state.skillsIndex === false) {
+      this.props.context.actions.addElement("skills", this.state.skill);
+    } // if creating
+    else {
+      this.props.context.actions.setElement(
+        this.props.location.state.skillsIndex,
+        "skills",
+        this.state.skill
+      );
+    } // if editing
+
+    const tempObj = {
+      "sections.skills": this.props.context.userInfo.skills
+    };
     axios
-      .post("localhost:3000", this.state)
+      .put(
+        "https://easy-resume.herokuapp.com/users/info/" +
+          this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
       .then(response => {
-        this.setState({
-          skills: []
-        });
+        console.log(response);
+        this.setState({ success: true });
       })
       .catch(err => {
-        if (skills === "") {
-          errors.push("Skills are required.");
-        }
+        console.log("err", err);
       });
   };
 
   render() {
-    const { skills } = this.state;
-
     return (
       <div>
+        {this.state.success ? <Redirect to="/skills" /> : null}
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },
@@ -62,15 +89,14 @@ class SkillsCreate extends Component {
                   “Success is skill inside out.” ― Matshona Dhliwayo
                 </label>
                 <input
-                  value={this.state.values[this.props.skills.state.skillsIndex]}
-                  title="values[0]"
-                  onChange={this.handleSubmit}
-                  type="text"
+                  value={this.state.skill}
+                  onChange={this.onInputChange}
                   className="form-control"
-                  name="skills"
+                  name="skill"
                   placeholder="List Skills"
                 />
               </div>
+              <button onClick={e => this.handleSubmit(e)}>Submit</button>
             </form>
           </div>
         </div>

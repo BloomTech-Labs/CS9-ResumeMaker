@@ -18,6 +18,19 @@ class Skills extends Component {
           <Sidebar />
           <div className="title-div">
             <h1>Skills</h1>
+            {this.props.context.userInfo.skills.map((element, index) => {
+              return (
+                <Link
+                  to={{
+                    pathname: "/skills/create", // component being Linked to
+                    state: { skillsIndex: index } // Setting Index passed into skillsCreate component
+                  }}
+                  key={index}
+                >
+                  <span>{element}</span>
+                </Link>
+              );
+            })}
             <div className="link-hide">
               <Link
                 to={{
