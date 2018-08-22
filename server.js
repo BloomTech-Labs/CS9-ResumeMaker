@@ -27,6 +27,7 @@ require("./user/config_passport.js")(passport);
 // Middleware
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
+server.use(cors);
 
 // const whitelist = ['https://labs-resume-maker.firebaseapp.com/'];
 // const corsOptions = {

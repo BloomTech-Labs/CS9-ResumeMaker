@@ -22,7 +22,8 @@ module.exports = passport => {
             // Possibly add the email in here too to invalidate tokens made before an email change?
             if (
               user.active === true &&
-              jwt_payload.password === user.password
+              jwt_payload.password === user.password &&
+              jwt_payload.email === user.email
             ) {
               // * null param = errors
               return done(null, user);

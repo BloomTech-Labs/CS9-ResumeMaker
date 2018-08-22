@@ -12,6 +12,7 @@ class AuthProvider extends Component {
     links: [],
     education: [],
     experience: [],
+    skills: [],
     summary: [],
     userName: ""
   };
