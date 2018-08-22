@@ -47,7 +47,10 @@ class Register extends Component {
       .catch(err => {
         console.log("err", err);
         localStorage.removeItem("token");
-        this.setState({ invalidCredentials: true, password: "" });
+        this.setState({
+          invalidCredentials: true,
+          password: ""
+        });
       });
   };
 
