@@ -41,7 +41,12 @@ UserRouter.get("/", (req, res) => {
 // Register a new user
 // Make sure to send confirmation email
 UserRouter.post("/register", (req, res) => {
-  const userData = req.body;
+  // Write req.body to userData in this way to avoid any fields other than these 3 (such as the confirmemail one) from being inserted
+  const userData = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  };
   User.findOne({ email: userData.email })
     .then(user => {
       if (user) {
@@ -118,6 +123,9 @@ UserRouter.post("/register", (req, res) => {
               error: err
             });
           });
+        // If you put a response here the time for response to a register request will be 100-200ms
+        // instead of 2000-5000, but they won't get error messages from the backend.
+        // res.status(200).json(userData.email);
       }
     })
     .catch(err => {
@@ -549,7 +557,8 @@ UserRouter.put("/forgotpassword", (req, res) => {
             error: err
           });
         });
-
+      // Having this here means the response time is 175ms rather than 2000-3000 as it is
+      // if the response has to wait to be sent until the res in transporter.sendMail above!
       res.status(200).json(user.email);
     })
     .catch(err => {

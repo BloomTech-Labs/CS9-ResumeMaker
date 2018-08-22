@@ -33,43 +33,41 @@ const checkPasswordStrength = password => {
   return true;
 };
 
-const EmailConfirmation = new mongoose.Schema(
-  {
-    // This is to see if the user has confirmed their email
-    hash: {
+const EmailConfirmation = new mongoose.Schema({
+  // This is to see if the user has confirmed their email
+  hash: {
+    type: String,
+    required: true
+  },
+  user: {
+    type: String
+  },
+  newemail: {
+    type: String,
+    validate: [validateEmail, "Invalid email."]
+  },
+  oldemail: {
+    type: String,
+    validate: [validateEmail, "Invalid email."]
+  },
+  userData: {
+    type: Object,
+    username: {
       type: String,
-      required: true
+      lowercase: true
     },
-    user: {
-      type: String
-    },
-    newemail: {
+    password: {
       type: String,
-      validate: [validateEmail, "Invalid email."]
+      validate: [checkPasswordStrength, "Password Too Weak"]
     },
-    oldemail: {
+    email: {
       type: String,
-      validate: [validateEmail, "Invalid email."]
-    },
-    userData: {
-      type: Object,
-      username: {
-        type: String,
-        lowercase: true
-      },
-      password: {
-        type: String,
-        validate: [checkPasswordStrength, "Password Too Weak"]
-      },
-      email: {
-        type: String,
-        validate: [validateEmail, "Invalid Email"]
-      }
-    },
-    createdAt: { type: Date, expires: 2400, default: Date.now }
-  }
-  // { timestamps: true }
-);
+      validate: [validateEmail, "Invalid Email"]
+    }
+  },
+  // The confirmation will auto delete after 1800 seconds (30 minutes)
+  createdAt: { type: Date, expires: 1800, default: Date.now }
+});
 
 EmailConfirmation.pre("save", function(next) {
   if (this.userData) {
