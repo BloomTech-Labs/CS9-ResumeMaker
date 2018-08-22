@@ -82,8 +82,8 @@ export default class Login extends Component {
           >
             Login
           </Button>
+          {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
         </form>
-        {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
       </div>
     );
   }
