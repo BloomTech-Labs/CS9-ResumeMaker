@@ -7,24 +7,6 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 const User = require("../user/UserModel");
 
 /*
-    @route  GET pay
-    @desc   Renders initial page
-    @access Public (Testing) | Private (Production)
-*/
-router.get("/", (req, res) => {
-  res.render("index", {});
-});
-
-/*
-    @route  GET pay/paid
-    @desc   Displays successful subscription page
-    @access Public (Testing) | Private (Production)
-*/
-router.get("/paid", (req, res) => {
-  res.render("success", {});
-});
-
-/*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
     @access Private source: 'tok_visa', email = req.body | Private source: token, email = req.user
