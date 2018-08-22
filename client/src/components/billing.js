@@ -11,12 +11,26 @@ class Billing extends Component {
     complete: false
   };
 
-  submit = async () => {
+  monthly = async () => {
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
     });
     axios
       .post("http://localhost:3333/pay/monthly", token)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  yearly = async () => {
+    let { token } = await this.props.stripe.createToken({
+      email: this.props.context.userInfo.email
+    });
+    axios
+      .post("http://localhost:3333/pay/yearly", token)
       .then(res => {
         console.log(res);
       })
@@ -44,7 +58,14 @@ class Billing extends Component {
               <div className="card-element">
                 <CardElement />
               </div>
-              <button onClick={this.submit}>Monthly Subscriptions - $4.99</button>
+            </div>
+            <div className="buttons">
+              <button onClick={this.monthly}>
+                Monthly Subscriptions - $4.99
+              </button>
+              <button onClick={this.yearly}>
+                Yearly Subscriptions - $55.99
+              </button>
             </div>
           </div>
         </div>
