@@ -7,12 +7,25 @@ class SummaryCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values:
-        props.context.userInfo.summary[this.props.summaryIndex] === undefined
-          ? [""]
-          : props.context.userInfo.summary[this.props.summaryIndex],
-      errors: []
+      summary: "",
+      success: false
     };
+  }
+
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    }
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.location.state.summaryIndex !== false
+    )
+      this.setState({
+        skill: this.props.context.userInfo.summary[
+          this.props.location.state.summaryIndex
+        ]
+      });
   }
 
   handleTextInput = e => {
