@@ -31,34 +31,10 @@ router.get("/paid", (req, res) => {
 */
 router.post(
   "/monthly",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // const { email } = req.body;
-    // const token = req.body.stripeToken;
-
-    // stripe.customers.create(
-    //   {
-    //     email: email,
-    //     source: token
-    //   },
-    //   (err, customer) => {
-    //     if (err) res.status(400).json("Unable to create a user");
-    //     else {
-    //       const { id } = customer;
-    //       stripe.subscriptions.create({
-    //         customer: id,
-    //         items: [
-    //           {
-    //             plan: "Monthly"
-    //           }
-    //         ]
-    //       });
-    //     }
-    //     res.redirect('paid')
-    //   }
-    // );
-
-    const { email } = req.user;
+    const { email } = req.body;
+    const token = req.body.id;
 
     User.findOne({ email })
       .then(user => {
@@ -67,7 +43,7 @@ router.post(
           stripe.customers.create(
             {
               email: email,
-              source: "tok_visa"
+              source: token
             },
             (err, customer) => {
               if (err) res.status(400).json("Unable to create a user");
@@ -110,9 +86,11 @@ router.post(
 */
 router.post(
   "/yearly",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { email } = req.user;
+    const { email } = req.body;
+    const token = req.body.id;
+
     User.findOne({ email })
       .then(user => {
         if (user.membership) res.status(400).json("You're already a member!");
@@ -120,7 +98,7 @@ router.post(
           stripe.customers.create(
             {
               email: email,
-              source: "tok_visa"
+              source: token
             },
             (err, customer) => {
               if (err) res.status(400).json("Unable to become a customer");
