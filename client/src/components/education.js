@@ -41,7 +41,7 @@ class Education extends Component {
                 <img
                   src={require("./CSS/plus-button.svg")}
                   alt=""
-                  height="50rem"
+                  className="plus-circle"
                 />
               </Link>
             </div>

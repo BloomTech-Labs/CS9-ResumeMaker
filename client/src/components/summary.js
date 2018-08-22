@@ -32,11 +32,16 @@ class Summary extends Component {
               );
             })}
             <div className="link-hide">
-              <Link to="/summary/create">
+              <Link
+                to={{
+                  pathname: "/summary/create", // component being Linked to
+                  state: { summaryIndex: false } // Setting Index passed into educationCreate component - false means new
+                }}
+              >
                 <img
                   src={require("./CSS/plus-button.svg")}
                   alt=""
-                  height="50rem"
+                  className="plus-circle"
                 />
               </Link>
             </div>
