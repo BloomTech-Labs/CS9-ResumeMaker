@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "./subComponents/navbar";
 import { Redirect } from "react-router-dom";
 // import { Consumer } from '../../context';
+
 const urls = require("../config.json");
 
 class EducationCreate extends Component {
