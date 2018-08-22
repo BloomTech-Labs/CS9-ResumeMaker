@@ -1,9 +1,10 @@
 .stripe {
     display: flex;
-    margin-left: 300px;
+    margin-left: 500px;
     max-width: 550px;
     width: 100%;
 }
+
 .card-element {
     max-width: 300px;
     width: 100%;
@@ -15,4 +16,11 @@
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
+}
+
+.buttons {
+   display: flex;
+   justify-content: space-around;
+   width: 50%;
+   margin: 2% 0 0 25%;
 }
