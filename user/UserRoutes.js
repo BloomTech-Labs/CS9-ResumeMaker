@@ -50,84 +50,67 @@ UserRouter.post("/register", (req, res) => {
             "This email is already in use. Please choose the forgot password option to reset your password."
         });
       } else {
-        const newUser = new User(userData);
-        newUser
+        // pseudo random seed to make each hash different
+        const random = crypto.randomBytes(20).toString("hex");
+        // creates a hash
+        const hash = crypto.createHash("sha256");
+        // adds user id, secret and the randomly generated string to make a unique hash
+        hash.update(userData.username + secretKey + random);
+
+        // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
+        const newEmailConfirmation = new EmailConfirmation({
+          hash: base64url(hash.digest("hex")) + "$",
+          userData: userData
+        });
+        newEmailConfirmation
           .save()
-          .then(user => {
-            const payload = {
-              id: user._id,
-              email: user.email,
-              password: user.password
-            };
-            const token = jwt.sign(payload, secretKey, {
-              expiresIn: "7d"
-            });
-
-            // pseudo random seed to make each hash different
-            const random = crypto.randomBytes(20).toString("hex");
-            // creates a hash
-            const hash = crypto.createHash("sha256");
-            // adds user id, secret and the randomly generated string to make a unique hash
-            hash.update(user.id + secretKey + random + token);
-
-            // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
-            const newEmailConfirmation = new EmailConfirmation({
-              hash: base64url(hash.digest("hex")) + "$",
-              user: user._id
-            });
-            newEmailConfirmation
-              .save()
-              .then(emailconfirmation => {
-                // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-                nodemailer.createTestAccount((err, account) => {
-                  // create reusable transporter object using the default SMTP transport
-                  let transporter = nodemailer.createTransport({
-                    host: "smtp.ethereal.email",
-                    port: 587,
-                    secure: false, // true for 465, false for other ports
-                    auth: {
-                      user: account.user, // generated ethereal user
-                      pass: account.pass // generated ethereal password
-                    }
-                  });
-                  let mailOptions = {
-                    from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
-                    to: `${user.email}`,
-                    subject: `Confirm your registration to ${websiteName}!`,
-                    text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
-                      "host"
-                    )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
-                    html: `Thank you for signing up! Please click this <a href=${req.get(
-                      "host"
-                    )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
+          .then(emailconfirmation => {
+            // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+            nodemailer.createTestAccount((err, account) => {
+              // create reusable transporter object using the default SMTP transport
+              let transporter = nodemailer.createTransport({
+                host: "smtp.ethereal.email",
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                  user: account.user, // generated ethereal user
+                  pass: account.pass // generated ethereal password
+                }
+              });
+              let mailOptions = {
+                from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
+                to: `${userData.email}`,
+                subject: `Confirm your registration to ${websiteName}!`,
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
+                html: `Thank you for signing up! Please click this <a href=${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
                 }>link</a>.`
-                  };
+              };
 
-                  transporter.sendMail(mailOptions, (err, info) => {
-                    if (err) {
-                      return console.log(err);
-                    }
-                    console.log("Message sent: %s", info.messageId);
-                    console.log(
-                      "Preview URL: %s",
-                      nodemailer.getTestMessageUrl(info)
-                    );
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                  return res.status(500).json({
+                    errorMessage: "Could not send email.",
+                    error: err
                   });
-                });
-              })
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not save email confirmation.",
-                  error: err
+                }
+                console.log("Message sent: %s", info.messageId);
+                console.log(
+                  "Preview URL: %s",
+                  nodemailer.getTestMessageUrl(info)
+                );
+                res.status(200).json({
+                  message: "Email confirmation saved and email sent."
                 });
               });
-            user.password = null;
-            res.status(201).json({ user, token });
+            });
           })
           .catch(err => {
-            res.status(500).json({
-              errorMessage:
-                "There was an error in account creation, please try again.",
+            console.log({
+              errorMessage: "Could not save email confirmation.",
               error: err
             });
           });
@@ -367,17 +350,6 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
           options
         )
           .then(user => {
-            // Deletes the now useless email confirmation if it still exists for some reason
-            const oldemail = emailconfirmation.oldemail;
-            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-              .then()
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not delete email confirmation.",
-                  error: err
-                });
-              });
-
             if (user !== null) {
               const payload = {
                 id: user._id,
@@ -389,7 +361,7 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
               });
               res.status(200).json({
                 message: "You have successfully changed your email address!",
-                email: oldemail,
+                email: emailconfirmation.oldemail,
                 token
               });
             } else
@@ -424,51 +396,33 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
 // Confirm user signup with an email
 UserRouter.get("/confirmemail/:hash", (req, res) => {
   const hash = req.params.hash;
-  const changes = {
-    active: true
-  };
-  const options = {
-    new: true
-  };
-
   EmailConfirmation.findOne({ hash: hash })
     .then(emailconfirmation => {
       if (emailconfirmation) {
-        User.findOneAndUpdate(
-          { _id: emailconfirmation.user, active: false },
-          changes,
-          options
-        )
+        const newUser = new User(emailconfirmation.userData);
+        newUser
+          .save()
           .then(user => {
-            // Deletes the now useless email confirmation if it still exists for some reason
-            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-              .then()
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not delete email confirmation.",
-                  error: err
-                });
-              });
-
-            if (user !== null) {
-              res
-                .status(200)
-                .json({ message: "You have successfully signed up!" });
-            } else
-              res.status(404).json({
-                errorMessage:
-                  "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
-              });
+            const payload = {
+              id: user._id,
+              email: user.email,
+              password: user.password
+            };
+            const token = jwt.sign(payload, secretKey, {
+              expiresIn: "7d"
+            });
+            user.password = null;
+            res.status(201).json({ user, token });
           })
           .catch(err => {
             res.status(500).json({
               errorMessage:
-                "Your account has already been activated or does not exist.",
+                "There was an error in account creation, please try again.",
               error: err
             });
           });
       } else
-        res.status(500).json({
+        res.status(404).json({
           errorMessage:
             "Your account has already been activated or does not exist."
         });
@@ -568,25 +522,20 @@ UserRouter.put("/forgotpassword", (req, res) => {
 // PUT users/info/:id
 // Update user information
 UserRouter.get("/resetpassword/:hash", (req, res) => {
-  const hash = req.params.hash;
-
-  EmailConfirmation.findOne({ hash: hash })
+  EmailConfirmation.findOne({ hash: req.params.hash })
     .then(emailconfirmation => {
       if (emailconfirmation) {
         User.findById(emailconfirmation.user)
           .then(user => {
-            // Deletes the now useless email confirmation if it still exists for some reason
-            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-              .then()
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not delete email confirmation.",
-                  error: err
-                });
-              });
-
             if (user !== null) {
-              user.password = hash;
+              // pseudo random seed to make each hash different
+              const random = crypto.randomBytes(20).toString("hex");
+              // creates a hash
+              const hash = crypto.createHash("sha256");
+              // adds user id, secret and the randomly generated string to make a unique hash
+              hash.update(req.params.hash + secretKey + random);
+              const newPassword = base64url(hash.digest("hex")) + "!";
+              user.password = newPassword;
               user.save(function(err) {
                 if (err) {
                   res.status(500).json({
@@ -594,7 +543,7 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
                       "There was an error setting the temporary password.",
                     error: err
                   });
-                } else res.status(200).json({ message: "Temporary password set successfully!", password: hash });
+                } else res.status(200).json({ message: "Temporary password set successfully!", password: newPassword });
               });
             } else
               res.status(404).json({

@@ -14,18 +14,20 @@ const EmailConfirmation = new mongoose.Schema(
     },
     user: {
       type: String,
-      required: true
+      required: false
     },
     newemail: {
       type: String,
       required: false,
-      unique: true,
       validate: [validateEmail, "Invalid email."]
     },
     oldemail: {
       type: String,
       required: false,
       validate: [validateEmail, "Invalid email."]
+    },
+    userData: {
+      type: Object
     },
     createdAt: { type: Date, expires: 2400, default: Date.now }
   }
