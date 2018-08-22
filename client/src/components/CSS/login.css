@@ -1,9 +1,19 @@
 .Login {
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  background-image: url(Buildings.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
-.Login .form-group {
+.Login form {
+  align-self: center;
+}
+
+.Login form .form-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
