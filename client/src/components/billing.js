@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import { CardElement, injectStripe } from "react-stripe-elements";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 
 class Billing extends Component {
+
+  submit = () => {
+
+  }
+
   render() {
     return (
       <div>
@@ -16,6 +22,11 @@ class Billing extends Component {
           <Sidebar />
           <div className="title-div">
             <h1>Billing</h1>
+            <div className="stripe">
+              <p>Would you like to complete a purchase?</p>
+              <CardElement />
+              <button onClick={this.submit}>Send</button>
+            </div>
           </div>
         </div>
       </div>
@@ -23,4 +34,4 @@ class Billing extends Component {
   }
 }
 
-export default Billing;
+export default injectStripe(Billing);
