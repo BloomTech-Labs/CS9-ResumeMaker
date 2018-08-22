@@ -6,11 +6,11 @@ const nodemailer = require("nodemailer");
 const base64url = require("base64url");
 const crypto = require("crypto");
 let websiteName = "";
+require("dotenv").config();
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
 } else websiteName = "easy-resume.com";
-require("dotenv").config();
-
+const secretKey = process.env.SECRET;
 const User = require("./UserModel.js");
 const EmailConfirmation = require("./EmailConfirmationModel.js");
 
@@ -59,8 +59,8 @@ UserRouter.post("/register", (req, res) => {
               email: user.email,
               password: user.password
             };
-            const token = jwt.sign(payload, process.env.SECRET, {
-              expiresIn: 604800
+            const token = jwt.sign(payload, secretKey, {
+              expiresIn: "7d"
             });
 
             // pseudo random seed to make each hash different
@@ -68,7 +68,7 @@ UserRouter.post("/register", (req, res) => {
             // creates a hash
             const hash = crypto.createHash("sha256");
             // adds user id, secret and the randomly generated string to make a unique hash
-            hash.update(user.id + process.env.SECRET + random + token);
+            hash.update(user.id + secretKey + random + token);
 
             // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
             const newEmailConfirmation = new EmailConfirmation({
@@ -158,8 +158,8 @@ UserRouter.post("/login", (req, res) => {
           email: user.email,
           password: user.password
         };
-        const token = jwt.sign(payload, process.env.SECRET, {
-          expiresIn: 604800
+        const token = jwt.sign(payload, secretKey, {
+          expiresIn: "7d"
         });
         user.password = null;
         res.json({ token, user });
@@ -200,8 +200,8 @@ UserRouter.delete(
 // PUT users/info/:id
 // Update user information
 UserRouter.put(
-  "/info/:id", 
-  passport.authenticate("jwt", { session: false }), 
+  "/info/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const id = req.params.id;
     if (id === req.user.id) {
@@ -238,7 +238,7 @@ UserRouter.put(
                   // creates a hash
                   const hash = crypto.createHash("sha256");
                   // adds user id, secret and the randomly generated string to make a unique hash
-                  hash.update(user.id + process.env.SECRET + random);
+                  hash.update(user.id + secretKey + random);
 
                   // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
                   const newEmailConfirmation = new EmailConfirmation({
@@ -312,8 +312,8 @@ UserRouter.put(
                         email: user.email,
                         password: user.password
                       };
-                      const token = jwt.sign(payload, process.env.SECRET, {
-                        expiresIn: 604800
+                      const token = jwt.sign(payload, secretKey, {
+                        expiresIn: "7d"
                       });
                       user.password = null;
                       res.json({ token, user });
@@ -384,8 +384,8 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
                 email: user.email,
                 password: user.password
               };
-              const token = jwt.sign(payload, process.env.SECRET, {
-                expiresIn: 604800
+              const token = jwt.sign(payload, secretKey, {
+                expiresIn: "7d"
               });
               res.status(200).json({
                 message: "You have successfully changed your email address!",
@@ -496,7 +496,7 @@ UserRouter.put("/forgotpassword", (req, res) => {
       // creates a hash
       const hash = crypto.createHash("sha256");
       // adds user id, secret and the randomly generated string to make a unique hash
-      hash.update(user.id + process.env.SECRET + random);
+      hash.update(user.id + secretKey + random);
 
       // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
       const newEmailConfirmation = new EmailConfirmation({

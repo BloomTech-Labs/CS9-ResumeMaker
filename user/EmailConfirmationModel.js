@@ -12,16 +12,24 @@ const EmailConfirmation = new mongoose.Schema(
       type: String,
       required: true
     },
-    user: String,
+    user: {
+      type: String,
+      required: true
+    },
     newemail: {
       type: String,
       required: false,
       unique: true,
       validate: [validateEmail, "Invalid email."]
     },
-    oldemail: String
-  },
-  { timestamps: true }
+    oldemail: {
+      type: String,
+      required: false,
+      validate: [validateEmail, "Invalid email."]
+    },
+    createdAt: { type: Date, expires: 2400, default: Date.now }
+  }
+  // { timestamps: true }
 );
 
 module.exports = mongoose.model("EmailConfirmation", EmailConfirmation);
