@@ -3,6 +3,8 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./CSS/login.css";
 import axios from "axios";
 
+const urls = require("../config.json");
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ export default class Login extends Component {
     event.preventDefault();
 
     axios
-      .post("https://easy-resume.herokuapp.com/users/login", {
+      .post(`${urls[urls.basePath]}/users/login`, {
         email: this.state.email,
         password: this.state.password
       })

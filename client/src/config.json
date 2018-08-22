@@ -1,0 +1,5 @@
+{
+  "localPath": "http://localhost:3333",
+  "herokuPath": "https://easy-resume.herokuapp.com",
+  "basePath": "herokuPath"
+}
