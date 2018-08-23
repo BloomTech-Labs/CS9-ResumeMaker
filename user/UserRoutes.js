@@ -178,21 +178,28 @@ UserRouter.post("/login", (req, res) => {
         return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
 
-      if (user.subscription) {
-        stripe.subscriptions.retrieve(user.subscription, (err, sub) => {
-          if (err) res.status(500);
+      if (user.membership) {
+        stripe.subscriptions.retrieve(user.subscriptions, (err, sub) => {
+          if (err) console.log(err);
           if (
             sub.status === "canceled" ||
             sub.status === "past_due" ||
             sub.status === "unpaid"
           ) {
-            stripe.subscriptions.del(user.subscription, (err, success) => {
-              if (err) res.status(400).json("Error Unsubscribing");
-              else res.status(200);
-            });
-            user.membership = false;
-            user.subscription = null;
-            user.save();
+            stripe.subscriptions.del(user.subscriptions, (err, success) => {
+              if (err) console.log(err);
+              else console.log(success);
+            })
+            User.findOneAndUpdate(
+              { email },
+              { membership: false, subscription: null }
+            )
+              .then(user => {
+                console.log(user);
+              })
+              .catch(err => {
+                console.log("Unable to find");
+              });
           }
         });
       }
