@@ -33,10 +33,23 @@ class Billing extends Component {
     axios
       .post(`${urls[urls.basePath]}/pay/yearly`, token)
       .then(res => {
-        console.log(res);
+        return;
       })
       .catch(err => {
-        console.log(err);
+        return;
+      });
+  };
+
+  unsubscribe = () => {
+    axios
+      .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
+        email: this.props.context.userInfo.email
+      })
+      .then(res => {
+        console.log("Successfully Unsubscribed");
+      })
+      .catch(err => {
+        console.log("You are not even a member");
       });
   };
 
@@ -67,6 +80,7 @@ class Billing extends Component {
               <button onClick={this.yearly}>
                 Yearly Subscriptions - $55.99
               </button>
+              <button onClick={this.unsubscribe}>Unsubscribe</button>
             </div>
           </div>
         </div>
