@@ -49,7 +49,7 @@ export class TemplateOne extends Component {
         />
 
         <div className="component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Template One</h3>

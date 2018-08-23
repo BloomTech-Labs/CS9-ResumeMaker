@@ -50,16 +50,24 @@ export class TemplateThree extends Component {
         />
 
         <div className="component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="page-div">
-
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Template Three</h3>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
-            <div class="row">
+              <div class="row">
                 <div class="col" className="left-column">
-                <a href="https://www.freeiconspng.com/img/37126" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/logo-lion-head-png-8.png" className="logo" alt="logo lion head png" /></a>
+                  <a
+                    href="https://www.freeiconspng.com/img/37126"
+                    title="Image from freeiconspng.com"
+                  >
+                    <img
+                      src="https://www.freeiconspng.com/uploads/logo-lion-head-png-8.png"
+                      className="logo"
+                      alt="logo lion head png"
+                    />
+                  </a>
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 class="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
@@ -71,29 +79,28 @@ export class TemplateThree extends Component {
                     <p>{userInfo.links.github}</p>
                     <p>{userInfo.links.portfolio}</p>
                   </FormGroup>
-
                 </div>
                 <div class="col">
-              <div textAlign="center" className="titleSection">
-                <h2>
-                  {userInfo.firstName} {userInfo.lastName}
-                </h2>
-                <h1>TITILE</h1>
-                <h4>{userInfo.title}</h4>
-              </div>
-              <Divider className="divider-div" />
-              <FormGroup
-                textAlign="center"
-                id="summary"
-                className="summarySection"
-              >
-                <h3 class="subtitle">Summary</h3>
-                <p>{userInfo.summary}</p>
-              </FormGroup>
-              <Divider className="divider-div" />
-             
-                <Divider className="divider-div" />
-                
+                  <div textAlign="center" className="titleSection">
+                    <h2>
+                      {userInfo.firstName} {userInfo.lastName}
+                    </h2>
+                    <h1>TITILE</h1>
+                    <h4>{userInfo.title}</h4>
+                  </div>
+                  <Divider className="divider-div" />
+                  <FormGroup
+                    textAlign="center"
+                    id="summary"
+                    className="summarySection"
+                  >
+                    <h3 class="subtitle">Summary</h3>
+                    <p>{userInfo.summary}</p>
+                  </FormGroup>
+                  <Divider className="divider-div" />
+
+                  <Divider className="divider-div" />
+
                   <FormGroup textAlign="center" className="skillsSection">
                     <h3 class="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => (
