@@ -13,7 +13,6 @@ class Sidebar extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props);
     if (
       this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
