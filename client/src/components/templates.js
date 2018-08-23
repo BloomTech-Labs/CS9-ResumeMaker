@@ -20,7 +20,7 @@ class Templates extends Component {
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">
-            <div className="title-div">
+            <div className="d-block justify-content-center title-div">
               <h1>Templates</h1>
             </div>
             <div className="containers-div">
@@ -32,7 +32,7 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./templates/tempTemplate1.png")} //import pics
+                    src={require("./templates/tempTemplate.png")} //import pics
                     alt=""
                     height="100rem"
                   />
@@ -47,7 +47,7 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./templates/tempTemplate2.png")} //import pics
+                    src={require("./templates/tempTemplate1.png")} //import pics
                     alt=""
                     height="100rem"
                   />
@@ -62,7 +62,7 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./templates/tempTemplate3.png")} //import pics
+                    src={require("./templates/tempTemplate2.png")} //import pics
                     alt=""
                     height="100rem"
                   />

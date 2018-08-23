@@ -9,7 +9,7 @@ class Billing extends Component {
         <Navbar
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/templates", title: "Templates" }
+            { link: "/billing", title: "Billing" }
           ]}
         />
         <div className="overall-component-div">
