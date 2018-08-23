@@ -16,7 +16,7 @@ class Experience extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Experience</h1>
             {this.props.context.userInfo.experience.map((element, index) => {

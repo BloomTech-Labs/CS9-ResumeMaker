@@ -3,6 +3,7 @@ import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import ResumeCard from "./subComponents/resumeCard";
 import axios from "axios";
+const urls = require("../config.json");
 
 class Resumes extends Component {
   render() {
@@ -15,7 +16,7 @@ class Resumes extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1 className="Header">Resumes</h1>
           </div>

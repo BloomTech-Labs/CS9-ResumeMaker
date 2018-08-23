@@ -15,7 +15,7 @@ class Summary extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
             {this.props.context.userInfo.summary.map((element, index) => {

@@ -82,7 +82,7 @@ class EducationCreate extends Component {
     };
     axios
       .put(
-        `${urls[urls.basepath]}/users/info/` + this.props.context.userInfo.id,
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
         tempObj,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }
@@ -109,7 +109,7 @@ class EducationCreate extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Education History</h1>
             <form>

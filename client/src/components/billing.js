@@ -13,7 +13,7 @@ class Billing extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Billing</h1>
           </div>

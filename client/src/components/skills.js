@@ -15,7 +15,7 @@ class Skills extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Skills</h1>
             {this.props.context.userInfo.skills.map((element, index) => {

@@ -21,10 +21,6 @@ import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 import { TemplateOne } from "./components/templates/template1";
 
 class App extends Component {
-  componentWillMount() {
-    console.log(this.props);
-  }
-
   render() {
     return (
       <div className="App">

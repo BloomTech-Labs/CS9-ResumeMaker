@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./CSS/sidebar.css";
+import axios from "axios";
+const urls = require("../../config.json");
 
 class Sidebar extends Component {
   constructor(props) {
@@ -8,6 +10,31 @@ class Sidebar extends Component {
     this.state = {
       sidebarOpen: true
     };
+  }
+
+  componentWillMount() {
+    console.log(this.props);
+    if (
+      this.props.context.userInfo.auth !== true &&
+      localStorage.getItem("token")
+    ) {
+      //future home of login automatically on refresh or revisit
+      console.log("passed token check");
+      axios
+        .get(`${urls[urls.basePath]}/users/currentuser/`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          const userData = response.data;
+          this.props.context.actions.setLogin(userData);
+        })
+        .catch(err => {
+          console.log("err", err);
+          localStorage.removeItem("token");
+        });
+    }
   }
 
   onSetSidebarOpen = open => {

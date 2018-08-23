@@ -18,7 +18,7 @@ class Templates extends Component {
           ]}
         />
         <div className="overall-component-div">
-          <Sidebar />
+          <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="title-div">
               <h1>Templates</h1>
