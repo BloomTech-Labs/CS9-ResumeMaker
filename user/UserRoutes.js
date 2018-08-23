@@ -13,7 +13,7 @@ if (process.env.SITE_NAME) {
 const secretKey = process.env.SECRET;
 const User = require("./UserModel.js");
 const EmailConfirmation = require("./EmailConfirmationModel.js");
-const stripe = require('stripe')(process.env.SECRET_KEY);
+const stripe = require("stripe")(process.env.SECRET_KEY);
 
 // GET users/:username
 // Route to find if a username is already in use
@@ -178,8 +178,27 @@ UserRouter.post("/login", (req, res) => {
         return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
 
+      if (user.subscription) {
+        stripe.subscriptions.retrieve(user.subscription, (err, sub) => {
+          if (err) res.status(500);
+          if (
+            sub.status === "canceled" ||
+            sub.status === "past_due" ||
+            sub.status === "unpaid"
+          ) {
+            stripe.subscriptions.del(user.subscription, (err, success) => {
+              if (err) res.status(400).json("Error Unsubscribing");
+              else res.status(200);
+            });
+            user.membership = false;
+            user.subscription = null;
+            user.save();
+          }
+        });
+      }
+
       user
-      .checkPassword(password)
+        .checkPassword(password)
         .then(verified => {
           if (verified) {
             const payload = {
@@ -187,13 +206,9 @@ UserRouter.post("/login", (req, res) => {
               email: user.email,
               password: user.password
             };
-            stripe.subscriptions.retrieve(user.subscription, (err, sub) => {
-              if (err) console.log(err)
-              if (sub.status === "canceled" || sub.status === "past_due" || sub.status === "unpaid") {
-                user.membership = false;
-                user.subscription = null;
-              }
-            })
+            // if (user.membership) {
+            //   payload.resumes = user.resumes;
+            // }
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "7d"
             });
