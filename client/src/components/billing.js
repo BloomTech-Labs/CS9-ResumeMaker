@@ -12,7 +12,7 @@ class Billing extends Component {
             { link: "/templates", title: "Templates" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Billing</h1>

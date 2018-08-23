@@ -108,7 +108,7 @@ class EducationCreate extends Component {
             { link: "/education/create", title: "Create" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Education History</h1>

@@ -14,7 +14,7 @@ class Resumes extends Component {
             { link: "/resumes", title: "Resumes" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1 className="Header">Resumes</h1>

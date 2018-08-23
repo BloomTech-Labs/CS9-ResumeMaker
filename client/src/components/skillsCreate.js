@@ -80,7 +80,7 @@ class SkillsCreate extends Component {
             { link: "/skills/create", title: "Create" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Skills</h1>

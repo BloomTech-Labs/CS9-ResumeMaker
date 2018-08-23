@@ -14,7 +14,7 @@ class Education extends Component {
             { link: "/education", title: "Education" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Education History</h1>

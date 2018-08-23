@@ -15,7 +15,7 @@ class Experience extends Component {
             { link: "/experience", title: "Experience" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Experience</h1>

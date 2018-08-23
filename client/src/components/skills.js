@@ -14,7 +14,7 @@ class Skills extends Component {
             { link: "/skills", title: "Skills" }
           ]}
         />
-        <div className="component-div">
+        <div className="overall-component-div">
           <Sidebar />
           <div className="title-div">
             <h1>Skills</h1>
