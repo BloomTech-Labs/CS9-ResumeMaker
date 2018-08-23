@@ -181,7 +181,7 @@ User.pre("save", function(next) {
 });
 
 User.methods.checkPassword = function(passwordGuess) {
-  return bcrypt.compare(passwordGuess, this.password);
+  return bcrypt.compareSync(passwordGuess, this.password);
 };
 
 module.exports = mongoose.model("User", User);
