@@ -4,7 +4,8 @@ import {
   Button,
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
+  HelpBlock
 } from "react-bootstrap";
 import "./CSS/login.css";
 import axios from "axios";
@@ -62,6 +63,9 @@ class Register extends Component {
       })
       .catch(err => {
         console.log(err);
+        if (!this.validateEmail()) {
+          this.setState({ emailInvalid: true });
+        }
       });
     if (!this.checkPasswordStrength(this.state.password)) {
       this.setState({ passwordInvalid: true });
@@ -78,8 +82,19 @@ class Register extends Component {
         this.state.password === this.state.confirmPassword
       ) {
         this.handleSubmit();
+      } else {
+        this.componentDidMount();
       }
     });
+  };
+
+  componentDidMount = () => {
+    this.render();
+  };
+
+  validateEmail = email => {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
   };
 
   checkPasswordStrength = password => {
@@ -94,9 +109,12 @@ class Register extends Component {
     return true;
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit = () => {
     console.log("handleSubmit called");
+    // Putting the set state here allows the submit modal to show before
+    // the email is sent. If the response gives an error the submittedError property
+    // will override the submitted modal and show there was an error.
+    this.setState({ submitted: true });
     axios
       .post(`${urls[urls.basePath]}/users/register`, {
         username: this.state.username,
@@ -104,13 +122,16 @@ class Register extends Component {
         password: this.state.password
       })
       .then(response => {
-        console.log(response.body);
-        this.setState({ submitted: true });
+        console.log(response);
       })
       .catch(err => {
         console.log("err", err);
-        this.setState({ submittedError: true });
+        this.setState({ submittedError: true, submitted: false });
       });
+  };
+
+  resetSubmitStatus = () => {
+    this.setState({ submitted: false, submittedError: false });
   };
 
   render() {
@@ -130,7 +151,7 @@ class Register extends Component {
                 <Button
                   bsStyle="primary"
                   onClick={() => {
-                    this.props.history.push("/register");
+                    this.resetSubmitStatus();
                   }}
                 >
                   Try again
@@ -144,7 +165,11 @@ class Register extends Component {
       return (
         <div className="Login">
           <form>
-            <FormGroup controlId="username" bsSize="small">
+            <FormGroup
+              controlId="username"
+              bsSize="small"
+              // validationState={!this.state.invalidUsername}
+            >
               <ControlLabel>Username</ControlLabel>
               <FormControl
                 autoFocus
@@ -152,8 +177,15 @@ class Register extends Component {
                 value={this.state.username}
                 onChange={this.handleChange}
               />
+              {this.state.invalidUsername === true ? (
+                <HelpBlock>This username is already in use.</HelpBlock>
+              ) : null}
             </FormGroup>
-            <FormGroup controlId="email" bsSize="large">
+            <FormGroup
+              controlId="email"
+              bsSize="large"
+              // validationState={!this.state.invalidEmail}
+            >
               <ControlLabel>Email</ControlLabel>
               <FormControl
                 autoFocus
@@ -161,14 +193,26 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
+              {this.state.invalidEmail ? (
+                <HelpBlock>Please enter an unused valid email.</HelpBlock>
+              ) : null}
             </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
+            <FormGroup
+              controlId="password"
+              bsSize="large"
+              // validationState={!this.state.invalidPassword}
+            >
               <ControlLabel>Password</ControlLabel>
               <FormControl
                 type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
+              {this.state.invalidPassword ? (
+                <HelpBlock>
+                  Please use a complex password at least 8 characters long.
+                </HelpBlock>
+              ) : null}
             </FormGroup>
             <FormGroup controlId="confirmPassword" bsSize="large">
               <ControlLabel>Confirm password</ControlLabel>
