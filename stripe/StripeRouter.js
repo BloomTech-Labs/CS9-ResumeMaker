@@ -123,16 +123,16 @@ router.post(
 */
 router.post(
   "/unsubscribe",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { email } = req.user;
-
+    const { email } = req.body;
     User.findOne({ email })
       .then(user => {
         if (user.membership && user.subscription) {
           stripe.subscriptions.del(user.subscription, (err, confirmation) => {
-            if (err) res.status(400).json("Unable to unsubscribe at this time");
-            else {
+            if (err) {
+              res.status(400).json("Unable to unsubscribe at this time");
+            } else {
               user.subscription = null;
               user.membership = false;
               user.save();
