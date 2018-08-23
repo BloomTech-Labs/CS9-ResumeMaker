@@ -6,7 +6,7 @@
     flex-direction: column; 
 }
 .page-header {
-    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    /* font-family: "Avant Garde"; , Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; */
     font-size: 2rem;
     padding: 2rem;
     text-align: center;
@@ -21,5 +21,12 @@
     border: 1px solid black; 
 }
 .resume-button {
-    width: 10rem;  
+    width: 10rem; 
+   
+}
+.subtitle {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold';
+}
+.titleSection {
+    background-color: lightgray; 
 }

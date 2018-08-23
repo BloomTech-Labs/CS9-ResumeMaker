@@ -1,10 +1,8 @@
 
 .page-div {
     width: 100%; 
-    align-content: center ;
-}
-.title-div {
-    padding: 1.5rem; 
+    display: flex; 
+    flex-direction: column; 
 }
 .containters-div {
 display: flex; 
@@ -14,5 +12,5 @@ flex-direction: row;
 padding: 1rem; 
 }
 img {
-    height: 18rem; 
+    height: 15rem; 
 }

@@ -20,7 +20,7 @@ class Templates extends Component {
         <div className="overall-component-div">
           <Sidebar />
           <div className="page-div">
-            <div className="title-div">
+            <div className="d-block justify-content-center title-div">
               <h1>Templates</h1>
             </div>
             <div className="containers-div">
