@@ -151,20 +151,25 @@ UserRouter.post("/login", (req, res) => {
       if (!user) {
         return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
-      const verified = user.checkPassword(password);
-      if (verified) {
-        const payload = {
-          id: user._id,
-          email: user.email,
-          password: user.password
-        };
-        const token = jwt.sign(payload, process.env.SECRET, {
-          expiresIn: 604800
-        });
-        user.password = null;
-        res.json({ token, user });
-      } else
-        return res.status(401).json({ errorMessage: "Invalid credentials." });
+      user.checkPassword(password)
+      .then(verified => {
+        if (verified) {
+          const payload = {
+            id: user._id,
+            email: user.email,
+            password: user.password
+          };
+          const token = jwt.sign(payload, process.env.SECRET, {
+            expiresIn: 604800
+          });
+          user.password = null;
+          res.json({ token, user });
+        } else
+          return res.status(401).json({ errorMessage: "Invalid credentials." });
+      })
+      .catch(err => {
+        res.status(400).json("Could not log in");
+      })
     })
     .catch(err => {
       res.status(500).json({ errorMessage: "Could not log in.", error: err });
