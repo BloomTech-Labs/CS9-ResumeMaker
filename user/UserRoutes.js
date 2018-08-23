@@ -6,13 +6,43 @@ const nodemailer = require("nodemailer");
 const base64url = require("base64url");
 const crypto = require("crypto");
 let websiteName = "";
+require("dotenv").config();
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
 } else websiteName = "easy-resume.com";
-require("dotenv").config();
-
+const secretKey = process.env.SECRET;
 const User = require("./UserModel.js");
 const EmailConfirmation = require("./EmailConfirmationModel.js");
+
+// GET users/:username
+// Route to find if a username is already in use
+UserRouter.get("/:username", (req, res) => {
+  User.findOne({ username: req.params.username })
+    .then(user => {
+      res.status(200).json(user.username);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Could not find user with that username.",
+        error: err
+      });
+    });
+});
+
+// GET users/emailcheck/:email
+// Route to find if an email is already in use
+UserRouter.get("/emailcheck/:email", (req, res) => {
+  User.findOne({ email: req.params.email })
+    .then(user => {
+      res.status(200).json(user.email);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Could not find user with that email.",
+        error: err
+      });
+    });
+});
 
 // GET users/currentuser (TEST ROUTE --- WILL REMOVE)
 // Route to find id, username and email of current user
@@ -41,7 +71,12 @@ UserRouter.get("/", (req, res) => {
 // Register a new user
 // Make sure to send confirmation email
 UserRouter.post("/register", (req, res) => {
-  const userData = req.body;
+  // Write req.body to userData in this way to avoid any fields other than these 3 (such as the confirmemail one) from being inserted
+  const userData = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  };
   User.findOne({ email: userData.email })
     .then(user => {
       if (user) {
@@ -50,87 +85,77 @@ UserRouter.post("/register", (req, res) => {
             "This email is already in use. Please choose the forgot password option to reset your password."
         });
       } else {
-        const newUser = new User(userData);
-        newUser
+        // pseudo random seed to make each hash different
+        const random = crypto.randomBytes(20).toString("hex");
+        // creates a hash
+        const hash = crypto.createHash("sha256");
+        // adds user id, secret and the randomly generated string to make a unique hash
+        hash.update(userData.username + secretKey + random);
+
+        // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
+        const newEmailConfirmation = new EmailConfirmation({
+          hash: base64url(hash.digest("hex")) + "$",
+          userData: userData
+        });
+        newEmailConfirmation
           .save()
-          .then(user => {
-            const payload = {
-              id: user._id,
-              email: user.email,
-              password: user.password
-            };
-            const token = jwt.sign(payload, process.env.SECRET, {
-              expiresIn: 604800
-            });
-
-            // pseudo random seed to make each hash different
-            const random = crypto.randomBytes(20).toString("hex");
-            // creates a hash
-            const hash = crypto.createHash("sha256");
-            // adds user id, secret and the randomly generated string to make a unique hash
-            hash.update(user.id + process.env.SECRET + random + token);
-
-            // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
-            const newEmailConfirmation = new EmailConfirmation({
-              hash: base64url(hash.digest("hex")) + "$",
-              user: user._id
-            });
-            newEmailConfirmation
-              .save()
-              .then(emailconfirmation => {
-                // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-                nodemailer.createTestAccount((err, account) => {
-                  // create reusable transporter object using the default SMTP transport
-                  let transporter = nodemailer.createTransport({
-                    host: "smtp.ethereal.email",
-                    port: 587,
-                    secure: false, // true for 465, false for other ports
-                    auth: {
-                      user: account.user, // generated ethereal user
-                      pass: account.pass // generated ethereal password
-                    }
-                  });
-                  let mailOptions = {
-                    from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
-                    to: `${user.email}`,
-                    subject: `Confirm your registration to ${websiteName}!`,
-                    text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
-                      "host"
-                    )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
-                    html: `Thank you for signing up! Please click this <a href=${req.get(
-                      "host"
-                    )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
+          .then(emailconfirmation => {
+            // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+            nodemailer.createTestAccount((err, account) => {
+              // create reusable transporter object using the default SMTP transport
+              let transporter = nodemailer.createTransport({
+                host: "smtp.ethereal.email",
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                  user: account.user, // generated ethereal user
+                  pass: account.pass // generated ethereal password
+                }
+              });
+              let mailOptions = {
+                from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
+                to: `${userData.email}`,
+                subject: `Confirm your registration to ${websiteName}!`,
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
+                html: `Thank you for signing up! Please click this <a href=${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
                 }>link</a>.`
-                  };
+              };
 
-                  transporter.sendMail(mailOptions, (err, info) => {
-                    if (err) {
-                      return console.log(err);
-                    }
-                    console.log("Message sent: %s", info.messageId);
-                    console.log(
-                      "Preview URL: %s",
-                      nodemailer.getTestMessageUrl(info)
-                    );
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                  return res.status(500).json({
+                    errorMessage: "Could not send email.",
+                    error: err
                   });
-                });
-              })
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not save email confirmation.",
-                  error: err
+                }
+                console.log("Message sent: %s", info.messageId);
+                console.log(
+                  "Preview URL: %s",
+                  nodemailer.getTestMessageUrl(info)
+                );
+                res.status(200).json({
+                  message: "Email confirmation saved and email sent."
                 });
               });
-            user.password = null;
-            res.status(201).json({ user, token });
+            });
           })
           .catch(err => {
+            console.log({
+              errorMessage: "Could not save email confirmation.",
+              error: err
+            });
             res.status(500).json({
-              errorMessage:
-                "There was an error in account creation, please try again.",
+              errorMessage: "Could not save email confirmation.",
               error: err
             });
           });
+        // If you put a response here the time for response to a register request will be 100-200ms
+        // instead of 2000-5000, but they won't get error messages from the backend.
+        // res.status(200).json(userData.email);
       }
     })
     .catch(err => {
@@ -151,20 +176,30 @@ UserRouter.post("/login", (req, res) => {
       if (!user) {
         return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
-      const verified = user.checkPassword(password);
-      if (verified) {
-        const payload = {
-          id: user._id,
-          email: user.email,
-          password: user.password
-        };
-        const token = jwt.sign(payload, process.env.SECRET, {
-          expiresIn: 604800
+      user
+        .checkPassword(password)
+        .then(verified => {
+          if (verified) {
+            const payload = {
+              id: user._id,
+              email: user.email,
+              password: user.password
+            };
+            const token = jwt.sign(payload, secretKey, {
+              expiresIn: "7d"
+            });
+            user.password = null;
+            res.json({ token, user });
+          } else
+            return res
+              .status(401)
+              .json({ errorMessage: "Invalid credentials." });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ errorMessage: "Could not log in.", error: err });
         });
-        user.password = null;
-        res.json({ token, user });
-      } else
-        return res.status(401).json({ errorMessage: "Invalid credentials." });
     })
     .catch(err => {
       res.status(500).json({ errorMessage: "Could not log in.", error: err });
@@ -181,7 +216,7 @@ UserRouter.delete(
     if (id === req.user.id) {
       User.findByIdAndRemove(id)
         .then(user => {
-          res.status(200).send("User successfully deleted.");
+          res.status(200).send({ message: "User successfully deleted." });
         })
         .catch(err => {
           res.status(404).json({
@@ -200,8 +235,8 @@ UserRouter.delete(
 // PUT users/info/:id
 // Update user information
 UserRouter.put(
-  "/info/:id", 
-  passport.authenticate("jwt", { session: false }), 
+  "/info/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const id = req.params.id;
     if (id === req.user.id) {
@@ -228,109 +263,151 @@ UserRouter.put(
               .json({ errorMessage: "No user with that id could be found." });
           } else {
             if (req.body.oldpassword) {
-              const verified = req.user.checkPassword(req.body.oldpassword);
-              if (verified) {
-                // If the password was changed then return a new token as well
-                // If the user edited their email, then this if statement sends an email confirmation to their new email to make sure
-                if (email && email !== req.user.email) {
-                  // pseudo random seed to make each hash different
-                  const random = crypto.randomBytes(20).toString("hex");
-                  // creates a hash
-                  const hash = crypto.createHash("sha256");
-                  // adds user id, secret and the randomly generated string to make a unique hash
-                  hash.update(user.id + process.env.SECRET + random);
-
-                  // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
-                  const newEmailConfirmation = new EmailConfirmation({
-                    hash: base64url(hash.digest("hex")) + "!",
-                    user: user._id,
-                    newemail: email
-                  });
-                  newEmailConfirmation
-                    .save()
-                    .then(emailconfirmation => {
-                      // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
-                      nodemailer.createTestAccount((err, account) => {
-                        // create reusable transporter object using the default SMTP transport
-                        let transporter = nodemailer.createTransport({
-                          host: "smtp.ethereal.email",
-                          port: 587,
-                          secure: false, // true for 465, false for other ports
-                          auth: {
-                            user: account.user, // generated ethereal user
-                            pass: account.pass // generated ethereal password
-                          }
-                        });
-                        let mailOptions = {
-                          from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
-                          to: `${req.user.email}`,
-                          subject: `Confirm your account email change for ${websiteName}!`,
-                          text: `Please go to this link to make this your new account email address: ${req.get(
-                            "host"
-                          )}${req.baseUrl}/changeemail/${
-                            newEmailConfirmation.hash
-                          }`,
-                          html: `Please click this <a href=${req.get("host")}${
-                            req.baseUrl
-                          }/changeemail/${newEmailConfirmation.hash}
-                    }>link</a> to make this your new account email address.`
-                        };
-
-                        transporter.sendMail(mailOptions, (err, info) => {
-                          if (err) {
-                            console.log(err);
+              user
+                .checkPassword(req.body.oldpassword)
+                .then(verified => {
+                  if (verified) {
+                    // If the password was changed then return a new token as well
+                    // If the user edited their email, then this if statement sends an email confirmation to their new email to make sure
+                    if (email && email !== req.user.email) {
+                      // ======= Comment out the block below to disable prechecking email validity
+                      User.findOne({ email: email })
+                        .then(emailInUse => {
+                          if (emailInUse) {
+                            console.log({
+                              errorMessage: "This email is already in use."
+                            });
                           } else {
-                            console.log("Message sent: %s", info.messageId);
-                            console.log(
-                              "Preview URL: %s",
-                              nodemailer.getTestMessageUrl(info)
-                            );
+                            // ==================
+                            // pseudo random seed to make each hash different
+                            const random = crypto
+                              .randomBytes(20)
+                              .toString("hex");
+                            // creates a hash
+                            const hash = crypto.createHash("sha256");
+                            // adds user id, secret and the randomly generated string to make a unique hash
+                            hash.update(user.id + secretKey + random);
+
+                            // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
+                            const newEmailConfirmation = new EmailConfirmation({
+                              hash: base64url(hash.digest("hex")) + "!",
+                              user: user._id,
+                              newemail: email
+                            });
+                            newEmailConfirmation
+                              .save()
+                              .then(emailconfirmation => {
+                                // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
+                                nodemailer.createTestAccount((err, account) => {
+                                  // create reusable transporter object using the default SMTP transport
+                                  let transporter = nodemailer.createTransport({
+                                    host: "smtp.ethereal.email",
+                                    port: 587,
+                                    secure: false, // true for 465, false for other ports
+                                    auth: {
+                                      user: account.user, // generated ethereal user
+                                      pass: account.pass // generated ethereal password
+                                    }
+                                  });
+                                  let mailOptions = {
+                                    from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
+                                    to: `${req.user.email}`,
+                                    subject: `Confirm your account email change for ${websiteName}!`,
+                                    text: `Please go to this link to make this your new account email address: ${req.get(
+                                      "host"
+                                    )}${req.baseUrl}/changeemail/${
+                                      newEmailConfirmation.hash
+                                    }`,
+                                    html: `Please click this <a href=${req.get(
+                                      "host"
+                                    )}${req.baseUrl}/changeemail/${
+                                      newEmailConfirmation.hash
+                                    }
+                    }>link</a> to make this your new account email address.`
+                                  };
+
+                                  transporter.sendMail(
+                                    mailOptions,
+                                    (err, info) => {
+                                      if (err) {
+                                        console.log(err);
+                                      } else {
+                                        console.log(
+                                          "Message sent: %s",
+                                          info.messageId
+                                        );
+                                        console.log(
+                                          "Preview URL: %s",
+                                          nodemailer.getTestMessageUrl(info)
+                                        );
+                                      }
+                                    }
+                                  );
+                                });
+                              })
+                              .catch(err => {
+                                console.log({
+                                  errorMessage:
+                                    "Could not save email confirmation.",
+                                  error: err
+                                });
+                              });
+                            // ======= Comment out the block below to disable prechecking email validity
                           }
+                        })
+                        .catch(err => {
+                          console.log({
+                            errorMessage:
+                              "Unable to check if the requested email is in use.",
+                            error: err
+                          });
                         });
-                      });
-                    })
-                    .catch(err => {
-                      console.log({
-                        errorMessage: "Could not save email confirmation.",
-                        error: err
-                      });
-                    });
-                }
-                if (req.body.newpassword) {
-                  user.password = req.body.newpassword;
-                  user.save(function(err) {
-                    if (err) {
-                      user.password = null;
-                      res.status(200).json({
-                        user,
-                        errorMessage: "Could not save new password.",
-                        error: err
+                      // ======
+                    }
+                    if (req.body.newpassword) {
+                      user.password = req.body.newpassword;
+                      user.save(function(err) {
+                        if (err) {
+                          user.password = null;
+                          res.status(200).json({
+                            user,
+                            errorMessage: "Could not save new password.",
+                            error: err
+                          });
+                        } else {
+                          const payload = {
+                            id: user._id,
+                            email: user.email,
+                            password: user.password
+                          };
+                          const token = jwt.sign(payload, secretKey, {
+                            expiresIn: "7d"
+                          });
+                          user.password = null;
+                          res.json({ token, user });
+                        }
                       });
                     } else {
-                      const payload = {
-                        id: user._id,
-                        email: user.email,
-                        password: user.password
-                      };
-                      const token = jwt.sign(payload, process.env.SECRET, {
-                        expiresIn: 604800
-                      });
                       user.password = null;
-                      res.json({ token, user });
+                      res.status(200).json({ user });
                     }
-                  });
-                } else {
+                  } else {
+                    user.password = null;
+                    res.status(200).json({
+                      errorMessage:
+                        "The password you entered was invalid. To update your email or password please enter your current password.",
+                      user
+                    });
+                  }
+                })
+                .catch(err => {
                   user.password = null;
-                  res.status(200).json({ user });
-                }
-              } else {
-                user.password = null;
-                res.status(200).json({
-                  user,
-                  errorMessage:
-                    "The password you entered was invalid. To update your email or password please enter your current password."
+                  res.status(200).json({
+                    errorMessage: "Unable to verify password.",
+                    error: err,
+                    user
+                  });
                 });
-              }
             } else {
               user.password = null;
               res.status(200).json({ user });
@@ -363,34 +440,23 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
       if (emailconfirmation && emailconfirmation.newemail) {
         User.findOneAndUpdate(
           { _id: emailconfirmation.user },
-          { email: emailconfirmation.newemail },
+          { email: emailconfirmation.newemail, active: true },
           options
         )
           .then(user => {
-            // Deletes the now useless email confirmation if it still exists for some reason
-            const oldemail = emailconfirmation.oldemail;
-            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-              .then()
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not delete email confirmation.",
-                  error: err
-                });
-              });
-
             if (user !== null) {
               const payload = {
                 id: user._id,
                 email: user.email,
                 password: user.password
               };
-              const token = jwt.sign(payload, process.env.SECRET, {
-                expiresIn: 604800
+              const token = jwt.sign(payload, secretKey, {
+                expiresIn: "7d"
               });
               res.status(200).json({
+                token,
                 message: "You have successfully changed your email address!",
-                email: oldemail,
-                token
+                email: emailconfirmation.oldemail
               });
             } else
               res.status(404).json({
@@ -424,51 +490,44 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
 // Confirm user signup with an email
 UserRouter.get("/confirmemail/:hash", (req, res) => {
   const hash = req.params.hash;
-  const changes = {
-    active: true
-  };
-  const options = {
-    new: true
-  };
-
   EmailConfirmation.findOne({ hash: hash })
     .then(emailconfirmation => {
       if (emailconfirmation) {
-        User.findOneAndUpdate(
-          { _id: emailconfirmation.user, active: false },
-          changes,
-          options
-        )
-          .then(user => {
-            // Deletes the now useless email confirmation if it still exists for some reason
-            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-              .then()
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not delete email confirmation.",
-                  error: err
-                });
-              });
+        // The password stored in the emailconfirmation is encrypted so it has to be decrypted here
+        const decipher = crypto.createDecipher("aes256", secretKey);
+        let decrypted = decipher.update(
+          emailconfirmation.userData.password,
+          "hex",
+          "utf8"
+        );
+        decrypted += decipher.final("utf8");
+        // Now the emailconfirmation password is set to the decrypted version so a user can be made
+        emailconfirmation.userData.password = decrypted;
 
-            if (user !== null) {
-              res
-                .status(200)
-                .json({ message: "You have successfully signed up!" });
-            } else
-              res.status(404).json({
-                errorMessage:
-                  "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
-              });
+        const newUser = new User(emailconfirmation.userData);
+        newUser
+          .save()
+          .then(user => {
+            const payload = {
+              id: user._id,
+              email: user.email,
+              password: user.password
+            };
+            const token = jwt.sign(payload, secretKey, {
+              expiresIn: "7d"
+            });
+            user.password = null;
+            res.status(201).json({ token, user });
           })
           .catch(err => {
             res.status(500).json({
               errorMessage:
-                "Your account has already been activated or does not exist.",
+                "There was an error in account creation, please try again.",
               error: err
             });
           });
       } else
-        res.status(500).json({
+        res.status(404).json({
           errorMessage:
             "Your account has already been activated or does not exist."
         });
@@ -496,7 +555,7 @@ UserRouter.put("/forgotpassword", (req, res) => {
       // creates a hash
       const hash = crypto.createHash("sha256");
       // adds user id, secret and the randomly generated string to make a unique hash
-      hash.update(user.id + process.env.SECRET + random);
+      hash.update(user.id + secretKey + random);
 
       // This creates a new email confirmation waiting to be fulfilled. Once it is accessed successfully it should be deleted and the user activated.
       const newEmailConfirmation = new EmailConfirmation({
@@ -542,7 +601,7 @@ UserRouter.put("/forgotpassword", (req, res) => {
                 "Preview URL: %s",
                 nodemailer.getTestMessageUrl(info)
               );
-              res
+              return res
                 .status(200)
                 .json({ message: "Email confirmation saved and email sent." });
             });
@@ -554,7 +613,8 @@ UserRouter.put("/forgotpassword", (req, res) => {
             error: err
           });
         });
-
+      // Having this here means the response time is 175ms rather than 2000-3000 as it is
+      // if the response has to wait to be sent until the res in transporter.sendMail above!
       res.status(200).json(user.email);
     })
     .catch(err => {
@@ -568,25 +628,21 @@ UserRouter.put("/forgotpassword", (req, res) => {
 // PUT users/info/:id
 // Update user information
 UserRouter.get("/resetpassword/:hash", (req, res) => {
-  const hash = req.params.hash;
-
-  EmailConfirmation.findOne({ hash: hash })
+  EmailConfirmation.findOne({ hash: req.params.hash })
     .then(emailconfirmation => {
       if (emailconfirmation) {
         User.findById(emailconfirmation.user)
           .then(user => {
-            // Deletes the now useless email confirmation if it still exists for some reason
-            EmailConfirmation.deleteOne({ _id: emailconfirmation.id })
-              .then()
-              .catch(err => {
-                console.log({
-                  errorMessage: "Could not delete email confirmation.",
-                  error: err
-                });
-              });
-
             if (user !== null) {
-              user.password = hash;
+              // pseudo random seed to make each hash different
+              const random = crypto.randomBytes(20).toString("hex");
+              // creates a hash
+              const hash = crypto.createHash("sha256");
+              // adds user id, secret and the randomly generated string to make a unique hash
+              hash.update(req.params.hash + secretKey + random);
+              const newPassword = base64url(hash.digest("hex")) + "!";
+              user.password = newPassword;
+              user.active = true;
               user.save(function(err) {
                 if (err) {
                   res.status(500).json({
@@ -594,7 +650,7 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
                       "There was an error setting the temporary password.",
                     error: err
                   });
-                } else res.status(200).json({ message: "Temporary password set successfully!", password: hash });
+                } else res.status(200).json({ message: "Temporary password set successfully!", password: newPassword });
               });
             } else
               res.status(404).json({
