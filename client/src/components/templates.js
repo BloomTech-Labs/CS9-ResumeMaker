@@ -32,7 +32,7 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./templates/tempTemplate1.png")} //import pics
+                    src={require("./templates/tempTemplate.png")} //import pics
                     alt=""
                     height="100rem"
                   />
@@ -47,7 +47,7 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./templates/tempTemplate2.png")} //import pics
+                    src={require("./templates/tempTemplate1.png")} //import pics
                     alt=""
                     height="100rem"
                   />
@@ -62,7 +62,7 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./templates/tempTemplate3.png")} //import pics
+                    src={require("./templates/tempTemplate2.png")} //import pics
                     alt=""
                     height="100rem"
                   />
