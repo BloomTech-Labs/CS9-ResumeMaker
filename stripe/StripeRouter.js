@@ -46,7 +46,6 @@ router.post(
                       user.subscription = subscription.id;
                       user.membership = true;
                       user.save();
-                      res.redirect("paid");
                     }
                   }
                 );
@@ -101,7 +100,6 @@ router.post(
                       user.subscription = subscription.id;
                       user.membership = true;
                       user.save();
-                      res.redirect("paid");
                     }
                   }
                 );
