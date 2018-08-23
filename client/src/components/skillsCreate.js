@@ -74,6 +74,7 @@ class SkillsCreate extends Component {
       <div>
         {this.state.success ? <Redirect to="/skills" /> : null}
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/skills", title: "Skills" },

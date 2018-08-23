@@ -22,7 +22,7 @@ class AuthProvider extends Component {
     this.setState({ auth: !this.state.auth });
   };
 
-  setContext = (title, value) => {
+  setValue = (title, value) => {
     this.setState({ [title]: value });
   };
 
@@ -67,7 +67,7 @@ class AuthProvider extends Component {
           userInfo,
           actions: {
             toggleAuth: this.toggleAuth,
-            setContext: this.setContext,
+            setValue: this.setValue,
             setLogin: this.setLogin,
             setElement: this.setElement,
             addElement: this.addElement

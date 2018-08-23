@@ -74,6 +74,7 @@ class SummaryCreate extends Component {
       <div>
         {this.state.success ? <Redirect to="/summary" /> : null}
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/summary", title: "Summary" },

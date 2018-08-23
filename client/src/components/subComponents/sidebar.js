@@ -17,7 +17,6 @@ class Sidebar extends Component {
       this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
-      //future home of login automatically on refresh or revisit
       console.log("passed token check");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {

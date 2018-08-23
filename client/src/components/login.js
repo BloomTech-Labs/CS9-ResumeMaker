@@ -43,7 +43,7 @@ export default class Login extends Component {
           this.props.context.actions.setLogin(userData);
 
           console.log(this.props.context.userInfo);
-          this.props.history.push("/resumes");
+          this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {
