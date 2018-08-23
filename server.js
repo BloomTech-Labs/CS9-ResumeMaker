@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const hbs = require('hbs');
 require("dotenv").config();
 
 // Connect To mLab
