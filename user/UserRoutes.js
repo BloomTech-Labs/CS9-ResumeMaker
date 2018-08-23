@@ -17,7 +17,7 @@ const stripe = require('stripe')(process.env.SECRET_KEY);
 
 // GET users/:username
 // Route to find if a username is already in use
-UserRouter.get("/:username", (req, res) => {
+UserRouter.get("/usernamecheck/:username", (req, res) => {
   User.findOne({ username: req.params.username })
     .then(user => {
       res.status(200).json(user.username);

@@ -47,7 +47,7 @@ class Register extends Component {
       passwordInvalid: false
     });
     const usernamePromise = axios
-      .get(`${urls[urls.basePath]}/users/${this.state.username}`)
+      .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
       .then(response => {
         console.log(response);
         this.setState({ usernameInvalid: true });
