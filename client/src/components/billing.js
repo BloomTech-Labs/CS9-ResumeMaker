@@ -5,6 +5,7 @@ import axios from "axios";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import "./CSS/billing.css";
+const urls = require("../config.json");
 
 class Billing extends Component {
   state = {
@@ -16,7 +17,7 @@ class Billing extends Component {
       email: this.props.context.userInfo.email
     });
     axios
-      .post("http://localhost:3333/pay/monthly", token)
+      .post(`${urls[urls.basePath]}/pay/monthly`, token)
       .then(res => {
         console.log(res);
       })
@@ -30,7 +31,7 @@ class Billing extends Component {
       email: this.props.context.userInfo.email
     });
     axios
-      .post("http://localhost:3333/pay/yearly", token)
+      .post(`${urls[urls.basePath]}/pay/yearly`, token)
       .then(res => {
         console.log(res);
       })
