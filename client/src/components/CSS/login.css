@@ -18,3 +18,15 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.Login .modal {
+  position: absolute;
+  /* the top and bottom make the modal relatively
+  centered on the screen */
+  top: 25%;
+  bottom: 10%;
+}
+
+.Login .modal-footer {
+  justify-content: center;
+}
