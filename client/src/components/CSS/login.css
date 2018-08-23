@@ -16,6 +16,7 @@
 .Login form .form-group {
   display: flex;
   flex-wrap: wrap;
+  max-width: 20rem;
   justify-content: center;
 }
 

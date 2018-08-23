@@ -63,10 +63,10 @@ class Register extends Component {
       })
       .catch(err => {
         console.log(err);
-        if (!this.validateEmail()) {
-          this.setState({ emailInvalid: true });
-        }
       });
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({ emailInvalid: true });
+    }
     if (!this.checkPasswordStrength(this.state.password)) {
       this.setState({ passwordInvalid: true });
     }
@@ -168,7 +168,7 @@ class Register extends Component {
             <FormGroup
               controlId="username"
               bsSize="small"
-              // validationState={!this.state.invalidUsername}
+              // validationState={!this.state.usernameInvalid}
             >
               <ControlLabel>Username</ControlLabel>
               <FormControl
@@ -177,14 +177,17 @@ class Register extends Component {
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              {this.state.invalidUsername === true ? (
-                <HelpBlock>This username is already in use.</HelpBlock>
-              ) : null}
+              <FormControl.Feedback>
+                {this.state.usernameInvalid === true ? (
+                  <HelpBlock>This username is already in use.</HelpBlock>
+                ) : null}
+              </FormControl.Feedback>
             </FormGroup>
+
             <FormGroup
               controlId="email"
               bsSize="large"
-              // validationState={!this.state.invalidEmail}
+              // validationState={!this.state.emailInvalid}
             >
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -193,14 +196,17 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              {this.state.invalidEmail ? (
-                <HelpBlock>Please enter an unused valid email.</HelpBlock>
-              ) : null}
+              <FormControl.Feedback>
+                {this.state.emailInvalid ? (
+                  <HelpBlock>Please enter an unused valid email.</HelpBlock>
+                ) : null}
+              </FormControl.Feedback>
             </FormGroup>
+
             <FormGroup
               controlId="password"
               bsSize="large"
-              // validationState={!this.state.invalidPassword}
+              // validationState={!this.state.passwordInvalid}
             >
               <ControlLabel>Password</ControlLabel>
               <FormControl
@@ -208,11 +214,13 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              {this.state.invalidPassword ? (
-                <HelpBlock>
-                  Please use a complex password at least 8 characters long.
-                </HelpBlock>
-              ) : null}
+              <FormControl.Feedback>
+                {this.state.passwordInvalid ? (
+                  <HelpBlock>
+                    Please use a complex password at least 8 characters long.
+                  </HelpBlock>
+                ) : null}
+              </FormControl.Feedback>
             </FormGroup>
             <FormGroup controlId="confirmPassword" bsSize="large">
               <ControlLabel>Confirm password</ControlLabel>
