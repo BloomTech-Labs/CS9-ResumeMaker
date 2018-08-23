@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 require("dotenv").config();
 
+const UserRouter = require("./user/UserRoutes.js");
+const StripeRouter = require("./stripe/StripeRouter.js");
+
+
 // Connect To mLab
 mongoose
   .connect(
@@ -15,9 +19,6 @@ mongoose
 
 // Initialize Server
 const server = express();
-
-server.set('view engine', 'hbs');
-server.set('views', __dirname + '/views');
 
 // Initialize passport authentication
 server.use(passport.initialize());
@@ -36,18 +37,9 @@ server.use(cors());
 // }
 // server.use(cors(corsOptions));
 
-// Route for editing/adding/deleting users
-const UserRouter = require("./user/UserRoutes.js");
+// Routes
 server.use("/users", UserRouter);
-
-// Route for Stripe
-const StripeRouter = require("./stripe/StripeRouter.js");
 server.use('/pay', StripeRouter);
-
-// Initial GET route
-server.get("/", (req, res) => {
-  res.json({ Message: "Hello World" });
-});
 
 const port = process.env.PORT || 3333;
 server.listen(port, () => console.log(`Server running on port: ${port}`));
