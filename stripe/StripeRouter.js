@@ -9,7 +9,7 @@ const User = require("../user/UserModel");
 /*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
-    @access Private source: 'tok_visa', email = req.body | Private source: token, email = req.user
+    @access Private | Public (Test)
 */
 router.post(
   "/monthly",
@@ -63,7 +63,7 @@ router.post(
 /* 
     @route  POST pay/yearly
     @desc   Allow user to subscribe to a yearly plan
-    @access Private source: 'tok_visa', email = req.body | Private source: token, email = req.user
+    @access Private | Public (Test)
 */
 router.post(
   "/yearly",
@@ -117,7 +117,7 @@ router.post(
 /*
     @route  POST pay/unsubscribe
     @desc   Allows the user to unsubscribe
-    @access Private
+    @access Private | Public (Test)
 */
 router.post(
   "/unsubscribe",
