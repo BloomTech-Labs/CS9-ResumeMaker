@@ -61,7 +61,7 @@ const User = new mongoose.Schema(
     active: {
       type: Boolean,
       required: true,
-      default: false
+      default: true
     },
     username: {
       type: String,
@@ -181,7 +181,7 @@ User.pre("save", function(next) {
 });
 
 User.methods.checkPassword = function(passwordGuess) {
-  return bcrypt.compareSync(passwordGuess, this.password);
+  return bcrypt.compare(passwordGuess, this.password);
 };
 
 module.exports = mongoose.model("User", User);
