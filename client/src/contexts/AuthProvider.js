@@ -29,9 +29,9 @@ class AuthProvider extends Component {
     this.setState({
       auth: true,
       email: userData.email ? userData.email : "",
-      password: userData.password ? userData.password : "",
-      firstName: userData.firstName ? userData.firstName : "",
-      lastName: userData.lastName ? userData.lastName : "",
+      firstName: userData.name.firstname ? userData.name.firstname : "",
+      lastName: userData.name.lastname ? userData.name.lastname : "",
+      middleName: userData.name.middlename ? userData.name.middlename : "",
       links: userData.links ? userData.links : [],
       phoneNumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
