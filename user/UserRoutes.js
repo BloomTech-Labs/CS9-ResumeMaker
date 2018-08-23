@@ -13,6 +13,7 @@ if (process.env.SITE_NAME) {
 const secretKey = process.env.SECRET;
 const User = require("./UserModel.js");
 const EmailConfirmation = require("./EmailConfirmationModel.js");
+const stripe = require('stripe')(process.env.SECRET_KEY);
 
 // GET users/:username
 // Route to find if a username is already in use
@@ -176,8 +177,9 @@ UserRouter.post("/login", (req, res) => {
       if (!user) {
         return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
+
       user
-        .checkPassword(password)
+      .checkPassword(password)
         .then(verified => {
           if (verified) {
             const payload = {
@@ -185,6 +187,13 @@ UserRouter.post("/login", (req, res) => {
               email: user.email,
               password: user.password
             };
+            stripe.subscriptions.retrieve(user.subscription, (err, sub) => {
+              if (err) console.log(err)
+              if (sub.status === "canceled" || sub.status === "past_due" || sub.status === "unpaid") {
+                user.membership = false;
+                user.subscription = null;
+              }
+            })
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "7d"
             });
