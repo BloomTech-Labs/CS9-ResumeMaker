@@ -14,6 +14,36 @@ const secretKey = process.env.SECRET;
 const User = require("./UserModel.js");
 const EmailConfirmation = require("./EmailConfirmationModel.js");
 
+// GET users/:username
+// Route to find if a username is already in use
+UserRouter.get("/:username", (req, res) => {
+  User.findOne({ username: req.params.username })
+    .then(user => {
+      res.status(200).json(user.username);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Could not find user with that username.",
+        error: err
+      });
+    });
+});
+
+// GET users/emailcheck/:email
+// Route to find if an email is already in use
+UserRouter.get("/emailcheck/:email", (req, res) => {
+  User.findOne({ email: req.params.email })
+    .then(user => {
+      res.status(200).json(user.email);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: "Could not find user with that email.",
+        error: err
+      });
+    });
+});
+
 // GET users/currentuser (TEST ROUTE --- WILL REMOVE)
 // Route to find id, username and email of current user
 UserRouter.get(
