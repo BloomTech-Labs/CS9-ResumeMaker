@@ -43,17 +43,21 @@ export class PersonalInfo extends Component {
     return initObj;
   };
 
-  componentWillMount() {
+  componentWillMount = () => {
+    console.log("WILLMOUNT CALLED");
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
     } else {
-      console.log("props on willMount:", this.props.context.userInfo);
+      console.log(
+        "(augmentObj called) props on willMount:",
+        this.props.context.userInfo
+      );
       // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
       this.setState(
         this.augmentObject(this.state, this.props.context.userInfo)
       );
     }
-  }
+  };
 
   handleChange = e => {
     /*const target = e.target;
@@ -79,7 +83,8 @@ export class PersonalInfo extends Component {
   };
 
   handleSubmit = e => {
-    this.setState({ errors: [] });
+    // e.preventDefault();
+    // this.setState({ errors: [] });
     const errors = [];
     //TODO: render any conditions before axios call
     axios
@@ -91,6 +96,8 @@ export class PersonalInfo extends Component {
         }
       )
       .then(response => {
+        console.log("RESPONSE GOTTEN", response.data.user);
+        this.setState(response.data.user);
         // this.setState({
         //   firstName: "",
         //   lastName: "",
@@ -123,7 +130,7 @@ export class PersonalInfo extends Component {
     return (
       <div>
         <h1> Personal Information </h1>
-        <form onSubmit={() => this.handleSubmit()}>
+        <form>
           <div className="form-group">
             <input
               onChange={this.handleChange}
@@ -198,11 +205,11 @@ export class PersonalInfo extends Component {
               value={this.state.links.portfolio}
             />
           </div>
-          <button type="submit">Submit</button>
-          {this.state.errors
-            ? this.state.errors.map(error => <p>{error}</p>)
-            : null}
         </form>
+        <button onClick={() => this.handleSubmit()}>Submit</button>
+        {this.state.errors
+          ? this.state.errors.map(error => <p>{error}</p>)
+          : null}
       </div>
     );
   }
