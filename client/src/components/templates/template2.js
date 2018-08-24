@@ -60,7 +60,6 @@ export class TemplateTwo extends Component {
                 <h2>
                   {userInfo.firstName} {userInfo.lastName}
                 </h2>
-                <h1>TITILE</h1>
                 <h4>{userInfo.title}</h4>
               </div>
               <Divider className="divider-div" />
@@ -80,11 +79,19 @@ export class TemplateTwo extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p>{userInfo.email}</p>
                     </a>
-                    <p>{userInfo.location}</p>
-                    <p>{userInfo.phoneNumber}</p>
-                    <p>{userInfo.links.linkedin}</p>
-                    <p>{userInfo.links.github}</p>
-                    <p>{userInfo.links.portfolio}</p>
+                    <p>
+                      location!!!
+                      {userInfo.location}
+                      <br />
+                      {userInfo.phoneNumber}
+                    </p>
+                    <p>
+                      {userInfo.links.linkedin}
+                      <br />
+                      {userInfo.links.github}
+                      <br />
+                      {userInfo.links.portfolio}
+                    </p>
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
@@ -94,9 +101,9 @@ export class TemplateTwo extends Component {
                         <div key={index}>
                           <h3>{content.school} </h3>
                           <p>{content.location}</p>
-                          <p>
+                          <h5>
                             {content.degree} {content.field}{" "}
-                          </p>
+                          </h5>
                           <p>
                             {content.from} - {content.to}
                           </p>
@@ -132,8 +139,8 @@ export class TemplateTwo extends Component {
                       return (
                         <div key={index}>
                           {console.log(content)}
-                          <p>{content.title} </p>
-                          <p>{content.company}</p>
+                          <h4>{content.title} </h4>
+                          <h5>{content.company}</h5>
                           <p>{content.location}</p>
                           <p>
                             {content.from} - {content.to}

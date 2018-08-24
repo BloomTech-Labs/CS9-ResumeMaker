@@ -4,9 +4,9 @@
 .page-div {
     display: flex; 
     flex-direction: column; 
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 .page-header {
-    /* font-family: "Avant Garde"; , Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif; */
     font-size: 2rem;
     padding: 2rem;
     text-align: center;

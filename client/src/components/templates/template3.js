@@ -85,7 +85,6 @@ export class TemplateThree extends Component {
                     <h2>
                       {userInfo.firstName} {userInfo.lastName}
                     </h2>
-                    <h1>TITILE</h1>
                     <h4>{userInfo.title}</h4>
                   </div>
                   <Divider className="divider-div" />
@@ -121,13 +120,12 @@ export class TemplateThree extends Component {
                       return (
                         <div key={index}>
                           {console.log(content)}
-                          <p>{content.title} </p>
-                          <p>{content.company}</p>
-                          <p>{content.location}</p>
-                          <p>
+                          <h5>{content.title} </h5>
+                          <p>{content.company}<br/>
+                          {content.location} location!!!<br/>
                             {content.from} - {content.to}
-                          </p>
-                          <p>{content.description} </p>
+                      <br/>
+                          {content.description} </p>
                           {/* <input
                       type="checkbox"
                       checked={this.state.isSelected}
@@ -147,8 +145,7 @@ export class TemplateThree extends Component {
                           <p>{content.location}</p>
                           <p>
                             {content.degree} {content.field}{" "}
-                          </p>
-                          <p>
+                         <br/>
                             {content.from} - {content.to}
                           </p>
                           {/* <input

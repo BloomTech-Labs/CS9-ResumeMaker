@@ -59,7 +59,7 @@ export class TemplateOne extends Component {
                 <h2>
                   {userInfo.firstName} {userInfo.lastName}
                 </h2>
-                <h4>{userInfo.title}</h4>
+                <h5>{userInfo.title}</h5>
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
@@ -67,11 +67,18 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>{userInfo.email}</p>
                 </a>
-                <p>{userInfo.location}</p>
-                <p>{userInfo.phoneNumber}</p>
-                <p>{userInfo.links.linkedin}</p>
-                <p>{userInfo.links.github}</p>
-                <p>{userInfo.links.portfolio}</p>
+                <p>
+                  {" "}
+                  {userInfo.location}
+                  <br />
+                  {userInfo.phoneNumber}
+                  <br />
+                  {userInfo.links.linkedin}
+                  <br />
+                  {userInfo.links.github}
+                  <br />
+                  {userInfo.links.portfolio}
+                </p>
               </Container>
               <Divider className="divider-div" />
               <Container
@@ -104,10 +111,13 @@ export class TemplateOne extends Component {
                   return (
                     <div key={index}>
                       {console.log(content)}
-                      <p>{content.title} </p>
-                      <p>{content.company}</p>
-                      <p>{content.location}</p>
                       <p>
+                        {content.title} <br />
+                        {content.company}
+                        <br />
+                        {content.location}
+                        Location!!!
+                        <br />
                         {content.from} - {content.to}
                       </p>
                       <p>{content.description} </p>
@@ -126,12 +136,10 @@ export class TemplateOne extends Component {
                 {education.map(function(content, index) {
                   return (
                     <div key={index}>
-                      <h3>{content.school} </h3>
+                      <h5>{content.school} </h5>
                       <p>{content.location}</p>
                       <p>
-                        {content.degree} {content.field}{" "}
-                      </p>
-                      <p>
+                        {content.degree} {content.field} <br />
                         {content.from} - {content.to}
                       </p>
                       {/* <input
