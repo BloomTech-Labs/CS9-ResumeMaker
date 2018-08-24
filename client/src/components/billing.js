@@ -9,9 +9,6 @@ import "./CSS/billing.css";
 const urls = require("../config.json");
 
 class Billing extends Component {
-  state = {
-    complete: false
-  };
 
   monthly = async (e) => {
     e.preventDefault();
@@ -36,7 +33,7 @@ class Billing extends Component {
     axios
       .post(`${urls[urls.basePath]}/pay/yearly`, token)
       .then(res => {
-        return;
+        console.log("Successfully Subscribed to One Year")
       })
       .catch(err => {
         return;
@@ -58,7 +55,6 @@ class Billing extends Component {
   };
 
   render() {
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
     return (
       <div>
         <Navbar
@@ -66,7 +62,7 @@ class Billing extends Component {
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" }
           ]}
-        />
+          />
         <div className="component-div">
           <Sidebar />
           <div className="title-div">
