@@ -20,9 +20,9 @@ class Register extends Component {
     username: "screech",
     submitted: false,
     submittedError: false,
-    usernameInvalid: false,
-    emailInvalid: false,
-    passwordInvalid: false
+    usernameInvalid: null,
+    emailInvalid: null,
+    passwordInvalid: null
   };
 
   validateForm() {
@@ -42,15 +42,15 @@ class Register extends Component {
 
   checkInputValidity = () => {
     this.setState({
-      usernameInvalid: false,
-      emailInvalid: false,
-      passwordInvalid: false
+      usernameInvalid: null,
+      emailInvalid: null,
+      passwordInvalid: null
     });
     const usernamePromise = axios
       .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
       .then(response => {
         console.log(response);
-        this.setState({ usernameInvalid: true });
+        this.setState({ usernameInvalid: "error" });
       })
       .catch(err => {
         console.log(err);
@@ -59,16 +59,16 @@ class Register extends Component {
       .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
       .then(response => {
         console.log(response);
-        this.setState({ emailInvalid: true });
+        this.setState({ emailInvalid: "error" });
       })
       .catch(err => {
         console.log(err);
       });
     if (!this.validateEmail(this.state.email)) {
-      this.setState({ emailInvalid: true });
+      this.setState({ emailInvalid: "error" });
     }
     if (!this.checkPasswordStrength(this.state.password)) {
-      this.setState({ passwordInvalid: true });
+      this.setState({ passwordInvalid: "error" });
     }
 
     // If all fields are valid and the confirm password matches password,
@@ -76,9 +76,9 @@ class Register extends Component {
     Promise.all([usernamePromise, emailPromise]).then(values => {
       console.log("The current state:", this.state);
       if (
-        this.state.usernameInvalid === false &&
-        this.state.emailInvalid === false &&
-        this.state.passwordInvalid === false &&
+        this.state.usernameInvalid === null &&
+        this.state.emailInvalid === null &&
+        this.state.passwordInvalid === null &&
         this.state.password === this.state.confirmPassword
       ) {
         this.handleSubmit();
@@ -168,7 +168,7 @@ class Register extends Component {
             <FormGroup
               controlId="username"
               bsSize="small"
-              // validationState={!this.state.usernameInvalid}
+              validationState={this.state.usernameInvalid}
             >
               <ControlLabel>Username</ControlLabel>
               <FormControl
@@ -178,7 +178,7 @@ class Register extends Component {
                 onChange={this.handleChange}
               />
               <FormControl.Feedback>
-                {this.state.usernameInvalid === true ? (
+                {this.state.usernameInvalid ? (
                   <HelpBlock>This username is already in use.</HelpBlock>
                 ) : null}
               </FormControl.Feedback>
@@ -187,7 +187,7 @@ class Register extends Component {
             <FormGroup
               controlId="email"
               bsSize="large"
-              // validationState={!this.state.emailInvalid}
+              validationState={this.state.emailInvalid}
             >
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -206,7 +206,7 @@ class Register extends Component {
             <FormGroup
               controlId="password"
               bsSize="large"
-              // validationState={!this.state.passwordInvalid}
+              validationState={this.state.passwordInvalid}
             >
               <ControlLabel>Password</ControlLabel>
               <FormControl
@@ -222,7 +222,11 @@ class Register extends Component {
                 ) : null}
               </FormControl.Feedback>
             </FormGroup>
-            <FormGroup controlId="confirmPassword" bsSize="large">
+            <FormGroup
+              controlId="confirmPassword"
+              bsSize="large"
+              validationState={this.state.passwordInvalid}
+            >
               <ControlLabel>Confirm password</ControlLabel>
               <FormControl
                 type="password"
