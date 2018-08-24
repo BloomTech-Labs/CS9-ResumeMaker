@@ -179,7 +179,7 @@ UserRouter.post("/login", (req, res) => {
       }
 
       if (user.membership) {
-        stripe.subscriptions.retrieve(user.subscriptions, (err, sub) => {
+        stripe.subscriptions.retrieve(user.subscription, (err, sub) => {
           if (err) console.log(err);
           if (
             sub.status === "canceled" ||
