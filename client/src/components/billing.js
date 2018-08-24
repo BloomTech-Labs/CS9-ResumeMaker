@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { CardElement, injectStripe } from "react-stripe-elements";
+import { injectStripe } from "react-stripe-elements";
 import axios from "axios";
+import CheckoutForm from "./checkoutForm";
 
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
@@ -70,7 +71,7 @@ class Billing extends Component {
             <p>Would You Like To Become a Member?</p>
             <div className="stripe">
               <div className="card-element">
-                <CardElement />
+                <CheckoutForm />
               </div>
             </div>
             <div className="buttons">
