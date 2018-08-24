@@ -167,7 +167,7 @@ class Register extends Component {
           <form>
             <FormGroup
               controlId="username"
-              bsSize="small"
+              bsSize="large"
               validationState={this.state.usernameInvalid}
             >
               <ControlLabel>Username</ControlLabel>
@@ -177,11 +177,9 @@ class Register extends Component {
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              <FormControl.Feedback>
-                {this.state.usernameInvalid ? (
-                  <HelpBlock>This username is already in use.</HelpBlock>
-                ) : null}
-              </FormControl.Feedback>
+              {this.state.usernameInvalid ? (
+                <HelpBlock>This username is already in use.</HelpBlock>
+              ) : null}
             </FormGroup>
 
             <FormGroup
@@ -196,11 +194,9 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              <FormControl.Feedback>
-                {this.state.emailInvalid ? (
-                  <HelpBlock>Please enter an unused valid email.</HelpBlock>
-                ) : null}
-              </FormControl.Feedback>
+              {this.state.emailInvalid ? (
+                <HelpBlock>Please enter an unused valid email.</HelpBlock>
+              ) : null}
             </FormGroup>
 
             <FormGroup
@@ -214,13 +210,11 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              <FormControl.Feedback>
-                {this.state.passwordInvalid ? (
-                  <HelpBlock>
-                    Please use a complex password at least 8 characters long.
-                  </HelpBlock>
-                ) : null}
-              </FormControl.Feedback>
+              {this.state.passwordInvalid ? (
+                <HelpBlock>
+                  Please use a complex password at least 8 characters long.
+                </HelpBlock>
+              ) : null}
             </FormGroup>
             <FormGroup
               controlId="confirmPassword"
@@ -237,10 +231,17 @@ class Register extends Component {
             <Button
               block
               bsSize="large"
+              bsStyle="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
               Register
+            </Button>
+            <Button
+              bsStyle="danger"
+              onClick={() => this.props.history.push("/login")}
+            >
+              Take me to the login page
             </Button>
           </form>
         </div>

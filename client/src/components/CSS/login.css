@@ -20,6 +20,18 @@
   justify-content: center;
 }
 
+.Login form .form-group .control-label {
+  margin: 0;
+}
+
+.Login form .form-group .help-block {
+  margin: 0;
+}
+
+.Login form .btn {
+  margin-top: 2rem;
+}
+
 .Login .modal {
   position: absolute;
   /* the top and bottom make the modal relatively
@@ -30,4 +42,8 @@
 
 .Login .modal-footer {
   justify-content: center;
+}
+
+.Login .btn {
+  /* font-size: 1.6rem; */
 }

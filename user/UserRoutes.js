@@ -78,6 +78,7 @@ UserRouter.post("/register", (req, res) => {
     email: req.body.email,
     password: req.body.password
   };
+  console.log("WE GOT CALLED to make user", userData);
   User.findOne({ email: userData.email })
     .then(user => {
       if (user) {
@@ -101,6 +102,12 @@ UserRouter.post("/register", (req, res) => {
         newEmailConfirmation
           .save()
           .then(emailconfirmation => {
+            console.log(
+              "Link to activate account:\n",
+              `${req.get("host")}${req.baseUrl}/confirmemail/${
+                newEmailConfirmation.hash
+              }`
+            );
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
               if (err) {
@@ -135,6 +142,10 @@ UserRouter.post("/register", (req, res) => {
 
               transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
+                  console.log({
+                    errorMessage: "Could not send email.",
+                    error: err
+                  });
                   return res.status(500).json({
                     errorMessage: "Could not send email.",
                     error: err

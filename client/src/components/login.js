@@ -66,6 +66,9 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
+          {this.state.invalidCredentials ? (
+            <h3 className="mb-5">Invalid password or email.</h3>
+          ) : null}
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
@@ -86,12 +89,12 @@ export default class Login extends Component {
           <Button
             block
             bsSize="large"
+            bsStyle="primary"
             disabled={!this.validateForm()}
             type="submit"
           >
             Login
           </Button>
-          {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
         </form>
       </div>
     );
