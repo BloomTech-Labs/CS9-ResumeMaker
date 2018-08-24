@@ -111,7 +111,7 @@ router.post(
                       };
                       User.findOneAndUpdate({ email }, membershipChange)
                         .then(user => {
-                          console.log("user", user);
+                          console.log("You are subscribed to one year");
                         })
                         .catch(err => {
                           console.log("Error Saving");
@@ -153,7 +153,7 @@ router.post(
               };
               User.findOneAndUpdate({ email }, membershipChange)
                 .then(user => {
-                  console.log("user", user);
+                  console.log("You are unsubscribed");
                 })
                 .catch(err => {
                   console.log("Error Saving");
