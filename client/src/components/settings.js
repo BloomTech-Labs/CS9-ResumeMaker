@@ -1,27 +1,32 @@
 import React, { Component } from "react";
-import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
+
+import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
+const urls = require("../config.json");
 
 export class PersonalInfo extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      phone: "",
       email: "",
+      name: {
+        firstname: "",
+        middlename: "",
+        lastname: ""
+      },
       location: "",
       title: "",
+      phonenumber: "",
       links: {
         linkedin: "",
-        github: ""
+        github: "",
+        portfolio: ""
       },
       membership: false,
       subscription: "",
-      password: "",
-      confirmPassword: "",
+      oldpassword: "",
+      newpassword: "",
       errors: []
     };
   }
@@ -63,29 +68,35 @@ export class PersonalInfo extends Component {
     const errors = [];
     //TODO: render any conditions before axios call
     axios
-      .post("localhost:3000", this.state)
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        this.state,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
       .then(response => {
-        this.setState({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          location: "",
-          title: "",
-          errors: []
-        });
+        // this.setState({
+        //   firstName: "",
+        //   lastName: "",
+        //   email: "",
+        //   phone: "",
+        //   location: "",
+        //   title: "",
+        //   errors: []
+        // });
       })
       .catch(err => {
-        if (this.state.firstName === "") {
+        if (this.state.name.firstname === "") {
           errors.push("First name is required.");
         }
-        if (this.state.lastName === "") {
+        if (this.state.name.lastname === "") {
           errors.push("Last name is required.");
         }
         if (this.state.email === "") {
           errors.push("Email is required.");
         }
-        if (this.state.phone === "") {
+        if (this.state.phonenumber === "") {
           errors.push("Phone number is required.");
         }
         this.setState({ errors: errors });
@@ -104,21 +115,30 @@ export class PersonalInfo extends Component {
             </label>
             <input
               onChange={this.handleChange}
-              name="firstName"
+              name="firstname"
               type="text"
               className="form-control"
               id="formGroupExampleInput2"
-              placeholder="First Name"
-              value={this.state.firstName}
+              placeholder="Your first name"
+              value={this.state.name.firstname}
+            />
+            <input
+              onChange={this.handleChange}
+              name="middlename"
+              type="text"
+              className="form-control"
+              id="formGroupExampleInput2"
+              placeholder="Your middle name(s)"
+              value={this.state.name.middlename}
             />
             <input
               onChange={this.handleChange}
               type="text"
-              name="lastName"
+              name="lastname"
               className="form-control"
               id="formGroupExampleInput2"
-              placeholder="Last Name"
-              value={this.state.lastName}
+              placeholder="Your last name"
+              value={this.state.name.lastname}
             />
             <input
               onChange={this.handleChange}
@@ -127,20 +147,52 @@ export class PersonalInfo extends Component {
               className="form-control"
               id="formGroupExampleInput2"
               placeholder="Email"
+              value={this.state.email}
             />
             <input
+              onChange={this.handleChange}
               type="text"
-              name="phone"
+              name="phonenumber"
               className="form-control"
               id="formGroupExampleInput2"
-              placeholder="Phone"
+              placeholder="Your phone number"
+              value={this.state.phonenumber}
             />
             <input
+              onChange={this.handleChange}
               type="text"
               name="location"
               className="form-control"
               id="formGroupExampleInput2"
-              placeholder="City or State"
+              placeholder="Your location"
+              value={this.state.location}
+            />
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="linkedin"
+              className="form-control"
+              id="formGroupExampleInput2"
+              placeholder="A link to your linkedin"
+              value={this.state.links.linkedin}
+            />
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="github"
+              className="form-control"
+              id="formGroupExampleInput2"
+              placeholder="A link to your github"
+              value={this.state.links.github}
+            />
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="portfolio"
+              className="form-control"
+              id="formGroupExampleInput2"
+              placeholder="A link to your portfolio"
+              value={this.state.links.portfolio}
             />
           </div>
           <button type="submit">Submit</button>

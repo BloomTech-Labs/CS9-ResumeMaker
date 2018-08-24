@@ -58,7 +58,7 @@ export class TemplateOne extends Component {
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
                 <h2>
-                  {userInfo.firstName} {userInfo.lastName}
+                  {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 <h5>{userInfo.title}</h5>
               </Container>
@@ -72,7 +72,7 @@ export class TemplateOne extends Component {
                   {" "}
                   {userInfo.location}
                   <br />
-                  {userInfo.phoneNumber}
+                  {userInfo.phonenumber}
                   <br />
                   {userInfo.links.linkedin}
                   <br />
