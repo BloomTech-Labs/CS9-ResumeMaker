@@ -5,7 +5,7 @@ import "./CSS/navbar.css";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar sticky-top jumbotron banner">
+      <nav className="navbar sticky-top navbar-dark bg-primary">
         <ol className="breadcrumb">
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>

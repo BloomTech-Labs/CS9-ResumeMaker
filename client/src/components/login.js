@@ -3,18 +3,27 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./CSS/login.css";
 import axios from "axios";
 
+const scrinch = {
+  email: "scrinch@gmail.com",
+  password:
+    "YjBjZDYyM2Y1MGY4YTY2ZDFjYzBhZTMzMTJiZjhlZTMxMzc3Nzg5OThlOWMzZjU5NTgxNDYyMWI3ODQ5ODc0OQ!",
+  invalidCredentials: false
+};
+
+const bobbert = {
+  email: "bobbert@gmail.com",
+  password:
+    "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
+  invalidCredentials: false
+};
+
 const urls = require("../config.json");
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      email: "bobbert@gmail.com",
-      password:
-        "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
-      invalidCredentials: false
-    };
+    this.state = scrinch;
   }
 
   validateForm() {
