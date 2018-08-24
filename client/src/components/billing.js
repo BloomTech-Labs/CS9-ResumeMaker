@@ -9,8 +9,7 @@ import "./CSS/billing.css";
 const urls = require("../config.json");
 
 class Billing extends Component {
-
-  monthly = async (e) => {
+  monthly = async e => {
     e.preventDefault();
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
@@ -25,7 +24,7 @@ class Billing extends Component {
       });
   };
 
-  yearly = async (e) => {
+  yearly = async e => {
     e.preventDefault();
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
@@ -33,14 +32,14 @@ class Billing extends Component {
     axios
       .post(`${urls[urls.basePath]}/pay/yearly`, token)
       .then(res => {
-        console.log("Successfully Subscribed to One Year")
+        console.log("Successfully Subscribed to One Year");
       })
       .catch(err => {
         return;
       });
   };
 
-  unsubscribe = (e) => {
+  unsubscribe = e => {
     e.preventDefault();
     axios
       .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
@@ -62,7 +61,7 @@ class Billing extends Component {
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" }
           ]}
-          />
+        />
         <div className="component-div">
           <Sidebar />
           <div className="title-div">
