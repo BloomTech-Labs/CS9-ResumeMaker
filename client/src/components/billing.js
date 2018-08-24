@@ -76,10 +76,10 @@ class Billing extends Component {
             </div>
             <div className="buttons">
               <button onClick={this.monthly}>
-                Monthly Subscriptions - $4.99
+                Monthly Subscriptions - $0.99
               </button>
               <button onClick={this.yearly}>
-                Yearly Subscriptions - $55.99
+                Yearly Subscriptions - $9.99
               </button>
               <button onClick={this.unsubscribe}>Unsubscribe</button>
             </div>
