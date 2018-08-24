@@ -21,5 +21,17 @@
     border: 1px solid black; 
 }
 .resume-button {
-    width: 10rem;  
+    width: 10rem; 
+}
+.subtitle {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+.left-column {
+ width: 23%; 
+ background-color: blanchedalmond
+  }
+.logo {
+    width: 10rem; 
+    height: 10rem; 
+    padding: 1rem; 
 }
