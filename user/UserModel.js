@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Validation
 
@@ -167,7 +168,11 @@ const User = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    subscription: String
+    subscription: String,
+    resumes: [{
+      type: ObjectId,
+      ref: "Resume"
+    }]
   },
   { timestamps: true }
 );
