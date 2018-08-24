@@ -195,10 +195,10 @@ UserRouter.post("/login", (req, res) => {
               { membership: false, subscription: null }
             )
               .then(user => {
-                console.log(user);
+                console.log("No Longer a Member");
               })
               .catch(err => {
-                console.log("Unable to find");
+                console.log("Unable To Find");
               });
           }
         });
