@@ -9,13 +9,14 @@ class Education extends Component {
     return (
       <div>
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/education", title: "Education" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Education History</h1>
             {this.props.context.userInfo.education.map((element, index) => {
@@ -41,7 +42,7 @@ class Education extends Component {
                 <img
                   src={require("./CSS/plus-button.svg")}
                   alt=""
-                  height="50rem"
+                  className="plus-circle"
                 />
               </Link>
             </div>

@@ -7,13 +7,14 @@ class Billing extends Component {
     return (
       <div>
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/templates", title: "Templates" }
+            { link: "/billing", title: "Billing" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Billing</h1>
           </div>

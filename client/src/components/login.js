@@ -12,7 +12,7 @@ export default class Login extends Component {
     this.state = {
       email: "bobbert@gmail.com",
       password:
-        "OTUxYWU1OWI0ZDJlOTkyN2E2Y2FkODQ5ZjA3NjZkNjhiYTIwZmM1ZDAxNGYzNWJhMDc4YWFlODM4OTc0OTA0OQ!",
+        "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
       invalidCredentials: false
     };
   }
@@ -43,7 +43,7 @@ export default class Login extends Component {
           this.props.context.actions.setLogin(userData);
 
           console.log(this.props.context.userInfo);
-          this.props.history.push("/resumes");
+          this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {
@@ -82,8 +82,8 @@ export default class Login extends Component {
           >
             Login
           </Button>
+          {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
         </form>
-        {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
       </div>
     );
   }

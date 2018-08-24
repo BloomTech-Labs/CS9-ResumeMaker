@@ -6,9 +6,10 @@ class AuthProvider extends Component {
     auth: false,
     firstName: "",
     lastName: "",
+    middleName: "",
+    title: "",
     email: "",
     phoneNumber: "",
-    password: "",
     links: [],
     education: [],
     experience: [],
@@ -21,7 +22,7 @@ class AuthProvider extends Component {
     this.setState({ auth: !this.state.auth });
   };
 
-  setContext = (title, value) => {
+  setValue = (title, value) => {
     this.setState({ [title]: value });
   };
 
@@ -29,9 +30,10 @@ class AuthProvider extends Component {
     this.setState({
       auth: true,
       email: userData.email ? userData.email : "",
-      password: userData.password ? userData.password : "",
-      firstName: userData.firstName ? userData.firstName : "",
-      lastName: userData.lastName ? userData.lastName : "",
+      firstName: userData.name.firstname ? userData.name.firstname : "",
+      lastName: userData.name.lastname ? userData.name.lastname : "",
+      middleName: userData.name.middlename ? userData.name.middlename : "",
+      title: userData.title ? userData.title : "",
       links: userData.links ? userData.links : [],
       phoneNumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
@@ -65,7 +67,7 @@ class AuthProvider extends Component {
           userInfo,
           actions: {
             toggleAuth: this.toggleAuth,
-            setContext: this.setContext,
+            setValue: this.setValue,
             setLogin: this.setLogin,
             setElement: this.setElement,
             addElement: this.addElement

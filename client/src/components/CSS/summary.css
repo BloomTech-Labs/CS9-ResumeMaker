@@ -3,3 +3,8 @@
   display: flex;
   align-self: center;
 }
+
+.plus-circle {
+  width: 4rem;
+  height: 4rem;
+}

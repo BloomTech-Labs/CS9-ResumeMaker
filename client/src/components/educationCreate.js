@@ -3,7 +3,6 @@ import Sidebar from "./subComponents/sidebar";
 import axios from "axios";
 import Navbar from "./subComponents/navbar";
 import { Redirect } from "react-router-dom";
-// import { Consumer } from '../../context';
 
 const urls = require("../config.json");
 
@@ -83,7 +82,7 @@ class EducationCreate extends Component {
     };
     axios
       .put(
-        `${urls[urls.basepath]}/users/info/` + this.props.context.userInfo.id,
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
         tempObj,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }
@@ -103,14 +102,15 @@ class EducationCreate extends Component {
       <div>
         {this.state.success ? <Redirect to="/education" /> : null}
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/education", title: "Education" },
             { link: "/education/create", title: "Create" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Education History</h1>
             <form>
