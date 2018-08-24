@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./CSS/summary.css";
 
@@ -10,6 +9,7 @@ class Experience extends Component {
     return (
       <div>
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/experience", title: "Experience" }

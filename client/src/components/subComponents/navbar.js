@@ -32,6 +32,8 @@ class Navbar extends Component {
               type="button"
               className="btn btn-secondary"
               onClick={() => {
+                console.log(this.props.context);
+                this.props.context.actions.setValue("auth", false);
                 localStorage.removeItem("token");
                 history.push("/");
               }}

@@ -102,6 +102,7 @@ class ExperienceCreate extends Component {
       <div>
         {this.state.success ? <Redirect to="/experience" /> : null}
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/experience", title: "Experience" },
