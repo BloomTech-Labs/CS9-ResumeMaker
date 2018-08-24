@@ -103,6 +103,13 @@ UserRouter.post("/register", (req, res) => {
           .then(emailconfirmation => {
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
+              if (err) {
+                console.log({
+                  errorMessage:
+                    "Error creating/logging into an account for nodemailer.",
+                  error: err
+                });
+              }
               // create reusable transporter object using the default SMTP transport
               let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
@@ -189,7 +196,7 @@ UserRouter.post("/login", (req, res) => {
             stripe.subscriptions.del(user.subscriptions, (err, success) => {
               if (err) console.log(err);
               else console.log(success);
-            })
+            });
             User.findOneAndUpdate(
               { email },
               { membership: false, subscription: null }

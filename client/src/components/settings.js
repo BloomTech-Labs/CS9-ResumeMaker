@@ -8,14 +8,46 @@ export class PersonalInfo extends Component {
     super();
     this.state = {
       firstName: "",
+      middleName: "",
       lastName: "",
-      suffix: "",
       phone: "",
       email: "",
       location: "",
       title: "",
+      links: {
+        linkedin: "",
+        github: ""
+      },
+      membership: false,
+      subscription: "",
+      password: "",
+      confirmPassword: "",
       errors: []
     };
+  }
+
+  augmentObject = (initObj, modObj) => {
+    for (let prop in initObj) {
+      if (modObj[prop]) {
+        let val = modObj[prop];
+        if (typeof val == "object" && typeof initObj[prop] == "object")
+          this.augmentObject(initObj[prop], val);
+        else initObj[prop] = val;
+      }
+    }
+    return initObj;
+  };
+
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    } else {
+      console.log("props on willMount:", this.props.context.userInfo);
+      // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
+      this.setState(
+        this.augmentObject(this.state, this.props.context.userInfo)
+      );
+    }
   }
 
   handleChange = e => {
@@ -136,7 +168,7 @@ class Settings extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Settings</h1>
-            <PersonalInfo />
+            <PersonalInfo context={this.props.context} />
           </div>
         </div>
       </div>
