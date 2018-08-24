@@ -1,55 +1,88 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import axios from "axios";
+
+const urls = require("../config.json");
 
 class SummaryCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values:
-        props.context.userInfo.summary[this.props.summaryIndex] === undefined
-          ? [""]
-          : props.context.userInfo.summary[this.props.summaryIndex],
-      errors: []
+      summary: "",
+      success: false
     };
   }
 
-  handleTextInput = e => {
-    this.setState({ [e.target.title]: e.target.value });
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    }
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.location.state.summaryIndex !== false
+    )
+      this.setState({
+        summary: this.props.context.userInfo.summary[
+          this.props.location.state.summaryIndex
+        ]
+      });
+  }
+
+  onInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
-    this.setState({ errors: [] });
-    const errors = [];
-    const { summary } = this.state;
-    //TODO: render any conditions before axios call
+  handleSubmit = event => {
+    event.preventDefault();
+
+    if (this.props.location.state.summaryIndex === false) {
+      this.props.context.actions.addElement("summary", this.state.summary);
+    } // if creating
+    else {
+      this.props.context.actions.setElement(
+        this.props.location.state.summaryIndex,
+        "summary",
+        this.state.summary
+      );
+    } // if editing
+
+    const tempObj = {
+      "sections.summary": this.props.context.userInfo.summary
+    };
     axios
-      .post("localhost:3000", this.state)
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
       .then(response => {
-        this.setState({
-          summary: ""
-        });
+        console.log(response);
+        this.setState({ success: true });
       })
       .catch(err => {
-        if (summary === "") {
-          errors.push("Summary is required.");
-        }
+        console.log("err", err);
       });
   };
 
   render() {
     return (
       <div>
+        {this.state.success ? <Redirect to="/summary" /> : null}
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/summary", title: "Summary" },
             { link: "/summary/create", title: "Create" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
             <div className="form-group">
@@ -57,17 +90,16 @@ class SummaryCreate extends Component {
                 <label form="formGroupExampleInput2">
                   “Make the most of yourself....for that is all there is of
                   you.” ― Ralph Waldo Emerson
-                  <input
-                    value={this.state.values}
-                    title="values[0]"
-                    onChange={this.handleTextInput}
-                    type="text"
-                    className="form-control"
-                    id="formGroupExampleInput2"
-                    placeholder="Tell us about yourself"
-                  />
                 </label>
+                <input
+                  value={this.state.summary}
+                  onChange={this.onInputChange}
+                  className="form-control"
+                  name="summary"
+                  placeholder="List Summarys"
+                />
               </form>
+              <button onClick={e => this.handleSubmit(e)}>Submit</button>
             </div>
           </div>
         </div>

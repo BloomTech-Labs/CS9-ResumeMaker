@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "./CSS/summary.css";
 
@@ -10,13 +9,14 @@ class Experience extends Component {
     return (
       <div>
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/experience", title: "Experience" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Experience</h1>
             {this.props.context.userInfo.experience.map((element, index) => {
@@ -42,7 +42,7 @@ class Experience extends Component {
                 <img
                   src={require("./CSS/plus-button.svg")}
                   alt=""
-                  height="50rem"
+                  className="plus-circle"
                 />
               </Link>
             </div>

@@ -126,13 +126,14 @@ class Settings extends Component {
     return (
       <div>
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/settings", title: "Settings" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Settings</h1>
             <PersonalInfo />
