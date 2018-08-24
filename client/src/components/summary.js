@@ -19,19 +19,21 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
-            {this.props.context.userInfo.summary.map((element, index) => {
-              return (
-                <Link
-                  to={{
-                    pathname: "/summary/create", // component being Linked to
-                    state: { summaryIndex: index } // Setting Index passed into summaryCreate component
-                  }}
-                  key={index}
-                >
-                  <span>{element}</span>
-                </Link>
-              );
-            })}
+            <div className="div-for-links">
+              {this.props.context.userInfo.summary.map((element, index) => {
+                return (
+                  <Link
+                    to={{
+                      pathname: "/summary/create", // component being Linked to
+                      state: { summaryIndex: index } // Setting Index passed into summaryCreate component
+                    }}
+                    key={index}
+                  >
+                    <span>{element}</span>
+                  </Link>
+                );
+              })}
+            </div>
             <div className="link-hide">
               <Link
                 to={{

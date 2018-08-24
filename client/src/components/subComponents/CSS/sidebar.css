@@ -1,11 +1,10 @@
 .test-div {
-    border-right: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 10%;
-    min-width: 100px;
-    align-items: start;
-    background: url("banner.jpg"); 
-    height: 600px; 
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-width: 150px;
+  align-items: start;
+  background: url("banner.jpg");
+  height: 85vh;
 }
