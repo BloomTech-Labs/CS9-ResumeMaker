@@ -13,6 +13,7 @@ if (process.env.SITE_NAME) {
 const secretKey = process.env.SECRET;
 const User = require("./UserModel.js");
 const EmailConfirmation = require("./EmailConfirmationModel.js");
+const stripe = require("stripe")(process.env.SECRET_KEY);
 
 // GET users/:username
 // Route to find if a username is already in use
@@ -176,6 +177,33 @@ UserRouter.post("/login", (req, res) => {
       if (!user) {
         return res.status(401).json({ errorMessage: "Invalid credentials." });
       }
+
+      if (user.membership) {
+        stripe.subscriptions.retrieve(user.subscription, (err, sub) => {
+          if (err) console.log(err);
+          if (
+            sub.status === "canceled" ||
+            sub.status === "past_due" ||
+            sub.status === "unpaid"
+          ) {
+            stripe.subscriptions.del(user.subscriptions, (err, success) => {
+              if (err) console.log(err);
+              else console.log(success);
+            })
+            User.findOneAndUpdate(
+              { email },
+              { membership: false, subscription: null }
+            )
+              .then(user => {
+                console.log("No Longer a Member");
+              })
+              .catch(err => {
+                console.log("Unable To Find");
+              });
+          }
+        });
+      }
+
       user
         .checkPassword(password)
         .then(verified => {
@@ -185,6 +213,9 @@ UserRouter.post("/login", (req, res) => {
               email: user.email,
               password: user.password
             };
+            // if (user.membership) {
+            //   payload.resumes = user.resumes;
+            // }
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "7d"
             });

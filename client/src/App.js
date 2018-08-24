@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import { Elements, StripeProvider } from "react-stripe-elements";
+
 import LandingPage from "./components/landingPage";
 import Summaries from "./components/summary";
 import Education from "./components/education";
@@ -88,11 +90,15 @@ class App extends Component {
                   path="/resumes"
                   render={props => <Resumes {...props} context={context} />}
                 />
-                <Route
-                  exact
-                  path="/billing"
-                  render={props => <Billing {...props} context={context} />}
-                />
+                 <StripeProvider apiKey="pk_test_nY5MwNnJraHmAq0JRBD6Ksan">
+                  <Elements>
+                    <Route
+                      exact
+                      path="/billing"
+                      render={props => <Billing {...props} context={context} />}
+                    />
+                  </Elements>
+                </StripeProvider>
                 <Route
                   exact
                   path="/settings"
