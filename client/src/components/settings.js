@@ -59,8 +59,23 @@ export class PersonalInfo extends Component {
     /*const target = e.target;
     let value = target.value;
     const name = target.name;*/
-    this.setState({ [e.target.name]: e.target.value });
-    e.preventDefault();
+
+    console.log("hit");
+    const eName = e.target.name;
+    const value = e.target.value;
+    if (e.target.name.includes("name")) {
+      let { name } = this.state;
+      const nameArr = eName.split(".");
+      name[nameArr[1]] = value;
+      this.setState({ name });
+    } else if (e.target.name.includes("links")) {
+      let { links } = this.state;
+      const linksArr = eName.split(".");
+      links[linksArr[1]] = value;
+      this.setState({ links });
+    } else {
+      this.setState({ [eName]: value });
+    }
   };
 
   handleSubmit = e => {
@@ -108,35 +123,29 @@ export class PersonalInfo extends Component {
     return (
       <div>
         <h1> Personal Information </h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={() => this.handleSubmit()}>
           <div className="form-group">
-            <label form="formGroupExampleInput2">
-              Don't forget to spell your name right.
-            </label>
             <input
               onChange={this.handleChange}
-              name="firstname"
+              name="user.firstname"
               type="text"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="Your first name"
               value={this.state.name.firstname}
             />
             <input
               onChange={this.handleChange}
-              name="middlename"
+              name="name.middlename"
               type="text"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="Your middle name(s)"
               value={this.state.name.middlename}
             />
             <input
               onChange={this.handleChange}
               type="text"
-              name="lastname"
+              name="name.lastname"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="Your last name"
               value={this.state.name.lastname}
             />
@@ -145,7 +154,6 @@ export class PersonalInfo extends Component {
               type="text"
               name="email"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="Email"
               value={this.state.email}
             />
@@ -154,7 +162,6 @@ export class PersonalInfo extends Component {
               type="text"
               name="phonenumber"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="Your phone number"
               value={this.state.phonenumber}
             />
@@ -163,34 +170,30 @@ export class PersonalInfo extends Component {
               type="text"
               name="location"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="Your location"
               value={this.state.location}
             />
             <input
               onChange={this.handleChange}
               type="text"
-              name="linkedin"
+              name="links.linkedin"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="A link to your linkedin"
               value={this.state.links.linkedin}
             />
             <input
               onChange={this.handleChange}
               type="text"
-              name="github"
+              name="links.github"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="A link to your github"
               value={this.state.links.github}
             />
             <input
               onChange={this.handleChange}
               type="text"
-              name="portfolio"
+              name="links.portfolio"
               className="form-control"
-              id="formGroupExampleInput2"
               placeholder="A link to your portfolio"
               value={this.state.links.portfolio}
             />
