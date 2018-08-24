@@ -74,14 +74,15 @@ class SkillsCreate extends Component {
       <div>
         {this.state.success ? <Redirect to="/skills" /> : null}
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/skills", title: "Skills" },
             { link: "/skills/create", title: "Create" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
+        <div className="overall-component-div">
+          <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Skills</h1>
             <form>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import { Elements, StripeProvider } from "react-stripe-elements";
+
 import LandingPage from "./components/landingPage";
 import Summaries from "./components/summary";
 import Education from "./components/education";
@@ -19,6 +21,8 @@ import SkillsCreate from "./components/skillsCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 import { TemplateOne } from "./components/templates/template1";
+import { TemplateTwo } from "./components/templates/template2";
+import { TemplateThree } from "./components/templates/template3";
 
 class App extends Component {
   render() {
@@ -86,11 +90,15 @@ class App extends Component {
                   path="/resumes"
                   render={props => <Resumes {...props} context={context} />}
                 />
-                <Route
-                  exact
-                  path="/billing"
-                  render={props => <Billing {...props} context={context} />}
-                />
+                 <StripeProvider apiKey="pk_test_nY5MwNnJraHmAq0JRBD6Ksan">
+                  <Elements>
+                    <Route
+                      exact
+                      path="/billing"
+                      render={props => <Billing {...props} context={context} />}
+                    />
+                  </Elements>
+                </StripeProvider>
                 <Route
                   exact
                   path="/settings"
@@ -114,9 +122,17 @@ class App extends Component {
                 <Route
                   exact
                   path="/templates/template-1"
-                  render={props => (
-                    <TemplateOne {...props} context={context} />
-                  )}
+                  render={props => <TemplateOne {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/templates/template-2"
+                  render={props => <TemplateTwo {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/templates/template-3"
+                  render={props => <TemplateThree {...props} context={context} />}
                 />
                 <Route
                   exact

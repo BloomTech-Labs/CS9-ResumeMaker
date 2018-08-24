@@ -1,110 +1,164 @@
 import React, { Component } from "react";
+import { Container, Divider } from "semantic-ui-react";
 import Sidebar from "../subComponents/sidebar";
 import Navbar from "../subComponents/navbar";
+import "./template1.css";
+import { Link } from "react-router-dom";
 
 export class TemplateOne extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSelected: false
+    };
+  }
+
+  // getInitialState(e) {
+  //   return { isSelected: this.props.data.isSelected };
+  // }
+  handleChange = e => {
+    let selected = !this.state.isSelected;
+    this.setState({ isSelected: selected });
+  };
+
+  // handleSubmit(e) {
+  //   e.preventDefault();
+
+  //   const resume = {};
+  //   for (const field in this.refs) {
+  //     resume[field] = this.refs[field].value;
+  //   }
+  //   console.log("-->", resume);
+  //   alert("Resume submitted: " + this.state.value);
+  //   event.preventDefault();
+  // }
+
   render() {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-
+    console.log(userInfo);
     return (
       <div>
         <Navbar
+          context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" },
             { link: "/templates/template-1", title: "Template One" }
           ]}
         />
-        <div className="component-div">
-          <Sidebar />
-          <div className="title-div">
-            <h1>Templates</h1>
-            <section id="about">
-              <div className="row">
-                <div className="two columns">
-                  {/* <img className="profile-pic" src={picture} alt={name} />
-                  <h3> profile pic will go here </h3> */}
-                </div>
 
-                <div className="row">
-                  <div className="names">
-                    <span>
-                      {userInfo.firstName} {userInfo.lastName}
-                    </span>
-                    <span>{userInfo.title}</span>
+        <div className="component-div">
+          <Sidebar context={this.props.context} />
+          <div className="page-div">
+            <div className="d-block justify-content-center title-div">
+              <h3 className="page-header">Template One</h3>
+            </div>
+            <form className="template1" onSubmit={this.handleSubmit}>
+              <Container textAlign="center" className="titleSection">
+                <h2>
+                  {userInfo.firstName} {userInfo.lastName}
+                </h2>
+                <h5>{userInfo.title}</h5>
+              </Container>
+              <Divider className="divider-div" />
+              <Container textAlign="center" className="contactSection">
+                <h3>Contact Details</h3>
+                <a href={`mailto:${userInfo.email}`}>
+                  <p>{userInfo.email}</p>
+                </a>
+                <p>
+                  {" "}
+                  {userInfo.location}
+                  <br />
+                  {userInfo.phoneNumber}
+                  <br />
+                  {userInfo.links.linkedin}
+                  <br />
+                  {userInfo.links.github}
+                  <br />
+                  {userInfo.links.portfolio}
+                </p>
+              </Container>
+              <Divider className="divider-div" />
+              <Container
+                textAlign="center"
+                id="summary"
+                className="summarySection"
+              >
+                <h3>Summary</h3>
+                <p>{userInfo.summary}</p>
+              </Container>
+              <Divider className="divider-div" />
+              <Container textAlign="center" className="skillsSection">
+                <h3>Skills</h3>
+                {userInfo.skills.map((content, index) => (
+                  <div key={index}>
+                    <p>{content}</p>
+                    {/* <input
+                      type="checkbox"
+                      checked={this.state.isSelected}
+                      onClick={this.handleChange}
+                    />{" "} */}
                   </div>
-                  <div className="columns contact-details">
-                    // <h2>Contact Details</h2>
-                    <p className="location">
-                      <span>{userInfo.location}</span>
-                    </p>
-                    <p>
-                      {/* <a href={`mailto:${email}`}>
-                        <span>{userInfo.email}</span>
-                      </a> */}
-                      <span>{userInfo.phoneNumber}</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="blurb">
-                  {userInfo.summary.map(function(content, index) {
-                    return (
-                      <div>
-                        <p key={index}>{content}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
-            <section id="experience">
-              <div className="experience">
+                ))}
+              </Container>
+              <Divider className="divider-div" />
+              <Container textAlign="center" className="experienceSection">
+                <h3>Experience</h3>
+
                 {experience.map(function(content, index) {
                   return (
-                    <div>
-                      <p key={index}>{experience.title} </p>
-                      <p>{experience.company}</p>
-                      <p>{experience.location}</p>
+                    <div key={index}>
+                      {console.log(content)}
                       <p>
-                        {experience.from} - {experience.to}
+                        {content.title} <br />
+                        {content.company}
+                        <br />
+                        {content.location}
+                        Location!!!
+                        <br />
+                        {content.from} - {content.to}
                       </p>
-                      <h3>{experience.description} </h3>
+                      <p>{content.description} </p>
+                      {/* <input
+                      type="checkbox"
+                      checked={this.state.isSelected}
+                      onClick={this.handleChange}
+                    />{" "} */}
                     </div>
                   );
                 })}
-              </div>
-            </section>
-            <section id="education">
-              <div className="education">
+              </Container>
+              <Divider className="divider-div" />
+              <Container textAlign="center" className="educationSection">
+                <h3>Education</h3>
                 {education.map(function(content, index) {
                   return (
-                    <div>
-                      <p key={index}>{education.school} </p>
-                      <p>{education.location}</p>
+                    <div key={index}>
+                      <h5>{content.school} </h5>
+                      <p>{content.location}</p>
                       <p>
-                        {experience.degree} {experience.field}
+                        {content.degree} {content.field} <br />
+                        {content.from} - {content.to}
                       </p>
-                      <p>
-                        {experience.from} - {experience.to}
-                      </p>
+                      {/* <input
+                      type="checkbox"
+                      checked={this.state.isSelected}
+                      onClick={this.handleChange}
+                    />{" "} */}
                     </div>
                   );
                 })}
-              </div>
-            </section>
-            <section id="skills">
-              <div className="skills">
-                {userInfo.skills.map(function(content, index) {
-                  return (
-                    <div>
-                      <p key={index}>{content}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
+              </Container>
+            </form>
+            <div class="justify-content-center">
+              <Link to="/resumes" className="resume-button" type="submit">
+                {" "}
+                Add Resume
+              </Link>
+            </div>
           </div>
         </div>
       </div>

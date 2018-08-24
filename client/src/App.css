@@ -22,16 +22,11 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.component-div{
+.overall-component-div {
   display: flex;
 }
 
-.title-div{
+.title-div {
   display: flex;
   width: 100%;
   flex-direction: column;

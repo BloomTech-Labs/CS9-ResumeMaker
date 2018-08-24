@@ -1,0 +1,8 @@
+.jumbotron.banner {
+  background-image: url("banner-top.jpg");
+  margin-bottom: 0px;
+}
+
+.breadcrumb {
+  align-items: left;
+}
