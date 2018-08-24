@@ -43,9 +43,17 @@ router.post(
                   (err, subscription) => {
                     if (err) res.status(400).json("Unable to subscribe");
                     else {
-                      user.subscription = subscription.id;
-                      user.membership = true;
-                      user.save();
+                      const membershipChange = {
+                        subscription: subscription.id,
+                        membership: true
+                      };
+                      User.findOneAndUpdate({ email }, membershipChange)
+                        .then(user => {
+                          console.log("user", user);
+                        })
+                        .catch(err => {
+                          console.log("Error Saving");
+                        });
                     }
                   }
                 );
@@ -97,9 +105,17 @@ router.post(
                   (err, subscription) => {
                     if (err) res.status(400).json("Unable to subscribe");
                     else {
-                      user.subscription = subscription.id;
-                      user.membership = true;
-                      user.save();
+                      const membershipChange = {
+                        subscription: subscription.id,
+                        membership: true
+                      };
+                      User.findOneAndUpdate({ email }, membershipChange)
+                        .then(user => {
+                          console.log("user", user);
+                        })
+                        .catch(err => {
+                          console.log("Error Saving");
+                        });
                     }
                   }
                 );
@@ -131,9 +147,17 @@ router.post(
             if (err) {
               res.status(400).json("Unable to unsubscribe at this time");
             } else {
-              user.subscription = null;
-              user.membership = false;
-              user.save();
+              const membershipChange = {
+                subscription: null,
+                membership: false
+              };
+              User.findOneAndUpdate({ email }, membershipChange)
+                .then(user => {
+                  console.log("user", user);
+                })
+                .catch(err => {
+                  console.log("Error Saving");
+                });
               res
                 .status(201)
                 .json(
