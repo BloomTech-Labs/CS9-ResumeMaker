@@ -13,7 +13,8 @@ class Billing extends Component {
     complete: false
   };
 
-  monthly = async () => {
+  monthly = async (e) => {
+    e.preventDefault();
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
     });
@@ -27,7 +28,8 @@ class Billing extends Component {
       });
   };
 
-  yearly = async () => {
+  yearly = async (e) => {
+    e.preventDefault();
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
     });
@@ -41,7 +43,8 @@ class Billing extends Component {
       });
   };
 
-  unsubscribe = () => {
+  unsubscribe = (e) => {
+    e.preventDefault();
     axios
       .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
         email: this.props.context.userInfo.email
