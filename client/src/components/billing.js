@@ -36,7 +36,6 @@ class Billing extends Component {
           })
           .catch(err => {
             this.setState({ gone: false, complete: false, loading: false, sub_err: true, unsub_err: false })
-            console.log(err);
           });
       })
       .catch(err => {
@@ -55,7 +54,6 @@ class Billing extends Component {
           })
           .catch(err => {
             this.setState({ gone: false, complete: false, loading: false, sub_err: true, unsub_err: false })
-            console.log(err);
           });
       })
       .catch(err => {
@@ -71,11 +69,9 @@ class Billing extends Component {
       })
       .then(res => {
         this.setState({ gone: true, complete: false, loading: false, sub_err: false, unsub_err: false });
-        console.log(res)
       })
       .catch(err => {
         this.setState({ gone: false, complete: false, loading: false, sub_err: false, unsub_err: true });
-        console.log(err);
       });
   };
 
