@@ -135,16 +135,11 @@ router.post(
               };
               User.findOneAndUpdate({ email }, membershipChange)
                 .then(user => {
-                  res.status(200).json("Success")
+                  res.status(201).json("Successfully Unsubscribed");
                 })
                 .catch(err => {
                   res.status(400).json(err);
                 });
-              res
-                .status(201)
-                .json(
-                  "Thank you for your business. We hope to work with you again."
-                );
             }
           });
         } else {
