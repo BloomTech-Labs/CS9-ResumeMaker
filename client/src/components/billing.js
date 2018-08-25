@@ -101,8 +101,9 @@ class Billing extends Component {
               </button>
               <button onClick={this.unsubscribe}>Unsubscribe</button>
             </div>
-            { this.state.gone ? <h3>Thank You For Your Business. We Hope to Work With You Again Soon</h3> : null }
+            { this.state.loading ? <Loading /> : null }
             { this.state.complete ? <h3>Thank You For Subscribing</h3> : null }
+            { this.state.gone ? <h3>Thank You For Your Business. We Hope to Work With You Again Soon</h3> : null }
           </div>
         </div>
       </div>
