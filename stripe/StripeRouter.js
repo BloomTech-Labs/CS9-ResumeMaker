@@ -71,53 +71,44 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    User.findOne({ email })
-      .then(user => {
-        if (user.membership) res.status(400).json("You're already a member!");
+    stripe.customers.create(
+      {
+        email: email,
+        source: token
+      },
+      (err, customer) => {
+        if (err) res.status(400).json("Unable to become a customer");
         else {
-          stripe.customers.create(
+          const { id } = customer;
+          stripe.subscriptions.create(
             {
-              email: email,
-              source: token
+              customer: id,
+              items: [
+                {
+                  plan: "Yearly"
+                }
+              ]
             },
-            (err, customer) => {
-              if (err) res.status(400).json("Unable to become a customer");
+            (err, subscription) => {
+              if (err) res.status(400).json("Unable to subscribe");
               else {
-                const { id } = customer;
-                stripe.subscriptions.create(
-                  {
-                    customer: id,
-                    items: [
-                      {
-                        plan: "Yearly"
-                      }
-                    ]
-                  },
-                  (err, subscription) => {
-                    if (err) res.status(400).json("Unable to subscribe");
-                    else {
-                      const membershipChange = {
-                        subscription: subscription.id,
-                        membership: true
-                      };
-                      User.findOneAndUpdate({ email }, membershipChange)
-                        .then(user => {
-                          console.log("You are subscribed to one year");
-                        })
-                        .catch(err => {
-                          console.log("Error Saving");
-                        });
-                    }
-                  }
-                );
+                const membershipChange = {
+                  subscription: subscription.id,
+                  membership: true
+                };
+                User.findOneAndUpdate({ email }, membershipChange)
+                  .then(user => {
+                    console.log("You are subscribed to one year");
+                  })
+                  .catch(err => {
+                    console.log("Error Saving");
+                  });
               }
             }
           );
         }
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      });
+      }
+    );
   }
 );
 
