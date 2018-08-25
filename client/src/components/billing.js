@@ -55,8 +55,7 @@ class Billing extends Component {
       });
   };
 
-  unsubscribe = e => {
-    e.preventDefault();
+  unsubscribe = () => {
     axios
       .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
         email: this.props.context.userInfo.email
@@ -71,13 +70,6 @@ class Billing extends Component {
   };
 
   render() {
-    if (this.state.complete) return <h1>Thank You For Subscribing</h1>;
-    if (this.state.gone)
-      return (
-        <h1>
-          Thank You For Your Business. We Hope to Work With You Again Soon.
-        </h1>
-      );
     return (
       <div>
         <Navbar
@@ -106,6 +98,8 @@ class Billing extends Component {
               </button>
               <button onClick={this.unsubscribe}>Unsubscribe</button>
             </div>
+            { this.state.gone ? <h3>Thank You For Your Business. We Hope to Work With You Again Soon</h3> : null }
+            { this.state.complete ? <h3>Thank You For Subscribing</h3> : null }
           </div>
         </div>
       </div>
