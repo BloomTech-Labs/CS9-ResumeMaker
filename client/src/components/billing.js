@@ -11,7 +11,8 @@ const urls = require("../config.json");
 class Billing extends Component {
   state = {
     complete: false,
-    gone: false
+    gone: false,
+    loading: false
   };
 
   tokenCreator = async () => {
