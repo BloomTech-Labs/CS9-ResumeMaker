@@ -14,7 +14,7 @@ const User = require("../user/UserModel");
 router.post(
   "/monthly",
   // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  async (req, res) => {
     const { email } = req.body;
     const token = req.body.id;
 
@@ -76,7 +76,7 @@ router.post(
 router.post(
   "/yearly",
   // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  async (req, res) => {
     const { email } = req.body;
     const token = req.body.id;
 
