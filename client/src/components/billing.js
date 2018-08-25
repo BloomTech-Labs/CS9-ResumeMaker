@@ -9,20 +9,29 @@ import "./CSS/billing.css";
 const urls = require("../config.json");
 
 class Billing extends Component {
+  state = {
+    complete: false,
+    gone: false
+  };
 
   tokenCreator = async () => {
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
     });
     return token;
-  }
+  };
 
   monthly = () => {
-    const token = this.tokenCreator();
-    axios
-      .post(`${urls[urls.basePath]}/pay/monthly`, token)
-      .then(res => {
-        console.log("Successfully Subscribed to One Month!");
+    this.tokenCreator()
+      .then(token => {
+        axios
+          .post(`${urls[urls.basePath]}/pay/monthly`, token)
+          .then(res => {
+            this.setState({ complete: true });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -30,11 +39,16 @@ class Billing extends Component {
   };
 
   yearly = () => {
-    const token = this.tokenCreator();
-    axios
-      .post(`${urls[urls.basePath]}/pay/yearly`, token)
-      .then(res => {
-        console.log("Successfully Subscribed to One Year!");
+    this.tokenCreator()
+      .then(token => {
+        axios
+          .post(`${urls[urls.basePath]}/pay/yearly`, token)
+          .then(res => {
+            this.setState({ complete: true });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -48,14 +62,22 @@ class Billing extends Component {
         email: this.props.context.userInfo.email
       })
       .then(res => {
+        this.setState({ gone: true });
         console.log("Successfully Unsubscribed");
       })
       .catch(err => {
-        console.log("You are not even a member");
+        console.log(err);
       });
   };
 
   render() {
+    if (this.state.complete) return <h1>Thank You For Subscribing</h1>;
+    if (this.state.gone)
+      return (
+        <h1>
+          Thank You For Your Business. We Hope to Work With You Again Soon.
+        </h1>
+      );
     return (
       <div>
         <Navbar
