@@ -101,7 +101,7 @@ router.post(
                     res.status(201).json("User Updated");
                   })
                   .catch(err => {
-                    res.status(400).json("Unable to Update User");
+                    res.status(400).json(err);
                   });
               }
             }
@@ -135,10 +135,10 @@ router.post(
               };
               User.findOneAndUpdate({ email }, membershipChange)
                 .then(user => {
-                  console.log("You are unsubscribed");
+                  res.status(200).json("Success")
                 })
                 .catch(err => {
-                  console.log("Error Saving");
+                  res.status(400).json(err);
                 });
               res
                 .status(201)
