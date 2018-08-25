@@ -5,6 +5,7 @@ import CheckoutForm from "./checkoutForm";
 
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
+import Loading from "./subComponents/Loading"
 import "./CSS/billing.css";
 const urls = require("../config.json");
 
@@ -64,8 +65,7 @@ class Billing extends Component {
         email: this.props.context.userInfo.email
       })
       .then(res => {
-        this.setState({ gone: true, complete: false, gone: false });
-        console.log("Successfully Unsubscribed");
+        this.setState({ gone: true, complete: false, loading: false });
       })
       .catch(err => {
         console.log(err);
