@@ -41,7 +41,7 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <div className="test-div">
+      <div className="test-div bg-secondary">
         <Link to="/resumes" className="sidebar-button">
           {" "}
           Resumes

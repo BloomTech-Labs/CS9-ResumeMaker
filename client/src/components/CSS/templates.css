@@ -1,16 +1,16 @@
-
 .page-div {
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .containters-div {
-display: flex; 
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .container-div {
-padding: 1rem; 
+  padding: 1rem;
 }
+
 img {
-    height: 15rem; 
+  height: 15rem;
 }

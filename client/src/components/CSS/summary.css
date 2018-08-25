@@ -8,3 +8,19 @@
   width: 4rem;
   height: 4rem;
 }
+
+.title-div {
+  width: 100%;
+}
+
+.overall-component-div .title-div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.div-for-links {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
