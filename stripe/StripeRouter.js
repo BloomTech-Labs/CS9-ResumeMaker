@@ -45,10 +45,10 @@ router.post(
                 };
                 User.findOneAndUpdate({ email }, membershipChange)
                   .then(user => {
-                    console.log("user", user);
+                    res.status(201).json("Successfully Updated");
                   })
                   .catch(err => {
-                    console.log("Error Saving");
+                    res.status(400).json(err);
                   });
               }
             }
@@ -98,10 +98,10 @@ router.post(
                 };
                 User.findOneAndUpdate({ email }, membershipChange)
                   .then(user => {
-                    res.status(201).json("User Updated")
+                    res.status(201).json("User Updated");
                   })
                   .catch(err => {
-                    res.status(400).json("Unable to Update User")
+                    res.status(400).json("Unable to Update User");
                   });
               }
             }
