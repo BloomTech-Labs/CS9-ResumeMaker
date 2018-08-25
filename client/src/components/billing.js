@@ -64,7 +64,7 @@ class Billing extends Component {
         email: this.props.context.userInfo.email
       })
       .then(res => {
-        this.setState({ gone: true });
+        this.setState({ gone: true, complete: false, gone: false });
         console.log("Successfully Unsubscribed");
       })
       .catch(err => {
