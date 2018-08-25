@@ -60,6 +60,7 @@ class Billing extends Component {
   };
 
   unsubscribe = () => {
+    this.setState({ loading: true, complete: false, gone : false })
     axios
       .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
         email: this.props.context.userInfo.email
@@ -101,9 +102,11 @@ class Billing extends Component {
               </button>
               <button onClick={this.unsubscribe}>Unsubscribe</button>
             </div>
+            <div style = {{ marginTop: '10px' }}>
             { this.state.loading ? <Loading /> : null }
             { this.state.complete ? <h3>Thank You For Subscribing</h3> : null }
             { this.state.gone ? <h3>Thank You For Your Business. We Hope to Work With You Again Soon</h3> : null }
+            </div>
           </div>
         </div>
       </div>
