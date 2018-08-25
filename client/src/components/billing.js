@@ -9,33 +9,35 @@ import "./CSS/billing.css";
 const urls = require("../config.json");
 
 class Billing extends Component {
-  monthly = async e => {
-    e.preventDefault();
+
+  tokenCreator = async () => {
     let { token } = await this.props.stripe.createToken({
       email: this.props.context.userInfo.email
     });
+    return token;
+  }
+
+  monthly = () => {
+    const token = this.tokenCreator();
     axios
       .post(`${urls[urls.basePath]}/pay/monthly`, token)
       .then(res => {
-        console.log(res);
+        console.log("Successfully Subscribed to One Month!");
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  yearly = async e => {
-    e.preventDefault();
-    let { token } = await this.props.stripe.createToken({
-      email: this.props.context.userInfo.email
-    });
+  yearly = () => {
+    const token = this.tokenCreator();
     axios
       .post(`${urls[urls.basePath]}/pay/yearly`, token)
       .then(res => {
-        console.log("Successfully Subscribed to One Year");
+        console.log("Successfully Subscribed to One Year!");
       })
       .catch(err => {
-        return;
+        console.log(err);
       });
   };
 
