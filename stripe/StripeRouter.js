@@ -18,44 +18,53 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    stripe.customers.create(
-      {
-        email: email,
-        source: token
-      },
-      (err, customer) => {
-        if (err) res.status(400).json("Unable to create a user");
+    User.findOne({ email })
+      .then(user => {
+        if (user.membership) res.status(400).json("You're already a member!");
         else {
-          const { id } = customer;
-          stripe.subscriptions.create(
+          stripe.customers.create(
             {
-              customer: id,
-              items: [
-                {
-                  plan: "Monthly"
-                }
-              ]
+              email: email,
+              source: token
             },
-            (err, subscription) => {
-              if (err) res.status(400).json("Unable to subscribe");
+            (err, customer) => {
+              if (err) res.status(400).json("Unable to create a user");
               else {
-                const membershipChange = {
-                  subscription: subscription.id,
-                  membership: true
-                };
-                User.findOneAndUpdate({ email }, membershipChange)
-                  .then(user => {
-                    res.status(201).json("Successfully Updated");
-                  })
-                  .catch(err => {
-                    res.status(400).json(err);
-                  });
+                const { id } = customer;
+                stripe.subscriptions.create(
+                  {
+                    customer: id,
+                    items: [
+                      {
+                        plan: "Monthly"
+                      }
+                    ]
+                  },
+                  (err, subscription) => {
+                    if (err) res.status(400).json("Unable to subscribe");
+                    else {
+                      const membershipChange = {
+                        subscription: subscription.id,
+                        membership: true
+                      };
+                      User.findOneAndUpdate({ email }, membershipChange)
+                        .then(user => {
+                          res.status(201).json("Successfully Updated");
+                        })
+                        .catch(err => {
+                          res.status(400).json(err);
+                        });
+                    }
+                  }
+                );
               }
             }
           );
         }
-      }
-    );
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
   }
 );
 
@@ -71,44 +80,53 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    stripe.customers.create(
-      {
-        email: email,
-        source: token
-      },
-      (err, customer) => {
-        if (err) res.status(400).json("Unable to become a customer");
+    User.findOne({ email })
+      .then(user => {
+        if (user.membership) res.status(400).json("You're already a member!");
         else {
-          const { id } = customer;
-          stripe.subscriptions.create(
+          stripe.customers.create(
             {
-              customer: id,
-              items: [
-                {
-                  plan: "Yearly"
-                }
-              ]
+              email: email,
+              source: token
             },
-            (err, subscription) => {
-              if (err) res.status(400).json("Unable to subscribe");
+            (err, customer) => {
+              if (err) res.status(400).json("Unable to become a customer");
               else {
-                const membershipChange = {
-                  subscription: subscription.id,
-                  membership: true
-                };
-                User.findOneAndUpdate({ email }, membershipChange)
-                  .then(user => {
-                    res.status(201).json("User Updated");
-                  })
-                  .catch(err => {
-                    res.status(400).json(err);
-                  });
+                const { id } = customer;
+                stripe.subscriptions.create(
+                  {
+                    customer: id,
+                    items: [
+                      {
+                        plan: "Yearly"
+                      }
+                    ]
+                  },
+                  (err, subscription) => {
+                    if (err) res.status(400).json("Unable to subscribe");
+                    else {
+                      const membershipChange = {
+                        subscription: subscription.id,
+                        membership: true
+                      };
+                      User.findOneAndUpdate({ email }, membershipChange)
+                        .then(user => {
+                          res.status(201).json("User Updated");
+                        })
+                        .catch(err => {
+                          res.status(400).json(err);
+                        });
+                    }
+                  }
+                );
               }
             }
           );
         }
-      }
-    );
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
   }
 );
 
