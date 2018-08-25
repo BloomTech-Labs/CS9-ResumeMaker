@@ -23,12 +23,13 @@ class Billing extends Component {
   };
 
   monthly = () => {
+    this.setState({ loading: true, complete: false, gone: false })
     this.tokenCreator()
       .then(token => {
         axios
           .post(`${urls[urls.basePath]}/pay/monthly`, token)
           .then(res => {
-            this.setState({ complete: true });
+            this.setState({ complete: true, loading: false });
           })
           .catch(err => {
             console.log(err);
@@ -40,12 +41,13 @@ class Billing extends Component {
   };
 
   yearly = () => {
+    this.setState({ loading: true, complete: false, gone: false })
     this.tokenCreator()
       .then(token => {
         axios
           .post(`${urls[urls.basePath]}/pay/yearly`, token)
           .then(res => {
-            this.setState({ complete: true });
+            this.setState({ complete: true, loading: false });
           })
           .catch(err => {
             console.log(err);
