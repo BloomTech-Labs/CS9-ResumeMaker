@@ -1,0 +1,18 @@
+.summary-card-link {
+  background: white;
+  border: 1px solid lightgrey;
+  margin: 10px;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 10px;
+  width: 240px;
+  height: 160px;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.summary-card-span {
+  color: black;
+}

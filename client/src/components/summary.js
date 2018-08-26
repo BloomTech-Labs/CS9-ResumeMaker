@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
+import SummaryCard from "./subComponents/summaryCard";
 import { Link } from "react-router-dom";
 import "./CSS/summary.css";
 
@@ -19,18 +20,15 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
-            <div className="div-for-links">
+            <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
-                  <Link
-                    to={{
-                      pathname: "/summary/create", // component being Linked to
-                      state: { summaryIndex: index } // Setting Index passed into summaryCreate component
-                    }}
+                  <SummaryCard
+                    classname="summary-card"
+                    index={index}
+                    summary={element}
                     key={index}
-                  >
-                    <span>{element}</span>
-                  </Link>
+                  />
                 );
               })}
             </div>
