@@ -12,6 +12,7 @@ class ExperienceCreate extends Component {
     this.state = {
       title: "",
       company: "",
+      location: "",
       description: "",
       from: "",
       to: "",
@@ -35,6 +36,9 @@ class ExperienceCreate extends Component {
         company: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
         ].company,
+        company: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ].location,
         from: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
         ].from,
@@ -58,6 +62,7 @@ class ExperienceCreate extends Component {
       this.props.context.actions.addElement("experience", {
         title: this.state.title,
         company: this.state.company,
+        location: this.state.location,
         description: this.state.description,
         from: this.state.from,
         to: this.state.to
@@ -70,6 +75,7 @@ class ExperienceCreate extends Component {
         {
           title: this.state.title,
           company: this.state.company,
+          location: this.state.location,
           description: this.state.description,
           from: this.state.from,
           to: this.state.to
@@ -132,6 +138,13 @@ class ExperienceCreate extends Component {
                   className="form-control"
                   name="company"
                   placeholder="Company Name"
+                />
+                <input
+                  value={this.state.location}
+                  onChange={this.onInputChange}
+                  className="form-control"
+                  name="location"
+                  placeholder="Company Location"
                 />
                 <input
                   value={this.state.description}

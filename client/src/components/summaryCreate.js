@@ -16,10 +16,6 @@ class SummaryCreate extends Component {
   }
 
   componentWillMount() {
-    if (this.props.context.userInfo.auth !== true) {
-      //future home of login automatically on refresh or revisit
-    }
-
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.summaryIndex !== false
@@ -91,7 +87,8 @@ class SummaryCreate extends Component {
                   “Make the most of yourself....for that is all there is of
                   you.” ― Ralph Waldo Emerson
                 </label>
-                <input
+                <textarea
+                  rows={10}
                   value={this.state.summary}
                   onChange={this.onInputChange}
                   className="form-control"
