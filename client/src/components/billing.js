@@ -109,7 +109,7 @@ class Billing extends Component {
             { this.state.complete ? <h3>Thank You For Subscribing</h3> : null }
             { this.state.gone ? <h3>Thank You For Your Business. We Hope to Work With You Again Soon</h3> : null }
             { this.state.sub_err ? <h3>You Are Actually Already A Member!</h3> : null }
-            { this.state.unsub_err ? <h3>You Have Already Unsubscribed!</h3> : null }
+            { this.state.unsub_err ? <h3>You Have No Current Subscription!</h3> : null }
             </div>
           </div>
         </div>
