@@ -21,9 +21,10 @@ router.post(
     newResume
       .save()
       .then(resume => {
-        User.findOneAndUpdate({ email })
+        User.findOne({ email })
           .then(user => {
             user.resumes.push(resume);
+            user.save();
           })
           .catch(err => {
             res.status(400).json({ Error: err });
