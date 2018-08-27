@@ -6,6 +6,27 @@ const Resume = require("./ResumeModel");
 const User = require("../user/UserModel");
 
 /*
+    @route  resume/:id
+    @desc   Gets a resume by its id
+    @access Private (Production) | Public (Development)
+*/
+router.get(
+  "/:id",
+  // passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { id } = req.params;
+
+    Resume.findById(id)
+      .then(resume => {
+        res.status(200).json(resume);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  }
+);
+
+/*
     @route  resume
     @desc   Creates a new resume per user
     @access Private (Production) | Public (Development)
