@@ -36,7 +36,7 @@ class ExperienceCreate extends Component {
         company: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
         ].company,
-        company: this.props.context.userInfo.experience[
+        location: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
         ].location,
         from: this.props.context.userInfo.experience[
