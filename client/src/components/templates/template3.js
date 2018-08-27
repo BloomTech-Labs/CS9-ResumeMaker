@@ -6,6 +6,23 @@ import Navbar from "../subComponents/navbar";
 import "./template3.css";
 import { Link } from "react-router-dom";
 
+class CheckBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false
+    };
+  }
+
+  toggle = () => {
+    this.setState({ checked: !this.state.checked });
+  };
+
+  render() {
+    return <input type="checkbox" onChange={this.toggle} />;
+  }
+}
+
 export class TemplateThree extends Component {
   constructor(props) {
     super(props);
@@ -95,7 +112,14 @@ export class TemplateThree extends Component {
                     className="summarySection"
                   >
                     <h3 class="subtitle">Summary</h3>
-                    <p>{userInfo.summary}</p>
+                    {userInfo.summary.map((content, index) => {
+                      return (
+                        <div key={index}>
+                          <p>{content}</p>
+                          <CheckBox />
+                        </div>
+                      );
+                    })}
                   </FormGroup>
                   <Divider className="divider-div" />
 
@@ -103,35 +127,32 @@ export class TemplateThree extends Component {
 
                   <FormGroup textAlign="center" className="skillsSection">
                     <h3 class="subtitle">Skills</h3>
-                    {userInfo.skills.map((content, index) => (
-                      <div key={index}>
-                        <p>{content}</p>
-                        {/* <input
-                      type="checkbox"
-                      checked={this.state.isSelected}
-                      onClick={this.handleChange}
-                    />{" "} */}
-                      </div>
-                    ))}
+                    {userInfo.skills.map((content, index) => {
+                      return (
+                        <div key={index}>
+                          <p>{content}</p>
+                          <CheckBox />
+                        </div>
+                      );
+                    })}
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
                     <h3 class="subtitle">Experience</h3>
-                    {experience.map(function(content, index) {
+                    {experience.map((content, index) => {
                       return (
                         <div key={index}>
                           {console.log(content)}
-                          <h5>{content.title} </h5>
-                          <p>{content.company}<br/>
-                          {content.location}<br/>
+                          <p>
+                            {content.title} <br />
+                            {content.company}
+                            <br />
+                            {content.location}
+                            <br />
                             {content.from} - {content.to}
-                      <br/>
-                          {content.description} </p>
-                          {/* <input
-                      type="checkbox"
-                      checked={this.state.isSelected}
-                      onClick={this.handleChange}
-                    />{" "} */}
+                          </p>
+                          <p>{content.description} </p>
+                          <CheckBox />
                         </div>
                       );
                     })}
@@ -139,21 +160,16 @@ export class TemplateThree extends Component {
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
                     <h3 class="subtitle">Education</h3>
-                    {education.map(function(content, index) {
+                    {education.map((content, index) => {
                       return (
                         <div key={index}>
-                          <h3>{content.school} </h3>
+                          <h5>{content.school} </h5>
                           <p>{content.location}</p>
                           <p>
-                            {content.degree} to {content.fieldofstudy}{" "}
-                         <br/>
+                            {content.degree} in {content.fieldofstudy} <br />
                             {content.from} - {content.to}
                           </p>
-                          {/* <input
-                      type="checkbox"
-                      checked={this.state.isSelected}
-                      onClick={this.handleChange}
-                    />{" "} */}
+                          <CheckBox />
                         </div>
                       );
                     })}

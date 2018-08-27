@@ -18,7 +18,7 @@ class CheckBox extends React.Component {
   };
 
   render() {
-    return <input type="checkbox" onChange={this.toggle}/>;
+    return <input type="checkbox" onChange={this.toggle} />;
   }
 }
 
@@ -50,11 +50,9 @@ export class TemplateOne extends Component {
   // }
 
   render() {
-    const content = this.state.checked ? <div> Content </div> : null;
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    console.log(this.state);
     return (
       <div>
         <Navbar
@@ -109,7 +107,7 @@ export class TemplateOne extends Component {
                   return (
                     <div key={index}>
                       <p>{content}</p>
-                      <CheckBox/>
+                      <CheckBox />
                     </div>
                   );
                 })}
@@ -121,7 +119,7 @@ export class TemplateOne extends Component {
                   return (
                     <div key={index}>
                       <p>{content}</p>
-                      <CheckBox/>
+                      <CheckBox />
                     </div>
                   );
                 })}
