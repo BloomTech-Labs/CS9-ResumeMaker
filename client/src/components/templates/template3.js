@@ -123,7 +123,7 @@ export class TemplateThree extends Component {
                           {console.log(content)}
                           <h5>{content.title} </h5>
                           <p>{content.company}<br/>
-                          {content.location} location!!!<br/>
+                          {content.location}<br/>
                             {content.from} - {content.to}
                       <br/>
                           {content.description} </p>
@@ -145,7 +145,7 @@ export class TemplateThree extends Component {
                           <h3>{content.school} </h3>
                           <p>{content.location}</p>
                           <p>
-                            {content.degree} {content.field}{" "}
+                            {content.degree} to {content.fieldofstudy}{" "}
                          <br/>
                             {content.from} - {content.to}
                           </p>

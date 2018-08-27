@@ -1,26 +1,28 @@
 .stripe {
-    display: flex;
-    margin-left: 500px;
-    max-width: 550px;
-    width: 100%;
+  display: flex;
+  /* margin-left: 25%; */
+  /* max-width: 550px; */
+  width: 300px;
 }
 
 .card-element {
-    max-width: 300px;
-    width: 100%;
-    background-color: white;
-    height: 40px;
-    padding: 10px 12px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
+  max-width: 300px;
+  width: 100%;
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
 }
 
 .buttons {
-   display: flex;
-   justify-content: space-around;
-   width: 50%;
-   margin: 2% 0 0 25%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 50%;
+  max-width: 800px;
+  margin: 20px 0 0 0;
 }

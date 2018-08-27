@@ -32,3 +32,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
+textarea {
+  height: auto;
+}
