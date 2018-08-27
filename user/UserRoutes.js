@@ -68,6 +68,28 @@ UserRouter.get("/", (req, res) => {
     });
 });
 
+/*
+  @route  users/:id/resumes
+  @desc   Retrieve resumes from a specific user
+  @access Private (Development) | Public (Testing)
+*/
+UserRouter.get(
+  "/:id/resumes",
+  // passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { id } = req.params;
+    const query = User.findById(id)
+      .select("resumes")
+      .populate("resumes");
+
+    query.then(resumes => {
+      res.status(200).json(resumes)
+    }).catch(err => {
+      res.status(400).json({ errorMessage: "Unable to retrieve" });
+    });
+  }
+);
+
 // POST users/register
 // Register a new user
 // Make sure to send confirmation email
@@ -189,7 +211,7 @@ UserRouter.post("/login", (req, res) => {
             stripe.subscriptions.del(user.subscriptions, (err, success) => {
               if (err) console.log(err);
               else console.log(success);
-            })
+            });
             User.findOneAndUpdate(
               { email },
               { membership: false, subscription: null }
