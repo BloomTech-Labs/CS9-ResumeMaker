@@ -1,8 +1,14 @@
-.jumbotron.banner {
-  background-image: url("banner-top.jpg");
+.sticky-top.navbar-dark {
+  /* background-image: url("banner-top.jpg"); */
   margin-bottom: 0px;
+  height: 8vh;
 }
 
-.breadcrumb {
+.sticky-top.navbar-dark .breadcrumb {
   align-items: left;
+  margin-bottom: 0;
+}
+
+.navbar-button {
+  color: black;
 }

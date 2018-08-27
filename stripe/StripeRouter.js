@@ -14,7 +14,7 @@ const User = require("../user/UserModel");
 router.post(
   "/monthly",
   // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  async (req, res) => {
     const { email } = req.body;
     const token = req.body.id;
 
@@ -49,10 +49,10 @@ router.post(
                       };
                       User.findOneAndUpdate({ email }, membershipChange)
                         .then(user => {
-                          console.log("user", user);
+                          res.status(201).json("Successfully Updated");
                         })
                         .catch(err => {
-                          console.log("Error Saving");
+                          res.status(400).json(err);
                         });
                     }
                   }
@@ -76,7 +76,7 @@ router.post(
 router.post(
   "/yearly",
   // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  async (req, res) => {
     const { email } = req.body;
     const token = req.body.id;
 
@@ -111,10 +111,10 @@ router.post(
                       };
                       User.findOneAndUpdate({ email }, membershipChange)
                         .then(user => {
-                          console.log("You are subscribed to one year");
+                          res.status(201).json("User Updated");
                         })
                         .catch(err => {
-                          console.log("Error Saving");
+                          res.status(400).json(err);
                         });
                     }
                   }
@@ -153,16 +153,11 @@ router.post(
               };
               User.findOneAndUpdate({ email }, membershipChange)
                 .then(user => {
-                  console.log("You are unsubscribed");
+                  res.status(201).json("Successfully Unsubscribed");
                 })
                 .catch(err => {
-                  console.log("Error Saving");
+                  res.status(400).json(err);
                 });
-              res
-                .status(201)
-                .json(
-                  "Thank you for your business. We hope to work with you again."
-                );
             }
           });
         } else {

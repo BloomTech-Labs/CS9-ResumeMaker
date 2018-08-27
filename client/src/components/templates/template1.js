@@ -117,7 +117,6 @@ export class TemplateOne extends Component {
                         {content.company}
                         <br />
                         {content.location}
-                        Location!!!
                         <br />
                         {content.from} - {content.to}
                       </p>
@@ -140,7 +139,7 @@ export class TemplateOne extends Component {
                       <h5>{content.school} </h5>
                       <p>{content.location}</p>
                       <p>
-                        {content.degree} {content.field} <br />
+                        {content.degree} in {content.fieldofstudy} <br />
                         {content.from} - {content.to}
                       </p>
                       {/* <input

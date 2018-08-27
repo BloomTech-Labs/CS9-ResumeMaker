@@ -103,7 +103,7 @@ export class TemplateTwo extends Component {
                           <h3>{content.school} </h3>
                           <p>{content.location}</p>
                           <h5>
-                            {content.degree} {content.field}{" "}
+                            {content.degree} in {content.fieldofstudy}{" "}
                           </h5>
                           <p>
                             {content.from} - {content.to}
