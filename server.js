@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const UserRouter = require("./user/UserRoutes.js");
 const StripeRouter = require("./stripe/StripeRouter.js");
+const ResumeRouter = require("./resume/ResumeRouter.js");
 
 
 // Connect To mLab
@@ -40,6 +41,7 @@ server.use(cors());
 // Routes
 server.use("/users", UserRouter);
 server.use('/pay', StripeRouter);
+server.use("/resume", ResumeRouter);
 
 const port = process.env.PORT || 3333;
 server.listen(port, () => console.log(`Server running on port: ${port}`));
