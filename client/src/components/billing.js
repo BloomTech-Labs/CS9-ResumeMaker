@@ -106,10 +106,10 @@ class Billing extends Component {
             </div>
             <div style = {{ marginTop: '10px' }}>
             { this.state.loading ? <Loading /> : null }
-            { this.state.complete ? <h3>Thank You For Subscribing</h3> : null }
-            { this.state.gone ? <h3>Thank You For Your Business. We Hope to Work With You Again Soon</h3> : null }
-            { this.state.sub_err ? <h3>You Are Actually Already A Member!</h3> : null }
-            { this.state.unsub_err ? <h3>You Have No Current Subscription!</h3> : null }
+            { this.state.complete ? <h3>Thank you for subscribing!</h3> : null }
+            { this.state.gone ? <h3>Thank you for your business. We hope to work with you again soon!</h3> : null }
+            { this.state.sub_err ? <h3>You are unable to complete subscribe if you are already a member or your payment is invalid!</h3> : null }
+            { this.state.unsub_err ? <h3>You do not have an active subscription!</h3> : null }
             </div>
           </div>
         </div>
