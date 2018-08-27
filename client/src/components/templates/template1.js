@@ -5,21 +5,37 @@ import Navbar from "../subComponents/navbar";
 import "./template1.css";
 import { Link } from "react-router-dom";
 
+class CheckBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false
+    };
+  }
+
+  toggle = () => {
+    this.setState({ checked: !this.state.checked });
+  };
+
+  render() {
+    return <input type="checkbox" onChange={this.toggle}/>;
+  }
+}
+
 export class TemplateOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSelected: false
+      checked: false
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  // getInitialState(e) {
-  //   return { isSelected: this.props.data.isSelected };
-  // }
-  handleChange = e => {
-    let selected = !this.state.isSelected;
-    this.setState({ isSelected: selected });
-  };
+  handleChange(e) {
+    this.setState({
+      checked: !this.state.checked
+    });
+  }
 
   // handleSubmit(e) {
   //   e.preventDefault();
@@ -34,10 +50,11 @@ export class TemplateOne extends Component {
   // }
 
   render() {
+    const content = this.state.checked ? <div> Content </div> : null;
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    console.log(userInfo);
+    console.log(this.state);
     return (
       <div>
         <Navbar
@@ -88,27 +105,31 @@ export class TemplateOne extends Component {
                 className="summarySection"
               >
                 <h3>Summary</h3>
-                <p>{userInfo.summary}</p>
+                {userInfo.summary.map((content, index) => {
+                  return (
+                    <div key={index}>
+                      <p>{content}</p>
+                      <CheckBox/>
+                    </div>
+                  );
+                })}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="skillsSection">
                 <h3>Skills</h3>
-                {userInfo.skills.map((content, index) => (
-                  <div key={index}>
-                    <p>{content}</p>
-                    {/* <input
-                      type="checkbox"
-                      checked={this.state.isSelected}
-                      onClick={this.handleChange}
-                    />{" "} */}
-                  </div>
-                ))}
+                {userInfo.skills.map((content, index) => {
+                  return (
+                    <div key={index}>
+                      <p>{content}</p>
+                      <CheckBox/>
+                    </div>
+                  );
+                })}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="experienceSection">
                 <h3>Experience</h3>
-
-                {experience.map(function(content, index) {
+                {experience.map((content, index) => {
                   return (
                     <div key={index}>
                       {console.log(content)}
@@ -121,11 +142,7 @@ export class TemplateOne extends Component {
                         {content.from} - {content.to}
                       </p>
                       <p>{content.description} </p>
-                      {/* <input
-                      type="checkbox"
-                      checked={this.state.isSelected}
-                      onClick={this.handleChange}
-                    />{" "} */}
+                      <CheckBox />
                     </div>
                   );
                 })}
@@ -133,7 +150,7 @@ export class TemplateOne extends Component {
               <Divider className="divider-div" />
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
-                {education.map(function(content, index) {
+                {education.map((content, index) => {
                   return (
                     <div key={index}>
                       <h5>{content.school} </h5>
@@ -142,17 +159,13 @@ export class TemplateOne extends Component {
                         {content.degree} in {content.fieldofstudy} <br />
                         {content.from} - {content.to}
                       </p>
-                      {/* <input
-                      type="checkbox"
-                      checked={this.state.isSelected}
-                      onClick={this.handleChange}
-                    />{" "} */}
+                      <CheckBox />
                     </div>
                   );
                 })}
               </Container>
             </form>
-            <div class="justify-content-center">
+            <div className="justify-content-center">
               <Link to="/resumes" className="resume-button" type="submit">
                 {" "}
                 Add Resume
