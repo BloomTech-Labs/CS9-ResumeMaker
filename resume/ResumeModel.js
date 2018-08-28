@@ -33,7 +33,8 @@ const Resume = new Schema({
     ],
     summary: [
       {
-        type: String,
+        id: Number,
+        value: Boolean
       }
     ],
     skills: [
