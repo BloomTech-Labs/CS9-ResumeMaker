@@ -13,6 +13,19 @@ const createCustomer = (email, token) => {
   });
   return customer;
 };
+
+const createSubscription = (id, planType) => {
+  const subscription = stripe.subscriptions.create({
+    customer: id,
+    items: [
+      {
+        plan: planType
+      }
+    ]
+  });
+  return subscription;
+};
+
 /*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
@@ -29,44 +42,26 @@ router.post(
       .then(user => {
         if (user.membership) res.status(400).json("You're already a member!");
         else {
-          stripe.customers.create(
-            {
-              email: email,
-              source: token
-            },
-            (err, customer) => {
-              if (err) res.status(400).json("Unable to create a user");
-              else {
-                const { id } = customer;
-                stripe.subscriptions.create(
-                  {
-                    customer: id,
-                    items: [
-                      {
-                        plan: "Monthly"
-                      }
-                    ]
-                  },
-                  (err, subscription) => {
-                    if (err) res.status(400).json("Unable to subscribe");
-                    else {
-                      const membershipChange = {
-                        subscription: subscription.id,
-                        membership: true
-                      };
-                      User.findOneAndUpdate({ email }, membershipChange)
-                        .then(user => {
-                          res.status(201).json("Successfully Updated");
-                        })
-                        .catch(err => {
-                          res.status(400).json(err);
-                        });
-                    }
-                  }
-                );
-              }
+          const newCustomer = createCustomer(email, token);
+          if (!newCustomer) res.status(400).json("Unable to create a user");
+          else {
+            const { id } = newCustomer;
+            const newSubscription = createSubscription(id, "Monthly");
+            if (!newSubscription) res.status(400).json("Unable to subscribe");
+            else {
+              const membershipChange = {
+                subscription: newSubscription.id,
+                membership: true
+              };
+              User.findOneAndUpdate({ email }, membershipChange)
+                .then(user => {
+                  res.status(201).json("Successfully Updated");
+                })
+                .catch(err => {
+                  res.status(400).json(err);
+                });
             }
-          );
+          }
         }
       })
       .catch(err => {
