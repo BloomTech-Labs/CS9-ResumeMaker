@@ -78,11 +78,6 @@ export class PersonalInfo extends Component {
   };
 
   handleChange = e => {
-    /*const target = e.target;
-    let value = target.value;
-    const name = target.name;*/
-
-    console.log("hit");
     const eName = e.target.name;
     const value = e.target.value;
     if (e.target.name.includes("name")) {
@@ -116,15 +111,8 @@ export class PersonalInfo extends Component {
       .then(response => {
         console.log("RESPONSE GOTTEN", response.data.user);
         this.setState(response.data.user);
-        // this.setState({
-        //   firstName: "",
-        //   lastName: "",
-        //   email: "",
-        //   phone: "",
-        //   location: "",
-        //   title: "",
-        //   errors: []
-        // });
+        // This updates context with the new user info from server
+        this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {
         if (this.state.name.firstname === "") {
