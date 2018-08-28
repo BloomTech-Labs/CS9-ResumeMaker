@@ -421,7 +421,7 @@ UserRouter.put(
                         });
                       // ======
                     }
-                    if (req.body.newpassword) {
+                    if (req.body.newpassword && req.body.newpassword != "") {
                       user.password = req.body.newpassword;
                       user.save(function(err) {
                         if (err) {

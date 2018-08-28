@@ -1,6 +1,6 @@
 .Settings {
-  /* display: flex;
-  justify-content: center; */
+  display: flex;
+  justify-content: center;
   /* min-height: 100vh;
   background-image: url(Buildings.jpg);
   background-repeat: no-repeat;
@@ -11,6 +11,8 @@
 
 .Settings form {
   align-self: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .Settings form .form-group {
@@ -21,6 +23,8 @@
 }
 
 .Settings form .form-group .control-label {
+  display: flex;
+  flex-wrap: wrap;
   margin: 0;
 }
 

@@ -205,141 +205,147 @@ export class PersonalInfo extends Component {
       this.props.context.userInfo
     );
     return (
-      <div className="Settings">
+      <div>
         <h1> Personal Information </h1>
-        <form>
-          <FormGroup controlId="name.firstname" bsSize="large">
-            <ControlLabel>First Name</ControlLabel>
-            <FormControl
-              value={this.state.name.firstname}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="name.middlename" bsSize="large">
-            <ControlLabel>Middle Name</ControlLabel>
-            <FormControl
-              value={this.state.name.middlename}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="name.lastname" bsSize="large">
-            <ControlLabel>Last Name</ControlLabel>
-            <FormControl
-              value={this.state.name.lastname}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="phonenumber" bsSize="large">
-            <ControlLabel>Phone Number</ControlLabel>
-            <FormControl
-              value={this.state.name.lastname}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="location" bsSize="large">
-            <ControlLabel>Location</ControlLabel>
-            <FormControl
-              value={this.state.location}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="links.linkedin" bsSize="large">
-            <ControlLabel>Linkedin</ControlLabel>
-            <FormControl
-              value={this.state.links.linkedin}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="links.github" bsSize="large">
-            <ControlLabel>Github</ControlLabel>
-            <FormControl
-              value={this.state.links.github}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="links.portfolio" bsSize="large">
-            <ControlLabel>Portfolio</ControlLabel>
-            <FormControl
-              value={this.state.links.portfolio}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
+        <div className="Settings">
+          <form>
+            <FormGroup controlId="name.firstname" bsSize="large">
+              <ControlLabel>First Name</ControlLabel>
+              <FormControl
+                value={this.state.name.firstname}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="name.middlename" bsSize="large">
+              <ControlLabel>Middle Name</ControlLabel>
+              <FormControl
+                value={this.state.name.middlename}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="name.lastname" bsSize="large">
+              <ControlLabel>Last Name</ControlLabel>
+              <FormControl
+                value={this.state.name.lastname}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="phonenumber" bsSize="large">
+              <ControlLabel>Phone Number</ControlLabel>
+              <FormControl
+                value={this.state.name.lastname}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="location" bsSize="large">
+              <ControlLabel>Location</ControlLabel>
+              <FormControl
+                value={this.state.location}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="links.linkedin" bsSize="large">
+              <ControlLabel>Linkedin</ControlLabel>
+              <FormControl
+                value={this.state.links.linkedin}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="links.github" bsSize="large">
+              <ControlLabel>Github</ControlLabel>
+              <FormControl
+                value={this.state.links.github}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="links.portfolio" bsSize="large">
+              <ControlLabel>Portfolio</ControlLabel>
+              <FormControl
+                value={this.state.links.portfolio}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
 
-          <FormGroup
-            controlId="email"
-            bsSize="large"
-            validationState={this.state.emailInvalid}
-          >
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-            {this.state.emailInvalid ? (
-              <HelpBlock>Please enter an unused valid email.</HelpBlock>
-            ) : null}
-          </FormGroup>
+            <FormGroup
+              controlId="email"
+              bsSize="large"
+              validationState={this.state.emailInvalid}
+            >
+              <ControlLabel>Email</ControlLabel>
+              <FormControl
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+              {this.state.emailInvalid ? (
+                <HelpBlock>Please enter an unused valid email.</HelpBlock>
+              ) : null}
+            </FormGroup>
 
-          <FormGroup
-            controlId="oldpassword"
-            bsSize="large"
-            validationState={this.checkPasswordStrength(this.state.oldpassword)}
-          >
-            <ControlLabel>Current Password</ControlLabel>
-            <FormControl
-              type="password"
-              value={this.state.oldpassword}
-              onChange={this.handleChange}
-            />
-            {this.state.passwordInvalid ? (
-              <HelpBlock>
-                Incorrect password. Please enter your current password if you
-                want to make a new password or change your email.
-              </HelpBlock>
-            ) : null}
-          </FormGroup>
-          <FormGroup
-            controlId="newpassword"
-            bsSize="large"
-            validationState={this.checkPasswordStrength(this.state.newpassword)}
-          >
-            <ControlLabel>New Password</ControlLabel>
-            <FormControl
-              type="password"
-              value={this.state.newpassword}
-              onChange={this.handleChange}
-            />
-            {this.checkPasswordStrength(this.state.newpassword) ? (
-              <HelpBlock>
-                Please use a complex password at least 8 characters long.
-              </HelpBlock>
-            ) : null}
-          </FormGroup>
-          <FormGroup
-            controlId="newconfirmpassword"
-            bsSize="large"
-            validationState={this.checkConfirmPassword()}
-          >
-            <ControlLabel>Confirm New Password</ControlLabel>
-            <FormControl
-              type="password"
-              value={this.state.newconfirmpassword}
-              onChange={this.handleChange}
-            />
-            {this.state.newconfirmpassword !== this.state.newpassword ? (
-              <HelpBlock>Please make this match your new password.</HelpBlock>
-            ) : null}
-          </FormGroup>
-        </form>
-        <Button
-          block
-          bsSize="large"
-          bsStyle="primary"
-          onClick={() => this.checkInputValidity()}
-        >
-          Submit
-        </Button>
+            <FormGroup
+              controlId="oldpassword"
+              bsSize="large"
+              validationState={this.checkPasswordStrength(
+                this.state.oldpassword
+              )}
+            >
+              <ControlLabel>Current Password</ControlLabel>
+              <FormControl
+                type="password"
+                value={this.state.oldpassword}
+                onChange={this.handleChange}
+              />
+              {this.state.passwordInvalid ? (
+                <HelpBlock>
+                  Incorrect password. Please enter your current password if you
+                  want to make a new password or change your email.
+                </HelpBlock>
+              ) : null}
+            </FormGroup>
+            <FormGroup
+              controlId="newpassword"
+              bsSize="large"
+              validationState={this.checkPasswordStrength(
+                this.state.newpassword
+              )}
+            >
+              <ControlLabel>New Password</ControlLabel>
+              <FormControl
+                type="password"
+                value={this.state.newpassword}
+                onChange={this.handleChange}
+              />
+              {this.checkPasswordStrength(this.state.newpassword) ? (
+                <HelpBlock>
+                  Please use a complex password at least 8 characters long.
+                </HelpBlock>
+              ) : null}
+            </FormGroup>
+            <FormGroup
+              controlId="newconfirmpassword"
+              bsSize="large"
+              validationState={this.checkConfirmPassword()}
+            >
+              <ControlLabel>Confirm New Password</ControlLabel>
+              <FormControl
+                type="password"
+                value={this.state.newconfirmpassword}
+                onChange={this.handleChange}
+              />
+              {this.state.newconfirmpassword !== this.state.newpassword ? (
+                <HelpBlock>Please make this match your new password.</HelpBlock>
+              ) : null}
+            </FormGroup>
+            <Button
+              block
+              bsSize="large"
+              bsStyle="primary"
+              onClick={() => this.checkInputValidity()}
+            >
+              Submit
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }
