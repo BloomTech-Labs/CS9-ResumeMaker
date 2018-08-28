@@ -26,13 +26,16 @@ const createSubscription = (id, planType) => {
   return subscription;
 };
 
-const paidMember = (sub_id, email) => {
+const paidMember = async (sub_id, email) => {
   const membershipChange = {
     subscription: sub_id,
     membership: true
   };
 
-  const updatedStatus = User.findOneAndUpdate({ email }, membershipChange);
+  const updatedStatus = await User.findOneAndUpdate(
+    { email },
+    membershipChange
+  );
   return updatedStatus;
 };
 /*
@@ -89,44 +92,20 @@ router.post(
       .then(user => {
         if (user.membership) res.status(400).json("You're already a member!");
         else {
-          stripe.customers.create(
-            {
-              email: email,
-              source: token
-            },
-            (err, customer) => {
-              if (err) res.status(400).json("Unable to become a customer");
-              else {
-                const { id } = customer;
-                stripe.subscriptions.create(
-                  {
-                    customer: id,
-                    items: [
-                      {
-                        plan: "Yearly"
-                      }
-                    ]
-                  },
-                  (err, subscription) => {
-                    if (err) res.status(400).json("Unable to subscribe");
-                    else {
-                      const membershipChange = {
-                        subscription: subscription.id,
-                        membership: true
-                      };
-                      User.findOneAndUpdate({ email }, membershipChange)
-                        .then(user => {
-                          res.status(201).json("User Updated");
-                        })
-                        .catch(err => {
-                          res.status(400).json(err);
-                        });
-                    }
-                  }
-                );
-              }
+          const newCustomer = createCustomer(email, token);
+          if (!newCustomer) res.status(400).json("Unable to become a customer");
+          else {
+            const newSubscription = createSubscription(
+              newCustomer.id,
+              "Yearly"
+            );
+            if (!newSubscription) res.status(400).json("Unable to subscribe");
+            else {
+              if (paidMember(newSubscription.id, email))
+                res.status(201).json("Success");
+              else res.status(400).json("Error");
             }
-          );
+          }
         }
       })
       .catch(err => {
