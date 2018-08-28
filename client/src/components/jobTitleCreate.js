@@ -72,12 +72,12 @@ class JobTitleCreate extends Component {
   render() {
     return (
       <div>
-        {this.state.success ? <Redirect to="/title" /> : null}
+        {this.state.success ? <Redirect to="/jobtitle" /> : null}
         <Navbar
           context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/title", title: "Title" },
+            { link: "/jobtitle", title: "Job Title" },
             { link: "/jobtitle/create", title: "Create" }
           ]}
         />
