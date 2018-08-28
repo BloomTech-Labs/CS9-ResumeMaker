@@ -54,9 +54,13 @@ class Sidebar extends Component {
           {" "}
           Resumes
         </Link>
+        <Link to="/jobTitle" className="sidebar-button">
+          {" "}
+          JobTitle
+        </Link>
         <Link to="/summary" className="sidebar-button">
           {" "}
-          Summarys
+          Summary
         </Link>
         <Link to="/skills" className="sidebar-button">
           {" "}
