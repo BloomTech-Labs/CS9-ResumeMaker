@@ -101,7 +101,11 @@ const User = new mongoose.Schema(
       }
     },
     location: String,
-    title: String,
+    title: [
+      {
+        type: String
+      }
+    ],
     phonenumber: {
       type: String,
       validate: [validatePhone, "Invalid Phone Number"]
