@@ -16,10 +16,6 @@ class JobTitleCreate extends Component {
   }
 
   componentDidMount() {
-    if (this.props.context.userInfo.auth !== true) {
-      //future home of login automatically on refresh or revisit
-    }
-
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.titleIndex !== false
