@@ -14,29 +14,26 @@ class CheckBox extends React.Component {
   }
 
   toggle = () => {
-    this.setState({ checked: !this.state.checked });
+    this.setState(
+      {
+        checked: !this.state.checked // flips boolean value
+      },
+      function() {
+        console.log(this.state);
+      }.bind(this)
+    );
   };
 
   render() {
-    return <input type="checkbox" onChange={this.toggle} />;
+    return <input type="checkbox" checked={this.state.checked} onChange={this.toggle} />;
   }
 }
 
 export class TemplateOne extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      checked: false
-    };
-    this.handleChange = this.handleChange.bind(this);
   }
-
-  handleChange(e) {
-    this.setState({
-      checked: !this.state.checked
-    });
-  }
-
+  
   // handleSubmit(e) {
   //   e.preventDefault();
 

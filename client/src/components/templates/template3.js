@@ -15,29 +15,25 @@ class CheckBox extends React.Component {
   }
 
   toggle = () => {
-    this.setState({ checked: !this.state.checked });
+    this.setState(
+      {
+        checked: !this.state.checked 
+      },
+      function() {
+        console.log(this.state);
+      }.bind(this)
+    );
   };
 
   render() {
-    return <input type="checkbox" onChange={this.toggle} />;
+    return <input type="checkbox" checked={this.state.checked} onChange={this.toggle} />;
   }
 }
 
 export class TemplateThree extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isSelected: false
-    };
   }
-
-  // getInitialState(e) {
-  //   return { isSelected: this.props.data.isSelected };
-  // }
-  handleChange = e => {
-    let selected = !this.state.isSelected;
-    this.setState({ isSelected: selected });
-  };
 
   // handleSubmit(e) {
   //   e.preventDefault();
