@@ -6,6 +6,13 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 
 const User = require("../user/UserModel");
 
+const createCustomer = (email, token) => {
+  const customer = stripe.customers.create({
+    email: email,
+    source: token
+  });
+  return customer;
+};
 /*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
