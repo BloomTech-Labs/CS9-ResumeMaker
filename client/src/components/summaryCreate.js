@@ -16,7 +16,7 @@ class SummaryCreate extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.summaryIndex !== false

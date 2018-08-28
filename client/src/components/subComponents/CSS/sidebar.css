@@ -1,4 +1,4 @@
-.test-div {
+.sidebar {
   border-right: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   min-width: 150px;
   align-items: start;
   /* background: url("banner.jpg"); */
-  height: 92vh;
+  min-height: 100vh;
 }
 .sidebar-button {
   color: white;

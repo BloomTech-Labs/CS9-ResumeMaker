@@ -88,7 +88,7 @@ export class TemplateThree extends Component {
                       <p>{userInfo.email}</p>
                     </a>
                     <p>{userInfo.location}</p>
-                    <p>{userInfo.phoneNumber}</p>
+                    <p>{userInfo.phonenumber}</p>
                     <p>{userInfo.links.linkedin}</p>
                     <p>{userInfo.links.github}</p>
                     <p>{userInfo.links.portfolio}</p>
@@ -97,7 +97,7 @@ export class TemplateThree extends Component {
                 <div class="col">
                   <div textAlign="center" className="titleSection">
                     <h2>
-                      {userInfo.firstName} {userInfo.lastName}
+                      {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
                     <h4>{userInfo.title}</h4>
                   </div>
@@ -139,16 +139,20 @@ export class TemplateThree extends Component {
                       return (
                         <div key={index}>
                           {console.log(content)}
+
                           <p>
                             {content.title} <br />
+
                             {content.company}
                             <br />
                             {content.location}
                             <br />
                             {content.from} - {content.to}
+
                           </p>
                           <p>{content.description} </p>
                           <CheckBox />
+
                         </div>
                       );
                     })}
@@ -162,7 +166,9 @@ export class TemplateThree extends Component {
                           <h5>{content.school} </h5>
                           <p>{content.location}</p>
                           <p>
+
                             {content.degree} in {content.fieldofstudy} <br />
+
                             {content.from} - {content.to}
                           </p>
                           <CheckBox />

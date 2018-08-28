@@ -78,6 +78,7 @@ UserRouter.post("/register", (req, res) => {
     email: req.body.email,
     password: req.body.password
   };
+  console.log("WE GOT CALLED to make user", userData);
   User.findOne({ email: userData.email })
     .then(user => {
       if (user) {
@@ -101,8 +102,22 @@ UserRouter.post("/register", (req, res) => {
         newEmailConfirmation
           .save()
           .then(emailconfirmation => {
+            // This is if ethereal doesn't work or you don't want to test with real emails
+            console.log(
+              "Link to activate account:\n",
+              `${req.get("host")}${req.baseUrl}/confirmemail/${
+                newEmailConfirmation.hash
+              }`
+            );
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
+              if (err) {
+                console.log({
+                  errorMessage:
+                    "Error creating/logging into an account for nodemailer.",
+                  error: err
+                });
+              }
               // create reusable transporter object using the default SMTP transport
               let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
@@ -128,6 +143,10 @@ UserRouter.post("/register", (req, res) => {
 
               transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
+                  console.log({
+                    errorMessage: "Could not send email.",
+                    error: err
+                  });
                   return res.status(500).json({
                     errorMessage: "Could not send email.",
                     error: err
@@ -189,7 +208,7 @@ UserRouter.post("/login", (req, res) => {
             stripe.subscriptions.del(user.subscriptions, (err, success) => {
               if (err) console.log(err);
               else console.log(success);
-            })
+            });
             User.findOneAndUpdate(
               { email },
               { membership: false, subscription: null }
@@ -328,6 +347,13 @@ UserRouter.put(
                             newEmailConfirmation
                               .save()
                               .then(emailconfirmation => {
+                                // This is if ethereal doesn't work or you don't want to test with real emails
+                                console.log(
+                                  "Link to change email:\n",
+                                  `${req.get("host")}${
+                                    req.baseUrl
+                                  }/changeemail/${newEmailConfirmation.hash}`
+                                );
                                 // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
                                 nodemailer.createTestAccount((err, account) => {
                                   // create reusable transporter object using the default SMTP transport
@@ -596,6 +622,13 @@ UserRouter.put("/forgotpassword", (req, res) => {
       newEmailConfirmation
         .save()
         .then(emailconfirmation => {
+          // This is if ethereal doesn't work or you don't want to test with real emails
+          console.log(
+            "Link to reset password:\n",
+            `${req.get("host")}${req.baseUrl}/resetpassword/${
+              newEmailConfirmation.hash
+            }`
+          );
           // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
           nodemailer.createTestAccount((err, account) => {
             // create reusable transporter object using the default SMTP transport
