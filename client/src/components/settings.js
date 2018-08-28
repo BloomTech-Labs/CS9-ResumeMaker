@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import {
+  Modal,
+  Button,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  HelpBlock
+} from "react-bootstrap";
+
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 const urls = require("../config.json");
@@ -254,7 +263,7 @@ class Settings extends Component {
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div Settings">
             <h1>Settings</h1>
             <PersonalInfo context={this.props.context} />
           </div>

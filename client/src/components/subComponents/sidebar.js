@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./CSS/sidebar.css";
 import axios from "axios";
 const urls = require("../../config.json");
@@ -12,7 +12,7 @@ class Sidebar extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (
       this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
@@ -40,6 +40,10 @@ class Sidebar extends Component {
   };
 
   render() {
+    // If there is no token, then going to any page will result in a redirect to login
+    if (!localStorage.getItem("token")) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className="test-div bg-secondary">
         <Link to="/resumes" className="sidebar-button">
