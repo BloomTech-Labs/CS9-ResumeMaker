@@ -6,6 +6,7 @@ import LandingPage from "./components/landingPage";
 import Summaries from "./components/summary";
 import Education from "./components/education";
 import Skills from "./components/skills";
+import JobTitle from "./components/jobTitle";
 import Resumes from "./components/resumes";
 import Billing from "./components/billing";
 import Settings from "./components/settings";
@@ -18,6 +19,7 @@ import SummaryCreate from "./components/summaryCreate";
 import EducationCreate from "./components/educationCreate";
 import ExperienceCreate from "./components/experienceCreate";
 import SkillsCreate from "./components/skillsCreate";
+import JobTitleCreate from "./components/jobTitleCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 import { TemplateOne } from "./components/templates/template1";
@@ -83,6 +85,18 @@ class App extends Component {
                   path="/skills/create"
                   render={props => (
                     <SkillsCreate {...props} context={context} />
+                  )}
+                />
+                                <Route
+                  exact
+                  path="/jobtitle"
+                  render={props => <JobTitle {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/jobtitle/create"
+                  render={props => (
+                    <JobTitleCreate {...props} context={context} />
                   )}
                 />
                 <Route
