@@ -7,47 +7,39 @@ const Resume = new Schema({
     type: ObjectId,
     ref: "User"
   },
-  email: String,
-  name: {
-    firstname: String,
-    middlename: String,
-    lastname: String
-  },
-  location: String,
-  title: String,
-  phonenumber: String,
   links: {
-    linkedin: String,
-    github: String,
-    portfolio: String
+    linkedin: {
+      value: Boolean
+    },
+    github: {
+      value: Boolean
+    },
+    portfolio: {
+      value: Boolean
+    }
   },
   sections: {
     experience: [
       {
-        title: String,
-        company: String,
-        location: String,
-        from: String,
-        to: String
+        id: Number,
+        value: Boolean
       }
     ],
     education: [
       {
-        school: String,
-        degree: String,
-        fieldofstudy: String,
-        from: String,
-        to: String
+        id: Number,
+        value: Boolean
       }
     ],
     summary: [
       {
-        type: String
+        type: String,
       }
     ],
     skills: [
       {
-        type: String
+        id: Number,
+        value: Boolean
       }
     ]
   }
