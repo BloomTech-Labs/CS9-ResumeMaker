@@ -25,7 +25,7 @@ export class PersonalInfo extends Component {
         lastname: ""
       },
       location: "",
-      title: "",
+      // title: "",
       phonenumber: "",
       links: {
         linkedin: "",

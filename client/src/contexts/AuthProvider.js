@@ -38,7 +38,7 @@ class AuthProvider extends Component {
 
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
-      title: userData.title ? userData.title : "",
+      title: userData.title ? userData.title : [],
       links: userData.links ? userData.links : [],
       location: userData.location ? userData.location : "",
       phonenumber: userData.phonenumber ? userData.phonenumber : "",
