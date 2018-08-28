@@ -16,10 +16,6 @@ class JobTitleCreate extends Component {
   }
 
   componentDidMount() {
-    if (this.props.context.userInfo.auth !== true) {
-      //future home of login automatically on refresh or revisit
-    }
-
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.titleIndex !== false
@@ -50,7 +46,7 @@ class JobTitleCreate extends Component {
     } // if editing
 
     const tempObj = {
-      "sections.title": this.props.context.userInfo.title
+      title: this.props.context.userInfo.title
     };
     axios
       .put(
@@ -72,7 +68,7 @@ class JobTitleCreate extends Component {
   render() {
     return (
       <div>
-        {this.state.success ? <Redirect to="/title" /> : null}
+        {this.state.success ? <Redirect to="/jobtitle" /> : null}
         <Navbar
           context={this.props.context}
           breadcrumbs={[
