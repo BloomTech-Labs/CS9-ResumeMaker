@@ -46,7 +46,11 @@ class JobTitleCreate extends Component {
     } // if editing
 
     const tempObj = {
+<<<<<<< HEAD
       title: this.props.context.userInfo.title
+=======
+      "title": this.props.context.userInfo.title
+>>>>>>> 9d4907f1c334fcc0bb61ab2590c70b1292a5e3ed
     };
     axios
       .put(
@@ -73,7 +77,7 @@ class JobTitleCreate extends Component {
           context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/title", title: "Title" },
+            { link: "/jobtitle", title: "Job Title" },
             { link: "/jobtitle/create", title: "Create" }
           ]}
         />
