@@ -20,6 +20,7 @@ class JobTitle extends Component {
           <div className="title-div">
             <h1>Job Title</h1>
             {this.props.context.userInfo.title.map((element, index) => {
+             
               return (
                 <Link
                   to={{

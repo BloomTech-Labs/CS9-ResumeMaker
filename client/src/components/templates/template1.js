@@ -50,6 +50,7 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
+  
     return (
       <div>
         <Navbar
