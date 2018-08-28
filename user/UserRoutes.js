@@ -5,15 +5,17 @@ const passport = require("passport");
 const nodemailer = require("nodemailer");
 const base64url = require("base64url");
 const crypto = require("crypto");
-let websiteName = "";
 require("dotenv").config();
+const stripe = require("stripe")(process.env.SECRET_KEY);
+
+const User = require("./UserModel.js");
+const Resume = require("../resume/ResumeModel");
+const EmailConfirmation = require("./EmailConfirmationModel.js");
+const secretKey = process.env.SECRET;
+let websiteName = "";
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
 } else websiteName = "easy-resume.com";
-const secretKey = process.env.SECRET;
-const User = require("./UserModel.js");
-const EmailConfirmation = require("./EmailConfirmationModel.js");
-const stripe = require("stripe")(process.env.SECRET_KEY);
 
 // GET users/:username
 // Route to find if a username is already in use
@@ -45,7 +47,7 @@ UserRouter.get("/emailcheck/:email", (req, res) => {
     });
 });
 
-// GET users/currentuser (TEST ROUTE --- WILL REMOVE)
+// GET users/currentuser
 // Route to find id, username and email of current user
 UserRouter.get(
   "/currentuser",
@@ -67,28 +69,6 @@ UserRouter.get("/", (req, res) => {
       res.status(500).json({ errorMessage: "Get unsuccessful.", error: err });
     });
 });
-
-/*
-  @route  users/:id/resumes
-  @desc   Retrieve resumes from a specific user
-  @access Private (Development) | Public (Testing)
-*/
-UserRouter.get(
-  "/:id/resumes",
-  // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { id } = req.params;
-    const query = User.findById(id)
-      .select("resumes")
-      .populate("resumes");
-
-    query.then(resumes => {
-      res.status(200).json(resumes)
-    }).catch(err => {
-      res.status(400).json({ errorMessage: "Unable to retrieve" });
-    });
-  }
-);
 
 // POST users/register
 // Register a new user
@@ -235,14 +215,21 @@ UserRouter.post("/login", (req, res) => {
               email: user.email,
               password: user.password
             };
-            // if (user.membership) {
-            //   payload.resumes = user.resumes;
-            // }
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "7d"
             });
             user.password = null;
-            res.json({ token, user });
+            if (user.membership) {
+              const query = Resume.find({ user: user.id });
+              query.then(resumes => {
+                res.json({ token, user, resumes });
+              });
+            } else {
+              const query = Resume.findOne({ user: user.id });
+              query.then(resume => {
+                res.json({ token, user, resume })
+              });
+            }
           } else
             return res
               .status(401)
