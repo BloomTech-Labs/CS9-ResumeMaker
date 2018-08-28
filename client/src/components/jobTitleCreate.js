@@ -78,17 +78,18 @@ class JobTitleCreate extends Component {
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/title", title: "Title" },
-            { link: "/title/create", title: "Create" }
+            { link: "/jobtitle/create", title: "Create" }
           ]}
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
           <div className="title-div">
-            <h1>JOB TITLE</h1>
+            <h1>Job Title</h1>
             <form>
               <div className="form-group">
                 <label form="formGroupExampleInput2">
-                  “Success is title inside out.” ― Matshona Dhliwayo
+                  “It is not titles that honour men, but men that honour
+                  titles.” ― Niccolò Machiavelli
                 </label>
                 <input
                   value={this.state.title}
