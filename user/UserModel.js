@@ -72,11 +72,13 @@ const User = new mongoose.Schema(
     sections: {
       summary: [
         {
+          id: ObjectId,
           type: String
         }
       ],
       experience: [
         {
+          id: ObjectId,
           title: {
             type: String,
             required: true
@@ -96,6 +98,7 @@ const User = new mongoose.Schema(
       ],
       education: [
         {
+          id: ObjectId,
           school: {
             type: String,
             required: true
@@ -117,6 +120,7 @@ const User = new mongoose.Schema(
       ],
       skills: [
         {
+          id: ObjectId,
           type: String
         }
       ]
