@@ -1,0 +1,49 @@
+.Settings {
+  /* display: flex;
+  justify-content: center; */
+  /* min-height: 100vh;
+  background-image: url(Buildings.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover; */
+}
+
+.Settings form {
+  align-self: center;
+}
+
+.Settings form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 20rem;
+  justify-content: center;
+}
+
+.Settings form .form-group .control-label {
+  margin: 0;
+}
+
+.Settings form .form-group .help-block {
+  margin: 0;
+}
+
+.Settings form .btn {
+  margin-top: 2rem;
+}
+
+.Settings .modal {
+  position: absolute;
+  /* the top and bottom make the modal relatively
+  centered on the screen */
+  top: 25%;
+  bottom: 10%;
+}
+
+.Settings .modal-footer {
+  justify-content: center;
+}
+
+.Settings .btn {
+  /* font-size: 1.6rem; */
+}

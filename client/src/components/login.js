@@ -22,8 +22,7 @@ const urls = require("../config.json");
 export default class Login extends Component {
   constructor(props) {
     super(props);
-
-    this.state = bobbert;
+    this.state = scrinch;
   }
 
   validateForm() {

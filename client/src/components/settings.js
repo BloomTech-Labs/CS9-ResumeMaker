@@ -12,6 +12,8 @@ import {
 
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
+import "./CSS/settings.css";
+
 const urls = require("../config.json");
 
 export class PersonalInfo extends Component {
@@ -36,7 +38,10 @@ export class PersonalInfo extends Component {
       subscription: "",
       oldpassword: "",
       newpassword: "",
-      errors: []
+      newconfirmpassword: "",
+      usernameInvalid: null,
+      emailInvalid: null,
+      passwordInvalid: null
     };
   }
 
@@ -77,15 +82,39 @@ export class PersonalInfo extends Component {
     return initObj;
   };
 
+  validateEmail = email => {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+  };
+
+  checkPasswordStrength = password => {
+    if (password === "") return null;
+    const minlength = 6;
+    if (password.length < minlength) return "error";
+    if (!password.match(/[A-Z]/)) return "error";
+    if (!password.match(/[a-z]/)) return "error";
+    if (!password.match(/\d/)) return "error";
+    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+      return "error";
+    return "success";
+  };
+
+  checkConfirmPassword = () => {
+    if (this.state.newpassword === "") return null;
+    if (this.state.newpassword !== this.state.newconfirmpassword) {
+      return "error";
+    } else return "success";
+  };
+
   handleChange = e => {
-    const eName = e.target.name;
+    const eName = e.target.id;
     const value = e.target.value;
-    if (e.target.name.includes("name")) {
+    if (eName.includes("name")) {
       let { name } = this.state;
       const nameArr = eName.split(".");
       name[nameArr[1]] = value;
       this.setState({ name });
-    } else if (e.target.name.includes("links")) {
+    } else if (eName.includes("links")) {
       let { links } = this.state;
       const linksArr = eName.split(".");
       links[linksArr[1]] = value;
@@ -95,10 +124,55 @@ export class PersonalInfo extends Component {
     }
   };
 
+  checkInputValidity = () => {
+    this.setState({
+      // usernameInvalid: null,
+      emailInvalid: null,
+      passwordInvalid: null
+    });
+    if (this.state.email !== this.props.context.userInfo.email) {
+      // const usernamePromise = axios
+      //   .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
+      //   .then(response => {
+      //     console.log(response);
+      //     this.setState({ usernameInvalid: "error" });
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
+      const emailPromise = axios
+        .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
+        .then(response => {
+          console.log(response);
+          this.setState({ emailInvalid: "error" });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      if (!this.validateEmail(this.state.email)) {
+        this.setState({ emailInvalid: "error" });
+      }
+
+      // If all fields are valid and the confirm password matches password,
+      // then account info is submitted and the user redirected to a modal with a link to the login page
+      Promise.all([emailPromise]).then(values => {
+        console.log("The current state:", this.state);
+        if (
+          // this.state.usernameInvalid === null &&
+          this.state.emailInvalid === null
+        ) {
+          this.handleSubmit();
+        } else {
+          this.componentDidMount();
+        }
+      });
+    } else this.handleSubmit();
+  };
+
   handleSubmit = e => {
     // e.preventDefault();
     // this.setState({ errors: [] });
-    const errors = [];
+    // const errors = [];
     //TODO: render any conditions before axios call
     axios
       .put(
@@ -109,25 +183,17 @@ export class PersonalInfo extends Component {
         }
       )
       .then(response => {
-        console.log("RESPONSE GOTTEN", response.data.user);
+        console.log("RESPONSE GOTTEN", response);
+        if (response.data.errorMessage) {
+          if (response.data.errorMessage.includes("password")) {
+            this.setState({ passwordInvalid: "error" });
+          }
+        }
         this.setState(response.data.user);
         // This updates context with the new user info from server
         this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {
-        if (this.state.name.firstname === "") {
-          errors.push("First name is required.");
-        }
-        if (this.state.name.lastname === "") {
-          errors.push("Last name is required.");
-        }
-        if (this.state.email === "") {
-          errors.push("Email is required.");
-        }
-        if (this.state.phonenumber === "") {
-          errors.push("Phone number is required.");
-        }
-        this.setState({ errors: errors });
         console.log("oops", err.message);
         alert("try again");
       });
@@ -139,88 +205,141 @@ export class PersonalInfo extends Component {
       this.props.context.userInfo
     );
     return (
-      <div>
+      <div className="Settings">
         <h1> Personal Information </h1>
         <form>
-          <div className="form-group">
-            <input
-              onChange={this.handleChange}
-              name="user.firstname"
-              type="text"
-              className="form-control"
-              placeholder="Your first name"
+          <FormGroup controlId="name.firstname" bsSize="large">
+            <ControlLabel>First Name</ControlLabel>
+            <FormControl
               value={this.state.name.firstname}
-            />
-            <input
               onChange={this.handleChange}
-              name="name.middlename"
-              type="text"
-              className="form-control"
-              placeholder="Your middle name(s)"
+            />
+          </FormGroup>
+          <FormGroup controlId="name.middlename" bsSize="large">
+            <ControlLabel>Middle Name</ControlLabel>
+            <FormControl
               value={this.state.name.middlename}
-            />
-            <input
               onChange={this.handleChange}
-              type="text"
-              name="name.lastname"
-              className="form-control"
-              placeholder="Your last name"
+            />
+          </FormGroup>
+          <FormGroup controlId="name.lastname" bsSize="large">
+            <ControlLabel>Last Name</ControlLabel>
+            <FormControl
               value={this.state.name.lastname}
-            />
-            <input
               onChange={this.handleChange}
-              type="text"
-              name="email"
-              className="form-control"
-              placeholder="Email"
-              value={this.state.email}
             />
-            <input
+          </FormGroup>
+          <FormGroup controlId="phonenumber" bsSize="large">
+            <ControlLabel>Phone Number</ControlLabel>
+            <FormControl
+              value={this.state.name.lastname}
               onChange={this.handleChange}
-              type="text"
-              name="phonenumber"
-              className="form-control"
-              placeholder="Your phone number"
-              value={this.state.phonenumber}
             />
-            <input
-              onChange={this.handleChange}
-              type="text"
-              name="location"
-              className="form-control"
-              placeholder="Your location"
+          </FormGroup>
+          <FormGroup controlId="location" bsSize="large">
+            <ControlLabel>Location</ControlLabel>
+            <FormControl
               value={this.state.location}
-            />
-            <input
               onChange={this.handleChange}
-              type="text"
-              name="links.linkedin"
-              className="form-control"
-              placeholder="A link to your linkedin"
+            />
+          </FormGroup>
+          <FormGroup controlId="links.linkedin" bsSize="large">
+            <ControlLabel>Linkedin</ControlLabel>
+            <FormControl
               value={this.state.links.linkedin}
-            />
-            <input
               onChange={this.handleChange}
-              type="text"
-              name="links.github"
-              className="form-control"
-              placeholder="A link to your github"
+            />
+          </FormGroup>
+          <FormGroup controlId="links.github" bsSize="large">
+            <ControlLabel>Github</ControlLabel>
+            <FormControl
               value={this.state.links.github}
-            />
-            <input
               onChange={this.handleChange}
-              type="text"
-              name="links.portfolio"
-              className="form-control"
-              placeholder="A link to your portfolio"
-              value={this.state.links.portfolio}
             />
-          </div>
+          </FormGroup>
+          <FormGroup controlId="links.portfolio" bsSize="large">
+            <ControlLabel>Portfolio</ControlLabel>
+            <FormControl
+              value={this.state.links.portfolio}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
+          <FormGroup
+            controlId="email"
+            bsSize="large"
+            validationState={this.state.emailInvalid}
+          >
+            <ControlLabel>Email</ControlLabel>
+            <FormControl
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+            {this.state.emailInvalid ? (
+              <HelpBlock>Please enter an unused valid email.</HelpBlock>
+            ) : null}
+          </FormGroup>
+
+          <FormGroup
+            controlId="oldpassword"
+            bsSize="large"
+            validationState={this.checkPasswordStrength(this.state.oldpassword)}
+          >
+            <ControlLabel>Current Password</ControlLabel>
+            <FormControl
+              type="password"
+              value={this.state.oldpassword}
+              onChange={this.handleChange}
+            />
+            {this.state.passwordInvalid ? (
+              <HelpBlock>
+                Incorrect password. Please enter your current password if you
+                want to make a new password or change your email.
+              </HelpBlock>
+            ) : null}
+          </FormGroup>
+          <FormGroup
+            controlId="newpassword"
+            bsSize="large"
+            validationState={this.checkPasswordStrength(this.state.newpassword)}
+          >
+            <ControlLabel>New Password</ControlLabel>
+            <FormControl
+              type="password"
+              value={this.state.newpassword}
+              onChange={this.handleChange}
+            />
+            {this.checkPasswordStrength(this.state.newpassword) ? (
+              <HelpBlock>
+                Please use a complex password at least 8 characters long.
+              </HelpBlock>
+            ) : null}
+          </FormGroup>
+          <FormGroup
+            controlId="newconfirmpassword"
+            bsSize="large"
+            validationState={this.checkConfirmPassword()}
+          >
+            <ControlLabel>Confirm New Password</ControlLabel>
+            <FormControl
+              type="password"
+              value={this.state.newconfirmpassword}
+              onChange={this.handleChange}
+            />
+            {this.state.newconfirmpassword !== this.state.newpassword ? (
+              <HelpBlock>Please make this match your new password.</HelpBlock>
+            ) : null}
+          </FormGroup>
         </form>
-        <button onClick={() => this.handleSubmit()}>Submit</button>
-        {this.state.errors
-          ? this.state.errors.map(error => <p>{error}</p>)
-          : null}
+        <Button
+          block
+          bsSize="large"
+          bsStyle="primary"
+          onClick={() => this.checkInputValidity()}
+        >
+          Submit
+        </Button>
       </div>
     );
   }
@@ -251,7 +370,7 @@ class Settings extends Component {
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
-          <div className="title-div Settings">
+          <div className="title-div">
             <h1>Settings</h1>
             <PersonalInfo context={this.props.context} />
           </div>
