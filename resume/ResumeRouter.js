@@ -33,16 +33,16 @@ router.get(
 */
 router.post(
   "/",
-  //   passport.authenticate("jwt", { session: false }),
+    // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newResume = new Resume(req.body);
-    const { email } = req.body;
+    const { user } = req.body;
     // const email = req.user.email;
 
     newResume
       .save()
       .then(resume => {
-        User.findOne({ email })
+        User.findById(user)
           .then(user => {
             user.resumes.push(resume);
             user.save();
