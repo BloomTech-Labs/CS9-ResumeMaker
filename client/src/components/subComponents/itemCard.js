@@ -20,6 +20,14 @@ import "./CSS/itemcard.css";
 //   }
 // }
 
+function ellipsify(str) {
+  if (str.length > 150) {
+    return str.substring(0, 150) + "...";
+  } else {
+    return str;
+  }
+}
+
 class ItemCard extends Component {
   render() {
     return (
@@ -37,7 +45,7 @@ class ItemCard extends Component {
           </Link>
         </CardHeader>
         <CardBody>
-          <CardText>{this.props.content}</CardText>
+          <CardText>{ellipsify(this.props.content)}</CardText>
         </CardBody>
       </Card>
     );

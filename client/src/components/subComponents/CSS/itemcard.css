@@ -1,6 +1,6 @@
 .item-card {
   margin: 2% 1%;
-  width: 20%;
+  width: 29%;
   /* min-width: 20%; */
   text-align: left;
 }
@@ -13,8 +13,9 @@
 }
 
 .item-card .card-body .card-text {
+  text-overflow: ellipsis;
   overflow: hidden;
-  height: 150px;
+  /* height: 150px; */
 }
 
 /* .summary-card-link {
