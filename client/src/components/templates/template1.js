@@ -87,20 +87,20 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>
                     {" "}
-                    <CheckBox />
+                    <CheckBox /> 
                     {userInfo.email}
                   </p>
                 </a>
                 <p>
-                  <CheckBox />
+                  <CheckBox /> 
                   {userInfo.location}
                 </p>
                 <p>
-                  <CheckBox />
+                  <CheckBox /> 
                   {userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox />
+                  <CheckBox /> 
                   {userInfo.links.linkedin}
                 </p>
                 <p>

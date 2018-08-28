@@ -17,7 +17,7 @@ class CheckBox extends React.Component {
   toggle = () => {
     this.setState(
       {
-        checked: !this.state.checked 
+        checked: !this.state.checked
       },
       function() {
         console.log(this.state);
@@ -26,7 +26,13 @@ class CheckBox extends React.Component {
   };
 
   render() {
-    return <input type="checkbox" checked={this.state.checked} onChange={this.toggle} />;
+    return (
+      <input
+        type="checkbox"
+        checked={this.state.checked}
+        onChange={this.toggle}
+      />
+    );
   }
 }
 
@@ -86,8 +92,10 @@ export class TemplateTwo extends Component {
                 {userInfo.summary.map((content, index) => {
                   return (
                     <div key={index}>
-                      <p>{content}</p>
-                      <CheckBox />
+                      <p>
+                        {" "}
+                        <CheckBox /> {content}
+                      </p>
                     </div>
                   );
                 })}
@@ -98,18 +106,30 @@ export class TemplateTwo extends Component {
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 class="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p>{userInfo.email}</p>
+                      <p>
+                        {" "}
+                        <CheckBox />
+                        {userInfo.email}
+                      </p>
                     </a>
                     <p>
+                      <CheckBox />
                       {userInfo.location}
-                      <br />
+                    </p>
+                    <p>
+                      <CheckBox />
                       {userInfo.phonenumber}
                     </p>
                     <p>
+                      <CheckBox />
                       {userInfo.links.linkedin}
-                      <br />
+                    </p>
+                    <p>
+                      <CheckBox />
                       {userInfo.links.github}
-                      <br />
+                    </p>
+                    <p>
+                      <CheckBox />
                       {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
@@ -119,13 +139,16 @@ export class TemplateTwo extends Component {
                     {education.map((content, index) => {
                       return (
                         <div key={index}>
-                          <h5>{content.school} </h5>
+                          <h5>
+                            <CheckBox /> {content.degree} in{" "}
+                            {content.fieldofstudy}{" "}
+                          </h5>
                           <p>{content.location}</p>
                           <p>
-                            {content.degree} in {content.fieldofstudy} <br />
+                            {content.school}
+                            <br />
                             {content.from} - {content.to}
                           </p>
-                          <CheckBox />
                         </div>
                       );
                     })}
@@ -138,8 +161,9 @@ export class TemplateTwo extends Component {
                     {userInfo.skills.map((content, index) => {
                       return (
                         <div key={index}>
-                          <p>{content}</p>
-                          <CheckBox />
+                          <p>
+                            <CheckBox /> {content}
+                          </p>
                         </div>
                       );
                     })}
@@ -151,16 +175,18 @@ export class TemplateTwo extends Component {
                       return (
                         <div key={index}>
                           {console.log(content)}
+                          <h5>
+                            {" "}
+                            <CheckBox /> {content.company}{" "}
+                          </h5>
                           <p>
-                            {content.title} <br />
-                            {content.company}
+                            {content.title}
                             <br />
                             {content.location}
                             <br />
                             {content.from} - {content.to}
                           </p>
                           <p>{content.description} </p>
-                          <CheckBox />
                         </div>
                       );
                     })}
