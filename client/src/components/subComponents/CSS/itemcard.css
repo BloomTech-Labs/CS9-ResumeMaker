@@ -1,0 +1,38 @@
+.item-card {
+  margin: 2% 1%;
+  width: 29%;
+  /* min-width: 20%; */
+  text-align: left;
+}
+
+.item-card .card-header {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 50px;
+}
+
+.item-card .card-body .card-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* height: 150px; */
+}
+
+/* .summary-card-link {
+  background: white;
+  border: 1px solid lightgrey;
+  margin: 10px;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 10px;
+  width: 240px;
+  height: 160px;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.summary-card-span {
+  color: black;
+} */

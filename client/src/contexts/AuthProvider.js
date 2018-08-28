@@ -4,18 +4,20 @@ export const AuthContext = React.createContext({});
 class AuthProvider extends Component {
   state = {
     auth: false,
-    firstName: "",
-    lastName: "",
-    middleName: "",
-    title: "",
+    username: "",
     email: "",
-    phoneNumber: "",
+    name: {
+      firstname: "",
+      middlename: "",
+      lastname: ""
+    },
+    title: "",
+    phonenumber: "",
     links: [],
     education: [],
     experience: [],
     skills: [],
-    summary: [],
-    userName: ""
+    summary: []
   };
 
   toggleAuth = () => {
@@ -30,19 +32,23 @@ class AuthProvider extends Component {
     this.setState({
       auth: true,
       email: userData.email ? userData.email : "",
-      firstName: userData.name.firstname ? userData.name.firstname : "",
-      lastName: userData.name.lastname ? userData.name.lastname : "",
-      middleName: userData.name.middlename ? userData.name.middlename : "",
+      name: {
+        firstname: userData.name.firstname ? userData.name.firstname : "",
+        middlename: userData.name.middlename ? userData.name.middlename : "",
+
+        lastname: userData.name.lastname ? userData.name.lastname : ""
+      },
       title: userData.title ? userData.title : "",
       links: userData.links ? userData.links : [],
-      phoneNumber: userData.phonenumber ? userData.phonenumber : "",
+      location: userData.location ? userData.location : "",
+      phonenumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
       experience: userData.sections.experience
         ? userData.sections.experience
         : [],
       skills: userData.sections.skills ? userData.sections.skills : [],
       summary: userData.sections.summary ? userData.sections.summary : [],
-      userName: userData.username ? userData.username : "",
+      username: userData.username ? userData.username : "",
       id: userData._id ? userData._id : null
     });
   };

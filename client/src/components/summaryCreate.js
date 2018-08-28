@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { Prompt } from "react-router";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import axios from "axios";
@@ -15,7 +16,7 @@ class SummaryCreate extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.summaryIndex !== false
@@ -66,7 +67,16 @@ class SummaryCreate extends Component {
   };
 
   render() {
-    return (
+    return [
+      <Prompt
+        key="block-nav"
+        when={
+          this.props.context.userInfo.summary[
+            this.props.location.state.summaryIndex
+          ] !== this.state.summary
+        }
+        message="You have unsaved changes, are you sure you want to leave?"
+      />,
       <div>
         {this.state.success ? <Redirect to="/summary" /> : null}
         <Navbar
@@ -101,7 +111,7 @@ class SummaryCreate extends Component {
           </div>
         </div>
       </div>
-    );
+    ];
   }
 }
 export default SummaryCreate;

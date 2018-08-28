@@ -6,7 +6,7 @@ import axios from "axios";
 const urls = require("../config.json");
 
 class LandingPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     console.log(this.props.context.userInfo);
     if (this.props.context.userInfo.auth === true) {
       this.props.history.push("/templates");

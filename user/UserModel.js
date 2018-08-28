@@ -31,19 +31,29 @@ const User = new mongoose.Schema(
     name: {
       firstname: {
         type: String,
-        maxlength: 20
+        maxlength: 20,
+        required: true,
+        default: ""
       },
       middlename: {
         type: String,
-        maxlength: 20
+        maxlength: 20,
+        required: true,
+        default: ""
       },
       lastname: {
         type: String,
-        maxlength: 20
+        maxlength: 20,
+        required: true,
+        default: ""
       }
     },
     location: String,
-    title: String,
+    title: [
+      {
+        type: String
+      }
+    ],
     phonenumber: {
       type: String,
       validate: [validatePhone, "Invalid Phone Number"]
