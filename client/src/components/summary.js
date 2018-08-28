@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
-import SummaryCard from "./subComponents/summaryCard";
+import ItemCard from "./subComponents/itemCard";
 import { Link } from "react-router-dom";
 import "./CSS/summary.css";
 
@@ -23,10 +23,10 @@ class Summary extends Component {
             <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
-                  <SummaryCard
-                    classname="summary-card"
+                  <ItemCard
+                    linkTo="/summary"
                     index={index}
-                    summary={element}
+                    content={element}
                     key={index}
                   />
                 );

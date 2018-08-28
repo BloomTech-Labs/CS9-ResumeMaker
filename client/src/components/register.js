@@ -20,9 +20,9 @@ class Register extends Component {
     username: "screech",
     submitted: false,
     submittedError: false,
-    usernameInvalid: false,
-    emailInvalid: false,
-    passwordInvalid: false
+    usernameInvalid: null,
+    emailInvalid: null,
+    passwordInvalid: null
   };
 
   validateForm() {
@@ -42,15 +42,15 @@ class Register extends Component {
 
   checkInputValidity = () => {
     this.setState({
-      usernameInvalid: false,
-      emailInvalid: false,
-      passwordInvalid: false
+      usernameInvalid: null,
+      emailInvalid: null,
+      passwordInvalid: null
     });
     const usernamePromise = axios
       .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
       .then(response => {
         console.log(response);
-        this.setState({ usernameInvalid: true });
+        this.setState({ usernameInvalid: "error" });
       })
       .catch(err => {
         console.log(err);
@@ -59,16 +59,16 @@ class Register extends Component {
       .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
       .then(response => {
         console.log(response);
-        this.setState({ emailInvalid: true });
+        this.setState({ emailInvalid: "error" });
       })
       .catch(err => {
         console.log(err);
-        if (!this.validateEmail()) {
-          this.setState({ emailInvalid: true });
-        }
       });
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({ emailInvalid: "error" });
+    }
     if (!this.checkPasswordStrength(this.state.password)) {
-      this.setState({ passwordInvalid: true });
+      this.setState({ passwordInvalid: "error" });
     }
 
     // If all fields are valid and the confirm password matches password,
@@ -76,9 +76,9 @@ class Register extends Component {
     Promise.all([usernamePromise, emailPromise]).then(values => {
       console.log("The current state:", this.state);
       if (
-        this.state.usernameInvalid === false &&
-        this.state.emailInvalid === false &&
-        this.state.passwordInvalid === false &&
+        this.state.usernameInvalid === null &&
+        this.state.emailInvalid === null &&
+        this.state.passwordInvalid === null &&
         this.state.password === this.state.confirmPassword
       ) {
         this.handleSubmit();
@@ -167,8 +167,8 @@ class Register extends Component {
           <form>
             <FormGroup
               controlId="username"
-              bsSize="small"
-              // validationState={!this.state.invalidUsername}
+              bsSize="large"
+              validationState={this.state.usernameInvalid}
             >
               <ControlLabel>Username</ControlLabel>
               <FormControl
@@ -177,14 +177,15 @@ class Register extends Component {
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              {this.state.invalidUsername === true ? (
+              {this.state.usernameInvalid ? (
                 <HelpBlock>This username is already in use.</HelpBlock>
               ) : null}
             </FormGroup>
+
             <FormGroup
               controlId="email"
               bsSize="large"
-              // validationState={!this.state.invalidEmail}
+              validationState={this.state.emailInvalid}
             >
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -193,14 +194,15 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              {this.state.invalidEmail ? (
+              {this.state.emailInvalid ? (
                 <HelpBlock>Please enter an unused valid email.</HelpBlock>
               ) : null}
             </FormGroup>
+
             <FormGroup
               controlId="password"
               bsSize="large"
-              // validationState={!this.state.invalidPassword}
+              validationState={this.state.passwordInvalid}
             >
               <ControlLabel>Password</ControlLabel>
               <FormControl
@@ -208,13 +210,17 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              {this.state.invalidPassword ? (
+              {this.state.passwordInvalid ? (
                 <HelpBlock>
                   Please use a complex password at least 8 characters long.
                 </HelpBlock>
               ) : null}
             </FormGroup>
-            <FormGroup controlId="confirmPassword" bsSize="large">
+            <FormGroup
+              controlId="confirmPassword"
+              bsSize="large"
+              validationState={this.state.passwordInvalid}
+            >
               <ControlLabel>Confirm password</ControlLabel>
               <FormControl
                 type="password"
@@ -225,10 +231,17 @@ class Register extends Component {
             <Button
               block
               bsSize="large"
+              bsStyle="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
               Register
+            </Button>
+            <Button
+              bsStyle="danger"
+              onClick={() => this.props.history.push("/login")}
+            >
+              Take me to the login page
             </Button>
           </form>
         </div>

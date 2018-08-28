@@ -3,18 +3,27 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./CSS/login.css";
 import axios from "axios";
 
+const scrinch = {
+  email: "scrinch@gmail.com",
+  password:
+    "YjBjZDYyM2Y1MGY4YTY2ZDFjYzBhZTMzMTJiZjhlZTMxMzc3Nzg5OThlOWMzZjU5NTgxNDYyMWI3ODQ5ODc0OQ!",
+  invalidCredentials: false
+};
+
+const bobbert = {
+  email: "bobbert@gmail.com",
+  password:
+    "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
+  invalidCredentials: false
+};
+
 const urls = require("../config.json");
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      email: "bobbert@gmail.com",
-      password:
-        "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
-      invalidCredentials: false
-    };
+    this.state = bobbert;
   }
 
   validateForm() {
@@ -57,6 +66,9 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
+          {this.state.invalidCredentials ? (
+            <h3 className="mb-5">Invalid password or email.</h3>
+          ) : null}
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
@@ -77,12 +89,12 @@ export default class Login extends Component {
           <Button
             block
             bsSize="large"
+            bsStyle="primary"
             disabled={!this.validateForm()}
             type="submit"
           >
             Login
           </Button>
-          {this.state.invalidCredentials ? <h3>Invalid Credentials</h3> : null}
         </form>
       </div>
     );

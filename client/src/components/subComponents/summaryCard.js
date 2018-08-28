@@ -21,7 +21,7 @@ class SummaryCard extends Component {
         }}
       >
         <span className="summary-card-span">
-          {ellipsify(this.props.summary)}
+          {ellipsify(this.props.content)}
         </span>
       </Link>
     );

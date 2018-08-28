@@ -75,7 +75,7 @@ export class TemplateThree extends Component {
                       <p>{userInfo.email}</p>
                     </a>
                     <p>{userInfo.location}</p>
-                    <p>{userInfo.phoneNumber}</p>
+                    <p>{userInfo.phonenumber}</p>
                     <p>{userInfo.links.linkedin}</p>
                     <p>{userInfo.links.github}</p>
                     <p>{userInfo.links.portfolio}</p>
@@ -84,7 +84,7 @@ export class TemplateThree extends Component {
                 <div class="col">
                   <div textAlign="center" className="titleSection">
                     <h2>
-                      {userInfo.firstName} {userInfo.lastName}
+                      {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
                     <h4>{userInfo.title}</h4>
                   </div>
@@ -122,11 +122,15 @@ export class TemplateThree extends Component {
                         <div key={index}>
                           {console.log(content)}
                           <h5>{content.title} </h5>
-                          <p>{content.company}<br/>
-                          {content.location}<br/>
+                          <p>
+                            {content.company}
+                            <br />
+                            {content.location}
+                            <br />
                             {content.from} - {content.to}
-                      <br/>
-                          {content.description} </p>
+                            <br />
+                            {content.description}{" "}
+                          </p>
                           {/* <input
                       type="checkbox"
                       checked={this.state.isSelected}
@@ -145,8 +149,7 @@ export class TemplateThree extends Component {
                           <h3>{content.school} </h3>
                           <p>{content.location}</p>
                           <p>
-                            {content.degree} to {content.fieldofstudy}{" "}
-                         <br/>
+                            {content.degree} to {content.fieldofstudy} <br />
                             {content.from} - {content.to}
                           </p>
                           {/* <input

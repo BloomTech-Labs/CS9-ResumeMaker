@@ -59,7 +59,7 @@ export class TemplateTwo extends Component {
             <form className="template1" onSubmit={this.handleSubmit}>
               <div textAlign="center" className="titleSection">
                 <h2>
-                  {userInfo.firstName} {userInfo.lastName}
+                  {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 <h4>{userInfo.title}</h4>
               </div>
@@ -84,7 +84,7 @@ export class TemplateTwo extends Component {
                       location!!!
                       {userInfo.location}
                       <br />
-                      {userInfo.phoneNumber}
+                      {userInfo.phonenumber}
                     </p>
                     <p>
                       {userInfo.links.linkedin}
