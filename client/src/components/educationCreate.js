@@ -19,7 +19,7 @@ class EducationCreate extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
     }

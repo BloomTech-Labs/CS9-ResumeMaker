@@ -31,25 +31,13 @@ export class PersonalInfo extends Component {
     };
   }
 
-  augmentObject = (initObj, modObj) => {
-    for (let prop in initObj) {
-      if (modObj[prop]) {
-        let val = modObj[prop];
-        if (typeof val == "object" && typeof initObj[prop] == "object")
-          this.augmentObject(initObj[prop], val);
-        else initObj[prop] = val;
-      }
-    }
-    return initObj;
-  };
-
-  componentWillMount = () => {
-    console.log("WILLMOUNT CALLED");
+  componentDidMount = () => {
+    console.log("ComponentDidMount");
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
     } else {
       console.log(
-        "(augmentObj called) props on willMount:",
+        "(augmentObj called) props on componentDidMount:",
         this.props.context.userInfo
       );
       // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
@@ -57,6 +45,27 @@ export class PersonalInfo extends Component {
         this.augmentObject(this.state, this.props.context.userInfo)
       );
     }
+  };
+  componentWillUpdate = () => {
+    console.log("ComponentWillUpdate");
+  };
+  componentDidUpdate = () => {
+    console.log("ComponentDidUpdate");
+    if (this.state.email === "" && this.props.context.userInfo.auth === true) {
+      this.componentDidMount();
+    }
+  };
+
+  augmentObject = (initObj, modObj) => {
+    for (let prop in initObj) {
+      if (modObj[prop]) {
+        let val = modObj[prop];
+        if (typeof val === "object" && typeof initObj[prop] === "object")
+          this.augmentObject(initObj[prop], val);
+        else initObj[prop] = val;
+      }
+    }
+    return initObj;
   };
 
   handleChange = e => {
@@ -127,6 +136,11 @@ export class PersonalInfo extends Component {
       });
   };
   render() {
+    console.log("Render for settings called, STATE:", this.state);
+    console.log(
+      "Render for settings called, PROPS:",
+      this.props.context.userInfo
+    );
     return (
       <div>
         <h1> Personal Information </h1>
@@ -216,6 +230,18 @@ export class PersonalInfo extends Component {
 }
 
 class Settings extends Component {
+  ComponentDidMount = () => {
+    console.log("ComponentDidMount");
+  };
+  ShouldComponentUpdate = () => {
+    console.log("ShouldComponentUpdate");
+  };
+  ComponentWillUpdate = () => {
+    console.log("ComponentWillUpdate");
+  };
+  ComponentDidUpdate = () => {
+    console.log("ComponentDidUpdate");
+  };
   render() {
     return (
       <div>
