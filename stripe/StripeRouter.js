@@ -32,10 +32,9 @@ const paidMember = (sub_id, email) => {
     membership: true
   };
 
-  const updatedStatus = User.findOneAndUpdate({ email }, membershipChange)
-  console.log("updatedStatus", updatedStatus);
+  const updatedStatus = User.findOneAndUpdate({ email }, membershipChange);
   return updatedStatus;
-}
+};
 /*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
@@ -55,11 +54,15 @@ router.post(
           const newCustomer = createCustomer(email, token);
           if (!newCustomer) res.status(400).json("Unable to create a user");
           else {
-            const newSubscription = createSubscription(newCustomer.id, "Monthly");
+            const newSubscription = createSubscription(
+              newCustomer.id,
+              "Monthly"
+            );
             if (!newSubscription) res.status(400).json("Unable to subscribe");
             else {
-              if (paidMember(newSubscription.id, email)) res.status(201).json("Success")
-              else res.status(400).json("Error")
+              if (paidMember(newSubscription.id, email))
+                res.status(201).json("Success");
+              else res.status(400).json("Error");
             }
           }
         }
