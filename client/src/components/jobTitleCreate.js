@@ -50,7 +50,7 @@ class JobTitleCreate extends Component {
     } // if editing
 
     const tempObj = {
-      "sections.title": this.props.context.userInfo.title
+      "title": this.props.context.userInfo.title
     };
     axios
       .put(
