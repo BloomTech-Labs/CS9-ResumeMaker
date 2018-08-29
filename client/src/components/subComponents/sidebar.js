@@ -14,10 +14,9 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      // this.props.context.userInfo.auth !== true &&
+      this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
-      console.log("passed token check");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -25,7 +24,8 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          const userData = response.data;
+          console.log(response.data.resumes);
+          const userData = response.data.user;
           this.props.context.actions.setLogin(userData);
         })
         .catch(err => {
@@ -50,39 +50,39 @@ class Sidebar extends Component {
           <Link to="/templates" className="sidebar-button">
             {" "}
             Templates
-        </Link>
+          </Link>
           <Link to="/resumes" className="sidebar-button">
             {" "}
             Resumes
-        </Link>
+          </Link>
           <Link to="/jobTitle" className="sidebar-button">
             {" "}
             JobTitle
-        </Link>
+          </Link>
           <Link to="/summary" className="sidebar-button">
             {" "}
             Summary
-        </Link>
+          </Link>
           <Link to="/skills" className="sidebar-button">
             {" "}
             Skills
-        </Link>
+          </Link>
           <Link to="/experience" className="sidebar-button">
             {" "}
             Experience
-        </Link>
+          </Link>
           <Link to="/education" className="sidebar-button">
             {" "}
             Education
-        </Link>
+          </Link>
           <Link to="/billing" className="sidebar-button">
             {" "}
             Billing
-        </Link>
+          </Link>
           <Link to="/settings" className="sidebar-button">
             {" "}
             Settings
-        </Link>
+          </Link>
         </div>
       </div>
     );
