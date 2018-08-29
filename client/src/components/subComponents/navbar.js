@@ -6,7 +6,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar sticky-top navbar-dark bg-dark mb-0">
-        <ol className="breadcrumb p-0 mb-0 bg-dark">
+        <ol className="breadcrumb p-1 mb-0 bg-dark">
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
               <Link
