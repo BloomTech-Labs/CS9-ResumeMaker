@@ -3,6 +3,12 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./CSS/login.css";
 import axios from "axios";
 
+const cheese = {
+  email: "cheese23@gmail.com",
+  password: "Cheese123!",
+  invalidCredentials: false
+};
+
 const scrinch = {
   email: "scrinch@gmail.com",
   password: "tacobell1!G1",
@@ -21,7 +27,7 @@ const urls = require("../config.json");
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = bobbert;
+    this.state = cheese;
   }
 
   validateForm() {
