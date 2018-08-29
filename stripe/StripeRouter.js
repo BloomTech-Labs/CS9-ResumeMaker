@@ -26,18 +26,11 @@ const createSubscription = (id, planType) => {
   return subscription;
 };
 
-const paidMember = async (sub_id, email) => {
-  const membershipChange = {
-    subscription: sub_id,
-    membership: true
-  };
-
-  const updatedStatus = await User.findOneAndUpdate(
-    { email },
-    membershipChange
-  );
+const changeStatus = async (email, newInfo) => {
+  const updatedStatus = await User.findOneAndUpdate({ email }, newInfo);
   return updatedStatus;
 };
+
 /*
     @route  POST pay/monthly
     @desc   Allows user to subscribe to a monthly plan
@@ -63,7 +56,11 @@ router.post(
             );
             if (!newSubscription) res.status(400).json("Unable to subscribe");
             else {
-              if (paidMember(newSubscription.id, email))
+              const membershipChange = {
+                subscription: newSubscription.id,
+                membership: true
+              };
+              if (changeStatus(email, membershipChange))
                 res.status(201).json("Success");
               else res.status(400).json("Error");
             }
@@ -101,7 +98,11 @@ router.post(
             );
             if (!newSubscription) res.status(400).json("Unable to subscribe");
             else {
-              if (paidMember(newSubscription.id, email))
+              const membershipChange = {
+                subscription: newSubscription.id,
+                membership: true
+              };
+              if (changeStatus(email, membershipChange)) 
                 res.status(201).json("Success");
               else res.status(400).json("Error");
             }
@@ -135,13 +136,9 @@ router.post(
                 subscription: null,
                 membership: false
               };
-              User.findOneAndUpdate({ email }, membershipChange)
-                .then(user => {
-                  res.status(201).json("Successfully Unsubscribed");
-                })
-                .catch(err => {
-                  res.status(400).json(err);
-                });
+              if (changeStatus(email, membershipChange))
+                res.status(201).json("Successfully Unsubscribed");
+              else res.status(400).json(err);
             }
           });
         } else {
