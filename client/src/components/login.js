@@ -5,8 +5,7 @@ import axios from "axios";
 
 const scrinch = {
   email: "scrinch@gmail.com",
-  password:
-    "YjBjZDYyM2Y1MGY4YTY2ZDFjYzBhZTMzMTJiZjhlZTMxMzc3Nzg5OThlOWMzZjU5NTgxNDYyMWI3ODQ5ODc0OQ!",
+  password: "tacobell1!G1",
   invalidCredentials: false
 };
 
