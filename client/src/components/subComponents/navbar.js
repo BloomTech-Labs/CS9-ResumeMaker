@@ -5,11 +5,19 @@ import "./CSS/navbar.css";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar sticky-top navbar-dark bg-dark">
-         <ol className="breadcrumb bg-dark">
+      <nav className="navbar sticky-top navbar-dark bg-dark mb-0">
+        <ol className="breadcrumb p-1 mb-0 bg-dark">
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
-              <Link style={{ color: "white", fontFamily: 'helvetica', fontSize: '0.8rem'}} to={item.link}>
+              <Link
+                className="navbar-item"
+                style={{
+                  color: "white",
+                  fontFamily: "helvetica",
+                  fontSize: "0.8rem"
+                }}
+                to={item.link}
+              >
                 {item.title}
               </Link>
             </li>
@@ -17,17 +25,16 @@ class Navbar extends Component {
         </ol>
         <Route
           render={({ history }) => (
-            <button
-            style={{ color: "white"}}
-            type="button"
-            className="logout btn bg-dark"
+            <div
+              style={{ color: "white"}}
+              className="logout btn bg-dark"
               onClick={() => {
                 this.props.context.actions.setLogout();
                 history.push("/");
               }}
             >
               Logout
-            </button>
+            </div>
           )}
         />
       </nav>

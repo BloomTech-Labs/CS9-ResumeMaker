@@ -55,10 +55,10 @@ class ExperienceCreate extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.experienceIndex === false) {
+    if (this.props.location.state.experienceIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("experience", {
         title: this.state.title,
         company: this.state.company,
@@ -68,7 +68,7 @@ class ExperienceCreate extends Component {
         to: this.state.to
       });
     } // if creating
-    else {
+    else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.experienceIndex,
         "experience",
@@ -82,6 +82,9 @@ class ExperienceCreate extends Component {
         }
       );
     } // if editing
+    else {
+      this.props.context.actions.removeElement(this.props.location.state.experienceIndex, "experience")
+    }
 
     const tempObj = {
       "sections.experience": this.props.context.userInfo.experience
@@ -169,6 +172,9 @@ class ExperienceCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              {this.props.location.state.experienceIndex !== false ? <button onClick={e =>
+                this.handleSubmit(e, true)
+              }>Delete</button> : null}
             </form>
           </div>
         </div>

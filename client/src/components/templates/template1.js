@@ -25,7 +25,13 @@ class CheckBox extends React.Component {
   };
 
   render() {
-    return <input type="checkbox" checked={this.state.checked} onChange={this.toggle} />;
+    return (
+      <input
+        type="checkbox"
+        checked={this.state.checked}
+        onChange={this.toggle}
+      />
+    );
   }
 }
 
@@ -33,7 +39,7 @@ export class TemplateOne extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   // handleSubmit(e) {
   //   e.preventDefault();
 
@@ -50,7 +56,7 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-  
+
     return (
       <div>
         <Navbar
@@ -66,7 +72,7 @@ export class TemplateOne extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Template One</h3>
+              <h3 className="page-header">Traditional</h3>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
@@ -81,25 +87,23 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>
                     {" "}
-                    <CheckBox /> 
-                    {userInfo.email}
+                    <CheckBox />  {userInfo.email}
                   </p>
                 </a>
                 <p>
-                  <CheckBox /> 
-                  {userInfo.location}
+                  <CheckBox />  {userInfo.location}
                 </p>
                 <p>
-                  <CheckBox /> 
-                  {userInfo.phonenumber}
+                  <CheckBox />  {userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox /> 
-                  {userInfo.links.linkedin}
-                  <br />
-                  {userInfo.links.github}
-                  <br />
-                  {userInfo.links.portfolio}
+                  <CheckBox/>  {userInfo.links.linkedin}
+                </p>
+                <p>
+                  <CheckBox />  {userInfo.links.github}
+                </p>
+                <p>
+                  <CheckBox />  {userInfo.links.portfolio}
                 </p>
               </Container>
               <Divider className="divider-div" />
@@ -112,8 +116,10 @@ export class TemplateOne extends Component {
                 {userInfo.summary.map((content, index) => {
                   return (
                     <div key={index}>
-                      <p>{content}</p>
-                      <CheckBox />
+                      <p>
+                        {" "}
+                        <CheckBox /> {content}
+                      </p>
                     </div>
                   );
                 })}
@@ -124,8 +130,7 @@ export class TemplateOne extends Component {
                 {userInfo.skills.map((content, index) => {
                   return (
                     <div key={index}>
-                      <p>{content}</p>
-                      <CheckBox />
+                      <p> <CheckBox /> {content}</p>
                     </div>
                   );
                 })}
@@ -137,16 +142,14 @@ export class TemplateOne extends Component {
                   return (
                     <div key={index}>
                       {console.log(content)}
-                      <p>
-                        {content.title} <br />
-                        {content.company}
+                      <h5> <CheckBox />  {content.company} </h5>
+                        <p> {content.title}
                         <br />
                         {content.location}
                         <br />
                         {content.from} - {content.to}
                       </p>
                       <p>{content.description} </p>
-                      <CheckBox />
                     </div>
                   );
                 })}
@@ -155,18 +158,21 @@ export class TemplateOne extends Component {
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
                 {education.map((content, index) => {
-                  return (
-                    <div key={index}>
-                      <h5>{content.school} </h5>
-                      <p>{content.location}</p>
-                      <p>
-                        {content.degree} in {content.fieldofstudy} <br />
-                        {content.from} - {content.to}
-                      </p>
-                      <CheckBox />
-                    </div>
-                  );
-                })}
+                      return (
+                        <div key={index}>
+                          <h5>
+                            <CheckBox /> {content.degree} in{" "}
+                            {content.fieldofstudy}{" "}
+                          </h5>
+                          <p>{content.location}</p>
+                          <p>
+                            {content.school}
+                            <br />
+                            {content.from} - {content.to}
+                          </p>
+                        </div>
+                      );
+                    })}
               </Container>
             </form>
             <div className="justify-content-center">

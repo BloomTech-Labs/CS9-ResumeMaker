@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
-import { Button, FormGroup } from "react-bootstrap";
+import { FormGroup } from "reactstrap";
 import Sidebar from "../subComponents/sidebar";
 import Navbar from "../subComponents/navbar";
 import "./template3.css";
@@ -59,7 +59,7 @@ export class TemplateThree extends Component {
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" },
-            { link: "/templates/template-1", title: "Template One" }
+            { link: "/templates/template-3", title: "Template Three" }
           ]}
         />
 
@@ -67,7 +67,7 @@ export class TemplateThree extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Template Three</h3>
+              <h3 className="page-header">Elegant</h3>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div class="row">
@@ -85,29 +85,29 @@ export class TemplateThree extends Component {
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 class="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                    <p>
+                    <p className="contact-section">
                     {" "}
                     <CheckBox /> 
                     {userInfo.email}
                   </p>
                 </a>
-                <p>
+                <p className="contact-section">
                   <CheckBox /> 
                   {userInfo.location}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox /> 
                   {userInfo.phonenumber}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox /> 
                   {userInfo.links.linkedin}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox />
                   {userInfo.links.github}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox />
                   {userInfo.links.portfolio}
                 </p>
