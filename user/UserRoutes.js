@@ -53,8 +53,19 @@ UserRouter.get(
   "/currentuser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    req.user.password = null;
-    res.status(200).json(req.user);
+    const { user } = req;
+    user.password = null;
+    if (user.membership) {
+      const query = Resume.find({ user: user.id });
+      query.then(resumes => {
+        res.json({ user, resumes });
+      });
+    } else {
+      const query = Resume.findOne({ user: user.id });
+      query.then(resume => {
+        res.status(200).json({ user, resume });
+      });
+    }
   }
 );
 
@@ -246,7 +257,7 @@ UserRouter.post("/login", (req, res) => {
             } else {
               const query = Resume.findOne({ user: user.id });
               query.then(resume => {
-                res.json({ token, user, resume })
+                res.json({ token, user, resume });
               });
             }
           } else
