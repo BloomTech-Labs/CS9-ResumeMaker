@@ -6,6 +6,16 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 
 const User = require("../user/UserModel");
 
+const checkMembership = email => {
+  User.findOne({ email })
+    .then(async user => {
+      return await user.membership;
+    })
+    .catch(async err => {
+      return await err;
+    });
+};
+
 const createCustomer = async (email, token) => {
   const customer = stripe.customers.create({
     email: email,
@@ -43,33 +53,28 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    User.findOne({ email })
-      .then(async user => {
-        if (user.membership) res.status(400).json("You're already a member!");
+    if (checkMembership(email))
+      res.status(400).json("You're already a member!");
+    else {
+      const newCustomer = await createCustomer(email, token);
+      if (!newCustomer) res.status(400).json("Unable to create a user");
+      else {
+        const newSubscription = await createSubscription(
+          newCustomer.id,
+          "Monthly"
+        );
+        if (!newSubscription) res.status(400).json("Unable to subscribe");
         else {
-          const newCustomer = await createCustomer(email, token);
-          if (!newCustomer) res.status(400).json("Unable to create a user");
-          else {
-            const newSubscription = await createSubscription(
-              newCustomer.id,
-              "Monthly"
-            );
-            if (!newSubscription) res.status(400).json("Unable to subscribe");
-            else {
-              const membershipChange = {
-                subscription: newSubscription.id,
-                membership: true
-              };
-              if (changeStatus(email, membershipChange))
-                res.status(201).json("Success");
-              else res.status(400).json("Error");
-            }
-          }
+          const membershipChange = {
+            subscription: newSubscription.id,
+            membership: true
+          };
+          if (changeStatus(email, membershipChange))
+            res.status(201).json("Success");
+          else res.status(400).json("Error");
         }
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      });
+      }
+    }
   }
 );
 
@@ -85,33 +90,28 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    User.findOne({ email })
-      .then(async user => {
-        if (user.membership) res.status(400).json("You're already a member!");
+    if (checkMembership(email))
+      res.status(400).json("You're already a member!");
+    else {
+      const newCustomer = await createCustomer(email, token);
+      if (!newCustomer) res.status(400).json("Unable to become a customer");
+      else {
+        const newSubscription = await createSubscription(
+          newCustomer.id,
+          "Yearly"
+        );
+        if (!newSubscription) res.status(400).json("Unable to subscribe");
         else {
-          const newCustomer = await createCustomer(email, token);
-          if (!newCustomer) res.status(400).json("Unable to become a customer");
-          else {
-            const newSubscription = await createSubscription(
-              newCustomer.id,
-              "Yearly"
-            );
-            if (!newSubscription) res.status(400).json("Unable to subscribe");
-            else {
-              const membershipChange = {
-                subscription: newSubscription.id,
-                membership: true
-              };
-              if (changeStatus(email, membershipChange))
-                res.status(201).json("Success");
-              else res.status(400).json("Error");
-            }
-          }
+          const membershipChange = {
+            subscription: newSubscription.id,
+            membership: true
+          };
+          if (changeStatus(email, membershipChange))
+            res.status(201).json("Success");
+          else res.status(400).json("Error");
         }
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      });
+      }
+    }
   }
 );
 
