@@ -31,19 +31,22 @@ class JobTitleCreate extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.titleIndex === false) {
+    if (this.props.location.state.titleIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("title", this.state.title);
     } // if creating
-    else {
+    else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.titleIndex,
         "title",
         this.state.title
       );
     } // if editing
+    else {
+      this.props.context.actions.removeElement(this.props.location.state.titleIndex, "title")
+    }
 
     const tempObj = {
       "title": this.props.context.userInfo.title
@@ -96,6 +99,9 @@ class JobTitleCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              <button onClick={e =>
+                this.handleSubmit(e, true)
+              }>Delete</button>
             </form>
           </div>
         </div>
