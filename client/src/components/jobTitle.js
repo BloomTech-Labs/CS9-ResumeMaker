@@ -28,7 +28,7 @@ class JobTitle extends Component {
                   }}
                   key={index}
                 >
-                  <span>{element}</span>
+                  <span>{element.content}</span>
                 </Link>
               );
             })}

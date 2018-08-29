@@ -24,7 +24,7 @@ class SummaryCreate extends Component {
       this.setState({
         summary: this.props.context.userInfo.summary[
           this.props.location.state.summaryIndex
-        ]
+        ].content
       });
   }
 
@@ -36,17 +36,24 @@ class SummaryCreate extends Component {
     event.preventDefault();
 
     if (this.props.location.state.summaryIndex === false && !deleteFlag) {
-      this.props.context.actions.addElement("summary", this.state.summary);
+      this.props.context.actions.addElement("summary", {
+        content: this.state.summary
+      });
     } // if creating
     else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.summaryIndex,
         "summary",
-        this.state.summary
+        {
+          content: this.state.summary
+        }
       );
     } // if editing
     else {
-      this.props.context.actions.removeElement(this.props.location.state.summaryIndex, "summary")
+      this.props.context.actions.removeElement(
+        this.props.location.state.summaryIndex,
+        "summary"
+      );
     }
 
     const tempObj = {
@@ -71,15 +78,15 @@ class SummaryCreate extends Component {
 
   render() {
     return [
-      <Prompt
-        key="block-nav"
-        when={
-          this.props.context.userInfo.summary[
-          this.props.location.state.summaryIndex
-          ] !== this.state.summary
-        }
-        message="You have unsaved changes, are you sure you want to leave?"
-      />,
+      // <Prompt
+      //   key="block-nav"
+      //   when={
+      //     this.props.context.userInfo.summary[
+      //       this.props.location.state.summaryIndex
+      //     ] !== this.state.summary
+      //   }
+      //   message="You have unsaved changes, are you sure you want to leave?"
+      // />,
       <div>
         {this.state.success ? <Redirect to="/summary" /> : null}
         <Navbar
@@ -110,9 +117,11 @@ class SummaryCreate extends Component {
                 />
               </form>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.summaryIndex !== false ? <button onClick={e =>
-                this.handleSubmit(e, true)
-              }>Delete</button> : null}
+              {this.props.location.state.summaryIndex !== false ? (
+                <button onClick={e => this.handleSubmit(e, true)}>
+                  Delete
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

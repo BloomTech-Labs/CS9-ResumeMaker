@@ -7,13 +7,14 @@
   align-items: start;
   min-height: 100vh;
 }
-.sidebar-button {
-  color: white;
-  text-shadow: 1px 1px black;  
- 
-}
+
 .static-sidebar {
   position: fixed;
   display: flex;
   flex-direction: column;
- }
+}
+
+.sidebar-button {
+  color: white;
+  text-shadow: 1px 1px black;
+}

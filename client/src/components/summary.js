@@ -26,7 +26,7 @@ class Summary extends Component {
                   <ItemCard
                     linkTo="/summary"
                     index={index}
-                    content={element}
+                    content={element.content}
                     key={index}
                   />
                 );

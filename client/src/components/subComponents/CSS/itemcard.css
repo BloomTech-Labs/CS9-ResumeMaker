@@ -1,6 +1,6 @@
 .item-card {
   margin: 2% 1%;
-  width: 29%;
+  min-width: 29%;
   /* min-width: 20%; */
   text-align: left;
 }

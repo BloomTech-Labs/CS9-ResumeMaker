@@ -50,39 +50,39 @@ class Sidebar extends Component {
           <Link to="/templates" className="sidebar-button">
             {" "}
             Templates
-        </Link>
+          </Link>
           <Link to="/resumes" className="sidebar-button">
             {" "}
             Resumes
-        </Link>
+          </Link>
           <Link to="/jobTitle" className="sidebar-button">
             {" "}
             JobTitle
-        </Link>
+          </Link>
           <Link to="/summary" className="sidebar-button">
             {" "}
             Summary
-        </Link>
+          </Link>
           <Link to="/skills" className="sidebar-button">
             {" "}
             Skills
-        </Link>
+          </Link>
           <Link to="/experience" className="sidebar-button">
             {" "}
             Experience
-        </Link>
+          </Link>
           <Link to="/education" className="sidebar-button">
             {" "}
             Education
-        </Link>
+          </Link>
           <Link to="/billing" className="sidebar-button">
             {" "}
             Billing
-        </Link>
+          </Link>
           <Link to="/settings" className="sidebar-button">
             {" "}
             Settings
-        </Link>
+          </Link>
         </div>
       </div>
     );
