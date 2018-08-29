@@ -50,6 +50,7 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
+  
     return (
       <div>
         <Navbar
@@ -78,14 +79,22 @@ export class TemplateOne extends Component {
               <Container textAlign="center" className="contactSection">
                 <h3>Contact Details</h3>
                 <a href={`mailto:${userInfo.email}`}>
-                  <p>{userInfo.email}</p>
+                  <p>
+                    {" "}
+                    <CheckBox /> 
+                    {userInfo.email}
+                  </p>
                 </a>
                 <p>
-                  {" "}
+                  <CheckBox /> 
                   {userInfo.location}
-                  <br />
+                </p>
+                <p>
+                  <CheckBox /> 
                   {userInfo.phonenumber}
-                  <br />
+                </p>
+                <p>
+                  <CheckBox /> 
                   {userInfo.links.linkedin}
                   <br />
                   {userInfo.links.github}

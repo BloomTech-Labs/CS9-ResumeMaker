@@ -14,7 +14,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      this.props.context.userInfo.auth !== true &&
+      // this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
       console.log("passed token check");
@@ -30,7 +30,7 @@ class Sidebar extends Component {
         })
         .catch(err => {
           console.log("err", err);
-          localStorage.removeItem("token");
+          this.props.context.actions.setLogout();
         });
     }
   }
@@ -46,9 +46,17 @@ class Sidebar extends Component {
     }
     return (
       <div className="sidebar bg-secondary">
+        <Link to="/templates" className="sidebar-button">
+          {" "}
+          Templates
+        </Link>
         <Link to="/resumes" className="sidebar-button">
           {" "}
           Resumes
+        </Link>
+        <Link to="/jobTitle" className="sidebar-button">
+          {" "}
+          JobTitle
         </Link>
         <Link to="/summary" className="sidebar-button">
           {" "}
@@ -58,17 +66,13 @@ class Sidebar extends Component {
           {" "}
           Skills
         </Link>
-        <Link to="/education" className="sidebar-button">
-          {" "}
-          Education
-        </Link>
         <Link to="/experience" className="sidebar-button">
           {" "}
           Experience
         </Link>
-        <Link to="/templates" className="sidebar-button">
+        <Link to="/education" className="sidebar-button">
           {" "}
-          Templates
+          Education
         </Link>
         <Link to="/billing" className="sidebar-button">
           {" "}

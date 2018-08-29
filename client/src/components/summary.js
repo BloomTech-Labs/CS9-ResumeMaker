@@ -40,6 +40,7 @@ class Summary extends Component {
                 }}
               >
                 <img
+                // height="20px"
                   src={require("./CSS/plus-button.svg")}
                   alt=""
                   className="plus-circle"

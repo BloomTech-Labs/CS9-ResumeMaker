@@ -1,7 +1,66 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+<<<<<<< HEAD:api/user/UserModel.js
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const { checkPasswordStrength, validateEmail, validatePhone, validateLinkedIn, validateGithub } = require("../helpers/Validation");
+=======
+
+// Validation
+
+/*
+  Email example: test@service.com
+*/
+const validateEmail = email => {
+  const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email);
+};
+
+/*
+  Phone Number example: 123-456-7890
+*/
+// const validatePhone = number => {
+//   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
+//   return re.test(number);
+// };
+
+/* 
+  Password Requirements:
+    Must be longer than 6 characters
+    Must have at least 1 uppercase
+    Must have at least 1 lowercase
+    Must have at least 1 special character
+    Must have at least 1 digit
+*/
+const checkPasswordStrength = password => {
+  const minlength = 6;
+
+  if (password.length < minlength) return false;
+  if (!password.match(/[A-Z]/)) return false;
+  if (!password.match(/[a-z]/)) return false;
+  if (!password.match(/\d/)) return false;
+  if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+    return false;
+  return true;
+};
+
+// Checking links on the backend is a waste of processing time and creates unnecessary validation errors
+
+/*
+  Linkedin example: linkedin.com/in/test/ (allows some special characters)
+*/
+// const validateLinkedIn = url => {
+//   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
+//   return re.test(url);
+// };
+
+/*
+  GitHub example: github.com/test/ (allows some special characters)
+*/
+// const validateGithub = url => {
+//   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
+//   return re.test(url);
+// };
+>>>>>>> f9712a4a20682555ebddbbebe7b4d088dc29545f:user/UserModel.js
 
 const User = new mongoose.Schema(
   {
@@ -55,17 +114,17 @@ const User = new mongoose.Schema(
       }
     ],
     phonenumber: {
-      type: String,
-      validate: [validatePhone, "Invalid Phone Number"]
+      type: String
+      // validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
-        type: String,
-        validate: [validateLinkedIn, "Invalid Linkedin"]
+        type: String
+        // validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
-        type: String,
-        validate: [validateGithub, "Invalid GitHub"]
+        type: String
+        // validate: [validateGithub, "Invalid GitHub"]
       },
       portfolio: String
     },
@@ -81,16 +140,16 @@ const User = new mongoose.Schema(
           id: ObjectId,
           title: {
             type: String,
-            required: true
+            default: "title"
           },
           company: {
             type: String,
-            required: true
+            default: ""
           },
           location: String,
           from: {
             type: String,
-            required: true
+            default: ""
           },
           to: String,
           description: String
@@ -101,19 +160,19 @@ const User = new mongoose.Schema(
           id: ObjectId,
           school: {
             type: String,
-            required: true
+            default: "school"
           },
           degree: {
             type: String,
-            required: true
+            default: ""
           },
           fieldofstudy: {
             type: String,
-            required: true
+            default: ""
           },
           from: {
             type: String,
-            required: true
+            default: ""
           },
           to: String
         }

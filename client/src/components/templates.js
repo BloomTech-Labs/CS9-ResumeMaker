@@ -22,7 +22,7 @@ class Templates extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
-              <h1>Templates</h1>
+              <h1>TEMPLATES</h1>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
@@ -37,7 +37,7 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h4> Template 1 </h4>
+                  <h4> TEMPLATE 1 </h4>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -52,7 +52,7 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h4> Template 2 </h4>
+                  <h4> TEMPLATE 2 </h4>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -67,7 +67,7 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h4> Template 3 </h4>
+                  <h4> TEMPLATE 3 </h4>
                 </Link>
               </div>
             </div>
