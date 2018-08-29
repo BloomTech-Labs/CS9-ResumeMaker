@@ -87,29 +87,23 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>
                     {" "}
-                    <CheckBox />
-                    {userInfo.email}
+                    <CheckBox />  {userInfo.email}
                   </p>
                 </a>
                 <p>
-                  <CheckBox />
-                  {userInfo.location}
+                  <CheckBox />  {userInfo.location}
                 </p>
                 <p>
-                  <CheckBox />
-                  {userInfo.phonenumber}
+                  <CheckBox />  {userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox />
-                  {userInfo.links.linkedin}
+                  <CheckBox/>  {userInfo.links.linkedin}
                 </p>
                 <p>
-                  <CheckBox />
-                  {userInfo.links.github}
+                  <CheckBox />  {userInfo.links.github}
                 </p>
                 <p>
-                  <CheckBox />
-                  {userInfo.links.portfolio}
+                  <CheckBox />  {userInfo.links.portfolio}
                 </p>
               </Container>
               <Divider className="divider-div" />
@@ -136,8 +130,7 @@ export class TemplateOne extends Component {
                 {userInfo.skills.map((content, index) => {
                   return (
                     <div key={index}>
-                      <p>{content}</p>
-                      <CheckBox />
+                      <p> <CheckBox /> {content}</p>
                     </div>
                   );
                 })}
@@ -149,16 +142,14 @@ export class TemplateOne extends Component {
                   return (
                     <div key={index}>
                       {console.log(content)}
-                      <p>
-                        {content.title} <br />
-                        {content.company}
+                      <h5> <CheckBox />  {content.company} </h5>
+                        <p> {content.title}
                         <br />
                         {content.location}
                         <br />
                         {content.from} - {content.to}
                       </p>
                       <p>{content.description} </p>
-                      <CheckBox />
                     </div>
                   );
                 })}

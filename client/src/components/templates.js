@@ -27,6 +27,9 @@ class Templates extends Component {
             <div className="containers-div">
               <div className="d-inline-flex container-div">
                 <Link
+                  style={{
+                    color: "black"
+                  }}
                   to={{
                     pathname: "/templates/template-1", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new
@@ -37,11 +40,14 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5> TRADITIONAL </h5>
+                  <h5 className="link"> TRADITIONAL </h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
                 <Link
+                  style={{
+                    color: "black"
+                  }}
                   to={{
                     pathname: "/templates/template-2", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new
@@ -57,6 +63,9 @@ class Templates extends Component {
               </div>
               <div className="d-inline-flex container-div">
                 <Link
+                  style={{
+                    color: "black"
+                  }}
                   to={{
                     pathname: "/templates/template-3", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new

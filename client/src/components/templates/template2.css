@@ -16,6 +16,7 @@
 .template1 {
     border: 1px solid black; 
     padding: 50px; 
+    margin: 1rem; 
 }
 .divider-div {
     border: 1px solid black; 

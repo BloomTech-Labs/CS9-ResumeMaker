@@ -32,19 +32,22 @@ class SummaryCreate extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.summaryIndex === false) {
+    if (this.props.location.state.summaryIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("summary", this.state.summary);
     } // if creating
-    else {
+    else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.summaryIndex,
         "summary",
         this.state.summary
       );
     } // if editing
+    else {
+      this.props.context.actions.removeElement(this.props.location.state.summaryIndex, "summary")
+    }
 
     const tempObj = {
       "sections.summary": this.props.context.userInfo.summary
@@ -72,7 +75,7 @@ class SummaryCreate extends Component {
         key="block-nav"
         when={
           this.props.context.userInfo.summary[
-            this.props.location.state.summaryIndex
+          this.props.location.state.summaryIndex
           ] !== this.state.summary
         }
         message="You have unsaved changes, are you sure you want to leave?"
@@ -107,6 +110,9 @@ class SummaryCreate extends Component {
                 />
               </form>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              {this.props.location.state.summaryIndex !== false ? <button onClick={e =>
+                this.handleSubmit(e, true)
+              }>Delete</button> : null}
             </div>
           </div>
         </div>
