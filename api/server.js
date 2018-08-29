@@ -6,13 +6,13 @@ const passport = require("passport");
 const UserRouter = require("./user/UserRoutes.js");
 const StripeRouter = require("./stripe/StripeRouter.js");
 const ResumeRouter = require("./resume/ResumeRouter.js");
-require("dotenv").config();
 require("./config/passport.js")(passport);
+const uri = require("./config/keys").uri;
 
 // Connect To mLab
 mongoose
   .connect(
-    process.env.MLABURL,
+    uri,
     { useNewUrlParser: true }
   )
   .then(() => console.log("\n... API Connected to Database ...\n"))

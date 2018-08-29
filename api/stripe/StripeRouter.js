@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-require("dotenv").config();
-const stripe = require("stripe")(process.env.SECRET_KEY);
+
+const secretKey = require("../config/keys").secret_key;
+const stripe = require("stripe")(secretKey);
 
 const User = require("../user/UserModel");
 const { checkMembership, createCustomer, createSubscription, changeStatus } = require("../helpers/Stripe");

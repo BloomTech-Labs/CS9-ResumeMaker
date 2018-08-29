@@ -1,4 +1,5 @@
-const stripe = require("stripe")(process.env.SECRET_KEY);
+const secretKey = require("../config/keys").secret_key;
+const stripe = require("stripe")(secretKey);
 
 const User = require("../user/UserModel");
 

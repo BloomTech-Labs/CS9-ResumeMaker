@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
-require("dotenv").config();
-const secretKey = process.env.SECRET;
+
+const secretKey = require("../config/keys").secret;
 const { validateEmail, checkPasswordStrength } = require("../helpers/Validation");
 
 const EmailConfirmation = new mongoose.Schema({
