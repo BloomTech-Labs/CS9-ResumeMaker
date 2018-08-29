@@ -57,7 +57,11 @@ const User = new mongoose.Schema(
     location: String,
     title: [
       {
-        type: String
+        id: ObjectId,
+        content: {
+          type: String,
+          default: ""
+        }
       }
     ],
     phonenumber: {
@@ -79,7 +83,10 @@ const User = new mongoose.Schema(
       summary: [
         {
           id: ObjectId,
-          value: String
+          content: {
+            type: String,
+            default: ""
+          }
         }
       ],
       experience: [
@@ -127,7 +134,10 @@ const User = new mongoose.Schema(
       skills: [
         {
           id: ObjectId,
-          value: String
+          content: {
+            type: String,
+            default: ""
+          }
         }
       ]
     },

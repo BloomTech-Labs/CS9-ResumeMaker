@@ -1,5 +1,6 @@
 .component-div {
     display: flex; 
+    /* background: gray;  */
 }
 .page-div {
     display: flex; 
@@ -16,6 +17,8 @@
 .template1 {
     border: 1px solid black; 
     padding: 50px; 
+    margin: 1rem; 
+    background: white; 
 }
 .divider-div {
     border: 1px solid black; 
