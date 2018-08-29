@@ -4,22 +4,6 @@ import { Card, CardHeader, CardBody, CardText } from "reactstrap";
 
 import "./CSS/itemcard.css";
 
-// class ItemCard extends Component {
-//   render() {
-//     return (
-//       <Link
-//         className="summary-card-link"
-//         to={{
-//           pathname: "/summary/create", // component being Linked to
-//           state: { summaryIndex: this.props.index } // Setting Index passed into summaryCreate component
-//         }}
-//       >
-//         <span className="summary-card-span">{this.props.content}</span>
-//       </Link>
-//     );
-//   }
-// }
-
 function ellipsify(str) {
   if (str.length > 150) {
     return str.substring(0, 150) + "...";
@@ -30,9 +14,9 @@ function ellipsify(str) {
 
 class ItemCard extends Component {
   render() {
-    return (
-      <Card className="item-card">
-        <CardHeader>
+    if (this.props.header) {
+      return (
+        <Card className="item-card">
           <Link
             className="item-card-link"
             to={{
@@ -40,15 +24,29 @@ class ItemCard extends Component {
               state: { summaryIndex: this.props.index } // Setting Index passed into summaryCreate component
             }}
           >
-            HEADER
-            {/* <Link to={`note/${props.note._id}`}>{props.note.title}</Link> */}
+            <CardHeader>{ellipsify(this.props.header)}</CardHeader>
+            <CardBody>
+              <CardText>{ellipsify(this.props.content)}</CardText>
+            </CardBody>
           </Link>
-        </CardHeader>
-        <CardBody>
-          <CardText>{ellipsify(this.props.content)}</CardText>
-        </CardBody>
-      </Card>
-    );
+        </Card>
+      );
+    } else
+      return (
+        <Card className="item-card">
+          <Link
+            className="item-card-link"
+            to={{
+              pathname: `${this.props.linkTo}/create`, // component being Linked to
+              state: { summaryIndex: this.props.index } // Setting Index passed into summaryCreate component
+            }}
+          >
+            <CardBody>
+              <CardText>{ellipsify(this.props.content)}</CardText>
+            </CardBody>
+          </Link>
+        </Card>
+      );
   }
 }
 
