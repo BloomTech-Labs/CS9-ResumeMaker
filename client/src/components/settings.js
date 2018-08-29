@@ -233,7 +233,7 @@ export class PersonalInfo extends Component {
             <FormGroup controlId="phonenumber" bsSize="large">
               <ControlLabel>Phone Number</ControlLabel>
               <FormControl
-                value={this.state.name.lastname}
+                value={this.state.phonenumber}
                 onChange={this.handleChange}
               />
             </FormGroup>
@@ -265,7 +265,6 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-
             <FormGroup
               controlId="email"
               bsSize="large"
@@ -281,7 +280,6 @@ export class PersonalInfo extends Component {
                 <HelpBlock>Please enter an unused valid email.</HelpBlock>
               ) : null}
             </FormGroup>
-
             <FormGroup
               controlId="oldpassword"
               bsSize="large"
