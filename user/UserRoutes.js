@@ -63,9 +63,13 @@ UserRouter.get(
     } else {
       const query = Resume.findOne({ user: user.id });
       query.then(resume => {
-        res.status(200).json({ user, resume });
+        const resumes = [];
+        resumes.push(resume);
+        res.status(200).json({ user, resumes });
       });
     }
+    // req.user.password = null;
+    // res.status(200).json(req.user);
   }
 );
 
