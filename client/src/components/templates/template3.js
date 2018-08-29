@@ -85,29 +85,29 @@ export class TemplateThree extends Component {
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 class="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                    <p>
+                    <p className="contact-section">
                     {" "}
                     <CheckBox /> 
                     {userInfo.email}
                   </p>
                 </a>
-                <p>
+                <p className="contact-section">
                   <CheckBox /> 
                   {userInfo.location}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox /> 
                   {userInfo.phonenumber}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox /> 
                   {userInfo.links.linkedin}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox />
                   {userInfo.links.github}
                 </p>
-                <p>
+                <p className="contact-section">
                   <CheckBox />
                   {userInfo.links.portfolio}
                 </p>

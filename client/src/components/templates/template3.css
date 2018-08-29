@@ -29,10 +29,13 @@
   }
 .left-column {
  width: 23%; 
- background-color: blanchedalmond
+ background-color: blanchedalmond;
   }
 .logo {
     width: 10rem; 
     height: 10rem; 
     padding: 1rem; 
+}
+.contact-section { 
+    font-size: 0.7rem; 
 }
