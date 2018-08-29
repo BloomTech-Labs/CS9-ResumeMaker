@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const { checkPasswordStrength, validateEmail, validatePhone, validateLinkedIn, validateGithub } = require("../validation/Validation");
+const { checkPasswordStrength, validateEmail, validatePhone, validateLinkedIn, validateGithub } = require("../helpers/Validation");
 
 const User = new mongoose.Schema(
   {
