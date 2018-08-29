@@ -6,10 +6,10 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar sticky-top navbar-dark bg-dark">
-        <ol className="breadcrumb">
+         <ol className="breadcrumb bg-dark">
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
-              <Link to={item.link} className="navbar-button">
+              <Link style={{ color: "white", fontFamily: 'helvetica', fontSize: '0.8rem'}} to={item.link}>
                 {item.title}
               </Link>
             </li>
@@ -18,8 +18,9 @@ class Navbar extends Component {
         <Route
           render={({ history }) => (
             <button
-              type="button"
-              className="btn btn-light"
+            style={{ color: "white"}}
+            type="button"
+            className="logout btn bg-dark"
               onClick={() => {
                 this.props.context.actions.setLogout();
                 history.push("/");

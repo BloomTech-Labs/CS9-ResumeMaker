@@ -11,7 +11,7 @@ class AuthProvider extends Component {
       middlename: "",
       lastname: ""
     },
-    title: "",
+    title: [],
     phonenumber: "",
     links: [],
     education: [],

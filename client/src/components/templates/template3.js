@@ -85,13 +85,32 @@ export class TemplateThree extends Component {
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 class="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p>{userInfo.email}</p>
-                    </a>
-                    <p>{userInfo.location}</p>
-                    <p>{userInfo.phonenumber}</p>
-                    <p>{userInfo.links.linkedin}</p>
-                    <p>{userInfo.links.github}</p>
-                    <p>{userInfo.links.portfolio}</p>
+                    <p>
+                    {" "}
+                    <CheckBox /> 
+                    {userInfo.email}
+                  </p>
+                </a>
+                <p>
+                  <CheckBox /> 
+                  {userInfo.location}
+                </p>
+                <p>
+                  <CheckBox /> 
+                  {userInfo.phonenumber}
+                </p>
+                <p>
+                  <CheckBox /> 
+                  {userInfo.links.linkedin}
+                </p>
+                <p>
+                  <CheckBox />
+                  {userInfo.links.github}
+                </p>
+                <p>
+                  <CheckBox />
+                  {userInfo.links.portfolio}
+                </p>
                   </FormGroup>
                 </div>
                 <div class="col">
@@ -109,13 +128,15 @@ export class TemplateThree extends Component {
                   >
                     <h3 class="subtitle">Summary</h3>
                     {userInfo.summary.map((content, index) => {
-                      return (
-                        <div key={index}>
-                          <p>{content}</p>
-                          <CheckBox />
-                        </div>
-                      );
-                    })}
+                  return (
+                    <div key={index}>
+                      <p>
+                        {" "}
+                        <CheckBox /> {content}
+                      </p>
+                    </div>
+                  );
+                })}
                   </FormGroup>
                   <Divider className="divider-div" />
 
@@ -124,57 +145,52 @@ export class TemplateThree extends Component {
                   <FormGroup textAlign="center" className="skillsSection">
                     <h3 class="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
-                      return (
-                        <div key={index}>
-                          <p>{content}</p>
-                          <CheckBox />
-                        </div>
-                      );
-                    })}
+                  return (
+                    <div key={index}>
+                      <p>
+                        <CheckBox /> {content}
+                      </p>
+                    </div>
+                  );
+                })}
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
                     <h3 class="subtitle">Experience</h3>
                     {experience.map((content, index) => {
-                      return (
-                        <div key={index}>
-                          {console.log(content)}
-
-                          <p>
-                            {content.title} <br />
-
-                            {content.company}
-                            <br />
-                            {content.location}
-                            <br />
-                            {content.from} - {content.to}
-
-                          </p>
-                          <p>{content.description} </p>
-                          <CheckBox />
-
-                        </div>
-                      );
-                    })}
+                  return (
+                    <div key={index}>
+                      {console.log(content)}
+                      <h5> <CheckBox /> {content.company} </h5>
+                        <p>{content.title}
+                        <br />
+                        {content.location}
+                        <br />
+                        {content.from} - {content.to}
+                      </p>
+                      <p>{content.description} </p>
+                    </div>
+                  );
+                })}
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
                     <h3 class="subtitle">Education</h3>
                     {education.map((content, index) => {
-                      return (
-                        <div key={index}>
-                          <h5>{content.school} </h5>
-                          <p>{content.location}</p>
-                          <p>
-
-                            {content.degree} in {content.fieldofstudy} <br />
-
-                            {content.from} - {content.to}
-                          </p>
-                          <CheckBox />
-                        </div>
-                      );
-                    })}
+                  return (
+                    <div key={index}>
+                      <h5>
+                        <CheckBox /> {content.degree} in {content.fieldofstudy}{" "}
+                      </h5>
+                      <p>{content.location}</p>
+                      <p>
+                        {content.school}
+                        <br />
+                        {content.from} - {content.to}
+                      </p>
+                    </div>
+                  );
+                })}
                   </FormGroup>
                 </div>
               </div>
