@@ -37,7 +37,7 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h4> TEMPLATE 1 </h4>
+                  <h5> TRADITIONAL </h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -52,7 +52,7 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h4> TEMPLATE 2 </h4>
+                  <h5> MODERN </h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -67,7 +67,7 @@ class Templates extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h4> TEMPLATE 3 </h4>
+                  <h5> ELEGANT </h5>
                 </Link>
               </div>
             </div>

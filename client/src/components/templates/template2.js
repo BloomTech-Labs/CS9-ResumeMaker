@@ -65,7 +65,7 @@ export class TemplateTwo extends Component {
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" },
-            { link: "/templates/template-1", title: "Template One" }
+            { link: "/templates/template-2", title: "Template Two" }
           ]}
         />
 
@@ -73,7 +73,7 @@ export class TemplateTwo extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Template Two</h3>
+              <h3 className="page-header">Modern</h3>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div textAlign="center" className="titleSection">
