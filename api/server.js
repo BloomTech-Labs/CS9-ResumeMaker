@@ -8,7 +8,6 @@ const UserRouter = require("./user/UserRoutes.js");
 const StripeRouter = require("./stripe/StripeRouter.js");
 const ResumeRouter = require("./resume/ResumeRouter.js");
 
-
 // Connect To mLab
 mongoose
   .connect(

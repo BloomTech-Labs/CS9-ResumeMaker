@@ -92,23 +92,6 @@ class Register extends Component {
     this.render();
   };
 
-  validateEmail = email => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(email);
-  };
-
-  checkPasswordStrength = password => {
-    const minlength = 6;
-
-    if (password.length < minlength) return false;
-    if (!password.match(/[A-Z]/)) return false;
-    if (!password.match(/[a-z]/)) return false;
-    if (!password.match(/\d/)) return false;
-    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
-      return false;
-    return true;
-  };
-
   handleSubmit = () => {
     console.log("handleSubmit called");
     // Putting the set state here allows the submit modal to show before
