@@ -20,15 +20,6 @@ class AuthProvider extends Component {
     summary: []
   };
 
-  // Use setLogout instead of this
-  // toggleAuth = () => {
-  //   this.setState({ auth: !this.state.auth });
-  // };
-
-  setValue = (title, value) => {
-    this.setState({ [title]: value });
-  };
-
   setLogout = () => {
     localStorage.removeItem("token");
     this.setState({
@@ -95,7 +86,6 @@ class AuthProvider extends Component {
           userInfo,
           actions: {
             toggleAuth: this.toggleAuth,
-            setValue: this.setValue,
             setLogin: this.setLogin,
             setLogout: this.setLogout,
             setElement: this.setElement,

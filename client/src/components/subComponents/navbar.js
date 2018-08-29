@@ -21,8 +21,7 @@ class Navbar extends Component {
               type="button"
               className="btn btn-light"
               onClick={() => {
-                this.props.context.actions.setValue("auth", false);
-                localStorage.removeItem("token");
+                this.props.context.actions.setLogout();
                 history.push("/");
               }}
             >
