@@ -14,7 +14,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      this.props.context.userInfo.auth !== true &&
+      // this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
       console.log("passed token check");
@@ -30,7 +30,7 @@ class Sidebar extends Component {
         })
         .catch(err => {
           console.log("err", err);
-          localStorage.removeItem("token");
+          this.props.context.actions.setLogout();
         });
     }
   }

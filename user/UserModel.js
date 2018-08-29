@@ -14,10 +14,10 @@ const validateEmail = email => {
 /*
   Phone Number example: 123-456-7890
 */
-const validatePhone = number => {
-  const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
-  return re.test(number);
-};
+// const validatePhone = number => {
+//   const re = /^([0-9]{3}-)([0-9]{3}-)([0-9]{4})$/g;
+//   return re.test(number);
+// };
 
 /* 
   Password Requirements:
@@ -39,21 +39,23 @@ const checkPasswordStrength = password => {
   return true;
 };
 
+// Checking links on the backend is a waste of processing time and creates unnecessary validation errors
+
 /*
   Linkedin example: linkedin.com/in/test/ (allows some special characters)
 */
-const validateLinkedIn = url => {
-  const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
-  return re.test(url);
-};
+// const validateLinkedIn = url => {
+//   const re = /^(linkedin\.com\/in\/[\w-!@#$%^&*]+)$/;
+//   return re.test(url);
+// };
 
 /*
   GitHub example: github.com/test/ (allows some special characters)
 */
-const validateGithub = url => {
-  const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
-  return re.test(url);
-};
+// const validateGithub = url => {
+//   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;
+//   return re.test(url);
+// };
 
 const User = new mongoose.Schema(
   {
@@ -107,17 +109,17 @@ const User = new mongoose.Schema(
       }
     ],
     phonenumber: {
-      type: String,
-      validate: [validatePhone, "Invalid Phone Number"]
+      type: String
+      // validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
-        type: String,
-        validate: [validateLinkedIn, "Invalid Linkedin"]
+        type: String
+        // validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
-        type: String,
-        validate: [validateGithub, "Invalid GitHub"]
+        type: String
+        // validate: [validateGithub, "Invalid GitHub"]
       },
       portfolio: String
     },
@@ -131,16 +133,16 @@ const User = new mongoose.Schema(
         {
           title: {
             type: String,
-            required: true
+            default: "title"
           },
           company: {
             type: String,
-            required: true
+            default: ""
           },
           location: String,
           from: {
             type: String,
-            required: true
+            default: ""
           },
           to: String,
           description: String
@@ -150,19 +152,19 @@ const User = new mongoose.Schema(
         {
           school: {
             type: String,
-            required: true
+            default: "school"
           },
           degree: {
             type: String,
-            required: true
+            default: ""
           },
           fieldofstudy: {
             type: String,
-            required: true
+            default: ""
           },
           from: {
             type: String,
-            required: true
+            default: ""
           },
           to: String
         }
