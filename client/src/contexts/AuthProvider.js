@@ -11,7 +11,7 @@ class AuthProvider extends Component {
       middlename: "",
       lastname: ""
     },
-    title: "",
+    title: [],
     phonenumber: "",
     links: [],
     education: [],
@@ -20,12 +20,25 @@ class AuthProvider extends Component {
     summary: []
   };
 
-  toggleAuth = () => {
-    this.setState({ auth: !this.state.auth });
-  };
-
-  setValue = (title, value) => {
-    this.setState({ [title]: value });
+  setLogout = () => {
+    localStorage.removeItem("token");
+    this.setState({
+      auth: false,
+      username: "",
+      email: "",
+      name: {
+        firstname: "",
+        middlename: "",
+        lastname: ""
+      },
+      title: "",
+      phonenumber: "",
+      links: [],
+      education: [],
+      experience: [],
+      skills: [],
+      summary: []
+    });
   };
 
   setLogin = userData => {
@@ -38,7 +51,7 @@ class AuthProvider extends Component {
 
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
-      title: userData.title ? userData.title : "",
+      title: userData.title ? userData.title : [],
       links: userData.links ? userData.links : [],
       location: userData.location ? userData.location : "",
       phonenumber: userData.phonenumber ? userData.phonenumber : "",
@@ -73,8 +86,8 @@ class AuthProvider extends Component {
           userInfo,
           actions: {
             toggleAuth: this.toggleAuth,
-            setValue: this.setValue,
             setLogin: this.setLogin,
+            setLogout: this.setLogout,
             setElement: this.setElement,
             addElement: this.addElement
           }

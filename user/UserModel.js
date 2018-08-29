@@ -55,17 +55,17 @@ const User = new mongoose.Schema(
       }
     ],
     phonenumber: {
-      type: String,
-      validate: [validatePhone, "Invalid Phone Number"]
+      type: String
+      // validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
-        type: String,
-        validate: [validateLinkedIn, "Invalid Linkedin"]
+        type: String
+        // validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
-        type: String,
-        validate: [validateGithub, "Invalid GitHub"]
+        type: String
+        // validate: [validateGithub, "Invalid GitHub"]
       },
       portfolio: String
     },
@@ -81,16 +81,16 @@ const User = new mongoose.Schema(
           id: ObjectId,
           title: {
             type: String,
-            required: true
+            default: "title"
           },
           company: {
             type: String,
-            required: true
+            default: ""
           },
           location: String,
           from: {
             type: String,
-            required: true
+            default: ""
           },
           to: String,
           description: String
@@ -101,19 +101,19 @@ const User = new mongoose.Schema(
           id: ObjectId,
           school: {
             type: String,
-            required: true
+            default: "school"
           },
           degree: {
             type: String,
-            required: true
+            default: ""
           },
           fieldofstudy: {
             type: String,
-            required: true
+            default: ""
           },
           from: {
             type: String,
-            required: true
+            default: ""
           },
           to: String
         }
