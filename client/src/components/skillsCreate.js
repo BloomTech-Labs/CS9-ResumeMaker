@@ -35,19 +35,22 @@ class SkillsCreate extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.skillsIndex === false) {
+    if (this.props.location.state.skillsIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("skills", this.state.skill);
     } // if creating
-    else {
+    else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.skillsIndex,
         "skills",
         this.state.skill
       );
     } // if editing
+    else {
+      this.props.context.actions.removeElement(this.props.location.state.skillsIndex, "skills")
+    }
 
     const tempObj = {
       "sections.skills": this.props.context.userInfo.skills
@@ -99,6 +102,9 @@ class SkillsCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              {this.props.location.state.skillsIndex !== false ? <button onClick={e =>
+                this.handleSubmit(e, true)
+              }>Delete</button> : null}
             </form>
           </div>
         </div>
