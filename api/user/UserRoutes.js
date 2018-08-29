@@ -10,7 +10,7 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 
 const User = require("./UserModel.js");
 const Resume = require("../resume/ResumeModel");
-const EmailConfirmation = require("./EmailConfirmationModel.js");
+const EmailConfirmation = require("../email/EmailConfirmationModel.js");
 const secretKey = process.env.SECRET;
 let websiteName = "";
 if (process.env.SITE_NAME) {

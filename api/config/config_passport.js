@@ -3,8 +3,9 @@ const JwtStrategy = require("passport-jwt").Strategy;
 // * Extract = extracts the user data from the given payload
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 
-const User = require("./UserModel.js");
+const User = require("../user/UserModel.js");
 require("dotenv").config();
+
 const options = {
   usernameField: "email",
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

@@ -22,7 +22,7 @@ const server = express();
 
 // Initialize passport authentication
 server.use(passport.initialize());
-require("./user/config_passport.js")(passport);
+require("./config/config_passport.js")(passport);
 
 // Middleware
 server.use(express.json());
