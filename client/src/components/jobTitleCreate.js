@@ -99,9 +99,9 @@ class JobTitleCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              <button onClick={e =>
+              {this.props.location.state.titleIndex !== false ? <button onClick={e =>
                 this.handleSubmit(e, true)
-              }>Delete</button>
+              }>Delete</button> : null}
             </form>
           </div>
         </div>
