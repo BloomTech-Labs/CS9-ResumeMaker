@@ -25,7 +25,13 @@ class CheckBox extends React.Component {
   };
 
   render() {
-    return <input type="checkbox" checked={this.state.checked} onChange={this.toggle} />;
+    return (
+      <input
+        type="checkbox"
+        checked={this.state.checked}
+        onChange={this.toggle}
+      />
+    );
   }
 }
 
@@ -33,7 +39,7 @@ export class TemplateOne extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   // handleSubmit(e) {
   //   e.preventDefault();
 
@@ -50,7 +56,7 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-  
+
     return (
       <div>
         <Navbar
@@ -81,20 +87,20 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>
                     {" "}
-                    <CheckBox /> 
+                    <CheckBox />
                     {userInfo.email}
                   </p>
                 </a>
                 <p>
-                  <CheckBox /> 
+                  <CheckBox />
                   {userInfo.location}
                 </p>
                 <p>
-                  <CheckBox /> 
+                  <CheckBox />
                   {userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox /> 
+                  <CheckBox />
                   {userInfo.links.linkedin}
                   <br />
                   {userInfo.links.github}
