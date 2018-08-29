@@ -6,15 +6,15 @@ const stripe = require("stripe")(process.env.SECRET_KEY);
 
 const User = require("../user/UserModel");
 
-const createCustomer = (email, token) => {
+const createCustomer = async (email, token) => {
   const customer = stripe.customers.create({
     email: email,
     source: token
   });
-  return customer;
+  return await customer;
 };
 
-const createSubscription = (id, planType) => {
+const createSubscription = async (id, planType) => {
   const subscription = stripe.subscriptions.create({
     customer: id,
     items: [
@@ -23,7 +23,7 @@ const createSubscription = (id, planType) => {
       }
     ]
   });
-  return subscription;
+  return await subscription;
 };
 
 const changeStatus = async (email, newInfo) => {
@@ -44,13 +44,13 @@ router.post(
     const token = req.body.id;
 
     User.findOne({ email })
-      .then(user => {
+      .then(async user => {
         if (user.membership) res.status(400).json("You're already a member!");
         else {
-          const newCustomer = createCustomer(email, token);
+          const newCustomer = await createCustomer(email, token);
           if (!newCustomer) res.status(400).json("Unable to create a user");
           else {
-            const newSubscription = createSubscription(
+            const newSubscription = await createSubscription(
               newCustomer.id,
               "Monthly"
             );
@@ -86,13 +86,13 @@ router.post(
     const token = req.body.id;
 
     User.findOne({ email })
-      .then(user => {
+      .then(async user => {
         if (user.membership) res.status(400).json("You're already a member!");
         else {
-          const newCustomer = createCustomer(email, token);
+          const newCustomer = await createCustomer(email, token);
           if (!newCustomer) res.status(400).json("Unable to become a customer");
           else {
-            const newSubscription = createSubscription(
+            const newSubscription = await createSubscription(
               newCustomer.id,
               "Yearly"
             );
@@ -102,7 +102,7 @@ router.post(
                 subscription: newSubscription.id,
                 membership: true
               };
-              if (changeStatus(email, membershipChange)) 
+              if (changeStatus(email, membershipChange))
                 res.status(201).json("Success");
               else res.status(400).json("Error");
             }
