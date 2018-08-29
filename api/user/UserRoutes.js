@@ -12,6 +12,7 @@ const stripe = require("stripe")(secretKey);
 const User = require("./UserModel.js");
 const Resume = require("../resume/ResumeModel");
 const EmailConfirmation = require("../email/EmailConfirmationModel.js");
+const { changeStatus } = require("../helpers/Stripe");
 let websiteName = "";
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
@@ -211,16 +212,8 @@ router.post("/login", (req, res) => {
               if (err) console.log(err);
               else console.log(success);
             });
-            User.findOneAndUpdate(
-              { email },
-              { membership: false, subscription: null }
-            )
-              .then(user => {
-                console.log("No Longer a Member");
-              })
-              .catch(err => {
-                console.log("Unable To Find");
-              });
+           if (changeStatus(email, { subscription: null, membership: false})) console.log("Success");
+           else console.log("Error");
           }
         });
       }
