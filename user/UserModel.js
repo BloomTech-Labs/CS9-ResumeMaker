@@ -57,7 +57,11 @@ const User = new mongoose.Schema(
     location: String,
     title: [
       {
-        type: String
+        id: ObjectId,
+        content: {
+          type: String,
+          default: ""
+        }
       }
     ],
     phonenumber: {
