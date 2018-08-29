@@ -39,12 +39,7 @@ class Summary extends Component {
                   state: { summaryIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-                <img
-                // height="20px"
-                  src={require("./CSS/plus-button.svg")}
-                  alt=""
-                  className="plus-circle"
-                />
+                <i className="fas fa-plus plus-circle" />
               </Link>
             </div>
           </div>
