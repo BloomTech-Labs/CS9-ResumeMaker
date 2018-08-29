@@ -5,12 +5,16 @@
   padding: 20px;
   min-width: 150px;
   align-items: start;
-  /* background: url("banner.jpg"); */
   min-height: 100vh;
 }
-.sidebar-button {
-  color: white;
-  text-shadow: 1px 1px black;  
- 
+
+.static-sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
+.sidebar-button {
+  color: white;
+  text-shadow: 1px 1px black;
+}

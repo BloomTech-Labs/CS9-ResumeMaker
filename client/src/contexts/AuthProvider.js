@@ -78,6 +78,12 @@ class AuthProvider extends Component {
     this.setState(temp);
   };
 
+  removeElement = (index, elementName) => {
+    const temp = this.state;
+    temp[elementName].splice(index, 1);
+    this.setState(temp);
+  }
+
   render() {
     const userInfo = this.state;
     return (
@@ -89,7 +95,8 @@ class AuthProvider extends Component {
             setLogin: this.setLogin,
             setLogout: this.setLogout,
             setElement: this.setElement,
-            addElement: this.addElement
+            addElement: this.addElement,
+            removeElement: this.removeElement
           }
         }}
       >

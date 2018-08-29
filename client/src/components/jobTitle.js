@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import { Link } from "react-router-dom";
-import "./CSS/summary.css";
+import "./CSS/component-general.css";
 
 class JobTitle extends Component {
   render() {
@@ -20,7 +20,6 @@ class JobTitle extends Component {
           <div className="title-div">
             <h1>Job Title</h1>
             {this.props.context.userInfo.title.map((element, index) => {
-             
               return (
                 <Link
                   to={{
@@ -29,7 +28,7 @@ class JobTitle extends Component {
                   }}
                   key={index}
                 >
-                  <span>{element}</span>
+                  <span>{element.content}</span>
                 </Link>
               );
             })}
@@ -40,11 +39,7 @@ class JobTitle extends Component {
                   state: { titleIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-                <img
-                  src={require("./CSS/plus-button.svg")}
-                  alt=""
-                  className="plus-circle"
-                />
+                <i className="fas fa-plus plus-circle" />
               </Link>
             </div>
           </div>

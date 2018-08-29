@@ -20,10 +20,6 @@ class EducationCreate extends Component {
   }
 
   componentDidMount() {
-    if (this.props.context.userInfo.auth !== true) {
-      //future home of login automatically on refresh or revisit
-    }
-
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.educationIndex !== false
@@ -51,10 +47,10 @@ class EducationCreate extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.educationIndex === false) {
+    if (this.props.location.state.educationIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("education", {
         school: this.state.school,
         degree: this.state.degree,
@@ -63,7 +59,7 @@ class EducationCreate extends Component {
         to: this.state.to
       });
     } // if creating
-    else {
+    else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.educationIndex,
         "education",
@@ -76,6 +72,9 @@ class EducationCreate extends Component {
         }
       );
     } // if editing
+    else {
+      this.props.context.actions.removeElement(this.props.location.state.educationIndex, "education")
+    }
 
     const tempObj = {
       "sections.education": this.props.context.userInfo.education
@@ -156,6 +155,9 @@ class EducationCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              {this.props.location.state.educationIndex !== false ? <button onClick={e =>
+                this.handleSubmit(e, true)
+              }>Delete</button> : null}
             </form>
           </div>
         </div>

@@ -10,7 +10,7 @@ class JobTitleCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: [],
+      title: "",
       success: false
     };
   }
@@ -23,7 +23,7 @@ class JobTitleCreate extends Component {
       this.setState({
         title: this.props.context.userInfo.title[
           this.props.location.state.titleIndex
-        ]
+        ].content
       });
   }
 
@@ -31,22 +31,32 @@ class JobTitleCreate extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.titleIndex === false) {
-      this.props.context.actions.addElement("title", this.state.title);
+    if (this.props.location.state.titleIndex === false && !deleteFlag) {
+      this.props.context.actions.addElement("title", {
+        content: this.state.title
+      });
     } // if creating
-    else {
+    else if (!deleteFlag) {
       this.props.context.actions.setElement(
         this.props.location.state.titleIndex,
         "title",
-        this.state.title
+        {
+          content: this.state.title
+        }
       );
     } // if editing
+    else {
+      this.props.context.actions.removeElement(
+        this.props.location.state.titleIndex,
+        "title"
+      );
+    }
 
     const tempObj = {
-      "title": this.props.context.userInfo.title
+      title: this.props.context.userInfo.title
     };
     axios
       .put(
@@ -96,6 +106,11 @@ class JobTitleCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              {this.props.location.state.titleIndex !== false ? (
+                <button onClick={e => this.handleSubmit(e, true)}>
+                  Delete
+                </button>
+              ) : null}
             </form>
           </div>
         </div>

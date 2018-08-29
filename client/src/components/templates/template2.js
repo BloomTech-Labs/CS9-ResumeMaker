@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { Button, FormGroup } from "react-bootstrap";
+import { FormGroup } from "reactstrap";
 import Sidebar from "../subComponents/sidebar";
 import Navbar from "../subComponents/navbar";
 import "./template2.css";
@@ -65,7 +65,7 @@ export class TemplateTwo extends Component {
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" },
-            { link: "/templates/template-1", title: "Template One" }
+            { link: "/templates/template-2", title: "Template Two" }
           ]}
         />
 
@@ -73,7 +73,7 @@ export class TemplateTwo extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Template Two</h3>
+              <h3 className="page-header">Modern</h3>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div textAlign="center" className="titleSection">
@@ -108,29 +108,23 @@ export class TemplateTwo extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p>
                         {" "}
-                        <CheckBox />
-                        {userInfo.email}
+                        <CheckBox />  {userInfo.email}
                       </p>
                     </a>
                     <p>
-                      <CheckBox />
-                      {userInfo.location}
+                      <CheckBox />  {userInfo.location}
                     </p>
                     <p>
-                      <CheckBox />
-                      {userInfo.phonenumber}
+                      <CheckBox />  {userInfo.phonenumber}
                     </p>
                     <p>
-                      <CheckBox />
-                      {userInfo.links.linkedin}
+                      <CheckBox />  {userInfo.links.linkedin}
                     </p>
                     <p>
-                      <CheckBox />
-                      {userInfo.links.github}
+                      <CheckBox />  {userInfo.links.github}
                     </p>
                     <p>
-                      <CheckBox />
-                      {userInfo.links.portfolio}
+                      <CheckBox />  {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                   <Divider className="divider-div" />

@@ -7,7 +7,11 @@ const {
   validatePhone,
   validateLinkedIn,
   validateGithub
+<<<<<<< HEAD:api/user/UserModel.js
 } = require("../helpers/Validation");
+=======
+} = require("../validation/Validation");
+>>>>>>> 96eb844dd7900b5d1d3b0c5810896616a2c45b78:user/UserModel.js
 
 const User = new mongoose.Schema(
   {
@@ -57,7 +61,11 @@ const User = new mongoose.Schema(
     location: String,
     title: [
       {
-        type: String
+        id: ObjectId,
+        content: {
+          type: String,
+          default: ""
+        }
       }
     ],
     phonenumber: {
@@ -79,7 +87,10 @@ const User = new mongoose.Schema(
       summary: [
         {
           id: ObjectId,
-          type: String
+          content: {
+            type: String,
+            default: ""
+          }
         }
       ],
       experience: [
@@ -127,7 +138,10 @@ const User = new mongoose.Schema(
       skills: [
         {
           id: ObjectId,
-          type: String
+          content: {
+            type: String,
+            default: ""
+          }
         }
       ]
     },
