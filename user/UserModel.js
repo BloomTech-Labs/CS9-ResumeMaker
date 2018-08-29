@@ -73,7 +73,7 @@ const User = new mongoose.Schema(
       summary: [
         {
           id: ObjectId,
-          type: String
+          value: String
         }
       ],
       experience: [
@@ -121,9 +121,9 @@ const User = new mongoose.Schema(
       skills: [
         {
           id: ObjectId,
-          type: String
+          value: String
         }
-      ]
+      ],
     },
     membership: {
       type: Boolean,
