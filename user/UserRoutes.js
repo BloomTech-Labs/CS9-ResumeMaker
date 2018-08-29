@@ -1,5 +1,5 @@
 const express = require("express");
-const UserRouter = express.Router();
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
@@ -19,7 +19,7 @@ if (process.env.SITE_NAME) {
 
 // GET users/:username
 // Route to find if a username is already in use
-UserRouter.get("/usernamecheck/:username", (req, res) => {
+router.get("/usernamecheck/:username", (req, res) => {
   User.findOne({ username: req.params.username })
     .then(user => {
       res.status(200).json(user.username);
@@ -34,7 +34,7 @@ UserRouter.get("/usernamecheck/:username", (req, res) => {
 
 // GET users/emailcheck/:email
 // Route to find if an email is already in use
-UserRouter.get("/emailcheck/:email", (req, res) => {
+router.get("/emailcheck/:email", (req, res) => {
   User.findOne({ email: req.params.email })
     .then(user => {
       res.status(200).json(user.email);
@@ -49,7 +49,7 @@ UserRouter.get("/emailcheck/:email", (req, res) => {
 
 // GET users/currentuser
 // Route to find id, username and email of current user
-UserRouter.get(
+router.get(
   "/currentuser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -60,7 +60,7 @@ UserRouter.get(
 
 // GET users (TEST ROUTE --- WILL REMOVE)
 // Should get all the users
-UserRouter.get("/", (req, res) => {
+router.get("/", (req, res) => {
   User.find()
     .then(users => {
       res.status(200).json(users);
@@ -73,7 +73,7 @@ UserRouter.get("/", (req, res) => {
 // POST users/register
 // Register a new user
 // Make sure to send confirmation email
-UserRouter.post("/register", (req, res) => {
+router.post("/register", (req, res) => {
   // Write req.body to userData in this way to avoid any fields other than these 3 (such as the confirmemail one) from being inserted
   const userData = {
     username: req.body.username,
@@ -191,7 +191,7 @@ UserRouter.post("/register", (req, res) => {
 
 // POST users/login
 // Login with a registered user
-UserRouter.post("/login", (req, res) => {
+router.post("/login", (req, res) => {
   const { email, password } = req.body;
   User.findOne({ email })
     .then(user => {
@@ -267,7 +267,7 @@ UserRouter.post("/login", (req, res) => {
 
 // DELETE users/:id
 // Make sure to send confirmation email for deleting
-UserRouter.delete(
+router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -293,7 +293,7 @@ UserRouter.delete(
 
 // PUT users/info/:id
 // Update user information
-UserRouter.put(
+router.put(
   "/info/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -495,7 +495,7 @@ UserRouter.put(
 
 // PUT users/email/:id
 // Update user email
-UserRouter.get("/changeemail/:hash", (req, res) => {
+router.get("/changeemail/:hash", (req, res) => {
   const hash = req.params.hash;
   const options = {
     new: true
@@ -554,7 +554,7 @@ UserRouter.get("/changeemail/:hash", (req, res) => {
 
 // PUT users/confirmemail/:hash
 // Confirm user signup with an email
-UserRouter.get("/confirmemail/:hash", (req, res) => {
+router.get("/confirmemail/:hash", (req, res) => {
   const hash = req.params.hash;
   EmailConfirmation.findOne({ hash: hash })
     .then(emailconfirmation => {
@@ -608,7 +608,7 @@ UserRouter.get("/confirmemail/:hash", (req, res) => {
 
 // PUT users/forgotpassword/:id
 // Create a temporary password if the user forgot theirs
-UserRouter.put("/forgotpassword", (req, res) => {
+router.put("/forgotpassword", (req, res) => {
   const email = req.body.email;
   User.findOne({ email })
     .then(user => {
@@ -700,7 +700,7 @@ UserRouter.put("/forgotpassword", (req, res) => {
 
 // PUT users/info/:id
 // Update user information
-UserRouter.get("/resetpassword/:hash", (req, res) => {
+router.get("/resetpassword/:hash", (req, res) => {
   EmailConfirmation.findOne({ hash: req.params.hash })
     .then(emailconfirmation => {
       if (emailconfirmation) {
@@ -752,4 +752,4 @@ UserRouter.get("/resetpassword/:hash", (req, res) => {
     });
 });
 
-module.exports = UserRouter;
+module.exports = router;
