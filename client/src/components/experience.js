@@ -39,11 +39,7 @@ class Experience extends Component {
                   state: { experienceIndex: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
-                <img
-                  src={require("./CSS/plus-button.svg")}
-                  alt=""
-                  className="plus-circle"
-                />
+                <i className="fas fa-plus plus-circle" />
               </Link>
             </div>
           </div>

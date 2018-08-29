@@ -4,9 +4,12 @@
   align-self: center;
 }
 
-.plus-circle {
-  width: 4rem;
-  height: 4rem;
+i {
+  color: black; 
+  font-size: 2rem; 
+}
+i:hover{
+  font-size:3rem; 
 }
 
 .title-div {
