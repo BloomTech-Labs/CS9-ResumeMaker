@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const { checkPasswordStrength, validateEmail, validatePhone, validateLinkedIn, validateGithub } = require("../validation/Validation");
+const {
+  checkPasswordStrength,
+  validateEmail,
+  validatePhone,
+  validateLinkedIn,
+  validateGithub
+} = require("../validation/Validation");
 
 const User = new mongoose.Schema(
   {
@@ -73,7 +79,10 @@ const User = new mongoose.Schema(
       summary: [
         {
           id: ObjectId,
-          value: String
+          content: {
+            type: String,
+            default: ""
+          }
         }
       ],
       experience: [
@@ -121,25 +130,30 @@ const User = new mongoose.Schema(
       skills: [
         {
           id: ObjectId,
-          value: String
+          content: {
+            type: String,
+            default: ""
+          }
         }
-      ],
+      ]
     },
     membership: {
       type: Boolean,
       default: false
     },
     subscription: String,
-    resumes: [{
-      type: ObjectId,
-      ref: "Resume"
-    }]
+    resumes: [
+      {
+        type: ObjectId,
+        ref: "Resume"
+      }
+    ]
   },
   { timestamps: true }
 );
 
 User.pre("save", function(next) {
-  if (!this.isModified('password')) return next();
+  if (!this.isModified("password")) return next();
   bcrypt.hash(this.password, 11, (err, hash) => {
     if (err) return next(err);
     this.password = hash;
