@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import { Link } from "react-router-dom";
-import "./CSS/summary.css";
+import "./CSS/component-general.css";
 
 class Experience extends Component {
   render() {
@@ -39,11 +39,7 @@ class Experience extends Component {
                   state: { experienceIndex: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
-                <img
-                  src={require("./CSS/plus-button.svg")}
-                  alt=""
-                  className="plus-circle"
-                />
+                <i className="fas fa-plus plus-circle" />
               </Link>
             </div>
           </div>

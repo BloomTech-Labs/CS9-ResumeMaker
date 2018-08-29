@@ -3,7 +3,7 @@ import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import ItemCard from "./subComponents/itemCard";
 import { Link } from "react-router-dom";
-import "./CSS/summary.css";
+import "./CSS/component-general.css";
 
 class Summary extends Component {
   render() {
@@ -39,12 +39,7 @@ class Summary extends Component {
                   state: { summaryIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-                <img
-                // height="20px"
-                  src={require("./CSS/plus-button.svg")}
-                  alt=""
-                  className="plus-circle"
-                />
+                <i className="fas fa-plus plus-circle" />
               </Link>
             </div>
           </div>
