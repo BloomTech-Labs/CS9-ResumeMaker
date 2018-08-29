@@ -2,3 +2,6 @@
     font-size: 1.2rem; 
     font-weight: 600;
 }
+.logout.btn {
+    padding: 0; 
+}
