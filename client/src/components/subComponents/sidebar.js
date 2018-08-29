@@ -46,42 +46,44 @@ class Sidebar extends Component {
     }
     return (
       <div className="sidebar bg-secondary">
-        <Link to="/templates" className="sidebar-button">
-          {" "}
-          Templates
-        </Link>
-        <Link to="/resumes" className="sidebar-button">
-          {" "}
-          Resumes
-        </Link>
-        <Link to="/jobTitle" className="sidebar-button">
-          {" "}
-          JobTitle
-        </Link>
-        <Link to="/summary" className="sidebar-button">
-          {" "}
-          Summary
-        </Link>
-        <Link to="/skills" className="sidebar-button">
-          {" "}
-          Skills
-        </Link>
-        <Link to="/experience" className="sidebar-button">
-          {" "}
-          Experience
-        </Link>
-        <Link to="/education" className="sidebar-button">
-          {" "}
-          Education
-        </Link>
-        <Link to="/billing" className="sidebar-button">
-          {" "}
-          Billing
-        </Link>
-        <Link to="/settings" className="sidebar-button">
-          {" "}
-          Settings
-        </Link>
+        <div className="static-sidebar">
+          <Link to="/templates" className="sidebar-button">
+            {" "}
+            Templates
+          </Link>
+          <Link to="/resumes" className="sidebar-button">
+            {" "}
+            Resumes
+          </Link>
+          <Link to="/jobTitle" className="sidebar-button">
+            {" "}
+            JobTitle
+          </Link>
+          <Link to="/summary" className="sidebar-button">
+            {" "}
+            Summary
+          </Link>
+          <Link to="/skills" className="sidebar-button">
+            {" "}
+            Skills
+          </Link>
+          <Link to="/experience" className="sidebar-button">
+            {" "}
+            Experience
+          </Link>
+          <Link to="/education" className="sidebar-button">
+            {" "}
+            Education
+          </Link>
+          <Link to="/billing" className="sidebar-button">
+            {" "}
+            Billing
+          </Link>
+          <Link to="/settings" className="sidebar-button">
+            {" "}
+            Settings
+          </Link>
+        </div>
       </div>
     );
   }
