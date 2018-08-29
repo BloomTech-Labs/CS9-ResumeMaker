@@ -6,7 +6,12 @@ const secretKey = require("../config/keys").secret_key;
 const stripe = require("stripe")(secretKey);
 
 const User = require("../user/UserModel");
-const { checkMembership, createCustomer, createSubscription, changeStatus } = require("../helpers/Stripe");
+const {
+  checkMembership,
+  createCustomer,
+  createSubscription,
+  changeStatus
+} = require("../helpers/Stripe");
 
 /*
     @route  POST pay/monthly
@@ -32,11 +37,12 @@ router.post(
         );
         if (!newSubscription) res.status(400).json("Unable to subscribe");
         else {
-          const membershipChange = {
-            subscription: newSubscription.id,
-            membership: true
-          };
-          if (changeStatus(email, membershipChange))
+          if (
+            changeStatus(email, {
+              subscription: newSubscription.id,
+              membership: true
+            })
+          )
             res.status(201).json("Success");
           else res.status(400).json("Error");
         }
@@ -69,11 +75,12 @@ router.post(
         );
         if (!newSubscription) res.status(400).json("Unable to subscribe");
         else {
-          const membershipChange = {
-            subscription: newSubscription.id,
-            membership: true
-          };
-          if (changeStatus(email, membershipChange))
+          if (
+            changeStatus(email, {
+              subscription: newSubscription.id,
+              membership: true
+            })
+          )
             res.status(201).json("Success");
           else res.status(400).json("Error");
         }
@@ -99,11 +106,7 @@ router.post(
             if (err) {
               res.status(400).json("Unable to unsubscribe at this time");
             } else {
-              const membershipChange = {
-                subscription: null,
-                membership: false
-              };
-              if (changeStatus(email, membershipChange))
+              if (changeStatus(email, { subscription: null, membership: false }))
                 res.status(201).json("Successfully Unsubscribed");
               else res.status(400).json(err);
             }
