@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
-import { Button, FormGroup } from "react-bootstrap";
+import { FormGroup } from "reactstrap";
 import Sidebar from "../subComponents/sidebar";
 import Navbar from "../subComponents/navbar";
 import "./template3.css";
