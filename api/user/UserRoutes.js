@@ -249,7 +249,7 @@ router.post("/login", (req, res) => {
             if (user.membership) {
               const query = Resume.find({ user: user.id });
               query.then(resumes => {
-                res.json({ user, resumes });
+                res.json({ token, user, resumes });
               });
             } else {
               const query = Resume.findOne({ user: user.id });

@@ -31,7 +31,7 @@ class Sidebar extends Component {
           this.props.context.actions.setResume(resumeData);
         })
         .catch(err => {
-          console.log("err", err);
+          console.log("Server Error: ", err);
         });
     }
   }
