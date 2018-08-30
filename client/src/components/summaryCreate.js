@@ -47,8 +47,8 @@ class SummaryCreate extends Component {
 
     if (this.props.location.state.summaryIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("summary", {
-        content: this.state.content,
-        _id: this.state._id
+        // When creating, do NOT put in an _id, let mongo autocreate one
+        content: this.state.content
       });
     } // if creating
     else if (!deleteFlag) {
@@ -141,4 +141,5 @@ class SummaryCreate extends Component {
     ];
   }
 }
+
 export default SummaryCreate;
