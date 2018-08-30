@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "./subComponents/sidebar";
+import Sidebar from "../subComponents/sidebar";
 import axios from "axios";
-import Navbar from "./subComponents/navbar";
+import Navbar from "../subComponents/navbar";
 
-const urls = require("../config/config.json");
+const urls = require("../../config/config.json");
 
 class SkillsCreate extends Component {
   constructor(props) {

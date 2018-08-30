@@ -5,7 +5,7 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 import LandingPage from "./components/LandingPage/landingPage";
 import Summaries from "./components/Summary/summary";
 import Education from "./components/Education/education";
-import Skills from "./components/skills";
+import Skills from "./components/Skills/skills";
 import JobTitle from "./components/JobTitle/jobTitle";
 import Resumes from "./components/resumes";
 import Billing from "./components/Billing/billing"
@@ -18,7 +18,7 @@ import Sidebar from "./components/subComponents/sidebar";
 import SummaryCreate from "./components/Summary/summaryCreate";
 import EducationCreate from "./components/Education/educationCreate";
 import ExperienceCreate from "./components/Experience/experienceCreate";
-import SkillsCreate from "./components/skillsCreate";
+import SkillsCreate from "./components/Skills/skillsCreate";
 import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
