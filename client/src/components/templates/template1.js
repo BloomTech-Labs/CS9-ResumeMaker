@@ -76,10 +76,16 @@ export class TemplateOne extends Component {
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
+                {console.log("userinfo", userInfo)}
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                <h5>{userInfo.title}</h5>
+                {userInfo.title.map((title, index) => {
+                  return (<div key={index}>
+                    <h4> <CheckBox /> {title.content}</h4>
+                  </div>
+                  );
+                })}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
@@ -87,23 +93,23 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>
                     {" "}
-                    <CheckBox />  {userInfo.email}
+                    <CheckBox /> {userInfo.email}
                   </p>
                 </a>
                 <p>
-                  <CheckBox />  {userInfo.location}
+                  <CheckBox /> {userInfo.location}
                 </p>
                 <p>
-                  <CheckBox />  {userInfo.phonenumber}
+                  <CheckBox /> {userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox/>  {userInfo.links.linkedin}
+                  <CheckBox /> {userInfo.links.linkedin}
                 </p>
                 <p>
-                  <CheckBox />  {userInfo.links.github}
+                  <CheckBox /> {userInfo.links.github}
                 </p>
                 <p>
-                  <CheckBox />  {userInfo.links.portfolio}
+                  <CheckBox /> {userInfo.links.portfolio}
                 </p>
               </Container>
               <Divider className="divider-div" />
@@ -114,11 +120,14 @@ export class TemplateOne extends Component {
               >
                 <h3>Summary</h3>
                 {userInfo.summary.map((content, index) => {
+                  {
+                    console.log("Summary", content);
+                  }
                   return (
                     <div key={index}>
                       <p>
                         {" "}
-                        <CheckBox /> {content}
+                        <CheckBox /> {content.content}
                       </p>
                     </div>
                   );
@@ -130,7 +139,11 @@ export class TemplateOne extends Component {
                 {userInfo.skills.map((content, index) => {
                   return (
                     <div key={index}>
-                      <p> <CheckBox /> {content}</p>
+                      {console.log("Skills", content)}
+                      <p>
+                        {" "}
+                        <CheckBox /> {content.content}
+                      </p>
                     </div>
                   );
                 })}
@@ -141,9 +154,14 @@ export class TemplateOne extends Component {
                 {experience.map((content, index) => {
                   return (
                     <div key={index}>
-                      {console.log(content)}
-                      <h5> <CheckBox />  {content.company} </h5>
-                        <p> {content.title}
+                      {console.log("Experience", content)}
+                      <h5>
+                        {" "}
+                        <CheckBox /> {content.company}{" "}
+                      </h5>
+                      <p>
+                        {" "}
+                        {content.title}
                         <br />
                         {content.location}
                         <br />
@@ -158,21 +176,21 @@ export class TemplateOne extends Component {
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
                 {education.map((content, index) => {
-                      return (
-                        <div key={index}>
-                          <h5>
-                            <CheckBox /> {content.degree} in{" "}
-                            {content.fieldofstudy}{" "}
-                          </h5>
-                          <p>{content.location}</p>
-                          <p>
-                            {content.school}
-                            <br />
-                            {content.from} - {content.to}
-                          </p>
-                        </div>
-                      );
-                    })}
+                  return (
+                    <div key={index}>
+                      {console.log("education", content)}
+                      <h5>
+                        <CheckBox /> {content.degree} in {content.fieldofstudy}{" "}
+                      </h5>
+                      <p>{content.location}</p>
+                      <p>
+                        {content.school}
+                        <br />
+                        {content.from} - {content.to}
+                      </p>
+                    </div>
+                  );
+                })}
               </Container>
             </form>
             <div className="justify-content-center">
