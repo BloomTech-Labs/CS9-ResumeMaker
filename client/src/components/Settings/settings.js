@@ -210,7 +210,7 @@ export class PersonalInfo extends Component {
         <h1> Personal Information </h1>
         <div className="Settings">
           <Form>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>First Name</Label>
               <Input
                 id="name.firstname"
@@ -218,7 +218,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Middle Name</Label>
               <Input
                 id="name.middlename"
@@ -226,7 +226,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Last Name</Label>
               <Input
                 id="name.lastname"
@@ -234,7 +234,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Phone Number</Label>
               <Input
                 id="phonenumber"
@@ -242,7 +242,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Location</Label>
               <Input
                 id="location"
@@ -250,7 +250,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Linkedin</Label>
               <Input
                 id="links.linkedin"
@@ -258,7 +258,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Github</Label>
               <Input
                 id="links.github"
@@ -266,7 +266,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large">
+            <FormGroup>
               <Label>Portfolio</Label>
               <Input
                 id="links.portfolio"
@@ -274,7 +274,7 @@ export class PersonalInfo extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup bsSize="large" validationState={this.state.emailInvalid}>
+            <FormGroup validationState={this.state.emailInvalid}>
               <Label>Email</Label>
               <Input
                 id="email"
@@ -287,7 +287,6 @@ export class PersonalInfo extends Component {
               ) : null}
             </FormGroup>
             <FormGroup
-              bsSize="large"
               validationState={this.checkPasswordStrength(
                 this.state.oldpassword
               )}
@@ -307,7 +306,6 @@ export class PersonalInfo extends Component {
               ) : null}
             </FormGroup>
             <FormGroup
-              bsSize="large"
               validationState={this.checkPasswordStrength(
                 this.state.newpassword
               )}
@@ -325,10 +323,7 @@ export class PersonalInfo extends Component {
                 </FormFeedback>
               ) : null}
             </FormGroup>
-            <FormGroup
-              bsSize="large"
-              validationState={this.checkConfirmPassword()}
-            >
+            <FormGroup validationState={this.checkConfirmPassword()}>
               <Label>Confirm New Password</Label>
               <Input
                 id="newconfirmpassword"
@@ -344,7 +339,7 @@ export class PersonalInfo extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="large"
+              size="large"
               color="primary"
               onClick={() => this.checkInputValidity()}
             >

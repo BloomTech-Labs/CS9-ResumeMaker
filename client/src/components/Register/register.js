@@ -149,10 +149,7 @@ class Register extends Component {
       return (
         <div className="Login">
           <Form>
-            <FormGroup
-              bsSize="large"
-              validationState={this.state.usernameInvalid}
-            >
+            <FormGroup validationState={this.state.usernameInvalid}>
               <Label>Username</Label>
               <Input
                 autoFocus
@@ -166,7 +163,7 @@ class Register extends Component {
               ) : null}
             </FormGroup>
 
-            <FormGroup bsSize="large" validationState={this.state.emailInvalid}>
+            <FormGroup validationState={this.state.emailInvalid}>
               <Label>Email</Label>
               <Input
                 id="email"
@@ -178,11 +175,7 @@ class Register extends Component {
                 <FormFeedback>Please enter an unused valid email.</FormFeedback>
               ) : null}
             </FormGroup>
-
-            <FormGroup
-              bsSize="large"
-              validationState={this.state.passwordInvalid}
-            >
+            <FormGroup validationState={this.state.passwordInvalid}>
               <Label>Password</Label>
               <Input
                 id="password"
@@ -196,10 +189,7 @@ class Register extends Component {
                 </FormFeedback>
               ) : null}
             </FormGroup>
-            <FormGroup
-              bsSize="large"
-              validationState={this.state.passwordInvalid}
-            >
+            <FormGroup validationState={this.state.passwordInvalid}>
               <Label>Confirm password</Label>
               <Input
                 id="confirmPassword"
@@ -210,7 +200,7 @@ class Register extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="large"
+              size="large"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
