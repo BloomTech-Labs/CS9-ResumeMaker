@@ -80,7 +80,13 @@ export class TemplateTwo extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                <h4>{userInfo.title}</h4>
+                {userInfo.title.map(title => {
+                  return (
+                    <div>
+                      <h5><CheckBox /> {title.content}</h5>
+                    </div>
+                  );
+                })}
               </div>
               <Divider className="divider-div" />
               <Container
@@ -94,7 +100,7 @@ export class TemplateTwo extends Component {
                     <div key={index}>
                       <p>
                         {" "}
-                        <CheckBox /> {content}
+                        <CheckBox /> {content.content}
                       </p>
                     </div>
                   );
@@ -108,23 +114,23 @@ export class TemplateTwo extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p>
                         {" "}
-                        <CheckBox />  {userInfo.email}
+                        <CheckBox /> {userInfo.email}
                       </p>
                     </a>
                     <p>
-                      <CheckBox />  {userInfo.location}
+                      <CheckBox /> {userInfo.location}
                     </p>
                     <p>
-                      <CheckBox />  {userInfo.phonenumber}
+                      <CheckBox /> {userInfo.phonenumber}
                     </p>
                     <p>
-                      <CheckBox />  {userInfo.links.linkedin}
+                      <CheckBox /> {userInfo.links.linkedin}
                     </p>
                     <p>
-                      <CheckBox />  {userInfo.links.github}
+                      <CheckBox /> {userInfo.links.github}
                     </p>
                     <p>
-                      <CheckBox />  {userInfo.links.portfolio}
+                      <CheckBox /> {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                   <Divider className="divider-div" />
@@ -156,7 +162,7 @@ export class TemplateTwo extends Component {
                       return (
                         <div key={index}>
                           <p>
-                            <CheckBox /> {content}
+                            <CheckBox /> {content.content}
                           </p>
                         </div>
                       );
