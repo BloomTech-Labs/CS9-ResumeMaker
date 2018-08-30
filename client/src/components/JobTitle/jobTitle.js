@@ -12,7 +12,7 @@ class JobTitle extends Component {
           context={this.props.context}
           breadcrumbs={[
             { link: "/", title: "Home" },
-            { link: "/jobtitle", title: "JobTitle" }
+            { link: "/jobtitle", title: "Job Title" }
           ]}
         />
         <div className="overall-component-div">

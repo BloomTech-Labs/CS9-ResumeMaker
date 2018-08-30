@@ -34,7 +34,8 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="App LandingPage">
-        <h1 className="Header">Resume Maker</h1>
+        <h1 className="Header">rezLeft</h1>
+        <p>When Everyone Goes Right, We Go Left</p>
         <Link className="landing-button" to="/login">
           <button type="button" className="btn btn-secondary">
             Login
