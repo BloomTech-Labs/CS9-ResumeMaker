@@ -4,6 +4,7 @@ import axios from "axios";
 import {
   Modal,
   Button,
+  Form,
   FormGroup,
   Input,
   Label,
@@ -208,7 +209,7 @@ export class PersonalInfo extends Component {
       <div>
         <h1> Personal Information </h1>
         <div className="Settings">
-          <form>
+          <Form>
             <FormGroup bsSize="large">
               <Label>First Name</Label>
               <Input
@@ -344,12 +345,12 @@ export class PersonalInfo extends Component {
             <Button
               block
               bsSize="large"
-              bsStyle="primary"
+              color="primary"
               onClick={() => this.checkInputValidity()}
             >
               Submit
             </Button>
-          </form>
+          </Form>
         </div>
       </div>
     );

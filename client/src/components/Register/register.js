@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   Modal,
   Button,
+  Form,
   FormGroup,
   Input,
   Label,
@@ -132,7 +133,7 @@ class Register extends Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  bsStyle="primary"
+                  color="primary"
                   onClick={() => {
                     this.resetSubmitStatus();
                   }}
@@ -147,7 +148,7 @@ class Register extends Component {
     } else if (this.state.submitted === false) {
       return (
         <div className="Login">
-          <form>
+          <Form>
             <FormGroup
               bsSize="large"
               validationState={this.state.usernameInvalid}
@@ -210,19 +211,19 @@ class Register extends Component {
             <Button
               block
               bsSize="large"
-              bsStyle="primary"
+              color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
               Register
             </Button>
             <Button
-              bsStyle="danger"
+              color="danger"
               onClick={() => this.props.history.push("/login")}
             >
               Take me to the login page
             </Button>
-          </form>
+          </Form>
         </div>
       );
     } else {
@@ -239,7 +240,7 @@ class Register extends Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  bsStyle="primary"
+                  color="primary"
                   onClick={() => {
                     this.props.history.push("/login");
                   }}

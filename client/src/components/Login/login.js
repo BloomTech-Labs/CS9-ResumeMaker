@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, Input, Label } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
@@ -62,11 +62,11 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           {this.state.invalidCredentials ? (
             <h3 className="mb-5">Invalid password or email.</h3>
           ) : null}
-          <FormGroup bsSize="large">
+          <FormGroup>
             <Label>Email</Label>
             <Input
               autoFocus
@@ -88,13 +88,13 @@ export default class Login extends Component {
           <Button
             block
             bsSize="large"
-            bsStyle="primary"
+            color="primary"
             disabled={!this.validateForm()}
             type="submit"
           >
             Login
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }
