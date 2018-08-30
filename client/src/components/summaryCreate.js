@@ -11,7 +11,8 @@ class SummaryCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      summary: "",
+      content: "",
+      _id: "",
       success: false
     };
   }
@@ -20,12 +21,16 @@ class SummaryCreate extends Component {
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.summaryIndex !== false
-    )
+    ) {
       this.setState({
-        summary: this.props.context.userInfo.summary[
+        content: this.props.context.userInfo.summary[
           this.props.location.state.summaryIndex
-        ].content
+        ].content,
+        _id: this.props.context.userInfo.summary[
+          this.props.location.state.summaryIndex
+        ]._id
       });
+    }
   }
 
   onInputChange = e => {
@@ -37,7 +42,8 @@ class SummaryCreate extends Component {
 
     if (this.props.location.state.summaryIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("summary", {
-        content: this.state.summary
+        // When creating, do NOT put in an _id, let mongo autocreate one
+        content: this.state.content
       });
     } // if creating
     else if (!deleteFlag) {
@@ -45,7 +51,8 @@ class SummaryCreate extends Component {
         this.props.location.state.summaryIndex,
         "summary",
         {
-          content: this.state.summary
+          content: this.state.content,
+          _id: this.state._id
         }
       );
     } // if editing
@@ -109,11 +116,11 @@ class SummaryCreate extends Component {
                 </label>
                 <textarea
                   rows={10}
-                  value={this.state.summary}
+                  value={this.state.content}
                   onChange={this.onInputChange}
                   className="form-control"
-                  name="summary"
-                  placeholder="List Summarys"
+                  name="content"
+                  placeholder="Input your summary"
                 />
               </form>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
@@ -129,4 +136,5 @@ class SummaryCreate extends Component {
     ];
   }
 }
+
 export default SummaryCreate;

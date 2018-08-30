@@ -10,7 +10,8 @@ class SkillsCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      skill: "",
+      content: "",
+      _id: "",
       success: false
     };
   }
@@ -23,12 +24,16 @@ class SkillsCreate extends Component {
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.skillsIndex !== false
-    )
+    ) {
       this.setState({
-        skill: this.props.context.userInfo.skills[
+        content: this.props.context.userInfo.skills[
           this.props.location.state.skillsIndex
-        ].content
+        ].content,
+        _id: this.props.context.userInfo.skills[
+          this.props.location.state.skillsIndex
+        ]._id
       });
+    }
   }
 
   onInputChange = e => {
@@ -40,7 +45,8 @@ class SkillsCreate extends Component {
 
     if (this.props.location.state.skillsIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("skills", {
-        content: this.state.skill
+        // When creating, do NOT put in an _id, let mongo autocreate one
+        content: this.state.content
       });
     } // if creating
     else if (!deleteFlag) {
@@ -48,7 +54,8 @@ class SkillsCreate extends Component {
         this.props.location.state.skillsIndex,
         "skills",
         {
-          content: this.state.skill
+          content: this.state.content,
+          _id: this.state._id
         }
       );
     } // if editing
@@ -101,11 +108,11 @@ class SkillsCreate extends Component {
                   “Success is skill inside out.” ― Matshona Dhliwayo
                 </label>
                 <input
-                  value={this.state.skill}
+                  value={this.state.content}
                   onChange={this.onInputChange}
                   className="form-control"
-                  name="skill"
-                  placeholder="List Skills"
+                  name="content"
+                  placeholder="Input your skill"
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>

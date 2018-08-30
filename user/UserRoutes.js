@@ -246,7 +246,7 @@ UserRouter.post("/login", (req, res) => {
             } else {
               const query = Resume.findOne({ user: user.id });
               query.then(resume => {
-                res.json({ token, user, resume })
+                res.json({ token, user, resume });
               });
             }
           } else
@@ -297,6 +297,7 @@ UserRouter.put(
   "/info/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("REQ.BODY:", req.body);
     const id = req.params.id;
     if (id === req.user.id) {
       delete req.body.username;
