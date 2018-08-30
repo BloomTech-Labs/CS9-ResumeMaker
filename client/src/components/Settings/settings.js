@@ -339,7 +339,7 @@ export class PersonalInfo extends Component {
             </FormGroup>
             <Button
               block
-              size="large"
+              size="lg"
               color="primary"
               onClick={() => this.checkInputValidity()}
             >

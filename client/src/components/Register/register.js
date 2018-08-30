@@ -200,7 +200,7 @@ class Register extends Component {
             </FormGroup>
             <Button
               block
-              size="large"
+              size="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
