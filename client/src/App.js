@@ -6,7 +6,7 @@ import LandingPage from "./components/landingPage";
 import Summaries from "./components/summary";
 import Education from "./components/Education/education";
 import Skills from "./components/skills";
-import JobTitle from "./components/jobTitle";
+import JobTitle from "./components/JobTitle/jobTitle";
 import Resumes from "./components/resumes";
 import Billing from "./components/Billing/billing"
 import Settings from "./components/settings";
@@ -19,7 +19,7 @@ import SummaryCreate from "./components/summaryCreate";
 import EducationCreate from "./components/Education/educationCreate";
 import ExperienceCreate from "./components/Experience/experienceCreate";
 import SkillsCreate from "./components/skillsCreate";
-import JobTitleCreate from "./components/jobTitleCreate";
+import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 import { TemplateOne } from "./components/templates/template1";

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Sidebar from "./subComponents/sidebar";
-import Navbar from "./subComponents/navbar";
+import Sidebar from "../subComponents/sidebar";
+import Navbar from "../subComponents/navbar";
 import { Link } from "react-router-dom";
-import "./CSS/component-general.css";
+import "../CSS/component-general.css";
 
 class JobTitle extends Component {
   render() {
