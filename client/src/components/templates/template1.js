@@ -4,6 +4,7 @@ import Sidebar from "../subComponents/sidebar";
 import Navbar from "../subComponents/navbar";
 import "./template1.css";
 import { Link } from "react-router-dom";
+import DropDown from './dropdown';
 
 class CheckBox extends React.Component {
   constructor(props) {
@@ -79,7 +80,7 @@ export class TemplateOne extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                <h5>{userInfo.title}</h5>
+                <DropDown data={userInfo.title} />
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
@@ -113,16 +114,7 @@ export class TemplateOne extends Component {
                 className="summarySection"
               >
                 <h3>Summary</h3>
-                {userInfo.summary.map((content, index) => {
-                  return (
-                    <div key={index}>
-                      <p>
-                        {" "}
-                        <CheckBox /> {content}
-                      </p>
-                    </div>
-                  );
-                })}
+                <DropDown data={userInfo.summary} />
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="skillsSection">
