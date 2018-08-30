@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Sidebar from "./subComponents/sidebar";
-import Navbar from "./subComponents/navbar";
-import ItemCard from "./subComponents/itemCard";
+import Sidebar from "../subComponents/sidebar";
+import Navbar from "../subComponents/navbar";
+import ItemCard from "../subComponents/itemCard";
 import { Link } from "react-router-dom";
-import "./CSS/component-general.css";
+import "../CSS/component-general.css";
 
 class Summary extends Component {
   render() {

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Prompt } from "react-router";
-import Sidebar from "./subComponents/sidebar";
-import Navbar from "./subComponents/navbar";
+import Sidebar from "../subComponents/sidebar";
+import Navbar from "../subComponents/navbar";
 import axios from "axios";
 
-const urls = require("../config/config.json");
+const urls = require("../../config/config.json");
 
 class SummaryCreate extends Component {
   constructor(props) {
