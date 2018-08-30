@@ -10,14 +10,14 @@ import JobTitle from "./components/jobTitle";
 import Resumes from "./components/resumes";
 import Billing from "./components/Billing/billing"
 import Settings from "./components/settings";
-import Experience from "./components/experience";
+import Experience from "./components/Experience/experience";
 import Login from "./components/login";
 import Register from "./components/register";
 import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
 import SummaryCreate from "./components/summaryCreate";
 import EducationCreate from "./components/Education/educationCreate";
-import ExperienceCreate from "./components/experienceCreate";
+import ExperienceCreate from "./components/Experience/experienceCreate";
 import SkillsCreate from "./components/skillsCreate";
 import JobTitleCreate from "./components/jobTitleCreate";
 import "./App.css";
