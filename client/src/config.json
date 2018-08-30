@@ -2,5 +2,5 @@
   "localPath": "http://localhost:3333",
   "herokuPath": "https://easy-resume.herokuapp.com",
   "altHerokuPath": "https://rez-me.herokuapp.com",
-  "basePath": "localPath"
+  "basePath": "herokuPath"
 }
