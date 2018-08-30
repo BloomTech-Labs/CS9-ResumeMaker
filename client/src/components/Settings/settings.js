@@ -43,9 +43,9 @@ export class PersonalInfo extends Component {
       oldpassword: "",
       newpassword: "",
       newconfirmpassword: "",
-      usernameInvalid: null,
-      emailInvalid: null,
-      passwordInvalid: null
+      usernameInvalid: false,
+      emailInvalid: false,
+      passwordInvalid: false
     };
   }
 
@@ -127,9 +127,9 @@ export class PersonalInfo extends Component {
 
   checkInputValidity = () => {
     this.setState({
-      // usernameInvalid: null,
-      emailInvalid: null,
-      passwordInvalid: null
+      // usernameInvalid: false,
+      emailInvalid: false,
+      passwordInvalid: false
     });
     if (this.state.email !== this.props.context.userInfo.email) {
       // const usernamePromise = axios
@@ -145,13 +145,13 @@ export class PersonalInfo extends Component {
         .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
         .then(response => {
           console.log(response);
-          this.setState({ emailInvalid: "error" });
+          this.setState({ emailInvalid: true });
         })
         .catch(err => {
           console.log(err);
         });
       if (!this.validateEmail(this.state.email)) {
-        this.setState({ emailInvalid: "error" });
+        this.setState({ emailInvalid: true });
       }
 
       // If all fields are valid and the confirm password matches password,
@@ -159,8 +159,8 @@ export class PersonalInfo extends Component {
       Promise.all([emailPromise]).then(values => {
         console.log("The current state:", this.state);
         if (
-          // this.state.usernameInvalid === null &&
-          this.state.emailInvalid === null
+          this.state.usernameInvalid === false &&
+          this.state.emailInvalid === false
         ) {
           this.handleSubmit();
         } else {
@@ -187,7 +187,7 @@ export class PersonalInfo extends Component {
         console.log("RESPONSE GOTTEN", response);
         if (response.data.errorMessage) {
           if (response.data.errorMessage.includes("password")) {
-            this.setState({ passwordInvalid: "error" });
+            this.setState({ passwordInvalid: true });
           }
         }
         this.setState(response.data.user);
@@ -304,7 +304,12 @@ export class PersonalInfo extends Component {
                 <Label>Current Password</Label>
                 <Input
                   valid={!this.state.passwordInvalid}
-                  invalid={this.state.passwordInvalid}
+                  invalid={
+                    (this.state.passwordInvalid ||
+                      this.state.newpassword !== "" ||
+                      this.state.email !== this.props.context.userInfo.email) &&
+                    this.state.oldpassword === ""
+                  }
                   id="oldpassword"
                   size="sm"
                   type="password"
@@ -312,14 +317,19 @@ export class PersonalInfo extends Component {
                   onChange={this.handleChange}
                 />
                 <FormFeedback invalid>
-                  Incorrect password. Please enter your current password if you
-                  want to make a new password or change your email.
+                  Please enter your current password to change your email or
+                  password.
                 </FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label>New Password</Label>
                 <Input
-                  invalid={this.checkPasswordStrength(this.state.newpassword)}
+                  invalid={
+                    !this.checkPasswordStrength(this.state.newpassword) &&
+                    this.state.newpassword !== ""
+                      ? true
+                      : false
+                  }
                   valid={this.checkPasswordStrength(this.state.newpassword)}
                   id="newpassword"
                   size="sm"
