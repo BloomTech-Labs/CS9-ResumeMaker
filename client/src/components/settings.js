@@ -14,7 +14,7 @@ import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import "./CSS/settings.css";
 
-const urls = require("../config.json");
+const urls = require("../config/config.json");
 
 export class PersonalInfo extends Component {
   constructor() {

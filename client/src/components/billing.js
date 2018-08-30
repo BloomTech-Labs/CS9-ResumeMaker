@@ -7,7 +7,7 @@ import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import Loading from "./subComponents/Loading"
 import "./CSS/billing.css";
-const urls = require("../config.json");
+const urls = require("../config/config.json");
 
 class Billing extends Component {
   state = {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./CSS/sidebar.css";
 import axios from "axios";
-const urls = require("../../config.json");
+const urls = require("../../config/config.json");
 
 class Sidebar extends Component {
   constructor(props) {

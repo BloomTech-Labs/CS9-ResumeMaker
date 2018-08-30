@@ -5,7 +5,7 @@ import Sidebar from "./subComponents/sidebar";
 import Navbar from "./subComponents/navbar";
 import axios from "axios";
 
-const urls = require("../config.json");
+const urls = require("../config/config.json");
 
 class SummaryCreate extends Component {
   constructor(props) {

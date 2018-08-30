@@ -16,7 +16,7 @@ const bobbert = {
   invalidCredentials: false
 };
 
-const urls = require("../config.json");
+const urls = require("../config/config.json");
 
 export default class Login extends Component {
   constructor(props) {

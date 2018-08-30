@@ -4,7 +4,7 @@ import axios from "axios";
 import Navbar from "./subComponents/navbar";
 import { Redirect } from "react-router-dom";
 
-const urls = require("../config.json");
+const urls = require("../config/config.json");
 
 class EducationCreate extends Component {
   constructor(props) {
