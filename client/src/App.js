@@ -16,7 +16,7 @@ import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import Experience from "./components/Experience/experience";
 import ExperienceCreate from "./components/Experience/experienceCreate";
 import Billing from "./components/Billing/billing"
-import Resumes from "./components/resumes";
+import Resumes from "./components/Resume/resumes";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
