@@ -3,14 +3,9 @@ const stripe = require("stripe")(secretKey);
 
 const User = require("../user/UserModel");
 
-const checkMembership = email => {
-  User.findOne({ email })
-    .then(async user => {
-      return await user.membership;
-    })
-    .catch(async err => {
-      return await err;
-    });
+const checkMembership = async email => {
+  const status = await User.findOne({ email });
+  return await status.membership;
 };
 
 const createCustomer = async (email, token) => {
@@ -34,8 +29,8 @@ const createSubscription = async (id, planType) => {
 };
 
 const changeStatus = async (email, newInfo) => {
-  const updatedStatus = await User.findOneAndUpdate({ email }, newInfo);
-  return updatedStatus;
+  const updatedStatus = User.findOneAndUpdate({ email }, newInfo);
+  return await updatedStatus;
 };
 
 module.exports = {
