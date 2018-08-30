@@ -10,3 +10,4 @@ icon from Icons made by Nas Ztudio from www.flaticon.com is licensed by CC 3.0 B
 
 lion head icon from :"https://www.freeiconspng.com/img/37126"
 header: https://pixabay.com/en/photos/banner/
+ Styling:  href="http://mksht.crisnoble.com" rel="Like cool shit? visit my site"

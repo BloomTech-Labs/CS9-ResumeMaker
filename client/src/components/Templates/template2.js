@@ -37,7 +37,7 @@ export class TemplateTwo extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/"},
             { link: "/templates", title: "Templates" },
             { link: "/Templates/template-2", title: "Template Two" }
           ]}

@@ -5,3 +5,21 @@
 .logout.btn {
     padding: 0; 
 }
+.knockout {
+    background: url(http://apod.nasa.gov/apod/image/0603/coma_misti.jpg) 2rem 2rem;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
+    font-family: arial, helvetica;
+    margin: 1px;
+  }
+.knockout:hover {
+    font-weight: 800; 
+}
+.breadcrumb-item {
+   text-shadow: 1px 1px black; 
+}
+.breadcrumb {
+    display: inline; 
+}
