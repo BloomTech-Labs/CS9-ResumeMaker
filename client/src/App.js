@@ -4,7 +4,7 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 
 import LandingPage from "./components/landingPage";
 import Summaries from "./components/summary";
-import Education from "./components/education";
+import Education from "./components/Education/education";
 import Skills from "./components/skills";
 import JobTitle from "./components/jobTitle";
 import Resumes from "./components/resumes";
@@ -16,7 +16,7 @@ import Register from "./components/register";
 import Templates from "./components/templates";
 import Sidebar from "./components/subComponents/sidebar";
 import SummaryCreate from "./components/summaryCreate";
-import EducationCreate from "./components/educationCreate";
+import EducationCreate from "./components/Education/educationCreate";
 import ExperienceCreate from "./components/experienceCreate";
 import SkillsCreate from "./components/skillsCreate";
 import JobTitleCreate from "./components/jobTitleCreate";
