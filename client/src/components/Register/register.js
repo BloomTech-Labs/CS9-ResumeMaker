@@ -3,10 +3,10 @@ import {
   Modal,
   Button,
   FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock
-} from "react-bootstrap";
+  Input,
+  Label,
+  FormFeedback
+} from "reactstrap";
 import "../Login/login.css";
 import axios from "axios";
 
@@ -153,15 +153,15 @@ class Register extends Component {
               bsSize="large"
               validationState={this.state.usernameInvalid}
             >
-              <ControlLabel>Username</ControlLabel>
-              <FormControl
+              <Label>Username</Label>
+              <Input
                 autoFocus
                 type="username"
                 value={this.state.username}
                 onChange={this.handleChange}
               />
               {this.state.usernameInvalid ? (
-                <HelpBlock>This username is already in use.</HelpBlock>
+                <FormFeedback>This username is already in use.</FormFeedback>
               ) : null}
             </FormGroup>
 
@@ -170,15 +170,15 @@ class Register extends Component {
               bsSize="large"
               validationState={this.state.emailInvalid}
             >
-              <ControlLabel>Email</ControlLabel>
-              <FormControl
+              <Label>Email</Label>
+              <Input
                 autoFocus
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
               {this.state.emailInvalid ? (
-                <HelpBlock>Please enter an unused valid email.</HelpBlock>
+                <FormFeedback>Please enter an unused valid email.</FormFeedback>
               ) : null}
             </FormGroup>
 
@@ -187,16 +187,16 @@ class Register extends Component {
               bsSize="large"
               validationState={this.state.passwordInvalid}
             >
-              <ControlLabel>Password</ControlLabel>
-              <FormControl
+              <Label>Password</Label>
+              <Input
                 type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
               {this.state.passwordInvalid ? (
-                <HelpBlock>
+                <FormFeedback>
                   Please use a complex password at least 8 characters long.
-                </HelpBlock>
+                </FormFeedback>
               ) : null}
             </FormGroup>
             <FormGroup
@@ -204,8 +204,8 @@ class Register extends Component {
               bsSize="large"
               validationState={this.state.passwordInvalid}
             >
-              <ControlLabel>Confirm password</ControlLabel>
-              <FormControl
+              <Label>Confirm password</Label>
+              <Input
                 type="password"
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}

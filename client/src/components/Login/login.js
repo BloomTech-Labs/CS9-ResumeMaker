@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
@@ -16,7 +16,6 @@ const bobbert = {
     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
   invalidCredentials: false
 };
-
 
 export default class Login extends Component {
   constructor(props) {
@@ -68,8 +67,8 @@ export default class Login extends Component {
             <h3 className="mb-5">Invalid password or email.</h3>
           ) : null}
           <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
+            <Label>Email</Label>
+            <Input
               autoFocus
               type="email"
               value={this.state.email}
@@ -77,8 +76,8 @@ export default class Login extends Component {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
+            <Label>Password</Label>
+            <Input
               value={this.state.password}
               onChange={this.handleChange}
               type="password"

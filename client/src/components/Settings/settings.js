@@ -5,10 +5,10 @@ import {
   Modal,
   Button,
   FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock
-} from "react-bootstrap";
+  Input,
+  Label,
+  FormFeedback
+} from "reactstrap";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
@@ -210,57 +210,54 @@ export class PersonalInfo extends Component {
         <div className="Settings">
           <form>
             <FormGroup controlId="name.firstname" bsSize="large">
-              <ControlLabel>First Name</ControlLabel>
-              <FormControl
+              <Label>First Name</Label>
+              <Input
                 value={this.state.name.firstname}
                 onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup controlId="name.middlename" bsSize="large">
-              <ControlLabel>Middle Name</ControlLabel>
-              <FormControl
+              <Label>Middle Name</Label>
+              <Input
                 value={this.state.name.middlename}
                 onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup controlId="name.lastname" bsSize="large">
-              <ControlLabel>Last Name</ControlLabel>
-              <FormControl
+              <Label>Last Name</Label>
+              <Input
                 value={this.state.name.lastname}
                 onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup controlId="phonenumber" bsSize="large">
-              <ControlLabel>Phone Number</ControlLabel>
-              <FormControl
+              <Label>Phone Number</Label>
+              <Input
                 value={this.state.phonenumber}
                 onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup controlId="location" bsSize="large">
-              <ControlLabel>Location</ControlLabel>
-              <FormControl
-                value={this.state.location}
-                onChange={this.handleChange}
-              />
+              <Label>Location</Label>
+              <Input value={this.state.location} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup controlId="links.linkedin" bsSize="large">
-              <ControlLabel>Linkedin</ControlLabel>
-              <FormControl
+              <Label>Linkedin</Label>
+              <Input
                 value={this.state.links.linkedin}
                 onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup controlId="links.github" bsSize="large">
-              <ControlLabel>Github</ControlLabel>
-              <FormControl
+              <Label>Github</Label>
+              <Input
                 value={this.state.links.github}
                 onChange={this.handleChange}
               />
             </FormGroup>
             <FormGroup controlId="links.portfolio" bsSize="large">
-              <ControlLabel>Portfolio</ControlLabel>
-              <FormControl
+              <Label>Portfolio</Label>
+              <Input
                 value={this.state.links.portfolio}
                 onChange={this.handleChange}
               />
@@ -270,14 +267,14 @@ export class PersonalInfo extends Component {
               bsSize="large"
               validationState={this.state.emailInvalid}
             >
-              <ControlLabel>Email</ControlLabel>
-              <FormControl
+              <Label>Email</Label>
+              <Input
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
               {this.state.emailInvalid ? (
-                <HelpBlock>Please enter an unused valid email.</HelpBlock>
+                <FormFeedback>Please enter an unused valid email.</FormFeedback>
               ) : null}
             </FormGroup>
             <FormGroup
@@ -287,17 +284,17 @@ export class PersonalInfo extends Component {
                 this.state.oldpassword
               )}
             >
-              <ControlLabel>Current Password</ControlLabel>
-              <FormControl
+              <Label>Current Password</Label>
+              <Input
                 type="password"
                 value={this.state.oldpassword}
                 onChange={this.handleChange}
               />
               {this.state.passwordInvalid ? (
-                <HelpBlock>
+                <FormFeedback>
                   Incorrect password. Please enter your current password if you
                   want to make a new password or change your email.
-                </HelpBlock>
+                </FormFeedback>
               ) : null}
             </FormGroup>
             <FormGroup
@@ -307,16 +304,16 @@ export class PersonalInfo extends Component {
                 this.state.newpassword
               )}
             >
-              <ControlLabel>New Password</ControlLabel>
-              <FormControl
+              <Label>New Password</Label>
+              <Input
                 type="password"
                 value={this.state.newpassword}
                 onChange={this.handleChange}
               />
               {this.checkPasswordStrength(this.state.newpassword) ? (
-                <HelpBlock>
+                <FormFeedback>
                   Please use a complex password at least 8 characters long.
-                </HelpBlock>
+                </FormFeedback>
               ) : null}
             </FormGroup>
             <FormGroup
@@ -324,14 +321,16 @@ export class PersonalInfo extends Component {
               bsSize="large"
               validationState={this.checkConfirmPassword()}
             >
-              <ControlLabel>Confirm New Password</ControlLabel>
-              <FormControl
+              <Label>Confirm New Password</Label>
+              <Input
                 type="password"
                 value={this.state.newconfirmpassword}
                 onChange={this.handleChange}
               />
               {this.state.newconfirmpassword !== this.state.newpassword ? (
-                <HelpBlock>Please make this match your new password.</HelpBlock>
+                <FormFeedback>
+                  Please make this match your new password.
+                </FormFeedback>
               ) : null}
             </FormGroup>
             <Button
