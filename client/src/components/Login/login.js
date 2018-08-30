@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  FormFeedback,
+  Input,
+  Label
+} from "reactstrap";
 import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
@@ -63,14 +70,12 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <Form onSubmit={this.handleSubmit}>
-          {this.state.invalidCredentials ? (
-            <h3 className="mb-5">Invalid password or email.</h3>
-          ) : null}
           <FormGroup>
             <Label>Email</Label>
             <Input
               autoFocus
               id="email"
+              invalid={this.state.invalidCredentials}
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
@@ -80,10 +85,14 @@ export default class Login extends Component {
             <Label>Password</Label>
             <Input
               id="password"
+              invalid={this.state.invalidCredentials}
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
             />
+            <FormFeedback invalid>
+              The email or password you entered are incorrect.
+            </FormFeedback>
           </FormGroup>
           <Button
             block
