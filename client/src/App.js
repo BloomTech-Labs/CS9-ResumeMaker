@@ -8,7 +8,7 @@ import Education from "./components/education";
 import Skills from "./components/skills";
 import JobTitle from "./components/jobTitle";
 import Resumes from "./components/resumes";
-import Billing from "./components/billing";
+import Billing from "./components/Billing/billing"
 import Settings from "./components/settings";
 import Experience from "./components/experience";
 import Login from "./components/login";
