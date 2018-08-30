@@ -63,7 +63,7 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    if (checkMembership(email))
+    if (await checkMembership(email))
       res.status(400).json("You're already a member!");
     else {
       const newCustomer = await createCustomer(email, token);
@@ -76,7 +76,7 @@ router.post(
         if (!newSubscription) res.status(400).json("Unable to subscribe");
         else {
           if (
-            changeStatus(email, {
+            await changeStatus(email, {
               subscription: newSubscription.id,
               membership: true
             })
