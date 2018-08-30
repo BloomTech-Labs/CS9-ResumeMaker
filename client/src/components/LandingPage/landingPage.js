@@ -1,9 +1,9 @@
 // register, login, nav bar, landing page component
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./CSS/landingpage.css";
+import "./landingpage.css";
 import axios from "axios";
-const urls = require("../config/config.json");
+const urls = require("../../config/config.json");
 
 class LandingPage extends Component {
   componentDidMount() {

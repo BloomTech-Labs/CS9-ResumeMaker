@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { Elements, StripeProvider } from "react-stripe-elements";
 
-import LandingPage from "./components/landingPage";
+import LandingPage from "./components/LandingPage/landingPage";
 import Summaries from "./components/summary";
 import Education from "./components/Education/education";
 import Skills from "./components/skills";
