@@ -368,7 +368,7 @@ class Settings extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/"},
             { link: "/settings", title: "Settings" }
           ]}
         />

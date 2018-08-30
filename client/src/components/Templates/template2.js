@@ -5,37 +5,10 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template2.css";
 import { Link } from "react-router-dom";
-import DropDown from './dropdown';
+import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
+import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+import CheckBox from './TemplateClassFuntions/checkbox';
 
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-
-  toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.state.checked}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
 
 export class TemplateTwo extends Component {
   constructor(props) {
@@ -64,7 +37,7 @@ export class TemplateTwo extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/"},
             { link: "/templates", title: "Templates" },
             { link: "/Templates/template-2", title: "Template Two" }
           ]}
@@ -81,15 +54,7 @@ export class TemplateTwo extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                {userInfo.title.map(title => {
-                  return (
-                    <div>
-                      <h5>
-                        <CheckBox /> {title.content}
-                      </h5>
-                    </div>
-                  );
-                })}
+                <TitleDropdown data={userInfo} />
               </div>
               <Divider className="divider-div" />
               <Container
@@ -98,7 +63,7 @@ export class TemplateTwo extends Component {
                 className="summarySection"
               >
                 <h3 class="subtitle">Summary</h3>
-                <DropDown data={userInfo.summary} />
+                <SummaryDropdown data={userInfo} />
               </Container>
               <Divider className="divider-div" />
               <div class="row">

@@ -5,37 +5,9 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template3.css";
 import { Link } from "react-router-dom";
-import DropDown from './dropdown';
-
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-
-  toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.state.checked}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
+import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
+import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+import CheckBox from './TemplateClassFuntions/checkbox';
 
 export class TemplateThree extends Component {
   constructor(props) {
@@ -125,15 +97,7 @@ export class TemplateThree extends Component {
                     <h2>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
-                    {userInfo.title.map(title => {
-                      return (
-                        <div>
-                          <h5>
-                            <CheckBox /> {title.content}
-                          </h5>
-                        </div>
-                      );
-                    })}
+                    <TitleDropdown data={userInfo} />
                   </div>
                   <Divider className="divider-div" />
                   <FormGroup
@@ -142,7 +106,7 @@ export class TemplateThree extends Component {
                     className="summarySection"
                   >
                     <h3 class="subtitle">Summary</h3>
-                    <DropDown data={userInfo.summary} />
+                    <SummaryDropdown data={userInfo} />
                   </FormGroup>
                   <Divider className="divider-div" />
 

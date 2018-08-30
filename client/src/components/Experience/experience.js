@@ -11,7 +11,7 @@ class Experience extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/"},
             { link: "/experience", title: "Experience" }
           ]}
         />

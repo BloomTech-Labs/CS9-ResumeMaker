@@ -111,7 +111,7 @@ class EducationCreate extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/education", title: "Education" },
             { link: "/education/create", title: "Create" }
           ]}

@@ -7,15 +7,17 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar sticky-top navbar-dark bg-dark mb-0">
-        <ol className="breadcrumb p-1 mb-0 bg-dark">
+          
+        <ol className="breadcrumb p-1 mb-0 bg-dark ">
+        <Link className="knockout" style={{fontSize: '1.2rem'}} to="/">RezLeft</Link>
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
               <Link
-                className="navbar-item"
+                className="breadcrumb-item"
                 style={{
                   color: "white",
                   fontFamily: "helvetica",
-                  fontSize: "0.8rem"
+                  fontSize: "0.7rem"
                 }}
                 to={item.link}
               >
@@ -37,7 +39,7 @@ class Navbar extends Component {
               Logout
             </div>
           )}
-        />
+        /> 
       </nav>
     );
   }
