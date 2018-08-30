@@ -7,10 +7,10 @@ import {
   ControlLabel,
   HelpBlock
 } from "react-bootstrap";
-import "./Login/login.css";
+import "../Login/login.css";
 import axios from "axios";
 
-const urls = require("../config/config.json");
+const urls = require("../../config/config.json");
 
 class Register extends Component {
   state = {

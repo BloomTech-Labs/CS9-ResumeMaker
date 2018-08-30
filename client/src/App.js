@@ -19,7 +19,7 @@ import Billing from "./components/Billing/billing"
 import Resumes from "./components/resumes";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
-import Register from "./components/register";
+import Register from "./components/Register/register";
 import Templates from "./components/Templates/templates.js";
 import Sidebar from "./components/subComponents/sidebar";
 import { TemplateOne } from "./components/Templates/template1";
