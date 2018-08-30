@@ -17,7 +17,7 @@ class CheckBox extends React.Component {
   toggle = () => {
     this.setState(
       {
-        checked: !this.state.checked 
+        checked: !this.state.checked
       },
       function() {
         console.log(this.state);
@@ -26,7 +26,13 @@ class CheckBox extends React.Component {
   };
 
   render() {
-    return <input type="checkbox" checked={this.state.checked} onChange={this.toggle} />;
+    return (
+      <input
+        type="checkbox"
+        checked={this.state.checked}
+        onChange={this.toggle}
+      />
+    );
   }
 }
 
@@ -85,32 +91,32 @@ export class TemplateThree extends Component {
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 class="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
+                      <p className="contact-section">
+                        {" "}
+                        <CheckBox />
+                        {userInfo.email}
+                      </p>
+                    </a>
                     <p className="contact-section">
-                    {" "}
-                    <CheckBox /> 
-                    {userInfo.email}
-                  </p>
-                </a>
-                <p className="contact-section">
-                  <CheckBox /> 
-                  {userInfo.location}
-                </p>
-                <p className="contact-section">
-                  <CheckBox /> 
-                  {userInfo.phonenumber}
-                </p>
-                <p className="contact-section">
-                  <CheckBox /> 
-                  {userInfo.links.linkedin}
-                </p>
-                <p className="contact-section">
-                  <CheckBox />
-                  {userInfo.links.github}
-                </p>
-                <p className="contact-section">
-                  <CheckBox />
-                  {userInfo.links.portfolio}
-                </p>
+                      <CheckBox />
+                      {userInfo.location}
+                    </p>
+                    <p className="contact-section">
+                      <CheckBox />
+                      {userInfo.phonenumber}
+                    </p>
+                    <p className="contact-section">
+                      <CheckBox />
+                      {userInfo.links.linkedin}
+                    </p>
+                    <p className="contact-section">
+                      <CheckBox />
+                      {userInfo.links.github}
+                    </p>
+                    <p className="contact-section">
+                      <CheckBox />
+                      {userInfo.links.portfolio}
+                    </p>
                   </FormGroup>
                 </div>
                 <div class="col">
@@ -118,7 +124,15 @@ export class TemplateThree extends Component {
                     <h2>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
-                    <h4>{userInfo.title}</h4>
+                    {userInfo.title.map(title => {
+                      return (
+                        <div>
+                          <h5>
+                            <CheckBox /> {title.content}
+                          </h5>
+                        </div>
+                      );
+                    })}
                   </div>
                   <Divider className="divider-div" />
                   <FormGroup
@@ -128,15 +142,15 @@ export class TemplateThree extends Component {
                   >
                     <h3 class="subtitle">Summary</h3>
                     {userInfo.summary.map((content, index) => {
-                  return (
-                    <div key={index}>
-                      <p>
-                        {" "}
-                        <CheckBox /> {content}
-                      </p>
-                    </div>
-                  );
-                })}
+                      return (
+                        <div key={index}>
+                          <p>
+                            {" "}
+                            <CheckBox /> {content.content}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </FormGroup>
                   <Divider className="divider-div" />
 
@@ -145,52 +159,57 @@ export class TemplateThree extends Component {
                   <FormGroup textAlign="center" className="skillsSection">
                     <h3 class="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
-                  return (
-                    <div key={index}>
-                      <p>
-                        <CheckBox /> {content}
-                      </p>
-                    </div>
-                  );
-                })}
+                      return (
+                        <div key={index}>
+                          <p>
+                            <CheckBox /> {content.content}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
                     <h3 class="subtitle">Experience</h3>
                     {experience.map((content, index) => {
-                  return (
-                    <div key={index}>
-                      {console.log(content)}
-                      <h5> <CheckBox /> {content.company} </h5>
-                        <p>{content.title}
-                        <br />
-                        {content.location}
-                        <br />
-                        {content.from} - {content.to}
-                      </p>
-                      <p>{content.description} </p>
-                    </div>
-                  );
-                })}
+                      return (
+                        <div key={index}>
+                          {console.log(content)}
+                          <h5>
+                            {" "}
+                            <CheckBox /> {content.company}{" "}
+                          </h5>
+                          <p>
+                            {content.title}
+                            <br />
+                            {content.location}
+                            <br />
+                            {content.from} - {content.to}
+                          </p>
+                          <p>{content.description} </p>
+                        </div>
+                      );
+                    })}
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
                     <h3 class="subtitle">Education</h3>
                     {education.map((content, index) => {
-                  return (
-                    <div key={index}>
-                      <h5>
-                        <CheckBox /> {content.degree} in {content.fieldofstudy}{" "}
-                      </h5>
-                      <p>{content.location}</p>
-                      <p>
-                        {content.school}
-                        <br />
-                        {content.from} - {content.to}
-                      </p>
-                    </div>
-                  );
-                })}
+                      return (
+                        <div key={index}>
+                          <h5>
+                            <CheckBox /> {content.degree} in{" "}
+                            {content.fieldofstudy}{" "}
+                          </h5>
+                          <p>{content.location}</p>
+                          <p>
+                            {content.school}
+                            <br />
+                            {content.from} - {content.to}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </FormGroup>
                 </div>
               </div>
