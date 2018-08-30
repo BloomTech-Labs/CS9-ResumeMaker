@@ -10,11 +10,11 @@ import {
   HelpBlock
 } from "react-bootstrap";
 
-import Sidebar from "./subComponents/sidebar";
-import Navbar from "./subComponents/navbar";
-import "./CSS/settings.css";
+import Sidebar from "../subComponents/sidebar";
+import Navbar from "../subComponents/navbar";
+import "./settings.css";
 
-const urls = require("../config/config.json");
+const urls = require("../../config/config.json");
 
 export class PersonalInfo extends Component {
   constructor() {

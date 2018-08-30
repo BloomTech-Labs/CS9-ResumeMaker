@@ -9,7 +9,7 @@ import Skills from "./components/Skills/skills";
 import JobTitle from "./components/JobTitle/jobTitle";
 import Resumes from "./components/resumes";
 import Billing from "./components/Billing/billing"
-import Settings from "./components/settings";
+import Settings from "./components/Settings/settings";
 import Experience from "./components/Experience/experience";
 import Login from "./components/login";
 import Register from "./components/register";
