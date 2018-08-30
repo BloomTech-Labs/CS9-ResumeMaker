@@ -25,9 +25,9 @@ router.post(
     const { email } = req.body;
     const token = req.body.id;
 
-    if (checkMembership(email))
+    if (await checkMembership(email)) {
       res.status(400).json("You're already a member!");
-    else {
+    } else {
       const newCustomer = await createCustomer(email, token);
       if (!newCustomer) res.status(400).json("Unable to create a user");
       else {
@@ -38,13 +38,13 @@ router.post(
         if (!newSubscription) res.status(400).json("Unable to subscribe");
         else {
           if (
-            changeStatus(email, {
+            await changeStatus(email, {
               subscription: newSubscription.id,
               membership: true
             })
-          )
+          ) {
             res.status(201).json("Success");
-          else res.status(400).json("Error");
+          } else res.status(400).json("Error");
         }
       }
     }
@@ -106,7 +106,9 @@ router.post(
             if (err) {
               res.status(400).json("Unable to unsubscribe at this time");
             } else {
-              if (changeStatus(email, { subscription: null, membership: false }))
+              if (
+                changeStatus(email, { subscription: null, membership: false })
+              )
                 res.status(201).json("Successfully Unsubscribed");
               else res.status(400).json(err);
             }
