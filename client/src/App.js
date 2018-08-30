@@ -2,29 +2,29 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { Elements, StripeProvider } from "react-stripe-elements";
 
-import LandingPage from "./components/LandingPage/landingPage";
-import Summaries from "./components/Summary/summary";
-import Education from "./components/Education/education";
-import Skills from "./components/Skills/skills";
-import JobTitle from "./components/JobTitle/jobTitle";
-import Resumes from "./components/resumes";
-import Billing from "./components/Billing/billing"
-import Settings from "./components/Settings/settings";
-import Experience from "./components/Experience/experience";
-import Login from "./components/login";
-import Register from "./components/register";
-import Templates from "./components/templates";
-import Sidebar from "./components/subComponents/sidebar";
-import SummaryCreate from "./components/Summary/summaryCreate";
-import EducationCreate from "./components/Education/educationCreate";
-import ExperienceCreate from "./components/Experience/experienceCreate";
-import SkillsCreate from "./components/Skills/skillsCreate";
-import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
-import { TemplateOne } from "./components/templates/template1";
-import { TemplateTwo } from "./components/templates/template2";
-import { TemplateThree } from "./components/templates/template3";
+import LandingPage from "./components/LandingPage/landingPage";
+import Summaries from "./components/Summary/summary";
+import SummaryCreate from "./components/Summary/summaryCreate";
+import Education from "./components/Education/education";
+import EducationCreate from "./components/Education/educationCreate";
+import Skills from "./components/Skills/skills";
+import SkillsCreate from "./components/Skills/skillsCreate";
+import JobTitle from "./components/JobTitle/jobTitle";
+import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
+import Experience from "./components/Experience/experience";
+import ExperienceCreate from "./components/Experience/experienceCreate";
+import Billing from "./components/Billing/billing"
+import Resumes from "./components/resumes";
+import Settings from "./components/Settings/settings";
+import Login from "./components/Login/login";
+import Register from "./components/register";
+import Templates from "./components/Templates/templates.js";
+import Sidebar from "./components/subComponents/sidebar";
+import { TemplateOne } from "./components/Templates/template1";
+import { TemplateTwo } from "./components/Templates/template2";
+import { TemplateThree } from "./components/Templates/template3";
 
 class App extends Component {
   render() {
