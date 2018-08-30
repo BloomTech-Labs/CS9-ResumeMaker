@@ -7,36 +7,7 @@ import "./template3.css";
 import { Link } from "react-router-dom";
 import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
 import TitleDropdown from './TemplateClassFuntions/titleDropdown';
-
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-
-  toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.state.checked}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
+import CheckBox from './TemplateClassFuntions/checkbox';
 
 export class TemplateThree extends Component {
   constructor(props) {

@@ -6,36 +6,8 @@ import "./template1.css";
 import { Link } from "react-router-dom";
 import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
 import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+import CheckBox from './TemplateClassFuntions/checkbox';
 
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-
-  toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked // flips boolean value
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.state.checked}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
 
 export class TemplateOne extends Component {
   constructor(props) {
@@ -83,7 +55,7 @@ export class TemplateOne extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                <TitleDropdown data={userInfo} />
+                <TitleDropdown className="dropdown" data={userInfo} />
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
