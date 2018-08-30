@@ -22,11 +22,6 @@ class SummaryCreate extends Component {
       this.props.context.userInfo.auth === true &&
       this.props.location.state.summaryIndex !== false
     ) {
-      console.log(
-        this.props.context.userInfo.summary[
-          this.props.location.state.summaryIndex
-        ]._id
-      );
       this.setState({
         content: this.props.context.userInfo.summary[
           this.props.location.state.summaryIndex
