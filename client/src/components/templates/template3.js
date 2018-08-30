@@ -59,7 +59,7 @@ export class TemplateThree extends Component {
           breadcrumbs={[
             { link: "/", title: "Home" },
             { link: "/templates", title: "Templates" },
-            { link: "/templates/template-3", title: "Template Three" }
+            { link: "/Templates/template-3", title: "Template Three" }
           ]}
         />
 

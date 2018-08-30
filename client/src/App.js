@@ -15,16 +15,16 @@ import JobTitle from "./components/JobTitle/jobTitle";
 import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import Experience from "./components/Experience/experience";
 import ExperienceCreate from "./components/Experience/experienceCreate";
-import Billing from "./components/Billing/billing"
+import Billing from "./components/Billing/billing";
 import Resumes from "./components/Resume/resumes";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
-import Templates from "./components/Templates/templates.js";
 import Sidebar from "./components/subComponents/sidebar";
+import Templates from "./components/Templates/templates.js";
 import { TemplateOne } from "./components/Templates/template1";
-import { TemplateTwo } from "./components/Templates/template2";
-import { TemplateThree } from "./components/Templates/template3";
+import TemplateTwo from "./components/Templates/template2";
+import TemplateThree from "./components/Templates/template3";
 
 class App extends Component {
   render() {

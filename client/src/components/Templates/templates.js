@@ -31,7 +31,7 @@ class Templates extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/template-1", // component being Linked to
+                    pathname: "/templates/template-1", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new
                   }}
                 >
@@ -49,7 +49,7 @@ class Templates extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/template-2", // component being Linked to
+                    pathname: "/templates/template-2", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new
                   }}
                 >
@@ -67,7 +67,7 @@ class Templates extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/template-3", // component being Linked to
+                    pathname: "/templates/template-3", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new
                   }}
                 >
