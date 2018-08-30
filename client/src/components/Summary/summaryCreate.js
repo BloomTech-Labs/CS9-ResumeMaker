@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "../subComponents/sidebar";
-import Navbar from "../subComponents/navbar";
+import Sidebar from "../SubComponents/sidebar";
+import Navbar from "../SubComponents/navbar";
 import axios from "axios";
 
 const urls = require("../../config/config.json");

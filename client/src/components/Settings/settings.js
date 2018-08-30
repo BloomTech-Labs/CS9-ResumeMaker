@@ -10,8 +10,8 @@ import {
   HelpBlock
 } from "react-bootstrap";
 
-import Sidebar from "../subComponents/sidebar";
-import Navbar from "../subComponents/navbar";
+import Sidebar from "../SubComponents/sidebar";
+import Navbar from "../SubComponents/navbar";
 import "./settings.css";
 
 const urls = require("../../config/config.json");

@@ -3,8 +3,8 @@ import { injectStripe } from "react-stripe-elements";
 import axios from "axios";
 import CheckoutForm from "./checkoutForm";
 
-import Sidebar from "../subComponents/sidebar";
-import Navbar from "../subComponents/navbar";
+import Sidebar from "../SubComponents/sidebar";
+import Navbar from "../SubComponents/navbar";
 import Loading from "./Loading"
 import "./billing.css";
 const urls = require("../../config/config.json")

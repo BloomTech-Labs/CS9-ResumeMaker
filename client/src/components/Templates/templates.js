@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Sidebar from "../subComponents/sidebar";
-import Navbar from "../subComponents/navbar";
+import Sidebar from "../SubComponents/sidebar";
+import Navbar from "../SubComponents/navbar";
 import "./tempTemplate1.png";
 import "./tempTemplate2.png";
 import "./tempTemplate3.png";

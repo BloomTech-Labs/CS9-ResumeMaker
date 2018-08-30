@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Sidebar from "../SubComponents/sidebar";
+import Sidebar from "./SubComponents/sidebar";
 import axios from "axios";
-import Navbar from "../SubComponents/navbar";
+import Navbar from "./SubComponents/navbar";
 import { Redirect } from "react-router-dom";
 
-const urls = require("../../config/config.json");
+const urls = require("../config/config.json");
 
 class EducationCreate extends Component {
   constructor(props) {

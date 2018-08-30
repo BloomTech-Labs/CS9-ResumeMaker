@@ -20,7 +20,7 @@ import Resumes from "./components/Resume/resumes";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
-import Sidebar from "./components/subComponents/sidebar";
+import Sidebar from "./components/SubComponents/sidebar";
 import Templates from "./components/Templates/templates.js";
 import TemplateOne from "./components/Templates/template1";
 import TemplateTwo from "./components/Templates/template2";

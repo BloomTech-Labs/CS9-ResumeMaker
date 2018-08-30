@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
-import Sidebar from "../subComponents/sidebar";
-import Navbar from "../subComponents/navbar";
+import Sidebar from "../SubComponents/sidebar";
+import Navbar from "../SubComponents/navbar";
 import "./template3.css";
 import { Link } from "react-router-dom";
 
