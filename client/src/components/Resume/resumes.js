@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Sidebar from "../SubComponents/sidebar";
-import Navbar from "../SubComponents/navbar";
+import Sidebar from "../SubComponents/Sidebar/sidebar";
+import Navbar from "../SubComponents/Navbar/navbar";
 // import ResumeCard from "./SubComponents/resumeCard";
 
 class Resumes extends Component {
