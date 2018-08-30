@@ -16,10 +16,7 @@
 } */
 
 .Settings form .form-group {
-  /* display: flex;
-  flex-wrap: wrap; */
   max-width: 20rem;
-  /* justify-content: center; */
 }
 
 .Settings form .form-group label {
@@ -32,9 +29,9 @@
   margin: 0;
 }
 
-/* .Settings form .btn {
-  margin-top: 2rem;
-} */
+.Settings .btn {
+  display: flex;
+}
 
 .Settings .modal {
   position: absolute;
@@ -46,8 +43,4 @@
 
 .Settings .modal-footer {
   justify-content: center;
-}
-
-.Settings .btn {
-  /* font-size: 1.6rem; */
 }

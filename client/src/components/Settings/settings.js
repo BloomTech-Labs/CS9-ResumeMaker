@@ -92,7 +92,11 @@ export class PersonalInfo extends Component {
   };
 
   checkPasswordStrength = password => {
-    if (password === "") return false;
+    if (password === "") {
+      console.log("pass is empty");
+
+      return false;
+    }
     const minlength = 6;
     if (password.length < minlength) return false;
     if (!password.match(/[A-Z]/)) return false;
@@ -101,13 +105,6 @@ export class PersonalInfo extends Component {
     if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
       return false;
     return true;
-  };
-
-  checkConfirmPassword = () => {
-    if (this.state.newpassword === "") return null;
-    if (this.state.newpassword !== this.state.newconfirmpassword) {
-      return false;
-    } else return true;
   };
 
   handleChange = e => {
@@ -289,10 +286,11 @@ export class PersonalInfo extends Component {
           </Col>
           <Col>
             <Form>
-              <FormGroup validationState={this.state.emailInvalid}>
+              <FormGroup>
                 <Label>Email</Label>
                 <Input
                   id="email"
+                  invalid={this.state.emailInvalid}
                   size="sm"
                   type="email"
                   value={this.state.email}
@@ -318,15 +316,11 @@ export class PersonalInfo extends Component {
                   want to make a new password or change your email.
                 </FormFeedback>
               </FormGroup>
-              <FormGroup
-                validationState={this.checkPasswordStrength(
-                  this.state.newpassword
-                )}
-              >
+              <FormGroup>
                 <Label>New Password</Label>
                 <Input
                   invalid={this.checkPasswordStrength(this.state.newpassword)}
-                  // valid={this.checkPasswordStrength(this.state.newpassword)}
+                  valid={this.checkPasswordStrength(this.state.newpassword)}
                   id="newpassword"
                   size="sm"
                   type="password"
@@ -340,8 +334,14 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Confirm New Password</Label>
                 <Input
-                  valid={this.checkConfirmPassword()}
-                  invalid={!this.checkConfirmPassword()}
+                  valid={
+                    this.state.newpassword === this.state.newconfirmpassword &&
+                    this.state.newpassword !== ""
+                  }
+                  invalid={
+                    this.state.newpassword !== this.state.newconfirmpassword &&
+                    this.state.newconfirmpassword !== ""
+                  }
                   id="newconfirmpassword"
                   size="sm"
                   type="password"
@@ -355,7 +355,7 @@ export class PersonalInfo extends Component {
             </Form>
             <Button
               color="primary"
-              className="mt-5"
+              className="mt-2"
               onClick={() => this.checkInputValidity()}
             >
               Submit
