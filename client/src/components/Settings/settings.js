@@ -209,66 +209,74 @@ export class PersonalInfo extends Component {
         <h1> Personal Information </h1>
         <div className="Settings">
           <form>
-            <FormGroup controlId="name.firstname" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>First Name</Label>
               <Input
+                id="name.firstname"
                 value={this.state.name.firstname}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="name.middlename" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Middle Name</Label>
               <Input
+                id="name.middlename"
                 value={this.state.name.middlename}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="name.lastname" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Last Name</Label>
               <Input
+                id="name.lastname"
                 value={this.state.name.lastname}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="phonenumber" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Phone Number</Label>
               <Input
+                id="phonenumber"
                 value={this.state.phonenumber}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="location" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Location</Label>
-              <Input value={this.state.location} onChange={this.handleChange} />
+              <Input
+                id="location"
+                value={this.state.location}
+                onChange={this.handleChange}
+              />
             </FormGroup>
-            <FormGroup controlId="links.linkedin" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Linkedin</Label>
               <Input
+                id="links.linkedin"
                 value={this.state.links.linkedin}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="links.github" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Github</Label>
               <Input
+                id="links.github"
                 value={this.state.links.github}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="links.portfolio" bsSize="large">
+            <FormGroup bsSize="large">
               <Label>Portfolio</Label>
               <Input
+                id="links.portfolio"
                 value={this.state.links.portfolio}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup
-              controlId="email"
-              bsSize="large"
-              validationState={this.state.emailInvalid}
-            >
+            <FormGroup bsSize="large" validationState={this.state.emailInvalid}>
               <Label>Email</Label>
               <Input
+                id="email"
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
@@ -278,7 +286,6 @@ export class PersonalInfo extends Component {
               ) : null}
             </FormGroup>
             <FormGroup
-              controlId="oldpassword"
               bsSize="large"
               validationState={this.checkPasswordStrength(
                 this.state.oldpassword
@@ -286,6 +293,7 @@ export class PersonalInfo extends Component {
             >
               <Label>Current Password</Label>
               <Input
+                id="oldpassword"
                 type="password"
                 value={this.state.oldpassword}
                 onChange={this.handleChange}
@@ -298,7 +306,6 @@ export class PersonalInfo extends Component {
               ) : null}
             </FormGroup>
             <FormGroup
-              controlId="newpassword"
               bsSize="large"
               validationState={this.checkPasswordStrength(
                 this.state.newpassword
@@ -306,6 +313,7 @@ export class PersonalInfo extends Component {
             >
               <Label>New Password</Label>
               <Input
+                id="newpassword"
                 type="password"
                 value={this.state.newpassword}
                 onChange={this.handleChange}
@@ -317,12 +325,12 @@ export class PersonalInfo extends Component {
               ) : null}
             </FormGroup>
             <FormGroup
-              controlId="newconfirmpassword"
               bsSize="large"
               validationState={this.checkConfirmPassword()}
             >
               <Label>Confirm New Password</Label>
               <Input
+                id="newconfirmpassword"
                 type="password"
                 value={this.state.newconfirmpassword}
                 onChange={this.handleChange}

@@ -66,18 +66,20 @@ export default class Login extends Component {
           {this.state.invalidCredentials ? (
             <h3 className="mb-5">Invalid password or email.</h3>
           ) : null}
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup bsSize="large">
             <Label>Email</Label>
             <Input
               autoFocus
+              id="email"
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup bsSize="large">
             <Label>Password</Label>
             <Input
+              id="password"
               value={this.state.password}
               onChange={this.handleChange}
               type="password"

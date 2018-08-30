@@ -149,13 +149,13 @@ class Register extends Component {
         <div className="Login">
           <form>
             <FormGroup
-              controlId="username"
               bsSize="large"
               validationState={this.state.usernameInvalid}
             >
               <Label>Username</Label>
               <Input
                 autoFocus
+                id="username"
                 type="username"
                 value={this.state.username}
                 onChange={this.handleChange}
@@ -165,14 +165,10 @@ class Register extends Component {
               ) : null}
             </FormGroup>
 
-            <FormGroup
-              controlId="email"
-              bsSize="large"
-              validationState={this.state.emailInvalid}
-            >
+            <FormGroup bsSize="large" validationState={this.state.emailInvalid}>
               <Label>Email</Label>
               <Input
-                autoFocus
+                id="email"
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
@@ -183,12 +179,12 @@ class Register extends Component {
             </FormGroup>
 
             <FormGroup
-              controlId="password"
               bsSize="large"
               validationState={this.state.passwordInvalid}
             >
               <Label>Password</Label>
               <Input
+                id="password"
                 type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
@@ -200,12 +196,12 @@ class Register extends Component {
               ) : null}
             </FormGroup>
             <FormGroup
-              controlId="confirmPassword"
               bsSize="large"
               validationState={this.state.passwordInvalid}
             >
               <Label>Confirm password</Label>
               <Input
+                id="confirmPassword"
                 type="password"
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}
