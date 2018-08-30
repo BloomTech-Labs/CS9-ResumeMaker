@@ -15,7 +15,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      this.props.context.userInfo.auth !== true &&
+      // this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
       axios
@@ -25,13 +25,13 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          console.log(response.data.resumes);
           const userData = response.data.user;
+          const resumeData = response.data.resumes;
           this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
         })
         .catch(err => {
           console.log("err", err);
-          this.props.context.actions.setLogout();
         });
     }
   }

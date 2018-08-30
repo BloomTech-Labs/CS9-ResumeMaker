@@ -51,11 +51,13 @@ export default class Login extends Component {
       .then(response => {
         if (response.data.token) {
           const userData = response.data.user;
-          console.log(userData);
+          const resumeData = response.data.resumes;
+          console.log(resumeData);
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
 
-          console.log(this.props.context.userInfo);
+          // console.log(this.props.context.userInfo);
           this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })

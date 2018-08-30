@@ -17,8 +17,10 @@ class AuthProvider extends Component {
     education: [],
     experience: [],
     skills: [],
-    summary: []
-  };
+    summary: [],
+    resumes: []
+  }
+
 
   setLogout = () => {
     localStorage.removeItem("token");
@@ -66,6 +68,12 @@ class AuthProvider extends Component {
     });
   };
 
+  setResume = (resumeData) => {
+    this.setState({
+      resumes: resumeData
+    })
+  }
+
   setElement = (index, elementName, elementValue) => {
     const temp = this.state;
     temp[elementName][index] = elementValue;
@@ -92,6 +100,7 @@ class AuthProvider extends Component {
           userInfo,
           actions: {
             toggleAuth: this.toggleAuth,
+            setResume: this.setResume,
             setLogin: this.setLogin,
             setLogout: this.setLogout,
             setElement: this.setElement,
