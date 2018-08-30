@@ -83,7 +83,9 @@ export class TemplateTwo extends Component {
                 {userInfo.title.map(title => {
                   return (
                     <div>
-                      <h5><CheckBox /> {title.content}</h5>
+                      <h5>
+                        <CheckBox /> {title.content}
+                      </h5>
                     </div>
                   );
                 })}

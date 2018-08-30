@@ -21,7 +21,7 @@ import Resumes from "./components/Resume/resumes";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
-import Templates from "./components/Templates/templates.js";
+import Templates from "./components/Templates/templates";
 import TemplateOne from "./components/Templates/template1";
 import TemplateTwo from "./components/Templates/template2";
 import TemplateThree from "./components/Templates/template3";
