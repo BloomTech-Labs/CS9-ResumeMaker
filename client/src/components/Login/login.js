@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import "./CSS/login.css";
 import axios from "axios";
+import "./login.css";
+const urls = require("../../config/config.json");
 
 const scrinch = {
   email: "scrinch@gmail.com",
@@ -16,7 +17,6 @@ const bobbert = {
   invalidCredentials: false
 };
 
-const urls = require("../config/config.json");
 
 export default class Login extends Component {
   constructor(props) {

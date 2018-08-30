@@ -7,7 +7,7 @@ import {
   ControlLabel,
   HelpBlock
 } from "react-bootstrap";
-import "./CSS/login.css";
+import "./Login/login.css";
 import axios from "axios";
 
 const urls = require("../config/config.json");
