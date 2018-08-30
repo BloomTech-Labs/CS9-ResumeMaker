@@ -23,9 +23,9 @@ class SummaryDropdown extends Component {
   };
 
   render() {
-    const { summary } =  this.props.data;
+    const { summary } = this.props.data;
     const { toggled, selected } = this.state;
-console.log('dropdown', summary)
+    // console.log('dropdown', summary)
     const list = summary.map(data => (
       <li
         className="list-group-item"
@@ -44,11 +44,11 @@ console.log('dropdown', summary)
     return (
       <div className="card card-body mb-3">
         {/* <div className="jumbotron"> */}
-          <div className="container">
-            <p>
-              {selected}
-            </p>
-          </div>
+        <div className="container">
+          <p>
+            {selected}
+          </p>
+        </div>
         {/* </div> */}
         <h6>
           Choose an option:{' '}

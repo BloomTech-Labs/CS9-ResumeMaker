@@ -74,6 +74,44 @@ class AuthProvider extends Component {
     })
   }
 
+  createResume = () => {
+    const tempState = this.state.resumes;
+    const tempObj = {
+      links: { linkedin: false, github: false, portfolio: false },
+      sections: {
+        experience: this.state.experience.map(item => {
+          return { id: item._id, value: false }
+        }),
+        education: this.state.education.map(item => {
+          return { id: item._id, value: false }
+        }),
+        summary: this.state.summary.map(item => {
+          return { id: item._id, value: false }
+        }),
+        skills: this.state.skills.map(item => {
+          return { id: item._id, value: false }
+        }),
+      }
+    }
+    tempState.push(tempObj);
+    this.setState({ resumes: tempState })
+  }
+
+  setResumeItemState = (index, name, id) => {
+    const tempState = this.state;
+    console.log(index, name, id, tempState.resumes[index].sections[name]);
+    tempState.resumes[index][name].forEach(field => {
+      if (field.id === id)
+        field.value = !field.value;
+    });
+
+    // const str = "resumes" + "[" + index.toString() + "]" + name + ".value";
+    // const tempObj = { [str]: !this.state[str].value };
+    // console.log(tempObj);
+    this.setState(tempState);
+    console.log(this.state.resumes)
+  }
+
   setElement = (index, elementName, elementValue) => {
     const temp = this.state;
     temp[elementName][index] = elementValue;
@@ -101,6 +139,8 @@ class AuthProvider extends Component {
           actions: {
             toggleAuth: this.toggleAuth,
             setResume: this.setResume,
+            createResume: this.createResume,
+            setResumeItemState: this.setResumeItemState,
             setLogin: this.setLogin,
             setLogout: this.setLogout,
             setElement: this.setElement,

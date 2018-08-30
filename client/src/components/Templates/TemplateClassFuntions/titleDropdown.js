@@ -23,9 +23,9 @@ class TitleDropdown extends Component {
   };
 
   render() {
-    const { title } =  this.props.data;
+    const { title } = this.props.data;
     const { toggled, selected } = this.state;
-console.log('dropdown', title)
+    // console.log('dropdown', title)
     const list = title.map(data => (
       <li
         className="list-group-item"
@@ -43,11 +43,11 @@ console.log('dropdown', title)
 
     return (
       <div className="card card-body m-0">
-          <div className="container">
-            <p>
-              {selected}
-            </p>
-          </div>
+        <div className="container">
+          <p>
+            {selected}
+          </p>
+        </div>
         <h6>
           Choose an option:{' '}
           <i

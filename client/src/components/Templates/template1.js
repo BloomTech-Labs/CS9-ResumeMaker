@@ -11,19 +11,12 @@ class CheckBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: this.props.value || false
     };
   }
 
   toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked // flips boolean value
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
+    this.props.context.actions.setResumeItemState(this.props.index, this.props.name, this.props.id)
   };
 
   render() {
@@ -53,6 +46,14 @@ export class TemplateOne extends Component {
   //   alert("Resume submitted: " + this.state.value);
   //   event.preventDefault();
   // }
+
+  onCreate = () => {
+    this.props.context.actions.createResume();
+  }
+
+  componentWillMount() {
+    this.onCreate();
+  }
 
   render() {
     const userInfo = this.props.context.userInfo;
@@ -91,17 +92,18 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p>
                     {" "}
-                    <CheckBox /> {userInfo.email}
+                    {userInfo.email}
                   </p>
                 </a>
                 <p>
-                  <CheckBox /> {userInfo.location}
+                  {userInfo.location}
                 </p>
                 <p>
-                  <CheckBox /> {userInfo.phonenumber}
+                  {userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox /> {userInfo.links.linkedin}
+                  <CheckBox />
+                  {userInfo.links.linkedin}
                 </p>
                 <p>
                   <CheckBox /> {userInfo.links.github}
@@ -127,7 +129,13 @@ export class TemplateOne extends Component {
                     <div key={index}>
                       <p>
                         {" "}
-                        <CheckBox /> {content.content}
+                        <CheckBox
+                          context={this.props.context}
+                          id={content._id}
+                          name="skills"
+                          index={this.props.context.userInfo.resumes.length - 1}
+                        />
+                        {content.content}
                       </p>
                     </div>
                   );
