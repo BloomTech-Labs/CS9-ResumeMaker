@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
 import TitleDropdown from './TemplateClassFuntions/titleDropdown';
 import CheckBox from './TemplateClassFuntions/checkbox';
-
+import classnames from "classnames";
 
 export class TemplateOne extends Component {
   constructor(props) {
@@ -67,16 +67,17 @@ export class TemplateOne extends Component {
                   </p>
                 </a>
                 <p>
-                  <CheckBox /> {userInfo.location}
+                  <CheckBox /> <i class="fa fa-globe" aria-hidden="true"/>{" "}{userInfo.location}
                 </p>
                 <p>
-                  <CheckBox /> {userInfo.phonenumber}
+                  <CheckBox /> <i class="fa fa-mobile" aria-hidden="true"/>{" "}{userInfo.phonenumber}
                 </p>
                 <p>
-                  <CheckBox /> {userInfo.links.linkedin}
+                 <CheckBox /> <i className={"fa fa-linkedin fa-sm"}/>{" "}{userInfo.links.linkedin}
+                 
                 </p>
                 <p>
-                  <CheckBox /> {userInfo.links.github}
+                  <CheckBox /> <i class="fa fa-github" aria-hidden="true"/>{" "} {userInfo.links.github}
                 </p>
                 <p>
                   <CheckBox /> {userInfo.links.portfolio}

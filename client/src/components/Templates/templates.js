@@ -10,7 +10,7 @@ import "./templates.css";
 class Templates extends Component {
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar
           context={this.props.context}
           breadcrumbs={[
