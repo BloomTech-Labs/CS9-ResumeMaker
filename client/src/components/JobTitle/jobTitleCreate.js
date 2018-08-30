@@ -10,7 +10,8 @@ class JobTitleCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
+      content: "",
+      _id: "",
       success: false
     };
   }
@@ -19,12 +20,16 @@ class JobTitleCreate extends Component {
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.titleIndex !== false
-    )
+    ) {
       this.setState({
-        title: this.props.context.userInfo.title[
+        content: this.props.context.userInfo.title[
           this.props.location.state.titleIndex
-        ].content
+        ].content,
+        _id: this.props.context.userInfo.title[
+          this.props.location.state.titleIndex
+        ]._id
       });
+    }
   }
 
   onInputChange = e => {
@@ -36,7 +41,8 @@ class JobTitleCreate extends Component {
 
     if (this.props.location.state.titleIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("title", {
-        content: this.state.title
+        // When creating, do NOT put in an _id, let mongo autocreate one
+        content: this.state.content
       });
     } // if creating
     else if (!deleteFlag) {
@@ -44,7 +50,8 @@ class JobTitleCreate extends Component {
         this.props.location.state.titleIndex,
         "title",
         {
-          content: this.state.title
+          content: this.state.content,
+          _id: this.state._id
         }
       );
     } // if editing
@@ -98,10 +105,10 @@ class JobTitleCreate extends Component {
                   titles.” ― Niccolò Machiavelli
                 </label>
                 <input
-                  value={this.state.title}
+                  value={this.state.content}
                   onChange={this.onInputChange}
                   className="form-control"
-                  name="title"
+                  name="content"
                   placeholder="Enter Your Job Title"
                 />
               </div>

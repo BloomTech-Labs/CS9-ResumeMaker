@@ -16,6 +16,7 @@ class ExperienceCreate extends Component {
       description: "",
       from: "",
       to: "",
+      _id: "",
       success: false
     };
   }
@@ -47,7 +48,10 @@ class ExperienceCreate extends Component {
         ].to,
         description: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
-        ].description
+        ].description,
+        _id: this.props.context.userInfo.experience[
+          this.props.location.state.experienceIndex
+        ]._id
       });
   }
 
@@ -78,12 +82,16 @@ class ExperienceCreate extends Component {
           location: this.state.location,
           description: this.state.description,
           from: this.state.from,
-          to: this.state.to
+          to: this.state.to,
+          _id: this.state._id
         }
       );
     } // if editing
     else {
-      this.props.context.actions.removeElement(this.props.location.state.experienceIndex, "experience")
+      this.props.context.actions.removeElement(
+        this.props.location.state.experienceIndex,
+        "experience"
+      );
     }
 
     const tempObj = {
@@ -172,9 +180,11 @@ class ExperienceCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.experienceIndex !== false ? <button onClick={e =>
-                this.handleSubmit(e, true)
-              }>Delete</button> : null}
+              {this.props.location.state.experienceIndex !== false ? (
+                <button onClick={e => this.handleSubmit(e, true)}>
+                  Delete
+                </button>
+              ) : null}
             </form>
           </div>
         </div>

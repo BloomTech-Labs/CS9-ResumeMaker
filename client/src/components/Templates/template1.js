@@ -76,7 +76,6 @@ export class TemplateOne extends Component {
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
-                {console.log("userinfo", userInfo)}
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
@@ -120,9 +119,6 @@ export class TemplateOne extends Component {
               >
                 <h3>Summary</h3>
                 {userInfo.summary.map((content, index) => {
-                  {
-                    console.log("Summary", content);
-                  }
                   return (
                     <div key={index}>
                       <p>
@@ -139,7 +135,6 @@ export class TemplateOne extends Component {
                 {userInfo.skills.map((content, index) => {
                   return (
                     <div key={index}>
-                      {console.log("Skills", content)}
                       <p>
                         {" "}
                         <CheckBox /> {content.content}
@@ -154,7 +149,6 @@ export class TemplateOne extends Component {
                 {experience.map((content, index) => {
                   return (
                     <div key={index}>
-                      {console.log("Experience", content)}
                       <h5>
                         {" "}
                         <CheckBox /> {content.company}{" "}
@@ -178,7 +172,6 @@ export class TemplateOne extends Component {
                 {education.map((content, index) => {
                   return (
                     <div key={index}>
-                      {console.log("education", content)}
                       <h5>
                         <CheckBox /> {content.degree} in {content.fieldofstudy}{" "}
                       </h5>
