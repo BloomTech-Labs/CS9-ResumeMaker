@@ -57,7 +57,7 @@ class Sidebar extends Component {
           </Link>
           <Link to="/jobTitle" className="sidebar-button">
             {" "}
-            JobTitle
+            Job Title
           </Link>
           <Link to="/summary" className="sidebar-button">
             {" "}
