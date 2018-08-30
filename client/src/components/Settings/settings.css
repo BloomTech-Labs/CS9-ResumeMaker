@@ -1,6 +1,6 @@
 .Settings {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   /* min-height: 100vh;
   background-image: url(Buildings.jpg);
   background-repeat: no-repeat;
@@ -9,20 +9,20 @@
   background-size: cover; */
 }
 
-.Settings form {
+/* .Settings form {
   align-self: center;
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 .Settings form .form-group {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   max-width: 20rem;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
-.Settings form .form-group .control-label {
+.Settings form .form-group label {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
@@ -32,9 +32,9 @@
   margin: 0;
 }
 
-.Settings form .btn {
+/* .Settings form .btn {
   margin-top: 2rem;
-}
+} */
 
 .Settings .modal {
   position: absolute;

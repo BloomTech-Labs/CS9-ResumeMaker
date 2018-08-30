@@ -11,6 +11,8 @@
 
 .Login form {
   align-self: center;
+  background: #fff;
+  padding: 2rem 1rem;
 }
 
 .Login form .form-group {

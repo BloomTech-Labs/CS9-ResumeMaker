@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import {
+  Container,
+  Row,
+  Col,
   Modal,
   Button,
   Form,
@@ -89,22 +92,22 @@ export class PersonalInfo extends Component {
   };
 
   checkPasswordStrength = password => {
-    if (password === "") return null;
+    if (password === "") return false;
     const minlength = 6;
-    if (password.length < minlength) return "error";
-    if (!password.match(/[A-Z]/)) return "error";
-    if (!password.match(/[a-z]/)) return "error";
-    if (!password.match(/\d/)) return "error";
+    if (password.length < minlength) return false;
+    if (!password.match(/[A-Z]/)) return false;
+    if (!password.match(/[a-z]/)) return false;
+    if (!password.match(/\d/)) return false;
     if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
-      return "error";
-    return "success";
+      return false;
+    return true;
   };
 
   checkConfirmPassword = () => {
     if (this.state.newpassword === "") return null;
     if (this.state.newpassword !== this.state.newconfirmpassword) {
-      return "error";
-    } else return "success";
+      return false;
+    } else return true;
   };
 
   handleChange = e => {
@@ -206,148 +209,160 @@ export class PersonalInfo extends Component {
       this.props.context.userInfo
     );
     return (
-      <div>
-        <h1> Personal Information </h1>
-        <div className="Settings">
-          <Form>
-            <FormGroup>
-              <Label>First Name</Label>
-              <Input
-                id="name.firstname"
-                value={this.state.name.firstname}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Middle Name</Label>
-              <Input
-                id="name.middlename"
-                value={this.state.name.middlename}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Last Name</Label>
-              <Input
-                id="name.lastname"
-                value={this.state.name.lastname}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Phone Number</Label>
-              <Input
-                id="phonenumber"
-                value={this.state.phonenumber}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Location</Label>
-              <Input
-                id="location"
-                value={this.state.location}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Linkedin</Label>
-              <Input
-                id="links.linkedin"
-                value={this.state.links.linkedin}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Github</Label>
-              <Input
-                id="links.github"
-                value={this.state.links.github}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Portfolio</Label>
-              <Input
-                id="links.portfolio"
-                value={this.state.links.portfolio}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup validationState={this.state.emailInvalid}>
-              <Label>Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-              {this.state.emailInvalid ? (
-                <FormFeedback>Please enter an unused valid email.</FormFeedback>
-              ) : null}
-            </FormGroup>
-            <FormGroup
-              validationState={this.checkPasswordStrength(
-                this.state.oldpassword
-              )}
-            >
-              <Label>Current Password</Label>
-              <Input
-                id="oldpassword"
-                type="password"
-                value={this.state.oldpassword}
-                onChange={this.handleChange}
-              />
-              {this.state.passwordInvalid ? (
-                <FormFeedback>
+      <Container className="Settings">
+        <Row>
+          <Col>
+            <Form>
+              <FormGroup>
+                <Label>First Name</Label>
+                <Input
+                  id="name.firstname"
+                  size="sm"
+                  value={this.state.name.firstname}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Middle Name</Label>
+                <Input
+                  id="name.middlename"
+                  size="sm"
+                  value={this.state.name.middlename}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Last Name</Label>
+                <Input
+                  id="name.lastname"
+                  size="sm"
+                  value={this.state.name.lastname}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Phone Number</Label>
+                <Input
+                  id="phonenumber"
+                  size="sm"
+                  value={this.state.phonenumber}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Location</Label>
+                <Input
+                  id="location"
+                  size="sm"
+                  value={this.state.location}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Linkedin</Label>
+                <Input
+                  id="links.linkedin"
+                  size="sm"
+                  value={this.state.links.linkedin}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Github</Label>
+                <Input
+                  id="links.github"
+                  size="sm"
+                  value={this.state.links.github}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Portfolio</Label>
+                <Input
+                  id="links.portfolio"
+                  size="sm"
+                  value={this.state.links.portfolio}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+            </Form>
+          </Col>
+          <Col>
+            <Form>
+              <FormGroup validationState={this.state.emailInvalid}>
+                <Label>Email</Label>
+                <Input
+                  id="email"
+                  size="sm"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
+                  Please enter an unused valid email.
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label>Current Password</Label>
+                <Input
+                  valid={!this.state.passwordInvalid}
+                  invalid={this.state.passwordInvalid}
+                  id="oldpassword"
+                  size="sm"
+                  type="password"
+                  value={this.state.oldpassword}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
                   Incorrect password. Please enter your current password if you
                   want to make a new password or change your email.
                 </FormFeedback>
-              ) : null}
-            </FormGroup>
-            <FormGroup
-              validationState={this.checkPasswordStrength(
-                this.state.newpassword
-              )}
-            >
-              <Label>New Password</Label>
-              <Input
-                id="newpassword"
-                type="password"
-                value={this.state.newpassword}
-                onChange={this.handleChange}
-              />
-              {this.checkPasswordStrength(this.state.newpassword) ? (
-                <FormFeedback>
+              </FormGroup>
+              <FormGroup
+                validationState={this.checkPasswordStrength(
+                  this.state.newpassword
+                )}
+              >
+                <Label>New Password</Label>
+                <Input
+                  invalid={this.checkPasswordStrength(this.state.newpassword)}
+                  // valid={this.checkPasswordStrength(this.state.newpassword)}
+                  id="newpassword"
+                  size="sm"
+                  type="password"
+                  value={this.state.newpassword}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
                   Please use a complex password at least 8 characters long.
                 </FormFeedback>
-              ) : null}
-            </FormGroup>
-            <FormGroup validationState={this.checkConfirmPassword()}>
-              <Label>Confirm New Password</Label>
-              <Input
-                id="newconfirmpassword"
-                type="password"
-                value={this.state.newconfirmpassword}
-                onChange={this.handleChange}
-              />
-              {this.state.newconfirmpassword !== this.state.newpassword ? (
-                <FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label>Confirm New Password</Label>
+                <Input
+                  valid={this.checkConfirmPassword()}
+                  invalid={!this.checkConfirmPassword()}
+                  id="newconfirmpassword"
+                  size="sm"
+                  type="password"
+                  value={this.state.newconfirmpassword}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
                   Please make this match your new password.
                 </FormFeedback>
-              ) : null}
-            </FormGroup>
+              </FormGroup>
+            </Form>
             <Button
-              block
-              size="lg"
               color="primary"
+              className="mt-5"
               onClick={() => this.checkInputValidity()}
             >
               Submit
             </Button>
-          </Form>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

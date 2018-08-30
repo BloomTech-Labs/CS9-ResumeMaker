@@ -149,50 +149,52 @@ class Register extends Component {
       return (
         <div className="Login">
           <Form>
-            <FormGroup validationState={this.state.usernameInvalid}>
+            <FormGroup>
               <Label>Username</Label>
               <Input
                 autoFocus
+                invalid={this.state.usernameInvalid}
                 id="username"
                 type="username"
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              {this.state.usernameInvalid ? (
-                <FormFeedback>This username is already in use.</FormFeedback>
-              ) : null}
+              <FormFeedback invalid>
+                This username is already in use.
+              </FormFeedback>
             </FormGroup>
 
-            <FormGroup validationState={this.state.emailInvalid}>
+            <FormGroup>
               <Label>Email</Label>
               <Input
                 id="email"
+                invalid={this.state.emailInvalid}
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              {this.state.emailInvalid ? (
-                <FormFeedback>Please enter an unused valid email.</FormFeedback>
-              ) : null}
+              <FormFeedback invalid>
+                Please enter an unused valid email.
+              </FormFeedback>
             </FormGroup>
-            <FormGroup validationState={this.state.passwordInvalid}>
+            <FormGroup>
               <Label>Password</Label>
               <Input
                 id="password"
+                invalid={this.state.passwordInvalid}
                 type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              {this.state.passwordInvalid ? (
-                <FormFeedback>
-                  Please use a complex password at least 8 characters long.
-                </FormFeedback>
-              ) : null}
+              <FormFeedback invalid>
+                Please use a complex password at least 8 characters long.
+              </FormFeedback>
             </FormGroup>
-            <FormGroup validationState={this.state.passwordInvalid}>
+            <FormGroup>
               <Label>Confirm password</Label>
               <Input
                 id="confirmPassword"
+                invalid={this.state.passwordInvalid}
                 type="password"
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}
