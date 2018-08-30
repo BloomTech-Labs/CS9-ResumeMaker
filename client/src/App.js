@@ -22,9 +22,10 @@ import Login from "./components/Login/login";
 import Register from "./components/Register/register";
 import Sidebar from "./components/subComponents/sidebar";
 import Templates from "./components/Templates/templates.js";
-import { TemplateOne } from "./components/Templates/template1";
+import TemplateOne from "./components/Templates/template1";
 import TemplateTwo from "./components/Templates/template2";
 import TemplateThree from "./components/Templates/template3";
+const publish_key = require("./config/keys.json").publish
 
 class App extends Component {
   render() {
@@ -87,7 +88,7 @@ class App extends Component {
                     <SkillsCreate {...props} context={context} />
                   )}
                 />
-                                <Route
+                <Route
                   exact
                   path="/jobtitle"
                   render={props => <JobTitle {...props} context={context} />}
@@ -104,7 +105,7 @@ class App extends Component {
                   path="/resumes"
                   render={props => <Resumes {...props} context={context} />}
                 />
-                 <StripeProvider apiKey="pk_test_nY5MwNnJraHmAq0JRBD6Ksan">
+                <StripeProvider apiKey={publish_key}>
                   <Elements>
                     <Route
                       exact
@@ -146,7 +147,9 @@ class App extends Component {
                 <Route
                   exact
                   path="/templates/template-3"
-                  render={props => <TemplateThree {...props} context={context} />}
+                  render={props => (
+                    <TemplateThree {...props} context={context} />
+                  )}
                 />
                 <Route
                   exact
