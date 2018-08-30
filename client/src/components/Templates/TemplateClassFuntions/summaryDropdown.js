@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-class DropDown extends Component {
+class SummaryDropdown extends Component {
   // Adding default state as a placeholder
   state = {
     toggled: false,
@@ -16,53 +16,53 @@ class DropDown extends Component {
   };
 
   // Allows us to select an li and set our state with the given value
-  handleClick = name => {
+  handleClick = content => {
     this.setState({
-      selected: name,
+      selected: content,
     });
   };
 
   render() {
-    const { data } = this.props;
+    const { summary } =  this.props.data;
     const { toggled, selected } = this.state;
-
-    const list = data.map(data => (
+console.log('dropdown', summary)
+    const list = summary.map(data => (
       <li
         className="list-group-item"
-        key={data.id}
-        name={data.name}
+        key={data._id}
+        name={data.content}
         // Bound the this context for scoping due to having a function for each iteration
         // onClick={this.handleClick.bind(this, data.name)}
         /* Another option is to simply use this callback syntax as long as the function isn't being passed as props to another component. */
-        onClick={() => this.handleClick(data.name)}
+        onClick={() => this.handleClick(data.content)}
         style={{ cursor: 'pointer' }}
       >
-        {data.name}
+        {data.content}
       </li>
     ));
 
     return (
       <div className="card card-body mb-3">
-        <div className="jumbotron">
+        {/* <div className="jumbotron"> */}
           <div className="container">
-            <h3 style={{ fontSize: '40px' }} className="text-primary">
+            <p>
               {selected}
-            </h3>
+            </p>
           </div>
-        </div>
-        <h4>
+        {/* </div> */}
+        <h6>
           Choose an option:{' '}
           <i
             // Dynamically assigns a classname based on the value of this.toggled
-            className={toggled ? 'fa fa-arrow-right' : 'fa fa-arrow-down'}
+            className={toggled ? 'fa fa-arrow-up fa-sm' : 'fa fa-arrow-down fa-sm'}
             style={{ cursor: 'pointer' }}
             onClick={this.handleToggle}
           />
-        </h4>
+        </h6>
         {toggled ? <ul className="list-group">{list}</ul> : null}
       </div>
     );
   }
 }
 
-export default DropDown;
+export default SummaryDropdown;

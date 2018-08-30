@@ -5,7 +5,9 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template2.css";
 import { Link } from "react-router-dom";
-import DropDown from './dropdown';
+import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
+import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+
 
 class CheckBox extends React.Component {
   constructor(props) {
@@ -81,15 +83,7 @@ export class TemplateTwo extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                {userInfo.title.map(title => {
-                  return (
-                    <div>
-                      <h5>
-                        <CheckBox /> {title.content}
-                      </h5>
-                    </div>
-                  );
-                })}
+                <TitleDropdown data={userInfo} />
               </div>
               <Divider className="divider-div" />
               <Container
@@ -98,7 +92,7 @@ export class TemplateTwo extends Component {
                 className="summarySection"
               >
                 <h3 class="subtitle">Summary</h3>
-                <DropDown data={userInfo.summary} />
+                <SummaryDropdown data={userInfo} />
               </Container>
               <Divider className="divider-div" />
               <div class="row">
