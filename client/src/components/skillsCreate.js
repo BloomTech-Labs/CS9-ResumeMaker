@@ -46,7 +46,6 @@ class SkillsCreate extends Component {
     if (this.props.location.state.skillsIndex === false && !deleteFlag) {
       this.props.context.actions.addElement("skills", {
         // When creating, do NOT put in an _id, let mongo autocreate one
-
         content: this.state.content
       });
     } // if creating
