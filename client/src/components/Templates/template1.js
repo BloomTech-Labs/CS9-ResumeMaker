@@ -4,37 +4,10 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template1.css";
 import { Link } from "react-router-dom";
-import DropDown from './dropdown';
+import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
+import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+import CheckBox from './TemplateClassFuntions/checkbox';
 
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-
-  toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked // flips boolean value
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.state.checked}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
 
 export class TemplateOne extends Component {
   constructor(props) {
@@ -57,13 +30,15 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
+    // const summary = this.props.context.userInfo.summary; 
+    // const title = this.props.context.userInfo.title; 
 
     return (
       <div>
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/templates", title: "Templates" },
             { link: "/Templates/template-1", title: "Template One" }
           ]}
@@ -80,12 +55,7 @@ export class TemplateOne extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                {userInfo.title.map((title, index) => {
-                  return (<div key={index}>
-                    <h4> <CheckBox /> {title.content}</h4>
-                  </div>
-                  );
-                })}
+                <TitleDropdown className="dropdown" data={userInfo} />
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
@@ -119,7 +89,7 @@ export class TemplateOne extends Component {
                 className="summarySection"
               >
                 <h3>Summary</h3>
-                <DropDown data={userInfo.summary} />
+                <SummaryDropdown data={userInfo} />
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="skillsSection">
