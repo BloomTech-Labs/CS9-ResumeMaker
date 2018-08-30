@@ -15,6 +15,7 @@ class EducationCreate extends Component {
       fieldofstudy: "",
       from: "",
       to: "",
+      _id: "",
       success: false
     };
   }
@@ -39,7 +40,10 @@ class EducationCreate extends Component {
         ].from,
         to: this.props.context.userInfo.education[
           this.props.location.state.educationIndex
-        ].to
+        ].to,
+        _id: this.props.context.userInfo.education[
+          this.props.location.state.educationIndex
+        ]._id
       });
   }
 
@@ -68,12 +72,16 @@ class EducationCreate extends Component {
           degree: this.state.degree,
           fieldofstudy: this.state.fieldofstudy,
           from: this.state.from,
-          to: this.state.to
+          to: this.state.to,
+          _id: this.state._id
         }
       );
     } // if editing
     else {
-      this.props.context.actions.removeElement(this.props.location.state.educationIndex, "education")
+      this.props.context.actions.removeElement(
+        this.props.location.state.educationIndex,
+        "education"
+      );
     }
 
     const tempObj = {
@@ -155,9 +163,11 @@ class EducationCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.educationIndex !== false ? <button onClick={e =>
-                this.handleSubmit(e, true)
-              }>Delete</button> : null}
+              {this.props.location.state.educationIndex !== false ? (
+                <button onClick={e => this.handleSubmit(e, true)}>
+                  Delete
+                </button>
+              ) : null}
             </form>
           </div>
         </div>
