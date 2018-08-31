@@ -99,17 +99,19 @@ class AuthProvider extends Component {
 
   setResumeItemState = (index, name, id) => {
     const tempState = this.state;
-    console.log(index, name, id, tempState.resumes[index].sections[name]);
-    tempState.resumes[index][name].forEach(field => {
-      if (field.id === id)
+    tempState.resumes[index].sections[name].filter(field => {
+      console.log("field", field)
+      if (field._id === id) {
         field.value = !field.value;
+      }
     });
 
     // const str = "resumes" + "[" + index.toString() + "]" + name + ".value";
     // const tempObj = { [str]: !this.state[str].value };
     // console.log(tempObj);
+    console.log("Before", tempState)
     this.setState(tempState);
-    console.log(this.state.resumes)
+    console.log("After", this.state.resumes[index].sections[name])
   }
 
   setElement = (index, elementName, elementValue) => {
