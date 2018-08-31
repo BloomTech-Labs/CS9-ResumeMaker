@@ -130,11 +130,11 @@ class ExperienceCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Experience</h1>
+            <div>
+              “Far and away the best prize that life offers is the chance to
+              work hard at work worth doing.” –Theodore Roosevelt.
+            </div>
             <form>
-              <div>
-                “Far and away the best prize that life offers is the chance to
-                work hard at work worth doing.” –Theodore Roosevelt.
-              </div>
               <div className="form-group">
                 <label for="title">Title</label>
                 <input
