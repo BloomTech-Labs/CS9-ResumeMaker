@@ -149,7 +149,6 @@ class ExperienceCreate extends Component {
                         placeholder="Position Title"
                       />
                     </div>
-
                     <div className="form-group">
                       <label for="company">Company</label>
                       <input
