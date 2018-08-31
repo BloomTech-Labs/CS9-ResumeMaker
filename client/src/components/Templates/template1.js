@@ -152,7 +152,13 @@ export class TemplateOne extends Component {
                     <div key={index}>
                       <h5>
                         {" "}
-                        <CheckBox /> {content.company}{" "}
+                        <CheckBox 
+                        context={this.props.context}
+                        id={content._id}
+                        value={resumes[resumes.length - 1].sections.experience[index].value}
+                        name="experience"
+                        index={resumes.length - 1}
+                        /> {content.company}{" "}
                       </h5>
                       <p>
                         {" "}
