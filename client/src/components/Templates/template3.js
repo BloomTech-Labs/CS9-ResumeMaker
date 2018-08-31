@@ -99,16 +99,33 @@ export class TemplateThree extends Component {
                     <p className="contact-section">{userInfo.location}</p>
                     <p className="contact-section">{userInfo.phonenumber}</p>
                     <p className="contact-section">
-                      <CheckBox />
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="linkedin"
+                        value={
+                          resumes[resumes.length - 1].links.linkedin.value
+                        }
+                      />
                       {userInfo.links.linkedin}
                     </p>
-                    <p className="contact-section">
-                      <CheckBox />
-                      {userInfo.links.github}
+                    <p>
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="github"
+                        value={
+                          resumes[resumes.length - 1].links.github.value
+                        }
+                      /> {userInfo.links.github}
                     </p>
-                    <p className="contact-section">
-                      <CheckBox />
-                      {userInfo.links.portfolio}
+                    <p>
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="portfolio"
+                        value={resumes[resumes.length - 1].links.portfolio.value}
+                      /> {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                 </div>
@@ -117,7 +134,11 @@ export class TemplateThree extends Component {
                     <h2>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
-                    <TitleDropdown data={userInfo} />
+                    <TitleDropdown
+                      context={this.props.context}
+                      data={userInfo}
+                      value={resumes[resumes.length - 1].title.filter(title => title.value === true)}
+                      index={resumes.length - 1} />
                   </div>
                   <Divider className="divider-div" />
                   <FormGroup
@@ -126,7 +147,13 @@ export class TemplateThree extends Component {
                     className="summarySection"
                   >
                     <h3 className="subtitle">Summary</h3>
-                    <SummaryDropdown data={userInfo} />
+                    <SummaryDropdown
+
+                      context={this.props.context}
+                      data={userInfo}
+                      value={resumes[resumes.length - 1].sections.summary.filter(summary => summary.value === true)}
+                      index={resumes.length - 1}
+                    />
                   </FormGroup>
                   <Divider className="divider-div" />
 

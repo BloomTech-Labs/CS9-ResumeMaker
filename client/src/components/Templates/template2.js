@@ -55,6 +55,14 @@ export class TemplateTwo extends Component {
   //   event.preventDefault();
   // }
 
+  onCreate = () => {
+    this.props.context.actions.createResume();
+  };
+
+  componentWillMount() {
+    // this.onCreate();
+  }
+
   render() {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
@@ -84,7 +92,12 @@ export class TemplateTwo extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                <TitleDropdown data={userInfo} />
+                <TitleDropdown
+                  context={this.props.context}
+                  data={userInfo}
+                  value={resumes[resumes.length - 1].title.filter(title => title.value === true)}
+                  index={resumes.length - 1}
+                />
               </div>
               <Divider className="divider-div" />
               <Container
@@ -93,7 +106,12 @@ export class TemplateTwo extends Component {
                 className="summarySection"
               >
                 <h3 className="subtitle">Summary</h3>
-                <SummaryDropdown data={userInfo} />
+                <SummaryDropdown
+                  context={this.props.context}
+                  data={userInfo}
+                  value={resumes[resumes.length - 1].sections.summary.filter(summary => summary.value === true)}
+                  index={resumes.length - 1}
+                />
               </Container>
               <Divider className="divider-div" />
               <div className="row">
@@ -106,13 +124,33 @@ export class TemplateTwo extends Component {
                     <p>{userInfo.location}</p>
                     <p>{userInfo.phonenumber}</p>
                     <p>
-                      <CheckBox /> {userInfo.links.linkedin}
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="linkedin"
+                        value={
+                          resumes[resumes.length - 1].links.linkedin.value
+                        }
+                      />
+                      {userInfo.links.linkedin}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.links.github}
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="github"
+                        value={
+                          resumes[resumes.length - 1].links.github.value
+                        }
+                      /> {userInfo.links.github}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.links.portfolio}
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="portfolio"
+                        value={resumes[resumes.length - 1].links.portfolio.value}
+                      /> {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                   <Divider className="divider-div" />

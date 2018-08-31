@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 
 class SummaryDropdown extends Component {
   // Adding default state as a placeholder
   state = {
     toggled: false,
-    selected: '',
+    selected: this.props.context.userInfo.summary.filter(summary => this.props.value.id === summary.id).content || '',
   };
 
   // Toggles the drop down menu to appear based on the boolean value of state
@@ -16,15 +15,22 @@ class SummaryDropdown extends Component {
   };
 
   // Allows us to select an li and set our state with the given value
-  handleClick = content => {
+  handleClick = data => {
+    console.log(data);
     this.setState({
-      selected: content,
-    });
+      selected: data.content,
+    })
+    this.props.context.actions.setResumeItemDropdown(
+      this.props.index,
+      "summary",
+      data._id
+    );
   };
 
   render() {
     const { summary } = this.props.data;
     const { toggled, selected } = this.state;
+
     // console.log('dropdown', summary)
     const list = summary.map(data => (
       <li
@@ -34,7 +40,7 @@ class SummaryDropdown extends Component {
         // Bound the this context for scoping due to having a function for each iteration
         // onClick={this.handleClick.bind(this, data.name)}
         /* Another option is to simply use this callback syntax as long as the function isn't being passed as props to another component. */
-        onClick={() => this.handleClick(data.content)}
+        onClick={() => this.handleClick(data)}
         style={{ cursor: 'pointer' }}
       >
         {data.content}
