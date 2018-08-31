@@ -11,8 +11,9 @@ class CheckBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: this.props.value || false
+      checked: this.props.value
     };
+    {console.log("value", this.props.value)}
   }
 
   toggle = () => {
@@ -23,7 +24,7 @@ class CheckBox extends React.Component {
     return (
       <input
         type="checkbox"
-        checked={this.state.checked}
+        checked={this.props.value}
         onChange={this.toggle}
       />
     );
@@ -61,6 +62,7 @@ export class TemplateOne extends Component {
     const experience = this.props.context.userInfo.experience;
     // const summary = this.props.context.userInfo.summary; 
     // const title = this.props.context.userInfo.title; 
+    const resumes = this.props.context.userInfo.resumes;
 
     return (
       <div>
@@ -132,8 +134,9 @@ export class TemplateOne extends Component {
                         <CheckBox
                           context={this.props.context}
                           id={content._id}
+                          value={resumes[resumes.length - 1].sections.skills[index].value} 
                           name="skills"
-                          index={this.props.context.userInfo.resumes.length - 1}
+                          index={resumes.length - 1}
                         />
                         {content.content}
                       </p>
