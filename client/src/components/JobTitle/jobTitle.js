@@ -18,7 +18,17 @@ class JobTitle extends Component {
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
           <div className="title-div">
-            <h1>Job Title</h1>
+          <h1>Job Title</h1>
+            <div className="link-hide">
+              <Link
+                to={{
+                  pathname: "/jobtitle/create", // component being Linked to
+                  state: { titleIndex: false } // Setting Index passed into educationCreate component - false means new
+                }}
+              >
+               <i class="fa fa-pencil fa-2x" aria-hidden="true"/>
+              </Link>
+            </div>
             {this.props.context.userInfo.title.map((element, index) => {
               return (
                 <Link
@@ -32,16 +42,7 @@ class JobTitle extends Component {
                 </Link>
               );
             })}
-            <div className="link-hide">
-              <Link
-                to={{
-                  pathname: "/jobtitle/create", // component being Linked to
-                  state: { titleIndex: false } // Setting Index passed into educationCreate component - false means new
-                }}
-              >
-                <i className="fas fa-plus plus-circle" />
-              </Link>
-            </div>
+
           </div>
         </div>
       </div>

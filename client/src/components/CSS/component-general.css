@@ -14,6 +14,7 @@ i:hover{
 
 .title-div {
   width: 100%;
+  font-family: Impact, 'Arial Narrow Bold', sans-serif;
 }
 
 .overall-component-div .title-div {
@@ -34,4 +35,7 @@ i:hover{
   justify-content: center;
   /* max-width: 800px; */
   flex-wrap: wrap;
+}
+.fa-pencil {
+  margin-top: 1rem; 
 }
