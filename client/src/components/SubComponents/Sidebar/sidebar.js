@@ -15,7 +15,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      // this.props.context.userInfo.auth !== true &&
+      this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
       axios

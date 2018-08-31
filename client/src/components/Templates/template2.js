@@ -14,9 +14,6 @@ class CheckBox extends React.Component {
     this.state = {
       checked: this.props.value
     };
-    {
-      console.log("value", this.props.value);
-    }
   }
 
   toggle = () => {
@@ -39,9 +36,6 @@ class CheckBox extends React.Component {
 }
 
 export class TemplateTwo extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   // handleSubmit(e) {
   //   e.preventDefault();

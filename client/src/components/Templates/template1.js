@@ -35,9 +35,6 @@ class CheckBox extends React.Component {
 }
 
 export class TemplateOne extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   // handleSubmit(e) {
   //   e.preventDefault();
@@ -110,7 +107,7 @@ export class TemplateOne extends Component {
                     index={resumes.length - 1}
                     name="linkedin"
                     value={
-                      resumes[resumes.length - 1].links.linkedin.value
+                      resumes[resumes.length - 1].links.linkedin
                     }
                   />
                   {userInfo.links.linkedin}
@@ -121,7 +118,7 @@ export class TemplateOne extends Component {
                     index={resumes.length - 1}
                     name="github"
                     value={
-                      resumes[resumes.length - 1].links.github.value
+                      resumes[resumes.length - 1].links.github
                     }
                   /> {userInfo.links.github}
                 </p>
@@ -130,7 +127,7 @@ export class TemplateOne extends Component {
                     context={this.props.context}
                     index={resumes.length - 1}
                     name="portfolio"
-                    value={resumes[resumes.length - 1].links.portfolio.value}
+                    value={resumes[resumes.length - 1].links.portfolio}
                   /> {userInfo.links.portfolio}
                 </p>
               </Container>

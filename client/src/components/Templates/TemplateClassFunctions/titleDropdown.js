@@ -4,7 +4,7 @@ class TitleDropdown extends Component {
   // Adding default state as a placeholder
   state = {
     toggled: false,
-    selected: this.props.context.userInfo.title.filter(title => this.props.value.id === title.id).content || '',
+    selected: this.props.context.userInfo.title.filter(title => this.props.value[0].id === title.id)[0].content || '',
   };
 
   // Toggles the drop down menu to appear based on the boolean value of state
@@ -16,7 +16,6 @@ class TitleDropdown extends Component {
 
   // Allows us to select an li and set our state with the given value
   handleClick = data => {
-    console.log(data);
     this.setState({
       selected: data.content,
     })

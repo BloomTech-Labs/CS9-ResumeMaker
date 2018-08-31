@@ -17,26 +17,66 @@ class Resumes extends Component {
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
-            <h1 className="Header">Resumes</h1>
-          </div>
-          <div className="d-inline-flex container-div">
-            <Link
-              style={{
-                color: "black"
-              }}
-              to={{
-                pathname: "/resume1", // component being Linked to
-                state: { templateIndex: false } // Setting Index passed to template- false means new
-              }}
-            >
-              <img
-                src={require("../Templates/tempTemplate.png")} //import pics
-                alt=""
-                height="100rem"
-              />
-              <h5 className="link">Resume 1</h5>
-            </Link>
+          <div className="page-div">
+            <div className="d-block justify-content-center title-div">
+              <h1 className="Header">RESUMES</h1>
+            </div>
+            <div className="containers-div">
+              <div className="d-inline-flex container-div">
+                <Link
+                  style={{
+                    color: "black"
+                  }}
+                  to={{
+                    pathname: "/resume1", // component being Linked to
+                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                  }}
+                >
+                  <img
+                    src={require("../Templates/tempTemplate.png")} //import pics
+                    alt=""
+                    height="100rem"
+                  />
+                  <h5 className="link">Resume 1</h5>
+                </Link>
+              </div>
+              <div className="d-inline-flex container-div">
+                <Link
+                  style={{
+                    color: "black"
+                  }}
+                  to={{
+                    pathname: "/resume2", // component being Linked to
+                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                  }}
+                >
+                  <img
+                    src={require("../Templates/tempTemplate1.png")} //import pics
+                    alt=""
+                    height="100rem"
+                  />
+                  <h5 className="link">Resume 2</h5>
+                </Link>
+              </div>
+              <div className="d-inline-flex container-div">
+                <Link
+                  style={{
+                    color: "black"
+                  }}
+                  to={{
+                    pathname: "/resume1", // component being Linked to
+                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                  }}
+                >
+                  <img
+                    src={require("../Templates/tempTemplate2.png")} //import pics
+                    alt=""
+                    height="100rem"
+                  />
+                  <h5 className="link">Resume 3</h5>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

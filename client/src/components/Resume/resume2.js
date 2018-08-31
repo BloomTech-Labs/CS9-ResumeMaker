@@ -1,68 +1,13 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
+import { Link } from "react-router-dom";
+
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template2.css";
-import { Link } from "react-router-dom";
-import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
-import TitleDropdown from "../Templates/TemplateClassFunctions/titleDropdown";
-
-class CheckBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checked: this.props.value
-        };
-        {
-            console.log("value", this.props.value);
-        }
-    }
-
-    toggle = () => {
-        this.props.context.actions.setResumeItemState(
-            this.props.index,
-            this.props.name,
-            this.props.id
-        );
-    };
-
-    render() {
-        return (
-            <input
-                type="checkbox"
-                checked={this.props.value}
-                onChange={this.toggle}
-            />
-        );
-    }
-}
 
 export class ResumeTwo extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    // handleSubmit(e) {
-    //   e.preventDefault();
-
-    //   const resume = {};
-    //   for (const field in this.refs) {
-    //     resume[field] = this.refs[field].value;
-    //   }
-    //   console.log("-->", resume);
-    //   alert("Resume submitted: " + this.state.value);
-    //   event.preventDefault();
-    // }
-
-    onCreate = () => {
-        this.props.context.actions.createResume();
-    };
-
-    componentWillMount() {
-        // this.onCreate();
-    }
-
     render() {
         const userInfo = this.props.context.userInfo;
         const education = this.props.context.userInfo.education;
@@ -76,8 +21,8 @@ export class ResumeTwo extends Component {
                     context={this.props.context}
                     breadcrumbs={[
                         { link: "/", title: "Home" },
-                        { link: "/templates", title: "Templates" },
-                        { link: "/Templates/template-2", title: "Template Two" }
+                        { link: "/resumes", title: "Resumes" },
+                        { link: "/resumes/resume2", title: "Modern Resume" }
                     ]}
                 />
 
@@ -92,12 +37,9 @@ export class ResumeTwo extends Component {
                                 <h2>
                                     {userInfo.name.firstname} {userInfo.name.lastname}
                                 </h2>
-                                <TitleDropdown
-                                    context={this.props.context}
-                                    data={userInfo}
-                                    value={resumes[resumes.length - 1].title.filter(title => title.value === true)}
-                                    index={resumes.length - 1}
-                                />
+                                {userInfo.title.map((item, index) => {
+                                    return resumes[resumes.length - 1].title[index].value ? <p key={item._id}>{item.content}</p> : null
+                                })}
                             </div>
                             <Divider className="divider-div" />
                             <Container
@@ -106,12 +48,9 @@ export class ResumeTwo extends Component {
                                 className="summarySection"
                             >
                                 <h3 className="subtitle">Summary</h3>
-                                <SummaryDropdown
-                                    context={this.props.context}
-                                    data={userInfo}
-                                    value={resumes[resumes.length - 1].sections.summary.filter(summary => summary.value === true)}
-                                    index={resumes.length - 1}
-                                />
+                                {userInfo.summary.map((item, index) => {
+                                    return resumes[resumes.length - 1].sections.summary[index].value ? <p key={item._id}>{item.content}</p> : null
+                                })}
                             </Container>
                             <Divider className="divider-div" />
                             <div className="row">
@@ -123,63 +62,28 @@ export class ResumeTwo extends Component {
                                         </a>
                                         <p>{userInfo.location}</p>
                                         <p>{userInfo.phonenumber}</p>
-                                        <p>
-                                            <CheckBox
-                                                context={this.props.context}
-                                                index={resumes.length - 1}
-                                                name="linkedin"
-                                                value={
-                                                    resumes[resumes.length - 1].links.linkedin.value
-                                                }
-                                            />
-                                            {userInfo.links.linkedin}
-                                        </p>
-                                        <p>
-                                            <CheckBox
-                                                context={this.props.context}
-                                                index={resumes.length - 1}
-                                                name="github"
-                                                value={
-                                                    resumes[resumes.length - 1].links.github.value
-                                                }
-                                            /> {userInfo.links.github}
-                                        </p>
-                                        <p>
-                                            <CheckBox
-                                                context={this.props.context}
-                                                index={resumes.length - 1}
-                                                name="portfolio"
-                                                value={resumes[resumes.length - 1].links.portfolio.value}
-                                            /> {userInfo.links.portfolio}
-                                        </p>
+                                        {resumes[resumes.length - 1].links.linkedin ? <p >{userInfo.links.linkedin}</p> : null}
+                                        {resumes[resumes.length - 1].links.github ? <p>{userInfo.links.github}</p> : null}
+                                        {resumes[resumes.length - 1].links.portfolio ? <p>{userInfo.links.portfolio}</p> : null}
                                     </FormGroup>
                                     <Divider className="divider-div" />
                                     <FormGroup textAlign="center" className="educationSection">
                                         <h3 className="subtitle">Education</h3>
                                         {education.map((content, index) => {
                                             return (
-                                                <div key={index}>
-                                                    <h5>
-                                                        <CheckBox
-                                                            context={this.props.context}
-                                                            id={content._id}
-                                                            name="education"
-                                                            value={
-                                                                resumes[resumes.length - 1].sections.education[
-                                                                    index
-                                                                ].value
-                                                            }
-                                                            index={resumes.length - 1}
-                                                        />{" "}
-                                                        {content.degree} in {content.fieldofstudy}{" "}
-                                                    </h5>
-                                                    <p>{content.location}</p>
-                                                    <p>
-                                                        {content.school}
-                                                        <br />
-                                                        {content.from} - {content.to}
-                                                    </p>
-                                                </div>
+                                                resumes[resumes.length - 1].sections.education[index].value ?
+                                                    (<div key={index}>
+                                                        <h5>
+
+                                                            {content.degree} in {content.fieldofstudy}{" "}
+                                                        </h5>
+                                                        <p>{content.location}</p>
+                                                        <p>
+                                                            {content.school}
+                                                            <br />
+                                                            {content.from} - {content.to}
+                                                        </p>
+                                                    </div>) : null
                                             );
                                         })}
                                     </FormGroup>
@@ -190,23 +94,12 @@ export class ResumeTwo extends Component {
                                         <h3 className="subtitle">Skills</h3>
                                         {userInfo.skills.map((content, index) => {
                                             return (
-                                                <div key={index}>
-                                                    <p>
-                                                        {" "}
-                                                        <CheckBox
-                                                            context={this.props.context}
-                                                            id={content._id}
-                                                            name="skills"
-                                                            value={
-                                                                resumes[resumes.length - 1].sections.skills[
-                                                                    index
-                                                                ].value
-                                                            }
-                                                            index={resumes.length - 1}
-                                                        />
-                                                        {content.content}
-                                                    </p>
-                                                </div>
+                                                resumes[resumes.length - 1].sections.skills[index].value ?
+                                                    (<div key={index}>
+                                                        <p>
+                                                            {content.content}
+                                                        </p>
+                                                    </div>) : (null)
                                             );
                                         })}
                                     </FormGroup>
@@ -215,31 +108,21 @@ export class ResumeTwo extends Component {
                                         <h3 className="subtitle">Experience</h3>
                                         {experience.map((content, index) => {
                                             return (
-                                                <div key={index}>
-                                                    <h5>
-                                                        {" "}
-                                                        <CheckBox
-                                                            context={this.props.context}
-                                                            id={content._id}
-                                                            name="experience"
-                                                            value={
-                                                                resumes[resumes.length - 1].sections.experience[
-                                                                    index
-                                                                ].value
-                                                            }
-                                                            index={resumes.length - 1}
-                                                        />{" "}
-                                                        {content.company}{" "}
-                                                    </h5>
-                                                    <p>
-                                                        {content.title}
-                                                        <br />
-                                                        {content.location}
-                                                        <br />
-                                                        {content.from} - {content.to}
-                                                    </p>
-                                                    <p>{content.description} </p>
-                                                </div>
+                                                resumes[resumes.length - 1].sections.experience[index].value ?
+                                                    (<div key={index}>
+                                                        <h5>
+
+                                                            {content.company}{" "}
+                                                        </h5>
+                                                        <p>
+                                                            {content.title}
+                                                            <br />
+                                                            {content.location}
+                                                            <br />
+                                                            {content.from} - {content.to}
+                                                        </p>
+                                                        <p>{content.description} </p>
+                                                    </div>) : (null)
                                             );
                                         })}
                                     </FormGroup>

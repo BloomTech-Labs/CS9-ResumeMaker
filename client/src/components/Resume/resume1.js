@@ -4,40 +4,12 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template1.css";
 import { Link } from "react-router-dom";
-import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
-import TitleDropdown from "../Templates/TemplateClassFunctions/titleDropdown";
 
 export class ResumeOne extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    // handleSubmit(e) {
-    //   e.preventDefault();
-
-    //   const resume = {};
-    //   for (const field in this.refs) {
-    //     resume[field] = this.refs[field].value;
-    //   }
-    //   console.log("-->", resume);
-    //   alert("Resume submitted: " + this.state.value);
-    //   event.preventDefault();
-    // }
-
-    onCreate = () => {
-        this.props.context.actions.createResume();
-    };
-
-    componentWillMount() {
-        // this.onCreate();
-    }
-
     render() {
         const userInfo = this.props.context.userInfo;
         const education = this.props.context.userInfo.education;
         const experience = this.props.context.userInfo.experience;
-        // const summary = this.props.context.userInfo.summary;
-        // const title = this.props.context.userInfo.title;
         const resumes = this.props.context.userInfo.resumes;
 
         return (
@@ -46,8 +18,8 @@ export class ResumeOne extends Component {
                     context={this.props.context}
                     breadcrumbs={[
                         { link: "/", title: "Home" },
-                        { link: "/templates", title: "Templates" },
-                        { link: "/Templates/template-1", title: "Template One" }
+                        { link: "/resumes", title: "Resumes" },
+                        { link: "/resumes/resume1", title: "Traditional Resume" }
                     ]}
                 />
 
@@ -63,7 +35,7 @@ export class ResumeOne extends Component {
                                     {userInfo.name.firstname} {userInfo.name.lastname}
                                 </h2>
                                 {userInfo.title.map((item, index) => {
-                                    return resumes[resumes.length - 1].title[index].value ? <p>{item.content}</p> : null
+                                    return resumes[resumes.length - 1].title[index].value ? <p key={item._id}>{item.content}</p> : null
                                 })}
                             </Container>
                             <Divider className="divider-div" />
@@ -74,11 +46,11 @@ export class ResumeOne extends Component {
                                 </a>
                                 <p>{userInfo.location}</p>
                                 <p>{userInfo.phonenumber}</p>
-                                <p>
-                                    {resumes[resumes.length - 1].links.linkedin ? <p>{userInfo.links.linkedin}</p> : null}
+                                <div>
+                                    {resumes[resumes.length - 1].links.linkedin ? <p >{userInfo.links.linkedin}</p> : null}
                                     {resumes[resumes.length - 1].links.github ? <p>{userInfo.links.github}</p> : null}
                                     {resumes[resumes.length - 1].links.portfolio ? <p>{userInfo.links.portfolio}</p> : null}
-                                </p>
+                                </div>
 
                             </Container>
                             <Divider className="divider-div" />
@@ -89,7 +61,7 @@ export class ResumeOne extends Component {
                             >
                                 <h3>Summary</h3>
                                 {userInfo.summary.map((item, index) => {
-                                    return resumes[resumes.length - 1].sections.summary[index].value ? <p>{item.content}</p> : null
+                                    return resumes[resumes.length - 1].sections.summary[index].value ? <p key={item._id}>{item.content}</p> : null
                                 })}
                             </Container>
                             <Divider className="divider-div" />
@@ -100,8 +72,6 @@ export class ResumeOne extends Component {
                                         resumes[resumes.length - 1].sections.skills[index].value ?
                                             <div key={index}>
                                                 <p>
-                                                    {" "}
-
                                                     {content.content}
                                                 </p>
                                             </div>
@@ -157,7 +127,7 @@ export class ResumeOne extends Component {
                             <Link to="/resumes" className="resume-button" type="submit">
                                 {" "}
                                 Add Resume
-              </Link>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import {
-  Modal,
   Button,
   FormGroup,
   FormControl,
@@ -83,7 +82,7 @@ export class PersonalInfo extends Component {
   };
 
   validateEmail = email => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
     return re.test(email);
   };
 
@@ -94,7 +93,7 @@ export class PersonalInfo extends Component {
     if (!password.match(/[A-Z]/)) return "error";
     if (!password.match(/[a-z]/)) return "error";
     if (!password.match(/\d/)) return "error";
-    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+    if (!password.match(/[`~!@#$%^&*()_\-+=[{]}|\\:;"'<,>.?\/]/))
       return "error";
     return "success";
   };
