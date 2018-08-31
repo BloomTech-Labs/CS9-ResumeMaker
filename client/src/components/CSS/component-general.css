@@ -21,7 +21,8 @@ i:hover{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-image: linear-gradient( darkgray, white);
+  /* background-image: linear-gradient( darkgray, white); */
+  background: linear-gradient(#ffd699, lightgray);
 }
 
 .div-for-links {

@@ -15,9 +15,11 @@ class Navbar extends Component {
               <Link
                 className="breadcrumb-item"
                 style={{
-                  color: "white",
+                  color: "#DB8651",
                   fontFamily: "helvetica",
-                  fontSize: "0.7rem"
+                  fontSize: "0.7rem", 
+                  fontWeight: "600", 
+
                 }}
                 to={item.link}
               >
@@ -29,7 +31,7 @@ class Navbar extends Component {
         <Route
           render={({ history }) => (
             <div
-              style={{ color: "white" }}
+              style={{ color: "#FF6200", textShadow: "1px 1px black"}}
               className="logout btn bg-dark"
               onClick={() => {
                 this.props.context.actions.setLogout();
