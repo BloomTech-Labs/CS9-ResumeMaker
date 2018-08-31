@@ -38,14 +38,14 @@ export class PersonalInfo extends Component {
         github: "",
         portfolio: ""
       },
-      membership: false,
-      subscription: "",
       oldpassword: "",
       newpassword: "",
       newconfirmpassword: "",
       usernameInvalid: false,
       emailInvalid: false,
-      passwordInvalid: false
+      passwordInvalid: false,
+      changesSaved: null,
+      emailConfirmModal: false
     };
   }
 
@@ -129,7 +129,8 @@ export class PersonalInfo extends Component {
     this.setState({
       // usernameInvalid: false,
       emailInvalid: false,
-      passwordInvalid: false
+      passwordInvalid: false,
+      changesSaved: null
     });
     if (this.state.email !== this.props.context.userInfo.email) {
       // const usernamePromise = axios
@@ -160,11 +161,13 @@ export class PersonalInfo extends Component {
         console.log("The current state:", this.state);
         if (
           this.state.usernameInvalid === false &&
-          this.state.emailInvalid === false
+          this.state.emailInvalid === false &&
+          this.state.changesSaved === null
         ) {
           this.handleSubmit();
         } else {
-          this.componentDidMount();
+          this.setState({ changesSaved: false });
+          // this.componentDidMount();
         }
       });
     } else this.handleSubmit();
@@ -187,15 +190,25 @@ export class PersonalInfo extends Component {
         console.log("RESPONSE GOTTEN", response);
         if (response.data.errorMessage) {
           if (response.data.errorMessage.includes("password")) {
-            this.setState({ passwordInvalid: true });
+            this.setState({ passwordInvalid: true, oldpassword: "" });
           }
         }
+        if (response.data.token) {
+          this.setState({
+            oldpassword: this.state.newpassword,
+            newpassword: "",
+            newconfirmpassword: ""
+          });
+          localStorage.setItem("token", response.data.token);
+        }
+        response.data.user.changesSaved = true;
         this.setState(response.data.user);
         // This updates context with the new user info from server
         this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {
         console.log("oops", err.message);
+        this.setState({ changesSaved: false });
         alert("try again");
       });
   };
@@ -214,6 +227,7 @@ export class PersonalInfo extends Component {
                 <Label>First Name</Label>
                 <Input
                   id="name.firstname"
+                  maxLength={20}
                   size="sm"
                   value={this.state.name.firstname}
                   onChange={this.handleChange}
@@ -223,6 +237,7 @@ export class PersonalInfo extends Component {
                 <Label>Middle Name</Label>
                 <Input
                   id="name.middlename"
+                  maxLength={20}
                   size="sm"
                   value={this.state.name.middlename}
                   onChange={this.handleChange}
@@ -232,6 +247,7 @@ export class PersonalInfo extends Component {
                 <Label>Last Name</Label>
                 <Input
                   id="name.lastname"
+                  maxLength={20}
                   size="sm"
                   value={this.state.name.lastname}
                   onChange={this.handleChange}
@@ -241,6 +257,7 @@ export class PersonalInfo extends Component {
                 <Label>Phone Number</Label>
                 <Input
                   id="phonenumber"
+                  maxLength={20}
                   size="sm"
                   value={this.state.phonenumber}
                   onChange={this.handleChange}
@@ -303,12 +320,17 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Current Password</Label>
                 <Input
-                  valid={!this.state.passwordInvalid}
                   invalid={
-                    (this.state.passwordInvalid ||
-                      this.state.newpassword !== "" ||
-                      this.state.email !== this.props.context.userInfo.email) &&
-                    this.state.oldpassword === ""
+                    this.state.passwordInvalid === true ||
+                    (this.state.email !== this.props.context.userInfo.email &&
+                      this.state.oldpassword === "") ||
+                    (this.state.newpassword !== "" &&
+                      this.state.oldpassword === "")
+                  }
+                  valid={
+                    this.state.passwordInvalid === false &&
+                    this.state.changesSaved !== null &&
+                    this.state.oldpassword !== ""
                   }
                   id="oldpassword"
                   size="sm"
@@ -363,13 +385,17 @@ export class PersonalInfo extends Component {
                 </FormFeedback>
               </FormGroup>
             </Form>
-            <Button
-              color="primary"
-              className="mt-2"
-              onClick={() => this.checkInputValidity()}
-            >
-              Submit
-            </Button>
+            <div className="settings-footer mt-4">
+              <Button color="primary" onClick={() => this.checkInputValidity()}>
+                Submit
+              </Button>
+              {this.state.changesSaved && this.state.changesSaved !== null ? (
+                <div className="saved-status">Your changes were saved.</div>
+              ) : null}
+              {!this.state.changesSaved && this.state.changesSaved !== null ? (
+                <div className="saved-status">Your changes were not saved.</div>
+              ) : null}
+            </div>
           </Col>
         </Row>
       </Container>
@@ -396,7 +422,7 @@ class Settings extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/"},
+            { link: "/" },
             { link: "/settings", title: "Settings" }
           ]}
         />

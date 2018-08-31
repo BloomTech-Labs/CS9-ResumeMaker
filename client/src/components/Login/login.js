@@ -13,7 +13,7 @@ const urls = require("../../config/config.json");
 
 const scrinch = {
   email: "scrinch@gmail.com",
-  password: "tacobell1!G1",
+  password: "tacobell1!G",
   invalidCredentials: false
 };
 
