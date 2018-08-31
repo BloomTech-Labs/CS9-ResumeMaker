@@ -103,14 +103,14 @@ export class TemplateTwo extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p>
                         {" "}
-                        <CheckBox /> {userInfo.email}
+                       {userInfo.email}
                       </p>
                     </a>
                     <p>
-                      <CheckBox /> {userInfo.location}
+                     {userInfo.location}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.phonenumber}
+                     {userInfo.phonenumber}
                     </p>
                     <p>
                       <CheckBox /> {userInfo.links.linkedin}

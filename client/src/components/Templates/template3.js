@@ -96,16 +96,16 @@ export class TemplateThree extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section">
                         {" "}
-                        <CheckBox />
+                        
                         {userInfo.email}
                       </p>
                     </a>
                     <p className="contact-section">
-                      <CheckBox />
+                      
                       {userInfo.location}
                     </p>
                     <p className="contact-section">
-                      <CheckBox />
+                      
                       {userInfo.phonenumber}
                     </p>
                     <p className="contact-section">
