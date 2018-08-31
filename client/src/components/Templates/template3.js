@@ -96,16 +96,16 @@ export class TemplateThree extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section">
                         {" "}
-                        
+                        <CheckBox />
                         {userInfo.email}
                       </p>
                     </a>
                     <p className="contact-section">
-                      
+                      <CheckBox />
                       {userInfo.location}
                     </p>
                     <p className="contact-section">
-                      
+                      <CheckBox />
                       {userInfo.phonenumber}
                     </p>
                     <p className="contact-section">
@@ -143,7 +143,7 @@ export class TemplateThree extends Component {
                   <Divider className="divider-div" />
 
                   <FormGroup textAlign="center" className="skillsSection">
-                  <h3 className="subtitle">Skills</h3>
+                    <h3 className="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return (
                         <div key={index}>
@@ -152,12 +152,12 @@ export class TemplateThree extends Component {
                             <CheckBox
                               context={this.props.context}
                               id={content._id}
+                              name="skills"
                               value={
                                 resumes[resumes.length - 1].sections.skills[
                                   index
                                 ].value
                               }
-                              name="skills"
                               index={resumes.length - 1}
                             />
                             {content.content}
@@ -168,7 +168,7 @@ export class TemplateThree extends Component {
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
-                  <h3 className="subtitle">Experience</h3>
+                    <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
                       return (
                         <div key={index}>
@@ -177,12 +177,12 @@ export class TemplateThree extends Component {
                             <CheckBox
                               context={this.props.context}
                               id={content._id}
+                              name="experience"
                               value={
                                 resumes[resumes.length - 1].sections.experience[
                                   index
                                 ].value
                               }
-                              name="experience"
                               index={resumes.length - 1}
                             />{" "}
                             {content.company}{" "}
@@ -206,8 +206,18 @@ export class TemplateThree extends Component {
                       return (
                         <div key={index}>
                           <h5>
-                            <CheckBox /> {content.degree} in{" "}
-                            {content.fieldofstudy}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="education"
+                              value={
+                                resumes[resumes.length - 1].sections.education[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.degree} in {content.fieldofstudy}{" "}
                           </h5>
                           <p>{content.location}</p>
                           <p>

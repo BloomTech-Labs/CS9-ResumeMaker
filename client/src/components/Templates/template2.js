@@ -101,17 +101,10 @@ export class TemplateTwo extends Component {
                   <FormGroup textAlign="center" className="contactSection">
                     <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p>
-                        {" "}
-                       {userInfo.email}
-                      </p>
+                      <p> {userInfo.email}</p>
                     </a>
-                    <p>
-                     {userInfo.location}
-                    </p>
-                    <p>
-                     {userInfo.phonenumber}
-                    </p>
+                    <p>{userInfo.location}</p>
+                    <p>{userInfo.phonenumber}</p>
                     <p>
                       <CheckBox /> {userInfo.links.linkedin}
                     </p>
@@ -129,8 +122,18 @@ export class TemplateTwo extends Component {
                       return (
                         <div key={index}>
                           <h5>
-                            <CheckBox /> {content.degree} in{" "}
-                            {content.fieldofstudy}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="education"
+                              value={
+                                resumes[resumes.length - 1].sections.education[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.degree} in {content.fieldofstudy}{" "}
                           </h5>
                           <p>{content.location}</p>
                           <p>
@@ -155,12 +158,12 @@ export class TemplateTwo extends Component {
                             <CheckBox
                               context={this.props.context}
                               id={content._id}
+                              name="skills"
                               value={
                                 resumes[resumes.length - 1].sections.skills[
                                   index
                                 ].value
                               }
-                              name="skills"
                               index={resumes.length - 1}
                             />
                             {content.content}
@@ -180,12 +183,12 @@ export class TemplateTwo extends Component {
                             <CheckBox
                               context={this.props.context}
                               id={content._id}
+                              name="experience"
                               value={
                                 resumes[resumes.length - 1].sections.experience[
                                   index
                                 ].value
                               }
-                              name="experience"
                               index={resumes.length - 1}
                             />{" "}
                             {content.company}{" "}

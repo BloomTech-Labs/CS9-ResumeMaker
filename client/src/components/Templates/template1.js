@@ -4,8 +4,8 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template1.css";
 import { Link } from "react-router-dom";
-import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
-import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+import SummaryDropdown from "./TemplateClassFuntions/summaryDropdown";
+import TitleDropdown from "./TemplateClassFuntions/titleDropdown";
 
 class CheckBox extends React.Component {
   constructor(props) {
@@ -13,11 +13,14 @@ class CheckBox extends React.Component {
     this.state = {
       checked: this.props.value
     };
-    {console.log("value", this.props.value)}
   }
 
   toggle = () => {
-    this.props.context.actions.setResumeItemState(this.props.index, this.props.name, this.props.id)
+    this.props.context.actions.setResumeItemState(
+      this.props.index,
+      this.props.name,
+      this.props.id
+    );
   };
 
   render() {
@@ -50,7 +53,7 @@ export class TemplateOne extends Component {
 
   onCreate = () => {
     this.props.context.actions.createResume();
-  }
+  };
 
   componentWillMount() {
     this.onCreate();
@@ -60,8 +63,8 @@ export class TemplateOne extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    // const summary = this.props.context.userInfo.summary; 
-    // const title = this.props.context.userInfo.title; 
+    // const summary = this.props.context.userInfo.summary;
+    // const title = this.props.context.userInfo.title;
     const resumes = this.props.context.userInfo.resumes;
 
     return (
@@ -92,17 +95,10 @@ export class TemplateOne extends Component {
               <Container textAlign="center" className="contactSection">
                 <h3>Contact Details</h3>
                 <a href={`mailto:${userInfo.email}`}>
-                  <p>
-                    {" "}
-                    {userInfo.email}
-                  </p>
+                  <p> {userInfo.email}</p>
                 </a>
-                <p>
-                  {userInfo.location}
-                </p>
-                <p>
-                  {userInfo.phonenumber}
-                </p>
+                <p>{userInfo.location}</p>
+                <p>{userInfo.phonenumber}</p>
                 <p>
                   <CheckBox />
                   {userInfo.links.linkedin}
@@ -134,8 +130,11 @@ export class TemplateOne extends Component {
                         <CheckBox
                           context={this.props.context}
                           id={content._id}
-                          value={resumes[resumes.length - 1].sections.skills[index].value} 
                           name="skills"
+                          value={
+                            resumes[resumes.length - 1].sections.skills[index]
+                              .value
+                          }
                           index={resumes.length - 1}
                         />
                         {content.content}
@@ -152,13 +151,18 @@ export class TemplateOne extends Component {
                     <div key={index}>
                       <h5>
                         {" "}
-                        <CheckBox 
-                        context={this.props.context}
-                        id={content._id}
-                        value={resumes[resumes.length - 1].sections.experience[index].value}
-                        name="experience"
-                        index={resumes.length - 1}
-                        /> {content.company}{" "}
+                        <CheckBox
+                          context={this.props.context}
+                          id={content._id}
+                          name="experience"
+                          value={
+                            resumes[resumes.length - 1].sections.experience[
+                              index
+                            ].value
+                          }
+                          index={resumes.length - 1}
+                        />{" "}
+                        {content.company}{" "}
                       </h5>
                       <p>
                         {" "}
@@ -180,7 +184,18 @@ export class TemplateOne extends Component {
                   return (
                     <div key={index}>
                       <h5>
-                        <CheckBox /> {content.degree} in {content.fieldofstudy}{" "}
+                        <CheckBox
+                          context={this.props.context}
+                          id={content._id}
+                          name="education"
+                          value={
+                            resumes[resumes.length - 1].sections.education[
+                              index
+                            ].value
+                          }
+                          index={resumes.length - 1}
+                        />
+                        {content.degree} in {content.fieldofstudy}{" "}
                       </h5>
                       <p>{content.location}</p>
                       <p>
