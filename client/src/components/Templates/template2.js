@@ -5,8 +5,8 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template2.css";
 import { Link } from "react-router-dom";
-import SummaryDropdown from "./TemplateClassFuntions/summaryDropdown";
-import TitleDropdown from "./TemplateClassFuntions/titleDropdown";
+import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
+import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 
 class CheckBox extends React.Component {
   constructor(props) {

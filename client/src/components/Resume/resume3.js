@@ -3,10 +3,10 @@ import { Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
-import "./template3.css";
+import "../Templates/template3.css";
 import { Link } from "react-router-dom";
-import SummaryDropdown from "./TemplateClassFuntions/summaryDropdown";
-import TitleDropdown from "./TemplateClassFuntions/titleDropdown";
+import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
+import TitleDropdown from "../Templates/TemplateClassFunctions/titleDropdown";
 
 class CheckBox extends React.Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class CheckBox extends React.Component {
     }
 }
 
-export class TemplateThree extends Component {
+export class ResumeThree extends Component {
     constructor(props) {
         super(props);
     }
@@ -262,4 +262,4 @@ export class TemplateThree extends Component {
     }
 }
 
-export default TemplateThree;
+export default ResumeThree;

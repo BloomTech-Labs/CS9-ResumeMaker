@@ -102,30 +102,26 @@ class AuthProvider extends Component {
 
   setResumeItemState = (index, name, id) => {
     const tempState = this.state;
+    console.log("tempState", tempState);
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[name];
     } else {
       tempState.resumes[index].sections[name].forEach(field => {
-        console.log("field", field)
         if (field._id === id) {
           field.value = !field.value;
         }
       });
     }
-    console.log("Before", tempState)
+    console.log("Before setState", this.state);
     this.setState(tempState);
-    console.log("After", this.state.resumes[index].sections[name])
-    console.log("After", this.state.resumes[index].links[name])
+    console.log("After setState", this.state);
   } //Checkboxes
 
   setResumeItemDropdown = (index, name, id) => {
     const tempState = this.state;
-    console.log(index, name, id);
     if (name === "title") {
       tempState.resumes[index][name].forEach(field => {
-        console.log("field", field)
         if (field._id === id) {
-          console.log("HEREEE")
           field.value = true;
         }
         else {
@@ -136,7 +132,6 @@ class AuthProvider extends Component {
       tempState.resumes[index].sections[name].forEach(field => {
         console.log("field", field)
         if (field._id === id) {
-          console.log("HEREEE")
           field.value = true;
         }
         else {
