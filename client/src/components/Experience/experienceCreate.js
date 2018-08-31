@@ -131,47 +131,71 @@ class ExperienceCreate extends Component {
           <div className="title-div">
             <h1>Experience</h1>
             <form>
+              <div>
+                “Far and away the best prize that life offers is the chance to
+                work hard at work worth doing.” –Theodore Roosevelt.
+              </div>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
-                  “Far and away the best prize that life offers is the chance to
-                  work hard at work worth doing.” –Theodore Roosevelt.
-                </label>
+                <label for="title">Title</label>
                 <input
+                  id="title"
                   value={this.state.title}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="title"
                   placeholder="Position Title"
                 />
+              </div>
+
+              <div className="form-group">
+                <label for="company">Company</label>
                 <input
+                  id="company"
                   value={this.state.company}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="company"
                   placeholder="Company Name"
                 />
+              </div>
+              <div className="form-group">
+                <label for="location">Location</label>
                 <input
+                  id="location"
                   value={this.state.location}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="location"
                   placeholder="Company Location"
                 />
+              </div>
+              <div className="form-group">
+                <label for="description">Description</label>
                 <input
+                  id="description"
+                  type="text"
                   value={this.state.description}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="description"
                   placeholder="Position Description"
                 />
+              </div>
+              <div className="form-group">
+                <label for="from">Start date</label>
                 <input
+                  id="from"
                   value={this.state.from}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="from"
                   placeholder="Start Date"
                 />
+              </div>
+              <div className="form-group">
+                <label for="to">End date</label>
                 <input
+                  id="to"
                   value={this.state.to}
                   onChange={this.onInputChange}
                   className="form-control"
