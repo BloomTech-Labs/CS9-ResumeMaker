@@ -130,54 +130,85 @@ class ExperienceCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Experience</h1>
+            <div>
+              “Far and away the best prize that life offers is the chance to
+              work hard at work worth doing.” –Theodore Roosevelt.
+            </div>
             <form>
-              <div className="form-group">
-                <label form="formGroupExampleInput2"  style={{fontSize: "0.7rem"}}>
-                  “Far and away the best prize that life offers is the chance to
-                  work hard at work worth doing.” –Theodore Roosevelt.
-                </label>
-                <input
-                  value={this.state.title}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="title"
-                  placeholder="Position Title"
-                />
-                <input
-                  value={this.state.company}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="company"
-                  placeholder="Company Name"
-                />
-                <input
-                  value={this.state.location}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="location"
-                  placeholder="Company Location"
-                />
-                <input
-                  value={this.state.description}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="description"
-                  placeholder="Position Description"
-                />
-                <input
-                  value={this.state.from}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="from"
-                  placeholder="Start Date"
-                />
-                <input
-                  value={this.state.to}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="to"
-                  placeholder="End Date"
-                />
+              <div className="container">
+                <div className="row">
+                  <div className="col">
+                    <div className="form-group">
+                      <label for="title">Title</label>
+                      <input
+                        id="title"
+                        value={this.state.title}
+                        onChange={this.onInputChange}
+                        className="form-control"
+                        name="title"
+                        placeholder="Position Title"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="company">Company</label>
+                      <input
+                        id="company"
+                        value={this.state.company}
+                        onChange={this.onInputChange}
+                        className="form-control"
+                        name="company"
+                        placeholder="Company Name"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="location">Location</label>
+                      <input
+                        id="location"
+                        value={this.state.location}
+                        onChange={this.onInputChange}
+                        className="form-control"
+                        name="location"
+                        placeholder="Company Location"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="from">Start date</label>
+                      <input
+                        id="from"
+                        value={this.state.from}
+                        onChange={this.onInputChange}
+                        className="form-control"
+                        name="from"
+                        placeholder="Start Date"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="to">End date</label>
+                      <input
+                        id="to"
+                        value={this.state.to}
+                        onChange={this.onInputChange}
+                        className="form-control"
+                        name="to"
+                        placeholder="End Date"
+                      />
+                    </div>
+                  </div>
+                  <div className="col">
+                    <div className="form-group">
+                      <label for="description">Description</label>
+                      <textarea
+                        rows={15}
+                        id="description"
+                        value={this.state.description}
+                        onChange={this.onInputChange}
+                        className="form-control"
+                        name="description"
+                        placeholder="Position Description"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
               {this.props.location.state.experienceIndex !== false ? (

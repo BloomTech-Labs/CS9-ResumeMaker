@@ -120,41 +120,59 @@ class EducationCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Education History</h1>
+            <div>
+              “Intelligence plus character-that is the goal of true education.”
+              ― Martin Luther King Jr.
+            </div>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2" style={{fontSize: "0.7rem"}}>
-                  “Intelligence plus character-that is the goal of true
-                  education.” ― Martin Luther King Jr.
-                </label>
+                <label for="school">School</label>
                 <input
+                  id="school"
                   value={this.state.school}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="school"
                   placeholder="Name of Institution"
                 />
+              </div>
+              <div className="form-group">
+                <label for="degree">Degree</label>
                 <input
+                  id="degree"
                   value={this.state.degree}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="degree"
                   placeholder="Degree or Certificate"
                 />
+              </div>
+              <div className="form-group">
+                <label for="fieldofstudy">Field of Study</label>
                 <input
+                  id="fieldofstudy"
                   value={this.state.fieldofstudy}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="fieldofstudy"
                   placeholder="Field of Study"
                 />
+              </div>
+              <div className="form-group">
+                <label for="from">Start date</label>
                 <input
+                  id="from"
                   value={this.state.from}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="from"
                   placeholder="Start Date"
                 />
+              </div>
+              <div className="form-group">
+                <label for="to">End date</label>
                 <input
+                  id="to"
                   value={this.state.to}
                   onChange={this.onInputChange}
                   className="form-control"
