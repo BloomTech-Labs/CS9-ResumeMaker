@@ -11,14 +11,15 @@ class JobTitle extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/"},
+            { link: "/" },
             { link: "/jobtitle", title: "JobTitle" }
           ]}
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
           <div className="title-div">
-          <h1>Job Title</h1>
+            <h1>Job Title</h1>
+            <p>Please click the pencil to enter one or more Titles for the Job Positon you are seeking.</p>
             <div className="link-hide">
               <Link
                 to={{
@@ -26,12 +27,13 @@ class JobTitle extends Component {
                   state: { titleIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-               <i class="fa fa-pencil fa-2x" aria-hidden="true"/>
+                <i class="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
             </div>
             {this.props.context.userInfo.title.map((element, index) => {
               return (
                 <Link
+                  style={{ color: "black" , fontWeight: "600"}}
                   to={{
                     pathname: "/jobtitle/create", // component being Linked to
                     state: { titleIndex: index } // Setting Index passed into titleCreate component
@@ -42,7 +44,6 @@ class JobTitle extends Component {
                 </Link>
               );
             })}
-
           </div>
         </div>
       </div>

@@ -122,7 +122,7 @@ class EducationCreate extends Component {
             <h1>Education History</h1>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
+                <label form="formGroupExampleInput2" style={{fontSize: "0.7rem"}}>
                   “Intelligence plus character-that is the goal of true
                   education.” ― Martin Luther King Jr.
                 </label>

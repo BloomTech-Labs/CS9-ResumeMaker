@@ -100,7 +100,7 @@ class JobTitleCreate extends Component {
             <h1>Job Title</h1>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
+                <label form="formGroupExampleInput2"  style={{fontSize: "0.7rem"}}>
                   “It is not titles that honour men, but men that honour
                   titles.” ― Niccolò Machiavelli
                 </label>

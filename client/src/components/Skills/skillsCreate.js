@@ -104,7 +104,7 @@ class SkillsCreate extends Component {
             <h1>Skills</h1>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
+                <label form="formGroupExampleInput2" style={{fontSize: "0.7rem"}}>
                   “Success is skill inside out.” ― Matshona Dhliwayo
                 </label>
                 <input

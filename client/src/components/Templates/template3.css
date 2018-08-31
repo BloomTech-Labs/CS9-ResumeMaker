@@ -3,7 +3,7 @@
 }
 .page-div {
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
 }
 .page-header {
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;

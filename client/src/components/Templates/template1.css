@@ -1,6 +1,6 @@
 .component-div {
     display: flex; 
-    background-image: linear-gradient( darkgray, white);
+   background: #C8C8C8; 
 }
 .page-div {
     display: flex; 

@@ -132,7 +132,7 @@ class ExperienceCreate extends Component {
             <h1>Experience</h1>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
+                <label form="formGroupExampleInput2"  style={{fontSize: "0.7rem"}}>
                   “Far and away the best prize that life offers is the chance to
                   work hard at work worth doing.” –Theodore Roosevelt.
                 </label>

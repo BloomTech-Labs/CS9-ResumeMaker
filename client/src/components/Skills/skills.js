@@ -16,6 +16,7 @@ class Skills extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Skills</h1>
+            <p>Please click the pencil to enter each of your work related skills.</p>
             <div className="link-hide">
               <Link
                 to={{
@@ -29,6 +30,7 @@ class Skills extends Component {
             {this.props.context.userInfo.skills.map((element, index) => {
               return (
                 <Link
+                  style={{ color: "black" , fontWeight: "600"}}
                   to={{
                     pathname: "/skills/create", // component being Linked to
                     state: { skillsIndex: index } // Setting Index passed into skillsCreate component

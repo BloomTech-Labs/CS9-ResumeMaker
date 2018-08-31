@@ -109,9 +109,9 @@ class SummaryCreate extends Component {
             <h1>Personal Summary</h1>
             <div className="form-group">
               <form>
-                <label form="formGroupExampleInput2">
-                  “Make the most of yourself....for that is all there is of
-                  you.” ― Ralph Waldo Emerson
+                <label form="formGroupExampleInput2"  style={{fontSize: "0.7rem"}}>
+                “Make the most of yourself....for that is all there is of
+                  you.” ― Ralph Waldo Emerson 
                 </label>
                 <textarea
                   rows={10}
