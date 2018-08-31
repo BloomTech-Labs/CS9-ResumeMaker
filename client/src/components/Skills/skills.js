@@ -10,15 +10,22 @@ class Skills extends Component {
       <div>
         <Navbar
           context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/skills", title: "Skills" }
-          ]}
+          breadcrumbs={[{ link: "/" }, { link: "/skills", title: "Skills" }]}
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Skills</h1>
+            <div className="link-hide">
+              <Link
+                to={{
+                  pathname: "/skills/create", // component being Linked to
+                  state: { skillsIndex: false } // Setting Index passed into educationCreate component - false means new
+                }}
+              >
+                <i class="fa fa-pencil fa-2x" aria-hidden="true" />
+              </Link>
+            </div>
             {this.props.context.userInfo.skills.map((element, index) => {
               return (
                 <Link
@@ -32,16 +39,6 @@ class Skills extends Component {
                 </Link>
               );
             })}
-            <div className="link-hide">
-              <Link
-                to={{
-                  pathname: "/skills/create", // component being Linked to
-                  state: { skillsIndex: false } // Setting Index passed into educationCreate component - false means new
-                }}
-              >
-                <i className="fas fa-plus plus-circle" />
-              </Link>
-            </div>
           </div>
         </div>
       </div>

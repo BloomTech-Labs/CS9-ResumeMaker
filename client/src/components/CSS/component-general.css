@@ -14,12 +14,14 @@ i:hover{
 
 .title-div {
   width: 100%;
+  font-family: Impact, 'Arial Narrow Bold', sans-serif;
 }
 
 .overall-component-div .title-div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background-image: linear-gradient( darkgray, white);
 }
 
 .div-for-links {
@@ -33,4 +35,7 @@ i:hover{
   justify-content: center;
   /* max-width: 800px; */
   flex-wrap: wrap;
+}
+.fa-pencil {
+  margin-top: 1rem; 
 }

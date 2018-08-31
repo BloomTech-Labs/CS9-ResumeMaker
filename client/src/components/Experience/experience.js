@@ -19,6 +19,16 @@ class Experience extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Experience</h1>
+            <div className="link-hide">
+              <Link
+                to={{
+                  pathname: "/experience/create", // component being Linked to
+                  state: { experienceIndex: false } // Setting Index passed into experienceCreate component - false means new
+                }}
+              >
+                  <i class="fa fa-pencil fa-2x" aria-hidden="true" />
+              </Link>
+            </div>
             {this.props.context.userInfo.experience.map((element, index) => {
               return (
                 <Link
@@ -32,16 +42,7 @@ class Experience extends Component {
                 </Link>
               );
             })}
-            <div className="link-hide">
-              <Link
-                to={{
-                  pathname: "/experience/create", // component being Linked to
-                  state: { experienceIndex: false } // Setting Index passed into experienceCreate component - false means new
-                }}
-              >
-                <i className="fas fa-plus plus-circle" />
-              </Link>
-            </div>
+
           </div>
         </div>
       </div>

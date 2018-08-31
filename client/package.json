@@ -13,7 +13,8 @@
     "react-sidebar": "^3.0.2",
     "react-stripe-elements": "^2.0.1",
     "reactstrap": "^6.4.0",
-    "semantic-ui-react": "^0.82.2"
+    "semantic-ui-react": "^0.82.2",
+    "font-awesome": "^4.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
