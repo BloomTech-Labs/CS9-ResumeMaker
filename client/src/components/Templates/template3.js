@@ -5,25 +5,25 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template3.css";
 import { Link } from "react-router-dom";
-import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
-import TitleDropdown from './TemplateClassFuntions/titleDropdown';
+import SummaryDropdown from "./TemplateClassFuntions/summaryDropdown";
+import TitleDropdown from "./TemplateClassFuntions/titleDropdown";
 
 class CheckBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: this.props.value
     };
+    {
+      console.log("value", this.props.value);
+    }
   }
 
   toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
+    this.props.context.actions.setResumeItemState(
+      this.props.index,
+      this.props.name,
+      this.props.id
     );
   };
 
@@ -31,7 +31,7 @@ class CheckBox extends React.Component {
     return (
       <input
         type="checkbox"
-        checked={this.state.checked}
+        checked={this.props.value}
         onChange={this.toggle}
       />
     );
@@ -59,6 +59,7 @@ export class TemplateThree extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
+    const resumes = this.props.context.userInfo.resumes;
     console.log(userInfo);
     return (
       <div>
@@ -78,8 +79,8 @@ export class TemplateThree extends Component {
               <h3 className="page-header">Elegant</h3>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
-              <div class="row">
-                <div class="col" className="left-column">
+              <div className="row">
+                <div className="col" className="left-column">
                   <a
                     href="https://www.freeiconspng.com/img/37126"
                     title="Image from freeiconspng.com"
@@ -91,7 +92,7 @@ export class TemplateThree extends Component {
                     />
                   </a>
                   <FormGroup textAlign="center" className="contactSection">
-                    <h3 class="subtitle">Contact Details</h3>
+                    <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section">
                         {" "}
@@ -121,7 +122,7 @@ export class TemplateThree extends Component {
                     </p>
                   </FormGroup>
                 </div>
-                <div class="col">
+                <div className="col">
                   <div textAlign="center" className="titleSection">
                     <h2>
                       {userInfo.name.firstname} {userInfo.name.lastname}
@@ -134,7 +135,7 @@ export class TemplateThree extends Component {
                     id="summary"
                     className="summarySection"
                   >
-                    <h3 class="subtitle">Summary</h3>
+                    <h3 className="subtitle">Summary</h3>
                     <SummaryDropdown data={userInfo} />
                   </FormGroup>
                   <Divider className="divider-div" />
@@ -142,12 +143,24 @@ export class TemplateThree extends Component {
                   <Divider className="divider-div" />
 
                   <FormGroup textAlign="center" className="skillsSection">
-                    <h3 class="subtitle">Skills</h3>
+                  <h3 className="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return (
                         <div key={index}>
                           <p>
-                            <CheckBox /> {content.content}
+                            {" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              value={
+                                resumes[resumes.length - 1].sections.skills[
+                                  index
+                                ].value
+                              }
+                              name="skills"
+                              index={resumes.length - 1}
+                            />
+                            {content.content}
                           </p>
                         </div>
                       );
@@ -155,14 +168,24 @@ export class TemplateThree extends Component {
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
-                    <h3 class="subtitle">Experience</h3>
+                  <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
                       return (
                         <div key={index}>
-                          {console.log(content)}
                           <h5>
                             {" "}
-                            <CheckBox /> {content.company}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              value={
+                                resumes[resumes.length - 1].sections.experience[
+                                  index
+                                ].value
+                              }
+                              name="experience"
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.company}{" "}
                           </h5>
                           <p>
                             {content.title}
@@ -178,7 +201,7 @@ export class TemplateThree extends Component {
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
-                    <h3 class="subtitle">Education</h3>
+                    <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
                       return (
                         <div key={index}>
@@ -199,7 +222,7 @@ export class TemplateThree extends Component {
                 </div>
               </div>
             </form>
-            <div class="justify-content-center">
+            <div className="justify-content-center">
               <Link to="/resumes" className="resume-button" type="submit">
                 {" "}
                 Add Resume
