@@ -6,6 +6,11 @@
   min-width: 150px;
   align-items: start;
   min-height: 100vh;
+  /* background: #FF652F; burnt orange*/
+  /* background: #239191; dark turquoise*/
+  /* background: #333577; the blue */ 
+  /* background: #C42813;  */
+  background: #FF6122; 
 }
 
 .static-sidebar {
@@ -15,7 +20,7 @@
 }
 
 .sidebar-button {
-  color: white;
-  text-shadow: 2px 2px black;
+  color: black;
+  text-shadow: 1px 1px black;
   margin-top: 25px;
 }

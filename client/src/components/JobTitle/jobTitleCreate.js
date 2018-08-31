@@ -89,7 +89,7 @@ class JobTitleCreate extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/"},
+            { link: "/" },
             { link: "/jobtitle", title: "Job Title" },
             { link: "/jobtitle/create", title: "Create" }
           ]}
@@ -98,12 +98,12 @@ class JobTitleCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Job Title</h1>
+            <div>
+              “It is not titles that honour men, but men that honour titles.” ―
+              Niccolò Machiavelli
+            </div>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
-                  “It is not titles that honour men, but men that honour
-                  titles.” ― Niccolò Machiavelli
-                </label>
                 <input
                   value={this.state.content}
                   onChange={this.onInputChange}

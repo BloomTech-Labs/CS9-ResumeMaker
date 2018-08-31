@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import {
   Modal,
   Button,
+  Form,
   FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock
-} from "react-bootstrap";
+  Input,
+  Label,
+  FormFeedback
+} from "reactstrap";
 import "../Login/login.css";
 import axios from "axios";
 
@@ -132,7 +133,7 @@ class Register extends Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  bsStyle="primary"
+                  color="primary"
                   onClick={() => {
                     this.resetSubmitStatus();
                   }}
@@ -147,65 +148,53 @@ class Register extends Component {
     } else if (this.state.submitted === false) {
       return (
         <div className="Login">
-          <form>
-            <FormGroup
-              controlId="username"
-              bsSize="large"
-              validationState={this.state.usernameInvalid}
-            >
-              <ControlLabel>Username</ControlLabel>
-              <FormControl
+          <Form>
+            <FormGroup>
+              <Label>Username</Label>
+              <Input
                 autoFocus
+                invalid={this.state.usernameInvalid}
+                id="username"
                 type="username"
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              {this.state.usernameInvalid ? (
-                <HelpBlock>This username is already in use.</HelpBlock>
-              ) : null}
+              <FormFeedback invalid>
+                This username is already in use.
+              </FormFeedback>
             </FormGroup>
 
-            <FormGroup
-              controlId="email"
-              bsSize="large"
-              validationState={this.state.emailInvalid}
-            >
-              <ControlLabel>Email</ControlLabel>
-              <FormControl
-                autoFocus
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                id="email"
+                invalid={this.state.emailInvalid}
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              {this.state.emailInvalid ? (
-                <HelpBlock>Please enter an unused valid email.</HelpBlock>
-              ) : null}
+              <FormFeedback invalid>
+                Please enter an unused valid email.
+              </FormFeedback>
             </FormGroup>
-
-            <FormGroup
-              controlId="password"
-              bsSize="large"
-              validationState={this.state.passwordInvalid}
-            >
-              <ControlLabel>Password</ControlLabel>
-              <FormControl
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                id="password"
+                invalid={this.state.passwordInvalid}
                 type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              {this.state.passwordInvalid ? (
-                <HelpBlock>
-                  Please use a complex password at least 8 characters long.
-                </HelpBlock>
-              ) : null}
+              <FormFeedback invalid>
+                Please use a complex password at least 8 characters long.
+              </FormFeedback>
             </FormGroup>
-            <FormGroup
-              controlId="confirmPassword"
-              bsSize="large"
-              validationState={this.state.passwordInvalid}
-            >
-              <ControlLabel>Confirm password</ControlLabel>
-              <FormControl
+            <FormGroup>
+              <Label>Confirm password</Label>
+              <Input
+                id="confirmPassword"
+                invalid={this.state.passwordInvalid}
                 type="password"
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}
@@ -213,20 +202,20 @@ class Register extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="large"
-              bsStyle="primary"
+              size="lg"
+              color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
               Register
             </Button>
             <Button
-              bsStyle="danger"
+              color="danger"
               onClick={() => this.props.history.push("/login")}
             >
               Take me to the login page
             </Button>
-          </form>
+          </Form>
         </div>
       );
     } else {
@@ -243,7 +232,7 @@ class Register extends Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  bsStyle="primary"
+                  color="primary"
                   onClick={() => {
                     this.props.history.push("/login");
                   }}
