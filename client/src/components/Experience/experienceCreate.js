@@ -171,9 +171,9 @@ class ExperienceCreate extends Component {
               </div>
               <div className="form-group">
                 <label for="description">Description</label>
-                <input
+                <textarea
+                  rows={10}
                   id="description"
-                  type="text"
                   value={this.state.description}
                   onChange={this.onInputChange}
                   className="form-control"
