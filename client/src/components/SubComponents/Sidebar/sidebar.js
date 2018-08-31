@@ -46,7 +46,7 @@ class Sidebar extends Component {
       return <Redirect to="/login" />;
     }
     return (
-      <div className="sidebar bg-secondary">
+      <div className="sidebar">
         <div className="static-sidebar">
           <Link to="/templates" className="sidebar-button">
             {" "}
