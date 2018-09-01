@@ -2,7 +2,7 @@
 
 Front End - https://labs-resume-maker.firebaseapp.com/
 
-Back End - https://easy-resume.herokuapp.com/
+Back End - https://labs-resume-maker.herokuapp.com/
 
 Login picture from https://www.pexels.com/
 

@@ -21,6 +21,7 @@ class EducationCreate extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.educationIndex !== false

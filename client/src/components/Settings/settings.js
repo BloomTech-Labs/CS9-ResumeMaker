@@ -5,7 +5,6 @@ import {
   Container,
   Row,
   Col,
-  Modal,
   Button,
   Form,
   FormGroup,
@@ -31,7 +30,6 @@ export class PersonalInfo extends Component {
         lastname: ""
       },
       location: "",
-      // title: "",
       phonenumber: "",
       links: {
         linkedin: "",
@@ -50,6 +48,7 @@ export class PersonalInfo extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     console.log("ComponentDidMount");
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
@@ -87,7 +86,7 @@ export class PersonalInfo extends Component {
   };
 
   validateEmail = email => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
     return re.test(email);
   };
 
@@ -102,8 +101,7 @@ export class PersonalInfo extends Component {
     if (!password.match(/[A-Z]/)) return false;
     if (!password.match(/[a-z]/)) return false;
     if (!password.match(/\d/)) return false;
-    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
-      return false;
+    if (!password.match(/[`~!@#$%^&*()_\-+=[{]}|\\:;"'<,>.?\/]/)) return false;
     return true;
   };
 
@@ -405,6 +403,7 @@ export class PersonalInfo extends Component {
 
 class Settings extends Component {
   ComponentDidMount = () => {
+    window.scrollTo(0, 0);
     console.log("ComponentDidMount");
   };
   ShouldComponentUpdate = () => {
