@@ -48,6 +48,12 @@ export class TemplateThree extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Elegant</h3>
             </div>
+            <div className="justify-content-center">
+              <Link to="/resumes" className="resume-button" type="submit">
+                {" "}
+                Add Resume
+              </Link>
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div className="left-column">
@@ -234,12 +240,6 @@ export class TemplateThree extends Component {
                 </div>
               </div>
             </form>
-            <div className="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
-                {" "}
-                Add Resume
-              </Link>
-            </div>
           </div>
         </div>
       </div>

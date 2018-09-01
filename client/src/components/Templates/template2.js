@@ -56,6 +56,12 @@ export class TemplateTwo extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Modern</h3>
             </div>
+            <div className="justify-content-center">
+              <Link to="/resumes" className="resume-button" type="submit">
+                {" "}
+                Add Resume
+              </Link>
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div textAlign="center" className="titleSection">
                 <h2>
@@ -227,12 +233,6 @@ export class TemplateTwo extends Component {
                 </div>
               </div>
             </form>
-            <div className="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
-                {" "}
-                Add Resume
-              </Link>
-            </div>
           </div>
         </div>
       </div>

@@ -57,6 +57,12 @@ export class TemplateOne extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Traditional</h3>
             </div>
+            <div className="justify-content-center">
+              <Link to="/resumes" className="resume-button" type="submit">
+                {" "}
+                Add Resume
+              </Link>
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
                 <h2>
@@ -221,12 +227,6 @@ export class TemplateOne extends Component {
                 })}
               </Container>
             </form>
-            <div className="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
-                {" "}
-                Add Resume
-              </Link>
-            </div>
           </div>
         </div>
       </div>

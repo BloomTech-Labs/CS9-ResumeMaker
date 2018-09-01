@@ -3,7 +3,6 @@ import { Container, Divider } from "semantic-ui-react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template1.css";
-import { Link } from "react-router-dom";
 
 export class ResumeOne extends Component {
   componentDidMount() {
@@ -130,12 +129,6 @@ export class ResumeOne extends Component {
                 })}
               </Container>
             </form>
-            <div className="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
-                {" "}
-                Add Resume
-              </Link>
-            </div>
           </div>
         </div>
       </div>
