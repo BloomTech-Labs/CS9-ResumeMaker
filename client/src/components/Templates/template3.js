@@ -10,6 +10,9 @@ import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
 
 export class TemplateThree extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   // handleSubmit(e) {
   //   e.preventDefault();
 

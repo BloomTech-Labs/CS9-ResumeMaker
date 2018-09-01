@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import "../CSS/component-general.css";
 
 class Experience extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>
@@ -19,7 +22,10 @@ class Experience extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Experience</h1>
-            <p style={{fontSize: "0.8rem"}}>Please click the pencil to enter the information for all of your previous work related experience.</p>
+            <p style={{ fontSize: "0.8rem" }}>
+              Please click the pencil to enter the information for all of your
+              previous work related experience.
+            </p>
             <div className="link-hide">
               <Link
                 to={{

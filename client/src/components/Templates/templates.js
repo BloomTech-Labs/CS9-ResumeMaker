@@ -8,6 +8,9 @@ import "./tempTemplate3.png";
 import "./templates.css";
 
 class Templates extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div className="entire-page">

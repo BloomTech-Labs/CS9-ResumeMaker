@@ -17,6 +17,7 @@ class SkillsCreate extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
     }

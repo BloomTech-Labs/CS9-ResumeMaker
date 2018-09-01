@@ -8,6 +8,9 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template2.css";
 
 export class ResumeTwo extends Component {
+    componentDidMount() {
+        window.scrollTo(0, 0);
+      }
     render() {
         const userInfo = this.props.context.userInfo;
         const education = this.props.context.userInfo.education;

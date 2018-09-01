@@ -5,15 +5,15 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import { Link } from "react-router-dom";
 
 class Resumes extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>
         <Navbar
           context={this.props.context}
-          breadcrumbs={[
-            { link: "/"},
-            { link: "/resumes", title: "Resumes" }
-          ]}
+          breadcrumbs={[{ link: "/" }, { link: "/resumes", title: "Resumes" }]}
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />

@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import "../CSS/component-general.css";
 
 class Skills extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>

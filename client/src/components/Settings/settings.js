@@ -48,6 +48,7 @@ export class PersonalInfo extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     console.log("ComponentDidMount");
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
@@ -402,6 +403,7 @@ export class PersonalInfo extends Component {
 
 class Settings extends Component {
   ComponentDidMount = () => {
+    window.scrollTo(0, 0);
     console.log("ComponentDidMount");
   };
   ShouldComponentUpdate = () => {
