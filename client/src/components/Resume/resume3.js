@@ -18,7 +18,7 @@ export class ResumeThree extends Component {
                 <Navbar
                     context={this.props.context}
                     breadcrumbs={[
-                        { link: "/", title: "Home" },
+                        { link: "/" },
                         { link: "/resumes", title: "Resumes" },
                         { link: "/resumes/resume3", title: "Elegant Resume" }
                     ]}
