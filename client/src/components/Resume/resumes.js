@@ -64,7 +64,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume1", // component being Linked to
+                    pathname: "/resume3", // component being Linked to
                     state: { templateIndex: false } // Setting Index passed to template- false means new
                   }}
                 >
