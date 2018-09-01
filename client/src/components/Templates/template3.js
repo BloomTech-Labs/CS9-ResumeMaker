@@ -47,7 +47,7 @@ export class TemplateThree extends Component {
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div className="row">
-                <div className="col" className="left-column">
+                <div className="left-column">
                   <a
                     href="https://www.freeiconspng.com/img/37126"
                     title="Image from freeiconspng.com"
