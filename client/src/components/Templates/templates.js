@@ -1,13 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./tempTemplate1.png";
 import "./tempTemplate2.png";
 import "./tempTemplate3.png";
-import { Link } from "react-router-dom";
 import "./templates.css";
-import classnames from "classnames";
-
 
 class Templates extends Component {
   render() {
@@ -25,9 +23,14 @@ class Templates extends Component {
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
               <h1>TEMPLATES</h1>
- <p>Start your RESUME by selecting each link on the left sidebar and entering<br/> 
- all of your informaiton. Once completed, choose from the template formats below to <br/> 
- select the final informaiton to be rendered to your RESUME.</p>
+              <p>
+                Start your RESUME by selecting each link on the left sidebar and
+                entering
+                <br />
+                all of your informaiton. Once completed, choose from the
+                template formats below to <br />
+                select the final informaiton to be rendered to your RESUME.
+              </p>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
