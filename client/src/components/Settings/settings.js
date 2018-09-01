@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import {
+  Container,
+  Row,
+  Col,
   Button,
+  Form,
   FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock
-} from "react-bootstrap";
+  Input,
+  Label,
+  FormFeedback
+} from "reactstrap";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
@@ -26,21 +30,20 @@ export class PersonalInfo extends Component {
         lastname: ""
       },
       location: "",
-      // title: "",
       phonenumber: "",
       links: {
         linkedin: "",
         github: "",
         portfolio: ""
       },
-      membership: false,
-      subscription: "",
       oldpassword: "",
       newpassword: "",
       newconfirmpassword: "",
-      usernameInvalid: null,
-      emailInvalid: null,
-      passwordInvalid: null
+      usernameInvalid: false,
+      emailInvalid: false,
+      passwordInvalid: false,
+      changesSaved: null,
+      emailConfirmModal: false
     };
   }
 
@@ -87,22 +90,18 @@ export class PersonalInfo extends Component {
   };
 
   checkPasswordStrength = password => {
-    if (password === "") return null;
-    const minlength = 6;
-    if (password.length < minlength) return "error";
-    if (!password.match(/[A-Z]/)) return "error";
-    if (!password.match(/[a-z]/)) return "error";
-    if (!password.match(/\d/)) return "error";
-    if (!password.match(/[`~!@#$%^&*()_\-+=[{]}|\\:;"'<,>.?\/]/))
-      return "error";
-    return "success";
-  };
+    if (password === "") {
+      console.log("pass is empty");
 
-  checkConfirmPassword = () => {
-    if (this.state.newpassword === "") return null;
-    if (this.state.newpassword !== this.state.newconfirmpassword) {
-      return "error";
-    } else return "success";
+      return false;
+    }
+    const minlength = 6;
+    if (password.length < minlength) return false;
+    if (!password.match(/[A-Z]/)) return false;
+    if (!password.match(/[a-z]/)) return false;
+    if (!password.match(/\d/)) return false;
+    if (!password.match(/[`~!@#$%^&*()_\-+=[{]}|\\:;"'<,>.?\/]/)) return false;
+    return true;
   };
 
   handleChange = e => {
@@ -125,9 +124,10 @@ export class PersonalInfo extends Component {
 
   checkInputValidity = () => {
     this.setState({
-      // usernameInvalid: null,
-      emailInvalid: null,
-      passwordInvalid: null
+      // usernameInvalid: false,
+      emailInvalid: false,
+      passwordInvalid: false,
+      changesSaved: null
     });
     if (this.state.email !== this.props.context.userInfo.email) {
       // const usernamePromise = axios
@@ -143,13 +143,13 @@ export class PersonalInfo extends Component {
         .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
         .then(response => {
           console.log(response);
-          this.setState({ emailInvalid: "error" });
+          this.setState({ emailInvalid: true });
         })
         .catch(err => {
           console.log(err);
         });
       if (!this.validateEmail(this.state.email)) {
-        this.setState({ emailInvalid: "error" });
+        this.setState({ emailInvalid: true });
       }
 
       // If all fields are valid and the confirm password matches password,
@@ -157,12 +157,14 @@ export class PersonalInfo extends Component {
       Promise.all([emailPromise]).then(values => {
         console.log("The current state:", this.state);
         if (
-          // this.state.usernameInvalid === null &&
-          this.state.emailInvalid === null
+          this.state.usernameInvalid === false &&
+          this.state.emailInvalid === false &&
+          this.state.changesSaved === null
         ) {
           this.handleSubmit();
         } else {
-          this.componentDidMount();
+          this.setState({ changesSaved: false });
+          // this.componentDidMount();
         }
       });
     } else this.handleSubmit();
@@ -185,15 +187,25 @@ export class PersonalInfo extends Component {
         console.log("RESPONSE GOTTEN", response);
         if (response.data.errorMessage) {
           if (response.data.errorMessage.includes("password")) {
-            this.setState({ passwordInvalid: "error" });
+            this.setState({ passwordInvalid: true, oldpassword: "" });
           }
         }
+        if (response.data.token) {
+          this.setState({
+            oldpassword: this.state.newpassword,
+            newpassword: "",
+            newconfirmpassword: ""
+          });
+          localStorage.setItem("token", response.data.token);
+        }
+        response.data.user.changesSaved = true;
         this.setState(response.data.user);
         // This updates context with the new user info from server
         this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {
         console.log("oops", err.message);
+        this.setState({ changesSaved: false });
         alert("try again");
       });
   };
@@ -204,146 +216,186 @@ export class PersonalInfo extends Component {
       this.props.context.userInfo
     );
     return (
-      <div>
-        <h1> Personal Information </h1>
-        <div className="Settings">
-          <form>
-            <FormGroup controlId="name.firstname" bsSize="large">
-              <ControlLabel>First Name</ControlLabel>
-              <FormControl
-                value={this.state.name.firstname}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="name.middlename" bsSize="large">
-              <ControlLabel>Middle Name</ControlLabel>
-              <FormControl
-                value={this.state.name.middlename}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="name.lastname" bsSize="large">
-              <ControlLabel>Last Name</ControlLabel>
-              <FormControl
-                value={this.state.name.lastname}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="phonenumber" bsSize="large">
-              <ControlLabel>Phone Number</ControlLabel>
-              <FormControl
-                value={this.state.phonenumber}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="location" bsSize="large">
-              <ControlLabel>Location</ControlLabel>
-              <FormControl
-                value={this.state.location}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="links.linkedin" bsSize="large">
-              <ControlLabel>Linkedin</ControlLabel>
-              <FormControl
-                value={this.state.links.linkedin}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="links.github" bsSize="large">
-              <ControlLabel>Github</ControlLabel>
-              <FormControl
-                value={this.state.links.github}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="links.portfolio" bsSize="large">
-              <ControlLabel>Portfolio</ControlLabel>
-              <FormControl
-                value={this.state.links.portfolio}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup
-              controlId="email"
-              bsSize="large"
-              validationState={this.state.emailInvalid}
-            >
-              <ControlLabel>Email</ControlLabel>
-              <FormControl
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-              {this.state.emailInvalid ? (
-                <HelpBlock>Please enter an unused valid email.</HelpBlock>
-              ) : null}
-            </FormGroup>
-            <FormGroup
-              controlId="oldpassword"
-              bsSize="large"
-              validationState={this.checkPasswordStrength(
-                this.state.oldpassword
-              )}
-            >
-              <ControlLabel>Current Password</ControlLabel>
-              <FormControl
-                type="password"
-                value={this.state.oldpassword}
-                onChange={this.handleChange}
-              />
-              {this.state.passwordInvalid ? (
-                <HelpBlock>
-                  Incorrect password. Please enter your current password if you
-                  want to make a new password or change your email.
-                </HelpBlock>
-              ) : null}
-            </FormGroup>
-            <FormGroup
-              controlId="newpassword"
-              bsSize="large"
-              validationState={this.checkPasswordStrength(
-                this.state.newpassword
-              )}
-            >
-              <ControlLabel>New Password</ControlLabel>
-              <FormControl
-                type="password"
-                value={this.state.newpassword}
-                onChange={this.handleChange}
-              />
-              {this.checkPasswordStrength(this.state.newpassword) ? (
-                <HelpBlock>
+      <Container className="Settings">
+        <Row>
+          <Col>
+            <Form>
+              <FormGroup>
+                <Label>First Name</Label>
+                <Input
+                  id="name.firstname"
+                  maxLength={20}
+                  size="sm"
+                  value={this.state.name.firstname}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Middle Name</Label>
+                <Input
+                  id="name.middlename"
+                  maxLength={20}
+                  size="sm"
+                  value={this.state.name.middlename}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Last Name</Label>
+                <Input
+                  id="name.lastname"
+                  maxLength={20}
+                  size="sm"
+                  value={this.state.name.lastname}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Phone Number</Label>
+                <Input
+                  id="phonenumber"
+                  maxLength={20}
+                  size="sm"
+                  value={this.state.phonenumber}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Location</Label>
+                <Input
+                  id="location"
+                  size="sm"
+                  value={this.state.location}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Linkedin</Label>
+                <Input
+                  id="links.linkedin"
+                  size="sm"
+                  value={this.state.links.linkedin}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Github</Label>
+                <Input
+                  id="links.github"
+                  size="sm"
+                  value={this.state.links.github}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Portfolio</Label>
+                <Input
+                  id="links.portfolio"
+                  size="sm"
+                  value={this.state.links.portfolio}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+            </Form>
+          </Col>
+          <Col>
+            <Form>
+              <FormGroup>
+                <Label>Email</Label>
+                <Input
+                  id="email"
+                  invalid={this.state.emailInvalid}
+                  size="sm"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
+                  Please enter an unused valid email.
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label>Current Password</Label>
+                <Input
+                  invalid={
+                    this.state.passwordInvalid === true ||
+                    (this.state.email !== this.props.context.userInfo.email &&
+                      this.state.oldpassword === "") ||
+                    (this.state.newpassword !== "" &&
+                      this.state.oldpassword === "")
+                  }
+                  valid={
+                    this.state.passwordInvalid === false &&
+                    this.state.changesSaved !== null &&
+                    this.state.oldpassword !== ""
+                  }
+                  id="oldpassword"
+                  size="sm"
+                  type="password"
+                  value={this.state.oldpassword}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
+                  Please enter your current password to change your email or
+                  password.
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label>New Password</Label>
+                <Input
+                  invalid={
+                    !this.checkPasswordStrength(this.state.newpassword) &&
+                    this.state.newpassword !== ""
+                      ? true
+                      : false
+                  }
+                  valid={this.checkPasswordStrength(this.state.newpassword)}
+                  id="newpassword"
+                  size="sm"
+                  type="password"
+                  value={this.state.newpassword}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
                   Please use a complex password at least 8 characters long.
-                </HelpBlock>
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label>Confirm New Password</Label>
+                <Input
+                  valid={
+                    this.state.newpassword === this.state.newconfirmpassword &&
+                    this.state.newpassword !== ""
+                  }
+                  invalid={
+                    this.state.newpassword !== this.state.newconfirmpassword &&
+                    this.state.newconfirmpassword !== ""
+                  }
+                  id="newconfirmpassword"
+                  size="sm"
+                  type="password"
+                  value={this.state.newconfirmpassword}
+                  onChange={this.handleChange}
+                />
+                <FormFeedback invalid>
+                  Please make this match your new password.
+                </FormFeedback>
+              </FormGroup>
+            </Form>
+            <div className="settings-footer mt-4">
+              <Button color="primary" onClick={() => this.checkInputValidity()}>
+                Submit
+              </Button>
+              {this.state.changesSaved && this.state.changesSaved !== null ? (
+                <div className="saved-status">Your changes were saved.</div>
               ) : null}
-            </FormGroup>
-            <FormGroup
-              controlId="newconfirmpassword"
-              bsSize="large"
-              validationState={this.checkConfirmPassword()}
-            >
-              <ControlLabel>Confirm New Password</ControlLabel>
-              <FormControl
-                type="password"
-                value={this.state.newconfirmpassword}
-                onChange={this.handleChange}
-              />
-              {this.state.newconfirmpassword !== this.state.newpassword ? (
-                <HelpBlock>Please make this match your new password.</HelpBlock>
+              {!this.state.changesSaved && this.state.changesSaved !== null ? (
+                <div className="saved-status">Your changes were not saved.</div>
               ) : null}
-            </FormGroup>
-            <Button
-              block
-              bsSize="large"
-              bsStyle="primary"
-              onClick={() => this.checkInputValidity()}
-            >
-              Submit
-            </Button>
-          </form>
-        </div>
-      </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
@@ -367,7 +419,7 @@ class Settings extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/settings", title: "Settings" }
           ]}
         />

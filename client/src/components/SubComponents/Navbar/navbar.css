@@ -5,3 +5,33 @@
 .logout.btn {
     padding: 0; 
 }
+.knockout {
+    /* background: url(fire.jpeg) 4rem 7rem;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text; */
+    font-weight: 800; 
+    font-family: arial, helvetica;
+    margin: 1px;
+    /* -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black; */
+    color: #00FFC6; 
+    /* color: #ff2800; */
+    /* color: #66FCF1; */
+    /* color: #2944EE; */
+    /* color: #585CF4;  */
+    /* color: #DE1A00; */
+    /* color: #4707FA; */
+    text-shadow: 1px 1px black; 
+  }
+/* .knockout:hover {
+    font-weight: 800; 
+} */
+.breadcrumb-item {
+    /* color: #ff4900;  */
+   text-shadow: 1px 1px black; 
+   padding-top: 0.2rem; 
+}
+/* .breadcrumb {
+    display: inline; 
+} */

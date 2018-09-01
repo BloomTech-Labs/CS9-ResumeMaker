@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  FormFeedback,
+  Input,
+  Label
+} from "reactstrap";
 import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
@@ -12,7 +19,7 @@ const cheese = {
 
 const scrinch = {
   email: "scrinch@gmail.com",
-  password: "tacobell1!G1",
+  password: "tacobell1!G",
   invalidCredentials: false
 };
 
@@ -22,7 +29,6 @@ const bobbert = {
     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
   invalidCredentials: false
 };
-
 
 export default class Login extends Component {
   constructor(props) {
@@ -71,37 +77,41 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          {this.state.invalidCredentials ? (
-            <h3 className="mb-5">Invalid password or email.</h3>
-          ) : null}
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <Label>Email</Label>
+            <Input
               autoFocus
+              id="email"
+              invalid={this.state.invalidCredentials}
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
+          <FormGroup>
+            <Label>Password</Label>
+            <Input
+              id="password"
+              invalid={this.state.invalidCredentials}
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
             />
+            <FormFeedback invalid>
+              The email or password you entered are incorrect.
+            </FormFeedback>
           </FormGroup>
           <Button
             block
-            bsSize="large"
-            bsStyle="primary"
+            size="lg"
+            color="primary"
             disabled={!this.validateForm()}
             type="submit"
           >
             Login
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }

@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  /* background: lightgray;  */
 }
 .containters-div {
   display: flex;
@@ -12,5 +13,5 @@
 }
 
 img {
-  height: 15rem;
+  height: 10rem;
 }

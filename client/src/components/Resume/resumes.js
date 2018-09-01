@@ -11,7 +11,7 @@ class Resumes extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/"},
             { link: "/resumes", title: "Resumes" }
           ]}
         />

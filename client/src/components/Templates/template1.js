@@ -6,36 +6,9 @@ import "./template1.css";
 import { Link } from "react-router-dom";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
-
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: this.props.value
-    };
-  }
-
-  toggle = () => {
-    this.props.context.actions.setResumeItemState(
-      this.props.index,
-      this.props.name,
-      this.props.id
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.props.value}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
+import CheckBox from "./TemplateClassFunctions/checkbox";
 
 export class TemplateOne extends Component {
-
   // handleSubmit(e) {
   //   e.preventDefault();
 
@@ -69,7 +42,7 @@ export class TemplateOne extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/templates", title: "Templates" },
             { link: "/Templates/template-1", title: "Template One" }
           ]}
@@ -87,9 +60,12 @@ export class TemplateOne extends Component {
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 <TitleDropdown
+                  className="dropdown"
                   context={this.props.context}
                   data={userInfo}
-                  value={resumes[resumes.length - 1].title.filter(title => title.value === true)}
+                  value={resumes[resumes.length - 1].title.filter(
+                    title => title.value === true
+                  )}
                   index={resumes.length - 1}
                 />
               </Container>
@@ -99,17 +75,22 @@ export class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p> {userInfo.email}</p>
                 </a>
-                <p>{userInfo.location}</p>
-                <p>{userInfo.phonenumber}</p>
+                <p>
+                  <i class="fa fa-globe" aria-hidden="true" />
+                  {userInfo.location}
+                </p>
+                <p>
+                  <i class="fa fa-mobile" aria-hidden="true" />
+                  {userInfo.phonenumber}
+                </p>
                 <p>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
                     name="linkedin"
-                    value={
-                      resumes[resumes.length - 1].links.linkedin
-                    }
+                    value={resumes[resumes.length - 1].links.linkedin}
                   />
+                  <i className={"fa fa-linkedin fa-sm"} />
                   {userInfo.links.linkedin}
                 </p>
                 <p>
@@ -117,10 +98,10 @@ export class TemplateOne extends Component {
                     context={this.props.context}
                     index={resumes.length - 1}
                     name="github"
-                    value={
-                      resumes[resumes.length - 1].links.github
-                    }
-                  /> {userInfo.links.github}
+                    value={resumes[resumes.length - 1].links.github}
+                  />{" "}
+                  <i class="fa fa-github" aria-hidden="true" />
+                  {userInfo.links.github}
                 </p>
                 <p>
                   <CheckBox
@@ -128,7 +109,8 @@ export class TemplateOne extends Component {
                     index={resumes.length - 1}
                     name="portfolio"
                     value={resumes[resumes.length - 1].links.portfolio}
-                  /> {userInfo.links.portfolio}
+                  />{" "}
+                  {userInfo.links.portfolio}
                 </p>
               </Container>
               <Divider className="divider-div" />
@@ -141,7 +123,9 @@ export class TemplateOne extends Component {
                 <SummaryDropdown
                   context={this.props.context}
                   data={userInfo}
-                  value={resumes[resumes.length - 1].sections.summary.filter(summary => summary.value === true)}
+                  value={resumes[resumes.length - 1].sections.summary.filter(
+                    summary => summary.value === true
+                  )}
                   index={resumes.length - 1}
                 />
               </Container>

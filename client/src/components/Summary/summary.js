@@ -11,27 +11,13 @@ class Summary extends Component {
       <div>
         <Navbar
           context={this.props.context}
-          breadcrumbs={[
-            { link: "/", title: "Home" },
-            { link: "/summary", title: "Summary" }
-          ]}
+          breadcrumbs={[{ link: "/" }, { link: "/summary", title: "Summary" }]}
         />
         <div className="overall-component-div">
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
-            <div className="summary-containment-div">
-              {this.props.context.userInfo.summary.map((element, index) => {
-                return (
-                  <ItemCard
-                    linkTo="/summary"
-                    index={index}
-                    content={element.content}
-                    key={index}
-                  />
-                );
-              })}
-            </div>
+            <p  style={{fontSize: "0.8rem"}}>Please click the pencil to create one or more Personal Summaries about yourself. <br/>They should be aimed at toward the position you are seeking for and contain somthing about the past present and future. </p>
             <div className="link-hide">
               <Link
                 to={{
@@ -39,8 +25,21 @@ class Summary extends Component {
                   state: { summaryIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-                <i className="fas fa-plus plus-circle" />
+                <i class="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
+            </div>
+            <div className="summary-containment-div" >
+              {this.props.context.userInfo.summary.map((element, index) => {
+                return (
+                  <ItemCard
+                    className="card"
+                    linkTo="/summary"
+                    index={index}
+                    content={element.content}
+                    key={index}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

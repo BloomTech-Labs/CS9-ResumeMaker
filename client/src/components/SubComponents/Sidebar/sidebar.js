@@ -46,8 +46,8 @@ class Sidebar extends Component {
       return <Redirect to="/login" />;
     }
     return (
-      <div className="sidebar bg-secondary">
-        <div className="static-sidebar">
+      <div className="sidebar">
+        <div className="static-sidebar" style={{fontFamily: "Verdana",   fontSize: "0.7rem", fontWeight: "550", }}>
           <Link to="/templates" className="sidebar-button">
             {" "}
             Templates
