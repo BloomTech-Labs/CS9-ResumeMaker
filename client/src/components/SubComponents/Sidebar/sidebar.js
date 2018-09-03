@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import axios from "axios";
 
 import classnames from "classnames";
@@ -128,6 +128,19 @@ class Sidebar extends Component {
           >
             Settings
           </Link>
+          <Route
+            render={({ history }) => (
+              <div
+                className="logout btn"
+                onClick={() => {
+                  this.props.context.actions.setLogout();
+                  history.push("/");
+                }}
+              >
+                Logout
+              </div>
+            )}
+          />
         </div>
       </div>
     );

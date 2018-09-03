@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 // import ResumeCard from "./SubComponents/resumeCard";
 import { Link } from "react-router-dom";
 
@@ -11,10 +10,6 @@ class Resumes extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[{ link: "/" }, { link: "/resumes", title: "Resumes" }]}
-        />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">

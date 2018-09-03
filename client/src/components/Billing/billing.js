@@ -4,7 +4,6 @@ import axios from "axios";
 import CheckoutForm from "./checkoutForm";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import Loading from "./Loading";
 import "./billing.css";
 const urls = require("../../config/config.json");
@@ -134,10 +133,6 @@ class Billing extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[{ link: "/" }, { link: "/billing", title: "Billing" }]}
-        />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">

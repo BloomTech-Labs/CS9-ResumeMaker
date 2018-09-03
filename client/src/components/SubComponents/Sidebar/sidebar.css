@@ -11,13 +11,14 @@
   /* background: #333577; the blue */
   /* background: #C42813;  */
   /* background: #FF6122;  */
-  /* background: #162238; */
+  background: #162238;
+  justify-content: space-between;
 }
 
 .static-sidebar {
   border-right: 1px solid black;
   min-width: 10rem;
-  min-height: 100vh !important;
+  /* min-height: 100vh !important; */
   /* padding: 0 !important; */
   position: fixed !important;
   display: flex;
@@ -35,4 +36,12 @@
   border-left: 1rem solid #d9d9d9;
   background: #324359;
   /* border-bottom: 1px solid #162238; */
+}
+
+.sidebar .logout {
+  /* margin-top: 3rem; */
+  margin-top: 1rem;
+  position: fixed;
+  bottom: 0px;
+  color: #f2f2f0;
 }

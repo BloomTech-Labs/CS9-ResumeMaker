@@ -3,7 +3,6 @@ import { Container, Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template2.css";
 
 export class ResumeTwo extends Component {
@@ -19,15 +18,6 @@ export class ResumeTwo extends Component {
     console.log(userInfo);
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/resumes", title: "Resumes" },
-            { link: "/resumes/resume2", title: "Modern Resume" }
-          ]}
-        />
-
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

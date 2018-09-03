@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template1.css";
 
 export class ResumeOne extends Component {
@@ -16,15 +15,6 @@ export class ResumeOne extends Component {
 
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/resumes", title: "Resumes" },
-            { link: "/resumes/resume1", title: "Traditional Resume" }
-          ]}
-        />
-
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

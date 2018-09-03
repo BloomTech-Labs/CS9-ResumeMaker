@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "./template2.css";
 import { Link } from "react-router-dom";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
@@ -41,15 +40,6 @@ export class TemplateTwo extends Component {
 
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/templates", title: "Templates" },
-            { link: "/Templates/template-2", title: "Template Two" }
-          ]}
-        />
-
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

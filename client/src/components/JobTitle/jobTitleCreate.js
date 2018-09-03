@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
-import Navbar from "../SubComponents/Navbar/navbar";
 
 const urls = require("../../config/config.json");
 
@@ -88,14 +87,6 @@ class JobTitleCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/jobtitle" /> : null}
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/jobtitle", title: "Job Title" },
-            { link: "/jobtitle/create", title: "Create" }
-          ]}
-        />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">

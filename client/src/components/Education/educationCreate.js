@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
-import Navbar from "../SubComponents/Navbar/navbar";
 import { Redirect } from "react-router-dom";
 
 const urls = require("../../config/config.json");
@@ -109,14 +108,6 @@ class EducationCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/education" /> : null}
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/education", title: "Education" },
-            { link: "/education/create", title: "Create" }
-          ]}
-        />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
