@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 class PDF extends Component {
-  printDocument = () => {
+  pdfDocument = () => {
     let input = document.getElementsByClassName("template1");
     html2canvas(input[0])
       .then(canvas => {
@@ -20,7 +20,7 @@ class PDF extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.printDocument}>Print</button>
+        <button onClick={this.pdfDocument}>Download as PDF</button>
       </div>
     );
   }

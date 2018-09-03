@@ -5,6 +5,7 @@ import { FormGroup } from "reactstrap";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template2.css";
+import PDF from "../PDF/PDF";
 
 export class ResumeTwo extends Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ export class ResumeTwo extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Modern</h3>
             </div>
+            <PDF /> 
             <form className="template1" onSubmit={this.handleSubmit}>
               <div textAlign="center" className="titleSection">
                 <h2>
