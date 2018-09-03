@@ -28,7 +28,7 @@ import Templates from "./components/Templates/templates";
 import TemplateOne from "./components/Templates/template1";
 import TemplateTwo from "./components/Templates/template2";
 import TemplateThree from "./components/Templates/template3";
-const publish_key = require("./config/keys.json").publish
+const publish_key = require("./config/keys.json").publish;
 
 class App extends Component {
   render() {

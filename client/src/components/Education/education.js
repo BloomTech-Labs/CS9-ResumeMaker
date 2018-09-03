@@ -18,9 +18,9 @@ class Education extends Component {
             { link: "/education", title: "Education" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Education History</h1>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to enter the information for your

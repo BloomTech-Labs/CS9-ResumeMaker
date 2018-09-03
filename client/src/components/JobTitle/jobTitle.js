@@ -18,9 +18,9 @@ class JobTitle extends Component {
             { link: "/jobtitle", title: "Job Title" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Job Title</h1>
             <p>
               Please click the pencil to enter one or more Titles for the Job

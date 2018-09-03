@@ -18,9 +18,9 @@ class Experience extends Component {
             { link: "/experience", title: "Experience" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Experience</h1>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to enter the information for all of your

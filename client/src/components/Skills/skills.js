@@ -15,11 +15,13 @@ class Skills extends Component {
           context={this.props.context}
           breadcrumbs={[{ link: "/" }, { link: "/skills", title: "Skills" }]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Skills</h1>
-            <p>Please click the pencil to enter each of your work related skills.</p>
+            <p>
+              Please click the pencil to enter each of your work related skills.
+            </p>
             <div className="link-hide">
               <Link
                 to={{
@@ -33,7 +35,7 @@ class Skills extends Component {
             {this.props.context.userInfo.skills.map((element, index) => {
               return (
                 <Link
-                  style={{ color: "black" , fontWeight: "600"}}
+                  style={{ color: "black", fontWeight: "600" }}
                   to={{
                     pathname: "/skills/create", // component being Linked to
                     state: { skillsIndex: index } // Setting Index passed into skillsCreate component

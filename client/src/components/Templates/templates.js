@@ -21,9 +21,9 @@ class Templates extends Component {
             { link: "/templates", title: "Templates" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h1>TEMPLATES</h1>
               <p>

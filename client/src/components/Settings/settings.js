@@ -425,9 +425,9 @@ class Settings extends Component {
             { link: "/settings", title: "Settings" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Settings</h1>
             <PersonalInfo context={this.props.context} />
           </div>

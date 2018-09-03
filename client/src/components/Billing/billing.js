@@ -138,9 +138,9 @@ class Billing extends Component {
           context={this.props.context}
           breadcrumbs={[{ link: "/" }, { link: "/billing", title: "Billing" }]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Billing</h1>
             <p>Would You Like To Become a Member?</p>
             <div className="stripe">
