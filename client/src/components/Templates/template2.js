@@ -5,43 +5,14 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template2.css";
 import { Link } from "react-router-dom";
-import DropDown from './dropdown';
-
-class CheckBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-
-  toggle = () => {
-    this.setState(
-      {
-        checked: !this.state.checked
-      },
-      function() {
-        console.log(this.state);
-      }.bind(this)
-    );
-  };
-
-  render() {
-    return (
-      <input
-        type="checkbox"
-        checked={this.state.checked}
-        onChange={this.toggle}
-      />
-    );
-  }
-}
+import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
+import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
+import CheckBox from "./TemplateClassFunctions/checkbox";
 
 export class TemplateTwo extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
-
   // handleSubmit(e) {
   //   e.preventDefault();
 
@@ -54,17 +25,26 @@ export class TemplateTwo extends Component {
   //   event.preventDefault();
   // }
 
+  onCreate = () => {
+    this.props.context.actions.createResume();
+  };
+
+  componentWillMount() {
+    // this.onCreate();
+  }
+
   render() {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    console.log(userInfo);
+    const resumes = this.props.context.userInfo.resumes;
+
     return (
       <div>
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/templates", title: "Templates" },
             { link: "/Templates/template-2", title: "Template Two" }
           ]}
@@ -76,20 +56,25 @@ export class TemplateTwo extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Modern</h3>
             </div>
+            <div className="justify-content-center">
+              <Link to="/resumes" className="resume-button" type="submit">
+                {" "}
+                Add Resume
+              </Link>
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div textAlign="center" className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                {userInfo.title.map(title => {
-                  return (
-                    <div>
-                      <h5>
-                        <CheckBox /> {title.content}
-                      </h5>
-                    </div>
-                  );
-                })}
+                <TitleDropdown
+                  context={this.props.context}
+                  data={userInfo}
+                  value={resumes[resumes.length - 1].title.filter(
+                    title => title.value === true
+                  )}
+                  index={resumes.length - 1}
+                />
               </div>
               <Divider className="divider-div" />
               <Container
@@ -97,45 +82,83 @@ export class TemplateTwo extends Component {
                 id="summary"
                 className="summarySection"
               >
-                <h3 class="subtitle">Summary</h3>
-                <DropDown data={userInfo.summary} />
+                <h3 className="subtitle">Summary</h3>
+                <SummaryDropdown
+                  context={this.props.context}
+                  data={userInfo}
+                  value={resumes[resumes.length - 1].sections.summary.filter(
+                    summary => summary.value === true
+                  )}
+                  index={resumes.length - 1}
+                />
               </Container>
               <Divider className="divider-div" />
-              <div class="row">
-                <div class="col">
+              <div className="row">
+                <div className="col">
                   <FormGroup textAlign="center" className="contactSection">
-                    <h3 class="subtitle">Contact Details</h3>
+                    <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p>
-                        {" "}
-                        <CheckBox /> {userInfo.email}
-                      </p>
+                      <p> {userInfo.email}</p>
                     </a>
                     <p>
-                      <CheckBox /> {userInfo.location}
+                      <i class="fa fa-globe" aria-hidden="true" />
+                      {userInfo.location}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.phonenumber}
+                      <i class="fa fa-mobile" aria-hidden="true" />
+                      {userInfo.phonenumber}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.links.linkedin}
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="linkedin"
+                        value={resumes[resumes.length - 1].links.linkedin.value}
+                      />
+                      <i className={"fa fa-linkedin fa-sm"} />
+                      {userInfo.links.linkedin}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.links.github}
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="github"
+                        value={resumes[resumes.length - 1].links.github.value}
+                      />{" "}
+                      <i class="fa fa-github" aria-hidden="true" />
+                      {userInfo.links.github}
                     </p>
                     <p>
-                      <CheckBox /> {userInfo.links.portfolio}
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="portfolio"
+                        value={
+                          resumes[resumes.length - 1].links.portfolio.value
+                        }
+                      />{" "}
+                      {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
-                    <h3 class="subtitle">Education</h3>
+                    <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
                       return (
                         <div key={index}>
                           <h5>
-                            <CheckBox /> {content.degree} in{" "}
-                            {content.fieldofstudy}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="education"
+                              value={
+                                resumes[resumes.length - 1].sections.education[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.degree} in {content.fieldofstudy}{" "}
                           </h5>
                           <p>{content.location}</p>
                           <p>
@@ -149,14 +172,26 @@ export class TemplateTwo extends Component {
                   </FormGroup>
                 </div>
                 <Divider className="divider-div" />
-                <div class="col">
+                <div className="col">
                   <FormGroup textAlign="center" className="skillsSection">
-                    <h3 class="subtitle">Skills</h3>
+                    <h3 className="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return (
                         <div key={index}>
                           <p>
-                            <CheckBox /> {content.content}
+                            {" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="skills"
+                              value={
+                                resumes[resumes.length - 1].sections.skills[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />
+                            {content.content}
                           </p>
                         </div>
                       );
@@ -164,14 +199,24 @@ export class TemplateTwo extends Component {
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
-                    <h3 class="subtitle">Experience</h3>
+                    <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
                       return (
                         <div key={index}>
-                          {console.log(content)}
                           <h5>
                             {" "}
-                            <CheckBox /> {content.company}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="experience"
+                              value={
+                                resumes[resumes.length - 1].sections.experience[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.company}{" "}
                           </h5>
                           <p>
                             {content.title}
@@ -188,12 +233,6 @@ export class TemplateTwo extends Component {
                 </div>
               </div>
             </form>
-            <div class="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
-                {" "}
-                Add Resume
-              </Link>
-            </div>
           </div>
         </div>
       </div>

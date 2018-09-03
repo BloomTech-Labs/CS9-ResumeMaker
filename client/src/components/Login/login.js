@@ -1,12 +1,25 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  FormFeedback,
+  Input,
+  Label
+} from "reactstrap";
 import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
 
+const cheese = {
+  email: "cheese23@gmail.com",
+  password: "Cheese123!",
+  invalidCredentials: false
+};
+
 const scrinch = {
   email: "scrinch@gmail.com",
-  password: "tacobell1!G1",
+  password: "tacobell1!G",
   invalidCredentials: false
 };
 
@@ -17,11 +30,10 @@ const bobbert = {
   invalidCredentials: false
 };
 
-
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = scrinch;
+    this.state = bobbert;
   }
 
   validateForm() {
@@ -45,11 +57,13 @@ export default class Login extends Component {
       .then(response => {
         if (response.data.token) {
           const userData = response.data.user;
-          console.log(userData);
+          const resumeData = response.data.resumes;
+          console.log(resumeData);
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
 
-          console.log(this.props.context.userInfo);
+          // console.log(this.props.context.userInfo);
           this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
@@ -63,37 +77,41 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          {this.state.invalidCredentials ? (
-            <h3 className="mb-5">Invalid password or email.</h3>
-          ) : null}
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <Label>Email</Label>
+            <Input
               autoFocus
+              id="email"
+              invalid={this.state.invalidCredentials}
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
+          <FormGroup>
+            <Label>Password</Label>
+            <Input
+              id="password"
+              invalid={this.state.invalidCredentials}
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
             />
+            <FormFeedback invalid>
+              The email or password you entered are incorrect.
+            </FormFeedback>
           </FormGroup>
           <Button
             block
-            bsSize="large"
-            bsStyle="primary"
+            size="lg"
+            color="primary"
             disabled={!this.validateForm()}
             type="submit"
           >
             Login
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }

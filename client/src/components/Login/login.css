@@ -11,6 +11,8 @@
 
 .Login form {
   align-self: center;
+  background: #fff;
+  padding: 2rem 1rem;
 }
 
 .Login form .form-group {
@@ -20,7 +22,7 @@
   justify-content: center;
 }
 
-.Login form .form-group .control-label {
+.Login form .form-group label {
   margin: 0;
 }
 
@@ -42,8 +44,4 @@
 
 .Login .modal-footer {
   justify-content: center;
-}
-
-.Login .btn {
-  /* font-size: 1.6rem; */
 }

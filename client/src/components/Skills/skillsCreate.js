@@ -17,6 +17,7 @@ class SkillsCreate extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
     }
@@ -93,7 +94,7 @@ class SkillsCreate extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/skills", title: "Skills" },
             { link: "/skills/create", title: "Create" }
           ]}
@@ -102,11 +103,9 @@ class SkillsCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Skills</h1>
+            <div>“Success is skill inside out.” ― Matshona Dhliwayo</div>
             <form>
               <div className="form-group">
-                <label form="formGroupExampleInput2">
-                  “Success is skill inside out.” ― Matshona Dhliwayo
-                </label>
                 <input
                   value={this.state.content}
                   onChange={this.onInputChange}

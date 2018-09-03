@@ -14,12 +14,16 @@ i:hover{
 
 .title-div {
   width: 100%;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
 .overall-component-div .title-div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  /* background-image: linear-gradient( darkgray, white); */
+  /* background: linear-gradient(#7578F8, lightgray); */
+  /* background: #C8C8C8;   */
 }
 
 .div-for-links {
@@ -33,4 +37,11 @@ i:hover{
   justify-content: center;
   /* max-width: 800px; */
   flex-wrap: wrap;
+  
+}
+.fa-pencil {
+  margin-top: 1rem; 
+}
+.card-body.card-text.card {
+  text-decoration-color: black; 
 }

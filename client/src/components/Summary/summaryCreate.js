@@ -17,6 +17,7 @@ class SummaryCreate extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.summaryIndex !== false
@@ -98,7 +99,7 @@ class SummaryCreate extends Component {
         <Navbar
           context={this.props.context}
           breadcrumbs={[
-            { link: "/", title: "Home" },
+            { link: "/" },
             { link: "/summary", title: "Summary" },
             { link: "/summary/create", title: "Create" }
           ]}
@@ -107,12 +108,12 @@ class SummaryCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
-            <div className="form-group">
-              <form>
-                <label form="formGroupExampleInput2">
-                  “Make the most of yourself....for that is all there is of
-                  you.” ― Ralph Waldo Emerson
-                </label>
+            <div>
+              “Make the most of yourself....for that is all there is of you.” ―
+              Ralph Waldo Emerson
+            </div>
+            <form>
+              <div className="form-group">
                 <textarea
                   rows={10}
                   value={this.state.content}
@@ -121,14 +122,12 @@ class SummaryCreate extends Component {
                   name="content"
                   placeholder="Input your summary"
                 />
-              </form>
-              <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.summaryIndex !== false ? (
-                <button onClick={e => this.handleSubmit(e, true)}>
-                  Delete
-                </button>
-              ) : null}
-            </div>
+              </div>
+            </form>
+            <button onClick={e => this.handleSubmit(e)}>Submit</button>
+            {this.props.location.state.summaryIndex !== false ? (
+              <button onClick={e => this.handleSubmit(e, true)}>Delete</button>
+            ) : null}
           </div>
         </div>
       </div>

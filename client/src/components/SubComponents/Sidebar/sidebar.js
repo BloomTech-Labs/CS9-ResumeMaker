@@ -15,10 +15,9 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      // this.props.context.userInfo.auth !== true &&
+      this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
-      console.log("passed token check");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -26,12 +25,13 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          const userData = response.data;
+          const userData = response.data.user;
+          const resumeData = response.data.resumes;
           this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
         })
         .catch(err => {
-          console.log("err", err);
-          this.props.context.actions.setLogout();
+          console.log("Server Error: ", err);
         });
     }
   }
@@ -46,8 +46,8 @@ class Sidebar extends Component {
       return <Redirect to="/login" />;
     }
     return (
-      <div className="sidebar bg-secondary">
-        <div className="static-sidebar">
+      <div className="sidebar">
+        <div className="static-sidebar" style={{fontFamily: "Verdana",   fontSize: "0.7rem", fontWeight: "550", }}>
           <Link to="/templates" className="sidebar-button">
             {" "}
             Templates

@@ -17,8 +17,10 @@ class AuthProvider extends Component {
     education: [],
     experience: [],
     skills: [],
-    summary: []
-  };
+    summary: [],
+    resumes: []
+  }
+
 
   setLogout = () => {
     localStorage.removeItem("token");
@@ -31,7 +33,7 @@ class AuthProvider extends Component {
         middlename: "",
         lastname: ""
       },
-      title: "",
+      title: [],
       phonenumber: "",
       links: [],
       education: [],
@@ -66,6 +68,77 @@ class AuthProvider extends Component {
     });
   };
 
+  setResume = (resumeData) => {
+    this.setState({
+      resumes: resumeData
+    })
+  }
+
+  createResume = () => {
+    const tempState = this.state.resumes;
+    const tempObj = {
+      links: { linkedin: false, github: false, portfolio: false },
+      title: this.state.title.map(item => {
+        return { id: item._id, value: false }
+      }),
+      sections: {
+        experience: this.state.experience.map(item => {
+          return { id: item._id, value: false }
+        }),
+        education: this.state.education.map(item => {
+          return { id: item._id, value: false }
+        }),
+        summary: this.state.summary.map(item => {
+          return { id: item._id, value: false }
+        }),
+        skills: this.state.skills.map(item => {
+          return { id: item._id, value: false }
+        }),
+      }
+    }
+    tempState.push(tempObj);
+    this.setState({ resumes: tempState })
+  }
+
+  setResumeItemState = (index, name, id) => {
+    const tempState = this.state;
+    if (name === "linkedin" || name === "github" || name === "portfolio") {
+      tempState.resumes[index].links[name] = !tempState.resumes[index].links[name];
+    } else {
+      tempState.resumes[index].sections[name].forEach(field => {
+        if (field._id === id) {
+          field.value = !field.value;
+        }
+      });
+    }
+    this.setState(tempState);
+
+  } //Checkboxes
+
+  setResumeItemDropdown = (index, name, id) => {
+    const tempState = this.state;
+    if (name === "title") {
+      tempState.resumes[index][name].forEach(field => {
+        if (field._id === id) {
+          field.value = true;
+        }
+        else {
+          field.value = false;
+        }
+      })
+    } else {
+      tempState.resumes[index].sections[name].forEach(field => {
+        if (field._id === id) {
+          field.value = true;
+        }
+        else {
+          field.value = false;
+        }
+      })
+    }
+    this.setState(tempState);
+  } //Dropdowns
+
   setElement = (index, elementName, elementValue) => {
     const temp = this.state;
     temp[elementName][index] = elementValue;
@@ -92,6 +165,10 @@ class AuthProvider extends Component {
           userInfo,
           actions: {
             toggleAuth: this.toggleAuth,
+            setResume: this.setResume,
+            createResume: this.createResume,
+            setResumeItemState: this.setResumeItemState,
+            setResumeItemDropdown: this.setResumeItemDropdown,
             setLogin: this.setLogin,
             setLogout: this.setLogout,
             setElement: this.setElement,
