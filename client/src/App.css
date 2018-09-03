@@ -16,3 +16,9 @@
 textarea {
   height: auto;
 }
+
+.row {
+  /* Zeroing these margins gets rid of jolting content shift to the left */
+  margin-left: 0;
+  margin-right: 0;
+}
