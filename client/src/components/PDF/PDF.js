@@ -8,6 +8,9 @@ class PDF extends Component {
     html2canvas(input[0])
       .then(canvas => {
         const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, "JPEG", 15, 15, 180, 200);
+        pdf.save("download.pdf");
       })
       .catch(err => {
         console.log(err);
