@@ -127,9 +127,9 @@ class ExperienceCreate extends Component {
             { link: "/experience/create", title: "Create" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Experience</h1>
             <div>
               “Far and away the best prize that life offers is the chance to

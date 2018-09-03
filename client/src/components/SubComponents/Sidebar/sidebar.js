@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
+import classnames from "classnames";
 import "./sidebar.css";
 const urls = require("../../../config/config.json");
 
@@ -55,31 +56,76 @@ class Sidebar extends Component {
             fontWeight: "550"
           }}
         >
-          <Link to="/templates" className="sidebar-button">
+          <Link
+            to="/templates"
+            className={classnames({
+              active: window.location.pathname.includes("/templates")
+            })}
+          >
             Templates
           </Link>
-          <Link to="/resumes" className="sidebar-button">
+          <Link
+            to="/resumes"
+            className={classnames({
+              active: window.location.pathname.includes("/resumes")
+            })}
+          >
             Resumes
           </Link>
-          <Link to="/jobTitle" className="sidebar-button">
+          <Link
+            to="/jobtitle"
+            className={classnames({
+              active: window.location.pathname.includes("/jobtitle")
+            })}
+          >
             Job Title
           </Link>
-          <Link to="/summary" className="sidebar-button">
+          <Link
+            to="/summary"
+            className={classnames({
+              active: window.location.pathname.includes("/summary")
+            })}
+          >
             Summary
           </Link>
-          <Link to="/skills" className="sidebar-button">
+          <Link
+            to="/skills"
+            className={classnames({
+              active: window.location.pathname.includes("/skills")
+            })}
+          >
             Skills
           </Link>
-          <Link to="/experience" className="sidebar-button">
+          <Link
+            to="/experience"
+            className={classnames({
+              active: window.location.pathname.includes("/experience")
+            })}
+          >
             Experience
           </Link>
-          <Link to="/education" className="sidebar-button">
+          <Link
+            to="/education"
+            className={classnames({
+              active: window.location.pathname.includes("/education")
+            })}
+          >
             Education
           </Link>
-          <Link to="/billing" className="sidebar-button">
+          <Link
+            to="/billing"
+            className={classnames({
+              active: window.location.pathname.includes("/billing")
+            })}
+          >
             Billing
           </Link>
-          <Link to="/settings" className="sidebar-button">
+          <Link
+            to="/settings"
+            className={classnames({
+              active: window.location.pathname.includes("/settings")
+            })}
+          >
             Settings
           </Link>
         </div>

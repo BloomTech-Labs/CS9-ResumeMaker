@@ -104,9 +104,9 @@ class SummaryCreate extends Component {
             { link: "/summary/create", title: "Create" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Personal Summary</h1>
             <div>
               “Make the most of yourself....for that is all there is of you.” ―

@@ -99,9 +99,9 @@ class SkillsCreate extends Component {
             { link: "/skills/create", title: "Create" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Skills</h1>
             <div>“Success is skill inside out.” ― Matshona Dhliwayo</div>
             <form>

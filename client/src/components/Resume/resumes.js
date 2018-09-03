@@ -15,9 +15,9 @@ class Resumes extends Component {
           context={this.props.context}
           breadcrumbs={[{ link: "/" }, { link: "/resumes", title: "Resumes" }]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h1 className="Header">RESUMES</h1>
             </div>

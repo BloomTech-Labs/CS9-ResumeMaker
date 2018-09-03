@@ -117,9 +117,9 @@ class EducationCreate extends Component {
             { link: "/education/create", title: "Create" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Education History</h1>
             <div>
               “Intelligence plus character-that is the goal of true education.”

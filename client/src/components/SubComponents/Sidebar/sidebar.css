@@ -25,9 +25,13 @@
   background: #162238;
 }
 
-.sidebar-button {
+.static-sidebar a {
   color: #f2f2f0;
   /* text-shadow: 1px 1px black; */
   padding: 10% 0;
   border-bottom: 1px solid #d9d9d9;
+}
+
+.static-sidebar .active {
+  color: red;
 }

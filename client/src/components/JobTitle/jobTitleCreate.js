@@ -96,9 +96,9 @@ class JobTitleCreate extends Component {
             { link: "/jobtitle/create", title: "Create" }
           ]}
         />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Job Title</h1>
             <div>
               “It is not titles that honour men, but men that honour titles.” ―
