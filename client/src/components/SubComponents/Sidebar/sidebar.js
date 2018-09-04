@@ -16,7 +16,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      // this.props.context.userInfo.auth !== true &&
+      this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
       console.log("passed token check");
@@ -43,47 +43,47 @@ class Sidebar extends Component {
 
   render() {
     // If there is no token, then going to any page will result in a redirect to login
-    if (!localStorage.getItem("token")) {
-      return <Redirect to="/login" />;
-    }
+    // if (!localStorage.getItem("token")) {
+    //   return <Redirect to="/login" />;
+    // }
     return (
       <div className="sidebar">
-        <div className="static-sidebar" style={{fontFamily: "Verdana",   fontSize: "0.7rem", fontWeight: "550", }}>
+        <div className="static-sidebar" style={{fontFamily: "Verdana",   fontSize: "0.7rem"}}>
           <Link to="/templates" className="sidebar-button">
             {" "}
-            <i class="fa fa-copy sm"/> Templates
+            <div class="fa fa-copy sm" style={{color:"white"}}/>{" "}Templates
           </Link>
           <Link to="/resumes" className="sidebar-button">
             {" "}
-            <i class="fa fa-file-alt sm"/>Resumes
+            <div class="fa fa-file-alt sm" style={{color:"white"}}/>{" "}Resumes
           </Link>
           <Link to="/jobTitle" className="sidebar-button">
             {" "}
-            <i className="fa fa-briefcase sm"/>Job Title
+            <div className="fa fa-briefcase sm"style={{color:"white"}}/>{" "}Job Title
           </Link>
           <Link to="/summary" className="sidebar-button">
             {" "}
-            <i class="fa fa-edit sm"/>Summary
+            <div class="fa fa-edit sm"style={{color:"white"}}/>{" "}Summary
           </Link>
           <Link to="/skills" className="sidebar-button">
             {" "}
-            <i class="fa fa-toolbox sm"/>Skills
+            <div class="fa fa-toolbox sm" style={{color:"white"}}/>{" "}Skills
           </Link>
           <Link to="/experience" className="sidebar-button">
             {" "}
-            <i class="fa fa-lightbulb sm"/>Experience
+            <div class="fa fa-lightbulb sm"style={{color:"white"}}/>{" "}Experience
           </Link>
           <Link to="/education" className="sidebar-button">
             {" "}
-            <i class="fr fa-graduation-cap sm"/>Education
+            <div class="fa fa-graduation-cap sm"style={{color:"white"}}/>{" "}Education
           </Link>
           <Link to="/billing" className="sidebar-button">
             {" "}
-            <i class="fa fa-credit-card sm"/>Billing
+            <div class="fa fa-credit-card sm"style={{color:"white"}}/>{" "}Billing
           </Link>
           <Link to="/settings" className="sidebar-button">
             {" "}
-            <i class="fa fa-sliders-h sm"/>Settings
+            <div class="fa fa-sliders-h sm"style={{color:"white"}}/>{" "}Settings
           </Link>
         </div>
       </div>

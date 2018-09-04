@@ -71,17 +71,17 @@ export class TemplateThree extends Component {
                       </p>
                     </a>
                     <p>
-                  <CheckBox /> <i class="fa fa-globe" aria-hidden="true"/>{" "}{userInfo.location}
+                  <CheckBox /> <div class="fa fa-globe" aria-hidden="true"/>{" "}{userInfo.location}
                 </p>
                 <p>
-                  <CheckBox /> <i class="fa fa-mobile" aria-hidden="true"/>{" "}{userInfo.phonenumber}
+                  <CheckBox /> <div class="fa fa-mobile" aria-hidden="true"/>{" "}{userInfo.phonenumber}
                 </p>
                 <p>
-                 <CheckBox /> <i className={"fa fa-linkedin fa-sm"}/>{" "}{userInfo.links.linkedin}
+                 <CheckBox /> <div className={"fa fa-linkedin fa-sm"}/>{" "}{userInfo.links.linkedin}
                  
                 </p>
                 <p>
-                  <CheckBox /> <i class="fa fa-github" aria-hidden="true"/>{" "} {userInfo.links.github}
+                  <CheckBox /> <div class="fa fa-github" aria-hidden="true"/>{" "} {userInfo.links.github}
                 </p>
                     <p className="contact-section">
                       <CheckBox />
