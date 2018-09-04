@@ -5,6 +5,7 @@ import moment from "moment";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template1.css";
+import PDF from "../PDF/PDF";
 
 export class ResumeOne extends Component {
   componentDidMount() {
@@ -33,6 +34,7 @@ export class ResumeOne extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Traditional</h3>
             </div>
+            <PDF /> 
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
                 <h2>
