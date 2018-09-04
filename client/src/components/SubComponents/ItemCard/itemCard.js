@@ -24,7 +24,7 @@ class ItemCard extends Component {
     });
     const putPath = this.props.putPath;
     const tempObj = {
-      [putPath]: this.props.context.userInfo.summary
+      [putPath]: this.props.context.userInfo[this.props.elementName]
     };
     axios
       .put(
@@ -50,7 +50,7 @@ class ItemCard extends Component {
     );
     const putPath = this.props.putPath;
     const tempObj = {
-      [putPath]: this.props.context.userInfo.summary
+      [putPath]: this.props.context.userInfo[this.props.elementName]
     };
     axios
       .put(
@@ -134,7 +134,7 @@ class ItemCard extends Component {
             className="item-card-link"
             to={{
               pathname: `${this.props.linkTo}/create`, // component being Linked to
-              state: { index: this.props.index } // Setting Index passed into summaryCreate component
+              state: { index: this.props.index } // index passed into the create component
             }}
           >
             <CardBody>
