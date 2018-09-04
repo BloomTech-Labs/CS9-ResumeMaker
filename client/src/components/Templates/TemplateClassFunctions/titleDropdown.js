@@ -9,20 +9,21 @@ class TitleDropdown extends Component {
   };
 
   componentDidMount() {
-    this.setState({ selected: this.fillState() })
+    this.setState({ selected: this.fillState() });
   }
 
   fillState = () => {
-    if (this.props.value.length !== 0 && this.props.context.userInfo.title.length !== 0) {
-      const temp = this.props.context.userInfo.title.filter(
-        title => {
-          return this.props.value[0]._id === title._id
-        }
-      )
-      return temp[0].content;
-    }
-    else { return "Select a Title" }
-  }
+    if (
+      this.props.value.length !== 0 &&
+      this.props.context.userInfo.title.length !== 0
+    ) {
+      const temp = this.props.context.userInfo.title.filter(title => {
+        return this.props.value[0]._id === title._id;
+      });
+      if (temp.length > 0) return temp[0].content;
+      else return "Select a Title";
+    } else return "Select a Title";
+  };
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {

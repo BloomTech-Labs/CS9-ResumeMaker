@@ -20,7 +20,8 @@ class SummaryDropdown extends Component {
       const temp = this.props.context.userInfo.summary.filter(summary => {
         return this.props.value[0]._id === summary._id;
       });
-      return temp[0].content;
+      if (temp.length > 0) return temp[0].content;
+      else return "Select a Summary";
     } else {
       return "Select a Summary";
     }

@@ -58,7 +58,6 @@ export default class Login extends Component {
         if (response.data.token) {
           const userData = response.data.user;
           const resumeData = response.data.resumes;
-          console.log(resumeData);
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(userData);
           this.props.context.actions.setResume(resumeData);
