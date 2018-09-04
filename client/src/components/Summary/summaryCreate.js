@@ -20,14 +20,14 @@ class SummaryCreate extends Component {
     window.scrollTo(0, 0);
     if (
       this.props.context.userInfo.auth === true &&
-      this.props.location.state.summaryIndex !== false
+      this.props.location.state.index !== false
     ) {
       this.setState({
         content: this.props.context.userInfo.summary[
-          this.props.location.state.summaryIndex
+          this.props.location.state.index
         ].content,
         _id: this.props.context.userInfo.summary[
-          this.props.location.state.summaryIndex
+          this.props.location.state.index
         ]._id
       });
     }
@@ -40,7 +40,7 @@ class SummaryCreate extends Component {
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.summaryIndex === false && !deleteFlag) {
+    if (this.props.location.state.index === false && !deleteFlag) {
       this.props.context.actions.addElement("summary", {
         // When creating, do NOT put in an _id, let mongo autocreate one
         content: this.state.content
@@ -48,7 +48,7 @@ class SummaryCreate extends Component {
     } // if creating
     else if (!deleteFlag) {
       this.props.context.actions.setElement(
-        this.props.location.state.summaryIndex,
+        this.props.location.state.index,
         "summary",
         {
           content: this.state.content,
@@ -58,7 +58,7 @@ class SummaryCreate extends Component {
     } // if editing
     else {
       this.props.context.actions.removeElement(
-        this.props.location.state.summaryIndex,
+        this.props.location.state.index,
         "summary"
       );
     }
@@ -89,7 +89,7 @@ class SummaryCreate extends Component {
       //   key="block-nav"
       //   when={
       //     this.props.context.userInfo.summary[
-      //       this.props.location.state.summaryIndex
+      //       this.props.location.state.index
       //     ] !== this.state.summary
       //   }
       //   message="You have unsaved changes, are you sure you want to leave?"
@@ -117,7 +117,7 @@ class SummaryCreate extends Component {
               </div>
             </form>
             <button onClick={e => this.handleSubmit(e)}>Submit</button>
-            {this.props.location.state.summaryIndex !== false ? (
+            {this.props.location.state.index !== false ? (
               <button onClick={e => this.handleSubmit(e, true)}>Delete</button>
             ) : null}
           </div>

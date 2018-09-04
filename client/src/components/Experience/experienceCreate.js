@@ -33,29 +33,33 @@ class ExperienceCreate extends Component {
 
     if (
       this.props.context.userInfo.auth === true &&
-      this.props.location.state.experienceIndex !== false
+      this.props.location.state.index !== false
     )
       this.setState({
         title: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].title,
         company: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].company,
         location: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].location,
-        from: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
-        ].from,
-        to: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
-        ].to,
+        from: moment(
+          this.props.context.userInfo.experience[
+            this.props.location.state.index
+          ].from
+        ),
+        to: moment(
+          this.props.context.userInfo.experience[
+            this.props.location.state.index
+          ].to
+        ),
         description: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].description,
         _id: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ]._id
       });
   }
@@ -75,7 +79,7 @@ class ExperienceCreate extends Component {
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.experienceIndex === false && !deleteFlag) {
+    if (this.props.location.state.index === false && !deleteFlag) {
       this.props.context.actions.addElement("experience", {
         title: this.state.title,
         company: this.state.company,
@@ -87,7 +91,7 @@ class ExperienceCreate extends Component {
     } // if creating
     else if (!deleteFlag) {
       this.props.context.actions.setElement(
-        this.props.location.state.experienceIndex,
+        this.props.location.state.index,
         "experience",
         {
           title: this.state.title,
@@ -102,7 +106,7 @@ class ExperienceCreate extends Component {
     } // if editing
     else {
       this.props.context.actions.removeElement(
-        this.props.location.state.experienceIndex,
+        this.props.location.state.index,
         "experience"
       );
     }
@@ -144,7 +148,7 @@ class ExperienceCreate extends Component {
                 <div className="row">
                   <div className="col">
                     <div className="form-group">
-                      <label for="title">Title</label>
+                      <label htmlFor="title">Title</label>
                       <input
                         id="title"
                         value={this.state.title}
@@ -155,7 +159,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="company">Company</label>
+                      <label htmlFor="company">Company</label>
                       <input
                         id="company"
                         value={this.state.company}
@@ -166,7 +170,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="location">Location</label>
+                      <label htmlFor="location">Location</label>
                       <input
                         id="location"
                         value={this.state.location}
@@ -177,7 +181,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="from">Start date</label>
+                      <label htmlFor="from">Start date</label>
                       <DatePicker
                         selected={this.state.from}
                         onChange={this.fromChange}
@@ -186,7 +190,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="to">End date</label>
+                      <label htmlFor="to">End date</label>
                       <DatePicker
                         selected={this.state.to}
                         onChange={this.toChange}
@@ -197,7 +201,7 @@ class ExperienceCreate extends Component {
                   </div>
                   <div className="col">
                     <div className="form-group">
-                      <label for="description">Description</label>
+                      <label htmlFor="description">Description</label>
                       <textarea
                         rows={15}
                         id="description"
@@ -212,7 +216,7 @@ class ExperienceCreate extends Component {
                 </div>
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.experienceIndex !== false ? (
+              {this.props.location.state.index !== false ? (
                 <button onClick={e => this.handleSubmit(e, true)}>
                   Delete
                 </button>

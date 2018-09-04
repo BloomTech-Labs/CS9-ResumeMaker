@@ -26,7 +26,7 @@ class LandingPage extends Component {
         })
         .catch(err => {
           console.log("err", err);
-          localStorage.removeItem("token");
+          this.props.context.actions.setLogout();
         });
     } //if user has a token with no data on context
   }

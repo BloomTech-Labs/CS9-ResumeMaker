@@ -34,6 +34,7 @@ class Sidebar extends Component {
         })
         .catch(err => {
           console.log("Server Error: ", err);
+          this.props.context.actions.setLogout();
         });
     }
   }

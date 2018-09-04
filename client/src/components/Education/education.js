@@ -22,7 +22,7 @@ class Education extends Component {
               <Link
                 to={{
                   pathname: "/education/create", // component being Linked to
-                  state: { educationIndex: false } // Setting Index passed into educationCreate component - false means new
+                  state: { index: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
                 <i className="fa fa-pencil fa-2x" aria-hidden="true" />
@@ -34,7 +34,7 @@ class Education extends Component {
                   style={{ color: "black", fontWeight: "600" }}
                   to={{
                     pathname: "/education/create", // component being Linked to
-                    state: { educationIndex: index } // Setting Index passed into educationCreate component
+                    state: { index: index } // Setting Index passed into educationCreate component
                   }}
                   key={index}
                 >
