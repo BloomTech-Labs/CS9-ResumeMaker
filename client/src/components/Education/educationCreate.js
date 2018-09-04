@@ -17,8 +17,8 @@ class EducationCreate extends Component {
       school: "",
       degree: "",
       fieldofstudy: "",
-      from: "",
-      to: "",
+      from: moment(),
+      to: moment(),
       _id: "",
       success: false
     };
@@ -55,6 +55,14 @@ class EducationCreate extends Component {
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  fromChange = date => {
+    this.setState({ "from": date })
+  }
+  
+  toChange = date => {
+    this.setState({ "to": date })
+  }
 
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
@@ -165,24 +173,16 @@ class EducationCreate extends Component {
               </div>
               <div className="form-group">
                 <label for="from">Start date</label>
-                <input
-                  id="from"
-                  value={this.state.from}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="from"
-                  placeholder="Start Date"
+                <DatePicker 
+                  selected={this.state.from}
+                  onChange={this.fromChange}
                 />
               </div>
               <div className="form-group">
                 <label for="to">End date</label>
-                <input
-                  id="to"
-                  value={this.state.to}
-                  onChange={this.onInputChange}
-                  className="form-control"
-                  name="to"
-                  placeholder="End Date"
+                <DatePicker 
+                  selected={this.state.to}
+                  onChange={this.toChange}
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
