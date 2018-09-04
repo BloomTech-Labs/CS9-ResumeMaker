@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
+import moment from "moment";
+
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template1.css";
@@ -92,6 +94,8 @@ export class ResumeOne extends Component {
               <Container textAlign="center" className="experienceSection">
                 <h3>Experience</h3>
                 {experience.map((content, index) => {
+                  let from = moment(content.from).format("MMM YYYY");
+                  let to = moment(content.to).format("MMM YYYY");
                   return resumes[resumes.length - 1].sections.experience[index]
                     .value ? (
                     <div key={index}>
@@ -101,7 +105,7 @@ export class ResumeOne extends Component {
                         <br />
                         {content.location}
                         <br />
-                        {content.from} - {content.to}
+                        {from} - {to}
                       </p>
                       <p>{content.description} </p>
                     </div>
@@ -112,6 +116,8 @@ export class ResumeOne extends Component {
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
                 {education.map((content, index) => {
+                  let from = moment(content.from).format("MMM YYYY");
+                  let to = moment(content.to).format("MMM YYYY");
                   return resumes[resumes.length - 1].sections.education[index]
                     .value ? (
                     <div key={index}>
@@ -122,7 +128,7 @@ export class ResumeOne extends Component {
                       <p>
                         {content.school}
                         <br />
-                        {content.from} - {content.to}
+                        {from} - {to}
                       </p>
                     </div>
                   ) : null;
