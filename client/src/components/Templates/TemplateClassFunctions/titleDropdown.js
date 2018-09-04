@@ -5,11 +5,24 @@ class TitleDropdown extends Component {
   // Adding default state as a placeholder
   state = {
     toggled: false,
-    selected:
-      this.props.context.userInfo.title.filter(
-        title => this.props.value[0].id === title.id
-      )[0].content || ""
+    selected: ""
   };
+
+  componentDidMount() {
+    this.setState({ selected: this.fillState() })
+  }
+
+  fillState = () => {
+    if (this.props.value.length !== 0) {
+      const temp = this.props.context.userInfo.title.filter(
+        title => {
+          return this.props.value[0]._id === title._id
+        }
+      )
+      return temp[0].content;
+    }
+    else { return "Select a Title" }
+  }
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
