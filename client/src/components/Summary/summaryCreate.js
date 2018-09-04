@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
+import './summary.css'; 
 
 const urls = require("../../config/config.json");
 
@@ -104,7 +105,7 @@ class SummaryCreate extends Component {
               Ralph Waldo Emerson
             </div>
             <form>
-              <div className="form-group">
+              <div className="form-group" >
                 <textarea
                   rows={10}
                   value={this.state.content}
