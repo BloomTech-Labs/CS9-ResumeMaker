@@ -87,6 +87,7 @@ export default class Login extends Component {
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
+              autoComplete="username"
             />
           </FormGroup>
           <FormGroup>
@@ -97,6 +98,7 @@ export default class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
+              autoComplete="current-password"
             />
             <FormFeedback invalid>
               The email or password you entered are incorrect.
