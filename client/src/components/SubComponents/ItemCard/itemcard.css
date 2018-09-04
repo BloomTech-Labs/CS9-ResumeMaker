@@ -61,6 +61,11 @@
   min-height: 50px;
 }
 
+.summary-containment-div .item-card.card {
+  width: 25%;
+  min-height: 12rem;
+}
+
 /* .summary-card-link {
   background: white;
   border: 1px solid lightgrey;
