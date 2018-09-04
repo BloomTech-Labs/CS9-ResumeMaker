@@ -4,7 +4,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 
@@ -57,12 +57,12 @@ class EducationCreate extends Component {
   };
 
   fromChange = date => {
-    this.setState({ "from": date })
-  }
-  
+    this.setState({ from: date });
+  };
+
   toChange = date => {
-    this.setState({ "to": date })
-  }
+    this.setState({ to: date });
+  };
 
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
@@ -173,16 +173,20 @@ class EducationCreate extends Component {
               </div>
               <div className="form-group">
                 <label for="from">Start date</label>
-                <DatePicker 
+                <DatePicker
                   selected={this.state.from}
                   onChange={this.fromChange}
+                  placeholderText="Start Date"
+                  dateFormat="LL"
                 />
               </div>
               <div className="form-group">
                 <label for="to">End date</label>
-                <DatePicker 
+                <DatePicker
                   selected={this.state.to}
                   onChange={this.toChange}
+                  placeholderText="End Date"
+                  dateFormat="LL"
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
