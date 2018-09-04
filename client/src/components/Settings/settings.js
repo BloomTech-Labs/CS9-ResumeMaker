@@ -14,7 +14,6 @@ import {
 } from "reactstrap";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "./settings.css";
 
 const urls = require("../../config/config.json");
@@ -418,16 +417,9 @@ class Settings extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/settings", title: "Settings" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Settings</h1>
             <PersonalInfo context={this.props.context} />
           </div>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "./template1.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
@@ -42,15 +41,6 @@ export class TemplateOne extends Component {
 
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/templates", title: "Templates" },
-            { link: "/Templates/template-1", title: "Template One" }
-          ]}
-        />
-
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

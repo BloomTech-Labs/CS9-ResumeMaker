@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "./tempTemplate1.png";
 import "./tempTemplate2.png";
 import "./tempTemplate3.png";
@@ -14,16 +13,9 @@ class Templates extends Component {
   render() {
     return (
       <div className="entire-page">
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/templates", title: "Templates" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h1>TEMPLATES</h1>
               <p>

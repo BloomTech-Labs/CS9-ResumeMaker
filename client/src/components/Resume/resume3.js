@@ -4,7 +4,6 @@ import { FormGroup } from "reactstrap";
 import moment from "moment";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "../Templates/template3.css";
 import PDF from "../PDF/PDF";
 
@@ -19,15 +18,6 @@ export class ResumeThree extends Component {
     const resumes = this.props.context.userInfo.resumes;
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/resumes", title: "Resumes" },
-            { link: "/resumes/resume3", title: "Elegant Resume" }
-          ]}
-        />
-
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

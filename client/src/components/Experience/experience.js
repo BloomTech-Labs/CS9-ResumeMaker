@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import { Link } from "react-router-dom";
 import "../CSS/component-general.css";
 
@@ -11,16 +10,9 @@ class Experience extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/experience", title: "Experience" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Experience</h1>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to enter the information for all of your

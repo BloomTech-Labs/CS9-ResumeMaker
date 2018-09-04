@@ -2,27 +2,48 @@
   border-right: 1px solid black;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  min-width: 150px;
-  align-items: start;
-  min-height: 100vh;
+  /* padding: 20px; */
+  min-width: 10rem;
+  /* align-items: start; */
+  min-height: 100vh !important;
   /* background: #FF652F; burnt orange*/
   /* background: #239191; dark turquoise*/
   /* background: #333577; the blue */
   /* background: #C42813;  */
   /* background: #FF6122;  */
-  background: #1F2833; 
-
+  background: #162238;
+  justify-content: space-between;
+  margin-right: 1px;
 }
 
 .static-sidebar {
-  position: fixed;
+  /* border-right: 1px solid black; */
+  min-width: 10rem;
+  /* min-height: 100vh !important; */
+  padding: 0 !important;
+  /* position: fixed !important; */
   display: flex;
   flex-direction: column;
+  background: #162238;
 }
 
-.sidebar-button {
-  color: #C5C6C7;
-  text-shadow: 1px 1px black;
-  margin-top: 25%;
+.static-sidebar a {
+  color: #f2f2f0;
+  padding: 10% 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.static-sidebar .active {
+  border-left: 1rem solid #d9d9d9;
+  background: #324359;
+  /* border-bottom: 1px solid #162238; */
+}
+
+.sidebar .logout {
+  /* margin-top: 3rem; */
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+  /* position: fixed;
+  bottom: 0px; */
+  color: #f2f2f0;
 }

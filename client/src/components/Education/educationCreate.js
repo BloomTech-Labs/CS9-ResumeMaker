@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 
 const urls = require("../../config/config.json");
 
@@ -121,17 +121,9 @@ class EducationCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/education" /> : null}
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/education", title: "Education" },
-            { link: "/education/create", title: "Create" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Education History</h1>
             <div>
               “Intelligence plus character-that is the goal of true education.”

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 
 const urls = require("../../config/config.json");
 
@@ -131,17 +131,9 @@ class ExperienceCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/experience" /> : null}
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/experience", title: "Experience" },
-            { link: "/experience/create", title: "Create" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Experience</h1>
             <div>
               “Far and away the best prize that life offers is the chance to
