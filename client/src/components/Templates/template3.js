@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
@@ -11,22 +11,34 @@ import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
 
 export class TemplateThree extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: this.props.context.userInfo.currentResume || 0
+    };
+  }
+
+  componentWillMount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  // handleSubmit(e) {
-  //   e.preventDefault();
 
-  //   const resume = {};
-  //   for (const field in this.refs) {
-  //     resume[field] = this.refs[field].value;
-  //   }
-  //   console.log("-->", resume);
-  //   alert("Resume submitted: " + this.state.value);
-  //   event.preventDefault();
-  // }
+  handleSubmit = e => {
+  }
+
+  onCreate = () => {
+    this.props.context.actions.createResume();
+  };
 
   render() {
+    if (!this.props.context.userInfo.auth) {
+      return <Redirect to="/templates" />;
+    }
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;

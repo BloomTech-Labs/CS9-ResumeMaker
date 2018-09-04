@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
@@ -34,11 +34,13 @@ export class TemplateOne extends Component {
   }
 
   render() {
+    if (!this.props.context.userInfo.auth) {
+      return <Redirect to="/templates" />;
+    }
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-
     return (
       <div>
         <div className="component-div">
