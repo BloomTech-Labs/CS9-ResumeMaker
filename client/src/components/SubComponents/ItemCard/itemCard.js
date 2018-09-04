@@ -70,7 +70,7 @@ class ItemCard extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     if (this.props.elementName === "summary") {
       return (
         <Card className="item-card">
