@@ -9,35 +9,32 @@ import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
 
 export class TemplateOne extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: this.props.context.userInfo.currentResume || 0
+    }
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  // handleSubmit(e) {
-  //   e.preventDefault();
 
-  //   const resume = {};
-  //   for (const field in this.refs) {
-  //     resume[field] = this.refs[field].value;
-  //   }
-  //   console.log("-->", resume);
-  //   alert("Resume submitted: " + this.state.value);
-  //   event.preventDefault();
-  // }
+  handleSubmit = (e) => {
+  }
 
   onCreate = () => {
     this.props.context.actions.createResume();
   };
 
   componentWillMount() {
-    // this.onCreate();
+    this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume);
   }
 
   render() {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    // const summary = this.props.context.userInfo.summary;
-    // const title = this.props.context.userInfo.title;
     const resumes = this.props.context.userInfo.resumes;
 
     return (
@@ -85,11 +82,11 @@ export class TemplateOne extends Component {
                   <p> {userInfo.email}</p>
                 </a>
                 <p>
-                  <i class="fa fa-globe" aria-hidden="true" />
+                  <i className="fa fa-globe" aria-hidden="true" />
                   {userInfo.location}
                 </p>
                 <p>
-                  <i class="fa fa-mobile" aria-hidden="true" />
+                  <i className="fa fa-mobile" aria-hidden="true" />
                   {userInfo.phonenumber}
                 </p>
                 <p>
@@ -109,7 +106,7 @@ export class TemplateOne extends Component {
                     name="github"
                     value={resumes[resumes.length - 1].links.github}
                   />{" "}
-                  <i class="fa fa-github" aria-hidden="true" />
+                  <i className="fa fa-github" aria-hidden="true" />
                   {userInfo.links.github}
                 </p>
                 <p>

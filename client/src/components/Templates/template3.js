@@ -74,11 +74,11 @@ export class TemplateThree extends Component {
                     </a>
                     <p className="contact-section">
                       {" "}
-                      <i class="fa fa-globe" aria-hidden="true" />{" "}
+                      <i className="fa fa-globe" aria-hidden="true" />{" "}
                       {userInfo.location}
                     </p>
                     <p className="contact-section">
-                      <i class="fa fa-mobile" aria-hidden="true" />
+                      <i className="fa fa-mobile" aria-hidden="true" />
                       {userInfo.phonenumber}
                     </p>
                     <p className="contact-section">
@@ -98,7 +98,7 @@ export class TemplateThree extends Component {
                         name="github"
                         value={resumes[resumes.length - 1].links.github.value}
                       />{" "}
-                      <i class="fa fa-github" aria-hidden="true" />{" "}
+                      <i className="fa fa-github" aria-hidden="true" />{" "}
                       {userInfo.links.github}
                     </p>
                     <p>
