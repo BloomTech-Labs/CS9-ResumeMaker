@@ -11,6 +11,26 @@
   background-color: #707f8c;
 }
 
+.item-card .close {
+  color: red;
+  width: min-content;
+  height: min-content;
+  align-self: flex-end;
+  padding: 0.1rem;
+}
+
+.item-card .close:hover {
+  color: red !important;
+}
+
+.item-card .close:focus {
+  color: red !important;
+}
+
+.item-card-link {
+  color: inherit;
+}
+
 .item-card .card-header {
   text-overflow: ellipsis;
   white-space: nowrap;

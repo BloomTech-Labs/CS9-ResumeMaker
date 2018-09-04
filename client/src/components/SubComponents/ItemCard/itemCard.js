@@ -80,13 +80,26 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
-          <Button onClick={() => this.handleDelete()}>Delete</Button>
+          <button
+            className="close"
+            aria-label="Delete"
+            onClick={() => this.handleDelete()}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
     } else
       return (
         <Card className="item-card">
+          <button
+            className="close"
+            aria-label="Delete"
+            onClick={() => this.handleDelete()}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
           <Link
             className="item-card-link"
             to={{
@@ -98,7 +111,6 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
-          <Button onClick={() => this.handleDelete()}>Delete</Button>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
