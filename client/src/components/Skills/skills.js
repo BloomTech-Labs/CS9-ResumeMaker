@@ -24,7 +24,7 @@ class Skills extends Component {
                   state: { skillsIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-                <i class="fa fa-pencil fa-2x" aria-hidden="true" />
+                <i className="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
             </div>
             {this.props.context.userInfo.skills.map((element, index) => {

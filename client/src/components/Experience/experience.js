@@ -25,7 +25,7 @@ class Experience extends Component {
                   state: { experienceIndex: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
-                <i class="fa fa-pencil fa-2x" aria-hidden="true" />
+                <i className="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
             </div>
             {this.props.context.userInfo.experience.map((element, index) => {
