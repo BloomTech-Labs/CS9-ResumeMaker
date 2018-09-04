@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
@@ -45,12 +44,16 @@ class ExperienceCreate extends Component {
         location: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
         ].location,
-        from: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
-        ].from,
-        to: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
-        ].to,
+        from: moment(
+          this.props.context.userInfo.experience[
+            this.props.location.state.experienceIndex
+          ].from
+        ),
+        to: moment(
+          this.props.context.userInfo.experience[
+            this.props.location.state.experienceIndex
+          ].to
+        ),
         description: this.props.context.userInfo.experience[
           this.props.location.state.experienceIndex
         ].description,
@@ -144,7 +147,7 @@ class ExperienceCreate extends Component {
                 <div className="row">
                   <div className="col">
                     <div className="form-group">
-                      <label for="title">Title</label>
+                      <label htmlFor="title">Title</label>
                       <input
                         id="title"
                         value={this.state.title}
@@ -155,7 +158,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="company">Company</label>
+                      <label htmlFor="company">Company</label>
                       <input
                         id="company"
                         value={this.state.company}
@@ -166,7 +169,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="location">Location</label>
+                      <label htmlFor="location">Location</label>
                       <input
                         id="location"
                         value={this.state.location}
@@ -177,7 +180,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="from">Start date</label>
+                      <label htmlFor="from">Start date</label>
                       <DatePicker
                         selected={this.state.from}
                         onChange={this.fromChange}
@@ -186,7 +189,7 @@ class ExperienceCreate extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="to">End date</label>
+                      <label htmlFor="to">End date</label>
                       <DatePicker
                         selected={this.state.to}
                         onChange={this.toChange}
@@ -197,7 +200,7 @@ class ExperienceCreate extends Component {
                   </div>
                   <div className="col">
                     <div className="form-group">
-                      <label for="description">Description</label>
+                      <label htmlFor="description">Description</label>
                       <textarea
                         rows={15}
                         id="description"

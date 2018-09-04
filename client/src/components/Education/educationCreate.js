@@ -40,12 +40,12 @@ class EducationCreate extends Component {
         fieldofstudy: this.props.context.userInfo.education[
           this.props.location.state.educationIndex
         ].fieldofstudy,
-        from: this.props.context.userInfo.education[
+        from: moment(this.props.context.userInfo.education[
           this.props.location.state.educationIndex
-        ].from,
-        to: this.props.context.userInfo.education[
+        ].from),
+        to: moment(this.props.context.userInfo.education[
           this.props.location.state.educationIndex
-        ].to,
+        ].to),
         _id: this.props.context.userInfo.education[
           this.props.location.state.educationIndex
         ]._id
@@ -131,7 +131,7 @@ class EducationCreate extends Component {
             </div>
             <form>
               <div className="form-group">
-                <label for="school">School</label>
+                <label htmlFor="school">School</label>
                 <input
                   id="school"
                   value={this.state.school}
@@ -142,7 +142,7 @@ class EducationCreate extends Component {
                 />
               </div>
               <div className="form-group">
-                <label for="degree">Degree</label>
+                <label htmlFor="degree">Degree</label>
                 <input
                   id="degree"
                   value={this.state.degree}
@@ -153,7 +153,7 @@ class EducationCreate extends Component {
                 />
               </div>
               <div className="form-group">
-                <label for="fieldofstudy">Field of Study</label>
+                <label htmlFor="fieldofstudy">Field of Study</label>
                 <input
                   id="fieldofstudy"
                   value={this.state.fieldofstudy}
@@ -164,7 +164,7 @@ class EducationCreate extends Component {
                 />
               </div>
               <div className="form-group">
-                <label for="from">Start date</label>
+                <label htmlFor="from">Start date</label>
                 <DatePicker
                   selected={this.state.from}
                   onChange={this.fromChange}
@@ -173,7 +173,7 @@ class EducationCreate extends Component {
                 />
               </div>
               <div className="form-group">
-                <label for="to">End date</label>
+                <label htmlFor="to">End date</label>
                 <DatePicker
                   selected={this.state.to}
                   onChange={this.toChange}
