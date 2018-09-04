@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+
+import "react-datepicker/dist/react-datepicker.css";
+import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 
 const urls = require("../../config/config.json");
@@ -14,8 +18,8 @@ class ExperienceCreate extends Component {
       company: "",
       location: "",
       description: "",
-      from: "",
-      to: "",
+      from: moment(),
+      to: moment(),
       _id: "",
       success: false
     };
@@ -58,6 +62,14 @@ class ExperienceCreate extends Component {
 
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  fromChange = date => {
+    this.setState({ from: date });
+  };
+
+  toChange = date => {
+    this.setState({ to: date });
   };
 
   handleSubmit = (event, deleteFlag) => {
@@ -174,24 +186,20 @@ class ExperienceCreate extends Component {
                     </div>
                     <div className="form-group">
                       <label for="from">Start date</label>
-                      <input
-                        id="from"
-                        value={this.state.from}
-                        onChange={this.onInputChange}
-                        className="form-control"
-                        name="from"
-                        placeholder="Start Date"
+                      <DatePicker
+                        selected={this.state.from}
+                        onChange={this.fromChange}
+                        placeholderText="Start Date"
+                        dateFormat="LL"
                       />
                     </div>
                     <div className="form-group">
                       <label for="to">End date</label>
-                      <input
-                        id="to"
-                        value={this.state.to}
-                        onChange={this.onInputChange}
-                        className="form-control"
-                        name="to"
-                        placeholder="End Date"
+                      <DatePicker
+                        selected={this.state.to}
+                        onChange={this.toChange}
+                        placeholderText="End Date"
+                        dateFormat="LL"
                       />
                     </div>
                   </div>
