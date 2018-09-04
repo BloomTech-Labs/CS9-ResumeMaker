@@ -15,7 +15,6 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <h1>Personal Summary</h1>
-            <div class="fa fa-angle-left sm"/>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to create one or more Personal Summaries
               about yourself. <br />
