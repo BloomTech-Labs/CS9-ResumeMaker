@@ -41,7 +41,30 @@ class ItemCard extends Component {
       });
   };
 
+  handleDelete = () => {
+    this.props.context.actions.removeElement(this.props.index, "summary");
+    const tempObj = {
+      "sections.summary": this.props.context.userInfo.summary
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        const userData = response.data.user;
+        this.props.context.actions.setLogin(userData);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  };
+
   render() {
+    console.log(this.props);
     if (this.props.header) {
       return (
         <Card className="item-card">
@@ -57,6 +80,7 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
+          <Button onClick={() => this.handleDelete()}>Delete</Button>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
@@ -74,6 +98,7 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
+          <Button onClick={() => this.handleDelete()}>Delete</Button>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
