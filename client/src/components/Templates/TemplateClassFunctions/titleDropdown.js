@@ -13,7 +13,7 @@ class TitleDropdown extends Component {
   }
 
   fillState = () => {
-    if (this.props.value.length !== 0) {
+    if (this.props.value.length !== 0 && this.props.context.userInfo.title.length !== 0) {
       const temp = this.props.context.userInfo.title.filter(
         title => {
           return this.props.value[0]._id === title._id

@@ -9,20 +9,22 @@ class SummaryDropdown extends Component {
   };
 
   componentDidMount() {
-    this.setState({ selected: this.fillState() })
+    this.setState({ selected: this.fillState() });
   }
 
   fillState = () => {
-    if (this.props.value.length !== 0) {
-      const temp = this.props.context.userInfo.summary.filter(
-        summary => {
-          return this.props.value[0]._id === summary._id
-        }
-      )
+    if (
+      this.props.value.length !== 0 &&
+      this.props.context.userInfo.summary.length !== 0
+    ) {
+      const temp = this.props.context.userInfo.summary.filter(summary => {
+        return this.props.value[0]._id === summary._id;
+      });
       return temp[0].content;
+    } else {
+      return "Select a Summary";
     }
-    else { return "Select a Summary" }
-  }
+  };
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
