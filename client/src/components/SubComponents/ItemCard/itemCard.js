@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardHeader, CardBody, CardText } from "reactstrap";
+import { Card, CardHeader, CardBody, CardText, Button } from "reactstrap";
 
 import "./itemcard.css";
 
@@ -45,6 +45,7 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
+          <Button>Copy</Button>
         </Card>
       );
   }

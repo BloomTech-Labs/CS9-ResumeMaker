@@ -35,7 +35,6 @@ class Summary extends Component {
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
                   <ItemCard
-                    className="card"
                     linkTo="/summary"
                     index={index}
                     content={element.content}

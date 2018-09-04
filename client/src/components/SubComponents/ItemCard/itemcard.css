@@ -4,6 +4,11 @@
   max-width: 20rem;
   /* min-width: 20%; */
   text-align: left;
+  justify-content: space-between;
+}
+
+.item-card .btn {
+  background-color: #707f8c;
 }
 
 .item-card .card-header {
