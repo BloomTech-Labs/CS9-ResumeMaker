@@ -13,6 +13,8 @@
 
 .item-card .close {
   color: red;
+  position: absolute;
+  top: 0;
   width: min-content;
   height: min-content;
   align-self: flex-end;

@@ -17,7 +17,7 @@ class SummaryCard extends Component {
         className="summary-card-link"
         to={{
           pathname: "/summary/create", // component being Linked to
-          state: { summaryIndex: this.props.index } // Setting Index passed into summaryCreate component
+          state: { index: this.props.index } // Setting Index passed into summaryCreate component
         }}
       >
         <span className="summary-card-span">

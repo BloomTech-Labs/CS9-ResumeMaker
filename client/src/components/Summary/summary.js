@@ -25,7 +25,7 @@ class Summary extends Component {
               <Link
                 to={{
                   pathname: "/summary/create", // component being Linked to
-                  state: { summaryIndex: false } // Setting Index passed into educationCreate component - false means new
+                  state: { index: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
                 <i className="fa fa-pencil fa-2x" aria-hidden="true" />
@@ -36,6 +36,8 @@ class Summary extends Component {
                 return (
                   <ItemCard
                     linkTo="/summary"
+                    elementName="summary"
+                    putPath="sections.summary"
                     index={index}
                     content={element.content}
                     key={index}

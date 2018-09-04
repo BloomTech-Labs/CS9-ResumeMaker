@@ -22,7 +22,7 @@ class JobTitle extends Component {
               <Link
                 to={{
                   pathname: "/jobtitle/create", // component being Linked to
-                  state: { titleIndex: false } // Setting Index passed into educationCreate component - false means new
+                  state: { index: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
                 <i className="fa fa-pencil fa-2x" aria-hidden="true" />
@@ -34,7 +34,7 @@ class JobTitle extends Component {
                   style={{ color: "black", fontWeight: "600" }}
                   to={{
                     pathname: "/jobtitle/create", // component being Linked to
-                    state: { titleIndex: index } // Setting Index passed into titleCreate component
+                    state: { index: index } // Setting Index passed into titleCreate component
                   }}
                   key={index}
                 >
