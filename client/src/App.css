@@ -6,6 +6,7 @@
   max-width: 100%;
   padding-left: 0;
   padding-right: 0;
+  overflow-x: hidden;
 }
 
 .overall-component-div {
@@ -21,10 +22,4 @@
 
 textarea {
   height: auto;
-}
-
-.row {
-  /* Zeroing these margins gets rid of jolting content shift to the left */
-  margin-left: 0;
-  margin-right: 0;
 }
