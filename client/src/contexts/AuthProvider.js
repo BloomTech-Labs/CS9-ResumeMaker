@@ -144,8 +144,6 @@ class AuthProvider extends Component {
         ? this.state.resumes[index].sections.skills.push({ _id: item._id, value: false })
         : console.log()
     }
-    console.log(this.state.resumes[index].sections.skills)
-
     this.setState({ ["resumes"[index]]: tempObj });
   }
 
