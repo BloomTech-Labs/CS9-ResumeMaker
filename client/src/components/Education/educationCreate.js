@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import Sidebar from "../SubComponents/Sidebar/sidebar";
-import axios from "axios";
-import Navbar from "../SubComponents/Navbar/navbar";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+
+import 'react-datepicker/dist/react-datepicker.css';
+import Sidebar from "../SubComponents/Sidebar/sidebar";
+import Navbar from "../SubComponents/Navbar/navbar";
 
 const urls = require("../../config/config.json");
 
