@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect, Route } from "react-router-dom";
 import axios from "axios";
 
+
 import classnames from "classnames";
 import "./sidebar.css";
 const urls = require("../../../config/config.json");
@@ -43,9 +44,9 @@ class Sidebar extends Component {
 
   render() {
     // If there is no token, then going to any page will result in a redirect to login
-    if (!localStorage.getItem("token")) {
-      return <Redirect to="/login" />;
-    }
+    // if (!localStorage.getItem("token")) {
+    //   return <Redirect to="/login" />;
+    // }
     return (
       <div className="sidebar">
         <div
@@ -62,7 +63,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/templates")
             })}
           >
-            Templates
+              {" "}
+            <div class="fa fa-copy sm"style={{color:"white"}}/> {" "} Templates
           </Link>
           <Link
             to="/resumes"
@@ -70,7 +72,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/resumes")
             })}
           >
-            Resumes
+            {" "}
+            <div class="fa fa-file-alt sm"style={{color:"white"}}/> {" "} Resumes
           </Link>
           <Link
             to="/jobtitle"
@@ -78,7 +81,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/jobtitle")
             })}
           >
-            Job Title
+             <div className="fa fa-briefcase sm"style={{color:"white"}}/> {" "}Job Title
           </Link>
           <Link
             to="/summary"
@@ -86,7 +89,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/summary")
             })}
           >
-            Summary
+            {" "}
+            <div class="fa fa-edit sm"style={{color:"white"}}/> {" "} Summary
           </Link>
           <Link
             to="/skills"
@@ -94,7 +98,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/skills")
             })}
           >
-            Skills
+           {" "}
+            <div class="fa fa-wrench" style={{color:"white"}}/> {" "} Skills
           </Link>
           <Link
             to="/experience"
@@ -102,7 +107,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/experience")
             })}
           >
-            Experience
+            {" "}
+            <div class="fa fa-lightbulb sm"style={{color:"white"}}/> {" "} Experience
           </Link>
           <Link
             to="/education"
@@ -110,7 +116,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/education")
             })}
           >
-            Education
+            {" "}
+            <div class="fa fa-graduation-cap sm" style={{color:"white"}}/> {" "}Education
           </Link>
           <Link
             to="/billing"
@@ -118,7 +125,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/billing")
             })}
           >
-            Billing
+           {" "}
+            <div class="fa fa-credit-card sm"style={{color:"white"}}/> {" "} Billing
           </Link>
           <Link
             to="/settings"
@@ -126,7 +134,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/settings")
             })}
           >
-            Settings
+            {" "}
+            <div class="fa fa-sliders-h sm"style={{color:"white"}}/> {" "}Settings
           </Link>
         </div>
         <Route

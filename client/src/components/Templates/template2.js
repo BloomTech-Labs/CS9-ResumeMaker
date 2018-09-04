@@ -93,11 +93,11 @@ export class TemplateTwo extends Component {
                       <p> {userInfo.email}</p>
                     </a>
                     <p>
-                      <i className="fa fa-globe" aria-hidden="true" />
+                      <div className="fa fa-globe" aria-hidden="true" />
                       {userInfo.location}
                     </p>
                     <p>
-                      <i className="fa fa-mobile" aria-hidden="true" />
+                      <div className="fa fa-mobile" aria-hidden="true" />
                       {userInfo.phonenumber}
                     </p>
                     <p>
@@ -107,7 +107,7 @@ export class TemplateTwo extends Component {
                         name="linkedin"
                         value={resumes[resumes.length - 1].links.linkedin.value}
                       />
-                      <i className={"fa fa-linkedin fa-sm"} />
+                      <div className={"fa fa-linkedin fa-sm"} />
                       {userInfo.links.linkedin}
                     </p>
                     <p>
@@ -117,7 +117,7 @@ export class TemplateTwo extends Component {
                         name="github"
                         value={resumes[resumes.length - 1].links.github.value}
                       />{" "}
-                      <i className="fa fa-github" aria-hidden="true" />
+                      <div className="fa fa-github" aria-hidden="true" />
                       {userInfo.links.github}
                     </p>
                     <p>

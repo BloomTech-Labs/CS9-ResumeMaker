@@ -39,6 +39,12 @@
   /* border-bottom: 1px solid #162238; */
 }
 
+.sidebar-button {
+  color: #C5C6C7;
+  text-shadow: 1px 1px black;
+  margin-top: 25px;
+  /* border-bottom: 1px solid white;  */
+}
 .sidebar .logout {
   /* margin-top: 3rem; */
   padding-top: 1rem;

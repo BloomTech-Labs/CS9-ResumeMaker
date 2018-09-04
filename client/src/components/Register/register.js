@@ -133,7 +133,7 @@ class Register extends Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  color="primary"
+                  color="secondary"
                   onClick={() => {
                     this.resetSubmitStatus();
                   }}
@@ -203,7 +203,7 @@ class Register extends Component {
             <Button
               block
               size="lg"
-              color="primary"
+              color="secondary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
@@ -232,7 +232,7 @@ class Register extends Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  color="primary"
+                  color="secondary"
                   onClick={() => {
                     this.props.history.push("/login");
                   }}
