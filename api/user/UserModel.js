@@ -101,11 +101,8 @@ const User = new mongoose.Schema(
             default: ""
           },
           location: String,
-          from: {
-            type: String,
-            default: ""
-          },
-          to: String,
+          from: Date,
+          to: Date,
           description: String
         }
       ],
@@ -124,11 +121,8 @@ const User = new mongoose.Schema(
             type: String,
             default: ""
           },
-          from: {
-            type: String,
-            default: ""
-          },
-          to: String
+          from: Date,
+          to: Date
         }
       ],
       skills: [
