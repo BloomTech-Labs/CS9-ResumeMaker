@@ -33,7 +33,7 @@ const publish_key = require("./config/keys.json").publish;
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <AuthProvider>
           <AuthContext.Consumer>
             {context => (
