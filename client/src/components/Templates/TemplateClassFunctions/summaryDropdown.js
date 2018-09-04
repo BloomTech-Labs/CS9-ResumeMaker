@@ -5,11 +5,24 @@ class SummaryDropdown extends Component {
   // Adding default state as a placeholder
   state = {
     toggled: false,
-    selected:
-      this.props.context.userInfo.summary.filter(
-        summary => this.props.value[0]._id === summary._id
-      )[0].content || ""
+    selected: ""
   };
+
+  componentDidMount() {
+    this.setState({ selected: this.fillState() })
+  }
+
+  fillState = () => {
+    if (this.props.value.length !== 0) {
+      const temp = this.props.context.userInfo.summary.filter(
+        summary => {
+          return this.props.value[0]._id === summary._id
+        }
+      )
+      return temp[0].content;
+    }
+    else { return "Select a Summary" }
+  }
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
@@ -31,6 +44,8 @@ class SummaryDropdown extends Component {
   };
 
   render() {
+    // console.log(this.props.context.userInfo.summary.map(item => item));
+
     const { summary } = this.props.data;
     const { toggled, selected } = this.state;
     const list = summary.map(data => (
