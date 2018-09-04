@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
-import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
-import "./template3.css";
 import { Link } from "react-router-dom";
-import SummaryDropdown from './TemplateClassFuntions/summaryDropdown';
-import TitleDropdown from './TemplateClassFuntions/titleDropdown';
-import CheckBox from './TemplateClassFuntions/checkbox';
+import moment from "moment";
+
+import Sidebar from "../SubComponents/Sidebar/sidebar";
+import "./template3.css";
+import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
+import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
+import CheckBox from "./TemplateClassFunctions/checkbox";
 
 export class TemplateThree extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
-
   // handleSubmit(e) {
   //   e.preventDefault();
 
@@ -30,27 +30,25 @@ export class TemplateThree extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    console.log(userInfo);
+    const resumes = this.props.context.userInfo.resumes;
+
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/templates", title: "Templates" },
-            { link: "/Templates/template-3", title: "Template Three" }
-          ]}
-        />
-
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Elegant</h3>
             </div>
+            <div className="justify-content-center">
+              <Link to="/resumes" className="resume-button" type="submit">
+                {" "}
+                Add Resume
+              </Link>
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
-              <div class="row">
-                <div class="col" className="left-column">
+              <div className="row">
+                <div className="left-column">
                   <a
                     href="https://www.freeiconspng.com/img/37126"
                     title="Image from freeiconspng.com"
@@ -62,39 +60,65 @@ export class TemplateThree extends Component {
                     />
                   </a>
                   <FormGroup textAlign="center" className="contactSection">
-                    <h3 class="subtitle">Contact Details</h3>
+                    <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p className="contact-section">
-                        {" "}
-                        <CheckBox />
-                        {userInfo.email}
-                      </p>
+                      <p className="contact-section"> {userInfo.email}</p>
                     </a>
-                    <p>
-                  <CheckBox /> <i class="fa fa-globe" aria-hidden="true"/>{" "}{userInfo.location}
-                </p>
-                <p>
-                  <CheckBox /> <i class="fa fa-mobile" aria-hidden="true"/>{" "}{userInfo.phonenumber}
-                </p>
-                <p>
-                 <CheckBox /> <i className={"fa fa-linkedin fa-sm"}/>{" "}{userInfo.links.linkedin}
-                 
-                </p>
-                <p>
-                  <CheckBox /> <i class="fa fa-github" aria-hidden="true"/>{" "} {userInfo.links.github}
-                </p>
                     <p className="contact-section">
-                      <CheckBox />
+                      {" "}
+                      <i className="fa fa-globe" aria-hidden="true" />{" "}
+                      {userInfo.location}
+                    </p>
+                    <p className="contact-section">
+                      <i className="fa fa-mobile" aria-hidden="true" />
+                      {userInfo.phonenumber}
+                    </p>
+                    <p className="contact-section">
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="linkedin"
+                        value={resumes[resumes.length - 1].links.linkedin.value}
+                      />
+                      <i className={"fa fa-linkedin fa-sm"} />
+                      {userInfo.links.linkedin}
+                    </p>
+                    <p>
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="github"
+                        value={resumes[resumes.length - 1].links.github.value}
+                      />{" "}
+                      <i className="fa fa-github" aria-hidden="true" />{" "}
+                      {userInfo.links.github}
+                    </p>
+                    <p>
+                      <CheckBox
+                        context={this.props.context}
+                        index={resumes.length - 1}
+                        name="portfolio"
+                        value={
+                          resumes[resumes.length - 1].links.portfolio.value
+                        }
+                      />{" "}
                       {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                 </div>
-                <div class="col">
+                <div className="col">
                   <div textAlign="center" className="titleSection">
                     <h2>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
-                    <TitleDropdown data={userInfo} />
+                    <TitleDropdown
+                      context={this.props.context}
+                      data={userInfo}
+                      value={resumes[resumes.length - 1].title.filter(
+                        title => title.value === true
+                      )}
+                      index={resumes.length - 1}
+                    />
                   </div>
                   <Divider className="divider-div" />
                   <FormGroup
@@ -102,20 +126,41 @@ export class TemplateThree extends Component {
                     id="summary"
                     className="summarySection"
                   >
-                    <h3 class="subtitle">Summary</h3>
-                    <SummaryDropdown data={userInfo} />
+                    <h3 className="subtitle">Summary</h3>
+                    <SummaryDropdown
+                      context={this.props.context}
+                      data={userInfo}
+                      value={resumes[
+                        resumes.length - 1
+                      ].sections.summary.filter(
+                        summary => summary.value === true
+                      )}
+                      index={resumes.length - 1}
+                    />
                   </FormGroup>
                   <Divider className="divider-div" />
 
                   <Divider className="divider-div" />
 
                   <FormGroup textAlign="center" className="skillsSection">
-                    <h3 class="subtitle">Skills</h3>
+                    <h3 className="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return (
                         <div key={index}>
                           <p>
-                            <CheckBox /> {content.content}
+                            {" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="skills"
+                              value={
+                                resumes[resumes.length - 1].sections.skills[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />
+                            {content.content}
                           </p>
                         </div>
                       );
@@ -123,21 +168,33 @@ export class TemplateThree extends Component {
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="experienceSection">
-                    <h3 class="subtitle">Experience</h3>
+                    <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return (
                         <div key={index}>
-                          {console.log(content)}
                           <h5>
                             {" "}
-                            <CheckBox /> {content.company}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="experience"
+                              value={
+                                resumes[resumes.length - 1].sections.experience[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.company}{" "}
                           </h5>
                           <p>
                             {content.title}
                             <br />
                             {content.location}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                           <p>{content.description} </p>
                         </div>
@@ -146,19 +203,31 @@ export class TemplateThree extends Component {
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textAlign="center" className="educationSection">
-                    <h3 class="subtitle">Education</h3>
+                    <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return (
                         <div key={index}>
                           <h5>
-                            <CheckBox /> {content.degree} in{" "}
-                            {content.fieldofstudy}{" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="education"
+                              value={
+                                resumes[resumes.length - 1].sections.education[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.degree} in {content.fieldofstudy}{" "}
                           </h5>
                           <p>{content.location}</p>
                           <p>
                             {content.school}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                         </div>
                       );
@@ -167,12 +236,6 @@ export class TemplateThree extends Component {
                 </div>
               </div>
             </form>
-            <div class="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
-                {" "}
-                Add Resume
-              </Link>
-            </div>
           </div>
         </div>
       </div>

@@ -11,23 +11,29 @@ import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
 
-const scrinch = {
-  email: "scrinch@gmail.com",
-  password: "tacobell1!G",
+const user = {
+  email: "cheese23@gmail.com",
+  password: "Cheese123!",
   invalidCredentials: false
 };
 
-const bobbert = {
-  email: "bobbert@gmail.com",
-  password:
-    "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
-  invalidCredentials: false
-};
+// const user = {
+//   email: "scrinch@gmail.com",
+//   password: "tacobell1!G",
+//   invalidCredentials: false
+// };
+
+// const user = {
+//   email: "bobbert@gmail.com",
+//   password:
+//     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
+//   invalidCredentials: false
+// };
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = scrinch;
+    this.state = user;
   }
 
   validateForm() {
@@ -51,11 +57,13 @@ export default class Login extends Component {
       .then(response => {
         if (response.data.token) {
           const userData = response.data.user;
-          console.log(userData);
+          const resumeData = response.data.resumes;
+          console.log(resumeData);
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
 
-          console.log(this.props.context.userInfo);
+          // console.log(this.props.context.userInfo);
           this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })

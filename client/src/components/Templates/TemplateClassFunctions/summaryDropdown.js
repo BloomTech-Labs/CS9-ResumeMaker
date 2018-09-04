@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import classnames from "classnames";
-import './classFunction.css'
+import "./classFunction.css";
 
 class SummaryDropdown extends Component {
   // Adding default state as a placeholder
@@ -8,6 +7,22 @@ class SummaryDropdown extends Component {
     toggled: false,
     selected: ""
   };
+
+  componentDidMount() {
+    this.setState({ selected: this.fillState() })
+  }
+
+  fillState = () => {
+    if (this.props.value.length !== 0) {
+      const temp = this.props.context.userInfo.summary.filter(
+        summary => {
+          return this.props.value[0]._id === summary._id
+        }
+      )
+      return temp[0].content;
+    }
+    else { return "Select a Summary" }
+  }
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
@@ -17,16 +32,22 @@ class SummaryDropdown extends Component {
   };
 
   // Allows us to select an li and set our state with the given value
-  handleClick = content => {
+  handleClick = data => {
     this.setState({
-      selected: content
+      selected: data.content
     });
+    this.props.context.actions.setResumeItemDropdown(
+      this.props.index,
+      "summary",
+      data._id
+    );
   };
 
   render() {
+    // console.log(this.props.context.userInfo.summary.map(item => item));
+
     const { summary } = this.props.data;
     const { toggled, selected } = this.state;
-
     const list = summary.map(data => (
       <li
         className="list-group-item"
@@ -35,7 +56,7 @@ class SummaryDropdown extends Component {
         // Bound the this context for scoping due to having a function for each iteration
         // onClick={this.handleClick.bind(this, data.name)}
         /* Another option is to simply use this callback syntax as long as the function isn't being passed as props to another component. */
-        onClick={() => this.handleClick(data.content)}
+        onClick={() => this.handleClick(data)}
         style={{ cursor: "pointer" }}
       >
         {data.content}

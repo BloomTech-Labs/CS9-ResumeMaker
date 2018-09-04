@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
-import Navbar from "../SubComponents/Navbar/navbar";
 
 const urls = require("../../config/config.json");
 
@@ -17,6 +16,8 @@ class JobTitleCreate extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     if (
       this.props.context.userInfo.auth === true &&
       this.props.location.state.titleIndex !== false
@@ -86,17 +87,9 @@ class JobTitleCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/jobtitle" /> : null}
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/jobtitle", title: "Job Title" },
-            { link: "/jobtitle/create", title: "Create" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Job Title</h1>
             <div>
               “It is not titles that honour men, but men that honour titles.” ―

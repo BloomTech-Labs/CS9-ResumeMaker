@@ -18,6 +18,9 @@ import Experience from "./components/Experience/experience";
 import ExperienceCreate from "./components/Experience/experienceCreate";
 import Billing from "./components/Billing/billing";
 import Resumes from "./components/Resume/resumes";
+import ResumeOne from "./components/Resume/resume1";
+import ResumeTwo from "./components/Resume/resume2";
+import ResumeThree from "./components/Resume/resume3";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
@@ -25,12 +28,12 @@ import Templates from "./components/Templates/templates";
 import TemplateOne from "./components/Templates/template1";
 import TemplateTwo from "./components/Templates/template2";
 import TemplateThree from "./components/Templates/template3";
-const publish_key = require("./config/keys.json").publish
+const publish_key = require("./config/keys.json").publish;
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <AuthProvider>
           <AuthContext.Consumer>
             {context => (
@@ -104,6 +107,21 @@ class App extends Component {
                   exact
                   path="/resumes"
                   render={props => <Resumes {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/resume1"
+                  render={props => <ResumeOne {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/resume2"
+                  render={props => <ResumeTwo {...props} context={context} />}
+                />
+                <Route
+                  exact
+                  path="/resume3"
+                  render={props => <ResumeThree {...props} context={context} />}
                 />
                 <StripeProvider apiKey={publish_key}>
                   <Elements>

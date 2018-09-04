@@ -1,23 +1,27 @@
 import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
 import { Link } from "react-router-dom";
 import "../CSS/component-general.css";
 
 class Summary extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[{ link: "/" }, { link: "/summary", title: "Summary" }]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Personal Summary</h1>
-            <i class="fa fa-angle-left sm"/><p  style={{fontSize: "0.8rem"}}>Please click the pencil to create one or more Personal Summaries about yourself. <br/>They should be aimed at the position you are seeking and contain somthing about the past, present, and future. </p>
+            <div class="fa fa-angle-left sm"/>
+            <p style={{ fontSize: "0.8rem" }}>
+              Please click the pencil to create one or more Personal Summaries
+              about yourself. <br />
+              They should be aimed at toward the position you are seeking for
+              and contain somthing about the past present and future.{" "}
+            </p>
             <div className="link-hide">
               <Link
                 to={{
@@ -25,10 +29,10 @@ class Summary extends Component {
                   state: { summaryIndex: false } // Setting Index passed into educationCreate component - false means new
                 }}
               >
-                <i class="fa fa-pencil fa-2x" aria-hidden="true" />
+                <i className="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
             </div>
-            <div className="summary-containment-div" >
+            <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
                   <ItemCard

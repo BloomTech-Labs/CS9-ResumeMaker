@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import axios from "axios";
 
 
+import classnames from "classnames";
 import "./sidebar.css";
 const urls = require("../../../config/config.json");
 
@@ -16,10 +17,9 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (
-      // this.props.context.userInfo.auth !== true &&
+      this.props.context.userInfo.auth !== true &&
       localStorage.getItem("token")
     ) {
-      console.log("passed token check");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -27,12 +27,13 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          const userData = response.data;
+          const userData = response.data.user;
+          const resumeData = response.data.resumes;
           this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
         })
         .catch(err => {
-          console.log("err", err);
-          this.props.context.actions.setLogout();
+          console.log("Server Error: ", err);
         });
     }
   }
@@ -48,6 +49,7 @@ class Sidebar extends Component {
     }
     return (
       <div className="sidebar">
+<<<<<<< HEAD
         <div className="static-sidebar" style={{fontFamily: "Verdana",   fontSize: "0.7rem", fontWeight: "550", }}>
           <Link to="/templates" className="sidebar-button">
             {" "}
@@ -84,8 +86,102 @@ class Sidebar extends Component {
           <Link to="/settings" className="sidebar-button">
             {" "}
             <i class="fa fa-sliders-h sm"/>Settings
+=======
+        <div
+          className="static-sidebar"
+          style={{
+            fontFamily: "Verdana",
+            fontSize: "0.7rem",
+            fontWeight: "550"
+          }}
+        >
+          <Link
+            to="/templates"
+            className={classnames({
+              active: window.location.pathname.includes("/templates")
+            })}
+          >
+            Templates
+          </Link>
+          <Link
+            to="/resumes"
+            className={classnames({
+              active: window.location.pathname.includes("/resumes")
+            })}
+          >
+            Resumes
+          </Link>
+          <Link
+            to="/jobtitle"
+            className={classnames({
+              active: window.location.pathname.includes("/jobtitle")
+            })}
+          >
+            Job Title
+          </Link>
+          <Link
+            to="/summary"
+            className={classnames({
+              active: window.location.pathname.includes("/summary")
+            })}
+          >
+            Summary
+          </Link>
+          <Link
+            to="/skills"
+            className={classnames({
+              active: window.location.pathname.includes("/skills")
+            })}
+          >
+            Skills
+          </Link>
+          <Link
+            to="/experience"
+            className={classnames({
+              active: window.location.pathname.includes("/experience")
+            })}
+          >
+            Experience
+          </Link>
+          <Link
+            to="/education"
+            className={classnames({
+              active: window.location.pathname.includes("/education")
+            })}
+          >
+            Education
+          </Link>
+          <Link
+            to="/billing"
+            className={classnames({
+              active: window.location.pathname.includes("/billing")
+            })}
+          >
+            Billing
+          </Link>
+          <Link
+            to="/settings"
+            className={classnames({
+              active: window.location.pathname.includes("/settings")
+            })}
+          >
+            Settings
+>>>>>>> 48c15dc9cda04e46c0d5674e3cbe8243b5cd98b3
           </Link>
         </div>
+        <Route
+          render={({ history }) => (
+            <div
+              className="logout btn"
+              onClick={() => {
+                this.props.context.actions.setLogout();
+                history.push("/");
+              }}
+            >
+              Logout
+            </div>
+          )}
+        />
       </div>
     );
   }

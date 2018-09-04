@@ -5,7 +5,6 @@ import {
   Container,
   Row,
   Col,
-  Modal,
   Button,
   Form,
   FormGroup,
@@ -15,7 +14,6 @@ import {
 } from "reactstrap";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import Navbar from "../SubComponents/Navbar/navbar";
 import "./settings.css";
 
 const urls = require("../../config/config.json");
@@ -31,7 +29,6 @@ export class PersonalInfo extends Component {
         lastname: ""
       },
       location: "",
-      // title: "",
       phonenumber: "",
       links: {
         linkedin: "",
@@ -50,6 +47,7 @@ export class PersonalInfo extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     console.log("ComponentDidMount");
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
@@ -87,7 +85,7 @@ export class PersonalInfo extends Component {
   };
 
   validateEmail = email => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
     return re.test(email);
   };
 
@@ -102,8 +100,7 @@ export class PersonalInfo extends Component {
     if (!password.match(/[A-Z]/)) return false;
     if (!password.match(/[a-z]/)) return false;
     if (!password.match(/\d/)) return false;
-    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
-      return false;
+    if (!password.match(/[`~!@#$%^&*()_\-+=[{]}|\\:;"'<,>.?\/]/)) return false;
     return true;
   };
 
@@ -405,6 +402,7 @@ export class PersonalInfo extends Component {
 
 class Settings extends Component {
   ComponentDidMount = () => {
+    window.scrollTo(0, 0);
     console.log("ComponentDidMount");
   };
   ShouldComponentUpdate = () => {
@@ -419,16 +417,9 @@ class Settings extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          context={this.props.context}
-          breadcrumbs={[
-            { link: "/" },
-            { link: "/settings", title: "Settings" }
-          ]}
-        />
-        <div className="overall-component-div">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div">
+          <div className="title-div col">
             <h1>Settings</h1>
             <PersonalInfo context={this.props.context} />
           </div>

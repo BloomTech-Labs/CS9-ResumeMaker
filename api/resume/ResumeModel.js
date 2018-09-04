@@ -7,6 +7,12 @@ const Resume = new Schema({
     type: ObjectId,
     ref: "User"
   },
+  title: [
+    {
+      id: Number,
+      value: Boolean
+    }
+  ],
   links: {
     linkedin: {
       value: Boolean
