@@ -37,7 +37,8 @@ class SummaryDropdown extends Component {
   // Allows us to select an li and set our state with the given value
   handleClick = data => {
     this.setState({
-      selected: data.content
+      selected: data.content,
+      toggled: false
     });
     this.props.context.actions.setResumeItemDropdown(
       this.props.index,
