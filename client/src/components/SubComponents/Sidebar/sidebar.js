@@ -44,9 +44,9 @@ class Sidebar extends Component {
 
   render() {
     // If there is no token, then going to any page will result in a redirect to login
-    if (!localStorage.getItem("token")) {
-      return <Redirect to="/login" />;
-    }
+    // if (!localStorage.getItem("token")) {
+    //   return <Redirect to="/login" />;
+    // }
     return (
       <div className="sidebar">
         <div
