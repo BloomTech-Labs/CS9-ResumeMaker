@@ -386,7 +386,7 @@ export class PersonalInfo extends Component {
               </FormGroup>
             </Form>
             <div className="settings-footer mt-4">
-              <Button color="primary" onClick={() => this.checkInputValidity()}>
+              <Button color="secondary" onClick={() => this.checkInputValidity()}>
                 Submit
               </Button>
               {this.state.changesSaved && this.state.changesSaved !== null ? (

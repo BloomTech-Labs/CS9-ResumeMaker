@@ -17,7 +17,7 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div">
             <h1>Personal Summary</h1>
-            <p  style={{fontSize: "0.8rem"}}>Please click the pencil to create one or more Personal Summaries about yourself. <br/>They should be aimed at toward the position you are seeking for and contain somthing about the past present and future. </p>
+            <i class="fa fa-angle-left sm"/><p  style={{fontSize: "0.8rem"}}>Please click the pencil to create one or more Personal Summaries about yourself. <br/>They should be aimed at the position you are seeking and contain somthing about the past, present, and future. </p>
             <div className="link-hide">
               <Link
                 to={{
