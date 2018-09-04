@@ -11,29 +11,29 @@ import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
 
-const cheese = {
+const user = {
   email: "cheese23@gmail.com",
   password: "Cheese123!",
   invalidCredentials: false
 };
 
-const scrinch = {
-  email: "scrinch@gmail.com",
-  password: "tacobell1!G",
-  invalidCredentials: false
-};
+// const user = {
+//   email: "scrinch@gmail.com",
+//   password: "tacobell1!G",
+//   invalidCredentials: false
+// };
 
-const bobbert = {
-  email: "bobbert@gmail.com",
-  password:
-    "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
-  invalidCredentials: false
-};
+// const user = {
+//   email: "bobbert@gmail.com",
+//   password:
+//     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
+//   invalidCredentials: false
+// };
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = bobbert;
+    this.state = user;
   }
 
   validateForm() {

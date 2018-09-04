@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
+import moment from "moment";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template3.css";
+import PDF from "../PDF/PDF";
 
 export class ResumeThree extends Component {
   componentDidMount() {
@@ -22,6 +24,7 @@ export class ResumeThree extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Elegant</h3>
             </div>
+            <PDF />
             <form className="template1" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div className="left-column">
@@ -103,6 +106,8 @@ export class ResumeThree extends Component {
                   <FormGroup textAlign="center" className="experienceSection">
                     <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return resumes[resumes.length - 1].sections.experience[
                         index
                       ].value ? (
@@ -113,7 +118,7 @@ export class ResumeThree extends Component {
                             <br />
                             {content.location}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                           <p>{content.description} </p>
                         </div>
@@ -124,6 +129,8 @@ export class ResumeThree extends Component {
                   <FormGroup textAlign="center" className="educationSection">
                     <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
+                              let from = moment(content.from).format("MMM YYYY");
+                              let to = moment(content.to).format("MMM YYYY");
                       return resumes[resumes.length - 1].sections.education[
                         index
                       ].value ? (
@@ -135,7 +142,7 @@ export class ResumeThree extends Component {
                           <p>
                             {content.school}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                         </div>
                       ) : null;

@@ -26,6 +26,7 @@ class AuthProvider extends Component {
     localStorage.removeItem("token");
     this.setState({
       auth: false,
+      currentResume: 0,
       username: "",
       email: "",
       name: {
@@ -46,6 +47,7 @@ class AuthProvider extends Component {
   setLogin = userData => {
     this.setState({
       auth: true,
+      currentResume: 0,
       email: userData.email ? userData.email : "",
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
@@ -69,35 +71,82 @@ class AuthProvider extends Component {
   };
 
   setResume = (resumeData) => {
-    this.setState({
-      resumes: resumeData
-    })
+    if (resumeData[0] === null) {
+      this.createResume(true);
+    } else {
+      this.setState({
+        resumes: resumeData
+      })
+    }
   }
 
-  createResume = () => {
-    const tempState = this.state.resumes;
+  createResume = (newResume) => {
+    let tempState = this.state.resumes;
     const tempObj = {
       links: { linkedin: false, github: false, portfolio: false },
       title: this.state.title.map(item => {
-        return { id: item._id, value: false }
+        return { _id: item._id, value: false }
       }),
       sections: {
         experience: this.state.experience.map(item => {
-          return { id: item._id, value: false }
+          return { _id: item._id, value: false }
         }),
         education: this.state.education.map(item => {
-          return { id: item._id, value: false }
+          return { _id: item._id, value: false }
         }),
         summary: this.state.summary.map(item => {
-          return { id: item._id, value: false }
+          return { _id: item._id, value: false }
         }),
         skills: this.state.skills.map(item => {
-          return { id: item._id, value: false }
+          return { _id: item._id, value: false }
         }),
       }
     }
-    tempState.push(tempObj);
+    if (newResume) {
+      tempState = [];
+      tempState.push(tempObj);
+    }
+    else
+      tempState.push(tempObj);
     this.setState({ resumes: tempState })
+  }
+
+  expandResumeIDs = (index) => {
+    const tempObj = this.state.resumes[index];
+
+    for (let item of this.state.title) {
+      let current = this.state.resumes[index].title.filter(resumeItem => (resumeItem._id === item._id))
+      current.length === 0
+        ? this.state.resumes[index].title.push({ _id: item._id, value: false })
+        : console.log()
+    }
+    for (let item of this.state.experience) {
+      let current = this.state.resumes[index].sections.experience.filter(resumeItem => (resumeItem._id === item._id))
+      current.length === 0
+        ? this.state.resumes[index].sections.experience.push({ _id: item._id, value: false })
+        : console.log()
+    }
+    for (let item of this.state.education) {
+      let current = this.state.resumes[index].sections.education.filter(resumeItem => (resumeItem._id === item._id))
+      current.length === 0
+        ? this.state.resumes[index].sections.education.push({ _id: item._id, value: false })
+        : console.log()
+    }
+    for (let item of this.state.summary) {
+      let current = this.state.resumes[index].sections.summary.filter(resumeItem => (resumeItem._id === item._id))
+      current.length === 0
+        ? this.state.resumes[index].sections.summary.push({ _id: item._id, value: false })
+        : console.log()
+    }
+    for (let item of this.state.skills) {
+      let current = this.state.resumes[index].sections.skills.filter(resumeItem => (resumeItem._id === item._id))
+      current.length === 0
+        ? this.state.resumes[index].sections.skills.push({ _id: item._id, value: false })
+        : console.log()
+    }
+    console.log(this.state.resumes[index].sections.skills)
+
+    this.setState({ ["resumes"[index]]: tempObj });
   }
 
   setResumeItemState = (index, name, id) => {
@@ -167,6 +216,7 @@ class AuthProvider extends Component {
             toggleAuth: this.toggleAuth,
             setResume: this.setResume,
             createResume: this.createResume,
+            expandResumeIDs: this.expandResumeIDs,
             setResumeItemState: this.setResumeItemState,
             setResumeItemDropdown: this.setResumeItemDropdown,
             setLogin: this.setLogin,
