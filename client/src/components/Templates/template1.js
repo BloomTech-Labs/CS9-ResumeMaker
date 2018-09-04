@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import moment from "moment";
+
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template1.css";
-import { Link } from "react-router-dom";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
@@ -13,22 +15,23 @@ export class TemplateOne extends Component {
     super(props);
     this.state = {
       index: this.props.context.userInfo.currentResume || 0
-    }
+    };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-  handleSubmit = (e) => {
-  }
+  handleSubmit = e => {};
 
   onCreate = () => {
     this.props.context.actions.createResume();
   };
 
   componentWillMount() {
-    this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume);
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
   }
 
   render() {
@@ -163,6 +166,8 @@ export class TemplateOne extends Component {
               <Container textAlign="center" className="experienceSection">
                 <h3>Experience</h3>
                 {experience.map((content, index) => {
+                  let from = moment(content.from).format("MMM YYYY");
+                  let to = moment(content.to).format("MMM YYYY");
                   return (
                     <div key={index}>
                       <h5>
@@ -186,7 +191,7 @@ export class TemplateOne extends Component {
                         <br />
                         {content.location}
                         <br />
-                        {content.from} - {content.to}
+                        {from} - {to}
                       </p>
                       <p>{content.description} </p>
                     </div>
@@ -197,6 +202,8 @@ export class TemplateOne extends Component {
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
                 {education.map((content, index) => {
+                  let from = moment(content.from).format("MMM YYYY");
+                  let to = moment(content.to).format("MMM YYYY");
                   return (
                     <div key={index}>
                       <h5>
@@ -217,7 +224,7 @@ export class TemplateOne extends Component {
                       <p>
                         {content.school}
                         <br />
-                        {content.from} - {content.to}
+                        {from} - {to}
                       </p>
                     </div>
                   );
