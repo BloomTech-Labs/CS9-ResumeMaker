@@ -17,11 +17,11 @@
 }
 
 .static-sidebar {
-  border-right: 1px solid black;
+  /* border-right: 1px solid black; */
   min-width: 10rem;
   /* min-height: 100vh !important; */
   padding: 0 !important;
-  position: fixed !important;
+  /* position: fixed !important; */
   display: flex;
   flex-direction: column;
   background: #162238;
@@ -41,7 +41,8 @@
 
 .sidebar .logout {
   /* margin-top: 3rem; */
-  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
   /* position: fixed;
   bottom: 0px; */
   color: #f2f2f0;

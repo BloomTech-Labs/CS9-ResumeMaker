@@ -128,20 +128,20 @@ class Sidebar extends Component {
           >
             Settings
           </Link>
-          <Route
-            render={({ history }) => (
-              <div
-                className="logout btn"
-                onClick={() => {
-                  this.props.context.actions.setLogout();
-                  history.push("/");
-                }}
-              >
-                Logout
-              </div>
-            )}
-          />
         </div>
+        <Route
+          render={({ history }) => (
+            <div
+              className="logout btn"
+              onClick={() => {
+                this.props.context.actions.setLogout();
+                history.push("/");
+              }}
+            >
+              Logout
+            </div>
+          )}
+        />
       </div>
     );
   }
