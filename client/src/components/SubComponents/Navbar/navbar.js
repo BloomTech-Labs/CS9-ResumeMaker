@@ -9,7 +9,7 @@ class Navbar extends Component {
       <nav className="navbar sticky-top navbar-dark bg-dark mb-0">
           
         <ol className="breadcrumb p-1 mb-0 bg-dark ">
-        <Link className="knockout" style={{fontSize: '1.3rem'}} to="/">RezLeft</Link>
+        <Link className="knockout" style={{fontSize: '1.3rem'}} to="/">rezLeft</Link>
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
               <Link
