@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
+import moment from "moment";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
@@ -83,6 +84,8 @@ export class ResumeTwo extends Component {
                   <FormGroup textAlign="center" className="educationSection">
                     <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return resumes[resumes.length - 1].sections.education[
                         index
                       ].value ? (
@@ -94,7 +97,7 @@ export class ResumeTwo extends Component {
                           <p>
                             {content.school}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                         </div>
                       ) : null;
@@ -118,6 +121,8 @@ export class ResumeTwo extends Component {
                   <FormGroup textAlign="center" className="experienceSection">
                     <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return resumes[resumes.length - 1].sections.experience[
                         index
                       ].value ? (
@@ -128,7 +133,7 @@ export class ResumeTwo extends Component {
                             <br />
                             {content.location}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                           <p>{content.description} </p>
                         </div>

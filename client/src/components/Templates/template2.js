@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
+import { Link } from "react-router-dom";
+import moment from "moment";
+
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Navbar from "../SubComponents/Navbar/navbar";
 import "./template2.css";
-import { Link } from "react-router-dom";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
@@ -101,11 +103,11 @@ export class TemplateTwo extends Component {
                       <p> {userInfo.email}</p>
                     </a>
                     <p>
-                      <i class="fa fa-globe" aria-hidden="true" />
+                      <i className="fa fa-globe" aria-hidden="true" />
                       {userInfo.location}
                     </p>
                     <p>
-                      <i class="fa fa-mobile" aria-hidden="true" />
+                      <i className="fa fa-mobile" aria-hidden="true" />
                       {userInfo.phonenumber}
                     </p>
                     <p>
@@ -125,7 +127,7 @@ export class TemplateTwo extends Component {
                         name="github"
                         value={resumes[resumes.length - 1].links.github.value}
                       />{" "}
-                      <i class="fa fa-github" aria-hidden="true" />
+                      <i className="fa fa-github" aria-hidden="true" />
                       {userInfo.links.github}
                     </p>
                     <p>
@@ -144,6 +146,8 @@ export class TemplateTwo extends Component {
                   <FormGroup textAlign="center" className="educationSection">
                     <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return (
                         <div key={index}>
                           <h5>
@@ -164,7 +168,7 @@ export class TemplateTwo extends Component {
                           <p>
                             {content.school}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                         </div>
                       );
@@ -201,6 +205,8 @@ export class TemplateTwo extends Component {
                   <FormGroup textAlign="center" className="experienceSection">
                     <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
                       return (
                         <div key={index}>
                           <h5>
@@ -223,7 +229,7 @@ export class TemplateTwo extends Component {
                             <br />
                             {content.location}
                             <br />
-                            {content.from} - {content.to}
+                            {from} - {to}
                           </p>
                           <p>{content.description} </p>
                         </div>
