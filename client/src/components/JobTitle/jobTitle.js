@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
+import ItemCard from "../SubComponents/ItemCard/itemCard";
 import "../CSS/component-general.css";
 
 class JobTitle extends Component {
@@ -28,20 +29,21 @@ class JobTitle extends Component {
                 <i className="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
             </div>
-            {this.props.context.userInfo.title.map((element, index) => {
-              return (
-                <Link
-                  style={{ color: "black", fontWeight: "600" }}
-                  to={{
-                    pathname: "/jobtitle/create", // component being Linked to
-                    state: { index: index } // Setting Index passed into titleCreate component
-                  }}
-                  key={index}
-                >
-                  <span>{element.content}</span>
-                </Link>
-              );
-            })}
+            <div className="titles-containment-div">
+              {this.props.context.userInfo.title.map((element, index) => {
+                return (
+                  <ItemCard
+                    linkTo="/jobtitle"
+                    elementName="title"
+                    putPath="title"
+                    index={index}
+                    key={index}
+                    content={element.content}
+                    context={this.props.context}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

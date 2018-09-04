@@ -34,16 +34,15 @@ class Summary extends Component {
             <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
-                  <div key={index}>
-                    <ItemCard
-                      linkTo="/summary"
-                      elementName="summary"
-                      putPath="sections.summary"
-                      index={index}
-                      content={element.content}
-                      context={this.props.context}
-                    />
-                  </div>
+                  <ItemCard
+                    linkTo="/summary"
+                    elementName="summary"
+                    putPath="sections.summary"
+                    index={index}
+                    key={index}
+                    content={element.content}
+                    context={this.props.context}
+                  />
                 );
               })}
             </div>

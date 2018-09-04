@@ -31,16 +31,15 @@ class Skills extends Component {
             <div className="skills-containment-div">
               {this.props.context.userInfo.skills.map((element, index) => {
                 return (
-                  <div key={index}>
-                    <ItemCard
-                      linkTo="/skills"
-                      elementName="skills"
-                      putPath="sections.skills"
-                      index={index}
-                      content={element.content}
-                      context={this.props.context}
-                    />
-                  </div>
+                  <ItemCard
+                    linkTo="/skills"
+                    elementName="skills"
+                    putPath="sections.skills"
+                    index={index}
+                    key={index}
+                    content={element.content}
+                    context={this.props.context}
+                  />
                 );
               })}
             </div>
