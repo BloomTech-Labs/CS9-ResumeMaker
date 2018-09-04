@@ -17,14 +17,14 @@
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
   font-weight: 800; 
-  text-shadow: 4px 4px #00FFC6;
+  text-shadow: 4px 4px darkslategray;
 }
 .land-btn {
   background: transparent; 
   font-family: Impact; 
   font-size: 1.9rem; 
   padding: 0.2rem; 
-  text-shadow: 2px 2px #C5C6C7;
+  text-shadow: 1px 1px darkslategray;
  
 }
 .land-btn:hover {

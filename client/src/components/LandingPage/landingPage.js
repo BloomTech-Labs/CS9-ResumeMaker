@@ -35,7 +35,7 @@ class LandingPage extends Component {
     return (
       <div className="App LandingPage">
       <div className="landing-box" align="center" style={{alignSelf: "center"}}>
-        <h1 className="Header" style={{fontFamily: "Impact", fontSize: "3rem"}}>RezLeft</h1>
+        <h1 className="Header" style={{fontFamily: "Impact", fontSize: "3rem"}}>rezLeft</h1>
         <p style={{fontSize: "0.8rem", fontFamily: "calibri", color: "black"}}>When Resumes need to go Right.. Go Left.</p>
         <Link className="landing-button" to="/login">
           <button type="button" className="land-btn btn" style={{fontSize: "1.3rem"}}>
