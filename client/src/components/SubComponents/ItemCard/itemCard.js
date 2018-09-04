@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardHeader, CardBody, CardText, Button } from "reactstrap";
+import axios from "axios";
+
+import urls from "../../../config/config.json";
 
 import "./itemcard.css";
 
@@ -13,6 +16,31 @@ function ellipsify(str) {
 }
 
 class ItemCard extends Component {
+  handleCopy = () => {
+    this.props.context.actions.addElement("summary", {
+      // When creating, do NOT put in an _id, let mongo autocreate one
+      content: this.props.content
+    });
+    const tempObj = {
+      "sections.summary": this.props.context.userInfo.summary
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        const userData = response.data.user;
+        this.props.context.actions.setLogin(userData);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  };
+
   render() {
     if (this.props.header) {
       return (
@@ -29,6 +57,7 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
+          <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
     } else
@@ -45,7 +74,7 @@ class ItemCard extends Component {
               <CardText>{ellipsify(this.props.content)}</CardText>
             </CardBody>
           </Link>
-          <Button>Copy</Button>
+          <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
   }

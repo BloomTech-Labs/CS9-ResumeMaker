@@ -39,6 +39,7 @@ class Summary extends Component {
                     index={index}
                     content={element.content}
                     key={index}
+                    context={this.props.context}
                   />
                 );
               })}
