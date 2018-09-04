@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
+
 import "./sidebar.css";
 const urls = require("../../../config/config.json");
 
@@ -50,39 +51,39 @@ class Sidebar extends Component {
         <div className="static-sidebar" style={{fontFamily: "Verdana",   fontSize: "0.7rem", fontWeight: "550", }}>
           <Link to="/templates" className="sidebar-button">
             {" "}
-            Templates
+            <i class="fa fa-copy sm"/> Templates
           </Link>
           <Link to="/resumes" className="sidebar-button">
             {" "}
-            Resumes
+            <i class="fa fa-file-alt sm"/>Resumes
           </Link>
           <Link to="/jobTitle" className="sidebar-button">
             {" "}
-            Job Title
+            <i className="fa fa-briefcase sm"/>Job Title
           </Link>
           <Link to="/summary" className="sidebar-button">
             {" "}
-            Summary
+            <i class="fa fa-edit sm"/>Summary
           </Link>
           <Link to="/skills" className="sidebar-button">
             {" "}
-            Skills
+            <i class="fa fa-toolbox sm"/>Skills
           </Link>
           <Link to="/experience" className="sidebar-button">
             {" "}
-            Experience
+            <i class="fa fa-lightbulb sm"/>Experience
           </Link>
           <Link to="/education" className="sidebar-button">
             {" "}
-            Education
+            <i class="fr fa-graduation-cap sm"/>Education
           </Link>
           <Link to="/billing" className="sidebar-button">
             {" "}
-            Billing
+            <i class="fa fa-credit-card sm"/>Billing
           </Link>
           <Link to="/settings" className="sidebar-button">
             {" "}
-            Settings
+            <i class="fa fa-sliders-h sm"/>Settings
           </Link>
         </div>
       </div>
