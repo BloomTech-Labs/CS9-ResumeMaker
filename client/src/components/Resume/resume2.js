@@ -12,15 +12,14 @@ export class ResumeTwo extends Component {
   componentWillMount() {
     if (this.props.context.userInfo.auth !== true)
       this.props.history.push("/resumes");
+    else
+      this.props.context.actions.expandResumeIDs(
+        this.props.context.userInfo.currentResume
+      );
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if (this.props.context.userInfo.auth) {
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
-    }
   }
 
   render() {

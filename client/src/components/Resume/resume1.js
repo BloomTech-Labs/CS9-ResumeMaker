@@ -11,15 +11,14 @@ export class ResumeOne extends Component {
   componentWillMount() {
     if (this.props.context.userInfo.auth !== true)
       this.props.history.push("/resumes");
+    else
+      this.props.context.actions.expandResumeIDs(
+        this.props.context.userInfo.currentResume
+      )
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if (this.props.context.userInfo.auth) {
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
-    }
   }
 
   render() {
@@ -80,8 +79,8 @@ export class ResumeOne extends Component {
                 {userInfo.summary.map((item, index) => {
                   return resumes[resumes.length - 1].sections.summary[index]
                     .value ? (
-                    <p key={item._id}>{item.content}</p>
-                  ) : null;
+                      <p key={item._id}>{item.content}</p>
+                    ) : null;
                 })}
               </Container>
               <Divider className="divider-div" />
@@ -90,10 +89,10 @@ export class ResumeOne extends Component {
                 {userInfo.skills.map((content, index) => {
                   return resumes[resumes.length - 1].sections.skills[index]
                     .value ? (
-                    <div key={index}>
-                      <p>{content.content}</p>
-                    </div>
-                  ) : null;
+                      <div key={index}>
+                        <p>{content.content}</p>
+                      </div>
+                    ) : null;
                 })}
               </Container>
               <Divider className="divider-div" />
@@ -104,40 +103,41 @@ export class ResumeOne extends Component {
                   let to = moment(content.to).format("MMM YYYY");
                   return resumes[resumes.length - 1].sections.experience[index]
                     .value ? (
-                    <div key={index}>
-                      <h5>{content.company} </h5>
-                      <p>
-                        {content.title}
-                        <br />
-                        {content.location}
-                        <br />
-                        {from} - {to}
-                      </p>
-                      <p>{content.description} </p>
-                    </div>
-                  ) : null;
+                      <div key={index}>
+                        <h5>{content.company} </h5>
+                        <p>
+                          {content.title}
+                          <br />
+                          {content.location}
+                          <br />
+                          {from} - {to}
+                        </p>
+                        <p>{content.description} </p>
+                      </div>
+                    ) : null;
                 })}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
+                {console.log(education)}
                 {education.map((content, index) => {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return resumes[resumes.length - 1].sections.education[index]
                     .value ? (
-                    <div key={index}>
-                      <h5>
-                        {content.degree} in {content.fieldofstudy}{" "}
-                      </h5>
-                      <p>{content.location}</p>
-                      <p>
-                        {content.school}
-                        <br />
-                        {from} - {to}
-                      </p>
-                    </div>
-                  ) : null;
+                      <div key={index}>
+                        <h5>
+                          {content.degree} in {content.fieldofstudy}{" "}
+                        </h5>
+                        <p>{content.location}</p>
+                        <p>
+                          {content.school}
+                          <br />
+                          {from} - {to}
+                        </p>
+                      </div>
+                    ) : null;
                 })}
               </Container>
             </form>

@@ -23,15 +23,14 @@ class TemplateOne extends Component {
   componentWillMount() {
     if (this.props.context.userInfo.auth !== true)
       this.props.history.push("/templates");
+    else
+      this.props.context.actions.expandResumeIDs(
+        this.props.context.userInfo.currentResume
+      );
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if (this.props.context.userInfo.auth) {
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
-    }
   }
 
   onCreate = () => {
@@ -48,9 +47,9 @@ class TemplateOne extends Component {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` +
-            this.props.context.userInfo.resumes[
-              this.props.context.userInfo.resumes.length - 1
-            ]._id,
+          this.props.context.userInfo.resumes[
+            this.props.context.userInfo.resumes.length - 1
+          ]._id,
           tempObj,
           {
             headers: {
@@ -213,71 +212,72 @@ class TemplateOne extends Component {
                 <h3>Experience</h3>
                 {experience.length > 0
                   ? experience.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return (
-                        <div key={index}>
-                          <h5>
-                            {" "}
-                            <CheckBox
-                              context={this.props.context}
-                              id={content._id}
-                              name="experience"
-                              value={
-                                resumes[resumes.length - 1].sections.experience[
-                                  index
-                                ].value
-                              }
-                              index={resumes.length - 1}
-                            />{" "}
-                            {content.company}{" "}
-                          </h5>
-                          <p>
-                            {" "}
-                            {content.title}
-                            <br />
-                            {content.location}
-                            <br />
-                            {from} - {to}
-                          </p>
-                          <p>{content.description} </p>
-                        </div>
-                      );
-                    })
+                    let from = moment(content.from).format("MMM YYYY");
+                    let to = moment(content.to).format("MMM YYYY");
+                    return (
+                      <div key={index}>
+                        <h5>
+                          {" "}
+                          <CheckBox
+                            context={this.props.context}
+                            id={content._id}
+                            name="experience"
+                            value={
+                              resumes[resumes.length - 1].sections.experience[
+                                index
+                              ].value
+                            }
+                            index={resumes.length - 1}
+                          />{" "}
+                          {content.company}{" "}
+                        </h5>
+                        <p>
+                          {" "}
+                          {content.title}
+                          <br />
+                          {content.location}
+                          <br />
+                          {from} - {to}
+                        </p>
+                        <p>{content.description} </p>
+                      </div>
+                    );
+                  })
                   : null}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="educationSection">
+                {console.log(education)}
                 <h3>Education</h3>
                 {education.length > 0
                   ? education.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return (
-                        <div key={index}>
-                          <h5>
-                            <CheckBox
-                              context={this.props.context}
-                              id={content._id}
-                              name="education"
-                              value={
-                                resumes[resumes.length - 1].sections.education[
-                                  index
-                                ].value
-                              }
-                              index={resumes.length - 1}
-                            />
-                            {content.degree} in {content.fieldofstudy}{" "}
-                          </h5>
-                          <p>{content.location}</p>
-                          <p>
-                            {content.school}
-                            <br />
-                            {from} - {to}
-                          </p>
-                        </div>
-                      );
-                    })
+                    let from = moment(content.from).format("MMM YYYY");
+                    let to = moment(content.to).format("MMM YYYY");
+                    return (
+                      <div key={index}>
+                        <h5>
+                          <CheckBox
+                            context={this.props.context}
+                            id={content._id}
+                            name="education"
+                            value={
+                              resumes[resumes.length - 1].sections.education[
+                                index
+                              ].value
+                            }
+                            index={resumes.length - 1}
+                          />
+                          {content.degree} in {content.fieldofstudy}{" "}
+                        </h5>
+                        <p>{content.location}</p>
+                        <p>
+                          {content.school}
+                          <br />
+                          {from} - {to}
+                        </p>
+                      </div>
+                    );
+                  })
                   : null}
               </Container>
             </form>

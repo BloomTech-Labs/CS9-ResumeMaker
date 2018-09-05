@@ -23,15 +23,11 @@ class TemplateTwo extends Component {
   componentWillMount() {
     if (this.props.context.userInfo.auth !== true)
       this.props.history.push("/templates");
+    else this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume)
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if (this.props.context.userInfo.auth) {
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
-    }
   }
 
   handleSubmit = event => {
@@ -45,9 +41,9 @@ class TemplateTwo extends Component {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` +
-            this.props.context.userInfo.resumes[
-              this.props.context.userInfo.resumes.length - 1
-            ]._id,
+          this.props.context.userInfo.resumes[
+            this.props.context.userInfo.resumes.length - 1
+          ]._id,
           tempObj,
           {
             headers: {
