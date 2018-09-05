@@ -16,6 +16,7 @@ class Sidebar extends Component {
 
   componentDidMount() {
     if (localStorage.getItem("token") && this.props.context.auth !== true) {
+      console.log("ComponentDidMount on sidebar called for new user info");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -23,6 +24,7 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
+          console.log("sidebar get response for currentuser:", response);
           const userData = response.data.user;
           const resumeData = response.data.resumes;
           this.props.context.actions.setLogin(userData);
@@ -32,6 +34,8 @@ class Sidebar extends Component {
           console.log("Server Error: ", err);
           this.props.context.actions.setLogout();
         });
+    } else {
+      console.log("Sidebar detected no token and/or auth === false");
     }
   }
 
