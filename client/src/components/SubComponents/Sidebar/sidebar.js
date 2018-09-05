@@ -65,7 +65,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-copy sm" style={{ color: "white" }} /> {" "} Templates
+            <div className="fa fa-copy sm" style={{ color: "white" }} /> {" "} Templates
           </Link>
           <Link
             to="/resumes"
@@ -74,7 +74,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-file-alt sm" style={{ color: "white" }} /> {" "} Resumes
+            <div className="fa fa-file-alt sm" style={{ color: "white" }} /> {" "} Resumes
           </Link>
           <Link
             to="/jobtitle"
@@ -91,7 +91,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-edit sm" style={{ color: "white" }} /> {" "} Summary
+            <div className="fa fa-edit sm" style={{ color: "white" }} /> {" "} Summary
           </Link>
           <Link
             to="/skills"
@@ -100,7 +100,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-wrench" style={{ color: "white" }} /> {" "} Skills
+            <div className="fa fa-wrench" style={{ color: "white" }} /> {" "} Skills
           </Link>
           <Link
             to="/experience"
@@ -109,7 +109,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-lightbulb sm" style={{ color: "white" }} /> {" "} Experience
+            <div className="fa fa-lightbulb sm" style={{ color: "white" }} /> {" "} Experience
           </Link>
           <Link
             to="/education"
@@ -118,7 +118,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-graduation-cap sm" style={{ color: "white" }} /> {" "}Education
+            <div className="fa fa-graduation-cap sm" style={{ color: "white" }} /> {" "}Education
           </Link>
           <Link
             to="/billing"
@@ -127,7 +127,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-credit-card sm" style={{ color: "white" }} /> {" "} Billing
+            <div className="fa fa-credit-card sm" style={{ color: "white" }} /> {" "} Billing
           </Link>
           <Link
             to="/settings"
@@ -136,7 +136,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-sliders-h sm" style={{ color: "white" }} /> {" "}Settings
+            <div className="fa fa-sliders-h sm" style={{ color: "white" }} /> {" "}Settings
           </Link>
         </div>
         <Route
