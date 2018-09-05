@@ -43,9 +43,9 @@ class TemplateThree extends Component {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` +
-          this.props.context.userInfo.resumes[
-            this.props.context.userInfo.resumes.length - 1
-          ]._id,
+            this.props.context.userInfo.resumes[
+              this.props.context.userInfo.resumes.length - 1
+            ]._id,
           tempObj,
           {
             headers: {
@@ -92,9 +92,9 @@ class TemplateThree extends Component {
 
     return (
       <div>
-        <div className="component-div">
+        <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Elegant</h3>
             </div>
