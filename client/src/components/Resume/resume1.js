@@ -138,6 +138,7 @@ export class ResumeOne extends Component {
                       </div>
                     ) : null;
                   })}
+                  <Divider className="divider-div" />
                 </Container>
               ) : null}
 
