@@ -16,7 +16,7 @@ class Summary extends Component {
           <div className="title-div col">
             <div className="link-hide">
               <h1 style={{ fontWeight: "570" }}>
-                Personal Summary{" "}
+                PERSONAL SUMMARY{" "}
                 <Link
                   to={{
                     pathname: "/summary/create", // component being Linked to
@@ -31,7 +31,7 @@ class Summary extends Component {
               Please click the pencil to create one or more Personal Summaries
               about yourself. <br />
               They should be aimed at toward the position you are seeking for
-              and contain somthing about the past present and future.{" "}
+              and contain something about the past present and future.{" "}
             </p>
 
             <div className="summary-containment-div">

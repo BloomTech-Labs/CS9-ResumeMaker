@@ -115,11 +115,11 @@ class SummaryCreate extends Component {
                   placeholder="Input your summary"
                 />
               </div>
-            </form>
             <button onClick={e => this.handleSubmit(e)}>Submit</button>
             {this.props.location.state.index !== false ? (
               <button onClick={e => this.handleSubmit(e, true)}>Delete</button>
             ) : null}
+            </form>
           </div>
         </div>
       </div>
