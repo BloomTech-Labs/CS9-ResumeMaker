@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import {
-  Modal,
   Button,
   Form,
   FormGroup,
+  FormFeedback,
   Input,
-  Label,
-  FormFeedback
+  Label
 } from "reactstrap";
 import "../Login/login.css";
 import axios from "axios";
@@ -117,7 +116,6 @@ class Register extends Component {
     // Putting the set state here allows the submit modal to show before
     // the email is sent. If the response gives an error the submittedError property
     // will override the submitted modal and show there was an error.
-    this.setState({ submitted: true });
     axios
       .post(`${urls[urls.basePath]}/users/register`, {
         username: this.state.username,
@@ -125,6 +123,7 @@ class Register extends Component {
         password: this.state.password
       })
       .then(response => {
+        this.setState({ submitted: true, submittedError: false });
         console.log(response);
       })
       .catch(err => {
@@ -222,7 +221,7 @@ class Register extends Component {
             <Button
               block
               size="lg"
-              color="secondary"
+              color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
@@ -240,26 +239,19 @@ class Register extends Component {
     } else {
       return (
         <div className="Login">
-          <div className="static-modal">
-            <Modal.Dialog>
-              {/* <Modal.Header>
-                <Modal.Title>We don't need a header probably</Modal.Title>
-              </Modal.Header> */}
-              <Modal.Body>
-                Thank you for registering. Please check your email to finish
-                account creation.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    this.props.history.push("/login");
-                  }}
-                >
-                  Take me to the login page
-                </Button>
-              </Modal.Footer>
-            </Modal.Dialog>
+          <div className="message">
+            <p>
+              Please check your email within 30 minutes to confirm your
+              registration, then you can log in.
+            </p>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Take me to the login page
+            </Button>
           </div>
         </div>
       );

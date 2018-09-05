@@ -40,14 +40,11 @@
   justify-content: space-around;
 }
 
-.Login .modal {
-  position: absolute;
-  /* the top and bottom make the modal relatively
-  centered on the screen */
-  top: 25%;
-  bottom: 10%;
-}
-
-.Login .modal-footer {
-  justify-content: center;
+.Login .message {
+  display: flex;
+  align-self: center;
+  background: #fff;
+  border-radius: 0.25rem;
+  flex-direction: column;
+  padding: 2rem;
 }

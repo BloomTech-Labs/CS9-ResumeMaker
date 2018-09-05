@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Modal,
   Button,
   Form,
   FormGroup,
@@ -95,25 +94,18 @@ class ForgotPassword extends Component {
     } else {
       return (
         <div className="Login">
-          <div className="static-modal">
-            <Modal.Dialog>
-              {/* <Modal.Header>
-                <Modal.Title>We don't need a header probably</Modal.Title>
-              </Modal.Header> */}
-              <Modal.Body>
-                Please check your email to get a temporary password.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    this.props.history.push("/login");
-                  }}
-                >
-                  Take me to the login page
-                </Button>
-              </Modal.Footer>
-            </Modal.Dialog>
+          <div className="message">
+            <p>
+              Please check your email within 30 minutes to reset your password.
+            </p>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Take me to the login page
+            </Button>
           </div>
         </div>
       );
