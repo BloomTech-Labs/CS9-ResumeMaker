@@ -6,9 +6,9 @@ import "./navbar.css";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar sticky-top navbar-dark bg-dark mb-0">
+      <nav className="navbar sticky-top mb-0">
           
-        <ol className="breadcrumb p-1 mb-0 bg-dark ">
+        {/* <ol className="breadcrumb p-1 mb-0 bg-dark ">
         <Link className="knockout" style={{fontSize: '1.3rem'}} to="/">rezLeft</Link>
           {this.props.breadcrumbs.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
@@ -27,18 +27,18 @@ class Navbar extends Component {
               </Link>
             </li>
           ))}
-        </ol>
+        </ol> */}
         <Route
           render={({ history }) => (
             <div
-              style={{ color: "#45A29E", fontWeight: "600", textShadow: "1px 1px black"}}
-              className="logout btn bg-dark"
+              style={{ fontSize: "0.8rem", fontFamily: "Verdana", color: "#F2F2F0", textShadow: "1px 1px black", padding: "0"}}
+              className="logout-btn logout btn"
               onClick={() => {
                 this.props.context.actions.setLogout();
                 history.push("/");
               }}
             >
-              Logout
+              LOGOUT
             </div>
           )}
         /> 
