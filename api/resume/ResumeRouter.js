@@ -33,7 +33,7 @@ router.get(
 */
 router.post(
   "/",
-    // passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newResume = new Resume(req.body);
     const { user } = req.body;
@@ -51,6 +51,28 @@ router.post(
             res.status(400).json({ Error: err });
           });
         res.status(201).json({ Resume: resume });
+      })
+      .catch(err => {
+        res.status(400).json({ Error: err });
+      });
+  }
+);
+
+/*
+  @route  resume/:id
+  @desc   Edit a resume by id
+  @access Private (Production) | Public (Development)
+*/
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { id } = req.params;
+    const updatedResume = req.body;
+
+    Resume.findByIdAndUpdate(id, updatedResume)
+      .then(resume => {
+        res.status(200).json({ resume });
       })
       .catch(err => {
         res.status(400).json({ Error: err });

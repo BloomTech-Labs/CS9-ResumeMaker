@@ -13,14 +13,16 @@ class TitleDropdown extends Component {
   }
 
   fillState = () => {
-    if (this.props.value.length !== 0) {
+    if (
+      this.props.value.length !== 0 &&
+      this.props.context.userInfo.title.length !== 0
+    ) {
       const temp = this.props.context.userInfo.title.filter(title => {
         return this.props.value[0]._id === title._id;
       });
-      return temp[0].content;
-    } else {
-      return "Select a Title";
-    }
+      if (temp.length > 0) return temp[0].content;
+      else return "Select a Title";
+    } else return "Select a Title";
   };
 
   // Toggles the drop down menu to appear based on the boolean value of state
@@ -33,7 +35,8 @@ class TitleDropdown extends Component {
   // Allows us to select an li and set our state with the given value
   handleClick = data => {
     this.setState({
-      selected: data.content
+      selected: data.content,
+      toggled: false
     });
     this.props.context.actions.setResumeItemDropdown(
       this.props.index,
