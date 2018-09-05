@@ -65,19 +65,25 @@ const User = new mongoose.Schema(
       }
     ],
     phonenumber: {
-      type: String
+      type: String,
+      default: ""
       // validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
-        type: String
+        type: String,
+        default: ""
         // validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
-        type: String
+        type: String,
+        default: ""
         // validate: [validateGithub, "Invalid GitHub"]
       },
-      portfolio: String
+      portfolio: {
+        type: String,
+        default: ""
+      }
     },
     sections: {
       summary: [
@@ -100,10 +106,16 @@ const User = new mongoose.Schema(
             type: String,
             default: ""
           },
-          location: String,
+          location: {
+            type: String,
+            default: ""
+          },
           from: Date,
           to: Date,
-          description: String
+          description: {
+            type: String,
+            default: ""
+          }
         }
       ],
       education: [

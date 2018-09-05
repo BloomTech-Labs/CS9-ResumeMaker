@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
+import ItemCard from "../SubComponents/ItemCard/itemCard";
 import "../CSS/component-general.css";
 
 class Education extends Component {
@@ -28,20 +29,21 @@ class Education extends Component {
                 <i className="fa fa-pencil fa-2x" aria-hidden="true" />
               </Link>
             </div>
-            {this.props.context.userInfo.education.map((element, index) => {
-              return (
-                <Link
-                  style={{ color: "black", fontWeight: "600" }}
-                  to={{
-                    pathname: "/education/create", // component being Linked to
-                    state: { index: index } // Setting Index passed into educationCreate component
-                  }}
-                  key={index}
-                >
-                  <span>{element.school}</span>
-                </Link>
-              );
-            })}
+            <div className="education-containment-div">
+              {this.props.context.userInfo.education.map((element, index) => {
+                return (
+                  <ItemCard
+                    linkTo="/education"
+                    elementName="education"
+                    putPath="sections.education"
+                    index={index}
+                    key={index}
+                    element={element}
+                    context={this.props.context}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
