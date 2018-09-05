@@ -13,21 +13,24 @@ class Education extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Education History</h1>
+            <div className="link-hide">
+              <h1>
+                Education History{" "}
+                <Link
+                  to={{
+                    pathname: "/education/create", // component being Linked to
+                    state: { index: false } // Setting Index passed into educationCreate component - false means new
+                  }}
+                >
+                  <i className="fa fa-pencil fa-sm" />
+                </Link>
+              </h1>
+            </div>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to enter the information for your
               Education History.
             </p>
-            <div className="link-hide">
-              <Link
-                to={{
-                  pathname: "/education/create", // component being Linked to
-                  state: { index: false } // Setting Index passed into educationCreate component - false means new
-                }}
-              >
-                <i className="fa fa-pencil fa-2x" aria-hidden="true" />
-              </Link>
-            </div>
+
             {this.props.context.userInfo.education.map((element, index) => {
               return (
                 <Link
