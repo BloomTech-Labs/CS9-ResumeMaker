@@ -140,26 +140,19 @@ class Register extends Component {
     if (this.state.submittedError === true) {
       return (
         <div className="Login">
-          <div className="static-modal">
-            <Modal.Dialog>
-              {/* <Modal.Header>
-                <Modal.Title>We don't need a header probably</Modal.Title>
-              </Modal.Header> */}
-              <Modal.Body>
-                There was an error with your submission or our server is down.
-                Please try again in a few minutes.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    this.resetSubmitStatus();
-                  }}
-                >
-                  Try again
-                </Button>
-              </Modal.Footer>
-            </Modal.Dialog>
+          <div className="message">
+            <p>
+              There was an error with your submission or our server is down.
+              Please try again in a few minutes.
+            </p>
+            <Button
+              color="secondary"
+              onClick={() => {
+                this.resetSubmitStatus();
+              }}
+            >
+              Try again
+            </Button>
           </div>
         </div>
       );
