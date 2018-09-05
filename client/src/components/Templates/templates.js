@@ -52,7 +52,7 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid black",
+                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -72,7 +72,7 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid black",
+                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -92,7 +92,7 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid black",
+                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{

@@ -54,7 +54,7 @@ class Resumes extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5 className="link">Resume 1</h5>
+                  <h5 className="link">RESUME 1</h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -72,7 +72,7 @@ class Resumes extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5 className="link">Resume 2</h5>
+                  <h5 className="link">RESUME 2</h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -90,7 +90,7 @@ class Resumes extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5 className="link">Resume 3</h5>
+                  <h5 className="link">RESUME 3</h5>
                 </Link>
               </div>
             </div>
