@@ -100,43 +100,47 @@ export class ResumeThree extends Component {
                     })}
                   </div>
                   <Divider className="divider-div" />
-                  <FormGroup
-                    textalign="center"
-                    id="summary"
-                    className="summarySection"
-                  >
-                    <h3 className="subtitle">Summary</h3>
-                    {userInfo.summary.map((item, index) => {
-                      return resumes[resumes.length - 1].sections.summary[index]
-                        .value ? (
+                  {summaryLength.length > 0 ? (
+                    <FormGroup
+                      textalign="center"
+                      id="summary"
+                      className="summarySection"
+                    >
+                      <h3 className="subtitle">Summary</h3>
+                      {userInfo.summary.map((item, index) => {
+                        return resumes[resumes.length - 1].sections.summary[
+                          index
+                        ].value ? (
                           <p key={item._id}>{item.content}</p>
                         ) : null;
-                    })}
-                  </FormGroup>
-                  <Divider className="divider-div" />
-
-                  <Divider className="divider-div" />
-
-                  <FormGroup textalign="center" className="skillsSection">
-                    <h3 className="subtitle">Skills</h3>
-                    {userInfo.skills.map((content, index) => {
-                      return resumes[resumes.length - 1].sections.skills[index]
-                        .value ? (
+                      })}
+                      <Divider className="divider-div" />
+                    </FormGroup>
+                  ) : null}
+                  {skillsLength.length > 0 ? (
+                    <FormGroup textalign="center" className="skillsSection">
+                      <h3 className="subtitle">Skills</h3>
+                      {userInfo.skills.map((content, index) => {
+                        return resumes[resumes.length - 1].sections.skills[
+                          index
+                        ].value ? (
                           <div key={index}>
                             <p>{content.content}</p>
                           </div>
                         ) : null;
-                    })}
-                  </FormGroup>
-                  <Divider className="divider-div" />
-                  <FormGroup textalign="center" className="experienceSection">
-                    <h3 className="subtitle">Experience</h3>
-                    {experience.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return resumes[resumes.length - 1].sections.experience[
-                        index
-                      ].value ? (
+                      })}
+                      <Divider className="divider-div" />
+                    </FormGroup>
+                  ) : null}
+                  {experienceLength.length > 0 ? (
+                    <FormGroup textalign="center" className="experienceSection">
+                      <h3 className="subtitle">Experience</h3>
+                      {experience.map((content, index) => {
+                        let from = moment(content.from).format("MMM YYYY");
+                        let to = moment(content.to).format("MMM YYYY");
+                        return resumes[resumes.length - 1].sections.experience[
+                          index
+                        ].value ? (
                           <div key={index}>
                             <h5>{content.company} </h5>
                             <p>
@@ -149,17 +153,19 @@ export class ResumeThree extends Component {
                             <p>{content.description} </p>
                           </div>
                         ) : null;
-                    })}
-                  </FormGroup>
-                  <Divider className="divider-div" />
-                  <FormGroup textalign="center" className="educationSection">
-                    <h3 className="subtitle">Education</h3>
-                    {education.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return resumes[resumes.length - 1].sections.education[
-                        index
-                      ].value ? (
+                      })}
+                      <Divider className="divider-div" />
+                    </FormGroup>
+                  ) : null}
+                  {educationLength.length > 0 ? (
+                    <FormGroup textalign="center" className="educationSection">
+                      <h3 className="subtitle">Education</h3>
+                      {education.map((content, index) => {
+                        let from = moment(content.from).format("MMM YYYY");
+                        let to = moment(content.to).format("MMM YYYY");
+                        return resumes[resumes.length - 1].sections.education[
+                          index
+                        ].value ? (
                           <div key={index}>
                             <h5>
                               {content.degree} in {content.fieldofstudy}{" "}
@@ -172,8 +178,9 @@ export class ResumeThree extends Component {
                             </p>
                           </div>
                         ) : null;
-                    })}
-                  </FormGroup>
+                      })}
+                    </FormGroup>
+                  ) : null}
                 </div>
               </div>
             </form>
