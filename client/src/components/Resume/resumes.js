@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 // import ResumeCard from "./SubComponents/resumeCard";
 import { Link } from "react-router-dom";
+import "../CSS/component-general.css";
 
 class Resumes extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class Resumes extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h1 className="Header">RESUMES</h1>
+              <h1 style={{fontWeight: "600"}}>RESUMES</h1>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">

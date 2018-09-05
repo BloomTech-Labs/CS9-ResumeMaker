@@ -15,7 +15,7 @@ class Experience extends Component {
           <div className="title-div col">
            
             <div className="link-hide">
-            <h1>Experience{" "}
+            <h1 style={{fontWeight: "600"}}>Experience{" "}
               <Link
                 to={{
                   pathname: "/experience/create", // component being Linked to

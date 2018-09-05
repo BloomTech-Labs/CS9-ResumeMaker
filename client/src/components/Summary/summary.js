@@ -15,7 +15,7 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-              <h1>
+              <h1 style={{fontWeight: "570"}}>
                 Personal Summary{" "}
                 <Link
                   to={{

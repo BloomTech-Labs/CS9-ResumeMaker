@@ -420,7 +420,7 @@ class Settings extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Settings</h1>
+            <h1 style={{fontWeight: "600", paddingBottom: "1.5rem"}}>SETTINGS</h1>
             <PersonalInfo context={this.props.context} />
           </div>
         </div>

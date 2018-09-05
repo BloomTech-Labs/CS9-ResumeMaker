@@ -15,7 +15,7 @@ class Skills extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
           <div className="link-hide">
-            <h1>Skills{" "}
+            <h1 style={{fontWeight: "600"}}>SKILLS{" "}
               <Link
                 to={{
                   pathname: "/skills/create", // component being Linked to

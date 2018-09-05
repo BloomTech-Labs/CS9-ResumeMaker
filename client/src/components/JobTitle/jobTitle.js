@@ -15,8 +15,7 @@ class JobTitle extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-              <h1>
-                Job Title{" "}
+              <h1 style={{fontWeight: "600"}}>JOB TITLE{" "}
                 <Link
                   to={{
                     pathname: "/jobtitle/create", // component being Linked to
