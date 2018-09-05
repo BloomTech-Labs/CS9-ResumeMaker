@@ -30,6 +30,18 @@ export class ResumeThree extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
+    const summaryLength = userInfo.summary.filter((item, index) => {
+      return resumes[resumes.length - 1].sections.summary[index].value;
+    });
+    const skillsLength = userInfo.skills.filter((item, index) => {
+      return resumes[resumes.length - 1].sections.skills[index].value;
+    });
+    const educationLength = userInfo.education.filter((item, index) => {
+      return resumes[resumes.length - 1].sections.education[index].value;
+    });
+    const experienceLength = userInfo.experience.filter((item, index) => {
+      return resumes[resumes.length - 1].sections.experience[index].value;
+    });
     return (
       <div>
         <div className="component-div">
