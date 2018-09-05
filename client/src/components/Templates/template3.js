@@ -84,7 +84,7 @@ class TemplateThree extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.auth || this.state.success ) {
+    if (!this.props.context.userInfo.auth || this.state.success) {
       return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
@@ -124,7 +124,7 @@ class TemplateThree extends Component {
                       alt="logo lion head png"
                     />
                   </a>
-                  <FormGroup textAlign="center" className="contactSection">
+                  <FormGroup textalign="center" className="contactSection">
                     <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section"> {userInfo.email}</p>
@@ -138,12 +138,12 @@ class TemplateThree extends Component {
                       <i className="fa fa-mobile" aria-hidden="true" />
                       {userInfo.phonenumber}
                     </p>
-                    <p className="contact-section">
+                    <p>
                       <CheckBox
                         context={this.props.context}
                         index={resumes.length - 1}
                         name="linkedin"
-                        value={resumes[resumes.length - 1].links.linkedin.value}
+                        value={resumes[resumes.length - 1].links.linkedin}
                       />
                       <i className={"fa fa-linkedin fa-sm"} />
                       {userInfo.links.linkedin}
@@ -153,9 +153,9 @@ class TemplateThree extends Component {
                         context={this.props.context}
                         index={resumes.length - 1}
                         name="github"
-                        value={resumes[resumes.length - 1].links.github.value}
+                        value={resumes[resumes.length - 1].links.github}
                       />{" "}
-                      <i className="fa fa-github" aria-hidden="true" />{" "}
+                      <i className="fa fa-github" aria-hidden="true" />
                       {userInfo.links.github}
                     </p>
                     <p>
@@ -163,16 +163,14 @@ class TemplateThree extends Component {
                         context={this.props.context}
                         index={resumes.length - 1}
                         name="portfolio"
-                        value={
-                          resumes[resumes.length - 1].links.portfolio.value
-                        }
+                        value={resumes[resumes.length - 1].links.portfolio}
                       />{" "}
                       {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                 </div>
                 <div className="col">
-                  <div textAlign="center" className="titleSection">
+                  <div style={{ textAlign: "center" }} className="titleSection">
                     <h2>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h2>
@@ -187,7 +185,7 @@ class TemplateThree extends Component {
                   </div>
                   <Divider className="divider-div" />
                   <FormGroup
-                    textAlign="center"
+                    textalign="center"
                     id="summary"
                     className="summarySection"
                   >
@@ -207,7 +205,7 @@ class TemplateThree extends Component {
 
                   <Divider className="divider-div" />
 
-                  <FormGroup textAlign="center" className="skillsSection">
+                  <FormGroup textalign="center" className="skillsSection">
                     <h3 className="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return (
@@ -232,7 +230,7 @@ class TemplateThree extends Component {
                     })}
                   </FormGroup>
                   <Divider className="divider-div" />
-                  <FormGroup textAlign="center" className="experienceSection">
+                  <FormGroup textalign="center" className="experienceSection">
                     <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
                       let from = moment(content.from).format("MMM YYYY");
@@ -267,7 +265,7 @@ class TemplateThree extends Component {
                     })}
                   </FormGroup>
                   <Divider className="divider-div" />
-                  <FormGroup textAlign="center" className="educationSection">
+                  <FormGroup textalign="center" className="educationSection">
                     <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
                       let from = moment(content.from).format("MMM YYYY");

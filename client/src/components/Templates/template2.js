@@ -33,7 +33,7 @@ class TemplateTwo extends Component {
       );
     }
   }
-  
+
   handleSubmit = event => {
     event.preventDefault();
     const tempObj = this.props.context.userInfo.resumes[
@@ -84,7 +84,7 @@ class TemplateTwo extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.auth || this.state.success ) {
+    if (!this.props.context.userInfo.auth || this.state.success) {
       return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
@@ -101,7 +101,7 @@ class TemplateTwo extends Component {
               <h3 className="page-header">Modern</h3>
             </div>
             <div className="justify-content-center">
-            <button
+              <button
                 to="/resumes"
                 className="resume-button"
                 type="submit"
@@ -112,7 +112,7 @@ class TemplateTwo extends Component {
               </button>
             </div>
             <form className="template1">
-              <div textAlign="center" className="titleSection">
+              <div style={{ textAlign: "center" }} className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
@@ -127,7 +127,7 @@ class TemplateTwo extends Component {
               </div>
               <Divider className="divider-div" />
               <Container
-                textAlign="center"
+                textalign="center"
                 id="summary"
                 className="summarySection"
               >
@@ -144,7 +144,7 @@ class TemplateTwo extends Component {
               <Divider className="divider-div" />
               <div className="row">
                 <div className="col">
-                  <FormGroup textAlign="center" className="contactSection">
+                  <FormGroup textalign="center" className="contactSection">
                     <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
                       <p> {userInfo.email}</p>
@@ -162,7 +162,7 @@ class TemplateTwo extends Component {
                         context={this.props.context}
                         index={resumes.length - 1}
                         name="linkedin"
-                        value={resumes[resumes.length - 1].links.linkedin.value}
+                        value={resumes[resumes.length - 1].links.linkedin}
                       />
                       <i className={"fa fa-linkedin fa-sm"} />
                       {userInfo.links.linkedin}
@@ -172,7 +172,7 @@ class TemplateTwo extends Component {
                         context={this.props.context}
                         index={resumes.length - 1}
                         name="github"
-                        value={resumes[resumes.length - 1].links.github.value}
+                        value={resumes[resumes.length - 1].links.github}
                       />{" "}
                       <i className="fa fa-github" aria-hidden="true" />
                       {userInfo.links.github}
@@ -182,15 +182,13 @@ class TemplateTwo extends Component {
                         context={this.props.context}
                         index={resumes.length - 1}
                         name="portfolio"
-                        value={
-                          resumes[resumes.length - 1].links.portfolio.value
-                        }
+                        value={resumes[resumes.length - 1].links.portfolio}
                       />{" "}
                       {userInfo.links.portfolio}
                     </p>
                   </FormGroup>
                   <Divider className="divider-div" />
-                  <FormGroup textAlign="center" className="educationSection">
+                  <FormGroup textalign="center" className="educationSection">
                     <h3 className="subtitle">Education</h3>
                     {education.map((content, index) => {
                       let from = moment(content.from).format("MMM YYYY");
@@ -224,7 +222,7 @@ class TemplateTwo extends Component {
                 </div>
                 <Divider className="divider-div" />
                 <div className="col">
-                  <FormGroup textAlign="center" className="skillsSection">
+                  <FormGroup textalign="center" className="skillsSection">
                     <h3 className="subtitle">Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return (
@@ -249,7 +247,7 @@ class TemplateTwo extends Component {
                     })}
                   </FormGroup>
                   <Divider className="divider-div" />
-                  <FormGroup textAlign="center" className="experienceSection">
+                  <FormGroup textalign="center" className="experienceSection">
                     <h3 className="subtitle">Experience</h3>
                     {experience.map((content, index) => {
                       let from = moment(content.from).format("MMM YYYY");

@@ -28,10 +28,10 @@ class TemplateOne extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     if (this.props.context.userInfo.auth) {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
+      this.props.context.actions.expandResumeIDs(
+        this.props.context.userInfo.currentResume
+      );
+    }
   }
 
   onCreate = () => {
@@ -44,7 +44,6 @@ class TemplateOne extends Component {
       this.props.context.userInfo.resumes.length - 1
     ];
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
-    console.log("Temp Obj", tempObj);
     if (tempObj._id) {
       axios
         .put(
@@ -84,7 +83,7 @@ class TemplateOne extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.auth || this.state.success ) {
+    if (!this.props.context.userInfo.auth || this.state.success) {
       return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
@@ -110,7 +109,7 @@ class TemplateOne extends Component {
                 Save Resume
               </button>
             </div>
-            <form className="template1" >
+            <form className="template1">
               <Container textAlign="center" className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
