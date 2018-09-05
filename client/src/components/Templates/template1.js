@@ -129,15 +129,15 @@ class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p> {userInfo.email}</p>
                 </a>
-                <p>
+                <div>
                   <div className="fa fa-globe" aria-hidden="true" />
                   {userInfo.location}
-                </p>
-                <p>
+                </div>
+                <div>
                   <div className="fa fa-mobile" aria-hidden="true" />
                   {userInfo.phonenumber}
-                </p>
-                <p>
+                </div>
+                <div>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -146,8 +146,8 @@ class TemplateOne extends Component {
                   />
                   <div className={"fa fa-linkedin fa-sm"} />
                   {userInfo.links.linkedin}
-                </p>
-                <p>
+                </div>
+                <div>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -156,7 +156,7 @@ class TemplateOne extends Component {
                   />{" "}
                   <div className="fa fa-github" aria-hidden="true" />
                   {userInfo.links.github}
-                </p>
+                </div>
                 <p>
                   <CheckBox
                     context={this.props.context}
