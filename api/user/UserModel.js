@@ -102,7 +102,8 @@ const User = new mongoose.Schema(
           },
           location: String,
           from: Date,
-          to: Date
+          to: Date,
+          description: String
         }
       ],
       education: [

@@ -52,7 +52,6 @@ class AuthProvider extends Component {
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
         middlename: userData.name.middlename ? userData.name.middlename : "",
-
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
       title: userData.title ? userData.title : [],
@@ -112,6 +111,16 @@ class AuthProvider extends Component {
   }
 
   expandResumeIDs = (index) => {
+
+    function findWithAttr(array, attr, value) {
+      for (var i = 0; i < array.length; i += 1) {
+        if (array[i][attr] === value) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
     const tempObj = this.state.resumes[index];
 
     for (let item of this.state.title) {
@@ -119,32 +128,80 @@ class AuthProvider extends Component {
       current.length === 0
         ? this.state.resumes[index].title.push({ _id: item._id, value: false })
         : console.log()
-    }
+    } // All items in context now have a resume counterpart
+    let loopVar = this.state.resumes[index].title.length;
+    for (let i = 0; loopVar > i; i++) {
+      if (findWithAttr(this.state.title, "_id", this.state.resumes[index].title[i]._id) > -1) { }
+      else {
+        tempObj.title.splice(i, 1);
+        loopVar--;
+        i--;
+      }
+    }// All items in resume that are not in context were deleted from resume
+
     for (let item of this.state.experience) {
       let current = this.state.resumes[index].sections.experience.filter(resumeItem => (resumeItem._id === item._id))
       current.length === 0
         ? this.state.resumes[index].sections.experience.push({ _id: item._id, value: false })
         : console.log()
     }
+    loopVar = this.state.resumes[index].sections.experience.length;
+    for (let i = 0; loopVar > i; i++) {
+      if (findWithAttr(this.state.experience, "_id", this.state.resumes[index].sections.experience[i]._id) > -1) { }
+      else {
+        tempObj.sections.experience.splice(i, 1)
+        loopVar--;
+        i--;
+      }
+    }
+
     for (let item of this.state.education) {
       let current = this.state.resumes[index].sections.education.filter(resumeItem => (resumeItem._id === item._id))
       current.length === 0
         ? this.state.resumes[index].sections.education.push({ _id: item._id, value: false })
         : console.log()
     }
+    loopVar = this.state.resumes[index].sections.education.length;
+    for (let i = 0; loopVar > i; i++) {
+      if (findWithAttr(this.state.education, "_id", this.state.resumes[index].sections.education[i]._id) > -1) { }
+      else {
+        tempObj.sections.education.splice(i, 1)
+        loopVar--;
+        i--;
+      }
+    }
+
     for (let item of this.state.summary) {
       let current = this.state.resumes[index].sections.summary.filter(resumeItem => (resumeItem._id === item._id))
       current.length === 0
         ? this.state.resumes[index].sections.summary.push({ _id: item._id, value: false })
         : console.log()
     }
+    loopVar = this.state.resumes[index].sections.summary.length;
+    for (let i = 0; loopVar > i; i++) {
+      if (findWithAttr(this.state.summary, "_id", this.state.resumes[index].sections.summary[i]._id) > -1) { }
+      else {
+        tempObj.sections.summary.splice(i, 1)
+        loopVar--;
+        i--;
+      }
+    }
+
     for (let item of this.state.skills) {
       let current = this.state.resumes[index].sections.skills.filter(resumeItem => (resumeItem._id === item._id))
       current.length === 0
         ? this.state.resumes[index].sections.skills.push({ _id: item._id, value: false })
         : console.log()
     }
-    console.log(this.state.resumes[index].sections.skills)
+    loopVar = this.state.resumes[index].sections.skills.length;
+    for (let i = 0; loopVar > i; i++) {
+      if (findWithAttr(this.state.skills, "_id", this.state.resumes[index].sections.skills[i]._id) > -1) { }
+      else {
+        tempObj.sections.skills.splice(i, 1)
+        loopVar--;
+        i--;
+      }
+    }
 
     this.setState({ ["resumes"[index]]: tempObj });
   }

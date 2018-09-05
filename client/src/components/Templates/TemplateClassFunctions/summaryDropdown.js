@@ -13,11 +13,15 @@ class SummaryDropdown extends Component {
   }
 
   fillState = () => {
-    if (this.props.value.length !== 0) {
+    if (
+      this.props.value.length !== 0 &&
+      this.props.context.userInfo.summary.length !== 0
+    ) {
       const temp = this.props.context.userInfo.summary.filter(summary => {
         return this.props.value[0]._id === summary._id;
       });
-      return temp[0].content;
+      if (temp.length > 0) return temp[0].content;
+      else return "Select a Summary";
     } else {
       return "Select a Summary";
     }
@@ -33,7 +37,8 @@ class SummaryDropdown extends Component {
   // Allows us to select an li and set our state with the given value
   handleClick = data => {
     this.setState({
-      selected: data.content
+      selected: data.content,
+      toggled: false
     });
     this.props.context.actions.setResumeItemDropdown(
       this.props.index,
