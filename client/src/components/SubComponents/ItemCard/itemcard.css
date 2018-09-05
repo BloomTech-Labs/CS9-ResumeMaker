@@ -14,7 +14,7 @@
 /* the row card variants are for small one line cards */
 .item-card.row-card {
   flex-direction: row;
-  margin: 3% 0;
+  margin: 1%;
 }
 
 /* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
@@ -85,6 +85,18 @@
 .education-containment-div .item-card.card {
   width: 25%;
   min-height: 12rem;
+}
+
+.skills-containment-div,
+.titles-containment-div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  min-width: 50%;
+  flex-direction: column;
+  max-height: 60vh;
+  padding: 2rem;
 }
 
 /* .summary-card-link {
