@@ -18,7 +18,8 @@ class AuthProvider extends Component {
     experience: [],
     skills: [],
     summary: [],
-    resumes: []
+    resumes: [],
+    currentResume: 0
   }
 
 
@@ -123,85 +124,50 @@ class AuthProvider extends Component {
 
     const tempObj = this.state.resumes[index];
 
-    for (let item of this.state.title) {
-      let current = this.state.resumes[index].title.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].title.push({ _id: item._id, value: false })
-        : console.log()
-    } // All items in context now have a resume counterpart
-    let loopVar = this.state.resumes[index].title.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.title, "_id", this.state.resumes[index].title[i]._id) > -1) { }
-      else {
-        tempObj.title.splice(i, 1);
-        loopVar--;
-        i--;
-      }
-    }// All items in resume that are not in context were deleted from resume
-
-    for (let item of this.state.experience) {
-      let current = this.state.resumes[index].sections.experience.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.experience.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.experience.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.experience, "_id", this.state.resumes[index].sections.experience[i]._id) > -1) { }
-      else {
-        tempObj.sections.experience.splice(i, 1)
-        loopVar--;
-        i--;
-      }
-    }
-
-    for (let item of this.state.education) {
-      let current = this.state.resumes[index].sections.education.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.education.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.education.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.education, "_id", this.state.resumes[index].sections.education[i]._id) > -1) { }
-      else {
-        tempObj.sections.education.splice(i, 1)
-        loopVar--;
-        i--;
+    const expandSection = (section, resumeSection) => {
+      // no .sections portion
+      if (!resumeSection) {
+        for (let item of this.state[section]) {
+          let current = this.state.resumes[index][section].filter(resumeItem => (resumeItem._id === item._id))
+          current.length === 0
+            ? this.state.resumes[index][section].push({ _id: item._id, value: false })
+            : console.log()
+        } // All items in context now have a resume counterpart
+        let loopVar = this.state.resumes[index][section].length;
+        for (let i = 0; loopVar > i; i++) {
+          if (findWithAttr(this.state[section], "_id", this.state.resumes[index][section][i]._id) > -1) { }
+          else {
+            tempObj[section].splice(i, 1);
+            loopVar--;
+            i--;
+          }
+        }// All items in resume that are not in context were deleted from resume
+      } else {
+        //.sections portion
+        console.log("Section:", section, this.state.resumes[index].sections[section]);
+        for (let item of this.state[section]) {
+          let current = this.state.resumes[index].sections[section].filter(resumeItem => (resumeItem._id === item._id))
+          current.length === 0
+            ? this.state.resumes[index].sections[section].push({ _id: item._id, value: false })
+            : console.log()
+        } // All items in context now have a resume counterpart
+        let loopVar = this.state.resumes[index].sections[section].length;
+        for (let i = 0; loopVar > i; i++) {
+          if (findWithAttr(this.state[section], "_id", this.state.resumes[index].sections[section][i]._id) > -1) { }
+          else {
+            tempObj.sections[section].splice(i, 1);
+            loopVar--;
+            i--;
+          }
+        }// All items in resume that are not in context were deleted from resume
       }
     }
 
-    for (let item of this.state.summary) {
-      let current = this.state.resumes[index].sections.summary.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.summary.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.summary.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.summary, "_id", this.state.resumes[index].sections.summary[i]._id) > -1) { }
-      else {
-        tempObj.sections.summary.splice(i, 1)
-        loopVar--;
-        i--;
-      }
-    }
-
-    for (let item of this.state.skills) {
-      let current = this.state.resumes[index].sections.skills.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.skills.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.skills.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.skills, "_id", this.state.resumes[index].sections.skills[i]._id) > -1) { }
-      else {
-        tempObj.sections.skills.splice(i, 1)
-        loopVar--;
-        i--;
-      }
-    }
+    expandSection("title", false);
+    expandSection("experience", true);
+    expandSection("education", true);
+    expandSection("summary", true);
+    expandSection("skills", true);
 
     this.setState({ ["resumes"[index]]: tempObj });
   }
