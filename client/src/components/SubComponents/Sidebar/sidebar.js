@@ -15,7 +15,7 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") && this.props.context.auth !== true) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -60,7 +60,6 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/templates")
             })}
           >
-            {" "}
             <div className="fa fa-copy sm" style={{ color: "white" }} />{" "}
             Templates
           </Link>
@@ -70,11 +69,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/resumes")
             })}
           >
-            {" "}
-            <div
-              className="fa fa-file-alt sm"
-              style={{ color: "white" }}
-            />{" "}
+            <div className="fa fa-file-alt sm" style={{ color: "white" }} />
             Resumes
           </Link>
           <Link
@@ -92,7 +87,6 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/summary")
             })}
           >
-            {" "}
             <div className="fa fa-edit sm" style={{ color: "white" }} /> Summary
           </Link>
           <Link
@@ -101,7 +95,6 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/skills")
             })}
           >
-            {" "}
             <div className="fa fa-wrench" style={{ color: "white" }} /> Skills
           </Link>
           <Link
@@ -110,11 +103,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/experience")
             })}
           >
-            {" "}
-            <div
-              className="fa fa-lightbulb sm"
-              style={{ color: "white" }}
-            />{" "}
+            <div className="fa fa-lightbulb sm" style={{ color: "white" }} />
             Experience
           </Link>
           <Link
@@ -123,11 +112,10 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/education")
             })}
           >
-            {" "}
             <div
               className="fa fa-graduation-cap sm"
               style={{ color: "white" }}
-            />{" "}
+            />
             Education
           </Link>
           <Link
@@ -136,11 +124,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/billing")
             })}
           >
-            {" "}
-            <div
-              className="fa fa-credit-card sm"
-              style={{ color: "white" }}
-            />{" "}
+            <div className="fa fa-credit-card sm" style={{ color: "white" }} />{" "}
             Billing
           </Link>
           <Link
@@ -149,11 +133,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/settings")
             })}
           >
-            {" "}
-            <div
-              className="fa fa-sliders-h sm"
-              style={{ color: "white" }}
-            />{" "}
+            <div className="fa fa-sliders-h sm" style={{ color: "white" }} />
             Settings
           </Link>
         </div>
