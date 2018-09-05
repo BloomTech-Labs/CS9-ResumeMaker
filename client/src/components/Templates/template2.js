@@ -105,7 +105,7 @@ class TemplateTwo extends Component {
                 onClick={this.handleSubmit}
               >
                 {" "}
-                Save Resume
+                SAVE RESUME
               </button>
             </div>
             <form className="template1">
