@@ -37,7 +37,6 @@ class Summary extends Component {
             <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
-                  <React.Fragment key={index}>
                     <ItemCard
                       linkTo="/summary"
                       elementName="summary"
@@ -47,7 +46,6 @@ class Summary extends Component {
                       content={element.content}
                       context={this.props.context}
                     />
-                  </React.Fragment>
                 );
               })}
             </div>
