@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Modal,
   Button,
   Form,
   FormGroup,
@@ -9,19 +10,18 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import "../Login/login.css";
+
 const urls = require("../../config/config.json");
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      submitted: false
-    };
-  }
+class ForgotPassword extends Component {
+  state = {
+    email: "",
+    submitted: false,
+    submittedError: false
+  };
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0;
   }
 
   handleChange = event => {
@@ -30,67 +30,95 @@ export default class Login extends Component {
     });
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-
+  handleSubmit = () => {
     axios
-      .post(`${urls[urls.basePath]}/users/forgotpassword`, {
+      .put(`${urls[urls.basePath]}/users/forgotpassword`, {
         email: this.state.email
       })
       .then(response => {
-        if (response.data.token) {
-          this.setState({ submitted: true });
-        } else this.setState({ submitted: false, email: "" });
+        console.log(response);
+        this.setState({ submitted: true, submittedError: false });
       })
       .catch(err => {
         console.log("err", err);
+        this.setState({ submitted: false, submittedError: true });
       });
   };
 
   render() {
-    return (
-      <div className="Login">
-        <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <Label>Email</Label>
-            <Input
-              autoFocus
-              id="email"
-              invalid={this.state.invalidCredentials}
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              autoComplete="username"
-            />
-            <FormFeedback invalid>
-              The email or password you entered are incorrect.
-            </FormFeedback>
-          </FormGroup>
-          <Button
-            block
-            size="lg"
-            color="primary"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Submit
-          </Button>
-          <div className="bottom-buttons">
+    if (this.state.submitted === false) {
+      return (
+        <div className="Login">
+          <Form>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                autoFocus
+                id="email"
+                invalid={this.state.submittedError}
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                autoComplete="username"
+              />
+              <FormFeedback invalid>
+                The email your entered is not associated with a user or there
+                was an error contacting the server.
+              </FormFeedback>
+            </FormGroup>
             <Button
-              color="danger"
-              onClick={() => this.props.history.push("/login")}
+              block
+              size="lg"
+              color="primary"
+              disabled={!this.validateForm()}
+              onClick={() => this.handleSubmit()}
             >
-              Login
+              Submit
             </Button>
-            <Button
-              color="danger"
-              onClick={() => this.props.history.push("/register")}
-            >
-              Register
-            </Button>
+            <div className="bottom-buttons">
+              <Button
+                color="danger"
+                onClick={() => this.props.history.push("/login")}
+              >
+                Login
+              </Button>
+              <Button
+                color="danger"
+                onClick={() => this.props.history.push("/register")}
+              >
+                Register
+              </Button>
+            </div>
+          </Form>
+        </div>
+      );
+    } else {
+      return (
+        <div className="Login">
+          <div className="static-modal">
+            <Modal.Dialog>
+              {/* <Modal.Header>
+                <Modal.Title>We don't need a header probably</Modal.Title>
+              </Modal.Header> */}
+              <Modal.Body>
+                Please check your email to get a temporary password.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  color="secondary"
+                  onClick={() => {
+                    this.props.history.push("/login");
+                  }}
+                >
+                  Take me to the login page
+                </Button>
+              </Modal.Footer>
+            </Modal.Dialog>
           </div>
-        </Form>
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
+
+export default ForgotPassword;
