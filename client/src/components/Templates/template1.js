@@ -247,7 +247,6 @@ class TemplateOne extends Component {
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="educationSection">
-                {console.log(education)}
                 <h3>Education</h3>
                 {education.length > 0
                   ? education.map((content, index) => {
