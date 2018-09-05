@@ -13,30 +13,35 @@
   padding-top: 30vh;
 }
 .Header {
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: darkslategray;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
-  font-weight: 800; 
-  text-shadow: 4px 4px darkslategray;
+  font-weight: 600; 
+  /* text-shadow: 4px 4px darkslategray; */
+  padding-top: 2rem; 
 }
 .land-btn {
   background: transparent; 
-  font-family: Impact; 
   font-size: 1rem; 
-  padding: 0.0rem; 
+  font-family: Cambria;
+  /* padding: 5px !important;  */
   text-shadow: 1px 1px darkslategrey;
  
 }
 /* .land-btn:hover {
   font-weight: 500; 
 } */
+
+/* 
 .landing-box {
   height: 9rem; 
   width: 14rem; 
-  /* border: 1px solid black;  */
   margin: 0 auto;  
   padding: 1.2rem; 
   background-color:rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  /* box-shadow: 2px 2px black;  */
+  border-radius: 130px;
+   */
+
+.fa-angle-left {
+  height: 0.5rem !important;
 }
