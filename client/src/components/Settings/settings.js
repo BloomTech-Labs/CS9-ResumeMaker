@@ -91,8 +91,6 @@ export class PersonalInfo extends Component {
 
   checkPasswordStrength = password => {
     if (password === "") {
-      console.log("pass is empty");
-
       return false;
     }
     const minlength = 6;
@@ -383,7 +381,10 @@ export class PersonalInfo extends Component {
               </FormGroup>
             </Form>
             <div className="settings-footer mt-4">
-              <Button color="secondary" onClick={() => this.checkInputValidity()}>
+              <Button
+                color="secondary"
+                onClick={() => this.checkInputValidity()}
+              >
                 Submit
               </Button>
               {this.state.changesSaved && this.state.changesSaved !== null ? (

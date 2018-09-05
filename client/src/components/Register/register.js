@@ -15,15 +15,15 @@ const urls = require("../../config/config.json");
 
 class Register extends Component {
   state = {
-    email: "screech@gmail.com",
-    password: "Screech1G!",
-    confirmPassword: "Screech1G!",
-    username: "screech",
+    email: "scrinch@gmail.com",
+    password: "scrinch1G!",
+    confirmPassword: "scrinch1G!",
+    username: "scrinch",
     submitted: false,
     submittedError: false,
-    usernameInvalid: null,
-    emailInvalid: null,
-    passwordInvalid: null
+    usernameInvalid: false,
+    emailInvalid: false,
+    passwordInvalid: false
   };
 
   validateForm() {
@@ -41,17 +41,36 @@ class Register extends Component {
     });
   };
 
+  validateEmail = email => {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+  };
+
+  checkPasswordStrength = password => {
+    if (password === "") {
+      return false;
+    }
+    const minlength = 6;
+    if (password.length < minlength) return false;
+    if (!password.match(/[A-Z]/)) return false;
+    if (!password.match(/[a-z]/)) return false;
+    if (!password.match(/\d/)) return false;
+    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+      return false;
+    return true;
+  };
+
   checkInputValidity = () => {
     this.setState({
-      usernameInvalid: null,
-      emailInvalid: null,
-      passwordInvalid: null
+      usernameInvalid: false,
+      emailInvalid: false,
+      passwordInvalid: false
     });
     const usernamePromise = axios
       .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
       .then(response => {
         console.log(response);
-        this.setState({ usernameInvalid: "error" });
+        this.setState({ usernameInvalid: true });
       })
       .catch(err => {
         console.log(err);
@@ -60,16 +79,16 @@ class Register extends Component {
       .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
       .then(response => {
         console.log(response);
-        this.setState({ emailInvalid: "error" });
+        this.setState({ emailInvalid: true });
       })
       .catch(err => {
         console.log(err);
       });
     if (!this.validateEmail(this.state.email)) {
-      this.setState({ emailInvalid: "error" });
+      this.setState({ emailInvalid: true });
     }
     if (!this.checkPasswordStrength(this.state.password)) {
-      this.setState({ passwordInvalid: "error" });
+      this.setState({ passwordInvalid: true });
     }
 
     // If all fields are valid and the confirm password matches password,
@@ -77,9 +96,9 @@ class Register extends Component {
     Promise.all([usernamePromise, emailPromise]).then(values => {
       console.log("The current state:", this.state);
       if (
-        this.state.usernameInvalid === null &&
-        this.state.emailInvalid === null &&
-        this.state.passwordInvalid === null &&
+        this.state.usernameInvalid === false &&
+        this.state.emailInvalid === false &&
+        this.state.passwordInvalid === false &&
         this.state.password === this.state.confirmPassword
       ) {
         this.handleSubmit();
