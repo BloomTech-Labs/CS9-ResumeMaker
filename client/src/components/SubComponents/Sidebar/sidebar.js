@@ -15,10 +15,7 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
-    if (
-      this.props.context.userInfo.auth !== true &&
-      localStorage.getItem("token")
-    ) {
+    if (localStorage.getItem("token")) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
