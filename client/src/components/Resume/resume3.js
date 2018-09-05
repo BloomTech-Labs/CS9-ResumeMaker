@@ -3,7 +3,7 @@ import { Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template3.css";
 import PDF from "../PDF/PDF";
@@ -44,6 +44,7 @@ export class ResumeThree extends Component {
     });
     return (
       <div>
+        <Navbar/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

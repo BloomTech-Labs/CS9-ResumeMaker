@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ class Summary extends Component {
     return (
       <div>
         <div className="overall-component-div row">
+        <Navbar/>
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">

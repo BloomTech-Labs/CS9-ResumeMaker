@@ -4,7 +4,7 @@ import { FormGroup } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template2.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
@@ -89,7 +89,9 @@ class TemplateTwo extends Component {
 
     return (
       <div>
+         <Navbar/>
         <div className="component-div">
+       
           <Sidebar context={this.props.context} />
           <div className="page-div">
             <div className="d-block justify-content-center title-div">

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { injectStripe } from "react-stripe-elements";
 import axios from "axios";
 import CheckoutForm from "./checkoutForm";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Loading from "./Loading";
 import "./billing.css";
@@ -133,6 +133,7 @@ class Billing extends Component {
   render() {
     return (
       <div>
+        <Navbar/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">

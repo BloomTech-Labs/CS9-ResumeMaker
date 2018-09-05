@@ -3,7 +3,7 @@ import { Container, Divider } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template1.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
@@ -91,6 +91,7 @@ class TemplateOne extends Component {
     const resumes = this.props.context.userInfo.resumes;
     return (
       <div>
+         <Navbar/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

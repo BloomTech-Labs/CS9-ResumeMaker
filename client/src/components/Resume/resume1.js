@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template1.css";
 import PDF from "../PDF/PDF";
@@ -44,6 +44,7 @@ export class ResumeOne extends Component {
 
     return (
       <div>
+        <Navbar/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import "../CSS/component-general.css";
@@ -10,6 +11,7 @@ class Education extends Component {
   render() {
     return (
       <div>
+        <Navbar/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">

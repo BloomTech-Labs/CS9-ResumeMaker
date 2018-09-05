@@ -12,7 +12,7 @@ import {
   Label,
   FormFeedback
 } from "reactstrap";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./settings.css";
 
@@ -417,6 +417,7 @@ class Settings extends Component {
   render() {
     return (
       <div>
+        <Navbar/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
