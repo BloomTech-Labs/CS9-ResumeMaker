@@ -37,7 +37,7 @@ class Templates extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h1>TEMPLATES</h1>
+               <h1 style={{fontWeight: "600"}}>TEMPLATES</h1>
               <div className="fa fa-angle-left" />
               Start your RESUME by selecting each link on the left sidebar and
               entering

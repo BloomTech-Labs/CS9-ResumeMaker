@@ -7,12 +7,10 @@ const urls = require("../../config/config.json");
 
 class LandingPage extends Component {
   componentDidMount() {
-    console.log(this.props.context.userInfo);
     if (this.props.context.userInfo.auth === true) {
       this.props.history.push("/templates");
     } //if user has data on context already
     else if (localStorage.getItem("token")) {
-      console.log("passed token check");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -34,19 +32,36 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="App LandingPage">
-      <div className="landing-box" align="center" style={{alignSelf: "center"}}>
-        <h1 className="Header" style={{fontFamily: "Impact", fontSize: "3rem"}}>rezLeft</h1>
-        {/* <p style={{fontSize: "0.8rem", fontFamily: "calibri", color: "black"}}>The right resumes go Left.</p> */}
-        <Link className="landing-button" to="/login">
-          <button type="button" className="land-btn btn" style={{fontSize: "1.1rem"}}>
-            Login
-          </button>
-        </Link>
-        <Link className="landing-button" to="/register">
-          <button type="button" className="land-btn btn" style={{fontSize: "1.1rem"}}>
-            Register
-          </button>
-        </Link>
+        <div
+          className="landing-box"
+          align="center"
+          style={{ alignSelf: "center" }}
+        >
+          <h1
+            className="Header"
+            style={{ fontFamily: "aveni", fontSize: "3.3rem" }}
+          >
+            <div className="fa fa-angle-left" /> rezLeft
+          </h1>
+          {/* <p style={{fontSize: "0.8rem", fontFamily: "calibri", color: "black"}}>The right resumes go Left.</p> */}
+          <Link className="landing-button" to="/login">
+            <button
+              type="button"
+              className="land-btn btn"
+              style={{ fontSize: "1.1rem" }}
+            >
+              Login
+            </button>
+          </Link>
+          <Link className="landing-button" to="/register">
+            <button
+              type="button"
+              className="land-btn btn"
+              style={{ fontSize: "1.1rem" }}
+            >
+              Register
+            </button>
+          </Link>
         </div>
       </div>
     );

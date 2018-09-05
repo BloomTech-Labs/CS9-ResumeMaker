@@ -14,35 +14,40 @@ class Summary extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Personal Summary</h1>
+            <div className="link-hide">
+              <h1 style={{ fontWeight: "570" }}>
+                Personal Summary{" "}
+                <Link
+                  to={{
+                    pathname: "/summary/create", // component being Linked to
+                    state: { index: false } // Setting Index passed into educationCreate component - false means new
+                  }}
+                >
+                  <i className="fa fa-pencil fa-sm" />
+                </Link>
+              </h1>
+            </div>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to create one or more Personal Summaries
               about yourself. <br />
               They should be aimed at toward the position you are seeking for
               and contain somthing about the past present and future.{" "}
             </p>
-            <div className="link-hide">
-              <Link
-                to={{
-                  pathname: "/summary/create", // component being Linked to
-                  state: { index: false } // Setting Index passed into educationCreate component - false means new
-                }}
-              >
-                <i className="fa fa-pencil fa-2x" aria-hidden="true" />
-              </Link>
-            </div>
+
             <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
-                  <ItemCard
-                    linkTo="/summary"
-                    elementName="summary"
-                    putPath="sections.summary"
-                    index={index}
-                    key={index}
-                    content={element.content}
-                    context={this.props.context}
-                  />
+                  <React.Fragment key={index}>
+                    <ItemCard
+                      linkTo="/summary"
+                      elementName="summary"
+                      putPath="sections.summary"
+                      index={index}
+                      key={index}
+                      content={element.content}
+                      context={this.props.context}
+                    />
+                  </React.Fragment>
                 );
               })}
             </div>

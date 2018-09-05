@@ -13,21 +13,23 @@ class Experience extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Experience</h1>
-            <p style={{ fontSize: "0.8rem" }}>
-              Please click the pencil to enter the information for all of your
-              previous work related experience.
-            </p>
+           
             <div className="link-hide">
+            <h1 style={{fontWeight: "600"}}>Experience{" "}
               <Link
                 to={{
                   pathname: "/experience/create", // component being Linked to
                   state: { index: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
-                <i className="fa fa-pencil fa-2x" aria-hidden="true" />
-              </Link>
+                <i className="fa fa-pencil fa-sm" />
+              </Link></h1>
             </div>
+            <p style={{ fontSize: "0.8rem" }}>
+              Please click the pencil to enter the information for all of your
+              previous work related experience.
+            </p>
+
             {this.props.context.userInfo.experience.map((element, index) => {
               return (
                 <Link
