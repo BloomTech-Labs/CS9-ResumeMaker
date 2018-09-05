@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import moment from "moment";
+import axios from "axios";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template1.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
+const urls = require("../../config/config.json");
 
 export class TemplateOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: this.props.context.userInfo.currentResume || 0
+      index: this.props.context.userInfo.currentResume || 0,
+      success: false
     };
   }
 
@@ -21,7 +24,7 @@ export class TemplateOne extends Component {
     window.scrollTo(0, 0);
   }
 
-  handleSubmit = e => {};
+  handleSubmit = e => { };
 
   onCreate = () => {
     this.props.context.actions.createResume();
@@ -33,8 +36,31 @@ export class TemplateOne extends Component {
     );
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const tempObj = {
+      "resumes": this.props.context.userInfo.resumes
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/resume/` + this.props.context.userInfo.resumes[this.props.context.userInfo.resumes.length - 1]._id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({ success: true });
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  };
+
   render() {
-    if (!this.props.context.userInfo.auth) {
+    if (!this.props.context.userInfo.auth || this.state.success === true) {
       return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
@@ -50,10 +76,10 @@ export class TemplateOne extends Component {
               <h3 className="page-header">Traditional</h3>
             </div>
             <div className="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
+              <button to="/resumes" className="resume-button" type="submit" onClick={this.handleSubmit}>
                 {" "}
-                Add Resume
-              </Link>
+                Save Resume
+              </button>
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
@@ -133,7 +159,7 @@ export class TemplateOne extends Component {
               <Divider className="divider-div" />
               <Container textAlign="center" className="skillsSection">
                 <h3>Skills</h3>
-                {userInfo.skills.map((content, index) => {
+                {console.log(userInfo.skills.length) ? userInfo.skills.map((content, index) => {
                   return (
                     <div key={index}>
                       <p>
@@ -152,12 +178,12 @@ export class TemplateOne extends Component {
                       </p>
                     </div>
                   );
-                })}
+                }) : null}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="experienceSection">
                 <h3>Experience</h3>
-                {experience.map((content, index) => {
+                {experience.length > 0 ? experience.map((content, index) => {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return (
@@ -188,12 +214,12 @@ export class TemplateOne extends Component {
                       <p>{content.description} </p>
                     </div>
                   );
-                })}
+                }) : null}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
-                {education.map((content, index) => {
+                {education.length > 0 ? education.map((content, index) => {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return (
@@ -220,7 +246,7 @@ export class TemplateOne extends Component {
                       </p>
                     </div>
                   );
-                })}
+                }) : null}
               </Container>
             </form>
           </div>

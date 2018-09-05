@@ -7,8 +7,11 @@ import "../Templates/template1.css";
 import PDF from "../PDF/PDF";
 
 export class ResumeOne extends Component {
-  componentDidMount() {
+  componentWillMount() {
     window.scrollTo(0, 0);
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
   }
   render() {
     const userInfo = this.props.context.userInfo;
@@ -24,7 +27,7 @@ export class ResumeOne extends Component {
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Traditional</h3>
             </div>
-            <PDF /> 
+            <PDF />
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
                 <h2>
@@ -66,8 +69,8 @@ export class ResumeOne extends Component {
                 {userInfo.summary.map((item, index) => {
                   return resumes[resumes.length - 1].sections.summary[index]
                     .value ? (
-                    <p key={item._id}>{item.content}</p>
-                  ) : null;
+                      <p key={item._id}>{item.content}</p>
+                    ) : null;
                 })}
               </Container>
               <Divider className="divider-div" />
@@ -76,10 +79,10 @@ export class ResumeOne extends Component {
                 {userInfo.skills.map((content, index) => {
                   return resumes[resumes.length - 1].sections.skills[index]
                     .value ? (
-                    <div key={index}>
-                      <p>{content.content}</p>
-                    </div>
-                  ) : null;
+                      <div key={index}>
+                        <p>{content.content}</p>
+                      </div>
+                    ) : null;
                 })}
               </Container>
               <Divider className="divider-div" />
@@ -90,18 +93,18 @@ export class ResumeOne extends Component {
                   let to = moment(content.to).format("MMM YYYY");
                   return resumes[resumes.length - 1].sections.experience[index]
                     .value ? (
-                    <div key={index}>
-                      <h5>{content.company} </h5>
-                      <p>
-                        {content.title}
-                        <br />
-                        {content.location}
-                        <br />
-                        {from} - {to}
-                      </p>
-                      <p>{content.description} </p>
-                    </div>
-                  ) : null;
+                      <div key={index}>
+                        <h5>{content.company} </h5>
+                        <p>
+                          {content.title}
+                          <br />
+                          {content.location}
+                          <br />
+                          {from} - {to}
+                        </p>
+                        <p>{content.description} </p>
+                      </div>
+                    ) : null;
                 })}
               </Container>
               <Divider className="divider-div" />
@@ -112,18 +115,18 @@ export class ResumeOne extends Component {
                   let to = moment(content.to).format("MMM YYYY");
                   return resumes[resumes.length - 1].sections.education[index]
                     .value ? (
-                    <div key={index}>
-                      <h5>
-                        {content.degree} in {content.fieldofstudy}{" "}
-                      </h5>
-                      <p>{content.location}</p>
-                      <p>
-                        {content.school}
-                        <br />
-                        {from} - {to}
-                      </p>
-                    </div>
-                  ) : null;
+                      <div key={index}>
+                        <h5>
+                          {content.degree} in {content.fieldofstudy}{" "}
+                        </h5>
+                        <p>{content.location}</p>
+                        <p>
+                          {content.school}
+                          <br />
+                          {from} - {to}
+                        </p>
+                      </div>
+                    ) : null;
                 })}
               </Container>
             </form>

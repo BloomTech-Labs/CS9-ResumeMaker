@@ -131,7 +131,6 @@ class AuthProvider extends Component {
     } // All items in context now have a resume counterpart
     let loopVar = this.state.resumes[index].title.length;
     for (let i = 0; loopVar > i; i++) {
-      console.log(i);
       if (findWithAttr(this.state.title, "_id", this.state.resumes[index].title[i]._id) > -1) { }
       else {
         tempObj.title.splice(i, 1);

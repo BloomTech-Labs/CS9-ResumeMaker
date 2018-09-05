@@ -1,11 +1,29 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-// import ResumeCard from "./SubComponents/resumeCard";
 import { Link } from "react-router-dom";
+const urls = require("../../config/config.json");
 
 class Resumes extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
+    if (localStorage.getItem("token")) {
+      axios
+        .get(`${urls[urls.basePath]}/users/currentuser/`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          const userData = response.data.user;
+          const resumeData = response.data.resumes;
+          this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
+        })
+        .catch(err => {
+          console.log("Server Error: ", err);
+        });
+    }
   }
   render() {
     return (
