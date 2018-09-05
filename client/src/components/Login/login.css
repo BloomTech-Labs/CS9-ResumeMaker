@@ -24,6 +24,7 @@
 
 .Login form .form-group label {
   margin: 0;
+  padding-bottom: 1%;
 }
 
 .Login form .form-group .help-block {
@@ -32,6 +33,11 @@
 
 .Login form .btn {
   margin-top: 2rem;
+}
+
+.Login .bottom-buttons {
+  display: flex;
+  justify-content: space-around;
 }
 
 .Login .modal {

@@ -8,21 +8,8 @@ import {
   Label
 } from "reactstrap";
 import axios from "axios";
-import "./login.css";
+import "../Login/login.css";
 const urls = require("../../config/config.json");
-
-// const user = {
-//   email: "scrinch@gmail.com",
-//   password: "tacobell1!G",
-//   invalidCredentials: false
-// };
-
-// const user = {
-//   email: "bobbert@gmail.com",
-//   password:
-//     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
-//   invalidCredentials: false
-// };
 
 export default class Login extends Component {
   constructor(props) {
@@ -79,7 +66,6 @@ export default class Login extends Component {
               The email or password you entered are incorrect.
             </FormFeedback>
           </FormGroup>
-
           <Button
             block
             size="lg"
@@ -87,8 +73,22 @@ export default class Login extends Component {
             disabled={!this.validateForm()}
             type="submit"
           >
-            Login
+            Submit
           </Button>
+          <div className="bottom-buttons">
+            <Button
+              color="danger"
+              onClick={() => this.props.history.push("/login")}
+            >
+              Login
+            </Button>
+            <Button
+              color="danger"
+              onClick={() => this.props.history.push("/register")}
+            >
+              Register
+            </Button>
+          </div>
         </Form>
       </div>
     );

@@ -112,6 +112,20 @@ export default class Login extends Component {
           >
             Login
           </Button>
+          <div className="bottom-buttons">
+            <Button
+              color="danger"
+              onClick={() => this.props.history.push("/register")}
+            >
+              Register
+            </Button>
+            <Button
+              color="danger"
+              onClick={() => this.props.history.push("/forgotpassword")}
+            >
+              Forgot Password
+            </Button>
+          </div>
         </Form>
       </div>
     );
