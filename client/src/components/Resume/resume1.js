@@ -143,7 +143,6 @@ export class ResumeOne extends Component {
 
               {educationLength.length > 0 ? (
                 <Container textAlign="center" className="educationSection">
-                  <Divider className="divider-div" />
                   <h3>Education</h3>
                   {education.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
