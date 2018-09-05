@@ -6,7 +6,7 @@ import "./navbar.css";
 class Navbar extends Component {
   render() {
     return (
-      <nav className="navbar sticky-top mb-0">
+      <nav className="navbar sticky-top mb-0 d-flex justify-content-end">
           
         {/* <ol className="breadcrumb p-1 mb-0 bg-dark ">
         <Link className="knockout" style={{fontSize: '1.3rem'}} to="/">rezLeft</Link>
@@ -28,7 +28,7 @@ class Navbar extends Component {
             </li>
           ))}
         </ol> */}
-        <Route
+        <Route 
           render={({ history }) => (
             <div
               style={{ fontSize: "0.8rem", fontFamily: "Verdana", color: "#F2F2F0", textShadow: "1px 1px black", padding: "0"}}
