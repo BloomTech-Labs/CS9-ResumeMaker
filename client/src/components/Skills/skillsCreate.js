@@ -23,15 +23,14 @@ class SkillsCreate extends Component {
 
     if (
       this.props.context.userInfo.auth === true &&
-      this.props.location.state.skillsIndex !== false
+      this.props.location.state.index !== false
     ) {
       this.setState({
         content: this.props.context.userInfo.skills[
-          this.props.location.state.skillsIndex
+          this.props.location.state.index
         ].content,
-        _id: this.props.context.userInfo.skills[
-          this.props.location.state.skillsIndex
-        ]._id
+        _id: this.props.context.userInfo.skills[this.props.location.state.index]
+          ._id
       });
     }
   }
@@ -43,7 +42,7 @@ class SkillsCreate extends Component {
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.skillsIndex === false && !deleteFlag) {
+    if (this.props.location.state.index === false && !deleteFlag) {
       this.props.context.actions.addElement("skills", {
         // When creating, do NOT put in an _id, let mongo autocreate one
         content: this.state.content
@@ -51,7 +50,7 @@ class SkillsCreate extends Component {
     } // if creating
     else if (!deleteFlag) {
       this.props.context.actions.setElement(
-        this.props.location.state.skillsIndex,
+        this.props.location.state.index,
         "skills",
         {
           content: this.state.content,
@@ -61,7 +60,7 @@ class SkillsCreate extends Component {
     } // if editing
     else {
       this.props.context.actions.removeElement(
-        this.props.location.state.skillsIndex,
+        this.props.location.state.index,
         "skills"
       );
     }
@@ -106,7 +105,7 @@ class SkillsCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.skillsIndex !== false ? (
+              {this.props.location.state.index !== false ? (
                 <button onClick={e => this.handleSubmit(e, true)}>
                   Delete
                 </button>

@@ -28,26 +28,28 @@ class EducationCreate extends Component {
     window.scrollTo(0, 0);
     if (
       this.props.context.userInfo.auth === true &&
-      this.props.location.state.educationIndex !== false
+      this.props.location.state.index !== false
     )
       this.setState({
         school: this.props.context.userInfo.education[
-          this.props.location.state.educationIndex
+          this.props.location.state.index
         ].school,
         degree: this.props.context.userInfo.education[
-          this.props.location.state.educationIndex
+          this.props.location.state.index
         ].degree,
         fieldofstudy: this.props.context.userInfo.education[
-          this.props.location.state.educationIndex
+          this.props.location.state.index
         ].fieldofstudy,
-        from: moment(this.props.context.userInfo.education[
-          this.props.location.state.educationIndex
-        ].from),
-        to: moment(this.props.context.userInfo.education[
-          this.props.location.state.educationIndex
-        ].to),
+        from: moment(
+          this.props.context.userInfo.education[this.props.location.state.index]
+            .from
+        ),
+        to: moment(
+          this.props.context.userInfo.education[this.props.location.state.index]
+            .to
+        ),
         _id: this.props.context.userInfo.education[
-          this.props.location.state.educationIndex
+          this.props.location.state.index
         ]._id
       });
   }
@@ -67,7 +69,7 @@ class EducationCreate extends Component {
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.educationIndex === false && !deleteFlag) {
+    if (this.props.location.state.index === false && !deleteFlag) {
       this.props.context.actions.addElement("education", {
         school: this.state.school,
         degree: this.state.degree,
@@ -78,7 +80,7 @@ class EducationCreate extends Component {
     } // if creating
     else if (!deleteFlag) {
       this.props.context.actions.setElement(
-        this.props.location.state.educationIndex,
+        this.props.location.state.index,
         "education",
         {
           school: this.state.school,
@@ -92,7 +94,7 @@ class EducationCreate extends Component {
     } // if editing
     else {
       this.props.context.actions.removeElement(
-        this.props.location.state.educationIndex,
+        this.props.location.state.index,
         "education"
       );
     }
@@ -182,7 +184,7 @@ class EducationCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.educationIndex !== false ? (
+              {this.props.location.state.index !== false ? (
                 <button onClick={e => this.handleSubmit(e, true)}>
                   Delete
                 </button>

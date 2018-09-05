@@ -38,7 +38,7 @@ class Templates extends Component {
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h1>TEMPLATES</h1>
-              <p>
+              <p><div class="fa fa-angle-left"/>{" "}
                 Start your RESUME by selecting each link on the left sidebar and
                 entering
                 <br />

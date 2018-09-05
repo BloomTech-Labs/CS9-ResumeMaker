@@ -131,11 +131,11 @@ class TemplateThree extends Component {
                     </a>
                     <p className="contact-section">
                       {" "}
-                      <i className="fa fa-globe" aria-hidden="true" />{" "}
+                      <div className="fa fa-globe" aria-hidden="true" />{" "}
                       {userInfo.location}
                     </p>
                     <p className="contact-section">
-                      <i className="fa fa-mobile" aria-hidden="true" />
+                      <div className="fa fa-mobile" aria-hidden="true" />
                       {userInfo.phonenumber}
                     </p>
                     <p>
@@ -145,7 +145,7 @@ class TemplateThree extends Component {
                         name="linkedin"
                         value={resumes[resumes.length - 1].links.linkedin}
                       />
-                      <i className={"fa fa-linkedin fa-sm"} />
+                      <div className={"fa fa-linkedin fa-sm"} />
                       {userInfo.links.linkedin}
                     </p>
                     <p>
@@ -155,7 +155,7 @@ class TemplateThree extends Component {
                         name="github"
                         value={resumes[resumes.length - 1].links.github}
                       />{" "}
-                      <i className="fa fa-github" aria-hidden="true" />
+                      <div className="fa fa-github" aria-hidden="true" />{" "}
                       {userInfo.links.github}
                     </p>
                     <p>

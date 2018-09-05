@@ -32,33 +32,33 @@ class ExperienceCreate extends Component {
 
     if (
       this.props.context.userInfo.auth === true &&
-      this.props.location.state.experienceIndex !== false
+      this.props.location.state.index !== false
     )
       this.setState({
         title: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].title,
         company: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].company,
         location: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].location,
         from: moment(
           this.props.context.userInfo.experience[
-            this.props.location.state.experienceIndex
+            this.props.location.state.index
           ].from
         ),
         to: moment(
           this.props.context.userInfo.experience[
-            this.props.location.state.experienceIndex
+            this.props.location.state.index
           ].to
         ),
         description: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ].description,
         _id: this.props.context.userInfo.experience[
-          this.props.location.state.experienceIndex
+          this.props.location.state.index
         ]._id
       });
   }
@@ -78,7 +78,7 @@ class ExperienceCreate extends Component {
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.experienceIndex === false && !deleteFlag) {
+    if (this.props.location.state.index === false && !deleteFlag) {
       this.props.context.actions.addElement("experience", {
         title: this.state.title,
         company: this.state.company,
@@ -90,7 +90,7 @@ class ExperienceCreate extends Component {
     } // if creating
     else if (!deleteFlag) {
       this.props.context.actions.setElement(
-        this.props.location.state.experienceIndex,
+        this.props.location.state.index,
         "experience",
         {
           title: this.state.title,
@@ -105,7 +105,7 @@ class ExperienceCreate extends Component {
     } // if editing
     else {
       this.props.context.actions.removeElement(
-        this.props.location.state.experienceIndex,
+        this.props.location.state.index,
         "experience"
       );
     }
@@ -215,7 +215,7 @@ class ExperienceCreate extends Component {
                 </div>
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.experienceIndex !== false ? (
+              {this.props.location.state.index !== false ? (
                 <button onClick={e => this.handleSubmit(e, true)}>
                   Delete
                 </button>

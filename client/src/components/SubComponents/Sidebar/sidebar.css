@@ -33,12 +33,25 @@
   border-bottom: 1px solid #d9d9d9;
 }
 
+.static-sidebar a:hover {
+  color: #f2f2f0;
+  text-decoration: none;
+  border-left: 1rem solid #d9d9d9;
+  background: #707f8c;
+}
+
 .static-sidebar .active {
   border-left: 1rem solid #d9d9d9;
   background: #324359;
   /* border-bottom: 1px solid #162238; */
 }
 
+.sidebar-button {
+  color: #C5C6C7;
+  text-shadow: 1px 1px black;
+  margin-top: 25px;
+  /* border-bottom: 1px solid white;  */
+}
 .sidebar .logout {
   /* margin-top: 3rem; */
   padding-top: 1rem;

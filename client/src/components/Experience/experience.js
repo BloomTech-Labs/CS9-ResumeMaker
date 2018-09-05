@@ -22,7 +22,7 @@ class Experience extends Component {
               <Link
                 to={{
                   pathname: "/experience/create", // component being Linked to
-                  state: { experienceIndex: false } // Setting Index passed into experienceCreate component - false means new
+                  state: { index: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
                 <i className="fa fa-pencil fa-2x" aria-hidden="true" />
@@ -34,7 +34,7 @@ class Experience extends Component {
                   style={{ color: "black", fontWeight: "700" }}
                   to={{
                     pathname: "/experience/create", // component being Linked to
-                    state: { experienceIndex: index } // Setting Index passed into experienceCreate component
+                    state: { index: index } // Setting Index passed into experienceCreate component
                   }}
                   key={index}
                 >

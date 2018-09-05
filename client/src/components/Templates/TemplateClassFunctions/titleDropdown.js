@@ -64,7 +64,7 @@ class TitleDropdown extends Component {
     ));
 
     return (
-      <div className="card card-body m-0">
+      <div className="template-card card card-body m-0">
         <div className="container">
           <p>{selected}</p>
         </div>

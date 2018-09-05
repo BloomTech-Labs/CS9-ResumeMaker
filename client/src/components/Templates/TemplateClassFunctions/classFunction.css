@@ -1,5 +1,5 @@
-.card {
-    background-color: transparent !important; 
-    border: none !important; 
-    padding: 0; 
+.template-card {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0;
 }
