@@ -45,9 +45,9 @@ class Sidebar extends Component {
 
   render() {
     // If there is no token, then going to any page will result in a redirect to login
-    // if (!localStorage.getItem("token")) {
-    //   return <Redirect to="/login" />;
-    // }
+    if (!localStorage.getItem("token")) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className="sidebar">
         <div
@@ -64,8 +64,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/templates")
             })}
           >
-              {" "}
-            <div class="fa fa-copy sm"style={{color:"white"}}/> {" "} TEMPLATES
+            {" "}
+            <div className="fa fa-copy sm" style={{ color: "white" }} /> {" "} TEMPLATES
           </Link>
           <Link
             to="/resumes"
@@ -74,7 +74,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-file-alt sm"style={{color:"white"}}/> {" "} RESUMES
+            <div className="fa fa-file-alt sm" style={{ color: "white" }} /> {" "} RESUMES
           </Link>
           <Link
             to="/jobtitle"
@@ -82,7 +82,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/jobtitle")
             })}
           >
-             <div className="fa fa-briefcase sm"style={{color:"white"}}/> {" "}JOB TITLE
+            <div className="fa fa-briefcase sm" style={{ color: "white" }} /> {" "}JOB TITLE
           </Link>
           <Link
             to="/summary"
@@ -91,7 +91,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-edit sm"style={{color:"white"}}/> {" "} SUMMARY
+            <div className="fa fa-edit sm" style={{ color: "white" }} /> {" "} SUMMARY
           </Link>
           <Link
             to="/skills"
@@ -99,8 +99,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/skills")
             })}
           >
-           {" "}
-            <div class="fa fa-wrench" style={{color:"white"}}/> {" "} SKILLS
+            {" "}
+            <div className="fa fa-wrench" style={{ color: "white" }} /> {" "} SKILLS
           </Link>
           <Link
             to="/experience"
@@ -109,7 +109,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-lightbulb sm"style={{color:"white"}}/> {" "} EXPERIENCE
+            <div className="fa fa-lightbulb sm" style={{ color: "white" }} /> {" "} EXPERIENCE
           </Link>
           <Link
             to="/education"
@@ -118,7 +118,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-graduation-cap sm" style={{color:"white"}}/> {" "}EDUCATION
+            <div className="fa fa-graduation-cap sm" style={{ color: "white" }} /> {" "}EDUCATION
           </Link>
           <Link
             to="/billing"
@@ -126,8 +126,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/billing")
             })}
           >
-           {" "}
-            <div class="fa fa-credit-card sm"style={{color:"white"}}/> {" "} BILLING
+            {" "}
+            <div className="fa fa-credit-card sm" style={{ color: "white" }} /> {" "} BILLING
           </Link>
           <Link
             to="/settings"
@@ -136,7 +136,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div class="fa fa-sliders-h sm"style={{color:"white"}}/> {" "}SETTINGS
+            <div className="fa fa-sliders-h sm" style={{ color: "white" }} /> {" "}SETTINGS
           </Link>
         </div>
         <Route

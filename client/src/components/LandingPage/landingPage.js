@@ -7,12 +7,10 @@ const urls = require("../../config/config.json");
 
 class LandingPage extends Component {
   componentDidMount() {
-    console.log(this.props.context.userInfo);
     if (this.props.context.userInfo.auth === true) {
       this.props.history.push("/templates");
     } //if user has data on context already
     else if (localStorage.getItem("token")) {
-      console.log("passed token check");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {

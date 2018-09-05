@@ -15,7 +15,7 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-              <h1 style={{fontWeight: "570"}}>
+              <h1 style={{ fontWeight: "570" }}>
                 Personal Summary{" "}
                 <Link
                   to={{
@@ -37,15 +37,17 @@ class Summary extends Component {
             <div className="summary-containment-div">
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
-                  <ItemCard
-                    linkTo="/summary"
-                    elementName="summary"
-                    putPath="sections.summary"
-                    index={index}
-                    key={index}
-                    content={element.content}
-                    context={this.props.context}
-                  />
+                  <React.Fragment key={index}>
+                    <ItemCard
+                      linkTo="/summary"
+                      elementName="summary"
+                      putPath="sections.summary"
+                      index={index}
+                      key={index}
+                      content={element.content}
+                      context={this.props.context}
+                    />
+                  </React.Fragment>
                 );
               })}
             </div>

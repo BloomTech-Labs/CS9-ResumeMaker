@@ -1,14 +1,34 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./tempTemplate1.png";
 import "./tempTemplate2.png";
 import "./tempTemplate3.png";
 import "./templates.css";
+const urls = require("../../config/config.json");
 
 class Templates extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
+    if (localStorage.getItem("token")) {
+      axios
+        .get(`${urls[urls.basePath]}/users/currentuser/`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          const userData = response.data.user;
+          const resumeData = response.data.resumes;
+          this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setResume(resumeData);
+        })
+        .catch(err => {
+          console.log("Server Error: ", err);
+        });
+    }
   }
   render() {
     return (
@@ -17,15 +37,14 @@ class Templates extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h1 style={{fontWeight: "600"}}>TEMPLATES</h1>
-              <p><div class="fa fa-angle-left"/>{" "}
-                Start your RESUME by selecting each link on the left sidebar and
-                entering
-                <br />
-                all of your informaiton. Once completed, choose from the
-                template formats below to <br />
-                select the final informaiton to be rendered to your RESUME.
-              </p>
+               <h1 style={{fontWeight: "600"}}>TEMPLATES</h1>
+              <div className="fa fa-angle-left" />
+              Start your RESUME by selecting each link on the left sidebar and
+              entering
+              <br />
+              all of your information. Once completed, choose from the template
+              formats below to <br />
+              select the final information to be rendered to your RESUME.
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
