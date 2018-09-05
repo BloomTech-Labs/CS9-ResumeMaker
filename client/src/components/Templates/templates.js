@@ -38,14 +38,13 @@ class Templates extends Component {
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h1>TEMPLATES</h1>
-              <p><div class="fa fa-angle-left"/>{" "}
-                Start your RESUME by selecting each link on the left sidebar and
-                entering
-                <br />
-                all of your informaiton. Once completed, choose from the
-                template formats below to <br />
-                select the final informaiton to be rendered to your RESUME.
-              </p>
+              <div className="fa fa-angle-left" />
+              Start your RESUME by selecting each link on the left sidebar and
+              entering
+              <br />
+              all of your information. Once completed, choose from the template
+              formats below to <br />
+              select the final information to be rendered to your RESUME.
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">

@@ -40,7 +40,6 @@ class TemplateThree extends Component {
       this.props.context.userInfo.resumes.length - 1
     ];
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
-    console.log("Temp Obj", tempObj);
     if (tempObj._id) {
       axios
         .put(
@@ -129,16 +128,16 @@ class TemplateThree extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section"> {userInfo.email}</p>
                     </a>
-                    <p className="contact-section">
+                    <div className="contact-section">
                       {" "}
                       <div className="fa fa-globe" aria-hidden="true" />{" "}
                       {userInfo.location}
-                    </p>
-                    <p className="contact-section">
+                    </div>
+                    <div className="contact-section">
                       <div className="fa fa-mobile" aria-hidden="true" />
                       {userInfo.phonenumber}
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                       <CheckBox
                         context={this.props.context}
                         index={resumes.length - 1}
@@ -147,8 +146,8 @@ class TemplateThree extends Component {
                       />
                       <div className={"fa fa-linkedin fa-sm"} />
                       {userInfo.links.linkedin}
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                       <CheckBox
                         context={this.props.context}
                         index={resumes.length - 1}
@@ -157,8 +156,8 @@ class TemplateThree extends Component {
                       />{" "}
                       <div className="fa fa-github" aria-hidden="true" />{" "}
                       {userInfo.links.github}
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                       <CheckBox
                         context={this.props.context}
                         index={resumes.length - 1}
@@ -166,7 +165,7 @@ class TemplateThree extends Component {
                         value={resumes[resumes.length - 1].links.portfolio}
                       />{" "}
                       {userInfo.links.portfolio}
-                    </p>
+                    </div>
                   </FormGroup>
                 </div>
                 <div className="col">
