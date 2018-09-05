@@ -11,7 +11,7 @@ import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
 const urls = require("../../config/config.json");
 
-export class TemplateOne extends Component {
+class TemplateOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,47 +20,71 @@ export class TemplateOne extends Component {
     };
   }
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
+  componentWillMount() {
+    if (this.props.context.userInfo.auth !== true)
+      this.props.history.push("/templates");
   }
 
-  handleSubmit = e => { };
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    if (this.props.context.userInfo.auth) {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
+  }
+  }
 
   onCreate = () => {
     this.props.context.actions.createResume();
   };
 
-  componentWillMount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
-
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-
-    const tempObj = {
-      "resumes": this.props.context.userInfo.resumes
-    };
-    axios
-      .put(
-        `${urls[urls.basePath]}/resume/` + this.props.context.userInfo.resumes[this.props.context.userInfo.resumes.length - 1]._id,
-        tempObj,
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-        }
-      )
-      .then(response => {
-        console.log(response);
-        this.setState({ success: true });
-      })
-      .catch(err => {
-        console.log("err", err);
-      });
+    const tempObj = this.props.context.userInfo.resumes[
+      this.props.context.userInfo.resumes.length - 1
+    ];
+    if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
+    console.log("Temp Obj", tempObj);
+    if (tempObj._id) {
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` +
+            this.props.context.userInfo.resumes[
+              this.props.context.userInfo.resumes.length - 1
+            ]._id,
+          tempObj,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    } else {
+      axios
+        .post(`${urls[urls.basePath]}/resume/`, tempObj, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          console.log(response);
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
   };
 
   render() {
-    if (!this.props.context.userInfo.auth || this.state.success === true) {
+    if (!this.props.context.userInfo.auth || this.state.success ) {
       return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
@@ -76,12 +100,17 @@ export class TemplateOne extends Component {
               <h3 className="page-header">Traditional</h3>
             </div>
             <div className="justify-content-center">
-              <button to="/resumes" className="resume-button" type="submit" onClick={this.handleSubmit}>
+              <button
+                to="/resumes"
+                className="resume-button"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
                 {" "}
                 Save Resume
               </button>
             </div>
-            <form className="template1" onSubmit={this.handleSubmit}>
+            <form className="template1" >
               <Container textAlign="center" className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
@@ -159,7 +188,7 @@ export class TemplateOne extends Component {
               <Divider className="divider-div" />
               <Container textAlign="center" className="skillsSection">
                 <h3>Skills</h3>
-                {console.log(userInfo.skills.length) ? userInfo.skills.map((content, index) => {
+                {userInfo.skills.map((content, index) => {
                   return (
                     <div key={index}>
                       <p>
@@ -178,75 +207,79 @@ export class TemplateOne extends Component {
                       </p>
                     </div>
                   );
-                }) : null}
+                })}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="experienceSection">
                 <h3>Experience</h3>
-                {experience.length > 0 ? experience.map((content, index) => {
-                  let from = moment(content.from).format("MMM YYYY");
-                  let to = moment(content.to).format("MMM YYYY");
-                  return (
-                    <div key={index}>
-                      <h5>
-                        {" "}
-                        <CheckBox
-                          context={this.props.context}
-                          id={content._id}
-                          name="experience"
-                          value={
-                            resumes[resumes.length - 1].sections.experience[
-                              index
-                            ].value
-                          }
-                          index={resumes.length - 1}
-                        />{" "}
-                        {content.company}{" "}
-                      </h5>
-                      <p>
-                        {" "}
-                        {content.title}
-                        <br />
-                        {content.location}
-                        <br />
-                        {from} - {to}
-                      </p>
-                      <p>{content.description} </p>
-                    </div>
-                  );
-                }) : null}
+                {experience.length > 0
+                  ? experience.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
+                      return (
+                        <div key={index}>
+                          <h5>
+                            {" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="experience"
+                              value={
+                                resumes[resumes.length - 1].sections.experience[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />{" "}
+                            {content.company}{" "}
+                          </h5>
+                          <p>
+                            {" "}
+                            {content.title}
+                            <br />
+                            {content.location}
+                            <br />
+                            {from} - {to}
+                          </p>
+                          <p>{content.description} </p>
+                        </div>
+                      );
+                    })
+                  : null}
               </Container>
               <Divider className="divider-div" />
               <Container textAlign="center" className="educationSection">
                 <h3>Education</h3>
-                {education.length > 0 ? education.map((content, index) => {
-                  let from = moment(content.from).format("MMM YYYY");
-                  let to = moment(content.to).format("MMM YYYY");
-                  return (
-                    <div key={index}>
-                      <h5>
-                        <CheckBox
-                          context={this.props.context}
-                          id={content._id}
-                          name="education"
-                          value={
-                            resumes[resumes.length - 1].sections.education[
-                              index
-                            ].value
-                          }
-                          index={resumes.length - 1}
-                        />
-                        {content.degree} in {content.fieldofstudy}{" "}
-                      </h5>
-                      <p>{content.location}</p>
-                      <p>
-                        {content.school}
-                        <br />
-                        {from} - {to}
-                      </p>
-                    </div>
-                  );
-                }) : null}
+                {education.length > 0
+                  ? education.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
+                      return (
+                        <div key={index}>
+                          <h5>
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="education"
+                              value={
+                                resumes[resumes.length - 1].sections.education[
+                                  index
+                                ].value
+                              }
+                              index={resumes.length - 1}
+                            />
+                            {content.degree} in {content.fieldofstudy}{" "}
+                          </h5>
+                          <p>{content.location}</p>
+                          <p>
+                            {content.school}
+                            <br />
+                            {from} - {to}
+                          </p>
+                        </div>
+                      );
+                    })
+                  : null}
               </Container>
             </form>
           </div>

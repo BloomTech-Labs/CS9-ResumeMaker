@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { FormGroup } from "reactstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import moment from "moment";
+import axios from "axios";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template2.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
 import CheckBox from "./TemplateClassFunctions/checkbox";
+const urls = require("../../config/config.json");
 
-export class TemplateTwo extends Component {
+class TemplateTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,23 +21,70 @@ export class TemplateTwo extends Component {
   }
 
   componentWillMount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
+    if (this.props.context.userInfo.auth !== true)
+      this.props.history.push("/templates");
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    if (this.props.context.userInfo.auth) {
+      this.props.context.actions.expandResumeIDs(
+        this.props.context.userInfo.currentResume
+      );
+    }
   }
   
-  handleSubmit = e => {}
+  handleSubmit = event => {
+    event.preventDefault();
+    const tempObj = this.props.context.userInfo.resumes[
+      this.props.context.userInfo.resumes.length - 1
+    ];
+    if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
+    console.log("Temp Obj", tempObj);
+    if (tempObj._id) {
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` +
+            this.props.context.userInfo.resumes[
+              this.props.context.userInfo.resumes.length - 1
+            ]._id,
+          tempObj,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    } else {
+      axios
+        .post(`${urls[urls.basePath]}/resume/`, tempObj, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          console.log(response);
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
 
   onCreate = () => {
     this.props.context.actions.createResume();
   };
 
   render() {
-    if (!this.props.context.userInfo.auth) {
+    if (!this.props.context.userInfo.auth || this.state.success ) {
       return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
@@ -52,12 +101,17 @@ export class TemplateTwo extends Component {
               <h3 className="page-header">Modern</h3>
             </div>
             <div className="justify-content-center">
-              <Link to="/resumes" className="resume-button" type="submit">
+            <button
+                to="/resumes"
+                className="resume-button"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
                 {" "}
-                Add Resume
-              </Link>
+                Save Resume
+              </button>
             </div>
-            <form className="template1" onSubmit={this.handleSubmit}>
+            <form className="template1">
               <div textAlign="center" className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
