@@ -15,6 +15,7 @@
 .item-card.row-card {
   flex-direction: row;
   margin: 1%;
+  white-space: nowrap;
 }
 
 /* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
@@ -24,7 +25,7 @@
 
 /* This keeps the red delete X from jutting up against the left side on single line row cards */
 .item-card.row-card .close {
-  padding: 0.1rem 0.1rem 0.1rem 0.3rem;
+  padding: 0 0.3rem;
 }
 
 .item-card.row-card p {
@@ -45,6 +46,7 @@
 .item-card .close {
   color: red;
   position: absolute;
+  padding: 0 0.3rem 0 0;
   top: 0;
   width: min-content;
   height: min-content;
@@ -93,10 +95,14 @@
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  min-width: 50%;
-  flex-direction: column;
   max-height: 60vh;
   padding: 2rem;
+}
+
+.skills-containment-div .item-card.card,
+.titles-containment-div .item-card.card {
+  min-width: 1rem;
+  min-height: 1rem;
 }
 
 /* .summary-card-link {
