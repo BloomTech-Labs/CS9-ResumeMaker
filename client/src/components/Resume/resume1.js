@@ -44,7 +44,7 @@ export class ResumeOne extends Component {
 
     return (
       <div>
-        <Navbar/>
+        <Navbar context={this.props.context}/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">

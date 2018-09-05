@@ -13,7 +13,7 @@ class Summary extends Component {
     return (
       <div>
         <div className="overall-component-div row">
-        <Navbar/>
+        <Navbar context={this.props.context}/>
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">

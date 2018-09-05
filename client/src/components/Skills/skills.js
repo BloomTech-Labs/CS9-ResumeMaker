@@ -12,7 +12,7 @@ class Skills extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
+        <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">

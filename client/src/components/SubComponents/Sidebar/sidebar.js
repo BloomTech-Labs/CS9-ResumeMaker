@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect, Route } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 
@@ -139,7 +139,7 @@ class Sidebar extends Component {
             <div className="fa fa-sliders-h sm" style={{ color: "white" }} /> {" "}SETTINGS
           </Link>
         </div>
-        <Route
+        {/* <Route
           render={({ history }) => (
             <div
               className="logout btn"
@@ -151,7 +151,7 @@ class Sidebar extends Component {
               LOGOUT
             </div>
           )}
-        />
+        /> */}
       </div>
     );
   }

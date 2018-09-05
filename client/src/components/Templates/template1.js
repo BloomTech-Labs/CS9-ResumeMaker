@@ -91,7 +91,7 @@ class TemplateOne extends Component {
     const resumes = this.props.context.userInfo.resumes;
     return (
       <div>
-         <Navbar/>
+         <Navbar context={this.props.context}/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">
