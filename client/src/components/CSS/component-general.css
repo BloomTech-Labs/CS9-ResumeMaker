@@ -8,9 +8,6 @@ i {
   color: black;
   font-size: 2rem;
 }
-i:hover {
-  font-size: 3rem;
-}
 
 .title-div {
   width: 100%;
@@ -33,9 +30,10 @@ i:hover {
   max-width: 600px;
 }
 
-.fa-pencil {
-  margin-top: 1rem;
+.fa.fa-pencil.fa-2x {
+  margin: 1rem 0 0.5rem 0;
 }
+
 .card-body.card-text.card {
   text-decoration-color: black;
 }
