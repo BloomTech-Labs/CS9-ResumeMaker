@@ -47,9 +47,9 @@ class TemplateOne extends Component {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` +
-            this.props.context.userInfo.resumes[
-              this.props.context.userInfo.resumes.length - 1
-            ]._id,
+          this.props.context.userInfo.resumes[
+            this.props.context.userInfo.resumes.length - 1
+          ]._id,
           tempObj,
           {
             headers: {
@@ -91,14 +91,12 @@ class TemplateOne extends Component {
     const resumes = this.props.context.userInfo.resumes;
     return (
       <div>
-         <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Traditional</h3>
-            </div>
-            <div className="justify-content-center">
+            <div className="template title-div">
+              <span className="page-header">Traditional</span>
               <button
                 to="/resumes"
                 className="resume-button"
@@ -130,7 +128,7 @@ class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p> {userInfo.email}</p>
                 </a>
-                  <p><div className="fa fa-globe" aria-hidden="true" />
+                <p><div className="fa fa-globe" aria-hidden="true" />
                   {" "}{userInfo.location}
                 </p>
                 <p>
@@ -212,37 +210,37 @@ class TemplateOne extends Component {
                 <h3>Experience</h3>
                 {experience.length > 0
                   ? experience.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return (
-                        <div key={index}>
-                          <h5>
-                            {" "}
-                            <CheckBox
-                              context={this.props.context}
-                              id={content._id}
-                              name="experience"
-                              value={
-                                resumes[resumes.length - 1].sections.experience[
-                                  index
-                                ].value
-                              }
-                              index={resumes.length - 1}
-                            />{" "}
-                            {content.company}{" "}
-                          </h5>
-                          <p>
-                            {" "}
-                            {content.title}
-                            <br />
-                            {content.location}
-                            <br />
-                            {from} - {to}
-                          </p>
-                          <p>{content.description} </p>
-                        </div>
-                      );
-                    })
+                    let from = moment(content.from).format("MMM YYYY");
+                    let to = moment(content.to).format("MMM YYYY");
+                    return (
+                      <div key={index}>
+                        <h5>
+                          {" "}
+                          <CheckBox
+                            context={this.props.context}
+                            id={content._id}
+                            name="experience"
+                            value={
+                              resumes[resumes.length - 1].sections.experience[
+                                index
+                              ].value
+                            }
+                            index={resumes.length - 1}
+                          />{" "}
+                          {content.company}{" "}
+                        </h5>
+                        <p>
+                          {" "}
+                          {content.title}
+                          <br />
+                          {content.location}
+                          <br />
+                          {from} - {to}
+                        </p>
+                        <p>{content.description} </p>
+                      </div>
+                    );
+                  })
                   : null}
               </Container>
               <Divider className="divider-div" />

@@ -24,5 +24,12 @@
     border: 1px solid black; 
 }
 .resume-button {
-    width: 10rem;  
+    align-self: center;
+}
+
+.template.title-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 3rem;
 }
