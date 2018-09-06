@@ -24,6 +24,7 @@ import ResumeThree from "./components/Resume/resume3";
 import Settings from "./components/Settings/settings";
 import Login from "./components/Login/login";
 import Register from "./components/Register/register";
+import ConfirmationPage from "./components/ConfirmationPage/confirmationPage";
 import ForgotPassword from "./components/ForgotPassword/forgotPassword";
 import Templates from "./components/Templates/templates";
 import TemplateOne from "./components/Templates/template1";
@@ -147,6 +148,12 @@ class App extends Component {
                   exact
                   path="/register"
                   render={props => <Register {...props} context={context} />}
+                />
+                <Route
+                  path="/confirmationpage"
+                  render={props => (
+                    <ConfirmationPage {...props} context={context} />
+                  )}
                 />
                 <Route
                   exact

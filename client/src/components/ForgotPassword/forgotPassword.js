@@ -32,7 +32,8 @@ class ForgotPassword extends Component {
   handleSubmit = () => {
     axios
       .put(`${urls[urls.basePath]}/users/forgotpassword`, {
-        email: this.state.email
+        email: this.state.email,
+        path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
         console.log(response);

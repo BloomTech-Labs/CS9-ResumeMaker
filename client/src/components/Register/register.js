@@ -120,7 +120,8 @@ class Register extends Component {
       .post(`${urls[urls.basePath]}/users/register`, {
         username: this.state.username,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
         this.setState({ submitted: true, submittedError: false });

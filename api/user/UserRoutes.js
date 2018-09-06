@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const base64url = require("base64url");
 const crypto = require("crypto");
 
+const websiteName = require("../config/keys").site_name;
 const secretKey = require("../config/keys").secret_key;
 const secret = require("../config/keys").secret;
 const stripe = require("stripe")(secretKey);
@@ -13,10 +14,6 @@ const User = require("./UserModel.js");
 const Resume = require("../resume/ResumeModel");
 const EmailConfirmation = require("../email/EmailConfirmationModel.js");
 const { changeStatus } = require("../helpers/Stripe");
-let websiteName = "";
-if (process.env.SITE_NAME) {
-  websiteName = process.env.SITE_NAME;
-} else websiteName = "easy-resume.com";
 
 // GET users/:username
 // Route to find if a username is already in use
@@ -124,7 +121,7 @@ router.post("/register", (req, res) => {
             console.log(
               "Link to activate account:\n",
               `${req.get("host")}${req.baseUrl}/confirmemail/${
-              newEmailConfirmation.hash
+                newEmailConfirmation.hash
               }`
             );
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -146,17 +143,17 @@ router.post("/register", (req, res) => {
                   pass: account.pass // generated ethereal password
                 }
               });
+              // how to get host: ${req.get("host")}/confirmemail/${newEmailConfirmation.hash}
               let mailOptions = {
                 from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
                 to: `${userData.email}`,
                 subject: `Confirm your registration to ${websiteName}!`,
-                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
-                html: `Thank you for signing up! Please click this <a href=${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
-                }>link</a>.`
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${
+                  req.body.path
+                }?/users/confirmemail/${newEmailConfirmation.hash}`,
+                html: `Thank you for signing up! Please click this <a href=${
+                  req.body.path
+                }?/users/confirmemail/${newEmailConfirmation.hash}>link</a>.`
               };
 
               transporter.sendMail(mailOptions, (err, info) => {
@@ -227,7 +224,8 @@ router.post("/login", (req, res) => {
               if (err) console.log(err);
               else console.log(success);
             });
-            if (changeStatus(email, { subscription: null, membership: false })) console.log("Success");
+            if (changeStatus(email, { subscription: null, membership: false }))
+              console.log("Success");
             else console.log("Error");
           }
         });
@@ -371,7 +369,7 @@ router.put(
                                 console.log(
                                   "Link to change email:\n",
                                   `${req.get("host")}${
-                                  req.baseUrl
+                                    req.baseUrl
                                   }/changeemail/${newEmailConfirmation.hash}`
                                 );
                                 // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -394,12 +392,12 @@ router.put(
                                       "host"
                                     )}${req.baseUrl}/changeemail/${
                                       newEmailConfirmation.hash
-                                      }`,
+                                    }`,
                                     html: `Please click this <a href=${req.get(
                                       "host"
                                     )}${req.baseUrl}/changeemail/${
                                       newEmailConfirmation.hash
-                                      }
+                                    }
                     }>link</a> to make this your new account email address.`
                                   };
 
@@ -443,7 +441,7 @@ router.put(
                     }
                     if (req.body.newpassword && req.body.newpassword != "") {
                       user.password = req.body.newpassword;
-                      user.save(function (err) {
+                      user.save(function(err) {
                         if (err) {
                           user.password = null;
                           res.status(200).json({
@@ -646,7 +644,7 @@ router.put("/forgotpassword", (req, res) => {
           console.log(
             "Link to reset password:\n",
             `${req.get("host")}${req.baseUrl}/resetpassword/${
-            newEmailConfirmation.hash
+              newEmailConfirmation.hash
             }`
           );
           // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -670,7 +668,7 @@ router.put("/forgotpassword", (req, res) => {
               )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
               html: `Please click this <a href=${req.get("host")}${
                 req.baseUrl
-                }/resetpassword/${newEmailConfirmation.hash}
+              }/resetpassword/${newEmailConfirmation.hash}
           }>link</a> to reset your password.`
             };
 
@@ -727,7 +725,7 @@ router.get("/resetpassword/:hash", (req, res) => {
               const newPassword = base64url(hash.digest("hex")) + "!";
               user.password = newPassword;
               user.active = true;
-              user.save(function (err) {
+              user.save(function(err) {
                 if (err) {
                   res.status(500).json({
                     errorMessage:
