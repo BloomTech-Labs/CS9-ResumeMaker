@@ -1,6 +1,6 @@
 .item-card {
   margin: 1%;
-  min-width: 29%;
+  /* min-width: 29%; */
   max-width: 20rem;
   /* min-width: 20%; */
   text-align: left;
@@ -69,7 +69,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 50px;
+  min-height: 5rem;
 }
 
 .summary-containment-div,
@@ -85,8 +85,29 @@
 .summary-containment-div .item-card.card,
 .experience-containment-div .item-card.card,
 .education-containment-div .item-card.card {
-  width: 25%;
+  /* width: 25%; */
   min-height: 12rem;
+}
+
+.summary-containment-div .card-title,
+.experience-containment-div .card-title,
+.education-containment-div .card-title {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.experience-containment-div .card-subtitle,
+.education-containment-div .card-subtitle {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.education-containment-div .card-text {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .skills-containment-div,
