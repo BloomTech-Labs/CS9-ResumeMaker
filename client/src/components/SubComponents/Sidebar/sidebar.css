@@ -31,6 +31,8 @@
   color: #f2f2f0;
   padding: 10% 0;
   border-bottom: 1px solid #d9d9d9;
+  text-align: left;
+  padding-left: 20%;
 }
 
 .static-sidebar a:hover {
@@ -46,17 +48,15 @@
   /* border-bottom: 1px solid #162238; */
 }
 
+/* Stops icons next to section titles on sidebar from jutting up against the titles */
+.static-sidebar a .fa {
+  margin-right: 0.3rem;
+}
+
 .sidebar-button {
-  color: #C5C6C7;
+  color: #c5c6c7;
   text-shadow: 1px 1px black;
   margin-top: 25px;
   /* border-bottom: 1px solid white;  */
 }
-.sidebar .logout {
-  /* margin-top: 3rem; */
-  padding-top: 1rem;
-  padding-bottom: 3rem;
-  /* position: fixed;
-  bottom: 0px; */
-  color: #f2f2f0;
-}
+

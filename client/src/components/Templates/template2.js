@@ -4,7 +4,7 @@ import { FormGroup } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template2.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
@@ -39,9 +39,9 @@ class TemplateTwo extends Component {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` +
-          this.props.context.userInfo.resumes[
-            this.props.context.userInfo.resumes.length - 1
-          ]._id,
+            this.props.context.userInfo.resumes[
+              this.props.context.userInfo.resumes.length - 1
+            ]._id,
           tempObj,
           {
             headers: {
@@ -91,9 +91,10 @@ class TemplateTwo extends Component {
 
     return (
       <div>
-        <div className="component-div">
+         <Navbar context={this.props.context}/>
+        <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Modern</h3>
             </div>
@@ -104,7 +105,7 @@ class TemplateTwo extends Component {
                 onClick={this.handleSubmit}
               >
                 {" "}
-                Save Resume
+                SAVE RESUME
               </button>
             </div>
             <form className="template1">
@@ -145,43 +146,39 @@ class TemplateTwo extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p> {userInfo.email}</p>
                     </a>
-                    <div>
-                      <div className="fa fa-globe" aria-hidden="true" />
-                      {userInfo.location}
-                    </div>
-                    <div>
-                      <div className="fa fa-mobile" aria-hidden="true" />
-                      {userInfo.phonenumber}
-                    </div>
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={resumes.length - 1}
-                        name="linkedin"
-                        value={resumes[resumes.length - 1].links.linkedin}
-                      />
-                      <div className={"fa fa-linkedin fa-sm"} />
-                      {userInfo.links.linkedin}
-                    </div>
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={resumes.length - 1}
-                        name="github"
-                        value={resumes[resumes.length - 1].links.github}
-                      />{" "}
-                      <div className="fa fa-github" aria-hidden="true" />
-                      {userInfo.links.github}
-                    </div>
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={resumes.length - 1}
-                        name="portfolio"
-                        value={resumes[resumes.length - 1].links.portfolio}
-                      />{" "}
-                      {userInfo.links.portfolio}
-                    </div>
+                    <p>
+                  <div className="fa fa-mobile" aria-hidden="true" />
+                  {" "}{userInfo.phonenumber}
+                </p>
+                <p>
+                  <CheckBox
+                    context={this.props.context}
+                    index={resumes.length - 1}
+                    name="linkedin"
+                    value={resumes[resumes.length - 1].links.linkedin}
+                  />{" "}
+                  <div className={"fa fa-linkedin fa-sm"} />
+                  {" "}{userInfo.links.linkedin}
+                </p>
+                <p>
+                  <CheckBox
+                    context={this.props.context}
+                    index={resumes.length - 1}
+                    name="github"
+                    value={resumes[resumes.length - 1].links.github}
+                  />{" "}
+                  <div className="fa fa-github" aria-hidden="true" />
+                  {" "}{userInfo.links.github}
+                </p>
+                <p>
+                  <CheckBox
+                    context={this.props.context}
+                    index={resumes.length - 1}
+                    name="portfolio"
+                    value={resumes[resumes.length - 1].links.portfolio}
+                  />{" "}
+                  {userInfo.links.portfolio}
+                </p>
                   </FormGroup>
                   <Divider className="divider-div" />
                   <FormGroup textalign="center" className="educationSection">
@@ -235,7 +232,7 @@ class TemplateTwo extends Component {
                                 ].value
                               }
                               index={resumes.length - 1}
-                            />
+                            />{" "}
                             {content.content}
                           </p>
                         </div>

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import {
-  Modal,
   Button,
   Form,
   FormGroup,
+  FormFeedback,
   Input,
-  Label,
-  FormFeedback
+  Label
 } from "reactstrap";
 import "../Login/login.css";
 import axios from "axios";
@@ -15,15 +14,15 @@ const urls = require("../../config/config.json");
 
 class Register extends Component {
   state = {
-    email: "screech@gmail.com",
-    password: "Screech1G!",
-    confirmPassword: "Screech1G!",
-    username: "screech",
+    email: "scrinch@gmail.com",
+    password: "scrinch1G!",
+    confirmPassword: "scrinch1G!",
+    username: "scrinch",
     submitted: false,
     submittedError: false,
-    usernameInvalid: null,
-    emailInvalid: null,
-    passwordInvalid: null
+    usernameInvalid: false,
+    emailInvalid: false,
+    passwordInvalid: false
   };
 
   validateForm() {
@@ -41,17 +40,36 @@ class Register extends Component {
     });
   };
 
+  validateEmail = email => {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+  };
+
+  checkPasswordStrength = password => {
+    if (password === "") {
+      return false;
+    }
+    const minlength = 6;
+    if (password.length < minlength) return false;
+    if (!password.match(/[A-Z]/)) return false;
+    if (!password.match(/[a-z]/)) return false;
+    if (!password.match(/\d/)) return false;
+    if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
+      return false;
+    return true;
+  };
+
   checkInputValidity = () => {
     this.setState({
-      usernameInvalid: null,
-      emailInvalid: null,
-      passwordInvalid: null
+      usernameInvalid: false,
+      emailInvalid: false,
+      passwordInvalid: false
     });
     const usernamePromise = axios
       .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
       .then(response => {
         console.log(response);
-        this.setState({ usernameInvalid: "error" });
+        this.setState({ usernameInvalid: true });
       })
       .catch(err => {
         console.log(err);
@@ -60,16 +78,16 @@ class Register extends Component {
       .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
       .then(response => {
         console.log(response);
-        this.setState({ emailInvalid: "error" });
+        this.setState({ emailInvalid: true });
       })
       .catch(err => {
         console.log(err);
       });
     if (!this.validateEmail(this.state.email)) {
-      this.setState({ emailInvalid: "error" });
+      this.setState({ emailInvalid: true });
     }
     if (!this.checkPasswordStrength(this.state.password)) {
-      this.setState({ passwordInvalid: "error" });
+      this.setState({ passwordInvalid: true });
     }
 
     // If all fields are valid and the confirm password matches password,
@@ -77,9 +95,9 @@ class Register extends Component {
     Promise.all([usernamePromise, emailPromise]).then(values => {
       console.log("The current state:", this.state);
       if (
-        this.state.usernameInvalid === null &&
-        this.state.emailInvalid === null &&
-        this.state.passwordInvalid === null &&
+        this.state.usernameInvalid === false &&
+        this.state.emailInvalid === false &&
+        this.state.passwordInvalid === false &&
         this.state.password === this.state.confirmPassword
       ) {
         this.handleSubmit();
@@ -98,14 +116,15 @@ class Register extends Component {
     // Putting the set state here allows the submit modal to show before
     // the email is sent. If the response gives an error the submittedError property
     // will override the submitted modal and show there was an error.
-    this.setState({ submitted: true });
     axios
       .post(`${urls[urls.basePath]}/users/register`, {
         username: this.state.username,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
+        this.setState({ submitted: true, submittedError: false });
         console.log(response);
       })
       .catch(err => {
@@ -122,26 +141,19 @@ class Register extends Component {
     if (this.state.submittedError === true) {
       return (
         <div className="Login">
-          <div className="static-modal">
-            <Modal.Dialog>
-              {/* <Modal.Header>
-                <Modal.Title>We don't need a header probably</Modal.Title>
-              </Modal.Header> */}
-              <Modal.Body>
-                There was an error with your submission or our server is down.
-                Please try again in a few minutes.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    this.resetSubmitStatus();
-                  }}
-                >
-                  Try again
-                </Button>
-              </Modal.Footer>
-            </Modal.Dialog>
+          <div className="message">
+            <p>
+              There was an error with your submission or our server is down.
+              Please try again in a few minutes.
+            </p>
+            <Button
+              color="secondary"
+              onClick={() => {
+                this.resetSubmitStatus();
+              }}
+            >
+              Try again
+            </Button>
           </div>
         </div>
       );
@@ -203,7 +215,7 @@ class Register extends Component {
             <Button
               block
               size="lg"
-              color="secondary"
+              color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
             >
@@ -221,26 +233,19 @@ class Register extends Component {
     } else {
       return (
         <div className="Login">
-          <div className="static-modal">
-            <Modal.Dialog>
-              {/* <Modal.Header>
-                <Modal.Title>We don't need a header probably</Modal.Title>
-              </Modal.Header> */}
-              <Modal.Body>
-                Thank you for registering. Please check your email to finish
-                account creation.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  color="secondary"
-                  onClick={() => {
-                    this.props.history.push("/login");
-                  }}
-                >
-                  Take me to the login page
-                </Button>
-              </Modal.Footer>
-            </Modal.Dialog>
+          <div className="message">
+            <p>
+              Please check your email within 30 minutes to confirm your
+              registration, then you can log in.
+            </p>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Take me to the login page
+            </Button>
           </div>
         </div>
       );

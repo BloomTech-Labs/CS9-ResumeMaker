@@ -32,36 +32,19 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="App LandingPage">
-        <div
-          className="landing-box"
-          align="center"
-          style={{ alignSelf: "center" }}
-        >
-          <h1
-            className="Header"
-            style={{ fontFamily: "aveni", fontSize: "3.3rem" }}
-          >
-            <div className="fa fa-angle-left" /> rezLeft
-          </h1>
-          {/* <p style={{fontSize: "0.8rem", fontFamily: "calibri", color: "black"}}>The right resumes go Left.</p> */}
-          <Link className="landing-button" to="/login">
-            <button
-              type="button"
-              className="land-btn btn"
-              style={{ fontSize: "1.1rem" }}
-            >
-              Login
-            </button>
-          </Link>
-          <Link className="landing-button" to="/register">
-            <button
-              type="button"
-              className="land-btn btn"
-              style={{ fontSize: "1.1rem" }}
-            >
-              Register
-            </button>
-          </Link>
+      <div className="landing-box" align="center" style={{alignSelf: "center"}}>
+        <h1 className="Header" style={{fontFamily: "Tacoma", fontSize: "3.3rem"}}>rezRight</h1>
+        {/* <p style={{fontSize: "0.8rem", fontFamily: "calibri", color: "black"}}>The right resumes go Left.</p> */}
+        <Link className="landing-button" to="/login">
+          <button type="button" className="land-btn btn" style={{fontSize: "1.1rem", fontWeight: "600"}}>
+            Login
+          </button>
+        </Link>
+        <Link className="landing-button" to="/register">
+          <button type="button" className="land-btn btn" style={{fontSize: "1.1rem", fontWeight: "600"}}>
+            Register
+          </button>
+        </Link>
         </div>
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template1.css";
 import PDF from "../PDF/PDF";
@@ -44,9 +44,10 @@ export class ResumeOne extends Component {
 
     return (
       <div>
-        <div className="component-div">
+        <Navbar context={this.props.context}/>
+        <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Traditional</h3>
             </div>
@@ -83,7 +84,6 @@ export class ResumeOne extends Component {
                 </div>
               </Container>
               <Divider className="divider-div" />
-
               {summaryLength.length > 0 ? (
                 <div>
                   <Container

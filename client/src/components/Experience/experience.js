@@ -1,19 +1,22 @@
 import React, { Component } from "react";
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
+import ItemCard from "../SubComponents/ItemCard/itemCard";
 import "../CSS/component-general.css";
 
 class Experience extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+  
   render() {
     return (
       <div>
+        <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-           
             <div className="link-hide">
             <h1 style={{fontWeight: "600"}}>EXPERIENCE{" "}
               <Link
@@ -25,25 +28,26 @@ class Experience extends Component {
                 <i className="fa fa-pencil fa-sm" />
               </Link></h1>
             </div>
-            <p style={{ fontSize: "0.8rem" }}>
+             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to enter the information for all of your
               previous work related experience.
             </p>
 
-            {this.props.context.userInfo.experience.map((element, index) => {
-              return (
-                <Link
-                  style={{ color: "black", fontWeight: "700" }}
-                  to={{
-                    pathname: "/experience/create", // component being Linked to
-                    state: { index: index } // Setting Index passed into experienceCreate component
-                  }}
-                  key={index}
-                >
-                  <span>{element.title}</span>
-                </Link>
-              );
-            })}
+            <div className="experience-containment-div">
+              {this.props.context.userInfo.experience.map((element, index) => {
+                return (
+                  <ItemCard
+                    linkTo="/experience"
+                    elementName="experience"
+                    putPath="sections.experience"
+                    index={index}
+                    key={index}
+                    element={element}
+                    context={this.props.context}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@
   transition: box-shadow 150ms ease;
 }
 
-.buttons {
+.stripe .buttons {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -26,7 +26,6 @@
   max-width: 800px;
   margin: 20px 0 0 0;
   /* padding: 1rem;  */
-}
-button {
   margin-bottom: 1rem !important;  
 }
+
