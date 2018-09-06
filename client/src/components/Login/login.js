@@ -30,7 +30,7 @@ const user = {
   invalidCredentials: false
 };
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = user;
@@ -131,3 +131,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;
