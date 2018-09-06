@@ -120,7 +120,6 @@ class AuthProvider extends Component {
       })
       .then(response => {
         console.log(response.data.Resume._id);
-        return response.data.Resume._id;
       })
       .catch(err => {
         console.log("err", err);

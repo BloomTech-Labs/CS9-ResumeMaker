@@ -46,11 +46,11 @@ router.post(
           .then(user => {
             user.resumes.push(resume);
             user.save();
+            res.status(201).json({ Resume: resume });
           })
           .catch(err => {
             res.status(400).json({ Error: err });
           });
-        res.status(201).json({ Resume: resume });
       })
       .catch(err => {
         res.status(400).json({ Error: err });
