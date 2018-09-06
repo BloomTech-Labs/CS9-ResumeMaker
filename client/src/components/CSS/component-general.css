@@ -5,16 +5,14 @@
 }
 
 i {
-  color: black; 
-  font-size: 2rem; 
-}
-i:hover{
-  font-size:3rem; 
+  color: black;
+  font-size: 2rem;
 }
 
 .title-div {
   width: 100%;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,
+    "AppleGothic", sans-serif;
 }
 
 .overall-component-div .title-div {
@@ -32,16 +30,10 @@ i:hover{
   max-width: 600px;
 }
 
-.summary-containment-div {
-  display: flex;
-  justify-content: center;
-  /* max-width: 800px; */
-  flex-wrap: wrap;
-  
+.fa.fa-pencil {
+  margin: 1rem 0 0.5rem 0;
 }
-.fa-pencil {
-  margin-top: 1rem; 
-}
+
 .card-body.card-text.card {
-  text-decoration-color: black; 
+  text-decoration-color: black;
 }

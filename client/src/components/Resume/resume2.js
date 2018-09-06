@@ -46,9 +46,9 @@ export class ResumeTwo extends Component {
     return (
       <div>
         <Navbar context={this.props.context}/>
-        <div className="component-div">
+        <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
+          <div className="page-div col">
             <div className="d-block justify-content-center title-div">
               <h3 className="page-header">Modern</h3>
             </div>

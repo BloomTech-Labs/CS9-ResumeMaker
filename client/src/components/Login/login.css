@@ -24,6 +24,7 @@
 
 .Login form .form-group label {
   margin: 0;
+  padding-bottom: 1%;
 }
 
 .Login form .form-group .help-block {
@@ -34,14 +35,17 @@
   margin-top: 2rem;
 }
 
-.Login .modal {
-  position: absolute;
-  /* the top and bottom make the modal relatively
-  centered on the screen */
-  top: 25%;
-  bottom: 10%;
+.Login .bottom-buttons {
+  display: flex;
+  justify-content: space-around;
 }
 
-.Login .modal-footer {
-  justify-content: center;
+.Login .message {
+  display: flex;
+  max-width: 30%;
+  align-self: center;
+  background: #fff;
+  border-radius: 0.25rem;
+  flex-direction: column;
+  padding: 2rem;
 }

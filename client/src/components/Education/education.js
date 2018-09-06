@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
+import ItemCard from "../SubComponents/ItemCard/itemCard";
 import "../CSS/component-general.css";
 
 class Education extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+  
   render() {
     return (
       <div>
@@ -33,20 +35,21 @@ class Education extends Component {
               Education History.
             </p>
 
-            {this.props.context.userInfo.education.map((element, index) => {
-              return (
-                <Link
-                  style={{ color: "black", fontWeight: "600" }}
-                  to={{
-                    pathname: "/education/create", // component being Linked to
-                    state: { index: index } // Setting Index passed into educationCreate component
-                  }}
-                  key={index}
-                >
-                  <span>{element.school}</span>
-                </Link>
-              );
-            })}
+            <div className="education-containment-div">
+              {this.props.context.userInfo.education.map((element, index) => {
+                return (
+                  <ItemCard
+                    linkTo="/education"
+                    elementName="education"
+                    putPath="sections.education"
+                    index={index}
+                    key={index}
+                    element={element}
+                    context={this.props.context}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

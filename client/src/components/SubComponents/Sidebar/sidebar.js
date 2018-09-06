@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
-
 import classnames from "classnames";
 import "./sidebar.css";
 const urls = require("../../../config/config.json");
@@ -16,10 +15,8 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
-    if (
-      this.props.context.userInfo.auth !== true &&
-      localStorage.getItem("token")
-    ) {
+    if (localStorage.getItem("token") && this.props.context.auth !== true) {
+      console.log("ComponentDidMount on sidebar called for new user info");
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -27,6 +24,7 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
+          console.log("sidebar get response for currentuser:", response);
           const userData = response.data.user;
           const resumeData = response.data.resumes;
           this.props.context.actions.setLogin(userData);
@@ -36,6 +34,8 @@ class Sidebar extends Component {
           console.log("Server Error: ", err);
           this.props.context.actions.setLogout();
         });
+    } else {
+      console.log("Sidebar detected no token and/or auth === false");
     }
   }
 
@@ -117,8 +117,11 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/education")
             })}
           >
-            {" "}
-            <div className="fa fa-graduation-cap sm" style={{ color: "white" }} /> {" "}EDUCATION
+            <div
+              className="fa fa-graduation-cap sm"
+              style={{ color: "white" }}
+            />
+             {" "}EDUCATION
           </Link>
           <Link
             to="/billing"
