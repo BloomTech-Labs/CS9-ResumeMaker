@@ -2,8 +2,13 @@
   max-width: 50rem;
   display: flex;
   align-self: center;
+  flex-direction: row; 
 }
+.link-hide h1 {
 
+  margin-bottom: 0; 
+  padding-right: .5rem; 
+}
 i {
   color: black;
   font-size: 2rem;
@@ -19,9 +24,6 @@ i {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* background-image: linear-gradient( darkgray, white); */
-  /* background: linear-gradient(#7578F8, lightgray); */
-  /* background: #C8C8C8;   */
 }
 
 .div-for-links {
@@ -31,7 +33,16 @@ i {
 }
 
 .fa.fa-pencil {
-  margin: 1rem 0 0.5rem 0;
+  padding: .6rem; 
+}
+
+.fa.fa-pencil:hover {
+  color: #777;
+}
+
+.fa.fa-pencil:active {
+  font-size: 1.9rem; 
+  color: #777;
 }
 
 .card-body.card-text.card {

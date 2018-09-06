@@ -19,22 +19,20 @@ class Education extends Component {
           <div className="title-div col">
             <div className="link-hide">
               <h1 style={{fontWeight: "600"}}>
-                EDUCATION HISTORY{" "}
+                EDUCATION HISTORY{" "}</h1>
                 <Link
                   to={{
                     pathname: "/education/create", // component being Linked to
                     state: { index: false } // Setting Index passed into educationCreate component - false means new
                   }}
                 >
-                  <i className="fa fa-pencil fa-sm" />
+                  <i className="fa fa-pencil fa-2x" />
                 </Link>
-              </h1>
             </div>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to enter the information for your
               Education History.
             </p>
-
             <div className="education-containment-div">
               {this.props.context.userInfo.education.map((element, index) => {
                 return (

@@ -18,16 +18,15 @@ class Skills extends Component {
           <div className="title-div col">
             <div className="link-hide">
               <h1 style={{ fontWeight: "600" }}>
-                SKILLS{" "}
+                SKILLS{" "}</h1>
                 <Link
                   to={{
                     pathname: "/skills/create", // component being Linked to
                     state: { index: false } // Setting Index passed into educationCreate component - false means new
                   }}
-                >
-                  <i className="fa fa-pencil fa-sm" />
+                >{" "}
+                  <i className="fa fa-pencil fa-2x" />
                 </Link>
-              </h1>
             </div>
             <p>
               Please click the pencil to enter each of your work related skills.

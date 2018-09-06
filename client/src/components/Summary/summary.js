@@ -19,16 +19,15 @@ class Summary extends Component {
           <div className="title-div col">
             <div className="link-hide">
               <h1 style={{ fontWeight: "570" }}>
-                PERSONAL SUMMARY{" "}
+                PERSONAL SUMMARY{" "}</h1>
                 <Link
                   to={{
                     pathname: "/summary/create", // component being Linked to
                     state: { index: false } // Setting Index passed into educationCreate component - false means new
                   }}
                 >
-                  <i className="fa fa-pencil fa-sm" />
+                  <i className="fa fa-pencil fa-2x"/>
                 </Link>
-              </h1>
             </div>
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to create one or more Personal Summaries
