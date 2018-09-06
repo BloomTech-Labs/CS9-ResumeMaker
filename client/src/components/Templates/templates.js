@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./tempTemplate1.png";
 import "./tempTemplate2.png";
@@ -33,12 +33,13 @@ class Templates extends Component {
   render() {
     return (
       <div className="entire-page">
+      <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h1>TEMPLATES</h1>
-              <div className="fa fa-angle-left" />
+               <h1 style={{fontWeight: "600"}}>TEMPLATES</h1>
+              <div className="fa fa-angle-left" />{" "}
               Start your RESUME by selecting each link on the left sidebar and
               entering
               <br />
@@ -51,7 +52,7 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid black",
+                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -71,7 +72,7 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid black",
+                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -91,7 +92,7 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid black",
+                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{

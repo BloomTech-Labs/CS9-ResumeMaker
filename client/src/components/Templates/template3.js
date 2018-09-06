@@ -4,7 +4,7 @@ import { FormGroup } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template3.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
@@ -92,6 +92,7 @@ class TemplateThree extends Component {
 
     return (
       <div>
+        <Navbar context={this.props.context}/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">
@@ -106,7 +107,7 @@ class TemplateThree extends Component {
                 onClick={this.handleSubmit}
               >
                 {" "}
-                Save Resume
+                SAVE RESUME
               </button>
             </div>
             <form className="template1">
@@ -127,44 +128,39 @@ class TemplateThree extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section"> {userInfo.email}</p>
                     </a>
-                    <div className="contact-section">
-                      {" "}
-                      <div className="fa fa-globe" aria-hidden="true" />{" "}
-                      {userInfo.location}
-                    </div>
-                    <div className="contact-section">
-                      <div className="fa fa-mobile" aria-hidden="true" />
-                      {userInfo.phonenumber}
-                    </div>
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={resumes.length - 1}
-                        name="linkedin"
-                        value={resumes[resumes.length - 1].links.linkedin}
-                      />
-                      <div className={"fa fa-linkedin fa-sm"} />
-                      {userInfo.links.linkedin}
-                    </div>
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={resumes.length - 1}
-                        name="github"
-                        value={resumes[resumes.length - 1].links.github}
-                      />{" "}
-                      <div className="fa fa-github" aria-hidden="true" />{" "}
-                      {userInfo.links.github}
-                    </div>
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={resumes.length - 1}
-                        name="portfolio"
-                        value={resumes[resumes.length - 1].links.portfolio}
-                      />{" "}
-                      {userInfo.links.portfolio}
-                    </div>
+                    <p style={{fontSize: "0.65rem"}}>
+                  <div className="fa fa-mobile" aria-hidden="true" />
+                  {" "}{userInfo.phonenumber}
+                </p>
+                <p style={{fontSize: "0.65rem"}}>
+                  <CheckBox
+                    context={this.props.context}
+                    index={resumes.length - 1}
+                    name="linkedin"
+                    value={resumes[resumes.length - 1].links.linkedin}
+                  />{" "}
+                  <div className={"fa fa-linkedin fa-sm"} />
+                  {" "}{userInfo.links.linkedin}
+                </p>
+                <p style={{fontSize: "0.65rem"}}>
+                  <CheckBox
+                    context={this.props.context}
+                    index={resumes.length - 1}
+                    name="github"
+                    value={resumes[resumes.length - 1].links.github}
+                  />{" "}
+                  <div className="fa fa-github" aria-hidden="true" />
+                  {" "}{userInfo.links.github}
+                </p>
+                <p style={{fontSize: "0.65rem"}}>
+                  <CheckBox
+                    context={this.props.context}
+                    index={resumes.length - 1}
+                    name="portfolio"
+                    value={resumes[resumes.length - 1].links.portfolio}
+                  />{" "}
+                  {userInfo.links.portfolio}
+                </p>
                   </FormGroup>
                 </div>
                 <div className="col">
@@ -220,7 +216,7 @@ class TemplateThree extends Component {
                                 ].value
                               }
                               index={resumes.length - 1}
-                            />
+                            />{" "}
                             {content.content}
                           </p>
                         </div>

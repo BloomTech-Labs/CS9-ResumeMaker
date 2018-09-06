@@ -3,7 +3,7 @@ import { Container, Divider } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "./template1.css";
 import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
@@ -91,6 +91,7 @@ class TemplateOne extends Component {
     const resumes = this.props.context.userInfo.resumes;
     return (
       <div>
+         <Navbar context={this.props.context}/>
         <div className="component-div">
           <Sidebar context={this.props.context} />
           <div className="page-div">
@@ -105,7 +106,7 @@ class TemplateOne extends Component {
                 onClick={this.handleSubmit}
               >
                 {" "}
-                Save Resume
+                SAVE RESUME
               </button>
             </div>
             <form className="template1">
@@ -129,25 +130,24 @@ class TemplateOne extends Component {
                 <a href={`mailto:${userInfo.email}`}>
                   <p> {userInfo.email}</p>
                 </a>
-                <div>
-                  <div className="fa fa-globe" aria-hidden="true" />
-                  {userInfo.location}
-                </div>
-                <div>
+                  <p><div className="fa fa-globe" aria-hidden="true" />
+                  {" "}{userInfo.location}
+                </p>
+                <p>
                   <div className="fa fa-mobile" aria-hidden="true" />
-                  {userInfo.phonenumber}
-                </div>
-                <div>
+                  {" "}{userInfo.phonenumber}
+                </p>
+                <p>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
                     name="linkedin"
                     value={resumes[resumes.length - 1].links.linkedin}
-                  />
+                  />{" "}
                   <div className={"fa fa-linkedin fa-sm"} />
-                  {userInfo.links.linkedin}
-                </div>
-                <div>
+                  {" "}{userInfo.links.linkedin}
+                </p>
+                <p>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -155,8 +155,8 @@ class TemplateOne extends Component {
                     value={resumes[resumes.length - 1].links.github}
                   />{" "}
                   <div className="fa fa-github" aria-hidden="true" />
-                  {userInfo.links.github}
-                </div>
+                  {" "}{userInfo.links.github}
+                </p>
                 <p>
                   <CheckBox
                     context={this.props.context}
@@ -200,7 +200,7 @@ class TemplateOne extends Component {
                               .value
                           }
                           index={resumes.length - 1}
-                        />
+                        />{" "}
                         {content.content}
                       </p>
                     </div>
@@ -265,7 +265,7 @@ class TemplateOne extends Component {
                               ].value
                             }
                             index={resumes.length - 1}
-                          />
+                          />{" "}
                           {content.degree} in {content.fieldofstudy}{" "}
                         </h5>
                         <p>{content.location}</p>
