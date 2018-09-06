@@ -33,8 +33,8 @@ class Summary extends Component {
             <p style={{ fontSize: "0.8rem" }}>
               Please click the pencil to create one or more Personal Summaries
               about yourself. <br />
-              They should be aimed at toward the position you are seeking for
-              and contain something about the past present and future.{" "}
+              They should be aimed at the position you are seeking
+              and contain something about the past, present, and future.{" "}
             </p>
 
             <div className="summary-containment-div">

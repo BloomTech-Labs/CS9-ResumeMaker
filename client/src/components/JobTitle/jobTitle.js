@@ -30,7 +30,7 @@ class JobTitle extends Component {
             </div>
             <p>
               Please click the pencil to enter one or more Titles for the Job
-              Positon you are seeking.
+              Position you are seeking. 
             </p>
 
             <div className="titles-containment-div">
