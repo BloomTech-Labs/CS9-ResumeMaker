@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect, Route } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import classnames from "classnames";
@@ -54,8 +54,8 @@ class Sidebar extends Component {
           className="static-sidebar"
           style={{
             fontFamily: "Verdana",
-            fontSize: "0.7rem",
-            fontWeight: "550"
+            fontSize: "0.6rem",
+            fontWeight: "0"
           }}
         >
           <Link
@@ -64,8 +64,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/templates")
             })}
           >
-            <div className="fa fa-copy sm" style={{ color: "white" }} />{" "}
-            Templates
+            {" "}
+            <div className="fa fa-copy sm" style={{ color: "white" }} /> {" "} TEMPLATES
           </Link>
           <Link
             to="/resumes"
@@ -73,8 +73,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/resumes")
             })}
           >
-            <div className="fa fa-file-alt sm" style={{ color: "white" }} />
-            Resumes
+            {" "}
+            <div className="fa fa-file-alt sm" style={{ color: "white" }} /> {" "} RESUMES
           </Link>
           <Link
             to="/jobtitle"
@@ -82,8 +82,7 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/jobtitle")
             })}
           >
-            <div className="fa fa-briefcase sm" style={{ color: "white" }} />{" "}
-            Job Title
+            <div className="fa fa-briefcase sm" style={{ color: "white" }} /> {" "}JOB TITLE
           </Link>
           <Link
             to="/summary"
@@ -91,7 +90,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/summary")
             })}
           >
-            <div className="fa fa-edit sm" style={{ color: "white" }} /> Summary
+            {" "}
+            <div className="fa fa-edit sm" style={{ color: "white" }} /> {" "} SUMMARY
           </Link>
           <Link
             to="/skills"
@@ -99,7 +99,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/skills")
             })}
           >
-            <div className="fa fa-wrench" style={{ color: "white" }} /> Skills
+            {" "}
+            <div className="fa fa-wrench" style={{ color: "white" }} /> {" "} SKILLS
           </Link>
           <Link
             to="/experience"
@@ -107,8 +108,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/experience")
             })}
           >
-            <div className="fa fa-lightbulb sm" style={{ color: "white" }} />
-            Experience
+            {" "}
+            <div className="fa fa-lightbulb sm" style={{ color: "white" }} /> {" "} EXPERIENCE
           </Link>
           <Link
             to="/education"
@@ -120,7 +121,7 @@ class Sidebar extends Component {
               className="fa fa-graduation-cap sm"
               style={{ color: "white" }}
             />
-            Education
+             {" "}EDUCATION
           </Link>
           <Link
             to="/billing"
@@ -128,8 +129,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/billing")
             })}
           >
-            <div className="fa fa-credit-card sm" style={{ color: "white" }} />{" "}
-            Billing
+            {" "}
+            <div className="fa fa-credit-card sm" style={{ color: "white" }} /> {" "} BILLING
           </Link>
           <Link
             to="/settings"
@@ -137,11 +138,11 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/settings")
             })}
           >
-            <div className="fa fa-sliders-h sm" style={{ color: "white" }} />
-            Settings
+            {" "}
+            <div className="fa fa-sliders-h sm" style={{ color: "white" }} /> {" "}SETTINGS
           </Link>
         </div>
-        <Route
+        {/* <Route
           render={({ history }) => (
             <div
               className="logout btn"
@@ -150,10 +151,10 @@ class Sidebar extends Component {
                 history.push("/");
               }}
             >
-              Logout
+              LOGOUT
             </div>
           )}
-        />
+        /> */}
       </div>
     );
   }

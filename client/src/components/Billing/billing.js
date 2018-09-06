@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { injectStripe } from "react-stripe-elements";
 import axios from "axios";
 import CheckoutForm from "./checkoutForm";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Loading from "./Loading";
 import "./billing.css";
@@ -133,21 +133,22 @@ class Billing extends Component {
   render() {
     return (
       <div>
+        <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Billing</h1>
-            <p>Would You Like To Become a Member?</p>
+            <h1 style={{fontWeight: "600"}}>BILLING</h1>
+            <p>Become a Member:</p>
             <div className="stripe">
               <div className="card-element">
                 <CheckoutForm />
               </div>
             </div>
             <div className="buttons">
-              <button onClick={this.monthly}>
+              <button className="bill-btn" onClick={this.monthly}>
                 Monthly Subscriptions - $0.99
               </button>
-              <button onClick={this.yearly}>
+              <button className="bill-btn" onClick={this.yearly}>
                 Yearly Subscriptions - $9.99
               </button>
               <button onClick={this.unsubscribe}>Unsubscribe</button>
