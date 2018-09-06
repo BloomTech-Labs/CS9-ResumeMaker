@@ -6,7 +6,6 @@ const nodemailer = require("nodemailer");
 const base64url = require("base64url");
 const crypto = require("crypto");
 
-const websiteName = require("../config/keys").site_name;
 const secretKey = require("../config/keys").secret_key;
 const secret = require("../config/keys").secret;
 const stripe = require("stripe")(secretKey);
@@ -14,6 +13,10 @@ const User = require("./UserModel.js");
 const Resume = require("../resume/ResumeModel");
 const EmailConfirmation = require("../email/EmailConfirmationModel.js");
 const { changeStatus } = require("../helpers/Stripe");
+let websiteName = "";
+if (process.env.SITE_NAME) {
+  websiteName = process.env.SITE_NAME;
+} else websiteName = "easy-resume.com";
 
 // GET users/:username
 // Route to find if a username is already in use
@@ -23,7 +26,7 @@ router.get("/usernamecheck/:username", (req, res) => {
       res.status(200).json(user.username);
     })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         errorMessage: "Could not find user with that username.",
         error: err
       });
@@ -38,7 +41,7 @@ router.get("/emailcheck/:email", (req, res) => {
       res.status(200).json(user.email);
     })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         errorMessage: "Could not find user with that email.",
         error: err
       });
@@ -79,7 +82,7 @@ router.get("/", (req, res) => {
       res.status(200).json(users);
     })
     .catch(err => {
-      res.status(400).json({ errorMessage: "Get unsuccessful.", error: err });
+      res.status(500).json({ errorMessage: "Get unsuccessful.", error: err });
     });
 });
 
@@ -97,7 +100,7 @@ router.post("/register", (req, res) => {
   User.findOne({ email: userData.email })
     .then(user => {
       if (user) {
-        res.status(400).json({
+        res.status(500).json({
           errorMessage:
             "This email is already in use. Please choose the forgot password option to reset your password."
         });
@@ -121,7 +124,7 @@ router.post("/register", (req, res) => {
             console.log(
               "Link to activate account:\n",
               `${req.get("host")}${req.baseUrl}/confirmemail/${
-                newEmailConfirmation.hash
+              newEmailConfirmation.hash
               }`
             );
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -143,17 +146,17 @@ router.post("/register", (req, res) => {
                   pass: account.pass // generated ethereal password
                 }
               });
-              // how to get link we need to go to: ${req.get("host")}/confirmemail/${newEmailConfirmation.hash}
               let mailOptions = {
                 from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
                 to: `${userData.email}`,
                 subject: `Confirm your registration to ${websiteName}!`,
-                text: `Thank you for signing up! Please go to this address to confirm your registration: ${
-                  req.body.path
-                }?/users/confirmemail/${newEmailConfirmation.hash}`,
-                html: `Thank you for signing up! Please click this <a href=${
-                  req.body.path
-                }?/users/confirmemail/${newEmailConfirmation.hash}>link</a>.`
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
+                html: `Thank you for signing up! Please click this <a href=${req.get(
+                  "host"
+                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
+                }>link</a>.`
               };
 
               transporter.sendMail(mailOptions, (err, info) => {
@@ -162,7 +165,7 @@ router.post("/register", (req, res) => {
                     errorMessage: "Could not send email.",
                     error: err
                   });
-                  return res.status(400).json({
+                  return res.status(500).json({
                     errorMessage: "Could not send email.",
                     error: err
                   });
@@ -183,18 +186,18 @@ router.post("/register", (req, res) => {
               errorMessage: "Could not save email confirmation.",
               error: err
             });
-            res.status(400).json({
+            res.status(500).json({
               errorMessage: "Could not save email confirmation.",
               error: err
             });
           });
         // If you put a response here the time for response to a register request will be 100-200ms
-        // instead of 2000-4000, but they won't get error messages from the backend.
+        // instead of 2000-5000, but they won't get error messages from the backend.
         // res.status(200).json(userData.email);
       }
     })
     .catch(err => {
-      return res.status(400).json({
+      return res.status(500).json({
         errorMessage:
           "There was an error in account creation, please try again.",
         error: err
@@ -224,8 +227,7 @@ router.post("/login", (req, res) => {
               if (err) console.log(err);
               else console.log(success);
             });
-            if (changeStatus(email, { subscription: null, membership: false }))
-              console.log("Success");
+            if (changeStatus(email, { subscription: null, membership: false })) console.log("Success");
             else console.log("Error");
           }
         });
@@ -253,7 +255,9 @@ router.post("/login", (req, res) => {
               const query = Resume.findOne({ user: user.id });
               query.then(resume => {
                 const resumes = [];
-                resumes.push(resume);
+                if (resume !== null) {
+                  resumes.push(resume);
+                }
                 res.status(200).json({ token, user, resumes });
               });
             }
@@ -264,12 +268,12 @@ router.post("/login", (req, res) => {
         })
         .catch(err => {
           res
-            .status(400)
+            .status(500)
             .json({ errorMessage: "Could not log in.", error: err });
         });
     })
     .catch(err => {
-      res.status(400).json({ errorMessage: "Could not log in.", error: err });
+      res.status(500).json({ errorMessage: "Could not log in.", error: err });
     });
 });
 
@@ -286,14 +290,14 @@ router.delete(
           res.status(200).send({ message: "User successfully deleted." });
         })
         .catch(err => {
-          res.status(400).json({
+          res.status(404).json({
             errorMessage: "Could not find and delete user.",
             error: err
           });
         });
     } else {
       res
-        .status(400)
+        .status(500)
         .json({ errorMessage: "You do not have access to this user!" });
     }
   }
@@ -327,7 +331,7 @@ router.put(
         .then(user => {
           if (!user) {
             return res
-              .status(400)
+              .status(404)
               .json({ errorMessage: "No user with that id could be found." });
           } else {
             if (req.body.oldpassword) {
@@ -369,7 +373,7 @@ router.put(
                                 console.log(
                                   "Link to change email:\n",
                                   `${req.get("host")}${
-                                    req.baseUrl
+                                  req.baseUrl
                                   }/changeemail/${newEmailConfirmation.hash}`
                                 );
                                 // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -388,16 +392,17 @@ router.put(
                                     from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
                                     to: `${req.user.email}`,
                                     subject: `Confirm your account email change for ${websiteName}!`,
-                                    text: `Please go to this link to make this your new account email address: ${
-                                      req.body.path
-                                    }?/users/changeemail/${
+                                    text: `Please go to this link to make this your new account email address: ${req.get(
+                                      "host"
+                                    )}${req.baseUrl}/changeemail/${
                                       newEmailConfirmation.hash
-                                    }`,
-                                    html: `Please click this <a href=${
-                                      req.body.path
-                                    }?/users/changeemail/${
+                                      }`,
+                                    html: `Please click this <a href=${req.get(
+                                      "host"
+                                    )}${req.baseUrl}/changeemail/${
                                       newEmailConfirmation.hash
-                                    }>link</a> to make this your new account email address..`
+                                      }
+                    }>link</a> to make this your new account email address.`
                                   };
 
                                   transporter.sendMail(
@@ -440,7 +445,7 @@ router.put(
                     }
                     if (req.body.newpassword && req.body.newpassword != "") {
                       user.password = req.body.newpassword;
-                      user.save(function(err) {
+                      user.save(function (err) {
                         if (err) {
                           user.password = null;
                           res.status(200).json({
@@ -490,12 +495,12 @@ router.put(
         })
         .catch(err => {
           res
-            .status(400)
+            .status(500)
             .json({ errorMessage: "Could not update.", error: err });
         });
     } else {
       res
-        .status(400)
+        .status(500)
         .json({ errorMessage: "You do not have access to this user!" });
     }
   }
@@ -533,26 +538,26 @@ router.get("/changeemail/:hash", (req, res) => {
                 email: emailconfirmation.oldemail
               });
             } else
-              res.status(200).json({
+              res.status(404).json({
                 errorMessage:
                   "Your email could not be changed for some reason. Please try again."
               });
           })
           .catch(err => {
-            res.status(200).json({
+            res.status(500).json({
               errorMessage:
                 "Your email could not be changed for some reason. Please try again.",
               error: err
             });
           });
       } else
-        res.status(200).json({
+        res.status(500).json({
           errorMessage:
             "Your email could not be changed for some reason. Please try again."
         });
     })
     .catch(err => {
-      res.status(200).json({
+      res.status(500).json({
         errorMessage:
           "Email confirmation could not be found. Please try again.",
         error: err
@@ -594,20 +599,20 @@ router.get("/confirmemail/:hash", (req, res) => {
             res.status(201).json({ token, user });
           })
           .catch(err => {
-            res.status(200).json({
+            res.status(500).json({
               errorMessage:
                 "There was an error in account creation, please try again.",
               error: err
             });
           });
       } else
-        res.status(200).json({
+        res.status(404).json({
           errorMessage:
             "Your account has already been activated or does not exist."
         });
     })
     .catch(err =>
-      res.status(200).json({
+      res.status(404).json({
         errorMessage: "Could not find email confirmation in database.",
         error: err
       })
@@ -643,7 +648,7 @@ router.put("/forgotpassword", (req, res) => {
           console.log(
             "Link to reset password:\n",
             `${req.get("host")}${req.baseUrl}/resetpassword/${
-              newEmailConfirmation.hash
+            newEmailConfirmation.hash
             }`
           );
           // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -662,19 +667,19 @@ router.put("/forgotpassword", (req, res) => {
               from: `"Fredegar Fu 👻" <forgotpassword@${websiteName}>`,
               to: `${user.email}`,
               subject: `Confirm your password change for ${websiteName}!`,
-              text: `Please go to this link to reset your password: ${
-                req.body.path
-              }?/users/resetpassword/${newEmailConfirmation.hash}`,
-              html: `Please click this <a href=${
-                req.body.path
-              }?/users/resetpassword/${newEmailConfirmation.hash}
-              }>link</a> to reset your password.`
+              text: `Please go to this link to reset your password: ${req.get(
+                "host"
+              )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
+              html: `Please click this <a href=${req.get("host")}${
+                req.baseUrl
+                }/resetpassword/${newEmailConfirmation.hash}
+          }>link</a> to reset your password.`
             };
 
             transporter.sendMail(mailOptions, (err, info) => {
               if (err) {
                 return res
-                  .status(400)
+                  .status(500)
                   .json({ errorMessage: "Could not send email.", error: err });
               }
               console.log("Message sent: %s", info.messageId);
@@ -699,7 +704,7 @@ router.put("/forgotpassword", (req, res) => {
       res.status(200).json(user.email);
     })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         errorMessage: "Could not change password. Please try again.",
         error: err
       });
@@ -724,36 +729,36 @@ router.get("/resetpassword/:hash", (req, res) => {
               const newPassword = base64url(hash.digest("hex")) + "!";
               user.password = newPassword;
               user.active = true;
-              user.save(function(err) {
+              user.save(function (err) {
                 if (err) {
-                  res.status(200).json({
+                  res.status(500).json({
                     errorMessage:
-                      "There was an error setting a temporary password. Please try again.",
+                      "There was an error setting the temporary password.",
                     error: err
                   });
                 } else res.status(200).json({ message: "Temporary password set successfully!", password: newPassword });
               });
             } else
-              res.status(200).json({
+              res.status(404).json({
                 errorMessage:
-                  "You already changed your password or you took to long to confirm your password change. Please try again and click the emailed link within 30 minutes."
+                  "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
               });
           })
           .catch(err => {
-            res.status(200).json({
+            res.status(500).json({
               errorMessage:
-                "You already changed your password or you took to long to confirm your password change. Please try again and click the emailed link within 30 minutes.",
+                "Your account has already been activated or does not exist.",
               error: err
             });
           });
       } else
-        res.status(200).json({
+        res.status(500).json({
           errorMessage:
-            "You already changed your password or you took to long to confirm your password change. Please try again and click the emailed link within 30 minutes."
+            "Your account has already been activated or does not exist."
         });
     })
     .catch(err => {
-      res.status(200).json({
+      res.status(500).json({
         errorMessage: "Your password could not be reset for some reason.",
         error: err
       });

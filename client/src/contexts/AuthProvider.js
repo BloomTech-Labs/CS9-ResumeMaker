@@ -74,7 +74,7 @@ class AuthProvider extends Component {
   };
 
   setResume = resumeData => {
-    if (resumeData[0] === null) {
+    if (!resumeData.length) {
       this.createResume(true);
     } else {
       this.setState({
