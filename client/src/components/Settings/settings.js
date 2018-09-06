@@ -42,7 +42,9 @@ export class PersonalInfo extends Component {
       emailInvalid: false,
       passwordInvalid: false,
       changesSaved: null,
-      emailConfirmModal: false
+      emailChanged: false,
+      newPasswordInvalid: null,
+      passwordChanged: false
     };
   }
 
@@ -91,15 +93,26 @@ export class PersonalInfo extends Component {
 
   checkPasswordStrength = password => {
     if (password === "") {
-      return false;
+      this.setState({ newPasswordInvalid: null });
+      return;
     }
     const minlength = 6;
-    if (password.length < minlength) return false;
-    if (!password.match(/[A-Z]/)) return false;
-    if (!password.match(/[a-z]/)) return false;
-    if (!password.match(/\d/)) return false;
-    if (!password.match(/[`~!@#$%^&*()_\-+=[{]}|\\:;"'<,>.?\/]/)) return false;
-    return true;
+    if (password.length < minlength) {
+      this.setState({ newPasswordInvalid: true });
+    } else if (!password.match(/[A-Z]/)) {
+      this.setState({ newPasswordInvalid: true });
+    } else if (!password.match(/[a-z]/)) {
+      this.setState({ newPasswordInvalid: true });
+    } else if (!password.match(/\d/)) {
+      this.setState({ newPasswordInvalid: true });
+    } else if (
+      !password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)
+    ) {
+      this.setState({ newPasswordInvalid: true });
+    } else {
+      this.setState({ newPasswordInvalid: false });
+    }
+    return;
   };
 
   handleChange = e => {
@@ -159,6 +172,7 @@ export class PersonalInfo extends Component {
           this.state.emailInvalid === false &&
           this.state.changesSaved === null
         ) {
+          this.setState({ emailChanged: true });
           this.handleSubmit();
         } else {
           this.setState({ changesSaved: false });
@@ -342,17 +356,21 @@ export class PersonalInfo extends Component {
                 <Label>New Password</Label>
                 <Input
                   invalid={
-                    !this.checkPasswordStrength(this.state.newpassword) &&
+                    this.state.newPasswordInvalid === true &&
                     this.state.newpassword !== ""
-                      ? true
-                      : false
                   }
-                  valid={this.checkPasswordStrength(this.state.newpassword)}
+                  valid={
+                    this.state.newPasswordInvalid === false &&
+                    this.state.newpassword !== ""
+                  }
                   id="newpassword"
                   size="sm"
                   type="password"
                   value={this.state.newpassword}
-                  onChange={this.handleChange}
+                  onChange={e => {
+                    this.handleChange(e);
+                    this.checkPasswordStrength(e.target.value);
+                  }}
                 />
                 <FormFeedback invalid>
                   Please use a complex password at least 8 characters long.
@@ -366,8 +384,8 @@ export class PersonalInfo extends Component {
                     this.state.newpassword !== ""
                   }
                   invalid={
-                    this.state.newpassword !== this.state.newconfirmpassword &&
-                    this.state.newconfirmpassword !== ""
+                    this.state.newpassword !== "" &&
+                    this.state.newpassword !== this.state.newconfirmpassword
                   }
                   id="newconfirmpassword"
                   size="sm"
@@ -381,18 +399,29 @@ export class PersonalInfo extends Component {
               </FormGroup>
             </Form>
             <div className="settings-footer mt-4">
-              <Button
-                color="secondary"
-                onClick={() => this.checkInputValidity()}
-              >
+              <Button color="primary" onClick={() => this.checkInputValidity()}>
                 Submit
               </Button>
-              {this.state.changesSaved && this.state.changesSaved !== null ? (
-                <div className="saved-status">Your changes were saved.</div>
-              ) : null}
-              {!this.state.changesSaved && this.state.changesSaved !== null ? (
-                <div className="saved-status">Your changes were not saved.</div>
-              ) : null}
+              <div className="saved-status">
+                {this.state.changesSaved && this.state.changesSaved !== null ? (
+                  <span>Your changes were saved. </span>
+                ) : null}
+                {!this.state.changesSaved &&
+                this.state.changesSaved !== null ? (
+                  <span>Your changes were not saved. </span>
+                ) : null}
+                {this.state.emailChanged && this.state.changesSaved ? (
+                  <span>
+                    Please check your new email within 30 minutes to confirm
+                    your email change.
+                  </span>
+                ) : null}
+                {/* {this.state.passwordChanged && this.state.changesSaved ? (
+                  <span>
+                    You changed your password.
+                  </span>
+                ) : null} */}
+              </div>
             </div>
           </Col>
         </Row>
