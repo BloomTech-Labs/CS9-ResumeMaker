@@ -14,8 +14,8 @@ const urls = require("../../config/config.json");
 
 class ConfirmationPage extends Component {
   state = {
-    submitted: false,
-    submittedError: false
+    message: "Loading...",
+    password: null
   };
 
   componentDidMount = () => {
@@ -29,23 +29,12 @@ class ConfirmationPage extends Component {
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(response.data.user);
           this.props.history.push("/templates");
+        } else {
+          this.setState({
+            message: response.data.message,
+            password: response.data.password
+          });
         }
-        this.setState({ submitted: true, submittedError: false });
-      })
-      .catch(err => {
-        console.log("err", err);
-        this.setState({ submitted: false, submittedError: true });
-      });
-  };
-
-  handleSubmit = () => {
-    axios
-      .put(`${urls[urls.basePath]}/users/forgotpassword`, {
-        email: this.state.email
-      })
-      .then(response => {
-        console.log(response);
-        this.setState({ submitted: true, submittedError: false });
       })
       .catch(err => {
         console.log("err", err);
@@ -54,23 +43,40 @@ class ConfirmationPage extends Component {
   };
 
   render() {
-    return (
-      <div className="Login">
-        <div className="message">
-          <p>
-            Please check your email within 30 minutes to reset your password.
-          </p>
-          <Button
-            color="primary"
-            onClick={() => {
-              this.props.history.push("/login");
-            }}
-          >
-            Take me to the login page
-          </Button>
+    if (this.state.password && this.state.message !== "Loading...") {
+      return (
+        <div className="Login">
+          <div className="message">
+            <p>
+              {this.state.message} Your password is now {this.state.password}
+            </p>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Take me to the login page
+            </Button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else
+      return (
+        <div className="Login">
+          <div className="message">
+            <p>{this.state.message}</p>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Take me to the login page
+            </Button>
+          </div>
+        </div>
+      );
   }
 }
 
