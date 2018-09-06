@@ -42,6 +42,7 @@
 
 .Login .message {
   display: flex;
+  max-width: 30%;
   align-self: center;
   background: #fff;
   border-radius: 0.25rem;

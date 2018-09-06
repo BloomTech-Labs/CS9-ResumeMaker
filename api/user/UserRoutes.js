@@ -23,7 +23,7 @@ router.get("/usernamecheck/:username", (req, res) => {
       res.status(200).json(user.username);
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(400).json({
         errorMessage: "Could not find user with that username.",
         error: err
       });
@@ -38,7 +38,7 @@ router.get("/emailcheck/:email", (req, res) => {
       res.status(200).json(user.email);
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(400).json({
         errorMessage: "Could not find user with that email.",
         error: err
       });
@@ -79,7 +79,7 @@ router.get("/", (req, res) => {
       res.status(200).json(users);
     })
     .catch(err => {
-      res.status(500).json({ errorMessage: "Get unsuccessful.", error: err });
+      res.status(400).json({ errorMessage: "Get unsuccessful.", error: err });
     });
 });
 
@@ -97,7 +97,7 @@ router.post("/register", (req, res) => {
   User.findOne({ email: userData.email })
     .then(user => {
       if (user) {
-        res.status(500).json({
+        res.status(400).json({
           errorMessage:
             "This email is already in use. Please choose the forgot password option to reset your password."
         });
@@ -162,7 +162,7 @@ router.post("/register", (req, res) => {
                     errorMessage: "Could not send email.",
                     error: err
                   });
-                  return res.status(500).json({
+                  return res.status(400).json({
                     errorMessage: "Could not send email.",
                     error: err
                   });
@@ -183,18 +183,18 @@ router.post("/register", (req, res) => {
               errorMessage: "Could not save email confirmation.",
               error: err
             });
-            res.status(500).json({
+            res.status(400).json({
               errorMessage: "Could not save email confirmation.",
               error: err
             });
           });
         // If you put a response here the time for response to a register request will be 100-200ms
-        // instead of 2000-5000, but they won't get error messages from the backend.
+        // instead of 2000-4000, but they won't get error messages from the backend.
         // res.status(200).json(userData.email);
       }
     })
     .catch(err => {
-      return res.status(500).json({
+      return res.status(400).json({
         errorMessage:
           "There was an error in account creation, please try again.",
         error: err
@@ -264,12 +264,12 @@ router.post("/login", (req, res) => {
         })
         .catch(err => {
           res
-            .status(500)
+            .status(400)
             .json({ errorMessage: "Could not log in.", error: err });
         });
     })
     .catch(err => {
-      res.status(500).json({ errorMessage: "Could not log in.", error: err });
+      res.status(400).json({ errorMessage: "Could not log in.", error: err });
     });
 });
 
@@ -286,14 +286,14 @@ router.delete(
           res.status(200).send({ message: "User successfully deleted." });
         })
         .catch(err => {
-          res.status(404).json({
+          res.status(400).json({
             errorMessage: "Could not find and delete user.",
             error: err
           });
         });
     } else {
       res
-        .status(500)
+        .status(400)
         .json({ errorMessage: "You do not have access to this user!" });
     }
   }
@@ -327,7 +327,7 @@ router.put(
         .then(user => {
           if (!user) {
             return res
-              .status(404)
+              .status(400)
               .json({ errorMessage: "No user with that id could be found." });
           } else {
             if (req.body.oldpassword) {
@@ -490,12 +490,12 @@ router.put(
         })
         .catch(err => {
           res
-            .status(500)
+            .status(400)
             .json({ errorMessage: "Could not update.", error: err });
         });
     } else {
       res
-        .status(500)
+        .status(400)
         .json({ errorMessage: "You do not have access to this user!" });
     }
   }
@@ -533,26 +533,26 @@ router.get("/changeemail/:hash", (req, res) => {
                 email: emailconfirmation.oldemail
               });
             } else
-              res.status(404).json({
+              res.status(200).json({
                 errorMessage:
                   "Your email could not be changed for some reason. Please try again."
               });
           })
           .catch(err => {
-            res.status(500).json({
+            res.status(200).json({
               errorMessage:
                 "Your email could not be changed for some reason. Please try again.",
               error: err
             });
           });
       } else
-        res.status(500).json({
+        res.status(200).json({
           errorMessage:
             "Your email could not be changed for some reason. Please try again."
         });
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(200).json({
         errorMessage:
           "Email confirmation could not be found. Please try again.",
         error: err
@@ -594,20 +594,20 @@ router.get("/confirmemail/:hash", (req, res) => {
             res.status(201).json({ token, user });
           })
           .catch(err => {
-            res.status(500).json({
+            res.status(200).json({
               errorMessage:
                 "There was an error in account creation, please try again.",
               error: err
             });
           });
       } else
-        res.status(404).json({
+        res.status(200).json({
           errorMessage:
             "Your account has already been activated or does not exist."
         });
     })
     .catch(err =>
-      res.status(404).json({
+      res.status(200).json({
         errorMessage: "Could not find email confirmation in database.",
         error: err
       })
@@ -674,7 +674,7 @@ router.put("/forgotpassword", (req, res) => {
             transporter.sendMail(mailOptions, (err, info) => {
               if (err) {
                 return res
-                  .status(500)
+                  .status(400)
                   .json({ errorMessage: "Could not send email.", error: err });
               }
               console.log("Message sent: %s", info.messageId);
@@ -699,7 +699,7 @@ router.put("/forgotpassword", (req, res) => {
       res.status(200).json(user.email);
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(400).json({
         errorMessage: "Could not change password. Please try again.",
         error: err
       });
@@ -726,34 +726,34 @@ router.get("/resetpassword/:hash", (req, res) => {
               user.active = true;
               user.save(function(err) {
                 if (err) {
-                  res.status(500).json({
+                  res.status(200).json({
                     errorMessage:
-                      "There was an error setting the temporary password.",
+                      "There was an error setting a temporary password. Please try again.",
                     error: err
                   });
                 } else res.status(200).json({ message: "Temporary password set successfully!", password: newPassword });
               });
             } else
-              res.status(404).json({
+              res.status(200).json({
                 errorMessage:
-                  "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
+                  "You already changed your password or you took to long to confirm your password change. Please try again and click the emailed link within 30 minutes."
               });
           })
           .catch(err => {
-            res.status(500).json({
+            res.status(200).json({
               errorMessage:
-                "Your account has already been activated or does not exist.",
+                "You already changed your password or you took to long to confirm your password change. Please try again and click the emailed link within 30 minutes.",
               error: err
             });
           });
       } else
-        res.status(500).json({
+        res.status(200).json({
           errorMessage:
-            "Your account has already been activated or does not exist."
+            "You already changed your password or you took to long to confirm your password change. Please try again and click the emailed link within 30 minutes."
         });
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(200).json({
         errorMessage: "Your password could not be reset for some reason.",
         error: err
       });

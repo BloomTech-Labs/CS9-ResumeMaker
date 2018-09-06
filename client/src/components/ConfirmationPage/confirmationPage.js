@@ -25,7 +25,9 @@ class ConfirmationPage extends Component {
       .get(`${urls[urls.basePath]}${serverPath}`)
       .then(response => {
         console.log(response);
-        if (response.data.token) {
+        if (response.data.errorMessage) {
+          this.setState({ message: response.data.errorMessage });
+        } else if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(response.data.user);
           this.props.history.push("/templates");
@@ -38,7 +40,6 @@ class ConfirmationPage extends Component {
       })
       .catch(err => {
         console.log("err", err);
-        this.setState({ submitted: false, submittedError: true });
       });
   };
 
