@@ -39,7 +39,7 @@ class Resumes extends Component {
               <h1 style={{ fontWeight: "600" }}>RESUMES</h1>
             </div>
             <div className="containers-div">
-              <div className="d-inline-flex container-div">
+              {/* <div className="d-inline-flex container-div">
                 <Link
                   style={{
                     color: "black"
@@ -91,7 +91,7 @@ class Resumes extends Component {
                     height="100rem"
                   />
                   <h5 className="link">RESUME 3</h5>
-                </Link>
+                </Link> */}
                 <Link
                   style={{
                     color: "black"
