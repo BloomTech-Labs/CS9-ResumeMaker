@@ -16,7 +16,7 @@ class RIP extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: this.props.context.userInfo.currentResume || 0,
+      index: 0,
       success: false
     };
   }
@@ -37,17 +37,13 @@ class RIP extends Component {
       this.props.context.userInfo.currentresume
     );
     if (index === -1) index = 0;
-    this.setState({ index: index });
-
-    if (!this.props.context.userInfo.resumes.length) {
-      const id = this.props.context.actions.createResume();
-      this.props.context.actions.setSingleElement("currentresume", id);
-    } else if (this.props.context.userInfo.auth)
-      this.props.context.actions.expandResumeIDs(this.state.index);
+    // this.setState({ index: index });
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    // if (this.props.context.userInfo.auth)
+    //   this.props.context.actions.expandResumeIDs(this.state.index);
   }
 
   onCreate = () => {
@@ -116,6 +112,12 @@ class RIP extends Component {
   };
 
   render() {
+    if (!this.props.context.userInfo.resumes.length) {
+      const id = this.props.context.actions.createResume();
+      this.props.context.actions.setSingleElement("currentresume", id);
+      return <div>Random</div>;
+    }
+
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;
     }
@@ -154,6 +156,14 @@ class RIP extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
+                {console.log(
+                  "The Resume to RIP",
+                  resumes,
+                  "Index",
+                  this.state.index,
+                  "length",
+                  resumes.length
+                )}
                 <TitleDropdown
                   className="dropdown"
                   context={this.props.context}
