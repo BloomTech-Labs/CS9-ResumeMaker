@@ -34,7 +34,7 @@ class Resumes extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h1 style={{fontWeight: "600"}}>RESUMES</h1>
+              <h1 style={{ fontWeight: "600" }}>RESUMES</h1>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
@@ -89,6 +89,17 @@ class Resumes extends Component {
                     height="100rem"
                   />
                   <h5 className="link">Resume 3</h5>
+                </Link>
+                <Link
+                  style={{
+                    color: "black"
+                  }}
+                  to={{
+                    pathname: "/rip", // component being Linked to
+                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                  }}
+                >
+                  <h5 className="link">RIP</h5>
                 </Link>
               </div>
             </div>

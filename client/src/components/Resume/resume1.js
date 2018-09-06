@@ -85,61 +85,67 @@ export class ResumeOne extends Component {
               <Divider className="divider-div" />
 
               {summaryLength.length > 0 ? (
-                <Container
-                  textAlign="center"
-                  id="summary"
-                  className="summarySection"
-                >
-                  <h3>Summary</h3>
-                  {userInfo.summary.map((item, index) => {
-                    return resumes[resumes.length - 1].sections.summary[index]
-                      .value ? (
-                      <p key={item._id}>{item.content}</p>
-                    ) : null;
-                  })}
+                <div>
+                  <Container
+                    textAlign="center"
+                    id="summary"
+                    className="summarySection"
+                  >
+                    <h3>Summary</h3>
+                    {userInfo.summary.map((item, index) => {
+                      return resumes[resumes.length - 1].sections.summary[index]
+                        .value ? (
+                          <p key={item._id}>{item.content}</p>
+                        ) : null;
+                    })}
+                  </Container>
                   <Divider className="divider-div" />
-                </Container>
+                </div>
               ) : null}
 
               {skillsLength.length > 0 ? (
-                <Container textAlign="center" className="skillsSection">
-                  <h3>Skills</h3>
-                  {userInfo.skills.map((content, index) => {
-                    return resumes[resumes.length - 1].sections.skills[index]
-                      .value ? (
-                      <div key={index}>
-                        <p>{content.content}</p>
-                      </div>
-                    ) : null;
-                  })}
+                <div>
+                  <Container textAlign="center" className="skillsSection">
+                    <h3>Skills</h3>
+                    {userInfo.skills.map((content, index) => {
+                      return resumes[resumes.length - 1].sections.skills[index]
+                        .value ? (
+                          <div key={index}>
+                            <p>{content.content}</p>
+                          </div>
+                        ) : null;
+                    })}
+                  </Container>
                   <Divider className="divider-div" />
-                </Container>
+                </div>
               ) : null}
 
               {experienceLength.length > 0 ? (
-                <Container textAlign="center" className="experienceSection">
-                  <h3>Experience</h3>
-                  {experience.map((content, index) => {
-                    let from = moment(content.from).format("MMM YYYY");
-                    let to = moment(content.to).format("MMM YYYY");
-                    return resumes[resumes.length - 1].sections.experience[
-                      index
-                    ].value ? (
-                      <div key={index}>
-                        <h5>{content.company} </h5>
-                        <p>
-                          {content.title}
-                          <br />
-                          {content.location}
-                          <br />
-                          {from} - {to}
-                        </p>
-                        <p>{content.description} </p>
-                      </div>
-                    ) : null;
-                  })}
+                <div>
+                  <Container textAlign="center" className="experienceSection">
+                    <h3>Experience</h3>
+                    {experience.map((content, index) => {
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
+                      return resumes[resumes.length - 1].sections.experience[
+                        index
+                      ].value ? (
+                          <div key={index}>
+                            <h5>{content.company} </h5>
+                            <p>
+                              {content.title}
+                              <br />
+                              {content.location}
+                              <br />
+                              {from} - {to}
+                            </p>
+                            <p>{content.description} </p>
+                          </div>
+                        ) : null;
+                    })}
+                  </Container>
                   <Divider className="divider-div" />
-                </Container>
+                </div>
               ) : null}
 
               {educationLength.length > 0 ? (
@@ -150,18 +156,18 @@ export class ResumeOne extends Component {
                     let to = moment(content.to).format("MMM YYYY");
                     return resumes[resumes.length - 1].sections.education[index]
                       .value ? (
-                      <div key={index}>
-                        <h5>
-                          {content.degree} in {content.fieldofstudy}{" "}
-                        </h5>
-                        <p>{content.location}</p>
-                        <p>
-                          {content.school}
-                          <br />
-                          {from} - {to}
-                        </p>
-                      </div>
-                    ) : null;
+                        <div key={index}>
+                          <h5>
+                            {content.degree} in {content.fieldofstudy}{" "}
+                          </h5>
+                          <p>{content.location}</p>
+                          <p>
+                            {content.school}
+                            <br />
+                            {from} - {to}
+                          </p>
+                        </div>
+                      ) : null;
                   })}
                 </Container>
               ) : null}

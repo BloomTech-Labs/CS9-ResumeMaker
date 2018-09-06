@@ -21,9 +21,8 @@ class TemplateTwo extends Component {
   }
 
   componentWillMount() {
-    if (this.props.context.userInfo.auth !== true)
-      this.props.history.push("/templates");
-    else this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume)
+    if (this.props.context.userInfo.auth)
+      this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume)
   }
 
   componentDidMount() {
@@ -79,8 +78,11 @@ class TemplateTwo extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.auth || this.state.success) {
+    if (!this.props.context.userInfo.auth) {
       return <Redirect to="/templates" />;
+    }
+    if (this.state.success) {
+      return <Redirect to="/resumes" />;
     }
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
@@ -97,7 +99,6 @@ class TemplateTwo extends Component {
             </div>
             <div className="justify-content-center">
               <button
-                to="/resumes"
                 className="resume-button"
                 type="submit"
                 onClick={this.handleSubmit}

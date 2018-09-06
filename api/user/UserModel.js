@@ -145,12 +145,13 @@ const User = new mongoose.Schema(
         type: ObjectId,
         ref: "Resume"
       }
-    ]
+    ],
+    currentresume: Number
   },
   { timestamps: true }
 );
 
-User.pre("save", function(next) {
+User.pre("save", function (next) {
   if (!this.isModified("password")) return next();
   bcrypt.hash(this.password, 11, (err, hash) => {
     if (err) return next(err);
@@ -159,7 +160,7 @@ User.pre("save", function(next) {
   });
 });
 
-User.methods.checkPassword = function(passwordGuess) {
+User.methods.checkPassword = function (passwordGuess) {
   return bcrypt.compare(passwordGuess, this.password);
 };
 

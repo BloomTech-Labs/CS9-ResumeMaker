@@ -5,13 +5,14 @@ import moment from "moment";
 import axios from "axios";
 
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import "./template1.css";
-import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
-import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
-import CheckBox from "./TemplateClassFunctions/checkbox";
+import "../Templates/template1.css";
+import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
+import TitleDropdown from "../Templates/TemplateClassFunctions/titleDropdown";
+import ResumeDropdown from "../SubComponents/Resume/resumeDropdown";
+import CheckBox from "../Templates/TemplateClassFunctions/checkbox";
 const urls = require("../../config/config.json");
 
-class TemplateOne extends Component {
+class RIP extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,8 +22,28 @@ class TemplateOne extends Component {
   }
 
   componentWillMount() {
-    if (this.props.context.userInfo.auth)
-      this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume);
+    function findWithAttr(array, attr, value) {
+      for (var i = 0; i < array.length; i += 1) {
+        if (array[i][attr] === value) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    let index = findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+
+    if (!this.props.context.userInfo.resumes.length) {
+      const id = this.props.context.actions.createResume();
+      this.props.context.actions.setSingleElement("currentresume", id);
+    } else if (this.props.context.userInfo.auth)
+      this.props.context.actions.expandResumeIDs(this.state.index);
   }
 
   componentDidMount() {
@@ -33,19 +54,20 @@ class TemplateOne extends Component {
     this.props.context.actions.createResume();
   };
 
+  handleCreate = () => {
+    this.props.context.actions.createResume();
+    // this.props.context.actions.setSingleElement("currentresume", id);
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    const tempObj = this.props.context.userInfo.resumes[
-      this.props.context.userInfo.resumes.length - 1
-    ];
+    const tempObj = this.props.context.userInfo.resumes[this.state.index];
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
     if (tempObj._id) {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` +
-          this.props.context.userInfo.resumes[
-            this.props.context.userInfo.resumes.length - 1
-          ]._id,
+            this.props.context.userInfo.resumes[this.state.index]._id,
           tempObj,
           {
             headers: {
@@ -54,7 +76,23 @@ class TemplateOne extends Component {
           }
         )
         .then(response => {
-          console.log(response);
+          this.setState({ success: true });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+
+      axios
+        .put(
+          `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+          { currentresume: this.props.context.userInfo.currentresume },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
           this.setState({ success: true });
         })
         .catch(err => {
@@ -79,10 +117,10 @@ class TemplateOne extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/templates" />;
+      return <Redirect to="/resumes" />;
     }
     if (this.state.success) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
@@ -97,11 +135,16 @@ class TemplateOne extends Component {
               <h3 className="page-header">Traditional</h3>
             </div>
             <div className="justify-content-center">
-              <button
-                className="resume-button"
-                type="submit"
-                onClick={this.handleSubmit}
-              >
+              <ResumeDropdown
+                className="dropdown"
+                context={this.props.context}
+                data={userInfo}
+              />
+              <button className="resume-button" onClick={this.handleCreate}>
+                {" "}
+                Create Resume
+              </button>
+              <button className="resume-button" onClick={this.handleSubmit}>
                 {" "}
                 Save Resume
               </button>
@@ -115,10 +158,10 @@ class TemplateOne extends Component {
                   className="dropdown"
                   context={this.props.context}
                   data={userInfo}
-                  value={resumes[resumes.length - 1].title.filter(
+                  value={resumes[this.state.index].title.filter(
                     title => title.value === true
                   )}
-                  index={resumes.length - 1}
+                  index={this.state.index}
                 />
               </Container>
               <Divider className="divider-div" />
@@ -138,9 +181,9 @@ class TemplateOne extends Component {
                 <div>
                   <CheckBox
                     context={this.props.context}
-                    index={resumes.length - 1}
+                    index={this.state.index}
                     name="linkedin"
-                    value={resumes[resumes.length - 1].links.linkedin}
+                    value={resumes[this.state.index].links.linkedin}
                   />
                   <div className={"fa fa-linkedin fa-sm"} />
                   {userInfo.links.linkedin}
@@ -148,9 +191,9 @@ class TemplateOne extends Component {
                 <div>
                   <CheckBox
                     context={this.props.context}
-                    index={resumes.length - 1}
+                    index={this.state.index}
                     name="github"
-                    value={resumes[resumes.length - 1].links.github}
+                    value={resumes[this.state.index].links.github}
                   />{" "}
                   <div className="fa fa-github" aria-hidden="true" />
                   {userInfo.links.github}
@@ -158,9 +201,9 @@ class TemplateOne extends Component {
                 <p>
                   <CheckBox
                     context={this.props.context}
-                    index={resumes.length - 1}
+                    index={this.state.index}
                     name="portfolio"
-                    value={resumes[resumes.length - 1].links.portfolio}
+                    value={resumes[this.state.index].links.portfolio}
                   />{" "}
                   {userInfo.links.portfolio}
                 </p>
@@ -175,10 +218,10 @@ class TemplateOne extends Component {
                 <SummaryDropdown
                   context={this.props.context}
                   data={userInfo}
-                  value={resumes[resumes.length - 1].sections.summary.filter(
+                  value={resumes[this.state.index].sections.summary.filter(
                     summary => summary.value === true
                   )}
-                  index={resumes.length - 1}
+                  index={this.state.index}
                 />
               </Container>
               <Divider className="divider-div" />
@@ -194,10 +237,10 @@ class TemplateOne extends Component {
                           id={content._id}
                           name="skills"
                           value={
-                            resumes[resumes.length - 1].sections.skills[index]
+                            resumes[this.state.index].sections.skills[index]
                               .value
                           }
-                          index={resumes.length - 1}
+                          index={this.state.index}
                         />
                         {content.content}
                       </p>
@@ -210,37 +253,37 @@ class TemplateOne extends Component {
                 <h3>Experience</h3>
                 {experience.length > 0
                   ? experience.map((content, index) => {
-                    let from = moment(content.from).format("MMM YYYY");
-                    let to = moment(content.to).format("MMM YYYY");
-                    return (
-                      <div key={index}>
-                        <h5>
-                          {" "}
-                          <CheckBox
-                            context={this.props.context}
-                            id={content._id}
-                            name="experience"
-                            value={
-                              resumes[resumes.length - 1].sections.experience[
-                                index
-                              ].value
-                            }
-                            index={resumes.length - 1}
-                          />{" "}
-                          {content.company}{" "}
-                        </h5>
-                        <p>
-                          {" "}
-                          {content.title}
-                          <br />
-                          {content.location}
-                          <br />
-                          {from} - {to}
-                        </p>
-                        <p>{content.description} </p>
-                      </div>
-                    );
-                  })
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
+                      return (
+                        <div key={index}>
+                          <h5>
+                            {" "}
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="experience"
+                              value={
+                                resumes[this.state.index].sections.experience[
+                                  index
+                                ].value
+                              }
+                              index={this.state.index}
+                            />{" "}
+                            {content.company}{" "}
+                          </h5>
+                          <p>
+                            {" "}
+                            {content.title}
+                            <br />
+                            {content.location}
+                            <br />
+                            {from} - {to}
+                          </p>
+                          <p>{content.description} </p>
+                        </div>
+                      );
+                    })
                   : null}
               </Container>
               <Divider className="divider-div" />
@@ -248,33 +291,33 @@ class TemplateOne extends Component {
                 <h3>Education</h3>
                 {education.length > 0
                   ? education.map((content, index) => {
-                    let from = moment(content.from).format("MMM YYYY");
-                    let to = moment(content.to).format("MMM YYYY");
-                    return (
-                      <div key={index}>
-                        <h5>
-                          <CheckBox
-                            context={this.props.context}
-                            id={content._id}
-                            name="education"
-                            value={
-                              resumes[resumes.length - 1].sections.education[
-                                index
-                              ].value
-                            }
-                            index={resumes.length - 1}
-                          />
-                          {content.degree} in {content.fieldofstudy}{" "}
-                        </h5>
-                        <p>{content.location}</p>
-                        <p>
-                          {content.school}
-                          <br />
-                          {from} - {to}
-                        </p>
-                      </div>
-                    );
-                  })
+                      let from = moment(content.from).format("MMM YYYY");
+                      let to = moment(content.to).format("MMM YYYY");
+                      return (
+                        <div key={index}>
+                          <h5>
+                            <CheckBox
+                              context={this.props.context}
+                              id={content._id}
+                              name="education"
+                              value={
+                                resumes[this.state.index].sections.education[
+                                  index
+                                ].value
+                              }
+                              index={this.state.index}
+                            />
+                            {content.degree} in {content.fieldofstudy}{" "}
+                          </h5>
+                          <p>{content.location}</p>
+                          <p>
+                            {content.school}
+                            <br />
+                            {from} - {to}
+                          </p>
+                        </div>
+                      );
+                    })
                   : null}
               </Container>
             </form>
@@ -285,4 +328,4 @@ class TemplateOne extends Component {
   }
 }
 
-export default TemplateOne;
+export default RIP;
