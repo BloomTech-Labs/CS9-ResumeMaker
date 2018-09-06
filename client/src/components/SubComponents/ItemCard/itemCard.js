@@ -7,10 +7,10 @@ import urls from "../../../config/config.json";
 
 import "./itemcard.css";
 
-function ellipsify(str) {
+function ellipsify(str, length) {
   if (str) {
-    if (str.length > 150) {
-      return str.substring(0, 150) + "...";
+    if (str.length > length) {
+      return str.substring(0, length) + "...";
     } else {
       return str;
     }
@@ -110,7 +110,7 @@ class ItemCard extends Component {
                   state: { index: this.props.index } // Setting Index passed into summaryCreate component
                 }}
               >
-                {ellipsify(this.props.element.description)}
+                {ellipsify(this.props.element.description, 150)}
               </Link>
             </CardText>
           </CardBody>
@@ -136,7 +136,7 @@ class ItemCard extends Component {
                   state: { index: this.props.index } // Setting Index passed into summaryCreate component
                 }}
               >
-                {ellipsify(this.props.element.school)}
+                {ellipsify(this.props.element.school, 150)}
               </Link>
             </CardText>
           </CardBody>
@@ -162,7 +162,7 @@ class ItemCard extends Component {
                   state: { index: this.props.index } // Setting Index passed into summaryCreate component
                 }}
               >
-                {ellipsify(this.props.content)}
+                {ellipsify(this.props.content, 150)}
               </Link>
             </CardText>
           </CardBody>
@@ -172,7 +172,7 @@ class ItemCard extends Component {
     } else if (this.props.header) {
       return (
         <Card className="item-card">
-          <CardHeader>{ellipsify(this.props.header)}</CardHeader>
+          <CardHeader>{ellipsify(this.props.header, 50)}</CardHeader>
           <CardBody>
             <Link
               className="item-card-link"
@@ -181,7 +181,7 @@ class ItemCard extends Component {
                 state: { index: this.props.index } // Setting Index passed into summaryCreate component
               }}
             >
-              <CardText>{ellipsify(this.props.content)}</CardText>
+              <CardText>{ellipsify(this.props.content, 150)}</CardText>
             </Link>
           </CardBody>
           <button
@@ -213,7 +213,7 @@ class ItemCard extends Component {
                 state: { index: this.props.index } // index passed into the create component
               }}
             >
-              <CardText>{ellipsify(this.props.content)}</CardText>
+              <CardText>{ellipsify(this.props.content, 150)}</CardText>
             </Link>
           </CardBody>
         </Card>
