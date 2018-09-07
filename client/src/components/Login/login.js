@@ -104,6 +104,7 @@ export default class Login extends Component {
             </FormFeedback>
           </FormGroup>
           <Button
+           style={{fontSize: ".8rem", height: "2rem"}} 
             block
             size="lg"
             color="primary"
@@ -114,12 +115,14 @@ export default class Login extends Component {
           </Button>
           <div className="bottom-buttons">
             <Button
+             style={{fontSize: ".7rem", height: "2rem"}} 
               color="danger"
               onClick={() => this.props.history.push("/register")}
             >
               Register
             </Button>
             <Button
+             style={{fontSize: ".7rem", height: "2rem"}} 
               color="danger"
               onClick={() => this.props.history.push("/forgotpassword")}
             >

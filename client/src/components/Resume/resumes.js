@@ -4,6 +4,7 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import "../CSS/component-general.css";
+import "./resume.css"
 
 const urls = require("../../config/config.json");
 
@@ -35,7 +36,7 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
+            <div className="title-div resumes">
               <h4>RESUMES</h4>
             </div>
             <div className="containers-div">
@@ -52,10 +53,10 @@ class Resumes extends Component {
                   <img
                     src={require("../Templates/tempTemplate1.png")} //import pics
                     alt=""
-                    height="200rem"
-                    width="170rem"
+                    height="5rem"
+                 
                   />
-                  <h5 className="link">RESUME 1</h5>
+                  <h6 className="link" style={{padding: ".5rem"}}> RESUME 1</h6>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -71,10 +72,9 @@ class Resumes extends Component {
                   <img
                     src={require("../Templates/tempTemplate2.png")} //import pics
                     alt=""
-                    height="200rem"
-                    width="170rem"
+           
                   />
-                  <h5 className="link">RESUME 2</h5>
+                  <h6 className="link" style={{padding: ".5rem"}}>RESUME 2</h6>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -90,10 +90,9 @@ class Resumes extends Component {
                   <img
                     src={require("../Templates/tempTemplate3.png")} //import pics
                     alt=""
-                    height="200rem"
-                    width="170rem"
+
                   />
-                  <h5 className="link">RESUME 3</h5>
+                  <h6 className="link" style={{padding: ".5rem"}}>RESUME 3</h6>
                 </Link>
               </div>
             </div>

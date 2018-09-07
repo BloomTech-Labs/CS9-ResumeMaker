@@ -20,17 +20,22 @@ i {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,
     "AppleGothic", sans-serif;
     align-items: start;  
+   
 }
 
 .overall-component-div .title-div {
   display: flex;
   justify-content: flex-start;
-  padding: 0.5rem; 
+  padding: 1.5rem; 
 }
+
+.title-div.resumes h4,
 .title-div.templates h4 {
   width: 100%; 
   border-bottom: 1px solid black; 
   text-align: start; 
+  padding: .5rem; 
+  margin: 0; 
 }
 .title-div h4 {
   text-align: start; 
@@ -60,4 +65,12 @@ i {
 
 .card-body.card-text.card {
   text-decoration-color: black;
+}
+form {
+  font-size: .7rem; 
+}
+
+.form-control{
+  font-size: .7rem; 
+
 }

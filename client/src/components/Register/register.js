@@ -199,7 +199,7 @@ class Register extends Component {
                 onChange={this.handleChange}
               />
               <FormFeedback invalid>
-                Please use a complex password at least 8 characters long.
+                Please use a complex password at least 8 characters long. It must include 1 character, 1 number, and a capitol letter. 
               </FormFeedback>
             </FormGroup>
             <FormGroup>
