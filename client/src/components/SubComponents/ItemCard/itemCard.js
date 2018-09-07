@@ -90,6 +90,33 @@ class ItemCard extends Component {
       });
   };
 
+  handleNestedDelete = () => {
+    this.props.context.actions.removeNestedElement(
+      this.props.skillGroupIndex,
+      this.props.skillIndex,
+      "skillgroups",
+      "skills"
+    );
+    const putPath = this.props.putPath;
+    const tempObj = {
+      [putPath]: this.props.context.userInfo.skillgroups
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        this.props.context.actions.setLogin(response.data.user);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  }
+
   render() {
     // console.log(this.props);
     if(this.props.elementName === "skills") {
@@ -98,7 +125,7 @@ class ItemCard extends Component {
           <button
             className="close"
             aria-label="Delete"
-            onClick={() => this.handleDelete()}
+            onClick={() => this.handleNestedDelete()}
           >
             <span aria-hidden="true">&times;</span>
           </button>

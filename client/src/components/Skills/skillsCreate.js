@@ -62,7 +62,9 @@ class SkillsCreate extends Component {
     } // if editing
     else {
       this.props.context.actions.removeNestedElement(
-        this.props.location.state.index,
+        this.props.location.state.skillGroupIndex,
+        this.props.location.state.skillIndex,
+        "skillgroups",
         "skills"
       );
     }

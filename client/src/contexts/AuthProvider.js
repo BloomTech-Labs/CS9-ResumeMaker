@@ -277,9 +277,10 @@ class AuthProvider extends Component {
     this.setState(temp);
   }
 
-  removeNestedElement = (aIndex, bIndex, elementName) => {
+  removeNestedElement = (aIndex, bIndex, parentObjName, elementName) => {
+    console.log({ aIndex, bIndex, parentObjName, elementName })
     const temp = this.state;
-    temp[elementName][aIndex].splice(bIndex, 1);
+    temp[parentObjName][aIndex][elementName].splice(bIndex, 1);
     this.setState(temp);
   }
 
