@@ -124,7 +124,7 @@ router.post("/register", (req, res) => {
             console.log(
               "Link to activate account:\n",
               `${req.get("host")}${req.baseUrl}/confirmemail/${
-              newEmailConfirmation.hash
+                newEmailConfirmation.hash
               }`
             );
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -227,7 +227,8 @@ router.post("/login", (req, res) => {
               if (err) console.log(err);
               else console.log(success);
             });
-            if (changeStatus(email, { subscription: null, membership: false })) console.log("Success");
+            if (changeStatus(email, { subscription: null, membership: false }))
+              console.log("Success");
             else console.log("Error");
           }
         });
@@ -373,7 +374,7 @@ router.put(
                                 console.log(
                                   "Link to change email:\n",
                                   `${req.get("host")}${
-                                  req.baseUrl
+                                    req.baseUrl
                                   }/changeemail/${newEmailConfirmation.hash}`
                                 );
                                 // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -396,12 +397,12 @@ router.put(
                                       "host"
                                     )}${req.baseUrl}/changeemail/${
                                       newEmailConfirmation.hash
-                                      }`,
+                                    }`,
                                     html: `Please click this <a href=${req.get(
                                       "host"
                                     )}${req.baseUrl}/changeemail/${
                                       newEmailConfirmation.hash
-                                      }
+                                    }
                     }>link</a> to make this your new account email address.`
                                   };
 
@@ -445,7 +446,7 @@ router.put(
                     }
                     if (req.body.newpassword && req.body.newpassword != "") {
                       user.password = req.body.newpassword;
-                      user.save(function (err) {
+                      user.save(function(err) {
                         if (err) {
                           user.password = null;
                           res.status(200).json({
@@ -648,7 +649,7 @@ router.put("/forgotpassword", (req, res) => {
           console.log(
             "Link to reset password:\n",
             `${req.get("host")}${req.baseUrl}/resetpassword/${
-            newEmailConfirmation.hash
+              newEmailConfirmation.hash
             }`
           );
           // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
@@ -672,7 +673,7 @@ router.put("/forgotpassword", (req, res) => {
               )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
               html: `Please click this <a href=${req.get("host")}${
                 req.baseUrl
-                }/resetpassword/${newEmailConfirmation.hash}
+              }/resetpassword/${newEmailConfirmation.hash}
           }>link</a> to reset your password.`
             };
 
@@ -729,7 +730,7 @@ router.get("/resetpassword/:hash", (req, res) => {
               const newPassword = base64url(hash.digest("hex")) + "!";
               user.password = newPassword;
               user.active = true;
-              user.save(function (err) {
+              user.save(function(err) {
                 if (err) {
                   res.status(500).json({
                     errorMessage:
