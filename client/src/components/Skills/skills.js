@@ -29,7 +29,7 @@ class Skills extends Component {
                 </Link>
             </div>
             <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
-              Please click the pencil to enter each of your work related skills.
+              Click the pencil to enter your work related skills.
             </p>
 
             <div className="skills-containment-div">

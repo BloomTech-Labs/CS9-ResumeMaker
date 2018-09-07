@@ -28,8 +28,7 @@ class JobTitle extends Component {
                 </Link>
             </div>
             <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
-              Click the pencil to enter one or more Titles for the Job
-              Position you are seeking. 
+              Click the pencil to enter a Title for the Job Position you are seeking. 
             </p>
 
             <div className="titles-containment-div">

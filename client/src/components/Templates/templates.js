@@ -39,9 +39,7 @@ class Templates extends Component {
           <div className="page-div col">
             <div className=" title-div templates" style={{width: "85%", justifyContent: "left"}}>
                <h4 >TEMPLATES</h4>
-             <p style={{fontSize: "0.65rem", alignContent: "start"}}> Start your RESUME by selecting each link on the left sidebar and
-              entering all of your information. Once completed, choose from the template
-              formats below to select the final information to be rendered to your RESUME.</p>
+             <p style={{fontSize: "0.65rem", alignContent: "start"}}> Enter information into each section on the sidebar. Then choose a template below to complete your RESUME.</p>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">

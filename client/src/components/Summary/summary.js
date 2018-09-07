@@ -30,9 +30,8 @@ class Summary extends Component {
                 </Link>
             </div>
             <p style={{ fontSize: "0.7rem", paddingLeft: ".6rem"}}>
-              Please click the pencil to create one or more Personal Summaries
-              about yourself. 
-              They should be aimed at the position you are seeking
+              Click the pencil to add a Personal Summary. 
+              It should be aimed at the position you are seeking
               and contain something about the past, present, and future.{" "}
             </p>
 

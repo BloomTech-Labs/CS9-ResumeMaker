@@ -30,8 +30,7 @@ class Education extends Component {
                 </Link>
             </div>
             <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
-              Please click the pencil to enter the information for your
-              Education History.
+              Click the pencil to enter previous schools attended and degrees or certificates obtained.
             </p>
             <div className="education-containment-div">
               {this.props.context.userInfo.education.map((element, index) => {
