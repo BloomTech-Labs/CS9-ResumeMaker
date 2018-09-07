@@ -136,45 +136,48 @@ class Billing extends Component {
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
-            <h5>BILLING</h5>
-            <p>Become a Member:</p>
+          <div className="billing-main">
+          <div className="title-div billing col">
+            <h4 className="billing-title">BILLING</h4>
+            </div>
+            
+            <p style={{paddingTop: "2rem"}}>Become a Member:</p>
             <div className="stripe">
-              <div className="card-element">
+              <div className="card-element" >
                 <CheckoutForm />
               </div>
             </div>
-            <div className="buttons">
-              <button className="bill-btn" onClick={this.monthly}>
+            <div className="buttons" style={{fontSize: ".8rem", height: "1.9rem"}}>
+              <button className="bill-btn" onClick={this.monthly} style={{margin: ".2rem"}}>
                 Monthly Subscriptions - $0.99
               </button>
-              <button className="bill-btn" onClick={this.yearly}>
+              <button className="bill-btn" onClick={this.yearly}  style={{margin: ".2rem"}}>
                 Yearly Subscriptions - $9.99
               </button><br/>
-              <button onClick={this.unsubscribe}>Unsubscribe</button>
+              <button onClick={this.unsubscribe} style={{margin: ".2rem"}}>Unsubscribe</button>
             </div>
-            <div style={{ marginTop: "10px" }}>
+            <div style={{ marginTop: "10px", paddingTop: "1rem"}}>
               {this.state.loading ? <Loading /> : null}
-              {this.state.complete ? <h3>Thank you for subscribing!</h3> : null}
+              {this.state.complete ? <p>Thank you for subscribing!</p> : null}
               {this.state.gone ? (
-                <h3>
+                <p>
                   Thank you for your business. We hope to work with you again
                   soon!
-                </h3>
+                </p>
               ) : null}
               {this.state.sub_err ? (
-                <h3>
+                <p>
                   You are unable to complete subscribe if you are already a
                   member or your payment is invalid!
-                </h3>
+                </p>
               ) : null}
               {this.state.unsub_err ? (
-                <h3>You do not have an active subscription!</h3>
+                <p>You do not have an active subscription!</p>
               ) : null}
             </div>
           </div>
         </div>
-      </div>
+        </div>
     );
   }
 }

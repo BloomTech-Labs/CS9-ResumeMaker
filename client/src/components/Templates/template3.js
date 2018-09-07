@@ -21,12 +21,8 @@ class TemplateThree extends Component {
   }
 
   componentWillMount() {
-    if (this.props.context.userInfo.auth !== true)
-      this.props.history.push("/templates");
-    else
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
+    if (this.props.context.userInfo.auth)
+      this.props.context.actions.expandResumeIDs(this.props.context.userInfo.currentResume);
   }
 
   componentDidMount() {
@@ -82,8 +78,11 @@ class TemplateThree extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.auth || this.state.success) {
+    if (!this.props.context.userInfo.auth) {
       return <Redirect to="/templates" />;
+    }
+    if (this.state.success) {
+      return <Redirect to="/resumes" />;
     }
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
@@ -127,11 +126,11 @@ class TemplateThree extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section"> {userInfo.email}</p>
                     </a>
-                    <p style={{fontSize: "0.65rem"}}>
+                    <div style={{fontSize: "0.65rem"}}>
                   <div className="fa fa-mobile" aria-hidden="true" />
                   {" "}{userInfo.phonenumber}
-                </p>
-                <p style={{fontSize: "0.65rem"}}>
+                </div>
+                <div style={{fontSize: "0.65rem"}}>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -140,8 +139,8 @@ class TemplateThree extends Component {
                   />{" "}
                   <div className={"fa fa-linkedin fa-sm"} />
                   {" "}{userInfo.links.linkedin}
-                </p>
-                <p style={{fontSize: "0.65rem"}}>
+                </div>
+                <div style={{fontSize: "0.65rem"}}>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -150,7 +149,7 @@ class TemplateThree extends Component {
                   />{" "}
                   <div className="fa fa-github" aria-hidden="true" />
                   {" "}{userInfo.links.github}
-                </p>
+                </div>
                 <p style={{fontSize: "0.65rem"}}>
                   <CheckBox
                     context={this.props.context}

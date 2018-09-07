@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+
+import axios from "axios";
+const urls = require("../config/config.json");
+
 export const AuthContext = React.createContext({});
 
 class AuthProvider extends Component {
@@ -18,9 +22,9 @@ class AuthProvider extends Component {
     experience: [],
     skills: [],
     summary: [],
-    resumes: []
-  }
-
+    resumes: [],
+    currentResume: 0
+  };
 
   setLogout = () => {
     localStorage.removeItem("token");
@@ -47,7 +51,7 @@ class AuthProvider extends Component {
   setLogin = userData => {
     this.setState({
       auth: true,
-      currentResume: 0,
+      currentresume: userData.currentresume ? userData.currentresume : 0,
       email: userData.email ? userData.email : "",
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
@@ -69,48 +73,61 @@ class AuthProvider extends Component {
     });
   };
 
-  setResume = (resumeData) => {
-    if (resumeData[0] === null) {
+  setResume = resumeData => {
+    if (!resumeData.length && resumeData[0] === null) {
       this.createResume(true);
     } else {
       this.setState({
         resumes: resumeData
-      })
+      });
     }
-  }
+  };
 
-  createResume = (newResume) => {
+  createResume = newResume => {
     let tempState = this.state.resumes;
     const tempObj = {
+      value: false,
       links: { linkedin: false, github: false, portfolio: false },
       title: this.state.title.map(item => {
-        return { _id: item._id, value: false }
+        return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.state.experience.map(item => {
-          return { _id: item._id, value: false }
+          return { _id: item._id, value: false };
         }),
         education: this.state.education.map(item => {
-          return { _id: item._id, value: false }
+          return { _id: item._id, value: false };
         }),
         summary: this.state.summary.map(item => {
-          return { _id: item._id, value: false }
+          return { _id: item._id, value: false };
         }),
         skills: this.state.skills.map(item => {
-          return { _id: item._id, value: false }
-        }),
+          return { _id: item._id, value: false };
+        })
       }
-    }
+    };
     if (newResume) {
       tempState = [];
       tempState.push(tempObj);
-    }
-    else
-      tempState.push(tempObj);
-    this.setState({ resumes: tempState })
-  }
+    } else tempState.push(tempObj);
+    this.setState({ resumes: tempState });
 
-  expandResumeIDs = (index) => {
+    axios
+      .post(`${urls[urls.basePath]}/resume/`, tempObj, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        console.log(response.data.Resume._id);
+        this.setState({ currentresume: response.data.Resume._id });
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  };
+
+  expandResumeIDs = index => {
 
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
@@ -120,96 +137,141 @@ class AuthProvider extends Component {
       }
       return -1;
     }
-
     const tempObj = this.state.resumes[index];
+    
+    const expandSection = (section, resumeSection) => {
 
-    for (let item of this.state.title) {
-      let current = this.state.resumes[index].title.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].title.push({ _id: item._id, value: false })
-        : console.log()
-    } // All items in context now have a resume counterpart
-    let loopVar = this.state.resumes[index].title.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.title, "_id", this.state.resumes[index].title[i]._id) > -1) { }
-      else {
-        tempObj.title.splice(i, 1);
-        loopVar--;
-        i--;
-      }
-    }// All items in resume that are not in context were deleted from resume
-
-    for (let item of this.state.experience) {
-      let current = this.state.resumes[index].sections.experience.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.experience.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.experience.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.experience, "_id", this.state.resumes[index].sections.experience[i]._id) > -1) { }
-      else {
-        tempObj.sections.experience.splice(i, 1)
-        loopVar--;
-        i--;
-      }
-    }
-
-    for (let item of this.state.education) {
-      let current = this.state.resumes[index].sections.education.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.education.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.education.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.education, "_id", this.state.resumes[index].sections.education[i]._id) > -1) { }
-      else {
-        tempObj.sections.education.splice(i, 1)
-        loopVar--;
-        i--;
-      }
-    }
-
-    for (let item of this.state.summary) {
-      let current = this.state.resumes[index].sections.summary.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.summary.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.summary.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.summary, "_id", this.state.resumes[index].sections.summary[i]._id) > -1) { }
-      else {
-        tempObj.sections.summary.splice(i, 1)
-        loopVar--;
-        i--;
-      }
-    }
-
-    for (let item of this.state.skills) {
-      let current = this.state.resumes[index].sections.skills.filter(resumeItem => (resumeItem._id === item._id))
-      current.length === 0
-        ? this.state.resumes[index].sections.skills.push({ _id: item._id, value: false })
-        : console.log()
-    }
-    loopVar = this.state.resumes[index].sections.skills.length;
-    for (let i = 0; loopVar > i; i++) {
-      if (findWithAttr(this.state.skills, "_id", this.state.resumes[index].sections.skills[i]._id) > -1) { }
-      else {
-        tempObj.sections.skills.splice(i, 1)
-        loopVar--;
-        i--;
+   
+      // no .sections portion
+      if (!resumeSection) {
+        for (let item of this.state[section]) {
+          let current = this.state.resumes[index][section].filter(
+            resumeItem => resumeItem._id === item._id
+          );
+          current.length === 0
+            ? tempObj[section].push({
+                _id: item._id,
+                value: false
+              })
+            : console.log();
+        } // All items in context now have a resume counterpart
+        console.log("Expanded Section", section )
+        let loopVar = this.state.resumes[index][section].length;
+        for (let i = 0; loopVar > i; i++) {
+          if (
+            findWithAttr(
+              this.state[section],
+              "_id",
+              this.state.resumes[index][section][i]._id
+            ) > -1
+          ) {
+          } else {
+            tempObj[section].splice(i, 1);
+            loopVar--;
+            i--;
+          }
+        } // All items in resume that are not in context were deleted from resume
+      } else {
+        //.sections portion
+        for (let item of this.state[section]) {
+          let current = this.state.resumes[index].sections[section].filter(
+            resumeItem => resumeItem._id === item._id
+          );
+          current.length === 0
+            ? tempObj.sections[section].push({
+                _id: item._id,
+                value: false
+              })
+            : console.log();
+        } // All items in context now have a resume counterpart
+        let loopVar = this.state.resumes[index].sections[section].length;
+        for (let i = 0; loopVar > i; i++) {
+          if (
+            findWithAttr(
+              this.state[section],
+              "_id",
+              this.state.resumes[index].sections[section][i]._id
+            ) > -1
+          ) {
+          } else {
+            tempObj.sections[section].splice(i, 1);
+            loopVar--;
+            i--;
+          }
+        } // All items in resume that are not in context were deleted from resume
       }
     }
+      this.state.resumes.forEach( () => {
+      expandSection("title", false);
+      expandSection("experience", true);
+      expandSection("education", true);
+      expandSection("summary", true);
+      expandSection("skills", true);
+    });
 
     this.setState({ ["resumes"[index]]: tempObj });
-  }
+    const tempResume = this.state.resumes[index];
+
+    if (!tempResume["user"]) tempResume["user"] = this.state.id;
+    if (tempResume._id) {
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` +
+          this.state.resumes[index]._id,
+          tempResume,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log(response.data.resume._id);
+          axios
+            .put(
+              `${urls[urls.basePath]}/users/info/${
+              this.state.id
+              }`,
+              { currentresume: response.data.resume._id },
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token")
+                }
+              }
+            )
+            .then(response => {
+              this.setState({ success: true });
+              console.log("Response: ", response.data.user.currentresume);
+            })
+            .catch(err => {
+              console.log("err", err);
+            });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    } else {
+      axios
+        .post(`${urls[urls.basePath]}/resume/`, tempResume, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(() => {
+          console.log("Success on updating resumes")
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
 
   setResumeItemState = (index, name, id) => {
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
-      tempState.resumes[index].links[name] = !tempState.resumes[index].links[name];
+      tempState.resumes[index].links[name] = !tempState.resumes[index].links[
+        name
+      ];
     } else {
       tempState.resumes[index].sections[name].forEach(field => {
         if (field._id === id) {
@@ -218,8 +280,7 @@ class AuthProvider extends Component {
       });
     }
     this.setState(tempState);
-
-  } //Checkboxes
+  }; //Checkboxes
 
   setResumeItemDropdown = (index, name, id) => {
     const tempState = this.state;
@@ -227,28 +288,30 @@ class AuthProvider extends Component {
       tempState.resumes[index][name].forEach(field => {
         if (field._id === id) {
           field.value = true;
-        }
-        else {
+        } else {
           field.value = false;
         }
-      })
+      });
     } else {
       tempState.resumes[index].sections[name].forEach(field => {
         if (field._id === id) {
           field.value = true;
-        }
-        else {
+        } else {
           field.value = false;
         }
-      })
+      });
     }
     this.setState(tempState);
-  } //Dropdowns
+  }; //Dropdowns
 
   setElement = (index, elementName, elementValue) => {
     const temp = this.state;
     temp[elementName][index] = elementValue;
     this.setState(temp);
+  };
+
+  setSingleElement = (elementName, elementValue) => {
+    this.setState({ [elementName]: elementValue });
   };
 
   addElement = (elementName, elementValue) => {
@@ -261,7 +324,7 @@ class AuthProvider extends Component {
     const temp = this.state;
     temp[elementName].splice(index, 1);
     this.setState(temp);
-  }
+  };
 
   render() {
     const userInfo = this.state;
@@ -270,8 +333,8 @@ class AuthProvider extends Component {
         value={{
           userInfo,
           actions: {
-            toggleAuth: this.toggleAuth,
             setResume: this.setResume,
+            toggleAuth: this.toggleAuth,
             createResume: this.createResume,
             expandResumeIDs: this.expandResumeIDs,
             setResumeItemState: this.setResumeItemState,
@@ -280,7 +343,8 @@ class AuthProvider extends Component {
             setLogout: this.setLogout,
             setElement: this.setElement,
             addElement: this.addElement,
-            removeElement: this.removeElement
+            removeElement: this.removeElement,
+            setSingleElement: this.setSingleElement
           }
         }}
       >

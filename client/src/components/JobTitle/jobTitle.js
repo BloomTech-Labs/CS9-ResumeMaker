@@ -27,11 +27,11 @@ class JobTitle extends Component {
                   <i className="fa fa-pencil fa-lg"/>
                 </Link>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
               Click the pencil to enter a Title for the Job Position you are seeking. 
             </p>
 
-            <div className="titles-containment-div">
+            <div className="titles-containment-div" style={{paddingTop: "1rem"}}>
               {this.props.context.userInfo.title.map((element, index) => {
                 return (
                   <ItemCard
