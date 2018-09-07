@@ -253,6 +253,12 @@ class AuthProvider extends Component {
     this.setState(temp);
   };
 
+  setEntireElement = (elementName, elementValue) => {
+    const temp = this.state;
+    temp[elementName] = elementValue;
+    this.setState(temp);
+  };
+
   addElement = (elementName, elementValue) => {
     const temp = this.state;
     temp[elementName].push(elementValue);
@@ -282,7 +288,8 @@ class AuthProvider extends Component {
             setLogout: this.setLogout,
             setElement: this.setElement,
             addElement: this.addElement,
-            removeElement: this.removeElement
+            removeElement: this.removeElement,
+            setEntireElement: this.setEntireElement
           }
         }}
       >

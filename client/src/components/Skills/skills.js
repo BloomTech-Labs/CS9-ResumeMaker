@@ -3,12 +3,75 @@ import React, { Component } from "react";
 import Navbar from "../SubComponents/Navbar/navbar";import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Label
+} from "reactstrap";
 import "../CSS/component-general.css";
 
+import axios from "axios";
+const urls = require("../../config/config.json");
+
 class Skills extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newSkill: "",
+      skills: []
+    };
+  }
+  componentDidMount = () => {
     window.scrollTo(0, 0);
   }
+
+  componentDidUpdate = () => {
+    console.log("ComponentDidUpdate");
+    if (this.state.skills !== this.props.context.userInfo.skills && this.props.context.userInfo.auth === true) {
+      this.setState({ skills: this.props.context.userInfo.skills});
+    }
+  };
+
+  handleChange = (e, index) => {
+    // this.setState({ [e.target.id]: e.target.value });
+    const eName = e.target.name;
+    const value = e.target.value;
+    let newState = this.state.skills;
+    newState[index][eName] = value;
+    this.setState({ skills: newState })
+  };
+
+  handleSubmit = (action) => {
+    this.setState({ newSkill: "" })
+
+    // if(action === "add"){
+    //   this.props.context.actions.addElement("skillgroups", { "groupname": this.state.newSkill });
+    // } else if(action === "edit"){
+    //   this.props.context.actions.setEntireElement("skillgroups", this.state.skillgroups);
+    // }
+
+    const tempObj = {
+      "sections.skills": this.props.context.userInfo.skills
+    };
+    
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id, tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        // This updates context with the new user info from server
+        this.props.context.actions.setLogin(response.data.user);
+      })
+      .catch(err => {
+        console.log("oops", err.message);
+      });
+  };
+
   render() {
     return (
       <div>
@@ -34,19 +97,52 @@ class Skills extends Component {
             </p>
 
             <div className="skills-containment-div">
-              {this.props.context.userInfo.skills.map((element, index) => {
+              {this.state.skills.map((element, index) => {
                 return (
-                  <ItemCard
-                    linkTo="/skills"
-                    elementName="skills"
-                    putPath="sections.skills"
-                    index={index}
-                    key={index}
-                    content={element.content}
-                    context={this.props.context}
-                  />
-                );
+                  <div className="skillgroup" key={element._id ? element._id : element.groupname + index}>
+                    <b>{element.groupname}</b>
+                    {element.content}
+                    <FormGroup>
+                      <Input
+                        id={`skills`}
+                        name="groupname"
+                        placeholder="Group Name"
+                        size="sm"
+                        value={this.state.skills[index].groupname}
+                        onChange={(e) => this.handleChange(e, index)}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label>Skills</Label>
+                      <Input
+                        id={`skills`}
+                        name="content"
+                        placeholder="Skill 1, skill 2, skill 3..."
+                        size="sm"
+                        value={this.state.skills[index].content}
+                        onChange={(e) => this.handleChange(e, index)}
+                      />
+                    </FormGroup>
+                    <Button color="primary" onClick={() => this.handleSubmit("edit")}>
+                      Submit
+                    </Button>
+                  </div>
+                )
               })}
+              <div className="skillgroup-input">
+                <FormGroup>
+                  <Label>New Skill Group</Label>
+                  <Input
+                    id="newSkill"
+                    size="sm"
+                    value={this.state.newSkillGroup}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+                <Button color="primary" onClick={() => this.handleSubmit("add")}>
+                  Submit
+                </Button>
+              </div>
             </div>
           </div>
         </div>
