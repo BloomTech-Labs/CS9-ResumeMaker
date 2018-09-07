@@ -110,8 +110,8 @@ class Skills extends Component {
                 return (
                   <Form className="skillgroup" key={element._id ? element._id : element.groupname + index}>
                     <FormGroup row>
-                      <Label sm={2}>Group Name</Label>
-                      <Col sm={10}>
+                      <Label sm={1}>Group Name</Label>
+                      <Col sm={11}>
                         <Input
                           id={`skills`}
                           name="groupname"
@@ -123,8 +123,8 @@ class Skills extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label sm={2}>Skills</Label>
-                      <Col sm={10}>
+                      <Label sm={1}>Skills</Label>
+                      <Col sm={11}>
                       <Input
                         id={`skills`}
                         name="content"
