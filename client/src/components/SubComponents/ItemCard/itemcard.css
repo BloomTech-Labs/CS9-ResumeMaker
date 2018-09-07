@@ -110,7 +110,7 @@
   text-overflow: ellipsis;
 }
 
-.skills-containment-div,
+/* .skills-containment-div, */
 .titles-containment-div {
   display: flex;
   justify-content: center;
@@ -120,7 +120,7 @@
   padding: 2rem;
 }
 
-.skills-containment-div .item-card.card,
+/* .skills-containment-div .item-card.card, */
 .titles-containment-div .item-card.card {
   min-width: 1rem;
   min-height: 1rem;

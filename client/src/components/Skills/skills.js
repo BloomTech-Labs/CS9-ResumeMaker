@@ -4,6 +4,9 @@ import Navbar from "../SubComponents/Navbar/navbar";import Sidebar from "../SubC
 import { Link } from "react-router-dom";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
 import {
+  Container,
+  Row,
+  Col,
   Button,
   Form,
   FormGroup,
@@ -11,6 +14,7 @@ import {
   Label
 } from "reactstrap";
 import "../CSS/component-general.css";
+import "./skills.css";
 
 import axios from "axios";
 const urls = require("../../config/config.json");
@@ -101,33 +105,38 @@ class Skills extends Component {
               Please click the pencil to enter each of your work related skills.
             </p>
 
-            <div className="skills-containment-div">
+            <Container className="skills-containment-div">
               {this.state.skills.map((element, index) => {
                 return (
-                  <div className="skillgroup" key={element._id ? element._id : element.groupname + index}>
-                    <FormGroup>
-                      <Label>Groupname</Label>
-                      <Input
-                        id={`skills`}
-                        name="groupname"
-                        placeholder="Group Name"
-                        size="sm"
-                        value={this.state.skills[index].groupname}
-                        onChange={(e) => this.handleChange(e, index)}
-                      />
+                  <Form className="skillgroup" key={element._id ? element._id : element.groupname + index}>
+                    <FormGroup row>
+                      <Label sm={2}>Group Name</Label>
+                      <Col sm={10}>
+                        <Input
+                          id={`skills`}
+                          name="groupname"
+                          placeholder="Group Name"
+                          size="sm"
+                          value={this.state.skills[index].groupname}
+                          onChange={(e) => this.handleChange(e, index)}
+                        />
+                      </Col>
                     </FormGroup>
-                    <FormGroup>
-                      <Label>Skills</Label>
+                    <FormGroup row>
+                      <Label sm={2}>Skills</Label>
+                      <Col sm={10}>
                       <Input
                         id={`skills`}
                         name="content"
                         placeholder="Skill 1, skill 2, skill 3..."
+                        // type="textarea"
                         size="sm"
                         value={this.state.skills[index].content}
                         onChange={(e) => this.handleChange(e, index)}
                       />
+                      </Col>
                     </FormGroup>
-                  </div>
+                  </Form>
                 )
               })}
               <Button color="primary" onClick={() => this.handleSubmit("edit")}>
@@ -147,7 +156,7 @@ class Skills extends Component {
                   Submit
                 </Button>
               </div>
-            </div>
+            </Container>
           </div>
         </div>
       </div>

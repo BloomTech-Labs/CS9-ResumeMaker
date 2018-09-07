@@ -1,0 +1,14 @@
+.skills-containment-div {
+  /* display: flex;
+  flex-wrap: wrap;
+  padding: 2rem; */
+}
+
+/* .skills-containment-div .skillgroup {
+  display: flex;
+  padding: 2rem;
+} */
+
+.skills-containment-div label {
+  text-align: right;
+}
