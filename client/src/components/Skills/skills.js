@@ -22,7 +22,7 @@ class Skills extends Component {
                 <Link
                   to={{
                     pathname: "/skills/create", // component being Linked to
-                    state: { index: false } // Setting Index passed into educationCreate component - false means new
+                    state: { skillGroupIndex: false, skillIndex: false } // Setting Index passed into educationCreate component - false means new
                   }}
                 >
                   <i className="fa fa-pencil fa-sm" />
@@ -37,6 +37,14 @@ class Skills extends Component {
                 return (
                   <div key={element._id ? element._id : element.groupname + skillGroupIndex}>
                     <h1>{element.groupname}</h1>
+                    <Link
+                      to={{
+                        pathname: "/skills/create", // component being Linked to
+                        state: { skillGroupIndex: skillGroupIndex, skillIndex: false } // Setting Index passed into educationCreate component - false means new
+                      }}
+                    >
+                      <i className="fa fa-pencil fa-sm" />
+                    </Link>
                     {element.skills.map((element, skillIndex) => {
                       return (
                         <ItemCard

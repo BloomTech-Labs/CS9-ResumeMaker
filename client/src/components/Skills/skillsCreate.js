@@ -23,7 +23,7 @@ class SkillsCreate extends Component {
 
     if (
       this.props.context.userInfo.auth === true &&
-      this.props.location.state.index !== false
+      this.props.location.state.skillIndex !== false
     ) {
       this.setState({
         content: this.props.context.userInfo.skillgroups[this.props.location.state.skillGroupIndex].skills[
@@ -42,8 +42,8 @@ class SkillsCreate extends Component {
   handleSubmit = (event, deleteFlag) => {
     event.preventDefault();
 
-    if (this.props.location.state.index === false && !deleteFlag) {
-      this.props.context.actions.addElement("skills", {
+    if (this.props.location.state.skillIndex === false && !deleteFlag) {
+      this.props.context.actions.addNestedElement("skillgroups", this.props.location.state.skillGroupIndex, "skills", {
         // When creating, do NOT put in an _id, let mongo autocreate one
         content: this.state.content
       });
@@ -66,7 +66,7 @@ class SkillsCreate extends Component {
     }
 
     const tempObj = {
-      "sections.skills": this.props.context.userInfo.skills
+      "sections.skillgroups": this.props.context.userInfo.skillgroups
     };
     axios
       .put(
@@ -105,7 +105,7 @@ class SkillsCreate extends Component {
                 />
               </div>
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.index !== false ? (
+              {this.props.location.state.skillIndex !== false ? (
                 <button onClick={e => this.handleSubmit(e, true)}>
                   Delete
                 </button>
