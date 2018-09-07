@@ -37,22 +37,60 @@ class RIP extends Component {
       this.props.context.userInfo.currentresume
     );
     if (index === -1) index = 0;
-    // this.setState({ index: index });
+    this.setState({ index: index });
+
+    // if (this.props.context.userInfo.auth)
+    // this.props.context.actions.expandResumeIDs(
+    //   this.props.context.userInfo.currentResume
+    // );
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
     // if (this.props.context.userInfo.auth)
-    //   this.props.context.actions.expandResumeIDs(this.state.index);
+    //   this.props.context.actions.expandResumeIDs(
+    //     this.props.context.userInfo.currentResume
+    //   );
   }
 
-  onCreate = () => {
-    this.props.context.actions.createResume();
+  handleCreate = () => {
+    const tempObj = {
+      links: { linkedin: false, github: false, portfolio: false },
+      title: this.props.context.userInfo.title.map(item => {
+        return { _id: item._id, value: false };
+      }),
+      sections: {
+        experience: this.props.context.userInfo.experience.map(item => {
+          return { _id: item._id, value: false };
+        }),
+        education: this.props.context.userInfo.education.map(item => {
+          return { _id: item._id, value: false };
+        }),
+        summary: this.props.context.userInfo.summary.map(item => {
+          return { _id: item._id, value: false };
+        }),
+        skills: this.props.context.userInfo.skills.map(item => {
+          return { _id: item._id, value: false };
+        })
+      }
   };
 
-  handleCreate = () => {
-    this.props.context.actions.createResume();
-    // this.props.context.actions.setSingleElement("currentresume", id);
+    axios
+      .post(`${urls[urls.basePath]}/resume/`, tempObj, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        this.props.context.actions.setSingleElement(
+          "currentresume",
+          response.data.Resume._id
+        );
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
   };
 
   handleSubmit = event => {
@@ -72,16 +110,13 @@ class RIP extends Component {
           }
         )
         .then(response => {
-          this.setState({ success: true });
-        })
-        .catch(err => {
-          console.log("err", err);
-        });
-
+          console.log(response.data.resume._id);
       axios
         .put(
-          `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
-          { currentresume: this.props.context.userInfo.currentresume },
+              `${urls[urls.basePath]}/users/info/${
+                this.props.context.userInfo.id
+              }`,
+              { currentresume: response.data.resume._id },
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token")
@@ -90,6 +125,11 @@ class RIP extends Component {
         )
         .then(response => {
           this.setState({ success: true });
+              console.log("Response: ", response.data.user.currentresume);
+            })
+            .catch(err => {
+              console.log("err", err);
+            });
         })
         .catch(err => {
           console.log("err", err);
@@ -101,8 +141,7 @@ class RIP extends Component {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
         })
-        .then(response => {
-          console.log(response);
+        .then(() => {
           this.setState({ success: true });
         })
         .catch(err => {
@@ -112,18 +151,17 @@ class RIP extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.resumes.length) {
-      const id = this.props.context.actions.createResume();
-      this.props.context.actions.setSingleElement("currentresume", id);
-      return <div>Random</div>;
-    }
-
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;
     }
     if (this.state.success) {
       return <Redirect to="/templates" />;
     }
+    if (!this.props.context.userInfo.resumes.length || this.props.context.userInfo.resumes[0] === null) {
+      console.log("You probably had an error, which redirected you instead of crashing.");
+      return <Redirect to="/resumes" />;
+    }
+
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
@@ -242,6 +280,7 @@ class RIP extends Component {
                     <div key={index}>
                       <p>
                         {" "}
+                        {console.log(index, resumes[this.state.index].sections.skills[index])}
                         <CheckBox
                           context={this.props.context}
                           id={content._id}

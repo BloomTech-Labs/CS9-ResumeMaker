@@ -74,7 +74,7 @@ class AuthProvider extends Component {
   };
 
   setResume = resumeData => {
-    if (!resumeData.length) {
+    if (!resumeData.length && resumeData[0] === null) {
       this.createResume(true);
     } else {
       this.setState({
@@ -120,6 +120,7 @@ class AuthProvider extends Component {
       })
       .then(response => {
         console.log(response.data.Resume._id);
+        this.setState({ currentresume: response.data.Resume._id });
       })
       .catch(err => {
         console.log("err", err);
@@ -127,6 +128,7 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = index => {
+
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -135,10 +137,11 @@ class AuthProvider extends Component {
       }
       return -1;
     }
-
     const tempObj = this.state.resumes[index];
-
+    
     const expandSection = (section, resumeSection) => {
+
+   
       // no .sections portion
       if (!resumeSection) {
         for (let item of this.state[section]) {
@@ -146,12 +149,13 @@ class AuthProvider extends Component {
             resumeItem => resumeItem._id === item._id
           );
           current.length === 0
-            ? this.state.resumes[index][section].push({
+            ? tempObj[section].push({
                 _id: item._id,
                 value: false
               })
             : console.log();
         } // All items in context now have a resume counterpart
+        console.log("Expanded Section", section )
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
@@ -174,7 +178,7 @@ class AuthProvider extends Component {
             resumeItem => resumeItem._id === item._id
           );
           current.length === 0
-            ? this.state.resumes[index].sections[section].push({
+            ? tempObj.sections[section].push({
                 _id: item._id,
                 value: false
               })
@@ -196,15 +200,70 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-    };
-
-    expandSection("title", false);
-    expandSection("experience", true);
-    expandSection("education", true);
-    expandSection("summary", true);
-    expandSection("skills", true);
+    }
+      this.state.resumes.forEach( () => {
+      expandSection("title", false);
+      expandSection("experience", true);
+      expandSection("education", true);
+      expandSection("summary", true);
+      expandSection("skills", true);
+    });
 
     this.setState({ ["resumes"[index]]: tempObj });
+    const tempResume = this.state.resumes[index];
+
+    if (!tempResume["user"]) tempResume["user"] = this.state.id;
+    if (tempResume._id) {
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` +
+          this.state.resumes[index]._id,
+          tempResume,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log(response.data.resume._id);
+          axios
+            .put(
+              `${urls[urls.basePath]}/users/info/${
+              this.state.id
+              }`,
+              { currentresume: response.data.resume._id },
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token")
+                }
+              }
+            )
+            .then(response => {
+              this.setState({ success: true });
+              console.log("Response: ", response.data.user.currentresume);
+            })
+            .catch(err => {
+              console.log("err", err);
+            });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    } else {
+      axios
+        .post(`${urls[urls.basePath]}/resume/`, tempResume, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(() => {
+          console.log("Success on updating resumes")
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
   };
 
   setResumeItemState = (index, name, id) => {

@@ -10,6 +10,8 @@ const urls = require("../../config/config.json");
 class Resumes extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    // adding Axios call to update IDs before we begin comparing them
     if (localStorage.getItem("token")) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
@@ -39,7 +41,7 @@ class Resumes extends Component {
               <h1 style={{ fontWeight: "600" }}>RESUMES</h1>
             </div>
             <div className="containers-div">
-              {/* <div className="d-inline-flex container-div">
+              <div className="d-inline-flex container-div">
                 <Link
                   style={{
                     color: "black"
@@ -57,7 +59,7 @@ class Resumes extends Component {
                   <h5 className="link">RESUME 1</h5>
                 </Link>
               </div>
-              <div className="d-inline-flex container-div">
+              {/* <div className="d-inline-flex container-div">
                 <Link
                   style={{
                     color: "black"

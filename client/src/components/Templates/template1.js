@@ -29,10 +29,6 @@ class TemplateOne extends Component {
     window.scrollTo(0, 0);
   }
 
-  onCreate = () => {
-    this.props.context.actions.createResume();
-  };
-
   handleSubmit = event => {
     event.preventDefault();
     const tempObj = this.props.context.userInfo.resumes[
