@@ -137,6 +137,10 @@ const User = new mongoose.Schema(
       skills: [
         {
           id: ObjectId,
+          groupname: {
+            type: String,
+            default: ""
+          },
           content: {
             type: String,
             default: ""
