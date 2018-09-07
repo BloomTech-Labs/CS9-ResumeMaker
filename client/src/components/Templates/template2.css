@@ -32,3 +32,12 @@
 .titleSection {
     background-color: lightgray; 
 }
+.template.title-div {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    padding:  1rem 2rem 0; 
+}
+.template.page-header {
+    display: flex; 
+}

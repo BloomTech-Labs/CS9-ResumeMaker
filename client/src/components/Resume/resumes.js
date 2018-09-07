@@ -36,7 +36,7 @@ class Resumes extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h1 style={{fontWeight: "600"}}>RESUMES</h1>
+              <h4>RESUMES</h4>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
@@ -50,9 +50,10 @@ class Resumes extends Component {
                   }}
                 >
                   <img
-                    src={require("../Templates/tempTemplate.png")} //import pics
+                    src={require("../Templates/tempTemplate1.png")} //import pics
                     alt=""
-                    height="100rem"
+                    height="200rem"
+                    width="170rem"
                   />
                   <h5 className="link">RESUME 1</h5>
                 </Link>
@@ -68,9 +69,10 @@ class Resumes extends Component {
                   }}
                 >
                   <img
-                    src={require("../Templates/tempTemplate1.png")} //import pics
+                    src={require("../Templates/tempTemplate2.png")} //import pics
                     alt=""
-                    height="100rem"
+                    height="200rem"
+                    width="170rem"
                   />
                   <h5 className="link">RESUME 2</h5>
                 </Link>
@@ -86,9 +88,10 @@ class Resumes extends Component {
                   }}
                 >
                   <img
-                    src={require("../Templates/tempTemplate2.png")} //import pics
+                    src={require("../Templates/tempTemplate3.png")} //import pics
                     alt=""
-                    height="100rem"
+                    height="200rem"
+                    width="170rem"
                   />
                   <h5 className="link">RESUME 3</h5>
                 </Link>

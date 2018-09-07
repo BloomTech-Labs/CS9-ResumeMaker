@@ -1,5 +1,4 @@
 .sidebar {
-  border-right: 1px solid black;
   display: flex;
   flex-direction: column;
   /* padding: 20px; */
@@ -18,7 +17,7 @@
 
 .static-sidebar {
   /* border-right: 1px solid black; */
-  min-width: 10rem;
+  /* min-width: 10rem; */
   /* min-height: 100vh !important; */
   padding: 0 !important;
   /* position: fixed !important; */
@@ -59,4 +58,3 @@
   margin-top: 25px;
   /* border-bottom: 1px solid white;  */
 }
-

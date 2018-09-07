@@ -37,22 +37,15 @@ class Templates extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-               <h1 style={{fontWeight: "600"}}>TEMPLATES</h1>
-              <div className="fa fa-angle-left" />{" "}
-              Start your RESUME by selecting each link on the left sidebar and
-              entering
-              <br />
-              all of your information. Once completed, choose from the template
-              formats below to <br />
-              select the final information to be rendered to your RESUME.
+            <div className=" title-div templates" style={{width: "85%", justifyContent: "left"}}>
+               <h4 >TEMPLATES</h4>
+             <p style={{fontSize: "0.65rem", alignContent: "start"}}> Enter information into each section on the sidebar. Then choose a template below to complete your RESUME.</p>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -61,9 +54,10 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./tempTemplate.png")} //import pics
+                    src={require("./tempTemplate1.png")} //import pics
                     alt=""
-                    height="80rem"
+                    height="200rem"
+                    width="170rem"
                   />
                   <h5 className="link"> TRADITIONAL </h5>
                 </Link>
@@ -72,7 +66,6 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -81,9 +74,10 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./tempTemplate1.png")} //import pics
+                    src={require("./tempTemplate2.png")} //import pics
                     alt=""
-                    height="100rem"
+                    height="200rem"
+                    width="170rem"
                   />
                   <h5> MODERN </h5>
                 </Link>
@@ -92,7 +86,6 @@ class Templates extends Component {
                 <Link
                   style={{
                     color: "black",
-                    border: "1px solid #324359",
                     padding: "0.5rem"
                   }}
                   to={{
@@ -101,9 +94,10 @@ class Templates extends Component {
                   }}
                 >
                   <img
-                    src={require("./tempTemplate2.png")} //import pics
+                    src={require("./tempTemplate3.png")} //import pics
                     alt=""
-                    height="100rem"
+                    height="200rem"
+                    width="170rem"
                   />
                   <h5> ELEGANT </h5>
                 </Link>

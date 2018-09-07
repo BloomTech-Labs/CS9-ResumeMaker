@@ -96,18 +96,17 @@ class TemplateThree extends Component {
         <div className="component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Elegant</h3>
-            </div>
-            <div className="justify-content-center">
+            <div className="template title-div">
+              <h6 className="page-header"style={{fontSize: "1.5rem"}}>Elegant</h6>
               <button
+              style={{width: "4rem", fontSize:".7rem"}}
                 to="/resumes"
                 className="resume-button"
                 type="submit"
                 onClick={this.handleSubmit}
               >
                 {" "}
-                SAVE RESUME
+                SAVE
               </button>
             </div>
             <form className="template1">

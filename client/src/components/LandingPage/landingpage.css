@@ -13,12 +13,16 @@
   padding-top: 30vh;
 }
 .Header {
-  -webkit-text-fill-color: darkslategray;
+  width: 100%; 
+  background-color:rgba(0, 0, 0, 0.3);
+  /* -webkit-text-fill-color: darkslategray;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-color: black; */
   font-weight: 600; 
   /* text-shadow: 4px 4px darkslategray; */
-  padding-top: 2rem; 
+  padding: 1.5rem; 
+  text-shadow: 1px 1px white; 
+  margin: 0; 
 }
 .land-btn {
   background: transparent; 
@@ -26,22 +30,23 @@
   font-family: Cambria;
   /* font-weight: 800;  */
   /* padding: 5px !important;  */
-  text-shadow: 1px 1px darkslategrey;
+  /* text-shadow: 1px 1px darkslategrey; */
  
+}
+.landing-button:active {
+  font-size: 0.9rem; 
+  border: none; 
 }
 /* .land-btn:hover {
   font-weight: 500; 
 } */
 
-/* 
+
 .landing-box {
-  height: 9rem; 
-  width: 14rem; 
-  margin: 0 auto;  
-  padding: 1.2rem; 
-  background-color:rgba(0, 0, 0, 0.3);
-  border-radius: 130px;
-   */
+  width: 100%;  
+  padding: .2rem; 
+  background-color:rgba(0, 0, 0, 0.1);
+}
 
 .fa-angle-left {
   height: 0.5rem !important;
