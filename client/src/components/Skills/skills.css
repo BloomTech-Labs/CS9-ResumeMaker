@@ -14,6 +14,19 @@
   text-align: right;
 }
 
-.skillgroup {
-  width: 90%;
+.skills-containment-div .skillgroup {
+  padding: 0 6% 0 5%;
 }
+
+.skills-containment-div .skills-input,
+.skills-containment-div .skills-input {
+  border-radius: unset;
+}
+
+.skills-containment-div .groupname-input {
+  font-size: 1.8rem;
+}
+
+.skills-containment-div .skills-input {
+}
+

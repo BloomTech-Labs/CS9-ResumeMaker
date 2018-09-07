@@ -110,27 +110,27 @@ class Skills extends Component {
                 return (
                   <Form className="skillgroup" key={element._id ? element._id : element.groupname + index}>
                     <FormGroup row>
-                      <Label sm={1}>Group Name</Label>
-                      <Col sm={11}>
+                      <Col>
                         <Input
+                          className="groupname-input"
                           id={`skills`}
                           name="groupname"
                           placeholder="Group Name"
-                          size="sm"
+                          // size="sm"
                           value={this.state.skills[index].groupname}
                           onChange={(e) => this.handleChange(e, index)}
                         />
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label sm={1}>Skills</Label>
-                      <Col sm={11}>
+                      <Col>
                       <Input
+                        className="skills-input"
                         id={`skills`}
                         name="content"
                         placeholder="Skill 1, skill 2, skill 3..."
-                        // type="textarea"
-                        size="sm"
+                        type="textarea"
+                        // size="sm"
                         value={this.state.skills[index].content}
                         onChange={(e) => this.handleChange(e, index)}
                       />
