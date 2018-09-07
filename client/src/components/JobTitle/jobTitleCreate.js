@@ -89,11 +89,11 @@ class JobTitleCreate extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Job Title</h1>
-            <div>
+            <h5>JOB TITLE</h5>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
               “It is not titles that honour men, but men that honour titles.” ―
               Niccolò Machiavelli
-            </div>
+            </p>
             <form>
               <div className="form-group">
                 <input

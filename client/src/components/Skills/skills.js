@@ -17,18 +17,18 @@ class Skills extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-              <h1 style={{ fontWeight: "600" }}>
-                SKILLS{" "}</h1>
+              <h4>
+                SKILLS{" "}</h4>
                 <Link
                   to={{
                     pathname: "/skills/create", // component being Linked to
                     state: { index: false } // Setting Index passed into educationCreate component - false means new
                   }}
                 >{" "}
-                  <i className="fa fa-pencil fa-2x" />
+                  <i className="fa fa-pencil fa-lg" />
                 </Link>
             </div>
-            <p>
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
               Please click the pencil to enter each of your work related skills.
             </p>
 
