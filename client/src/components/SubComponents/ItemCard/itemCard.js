@@ -92,7 +92,32 @@ class ItemCard extends Component {
 
   render() {
     // console.log(this.props);
-    if (this.props.elementName === "experience") {
+    if(this.props.elementName === "skills") {
+      return (
+        <Card className="item-card row-card">
+          <button
+            className="close"
+            aria-label="Delete"
+            onClick={() => this.handleDelete()}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+          <CardBody>
+            <Link
+              className="item-card-link"
+              to={{
+                pathname: `${this.props.linkTo}/create`, // component being Linked to
+                state: { skillIndex: this.props.skillIndex, skillGroupIndex: this.props.skillGroupIndex } // index passed into the create component
+              }}
+            >
+              <CardText>{ellipsify(this.props.content, 150)}</CardText>
+            </Link>
+          </CardBody>
+        </Card>
+      );
+    }
+    else if (this.props.elementName === "experience") {
       return (
         <Card className="item-card">
           <button

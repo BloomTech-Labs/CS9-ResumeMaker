@@ -26,10 +26,10 @@ class SkillsCreate extends Component {
       this.props.location.state.index !== false
     ) {
       this.setState({
-        content: this.props.context.userInfo.skills[
-          this.props.location.state.index
+        content: this.props.context.userInfo.skillgroups[this.props.location.state.skillGroupIndex].skills[
+          this.props.location.state.skillIndex
         ].content,
-        _id: this.props.context.userInfo.skills[this.props.location.state.index]
+        _id: this.props.context.userInfo.skillgroups[this.props.location.state.skillGroupIndex].skills[this.props.location.state.skillIndex]
           ._id
       });
     }
