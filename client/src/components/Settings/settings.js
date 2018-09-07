@@ -106,6 +106,7 @@ export class PersonalInfo extends Component {
     } else if (!password.match(/\d/)) {
       this.setState({ newPasswordInvalid: true });
     } else if (
+      // eslint-disable-next-line
       !password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/)
     ) {
       this.setState({ newPasswordInvalid: true });
