@@ -106,7 +106,7 @@ class Skills extends Component {
                 return (
                   <div className="skillgroup" key={element._id ? element._id : element.groupname + index}>
                     <FormGroup>
-                      <Label>Group Name</Label>
+                      <Label>Groupname</Label>
                       <Input
                         id={`skills`}
                         name="groupname"
