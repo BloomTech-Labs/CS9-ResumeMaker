@@ -134,13 +134,22 @@ const User = new mongoose.Schema(
           to: Date
         }
       ],
-      skills: [
+      skillgroups: [
         {
           id: ObjectId,
-          content: {
+          groupname: {
             type: String,
             default: ""
-          }
+          },
+          skills: [
+            {
+              id: ObjectId,
+              content: {
+                type: String,
+                default: ""
+              }
+            }
+          ]
         }
       ]
     },

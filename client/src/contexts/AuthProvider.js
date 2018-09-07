@@ -16,7 +16,7 @@ class AuthProvider extends Component {
     links: [],
     education: [],
     experience: [],
-    skills: [],
+    skillgroups: [],
     summary: [],
     resumes: [],
     dateformat: "MM/DD/YYYY"
@@ -40,7 +40,7 @@ class AuthProvider extends Component {
       links: [],
       education: [],
       experience: [],
-      skills: [],
+      skillgroups: [],
       summary: []
     });
   };
@@ -63,7 +63,7 @@ class AuthProvider extends Component {
       experience: userData.sections.experience
         ? userData.sections.experience
         : [],
-      skills: userData.sections.skills ? userData.sections.skills : [],
+      skillgroups: userData.sections.skillgroups ? userData.sections.skillgroups : [],
       summary: userData.sections.summary ? userData.sections.summary : [],
       username: userData.username ? userData.username : "",
       id: userData._id ? userData._id : null,
@@ -98,7 +98,7 @@ class AuthProvider extends Component {
         summary: this.state.summary.map(item => {
           return { _id: item._id, value: false }
         }),
-        skills: this.state.skills.map(item => {
+        skillgroups: this.state.skillgroups.map(item => {
           return { _id: item._id, value: false }
         }),
       }

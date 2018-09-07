@@ -32,20 +32,26 @@ class Skills extends Component {
             <p>
               Please click the pencil to enter each of your work related skills.
             </p>
-
             <div className="skills-containment-div">
-              {this.props.context.userInfo.skills.map((element, index) => {
+              {this.props.context.userInfo.skillgroups.map((element, index) => {
                 return (
-                  <ItemCard
-                    linkTo="/skills"
-                    elementName="skills"
-                    putPath="sections.skills"
-                    index={index}
-                    key={index}
-                    content={element.content}
-                    context={this.props.context}
-                  />
-                );
+                  <div>
+                    <h1>{element.groupname}</h1>
+                    {element.skills.map((element, index) => {
+                      return (
+                        <ItemCard
+                          linkTo="/skills"
+                          elementName="skills"
+                          putPath="sections.skills"
+                          index={index}
+                          key={index}
+                          content={element.content}
+                          context={this.props.context}
+                        />
+                      )
+                    })}
+                  </div>
+                )
               })}
             </div>
           </div>
