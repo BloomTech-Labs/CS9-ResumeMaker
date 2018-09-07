@@ -107,7 +107,9 @@ class Skills extends Component {
             <Container className="skills-containment-div">
               {this.state.skills.map((element, index) => {
                 return (
-                  <Form className="skillgroup" key={element._id ? element._id : element.groupname + index}>
+                  <Form onSubmit={() => this.handleSubmit("edit")} 
+                    className="skillgroup" 
+                    key={element._id ? element._id : element.groupname + index}>
                     <FormGroup row>
                       <Col>
                         <Input
@@ -115,6 +117,7 @@ class Skills extends Component {
                           id={`skills`}
                           name="groupname"
                           placeholder="Group Name"
+                          type="submit"
                           // size="sm"
                           value={this.state.skills[index].groupname}
                           onChange={(e) => this.handleChange(e, index)}
@@ -128,19 +131,20 @@ class Skills extends Component {
                         id={`skills`}
                         name="content"
                         placeholder="Skill 1, skill 2, skill 3..."
-                        type="textarea"
+                        type="textarea submit"
                         // size="sm"
                         value={this.state.skills[index].content}
                         onChange={(e) => this.handleChange(e, index)}
                       />
                       </Col>
                     </FormGroup>
+                    {/* <button type="submit"></button> */}
                   </Form>
                 )
               })}
-              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
+              {/* <Button color="primary" onClick={() => this.handleSubmit("edit")}>
                 Submit
-              </Button>
+              </Button> */}
               <div className="skillgroup-input">
                 <FormGroup>
                   <Label>New Skill Group</Label>
