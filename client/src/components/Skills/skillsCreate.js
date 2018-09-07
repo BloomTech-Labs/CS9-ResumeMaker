@@ -100,7 +100,7 @@ class SkillsCreate extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <h1>Skills</h1>
-            <div>“Success is skill inside out.” ― Matshona Dhliwayo</div>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>“Success is skill inside out.” ― Matshona Dhliwayo</p>
             <form>
               <div className="form-group">
                 <input

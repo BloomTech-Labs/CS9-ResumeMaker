@@ -49,3 +49,7 @@
   flex-direction: column;
   padding: 2rem;
 }
+
+.Login .message p {
+  word-break: break;
+}

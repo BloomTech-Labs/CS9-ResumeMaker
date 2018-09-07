@@ -143,11 +143,11 @@ class ExperienceCreate extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Experience</h1>
-            <div>
+            <h4>EXPERIENCE</h4>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
               “Far and away the best prize that life offers is the chance to
               work hard at work worth doing.” –Theodore Roosevelt.
-            </div>
+            </p>
             <form>
               <div className="container">
                 <div className="row">

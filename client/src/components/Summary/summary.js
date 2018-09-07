@@ -18,23 +18,21 @@ class Summary extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-              <h1 style={{ fontWeight: "570" }}>
-                PERSONAL SUMMARY{" "}
+              <h4>
+                PERSONAL SUMMARY{" "}</h4>
                 <Link
                   to={{
                     pathname: "/summary/create", // component being Linked to
                     state: { index: false } // Setting Index passed into educationCreate component - false means new
                   }}
                 >
-                  <i className="fa fa-pencil fa-sm" />
+                  <i className="fa fa-pencil fa-lg"/>
                 </Link>
-              </h1>
             </div>
-            <p style={{ fontSize: "0.8rem" }}>
-              Please click the pencil to create one or more Personal Summaries
-              about yourself. <br />
-              They should be aimed at toward the position you are seeking for
-              and contain something about the past present and future.{" "}
+            <p style={{ fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+              Click the pencil to add a Personal Summary. 
+              It should be aimed at the position you are seeking
+              and contain something about the past, present, and future.{" "}
             </p>
 
             <div className="summary-containment-div">

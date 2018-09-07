@@ -137,7 +137,7 @@ class Billing extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1 style={{fontWeight: "600"}}>BILLING</h1>
+            <h5>BILLING</h5>
             <p>Become a Member:</p>
             <div className="stripe">
               <div className="card-element">
@@ -150,7 +150,7 @@ class Billing extends Component {
               </button>
               <button className="bill-btn" onClick={this.yearly}>
                 Yearly Subscriptions - $9.99
-              </button>
+              </button><br/>
               <button onClick={this.unsubscribe}>Unsubscribe</button>
             </div>
             <div style={{ marginTop: "10px" }}>

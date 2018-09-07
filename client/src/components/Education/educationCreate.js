@@ -132,11 +132,11 @@ class EducationCreate extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Education History</h1>
-            <div>
+            <h4>EDUCATION HISTORY</h4>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
               “Intelligence plus character-that is the goal of true education.”
               ― Martin Luther King Jr.
-            </div>
+            </p>
             <form>
               <div className="form-group">
                 <label htmlFor="school">School</label>
