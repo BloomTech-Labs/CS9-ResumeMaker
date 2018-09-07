@@ -7,6 +7,7 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template3.css";
 import PDF from "../PDF/PDF";
+import "./resume.css"
 
 export class ResumeThree extends Component {
   componentWillMount() {
@@ -48,11 +49,11 @@ export class ResumeThree extends Component {
         <Navbar context={this.props.context}/>
         <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-              <h4 className="page-header">Elegant</h4>
-            </div>
+          <div className="resume page-div col">
+            <div className="resume title-div">
+              <h4 className="page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Elegant</h4>
             <PDF />
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div className="left-column">
