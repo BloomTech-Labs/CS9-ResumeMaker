@@ -9,9 +9,7 @@ import PDF from "../PDF/PDF";
 
 export class ResumeOne extends Component {
   componentWillMount() {
-    if (this.props.context.userInfo.auth !== true)
-      this.props.history.push("/resumes");
-    else
+    if (this.props.context.userInfo.auth)
       this.props.context.actions.expandResumeIDs(
         this.props.context.userInfo.currentResume
       );
@@ -25,6 +23,13 @@ export class ResumeOne extends Component {
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;
     }
+    if (
+      !this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null
+    ) {
+      return <h1>Loading...</h1>;
+    }
+
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
@@ -44,7 +49,7 @@ export class ResumeOne extends Component {
 
     return (
       <div>
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
@@ -95,8 +100,8 @@ export class ResumeOne extends Component {
                     {userInfo.summary.map((item, index) => {
                       return resumes[resumes.length - 1].sections.summary[index]
                         .value ? (
-                          <p key={item._id}>{item.content}</p>
-                        ) : null;
+                        <p key={item._id}>{item.content}</p>
+                      ) : null;
                     })}
                   </Container>
                   <Divider className="divider-div" />
@@ -110,10 +115,10 @@ export class ResumeOne extends Component {
                     {userInfo.skills.map((content, index) => {
                       return resumes[resumes.length - 1].sections.skills[index]
                         .value ? (
-                          <div key={index}>
-                            <p>{content.content}</p>
-                          </div>
-                        ) : null;
+                        <div key={index}>
+                          <p>{content.content}</p>
+                        </div>
+                      ) : null;
                     })}
                   </Container>
                   <Divider className="divider-div" />
@@ -130,18 +135,18 @@ export class ResumeOne extends Component {
                       return resumes[resumes.length - 1].sections.experience[
                         index
                       ].value ? (
-                          <div key={index}>
-                            <h5>{content.company} </h5>
-                            <p>
-                              {content.title}
-                              <br />
-                              {content.location}
-                              <br />
-                              {from} - {to}
-                            </p>
-                            <p>{content.description} </p>
-                          </div>
-                        ) : null;
+                        <div key={index}>
+                          <h5>{content.company} </h5>
+                          <p>
+                            {content.title}
+                            <br />
+                            {content.location}
+                            <br />
+                            {from} - {to}
+                          </p>
+                          <p>{content.description} </p>
+                        </div>
+                      ) : null;
                     })}
                   </Container>
                   <Divider className="divider-div" />
@@ -156,18 +161,18 @@ export class ResumeOne extends Component {
                     let to = moment(content.to).format("MMM YYYY");
                     return resumes[resumes.length - 1].sections.education[index]
                       .value ? (
-                        <div key={index}>
-                          <h5>
-                            {content.degree} in {content.fieldofstudy}{" "}
-                          </h5>
-                          <p>{content.location}</p>
-                          <p>
-                            {content.school}
-                            <br />
-                            {from} - {to}
-                          </p>
-                        </div>
-                      ) : null;
+                      <div key={index}>
+                        <h5>
+                          {content.degree} in {content.fieldofstudy}{" "}
+                        </h5>
+                        <p>{content.location}</p>
+                        <p>
+                          {content.school}
+                          <br />
+                          {from} - {to}
+                        </p>
+                      </div>
+                    ) : null;
                   })}
                 </Container>
               ) : null}

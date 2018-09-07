@@ -73,6 +73,11 @@ export class PersonalInfo extends Component {
       this.componentDidMount();
     }
   };
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
+  }
 
   augmentObject = (initObj, modObj) => {
     for (let prop in initObj) {
