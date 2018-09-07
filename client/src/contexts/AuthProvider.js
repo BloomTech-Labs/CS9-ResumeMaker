@@ -253,6 +253,12 @@ class AuthProvider extends Component {
     this.setState(temp);
   };
 
+  setEntireElement = (elementName, elementValue) => {
+    const temp = this.state;
+    temp[elementName] = elementValue;
+    this.setState(temp);
+  };
+
   setNestedElement = (aIndex, bIndex, parentObjName, elementName, elementValue) => {
     const temp = this.state;
     temp[parentObjName][aIndex][elementName][bIndex] = elementValue;
@@ -304,7 +310,8 @@ class AuthProvider extends Component {
             removeElement: this.removeElement,
             setNestedElement: this.setNestedElement,
             addNestedElement: this.addNestedElement,
-            removeNestedElement: this.removeNestedElement
+            removeNestedElement: this.removeNestedElement,
+            setEntireElement: this.setEntireElement
           }
         }}
       >

@@ -19,18 +19,33 @@ class Skills extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newSkillGroup: ""
+      newSkillGroup: "",
+      skillgroups: []
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-    // the below isn't working currently
-    // this.setState(this.props.context.userInfo.skillgroups)
   }
 
-  onInputChange = e => {
-    this.setState({ [e.target.id]: e.target.value });
+  componentDidUpdate = () => {
+    console.log("ComponentDidUpdate");
+    if (this.state.skillgroups !== this.props.context.userInfo.skillgroups && this.props.context.userInfo.auth === true) {
+      this.setState({ skillgroups: this.props.context.userInfo.skillgroups});
+    }
+  };
+
+  onInputChange = (e, index) => {
+    // this.setState({ [e.target.id]: e.target.value });
+    const eName = e.target.id;
+    const value = e.target.value;
+    if (eName.includes("skillgroups")) {
+      let newState = this.state.skillgroups;
+      newState[index].content = value; 
+      this.setState({ skillgroups: newState })
+    } else {
+      this.setState({ [eName]: value });
+    }
   };
 
   handleSubmit = (action) => {
@@ -38,6 +53,8 @@ class Skills extends Component {
 
     if(action === "add"){
       this.props.context.actions.addElement("skillgroups", { "groupname": this.state.newSkillGroup });
+    } else if(action === "edit"){
+      this.props.context.actions.setEntireElement("skillgroups", this.state.skillgroups);
     }
 
     const tempObj = {
@@ -86,11 +103,24 @@ class Skills extends Component {
               Please click the pencil to enter each of your work related skills.
             </p>
             <div className="skills-containment-div">
-              {this.props.context.userInfo.skillgroups.map((element, skillGroupIndex) => {
+              {this.state.skillgroups.map((element, skillGroupIndex) => {
                 return (
                   <div className="skillgroup" key={element._id ? element._id : element.groupname + skillGroupIndex}>
                     <b>{element.groupname}</b>
-                    <Link
+                    {element.content}
+                    <FormGroup>
+                      <Label>Skills</Label>
+                      <Input
+                        id={`skillgroups`}
+                        size="sm"
+                        value={this.state.skillgroups[skillGroupIndex].content}
+                        onChange={(e) => this.onInputChange(e, skillGroupIndex)}
+                      />
+                    </FormGroup>
+                    <Button color="primary" onClick={() => this.handleSubmit("edit")}>
+                      Submit
+                    </Button>
+                    {/* <Link
                       to={{
                         pathname: "/skills/create", // component being Linked to
                         state: { skillGroupIndex: skillGroupIndex, skillIndex: false } // Setting Index passed into educationCreate component - false means new
@@ -111,7 +141,7 @@ class Skills extends Component {
                           context={this.props.context}
                         />
                       )
-                    }) : null}
+                    }) : null} */}
                   </div>
                 )
               })}

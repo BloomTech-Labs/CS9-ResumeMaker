@@ -141,6 +141,10 @@ const User = new mongoose.Schema(
             type: String,
             default: ""
           },
+          content: {
+            type: String,
+            default: ""
+          },
           skills: [
             {
               id: ObjectId,
