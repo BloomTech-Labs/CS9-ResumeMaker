@@ -126,11 +126,11 @@ class TemplateThree extends Component {
                     <a href={`mailto:${userInfo.email}`}>
                       <p className="contact-section"> {userInfo.email}</p>
                     </a>
-                    <p style={{fontSize: "0.65rem"}}>
+                    <div style={{fontSize: "0.65rem"}}>
                   <div className="fa fa-mobile" aria-hidden="true" />
                   {" "}{userInfo.phonenumber}
-                </p>
-                <p style={{fontSize: "0.65rem"}}>
+                </div>
+                <div style={{fontSize: "0.65rem"}}>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -139,8 +139,8 @@ class TemplateThree extends Component {
                   />{" "}
                   <div className={"fa fa-linkedin fa-sm"} />
                   {" "}{userInfo.links.linkedin}
-                </p>
-                <p style={{fontSize: "0.65rem"}}>
+                </div>
+                <div style={{fontSize: "0.65rem"}}>
                   <CheckBox
                     context={this.props.context}
                     index={resumes.length - 1}
@@ -149,7 +149,7 @@ class TemplateThree extends Component {
                   />{" "}
                   <div className="fa fa-github" aria-hidden="true" />
                   {" "}{userInfo.links.github}
-                </p>
+                </div>
                 <p style={{fontSize: "0.65rem"}}>
                   <CheckBox
                     context={this.props.context}
