@@ -49,7 +49,7 @@ export class ResumeOne extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Traditional</h3>
+              <h5 className="page-header">Traditional</h5>
             </div>
             <PDF />
             <form className="template1" onSubmit={this.handleSubmit}>
