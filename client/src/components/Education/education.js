@@ -29,7 +29,7 @@ class Education extends Component {
                   <i className="fa fa-pencil fa-lg" />
                 </Link>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
               Click the pencil to enter previous schools attended and degrees or certificates obtained.
             </p>
             <div className="education-containment-div">

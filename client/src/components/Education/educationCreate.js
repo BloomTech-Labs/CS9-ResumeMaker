@@ -4,7 +4,7 @@ import axios from "axios";
 
 import DatePicker from "react-datepicker";
 import moment from "moment";
-
+import Navbar from "../SubComponents/Navbar/navbar";
 import "react-datepicker/dist/react-datepicker.css";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 
@@ -129,18 +129,20 @@ class EducationCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/education" /> : null}
+        <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <h4>EDUCATION HISTORY</h4>
-            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “Intelligence plus character-that is the goal of true education.”
               ― Martin Luther King Jr.
             </p>
-            <form>
+            <form  style={{ width: "60%", alignItems: "left"}}>
               <div className="form-group">
                 <label htmlFor="school">School</label>
                 <input
+                 style={{fontSize: ".7rem", height: "1.7rem"}}
                   id="school"
                   value={this.state.school}
                   onChange={this.onInputChange}
@@ -152,6 +154,7 @@ class EducationCreate extends Component {
               <div className="form-group">
                 <label htmlFor="degree">Degree</label>
                 <input
+                style={{fontSize: ".7rem", height: "1.7rem"}}
                   id="degree"
                   value={this.state.degree}
                   onChange={this.onInputChange}
@@ -163,6 +166,7 @@ class EducationCreate extends Component {
               <div className="form-group">
                 <label htmlFor="fieldofstudy">Field of Study</label>
                 <input
+                style={{fontSize: ".7rem", height: "1.7rem"}}
                   id="fieldofstudy"
                   value={this.state.fieldofstudy}
                   onChange={this.onInputChange}

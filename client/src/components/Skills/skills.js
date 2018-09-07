@@ -35,7 +35,7 @@ class Skills extends Component {
                   <i className="fa fa-pencil fa-lg" />
                 </Link>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
               Click the pencil to enter your work related skills.
             </p>
 

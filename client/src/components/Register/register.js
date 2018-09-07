@@ -156,78 +156,85 @@ class Register extends Component {
                         >
                             Try again
             </Button>
-                    </div>
-                </div>
-            );
-        } else if (this.state.submitted === false) {
-            return (
-                <div className="Login">
-                    <Form>
-                        <FormGroup>
-                            <Label>Username</Label>
-                            <Input
-                                autoFocus
-                                invalid={this.state.usernameInvalid}
-                                id="username"
-                                type="username"
-                                value={this.state.username}
-                                onChange={this.handleChange}
-                            />
-                            <FormFeedback invalid>
-                                This username is already in use.
+          </div>
+        </div>
+      );
+    } else if (this.state.submitted === false) {
+      return (
+        <div className="Login">
+          <Form>
+            <FormGroup>
+              <h6>Username</h6>
+              <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
+                autoFocus
+                invalid={this.state.usernameInvalid}
+                id="username"
+                type="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+              <FormFeedback invalid>
+                This username is already in use.
               </FormFeedback>
                         </FormGroup>
 
-                        <FormGroup>
-                            <Label>Email</Label>
-                            <Input
-                                id="email"
-                                invalid={this.state.emailInvalid}
-                                type="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
-                            />
-                            <FormFeedback invalid>
-                                Please enter an unused valid email.
+            <FormGroup>
+              <h6>Email</h6>
+              <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
+                id="email"
+                invalid={this.state.emailInvalid}
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+              <FormFeedback invalid>
+                Please enter an unused valid email.
               </FormFeedback>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Password</Label>
-                            <Input
-                                id="password"
-                                invalid={this.state.passwordInvalid}
-                                type="password"
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                            />
-                            <FormFeedback invalid>
-                                Please use a complex password at least 8 characters long.
+            </FormGroup>
+            <FormGroup>
+              <h6>Password</h6>
+              <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
+                id="password"
+                invalid={this.state.passwordInvalid}
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+              <FormFeedback invalid>
+                Please use a complex password at least 8 characters long. It must include 1 character, 1 number, and a capitol letter. 
               </FormFeedback>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Confirm password</Label>
-                            <Input
-                                id="confirmPassword"
-                                invalid={this.state.passwordInvalid}
-                                type="password"
-                                value={this.state.confirmPassword}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <Button
-                            block
-                            size="lg"
-                            color="primary"
-                            disabled={!this.validateForm()}
-                            onClick={() => this.checkInputValidity()}
-                        >
-                            Register
+            </FormGroup>
+            <FormGroup>
+              <h6>Confirm password</h6>
+              <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
+                id="confirmPassword"
+                invalid={this.state.passwordInvalid}
+                type="password"
+                value={this.state.confirmPassword}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <Button
+             style={{fontSize: ".8rem", height: "2rem"}} 
+              block
+              size="lg"
+              color="primary"
+              disabled={!this.validateForm()}
+              onClick={() => this.checkInputValidity()}
+            >
+              Register
             </Button>
-                        <Button
-                            color="danger"
-                            onClick={() => this.props.history.push("/login")}
-                        >
-                            Take me to the login page
+            <Button
+            
+             style={{fontSize: ".7rem", height: "2rem"}} 
+              color="danger"
+              onClick={() => this.props.history.push("/login")}
+            >
+              Take me to the login page
             </Button>
                     </Form>
                 </div>
@@ -240,13 +247,14 @@ class Register extends Component {
                             Please check your email within 30 minutes to confirm your
                             registration, then you can log in.
             </p>
-                        <Button
-                            color="primary"
-                            onClick={() => {
-                                this.props.history.push("/login");
-                            }}
-                        >
-                            Take me to the login page
+            <Button
+             style={{fontSize: ".7rem", height: "2rem"}} 
+              color="primary"
+              onClick={() => {
+                this.props.history.push("/login");
+              }}
+            >
+              Take me to the login page
             </Button>
                     </div>
                 </div>

@@ -241,6 +241,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>First Name</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="name.firstname"
                   maxLength={20}
                   size="sm"
@@ -251,6 +252,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Middle Name</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="name.middlename"
                   maxLength={20}
                   size="sm"
@@ -261,6 +263,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Last Name</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="name.lastname"
                   maxLength={20}
                   size="sm"
@@ -271,6 +274,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Phone Number</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="phonenumber"
                   maxLength={20}
                   size="sm"
@@ -281,6 +285,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Location</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="location"
                   size="sm"
                   value={this.state.location}
@@ -290,6 +295,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Linkedin</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="links.linkedin"
                   size="sm"
                   value={this.state.links.linkedin}
@@ -299,6 +305,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Github</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="links.github"
                   size="sm"
                   value={this.state.links.github}
@@ -308,6 +315,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Portfolio</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="links.portfolio"
                   size="sm"
                   value={this.state.links.portfolio}
@@ -321,6 +329,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>Email</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   id="email"
                   invalid={this.state.emailInvalid}
                   size="sm"
@@ -328,13 +337,14 @@ export class PersonalInfo extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <FormFeedback invalid>
+                <FormFeedback invalid style={{fontSize: ".7rem"}}>
                   Please enter an unused valid email.
                 </FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label>Current Password</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   invalid={
                     this.state.passwordInvalid === true ||
                     (this.state.email !== this.props.context.userInfo.email &&
@@ -353,7 +363,7 @@ export class PersonalInfo extends Component {
                   value={this.state.oldpassword}
                   onChange={this.handleChange}
                 />
-                <FormFeedback invalid>
+                <FormFeedback invalid style={{fontSize: ".7rem"}}>
                   Please enter your current password to change your email or
                   password.
                 </FormFeedback>
@@ -361,6 +371,7 @@ export class PersonalInfo extends Component {
               <FormGroup>
                 <Label>New Password</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   invalid={
                     this.state.newPasswordInvalid === true &&
                     this.state.newpassword !== ""
@@ -378,13 +389,14 @@ export class PersonalInfo extends Component {
                     this.checkPasswordStrength(e.target.value);
                   }}
                 />
-                <FormFeedback invalid>
+                <FormFeedback invalid style={{fontSize: ".7rem"}}>
                   Please use a complex password at least 8 characters long.
                 </FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label>Confirm New Password</Label>
                 <Input
+                style={{fontSize: ".7rem", height: "1.5rem"}}
                   valid={
                     this.state.newpassword === this.state.newconfirmpassword &&
                     this.state.newpassword !== ""
@@ -399,16 +411,16 @@ export class PersonalInfo extends Component {
                   value={this.state.newconfirmpassword}
                   onChange={this.handleChange}
                 />
-                <FormFeedback invalid>
+                    <FormFeedback invalid style={{fontSize: ".7rem"}}>
                   Please make this match your new password.
                 </FormFeedback>
               </FormGroup>
             </Form>
             <div className="settings-footer mt-4">
-              <Button color="primary" onClick={() => this.checkInputValidity()}>
+              <Button color="primary"  style={{fontSize: ".7rem", height: "1.7rem"}} onClick={() => this.checkInputValidity()}>
                 Submit
               </Button>
-              <div className="saved-status">
+              <div className="saved-status" style={{fontSize: ".7rem"}}>
                 {this.state.changesSaved && this.state.changesSaved !== null ? (
                   <span>Your changes were saved. </span>
                 ) : null}
@@ -457,7 +469,7 @@ class Settings extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h4 style={{ padding: ".7rem"}}>SETTINGS</h4>
+            <h4 style={{ padding: ".5rem"}}>SETTINGS</h4>
             <PersonalInfo context={this.props.context} />
           </div>
         </div>

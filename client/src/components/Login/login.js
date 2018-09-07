@@ -78,8 +78,9 @@ class Login extends Component {
       <div className="Login">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label>Email</Label>
+            <h5>Email</h5>
             <Input
+             style={{fontSize: ".7rem", height: "2rem"}} 
               autoFocus
               id="email"
               invalid={this.state.invalidCredentials}
@@ -90,8 +91,9 @@ class Login extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label>Password</Label>
+            <h5>Password</h5>
             <Input
+             style={{fontSize: ".7rem", height: "2rem"}} 
               id="password"
               invalid={this.state.invalidCredentials}
               value={this.state.password}
@@ -104,6 +106,7 @@ class Login extends Component {
             </FormFeedback>
           </FormGroup>
           <Button
+           style={{fontSize: ".8rem", height: "2rem"}} 
             block
             size="lg"
             color="primary"
@@ -114,12 +117,14 @@ class Login extends Component {
           </Button>
           <div className="bottom-buttons">
             <Button
+             style={{fontSize: ".7rem", height: "2rem"}} 
               color="danger"
               onClick={() => this.props.history.push("/register")}
             >
               Register
             </Button>
             <Button
+             style={{fontSize: ".7rem", height: "2rem"}} 
               color="danger"
               onClick={() => this.props.history.push("/forgotpassword")}
             >

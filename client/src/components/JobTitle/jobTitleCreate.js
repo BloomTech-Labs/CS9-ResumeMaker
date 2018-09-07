@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
-
+import "../CSS/component-general.css";
 const urls = require("../../config/config.json");
 
 class JobTitleCreate extends Component {
@@ -92,30 +93,33 @@ class JobTitleCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/jobtitle" /> : null}
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" >
             <h5>JOB TITLE</h5>
-            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “It is not titles that honour men, but men that honour titles.” ―
               Niccolò Machiavelli
             </p>
             <form>
-              <div className="form-group">
+              <div className="form-group row">
                 <input
+                  style={{fontSize: ".7rem", width: "20rem", height: "1.5rem"}}
                   value={this.state.content}
                   onChange={this.onInputChange}
                   className="form-control"
                   name="content"
                   placeholder="Enter Your Job Title"
                 />
-              </div>
+             
               <button onClick={e => this.handleSubmit(e)}>Submit</button>
               {this.props.location.state.index !== false ? (
                 <button onClick={e => this.handleSubmit(e, true)}>
                   Delete
                 </button>
               ) : null}
+               </div>
             </form>
           </div>
         </div>

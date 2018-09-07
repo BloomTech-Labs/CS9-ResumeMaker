@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
 
@@ -96,11 +97,13 @@ class SkillsCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/skills" /> : null}
+        <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <h1>Skills</h1>
-            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>“Success is skill inside out.” ― Matshona Dhliwayo</p>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
+            “Success is skill inside out.” ― Matshona Dhliwayo</p>
             <form>
               <div className="form-group">
                 <input
