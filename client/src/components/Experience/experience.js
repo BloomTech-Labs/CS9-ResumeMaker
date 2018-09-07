@@ -18,19 +18,18 @@ class Experience extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-            <h1 style={{fontWeight: "600"}}>EXPERIENCE{" "}
+            <h4>EXPERIENCE{" "}</h4>
               <Link
                 to={{
                   pathname: "/experience/create", // component being Linked to
                   state: { index: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
-                <i className="fa fa-pencil fa-sm" />
-              </Link></h1>
+                <i className="fa fa-pencil fa-lg" />
+              </Link>
             </div>
-             <p style={{ fontSize: "0.8rem" }}>
-              Please click the pencil to enter the information for all of your
-              previous work related experience.
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+              Click the pencil to add previous employment information to your work history.
             </p>
 
             <div className="experience-containment-div">

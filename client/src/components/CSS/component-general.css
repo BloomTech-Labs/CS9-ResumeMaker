@@ -1,9 +1,15 @@
 .link-hide {
   max-width: 50rem;
   display: flex;
-  align-self: center;
+  align-self: start;
+  flex-direction: row; 
+  padding: 0.5rem 0 0 0.5rem; 
+  text-align: start; 
 }
-
+/* .link-hide h4 {
+  border-bottom: 1px solid black; 
+  text-align: start; 
+} */
 i {
   color: black;
   font-size: 2rem;
@@ -13,15 +19,24 @@ i {
   width: 100%;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,
     "AppleGothic", sans-serif;
+    align-items: start;  
 }
 
 .overall-component-div .title-div {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  /* background-image: linear-gradient( darkgray, white); */
-  /* background: linear-gradient(#7578F8, lightgray); */
-  /* background: #C8C8C8;   */
+  padding: 0.5rem; 
+}
+.title-div.templates h4 {
+  width: 100%; 
+  border-bottom: 1px solid black; 
+  text-align: start; 
+}
+.title-div h4 {
+  text-align: start; 
+}
+.title-div p {
+  text-align: start; 
 }
 
 .div-for-links {
@@ -31,7 +46,16 @@ i {
 }
 
 .fa.fa-pencil {
-  margin: 1rem 0 0.5rem 0;
+  padding: .5rem; 
+}
+
+.fa.fa-pencil:hover {
+  color: #777;
+}
+
+.fa.fa-pencil:active {
+  font-size: 1rem; 
+  color: #777;
 }
 
 .card-body.card-text.card {

@@ -110,7 +110,6 @@
   text-overflow: ellipsis;
 }
 
-/* .skills-containment-div, */
 .titles-containment-div {
   display: flex;
   justify-content: center;
@@ -126,21 +125,18 @@
   min-height: 1rem;
 }
 
-/* .summary-card-link {
-  background: white;
-  border: 1px solid lightgrey;
-  margin: 10px;
-  margin-right: 0;
-  margin-left: 0;
-  padding: 10px;
-  width: 240px;
-  height: 160px;
-  cursor: pointer;
-  user-select: none;
-  overflow: hidden;
-  text-decoration: none;
+.skills-containment-div {
+  justify-content: flex-start;
 }
 
-.summary-card-span {
-  color: black;
-} */
+.skills-containment-div .skillgroup {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 1% 5%;
+}
+
+.skillgroup-input {
+  display: flex;
+  justify-content: space-around;
+}

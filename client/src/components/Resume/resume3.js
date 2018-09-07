@@ -7,6 +7,7 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template3.css";
 import PDF from "../PDF/PDF";
+import "./resume.css"
 
 export class ResumeThree extends Component {
   componentWillMount() {
@@ -48,15 +49,15 @@ export class ResumeThree extends Component {
         <Navbar context={this.props.context}/>
         <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Elegant</h3>
-            </div>
+          <div className="resume page-div col">
+            <div className="resume title-div">
+              <h4 className="page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Elegant</h4>
             <PDF />
+            </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <div className="row">
                 <div className="left-column">
-                  <a
+                  {/* <a
                     href="https://www.freeiconspng.com/img/37126"
                     title="Image from freeiconspng.com"
                   >
@@ -65,25 +66,25 @@ export class ResumeThree extends Component {
                       className="logo"
                       alt="logo lion head png"
                     />
-                  </a>
+                  </a> */}
                   <FormGroup textalign="center" className="contactSection">
-                    <h3 className="subtitle">Contact Details</h3>
+                    <h5 className="subtitle" style={{paddingTop: "1rem"}}>Contact Details</h5>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p className="contact-section"> {userInfo.email}</p>
+                      <p className="contact-section"  style={{fontSize: "0.6rem"}}>  {userInfo.email}</p>
                     </a>
-                    <p className="contact-section">{userInfo.location}</p>
-                    <p className="contact-section">{userInfo.phonenumber}</p>
-                    <div className="contact-section">
+                    <p className="contact-section"  style={{fontSize: "0.6rem"}}>{userInfo.location}</p>
+                    <p className="contact-section"  style={{fontSize: "0.6rem"}}>{userInfo.phonenumber}</p>
+                    <div className="contact-section" style={{fontSize: "0.55rem"}}>
                       {resumes[resumes.length - 1].links.linkedin ? (
                         <p>{userInfo.links.linkedin}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section">
+                    <div className="contact-section"  style={{fontSize: "0.55rem"}}>
                       {resumes[resumes.length - 1].links.github ? (
                         <p>{userInfo.links.github}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section">
+                    <div className="contact-section"  style={{fontSize: "0.55rem"}}>
                       {resumes[resumes.length - 1].links.portfolio ? (
                         <p>{userInfo.links.portfolio}</p>
                       ) : null}
@@ -92,9 +93,9 @@ export class ResumeThree extends Component {
                 </div>
                 <div className="col">
                   <div style={{ textAlign: "center" }} className="titleSection">
-                    <h2>
+                    <h4>
                       {userInfo.name.firstname} {userInfo.name.lastname}
-                    </h2>
+                    </h4>
                     {userInfo.title.map((item, index) => {
                       return resumes[resumes.length - 1].title[index].value ? (
                         <p key={item._id}>{item.content}</p>
@@ -108,12 +109,12 @@ export class ResumeThree extends Component {
                       id="summary"
                       className="summarySection"
                     >
-                      <h3 className="subtitle">Summary</h3>
+                      <h5 className="subtitle" >Summary</h5>
                       {userInfo.summary.map((item, index) => {
                         return resumes[resumes.length - 1].sections.summary[
                           index
                         ].value ? (
-                          <p key={item._id}>{item.content}</p>
+                          <p key={item._id}  style={{fontSize: "0.6rem"}}>{item.content}</p>
                         ) : null;
                       })}
                       <Divider className="divider-div" />
@@ -121,13 +122,13 @@ export class ResumeThree extends Component {
                   ) : null}
                   {skillsLength.length > 0 ? (
                     <FormGroup textalign="center" className="skillsSection">
-                      <h3 className="subtitle">Skills</h3>
+                      <h5 className="subtitle">Skills</h5>
                       {userInfo.skills.map((content, index) => {
                         return resumes[resumes.length - 1].sections.skills[
                           index
                         ].value ? (
-                          <div key={index}>
-                            <p>{content.content}</p>
+                          <div key={index} >
+                            <p style={{margin: "0.5rem", fontSize: "0.6rem"}}>{content.content}</p>
                           </div>
                         ) : null;
                       })}
@@ -135,16 +136,16 @@ export class ResumeThree extends Component {
                     </FormGroup>
                   ) : null}
                   {experienceLength.length > 0 ? (
-                    <FormGroup textalign="center" className="experienceSection">
-                      <h3 className="subtitle">Experience</h3>
+                    <FormGroup textalign="center" className="experienceSection" >
+                      <h5 className="subtitle">Experience</h5>
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
                         return resumes[resumes.length - 1].sections.experience[
                           index
                         ].value ? (
-                          <div key={index}>
-                            <h5>{content.company} </h5>
+                          <div key={index}  style={{fontSize: "0.6rem"}}>
+                            <h6>{content.company} </h6>
                             <p>
                               {content.title}
                               <br />
@@ -161,17 +162,17 @@ export class ResumeThree extends Component {
                   ) : null}
                   {educationLength.length > 0 ? (
                     <FormGroup textalign="center" className="educationSection">
-                      <h3 className="subtitle">Education</h3>
+                      <h5 className="subtitle">Education</h5>
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
                         return resumes[resumes.length - 1].sections.education[
                           index
                         ].value ? (
-                          <div key={index}>
-                            <h5>
+                          <div key={index}  style={{fontSize: "0.6rem"}}>
+                            <h6>
                               {content.degree} in {content.fieldofstudy}{" "}
-                            </h5>
+                            </h6>
                             <p>{content.location}</p>
                             <p>
                               {content.school}

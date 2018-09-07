@@ -98,11 +98,11 @@ class SummaryCreate extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <h1>Personal Summary</h1>
-            <div>
+            <h4>Personal Summary</h4>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
               “Make the most of yourself....for that is all there is of you.” ―
               Ralph Waldo Emerson
-            </div>
+            </p>
             <form>
               <div className="form-group">
                 <textarea

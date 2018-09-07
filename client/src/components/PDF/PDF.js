@@ -9,7 +9,7 @@ class PDF extends Component {
       .then(canvas => {
         const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF();
-        pdf.addImage(imgData, "JPEG", 15, 15, 180, 200);
+        pdf.addImage(imgData, "JPEG", 20, 10, 165, 280);
         pdf.save("download.pdf");
       })
       .catch(err => {
@@ -20,7 +20,7 @@ class PDF extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.pdfDocument}>Download as PDF</button>
+        <button onClick={this.pdfDocument} style={{fontSize:".7rem"}}>Export PDF</button>
       </div>
     );
   }

@@ -96,15 +96,16 @@ class TemplateOne extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="template title-div">
-              <span className="page-header">Traditional</span>
+              <span className="template page-header" style={{fontSize: "1.5rem"}}>Traditional</span>
               <button
+                style={{width: "4rem", fontSize:".7rem"}}
                 to="/resumes"
                 className="resume-button"
                 type="submit"
                 onClick={this.handleSubmit}
               >
                 {" "}
-                SAVE RESUME
+                SAVE
               </button>
             </div>
             <form className="template1">

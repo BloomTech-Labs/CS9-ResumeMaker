@@ -1,0 +1,9 @@
+.resume.title-div {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    padding:  1rem 2rem 0; 
+}
+.resume.page-header {
+    display: flex; 
+}

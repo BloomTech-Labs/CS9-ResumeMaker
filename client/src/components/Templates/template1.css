@@ -24,12 +24,16 @@
     border: 1px solid black; 
 }
 .resume-button {
+    height: min-content; 
     align-self: center;
+    
 }
-
 .template.title-div {
-    display: flex;
-    flex-direction: row;
+    display: flex; 
+    flex-direction: row; 
     justify-content: space-between;
-    padding: 0 3rem;
+    padding:  1rem 2rem 0; 
+}
+.template.page-header {
+    display: flex; 
 }

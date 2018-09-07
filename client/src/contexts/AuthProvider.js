@@ -18,8 +18,7 @@ class AuthProvider extends Component {
     experience: [],
     skills: [],
     summary: [],
-    resumes: [],
-    dateformat: "MM/DD/YYYY"
+    resumes: []
   }
 
 
@@ -66,8 +65,7 @@ class AuthProvider extends Component {
       skills: userData.sections.skills ? userData.sections.skills : [],
       summary: userData.sections.summary ? userData.sections.summary : [],
       username: userData.username ? userData.username : "",
-      id: userData._id ? userData._id : null,
-      dateformat: userData.dateformat ? userData.dateformat : "MM/DD/YYYY"
+      id: userData._id ? userData._id : null
     });
   };
 

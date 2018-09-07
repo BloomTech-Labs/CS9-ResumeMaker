@@ -17,20 +17,18 @@ class JobTitle extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="link-hide">
-              <h1 style={{fontWeight: "600"}}>JOB TITLE{" "}
+              <h4>JOB TITLE{" "}</h4>
                 <Link
                   to={{
                     pathname: "/jobtitle/create", // component being Linked to
                     state: { index: false } // Setting Index passed into educationCreate component - false means new
                   }}
-                >
-                  <i className="fa fa-pencil fa-sm" />
+                >{" "}
+                  <i className="fa fa-pencil fa-lg"/>
                 </Link>
-              </h1>
             </div>
-            <p>
-              Please click the pencil to enter one or more Titles for the Job
-              Positon you are seeking.
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+              Click the pencil to enter a Title for the Job Position you are seeking. 
             </p>
 
             <div className="titles-containment-div">
