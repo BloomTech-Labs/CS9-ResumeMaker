@@ -43,14 +43,19 @@ class Skills extends Component {
     this.setState({ skills: newState })
   };
 
+  newSkillChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
   handleSubmit = (action) => {
+    if(action === "add"){
+      this.props.context.actions.addElement("skills", { "groupname": this.state.newSkill });
+    } else if(action === "edit"){
+      this.props.context.actions.setEntireElement("skills", this.state.skills);
+    }
+
     this.setState({ newSkill: "" })
 
-    // if(action === "add"){
-    //   this.props.context.actions.addElement("skillgroups", { "groupname": this.state.newSkill });
-    // } else if(action === "edit"){
-    //   this.props.context.actions.setEntireElement("skillgroups", this.state.skillgroups);
-    // }
 
     const tempObj = {
       "sections.skills": this.props.context.userInfo.skills
@@ -100,9 +105,8 @@ class Skills extends Component {
               {this.state.skills.map((element, index) => {
                 return (
                   <div className="skillgroup" key={element._id ? element._id : element.groupname + index}>
-                    <b>{element.groupname}</b>
-                    {element.content}
                     <FormGroup>
+                      <Label>Group Name</Label>
                       <Input
                         id={`skills`}
                         name="groupname"
@@ -123,20 +127,20 @@ class Skills extends Component {
                         onChange={(e) => this.handleChange(e, index)}
                       />
                     </FormGroup>
-                    <Button color="primary" onClick={() => this.handleSubmit("edit")}>
-                      Submit
-                    </Button>
                   </div>
                 )
               })}
+              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
+                Submit
+              </Button>
               <div className="skillgroup-input">
                 <FormGroup>
                   <Label>New Skill Group</Label>
                   <Input
                     id="newSkill"
                     size="sm"
-                    value={this.state.newSkillGroup}
-                    onChange={this.handleChange}
+                    value={this.state.newSkill}
+                    onChange={this.newSkillChange}
                   />
                 </FormGroup>
                 <Button color="primary" onClick={() => this.handleSubmit("add")}>
