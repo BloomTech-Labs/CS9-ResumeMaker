@@ -118,7 +118,6 @@ class ItemCard extends Component {
   }
 
   render() {
-    // console.log(this.props);
     if(this.props.elementName === "skills") {
       return (
         <Card className="item-card row-card">
@@ -165,7 +164,7 @@ class ItemCard extends Component {
               <CardTitle>{this.props.element.title}</CardTitle>
               <CardTitle>{this.props.element.company}</CardTitle>
               <CardText>
-                {moment(this.props.element.from).format(this.props.context.userInfo.dateformat)} - {moment(this.props.element.to).format(this.props.context.userInfo.dateformat)}
+                {moment(this.props.element.from).format("MMM YYYY")} - {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
               <CardText>
                 {ellipsify(this.props.element.description, 150)}
@@ -201,7 +200,7 @@ class ItemCard extends Component {
                 {ellipsify(this.props.element.fieldofstudy, 150)}
               </CardText>
               <CardText>
-                {moment(this.props.element.from).format(this.props.context.userInfo.dateformat)} - {moment(this.props.element.to).format(this.props.context.userInfo.dateformat)}
+                {moment(this.props.element.from).format("MMM YYYY")} - {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
             </CardBody>
           </Link>
