@@ -11,6 +11,7 @@ import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
 
+
 const cheese = {
   email: "cheese23@gmail.com",
   password: "Cheese123!",
@@ -78,8 +79,9 @@ export default class Login extends Component {
       <div className="Login">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label>Email</Label>
+            <h5>Email</h5>
             <Input
+             style={{fontSize: ".7rem", height: "2rem"}} 
               autoFocus
               id="email"
               invalid={this.state.invalidCredentials}
@@ -90,8 +92,9 @@ export default class Login extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label>Password</Label>
+            <h5>Password</h5>
             <Input
+             style={{fontSize: ".7rem", height: "2rem"}} 
               id="password"
               invalid={this.state.invalidCredentials}
               value={this.state.password}

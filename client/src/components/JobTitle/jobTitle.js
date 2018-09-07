@@ -31,7 +31,7 @@ class JobTitle extends Component {
               Click the pencil to enter a Title for the Job Position you are seeking. 
             </p>
 
-            <div className="titles-containment-div">
+            <div className="titles-containment-div" style={{paddingTop: "1rem"}}>
               {this.props.context.userInfo.title.map((element, index) => {
                 return (
                   <ItemCard

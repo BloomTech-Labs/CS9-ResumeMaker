@@ -162,8 +162,9 @@ class Register extends Component {
         <div className="Login">
           <Form>
             <FormGroup>
-              <Label>Username</Label>
+              <h6>Username</h6>
               <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
                 autoFocus
                 invalid={this.state.usernameInvalid}
                 id="username"
@@ -177,8 +178,9 @@ class Register extends Component {
             </FormGroup>
 
             <FormGroup>
-              <Label>Email</Label>
+              <h6>Email</h6>
               <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
                 id="email"
                 invalid={this.state.emailInvalid}
                 type="email"
@@ -190,8 +192,9 @@ class Register extends Component {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label>Password</Label>
+              <h6>Password</h6>
               <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
                 id="password"
                 invalid={this.state.passwordInvalid}
                 type="password"
@@ -203,8 +206,9 @@ class Register extends Component {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label>Confirm password</Label>
+              <h6>Confirm password</h6>
               <Input
+               style={{fontSize: ".7rem", height: "2rem"}} 
                 id="confirmPassword"
                 invalid={this.state.passwordInvalid}
                 type="password"
@@ -213,6 +217,7 @@ class Register extends Component {
               />
             </FormGroup>
             <Button
+             style={{fontSize: ".8rem", height: "2rem"}} 
               block
               size="lg"
               color="primary"
@@ -222,6 +227,8 @@ class Register extends Component {
               Register
             </Button>
             <Button
+            
+             style={{fontSize: ".7rem", height: "2rem"}} 
               color="danger"
               onClick={() => this.props.history.push("/login")}
             >
@@ -239,6 +246,7 @@ class Register extends Component {
               registration, then you can log in.
             </p>
             <Button
+             style={{fontSize: ".7rem", height: "2rem"}} 
               color="primary"
               onClick={() => {
                 this.props.history.push("/login");

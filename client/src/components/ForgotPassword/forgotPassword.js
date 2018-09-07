@@ -51,8 +51,9 @@ class ForgotPassword extends Component {
         <div className="Login">
           <Form>
             <FormGroup>
-              <Label>Email</Label>
+              <h5>Email</h5>
               <Input
+              style={{fontSize: ".7rem", height: "2rem"}}
                 autoFocus
                 id="email"
                 invalid={this.state.submittedError}
@@ -67,6 +68,7 @@ class ForgotPassword extends Component {
               </FormFeedback>
             </FormGroup>
             <Button
+            style={{fontSize: ".7rem", height: "2rem"}}
               block
               size="lg"
               color="primary"
@@ -77,12 +79,14 @@ class ForgotPassword extends Component {
             </Button>
             <div className="bottom-buttons">
               <Button
+              style={{fontSize: ".7rem", height: "2rem"}}
                 color="danger"
                 onClick={() => this.props.history.push("/login")}
               >
                 Login
               </Button>
               <Button
+              style={{fontSize: ".7rem", height: "2rem"}}
                 color="danger"
                 onClick={() => this.props.history.push("/register")}
               >
@@ -100,6 +104,7 @@ class ForgotPassword extends Component {
               Please check your email within 30 minutes to reset your password.
             </p>
             <Button
+            style={{fontSize: ".7rem", height: "2rem"}}
               color="primary"
               onClick={() => {
                 this.props.history.push("/login");
