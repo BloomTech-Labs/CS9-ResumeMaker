@@ -43,14 +43,16 @@ class SkillsCreate extends Component {
     event.preventDefault();
 
     if (this.props.location.state.skillIndex === false && !deleteFlag) {
-      this.props.context.actions.addNestedElement("skillgroups", this.props.location.state.skillGroupIndex, "skills", {
+      this.props.context.actions.addNestedElement(this.props.location.state.skillGroupIndex, "skillgroups", "skills", {
         // When creating, do NOT put in an _id, let mongo autocreate one
         content: this.state.content
       });
     } // if creating
     else if (!deleteFlag) {
-      this.props.context.actions.setElement(
-        this.props.location.state.index,
+      this.props.context.actions.setNestedElement(
+        this.props.location.state.skillGroupIndex,
+        this.props.location.state.skillIndex,
+        "skillgroups",
         "skills",
         {
           content: this.state.content,
@@ -59,7 +61,7 @@ class SkillsCreate extends Component {
       );
     } // if editing
     else {
-      this.props.context.actions.removeElement(
+      this.props.context.actions.removeNestedElement(
         this.props.location.state.index,
         "skills"
       );
