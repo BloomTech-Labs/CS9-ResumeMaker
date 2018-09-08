@@ -23,7 +23,8 @@ class AuthProvider extends Component {
     skills: [],
     summary: [],
     resumes: [],
-    currentResume: 0
+    currentResume: 0,
+    membership: false
   };
 
   setLogout = () => {
@@ -51,7 +52,7 @@ class AuthProvider extends Component {
   setLogin = userData => {
     this.setState({
       auth: true,
-      currentresume: userData.currentresume ? userData.currentresume : 0,
+      currentResume: userData.currentresume ? userData.currentresume : 0,
       email: userData.email ? userData.email : "",
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
@@ -69,7 +70,8 @@ class AuthProvider extends Component {
       skills: userData.sections.skills ? userData.sections.skills : [],
       summary: userData.sections.summary ? userData.sections.summary : [],
       username: userData.username ? userData.username : "",
-      id: userData._id ? userData._id : null
+      id: userData._id ? userData._id : null,
+      membership: userData.membership ? userData.membership : false
     });
   };
 
@@ -128,7 +130,6 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = index => {
-
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -138,10 +139,8 @@ class AuthProvider extends Component {
       return -1;
     }
     const tempObj = this.state.resumes[index];
-    
-    const expandSection = (section, resumeSection) => {
 
-   
+    const expandSection = (section, resumeSection) => {
       // no .sections portion
       if (!resumeSection) {
         for (let item of this.state[section]) {
@@ -155,7 +154,7 @@ class AuthProvider extends Component {
               })
             : console.log();
         } // All items in context now have a resume counterpart
-        console.log("Expanded Section", section )
+        console.log("Expanded Section", section);
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
@@ -200,8 +199,8 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-    }
-      this.state.resumes.forEach( () => {
+    };
+    this.state.resumes.forEach(() => {
       expandSection("title", false);
       expandSection("experience", true);
       expandSection("education", true);
@@ -216,8 +215,7 @@ class AuthProvider extends Component {
     if (tempResume._id) {
       axios
         .put(
-          `${urls[urls.basePath]}/resume/` +
-          this.state.resumes[index]._id,
+          `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
           tempResume,
           {
             headers: {
@@ -229,9 +227,7 @@ class AuthProvider extends Component {
           console.log(response.data.resume._id);
           axios
             .put(
-              `${urls[urls.basePath]}/users/info/${
-              this.state.id
-              }`,
+              `${urls[urls.basePath]}/users/info/${this.state.id}`,
               { currentresume: response.data.resume._id },
               {
                 headers: {
@@ -258,7 +254,7 @@ class AuthProvider extends Component {
           }
         })
         .then(() => {
-          console.log("Success on updating resumes")
+          console.log("Success on updating resumes");
         })
         .catch(err => {
           console.log("err", err);

@@ -10,7 +10,7 @@ const urls = require("../../config/config.json");
 
 class Billing extends Component {
   state = {
-    complete: false,
+    complete: this.props.context.userInfo.membership,
     gone: false,
     loading: false,
     sub_err: false,
@@ -171,7 +171,7 @@ class Billing extends Component {
               <div className="stripe-form">
                 {this.state.complete ? (
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <h1 style={{ textAlign: "center", marginTop: "10%" }}>
+                    <h1 style={{ textAlign: "center", marginTop: "6%" }}>
                       Thank You For Becoming A Member!
                     </h1>
                   </div>
@@ -187,22 +187,22 @@ class Billing extends Component {
                       <button className="bill-btn" onClick={this.yearly}>
                         Yearly Subscriptions - $9.99
                       </button>
-                      {this.state.gone ? (
-                        <p style={{ textAlign: "center" }}>
-                          Thank you for your business. We hope to work with you
-                          again soon!
-                        </p>
-                      ) : (
-                        <button
-                          style={{ marginLeft: "0%" }}
-                          className="bill-btn"
-                          onClick={this.unsubscribe}
-                        >
-                          Unsubscribe
-                        </button>
-                      )}
                     </div>
                   </div>
+                )}
+                {this.state.gone ? (
+                  <p style={{ textAlign: "center" }}>
+                    Thank you for your business. We hope to work with you again
+                    soon!
+                  </p>
+                ) : (
+                  <button
+                    style={{ marginLeft: "0%", marginTop: "4%" }}
+                    className="bill-btn"
+                    onClick={this.unsubscribe}
+                  >
+                    Unsubscribe
+                  </button>
                 )}
               </div>
             </div>

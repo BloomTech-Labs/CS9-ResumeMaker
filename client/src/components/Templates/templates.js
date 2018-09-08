@@ -144,10 +144,10 @@ class Templates extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/login" />;
     }
     if (this.state.success) {
-      return <Redirect to="/templates" />;
+      return <Redirect to="/resumes" />;
     }
     if (
       !this.props.context.userInfo.resumes.length ||
@@ -156,7 +156,7 @@ class Templates extends Component {
       console.log(
         "You probably had an error, which redirected you instead of crashing."
       );
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/login" />;
     }
 
     const userInfo = this.props.context.userInfo;
@@ -194,199 +194,187 @@ class Templates extends Component {
                 context={this.props.context}
                 data={userInfo}
               />
-              <button className="resume-button" onClick={this.handleCreate}>
-                {" "}
-                Create Resume
-              </button>
+              {console.log(this.props.context.userInfo)}
+              {this.props.context.userInfo.membership ? (
+                <button className="resume-button" onClick={this.handleCreate}>
+                  {" "}
+                  Create Resume
+                </button>
+              ) : null}
               <button className="resume-button" onClick={this.handleSubmit}>
                 {" "}
                 Save Resume
               </button>
             </div>
-            <form className="template1">
-              <Container textAlign="center" className="titleSection">
-                <h2>
-                  {userInfo.name.firstname} {userInfo.name.lastname}
-                </h2>
-                {console.log(
-                  "The Resume to RIP",
-                  resumes,
-                  "Index",
-                  this.state.index,
-                  "length",
-                  resumes.length
-                )}
-                <TitleDropdown
-                  className="dropdown"
-                  context={this.props.context}
-                  data={userInfo}
-                  value={resumes[this.state.index].title.filter(
-                    title => title.value === true
-                  )}
-                  index={this.state.index}
-                />
-              </Container>
-              <Divider className="divider-div" />
-              <Container textAlign="center" className="contactSection">
-                <h3>Contact Details</h3>
-                <a href={`mailto:${userInfo.email}`}>
-                  <p> {userInfo.email}</p>
-                </a>
-                <div>
-                  <div className="fa fa-globe" aria-hidden="true" />
-                  {userInfo.location}
+
+            {/* <Container textAlign="center" className="titleSection"> */}
+            <h2>
+              {userInfo.name.firstname} {userInfo.name.lastname}
+            </h2>
+
+            <TitleDropdown
+              className="dropdown"
+              context={this.props.context}
+              data={userInfo}
+              value={resumes[this.state.index].title.filter(
+                title => title.value === true
+              )}
+              index={this.state.index}
+            />
+            {/* </Container> */}
+            {/* <Divider className="divider-div" /> */}
+            {/* <Container textAlign="center" className="contactSection"> */}
+            <h3>Contact Details</h3>
+            <a href={`mailto:${userInfo.email}`}>
+              <p> {userInfo.email}</p>
+            </a>
+            <div>
+              <div className="fa fa-globe" aria-hidden="true" />
+              {userInfo.location}
+            </div>
+            <div>
+              <div className="fa fa-mobile" aria-hidden="true" />
+              {userInfo.phonenumber}
+            </div>
+            <div>
+              <CheckBox
+                context={this.props.context}
+                index={this.state.index}
+                name="linkedin"
+                value={resumes[this.state.index].links.linkedin}
+              />
+              <div className={"fa fa-linkedin fa-sm"} />
+              {userInfo.links.linkedin}
+            </div>
+            <div>
+              <CheckBox
+                context={this.props.context}
+                index={this.state.index}
+                name="github"
+                value={resumes[this.state.index].links.github}
+              />{" "}
+              <div className="fa fa-github" aria-hidden="true" />
+              {userInfo.links.github}
+            </div>
+            <p>
+              <CheckBox
+                context={this.props.context}
+                index={this.state.index}
+                name="portfolio"
+                value={resumes[this.state.index].links.portfolio}
+              />{" "}
+              {userInfo.links.portfolio}
+            </p>
+            {/* </Container> */}
+            {/* <Divider className="divider-div" /> */}
+            {/* <Container
+              textAlign="center"
+              id="summary"
+              className="summarySection"
+            > */}
+            <h3>Summary</h3>
+            <SummaryDropdown
+              context={this.props.context}
+              data={userInfo}
+              value={resumes[this.state.index].sections.summary.filter(
+                summary => summary.value === true
+              )}
+              index={this.state.index}
+            />
+            {/* </Container> */}
+            {/* <Divider className="divider-div" /> */}
+            {/* <Container textAlign="center" className="skillsSection"> */}
+            <h3>Skills</h3>
+            {userInfo.skills.map((content, index) => {
+              return (
+                <div key={index}>
+                  <p>
+                    {" "}
+                    <CheckBox
+                      context={this.props.context}
+                      id={content._id}
+                      name="skills"
+                      value={
+                        resumes[this.state.index].sections.skills[index].value
+                      }
+                      index={this.state.index}
+                    />
+                    {content.content}
+                  </p>
                 </div>
-                <div>
-                  <div className="fa fa-mobile" aria-hidden="true" />
-                  {userInfo.phonenumber}
-                </div>
-                <div>
-                  <CheckBox
-                    context={this.props.context}
-                    index={this.state.index}
-                    name="linkedin"
-                    value={resumes[this.state.index].links.linkedin}
-                  />
-                  <div className={"fa fa-linkedin fa-sm"} />
-                  {userInfo.links.linkedin}
-                </div>
-                <div>
-                  <CheckBox
-                    context={this.props.context}
-                    index={this.state.index}
-                    name="github"
-                    value={resumes[this.state.index].links.github}
-                  />{" "}
-                  <div className="fa fa-github" aria-hidden="true" />
-                  {userInfo.links.github}
-                </div>
-                <p>
-                  <CheckBox
-                    context={this.props.context}
-                    index={this.state.index}
-                    name="portfolio"
-                    value={resumes[this.state.index].links.portfolio}
-                  />{" "}
-                  {userInfo.links.portfolio}
-                </p>
-              </Container>
-              <Divider className="divider-div" />
-              <Container
-                textAlign="center"
-                id="summary"
-                className="summarySection"
-              >
-                <h3>Summary</h3>
-                <SummaryDropdown
-                  context={this.props.context}
-                  data={userInfo}
-                  value={resumes[this.state.index].sections.summary.filter(
-                    summary => summary.value === true
-                  )}
-                  index={this.state.index}
-                />
-              </Container>
-              <Divider className="divider-div" />
-              <Container textAlign="center" className="skillsSection">
-                <h3>Skills</h3>
-                {userInfo.skills.map((content, index) => {
+              );
+            })}
+            {/* </Container> */}
+            {/* <Divider className="divider-div" /> */}
+            {/* <Container textAlign="center" className="experienceSection"> */}
+            <h3>Experience</h3>
+            {experience.length > 0
+              ? experience.map((content, index) => {
+                  let from = moment(content.from).format("MMM YYYY");
+                  let to = moment(content.to).format("MMM YYYY");
                   return (
                     <div key={index}>
-                      <p>
+                      <h5>
                         {" "}
-                        {console.log(
-                          index,
-                          resumes[this.state.index].sections.skills[index]
-                        )}
                         <CheckBox
                           context={this.props.context}
                           id={content._id}
-                          name="skills"
+                          name="experience"
                           value={
-                            resumes[this.state.index].sections.skills[index]
+                            resumes[this.state.index].sections.experience[index]
+                              .value
+                          }
+                          index={this.state.index}
+                        />{" "}
+                        {content.company}{" "}
+                      </h5>
+                      <p>
+                        {" "}
+                        {content.title}
+                        <br />
+                        {content.location}
+                        <br />
+                        {from} - {to}
+                      </p>
+                      <p>{content.description} </p>
+                    </div>
+                  );
+                })
+              : null}
+            {/* </Container> */}
+            {/* <Divider className="divider-div" /> */}
+            {/* <Container textAlign="center" className="educationSection"> */}
+            <h3>Education</h3>
+            {education.length > 0
+              ? education.map((content, index) => {
+                  let from = moment(content.from).format("MMM YYYY");
+                  let to = moment(content.to).format("MMM YYYY");
+                  return (
+                    <div key={index}>
+                      <h5>
+                        <CheckBox
+                          context={this.props.context}
+                          id={content._id}
+                          name="education"
+                          value={
+                            resumes[this.state.index].sections.education[index]
                               .value
                           }
                           index={this.state.index}
                         />
-                        {content.content}
+                        {content.degree} in {content.fieldofstudy}{" "}
+                      </h5>
+                      <p>{content.location}</p>
+                      <p>
+                        {content.school}
+                        <br />
+                        {from} - {to}
                       </p>
                     </div>
                   );
-                })}
-              </Container>
-              <Divider className="divider-div" />
-              <Container textAlign="center" className="experienceSection">
-                <h3>Experience</h3>
-                {experience.length > 0
-                  ? experience.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return (
-                        <div key={index}>
-                          <h5>
-                            {" "}
-                            <CheckBox
-                              context={this.props.context}
-                              id={content._id}
-                              name="experience"
-                              value={
-                                resumes[this.state.index].sections.experience[
-                                  index
-                                ].value
-                              }
-                              index={this.state.index}
-                            />{" "}
-                            {content.company}{" "}
-                          </h5>
-                          <p>
-                            {" "}
-                            {content.title}
-                            <br />
-                            {content.location}
-                            <br />
-                            {from} - {to}
-                          </p>
-                          <p>{content.description} </p>
-                        </div>
-                      );
-                    })
-                  : null}
-              </Container>
-              <Divider className="divider-div" />
-              <Container textAlign="center" className="educationSection">
-                <h3>Education</h3>
-                {education.length > 0
-                  ? education.map((content, index) => {
-                      let from = moment(content.from).format("MMM YYYY");
-                      let to = moment(content.to).format("MMM YYYY");
-                      return (
-                        <div key={index}>
-                          <h5>
-                            <CheckBox
-                              context={this.props.context}
-                              id={content._id}
-                              name="education"
-                              value={
-                                resumes[this.state.index].sections.education[
-                                  index
-                                ].value
-                              }
-                              index={this.state.index}
-                            />
-                            {content.degree} in {content.fieldofstudy}{" "}
-                          </h5>
-                          <p>{content.location}</p>
-                          <p>
-                            {content.school}
-                            <br />
-                            {from} - {to}
-                          </p>
-                        </div>
-                      );
-                    })
-                  : null}
-              </Container>
-            </form>
+                })
+              : null}
+            {/* </Container> */}
           </div>
         </div>
       </div>

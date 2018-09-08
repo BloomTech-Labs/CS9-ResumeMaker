@@ -4,8 +4,12 @@
 }
 
 .stripe-form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
   background-color: #707f8c;
-  height: 305px;
+  height: 320px;
   width: 60%;
   padding: 3%;
   margin-top: 3%;
