@@ -1,4 +1,3 @@
-
 .Settings form .form-group {
   max-width: 20rem;
 }
@@ -36,4 +35,8 @@
 
 .Settings .modal-footer {
   justify-content: center;
+}
+
+.Settings.container {
+  margin-left: 0;
 }
