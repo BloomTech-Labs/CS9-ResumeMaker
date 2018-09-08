@@ -33,12 +33,13 @@
     align-self: center;
 }
 
-.template.title-div {
+.title-div {
     display: flex; 
-    flex-direction: row; 
+    flex-direction: column;
     justify-content: space-between;
-    padding:  1rem 2rem 0; 
+    padding: 0.5rem 0 0 0; 
 }
+
 .template.page-header {
     display: flex; 
 }

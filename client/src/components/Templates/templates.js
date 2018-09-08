@@ -37,9 +37,9 @@ class Templates extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className=" title-div templates">
-               <h4 >TEMPLATES</h4>
-             <p style={{fontSize: "0.65rem", alignContent: "start"}}> Enter information into each section on the sidebar. Then choose a template below to complete your RESUME.</p>
+            <div className="title-div templates">
+               <h4>TEMPLATES</h4>
+               <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", width: "100%"}}> Enter information into each section on the sidebar. Then choose a template below to complete your RESUME.</p>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">

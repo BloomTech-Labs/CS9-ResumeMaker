@@ -36,9 +36,10 @@ class Resumes extends Component {
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-              <h1 style={{ fontWeight: "600" }}>RESUMES</h1>
+          <div className="title-div col">
+            <div className="title-div">
+              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>        <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
+      This is your resume page</p>
             </div>
             <div className="containers-div">
               <div className="d-inline-flex container-div">
