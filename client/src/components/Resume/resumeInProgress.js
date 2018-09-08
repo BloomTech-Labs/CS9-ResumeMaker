@@ -45,6 +45,7 @@ class RIP extends Component {
     window.scrollTo(0, 0);
   }
 
+
   handleCreate = () => {
     const tempObj = {
       links: { linkedin: false, github: false, portfolio: false },

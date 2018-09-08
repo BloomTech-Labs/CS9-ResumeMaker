@@ -41,6 +41,12 @@ export class ResumeTwo extends Component {
     window.scrollTo(0, 0);
   }
 
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    )
+  }
+
   render() {
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;

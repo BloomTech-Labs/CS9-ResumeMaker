@@ -26,15 +26,21 @@ export class ResumeOne extends Component {
       }
       return -1;
     }
-  
-      let index = findWithAttr(
-        this.props.context.userInfo.resumes,
-        "_id",
-        this.props.context.userInfo.currentresume
-      );
-      if (index === -1) index = 0;
-      this.setState({ index: index });
-    }
+
+    let index = findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+  }
+
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -108,7 +114,9 @@ export class ResumeOne extends Component {
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
                 <h3>Contact Details</h3>
-                <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-evenly" }}
+                >
                   <div>
                     <a href={`mailto:${userInfo.email}`}>
                       <p> {userInfo.email}</p>

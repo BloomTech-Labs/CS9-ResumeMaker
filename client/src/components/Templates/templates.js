@@ -45,6 +45,12 @@ class Templates extends Component {
     window.scrollTo(0, 0);
   }
 
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
+  }
+
   handleCreate = () => {
     const tempObj = {
       links: { linkedin: false, github: false, portfolio: false },
