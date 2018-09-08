@@ -6,10 +6,7 @@
   padding: 0.5rem 0 0 0.5rem;
   text-align: start;
 }
-/* .link-hide h4 {
-  border-bottom: 1px solid black; 
-  text-align: start; 
-} */
+
 i {
   color: black;
   font-size: 2rem;
@@ -77,4 +74,8 @@ form {
 }
 .card-text {
   margin-top: 0.3rem;
+}
+
+.card-body.experience {
+  padding: 0.5rem;
 }

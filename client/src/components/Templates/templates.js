@@ -292,6 +292,7 @@ class Templates extends Component {
             {/* <Container textAlign="center" className="skillsSection"> */}
             <h3>Skills</h3>
             {userInfo.skills.map((content, index) => {
+              {console.log("resumes", resumes[this.state.index], "index", this.state.index)}
               return (
                 <div key={index}>
                   <p>
