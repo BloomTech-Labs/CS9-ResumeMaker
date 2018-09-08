@@ -154,7 +154,7 @@ class Billing extends Component {
               Become a Member:
             </p>
 
-            <div style={{ marginTop: "10px", paddingTop: "1rem" }}>
+            <div>
               {this.state.loading ? <Loading /> : null}
               {this.state.sub_err ? (
                 <p>
@@ -172,7 +172,7 @@ class Billing extends Component {
                 {this.state.complete ? (
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <h1 style={{ textAlign: "center", marginTop: "10%" }}>
-                      Thank You For Being A Member
+                      Thank You For Becoming A Member!
                     </h1>
                   </div>
                 ) : (
@@ -188,7 +188,7 @@ class Billing extends Component {
                         Yearly Subscriptions - $9.99
                       </button>
                       {this.state.gone ? (
-                        <p>
+                        <p style={{ textAlign: "center" }}>
                           Thank you for your business. We hope to work with you
                           again soon!
                         </p>
