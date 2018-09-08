@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardTitle, CardSubtitle, CardHeader, CardBody, CardText, Button } from "reactstrap";
+import {
+  Card,
+  CardTitle,
+  CardSubtitle,
+  CardHeader,
+  CardBody,
+  CardText,
+  Button
+} from "reactstrap";
 import axios from "axios";
 import moment from "moment";
 
@@ -115,12 +123,12 @@ class ItemCard extends Component {
       .catch(err => {
         console.log("err", err);
       });
-  }
+  };
 
   render() {
-    if(this.props.elementName === "skills") {
+    if (this.props.elementName === "skills") {
       return (
-        <Card className="item-card row-card title">
+        <Card className="item-card row-card oneline">
           <button
             className="close"
             aria-label="Delete"
@@ -134,7 +142,10 @@ class ItemCard extends Component {
               className="item-card-link"
               to={{
                 pathname: `${this.props.linkTo}/create`, // component being Linked to
-                state: { skillIndex: this.props.skillIndex, skillGroupIndex: this.props.skillGroupIndex } // index passed into the create component
+                state: {
+                  skillIndex: this.props.skillIndex,
+                  skillGroupIndex: this.props.skillGroupIndex
+                } // index passed into the create component
               }}
             >
               <CardText>{ellipsify(this.props.content, 150)}</CardText>
@@ -142,8 +153,7 @@ class ItemCard extends Component {
           </CardBody>
         </Card>
       );
-    }
-    else if (this.props.elementName === "experience") {
+    } else if (this.props.elementName === "experience") {
       return (
         <Card className="item-card">
           <button
@@ -154,17 +164,18 @@ class ItemCard extends Component {
             <span aria-hidden="true">&times;</span>
           </button>
           <Link
-                className="item-card-link"
-                to={{
-                  pathname: `${this.props.linkTo}/create`, // component being Linked to
-                  state: { index: this.props.index } // Setting Index passed into summaryCreate component
-                }}
-              >
+            className="item-card-link"
+            to={{
+              pathname: `${this.props.linkTo}/create`, // component being Linked to
+              state: { index: this.props.index }
+            }}
+          >
             <CardBody>
               <CardTitle>{this.props.element.title}</CardTitle>
               <CardTitle>{this.props.element.company}</CardTitle>
               <CardText>
-                {moment(this.props.element.from).format("MMM YYYY")} - {moment(this.props.element.to).format("MMM YYYY")}
+                {moment(this.props.element.from).format("MMM YYYY")} -{" "}
+                {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
               <CardText>
                 {ellipsify(this.props.element.description, 150)}
@@ -188,19 +199,18 @@ class ItemCard extends Component {
             className="item-card-link"
             to={{
               pathname: `${this.props.linkTo}/create`, // component being Linked to
-              state: { index: this.props.index } // Setting Index passed into summaryCreate component
+              state: { index: this.props.index } 
             }}
           >
             <CardBody>
               <CardTitle>{ellipsify(this.props.element.school, 50)}</CardTitle>
-              <CardText>
-                {ellipsify(this.props.element.degree, 150)}
-              </CardText>
+              <CardText>{ellipsify(this.props.element.degree, 150)}</CardText>
               <CardText>
                 {ellipsify(this.props.element.fieldofstudy, 150)}
               </CardText>
               <CardText>
-                {moment(this.props.element.from).format("MMM YYYY")} - {moment(this.props.element.to).format("MMM YYYY")}
+                {moment(this.props.element.from).format("MMM YYYY")} -{" "}
+                {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
             </CardBody>
           </Link>
@@ -217,19 +227,17 @@ class ItemCard extends Component {
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          <CardBody>
-            <CardText>
-              <Link
-                className="item-card-link"
-                to={{
-                  pathname: `${this.props.linkTo}/create`, // component being Linked to
-                  state: { index: this.props.index } // Setting Index passed into summaryCreate component
-                }}
-              >
-                {ellipsify(this.props.content, 150)}
-              </Link>
-            </CardText>
-          </CardBody>
+          <Link
+            className="item-card-link"
+            to={{
+              pathname: `${this.props.linkTo}/create`, // component being Linked to
+              state: { index: this.props.index } // Setting Index passed into summaryCreate component
+            }}
+          >
+            <CardBody>
+              <CardText>{ellipsify(this.props.content, 150)}</CardText>
+            </CardBody>
+          </Link>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
@@ -260,7 +268,7 @@ class ItemCard extends Component {
       );
     } else
       return (
-        <Card className="item-card row-card title">
+        <Card className="item-card row-card oneline">
           <button
             className="close"
             aria-label="Delete"

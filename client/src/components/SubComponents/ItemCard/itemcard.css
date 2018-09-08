@@ -134,12 +134,13 @@
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
+  height: 11rem;
 }
 .card-body h5 {
   font-size: 1rem;
 }
 
-.item-card.row-card.title,
+.item-card.row-card.oneline,
 .item-card.row-card .card-body {
   min-width: 1rem;
   max-width: 8rem;
@@ -152,4 +153,9 @@
 
 .item-card.row-card .card-body {
   height: 2rem;
+}
+
+a:hover {
+  color: inherit !important; 
+  text-decoration: none !important;
 }
