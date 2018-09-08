@@ -175,11 +175,11 @@ class RIP extends Component {
     return (
       <div>
         <Navbar context={this.props.context} />
-        <div className="component-div">
+        <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
-            <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Traditional</h3>
+          <div className="page-div col">
+            <div className="template title-div">
+              <h3 className="template page-header">Traditional</h3>
             </div>
             <div className="justify-content-center">
               <ResumeDropdown
