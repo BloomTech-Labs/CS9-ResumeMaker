@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
 
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template1.css";
 import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
@@ -38,19 +39,10 @@ class RIP extends Component {
     );
     if (index === -1) index = 0;
     this.setState({ index: index });
-
-    // if (this.props.context.userInfo.auth)
-    // this.props.context.actions.expandResumeIDs(
-    //   this.props.context.userInfo.currentResume
-    // );
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    // if (this.props.context.userInfo.auth)
-    //   this.props.context.actions.expandResumeIDs(
-    //     this.props.context.userInfo.currentResume
-    //   );
   }
 
   handleCreate = () => {
@@ -73,7 +65,7 @@ class RIP extends Component {
           return { _id: item._id, value: false };
         })
       }
-  };
+    };
 
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
@@ -111,20 +103,20 @@ class RIP extends Component {
         )
         .then(response => {
           console.log(response.data.resume._id);
-      axios
-        .put(
+          axios
+            .put(
               `${urls[urls.basePath]}/users/info/${
                 this.props.context.userInfo.id
               }`,
               { currentresume: response.data.resume._id },
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            }
-          }
-        )
-        .then(response => {
-          this.setState({ success: true });
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token")
+                }
+              }
+            )
+            .then(response => {
+              this.setState({ success: true });
               console.log("Response: ", response.data.user.currentresume);
             })
             .catch(err => {
@@ -157,8 +149,13 @@ class RIP extends Component {
     if (this.state.success) {
       return <Redirect to="/templates" />;
     }
-    if (!this.props.context.userInfo.resumes.length || this.props.context.userInfo.resumes[0] === null) {
-      console.log("You probably had an error, which redirected you instead of crashing.");
+    if (
+      !this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null
+    ) {
+      console.log(
+        "You probably had an error, which redirected you instead of crashing."
+      );
       return <Redirect to="/resumes" />;
     }
 
@@ -168,12 +165,10 @@ class RIP extends Component {
     const resumes = this.props.context.userInfo.resumes;
     return (
       <div>
-        <div className="component-div">
+        <Navbar context={this.props.context} />
+        <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div">
-            <div className="d-block justify-content-center title-div">
-              <h3 className="page-header">Traditional</h3>
-            </div>
+          <div className="page-div col">
             <div className="justify-content-center">
               <ResumeDropdown
                 className="dropdown"
@@ -280,7 +275,10 @@ class RIP extends Component {
                     <div key={index}>
                       <p>
                         {" "}
-                        {console.log(index, resumes[this.state.index].sections.skills[index])}
+                        {console.log(
+                          index,
+                          resumes[this.state.index].sections.skills[index]
+                        )}
                         <CheckBox
                           context={this.props.context}
                           id={content._id}

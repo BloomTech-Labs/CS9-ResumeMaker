@@ -3,3 +3,8 @@
   border: none !important;
   padding: 0;
 }
+
+.template-card card dropdown {
+  font-size: 0.7rem; 
+  width: 15rem; 
+}

@@ -100,7 +100,7 @@ class TemplateTwo extends Component {
               <button
               style={{width: "4rem", fontSize:".7rem"}}
                 to="/resumes"
-                className="resume-button"
+                className="save-button"
                 type="submit"
                 onClick={this.handleSubmit}
               >

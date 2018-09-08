@@ -18,11 +18,6 @@
   white-space: nowrap;
 }
 
-/* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
-.item-card.row-card .card-body {
-  padding: 0 0.5rem 0 0;
-}
-
 /* This keeps the red delete X from jutting up against the left side on single line row cards */
 .item-card.row-card .close {
   padding: 0 0.3rem;
@@ -110,25 +105,56 @@
   text-overflow: ellipsis;
 }
 
-/* .titles-containment-div {
+.titles-containment-div,
+.skills-containment-div {
   display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  max-height: 60vh;
-  padding: 2rem;
-} */
+  flex-flow: row wrap;
+  max-width: 50rem;
+  width: 80%;
+}
 
 .titles-containment-div .item-card.card {
   min-width: 1rem;
   min-height: 1rem;
 }
 
+.skills-containment-div .skillgroup {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 1% 5%;
+}
+
+.skillgroup-input {
+  display: flex;
+  justify-content: space-around;
+}
 .card-body {
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
+  height: 11rem;
 }
 .card-body h5 {
   font-size: 1rem;
+}
+
+.item-card.row-card.oneline,
+.item-card.row-card .card-body {
+  min-width: 1rem;
+  max-width: 8rem;
+  margin: 0 1rem 1rem 0.1rem;
+  padding: 0.3rem;
+  width: 7rem;
+  height: 3rem;
+  overflow: hidden;
+}
+
+.item-card.row-card .card-body {
+  height: 2rem;
+}
+
+a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
 }

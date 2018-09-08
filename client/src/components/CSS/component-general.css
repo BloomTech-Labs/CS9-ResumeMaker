@@ -2,9 +2,9 @@
   max-width: 50rem;
   display: flex;
   align-self: start;
-  flex-direction: row; 
-  padding: 0.5rem 0 0 0.5rem; 
-  text-align: start; 
+  flex-direction: row;
+  padding: 0.5rem 0 0 0.5rem;
+  text-align: start;
 }
 /* .link-hide h4 {
   border-bottom: 1px solid black; 
@@ -19,29 +19,32 @@ i {
   width: 100%;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,
     "AppleGothic", sans-serif;
-    align-items: start;  
-   
+  align-items: start;
+  max-width: 50rem;
+  display: flex;
+  align-self: start;
+  flex-direction: row;
+  text-align: start;
 }
 
 .overall-component-div .title-div {
   display: flex;
   justify-content: flex-start;
-  padding: 1.5rem; 
 }
 
 .title-div.resumes h4,
 .title-div.templates h4 {
-  width: 100%; 
-  border-bottom: 1px solid black; 
-  text-align: start; 
-  padding: .5rem; 
-  margin: 0; 
+  width: 100%;
+  border-bottom: 1px solid black;
+  text-align: start;
+  padding: 0.5rem;
+  margin: 0;
 }
 .title-div h4 {
-  text-align: start; 
+  text-align: start;
 }
 .title-div p {
-  text-align: start; 
+  text-align: start;
 }
 
 .div-for-links {
@@ -51,7 +54,7 @@ i {
 }
 
 .fa.fa-pencil {
-  padding: .5rem; 
+  padding: 0.5rem;
 }
 
 .fa.fa-pencil:hover {
@@ -59,7 +62,7 @@ i {
 }
 
 .fa.fa-pencil:active {
-  font-size: 1rem; 
+  font-size: 1rem;
   color: #777;
 }
 
@@ -67,13 +70,12 @@ i {
   text-decoration-color: black;
 }
 form {
-  font-size: .7rem; 
+  font-size: 0.7rem;
 }
 
-.form-control{
-  font-size: .7rem; 
-
+.form-control {
+  font-size: 0.7rem;
 }
-p.card-text{
- margin-top: .3rem; 
+.card-text {
+  margin-top: 0.3rem;
 }
