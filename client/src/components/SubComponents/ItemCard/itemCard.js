@@ -120,7 +120,7 @@ class ItemCard extends Component {
   render() {
     if(this.props.elementName === "skills") {
       return (
-        <Card className="item-card row-card">
+        <Card className="item-card row-card title">
           <button
             className="close"
             aria-label="Delete"
@@ -260,7 +260,7 @@ class ItemCard extends Component {
       );
     } else
       return (
-        <Card className="item-card row-card">
+        <Card className="item-card row-card title">
           <button
             className="close"
             aria-label="Delete"
