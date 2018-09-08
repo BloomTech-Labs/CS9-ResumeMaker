@@ -50,25 +50,17 @@ export class PersonalInfo extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    console.log("ComponentDidMount");
     if (this.props.context.userInfo.auth !== true) {
       //future home of login automatically on refresh or revisit
     } else {
-      console.log(
-        "(augmentObj called) props on componentDidMount:",
-        this.props.context.userInfo
-      );
       // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
       this.setState(
         this.augmentObject(this.state, this.props.context.userInfo)
       );
     }
   };
-  componentWillUpdate = () => {
-    console.log("ComponentWillUpdate");
-  };
+
   componentDidUpdate = () => {
-    console.log("ComponentDidUpdate");
     if (this.state.email === "" && this.props.context.userInfo.auth === true) {
       this.componentDidMount();
     }
@@ -159,7 +151,6 @@ export class PersonalInfo extends Component {
       const emailPromise = axios
         .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
         .then(response => {
-          console.log(response);
           this.setState({ emailInvalid: true });
         })
         .catch(err => {
@@ -172,7 +163,6 @@ export class PersonalInfo extends Component {
       // If all fields are valid and the confirm password matches password,
       // then account info is submitted and the user redirected to a modal with a link to the login page
       Promise.all([emailPromise]).then(values => {
-        console.log("The current state:", this.state);
         if (
           this.state.usernameInvalid === false &&
           this.state.emailInvalid === false &&
@@ -202,7 +192,6 @@ export class PersonalInfo extends Component {
         }
       )
       .then(response => {
-        console.log("RESPONSE GOTTEN", response);
         if (response.data.errorMessage) {
           if (response.data.errorMessage.includes("password")) {
             this.setState({ passwordInvalid: true, oldpassword: "" });
@@ -222,17 +211,11 @@ export class PersonalInfo extends Component {
         this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {
-        console.log("oops", err.message);
         this.setState({ changesSaved: false });
         alert("try again");
       });
   };
   render() {
-    console.log("Render for settings called, STATE:", this.state);
-    console.log(
-      "Render for settings called, PROPS:",
-      this.props.context.userInfo
-    );
     return (
       <Container className="Settings">
         <Row>
@@ -451,17 +434,8 @@ export class PersonalInfo extends Component {
 class Settings extends Component {
   ComponentDidMount = () => {
     window.scrollTo(0, 0);
-    console.log("ComponentDidMount");
   };
-  ShouldComponentUpdate = () => {
-    console.log("ShouldComponentUpdate");
-  };
-  ComponentWillUpdate = () => {
-    console.log("ComponentWillUpdate");
-  };
-  ComponentDidUpdate = () => {
-    console.log("ComponentDidUpdate");
-  };
+
   render() {
     return (
       <div>

@@ -48,8 +48,6 @@ class SummaryDropdown extends Component {
   };
 
   render() {
-    // console.log(this.props.context.userInfo.summary.map(item => item));
-
     const { summary } = this.props.data;
     const { toggled, selected } = this.state;
     const list = summary.map(data => (

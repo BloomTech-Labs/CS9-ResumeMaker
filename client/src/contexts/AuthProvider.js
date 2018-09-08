@@ -121,7 +121,6 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
-        console.log(response.data.Resume._id);
         this.setState({ currentresume: response.data.Resume._id });
       })
       .catch(err => {
@@ -154,7 +153,6 @@ class AuthProvider extends Component {
               })
             : console.log();
         } // All items in context now have a resume counterpart
-        console.log("Expanded Section", section);
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
@@ -224,7 +222,6 @@ class AuthProvider extends Component {
           }
         )
         .then(response => {
-          console.log(response.data.resume._id);
           axios
             .put(
               `${urls[urls.basePath]}/users/info/${this.state.id}`,
@@ -237,7 +234,6 @@ class AuthProvider extends Component {
             )
             .then(response => {
               this.setState({ success: true });
-              console.log("Response: ", response.data.user.currentresume);
             })
             .catch(err => {
               console.log("err", err);

@@ -80,7 +80,6 @@ class SkillsCreate extends Component {
         }
       )
       .then(response => {
-        console.log(response);
         this.setState({ success: true });
       })
       .catch(err => {

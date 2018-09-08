@@ -1,20 +1,20 @@
 .resume.title-div {
-    display: flex; 
-    flex-direction: row; 
-    justify-content: space-between;
-    padding:  1rem 2rem 0; 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2rem 0;
 }
 .resume.page-header {
-    display: flex; 
+  display: flex;
 }
 img {
-    height: 1rem; 
-    width: 7rem; 
+  height: 12rem;
+  width: 10rem;
 }
 .container-div {
-    padding: 1rem;
-  }
+  padding: 1rem;
+}
 .skillsSection {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }

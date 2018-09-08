@@ -80,7 +80,6 @@ class Templates extends Component {
         }
       })
       .then(response => {
-        console.log(response.data);
         this.props.context.actions.setSingleElement(
           "currentresume",
           response.data.Resume._id
@@ -108,7 +107,6 @@ class Templates extends Component {
           }
         )
         .then(response => {
-          console.log(response.data.resume._id);
           axios
             .put(
               `${urls[urls.basePath]}/users/info/${
@@ -123,7 +121,6 @@ class Templates extends Component {
             )
             .then(response => {
               this.setState({ success: true });
-              console.log("Response: ", response.data.user.currentresume);
             })
             .catch(err => {
               console.log("err", err);
@@ -200,7 +197,6 @@ class Templates extends Component {
                 context={this.props.context}
                 data={userInfo}
               />
-              {console.log(this.props.context.userInfo)}
               {this.props.context.userInfo.membership ? (
                 <button className="resume-button" onClick={this.handleCreate}>
                   {" "}
@@ -292,7 +288,6 @@ class Templates extends Component {
             {/* <Container textAlign="center" className="skillsSection"> */}
             <h3>Skills</h3>
             {userInfo.skills.map((content, index) => {
-              {console.log("resumes", resumes[this.state.index], "index", this.state.index)}
               return (
                 <div key={index}>
                   <p>

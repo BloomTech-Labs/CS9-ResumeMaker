@@ -138,7 +138,6 @@ class Billing extends Component {
   };
 
   render() {
-    console.log(this.state.member);
     return (
       <div>
         <Navbar context={this.props.context} />

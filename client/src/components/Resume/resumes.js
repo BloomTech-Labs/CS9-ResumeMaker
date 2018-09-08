@@ -34,9 +34,9 @@ class Resumes extends Component {
   componentWillUnmount() {
     this.props.context.actions.expandResumeIDs(
       this.props.context.userInfo.currentResume
-    )
+    );
   }
-  
+
   render() {
     return (
       <div>
@@ -57,7 +57,7 @@ class Resumes extends Component {
                 This is your resume page
               </p>
             </div>
-            
+
             <div className="d-inline-flex containers-div">
               <div className="d-inline-flex container-div">
                 <Link
@@ -112,24 +112,11 @@ class Resumes extends Component {
                   />
                   <h5 className="link">RESUME 3</h5>
                 </Link>
-              <Link
-                style={{
-                  color: "black"
-                }}
-                to={{
-                  pathname: "/rip", // component being Linked to
-                  state: { templateIndex: false } // Setting Index passed to template- false means new
-                }}
-              >
-                <h5 style={{ margin: "5rem" }} className="link">
-                  RIP
-                </h5>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      // </div>
     );
   }
 }

@@ -62,7 +62,6 @@ class Login extends Component {
           this.props.context.actions.setLogin(userData);
           this.props.context.actions.setResume(resumeData);
 
-          // console.log(this.props.context.userInfo);
           this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })

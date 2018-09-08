@@ -45,7 +45,6 @@ class RIP extends Component {
     window.scrollTo(0, 0);
   }
 
-
   handleCreate = () => {
     const tempObj = {
       links: { linkedin: false, github: false, portfolio: false },
@@ -75,7 +74,6 @@ class RIP extends Component {
         }
       })
       .then(response => {
-        console.log(response.data);
         this.props.context.actions.setSingleElement(
           "currentresume",
           response.data.Resume._id
@@ -103,7 +101,6 @@ class RIP extends Component {
           }
         )
         .then(response => {
-          console.log(response.data.resume._id);
           axios
             .put(
               `${urls[urls.basePath]}/users/info/${
@@ -118,7 +115,6 @@ class RIP extends Component {
             )
             .then(response => {
               this.setState({ success: true });
-              console.log("Response: ", response.data.user.currentresume);
             })
             .catch(err => {
               console.log("err", err);
@@ -190,14 +186,6 @@ class RIP extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                {console.log(
-                  "The Resume to RIP",
-                  resumes,
-                  "Index",
-                  this.state.index,
-                  "length",
-                  resumes.length
-                )}
                 <TitleDropdown
                   className="dropdown"
                   context={this.props.context}
@@ -276,10 +264,6 @@ class RIP extends Component {
                     <div key={index}>
                       <p>
                         {" "}
-                        {console.log(
-                          index,
-                          resumes[this.state.index].sections.skills[index]
-                        )}
                         <CheckBox
                           context={this.props.context}
                           id={content._id}
@@ -378,7 +362,8 @@ class RIP extends Component {
 
 export default RIP;
 
-{/* <div className="entire-page">
+{
+  /* <div className="entire-page">
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
@@ -406,4 +391,5 @@ export default RIP;
             </div>
               <ResumeDropdown
                 className="dropdown"
-                context={this.props.context} */}
+                context={this.props.context} */
+}
