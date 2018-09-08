@@ -41,7 +41,7 @@ class Resumes extends Component {
               <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>        <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
       This is your resume page</p>
             </div>
-            <div className="containers-div">
+            <div className="d-inline-flex containers-div">
               <div className="d-inline-flex container-div">
                 <Link
                   style={{
@@ -104,7 +104,7 @@ class Resumes extends Component {
                     state: { templateIndex: false } // Setting Index passed to template- false means new
                   }}
                 >
-                  <h5 className="link">RIP</h5>
+                  <h5 style={{ margin: "5rem" }}className="link">RIP</h5>
                 </Link>
               </div>
             </div>
