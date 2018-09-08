@@ -7,11 +7,13 @@
 .containters-div {
   display: flex;
   flex-direction: row;
+  padding: 1rem; 
 }
-.container-div {
-  padding: 1rem;
-}
+/* .container-div {
+  padding: rem;
+} */
 
 img {
-  height: 10rem;
+  height: 13rem; 
+  width: 9.5rem; 
 }

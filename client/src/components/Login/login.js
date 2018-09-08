@@ -15,7 +15,7 @@ const resumePopulateTester = {
   email: "resumePopulateTester@gmail.com",
   password: "scrinch1G!",
   invalidCredentials: false
-}
+};
 
 const cheese = {
   email: "cheese23@gmail.com",
@@ -23,11 +23,11 @@ const cheese = {
   invalidCredentials: false
 };
 
-const scrinch = {
-  email: "scrinch@gmail.com",
-  password: "tacobell1!G",
-  invalidCredentials: false
-};
+// const scrinch = {
+//   email: "scrinch@gmail.com",
+//   password: "tacobell1!G",
+//   invalidCredentials: false
+// };
 
 const bobbert = {
   email: "bobbert@gmail.com",
@@ -36,7 +36,7 @@ const bobbert = {
   invalidCredentials: false
 };
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = resumePopulateTester;
@@ -84,8 +84,9 @@ export default class Login extends Component {
       <div className="Login">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label>Email</Label>
+            <h5>Email</h5>
             <Input
+              style={{ fontSize: ".7rem", height: "2rem" }}
               autoFocus
               id="email"
               invalid={this.state.invalidCredentials}
@@ -96,8 +97,9 @@ export default class Login extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label>Password</Label>
+            <h5>Password</h5>
             <Input
+              style={{ fontSize: ".7rem", height: "2rem" }}
               id="password"
               invalid={this.state.invalidCredentials}
               value={this.state.password}
@@ -110,6 +112,7 @@ export default class Login extends Component {
             </FormFeedback>
           </FormGroup>
           <Button
+            style={{ fontSize: ".8rem", height: "2rem" }}
             block
             size="lg"
             color="primary"
@@ -120,12 +123,14 @@ export default class Login extends Component {
           </Button>
           <div className="bottom-buttons">
             <Button
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/register")}
             >
               Register
             </Button>
             <Button
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/forgotpassword")}
             >
@@ -137,3 +142,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;

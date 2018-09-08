@@ -34,12 +34,12 @@ router.get(
 */
 router.post(
   "/",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("RESUME POST req:", req.body)
     const newResume = new Resume(req.body);
-    const { user } = req.body;
-    // const email = req.user.email;
+    const user = req.user;
+    newResume.user = user._id;
 
     newResume
       .save()
@@ -48,11 +48,11 @@ router.post(
           .then(user => {
             user.resumes.push(resume);
             user.save();
+            res.status(201).json({ Resume: resume });
           })
           .catch(err => {
             res.status(400).json({ Error: err });
           });
-        res.status(201).json({ Resume: resume });
       })
       .catch(err => {
         res.status(400).json({ Error: err });

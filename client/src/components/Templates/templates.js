@@ -37,7 +37,7 @@ class Templates extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className=" title-div templates" style={{width: "85%", justifyContent: "left"}}>
+            <div className=" title-div templates">
                <h4 >TEMPLATES</h4>
              <p style={{fontSize: "0.65rem", alignContent: "start"}}> Enter information into each section on the sidebar. Then choose a template below to complete your RESUME.</p>
             </div>
@@ -56,10 +56,8 @@ class Templates extends Component {
                   <img
                     src={require("./tempTemplate1.png")} //import pics
                     alt=""
-                    height="200rem"
-                    width="170rem"
                   />
-                  <h5 className="link"> TRADITIONAL </h5>
+                  <h6 className="link" style={{padding: ".5rem"}}> TRADITIONAL </h6>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -76,10 +74,8 @@ class Templates extends Component {
                   <img
                     src={require("./tempTemplate2.png")} //import pics
                     alt=""
-                    height="200rem"
-                    width="170rem"
                   />
-                  <h5> MODERN </h5>
+                  <h6 className="link" style={{padding: ".5rem"}}> MODERN </h6>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -96,10 +92,8 @@ class Templates extends Component {
                   <img
                     src={require("./tempTemplate3.png")} //import pics
                     alt=""
-                    height="200rem"
-                    width="170rem"
                   />
-                  <h5> ELEGANT </h5>
+                  <h6 className="link" style={{padding: ".5rem"}}> ELEGANT </h6>
                 </Link>
               </div>
             </div>

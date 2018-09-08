@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
 
@@ -30,6 +31,12 @@ class SummaryCreate extends Component {
         ]._id
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
   }
 
   onInputChange = e => {
@@ -95,17 +102,19 @@ class SummaryCreate extends Component {
       // />,
       <div>
         {this.state.success ? <Redirect to="/summary" /> : null}
-        <div className="overall-component-div row">
+        <Navbar context={this.props.context}/>
+      <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <h4>Personal Summary</h4>
-            <p style={{fontSize: "0.7rem", fontStyle: "Italic"}}>
+            <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “Make the most of yourself....for that is all there is of you.” ―
               Ralph Waldo Emerson
             </p>
-            <form>
+            <form style={{fontSize: ".7rem", width: "100%"}}>
               <div className="form-group">
                 <textarea
+                style={{fontSize: ".7rem", width: "60%"}}
                   rows={10}
                   value={this.state.content}
                   onChange={this.onInputChange}
