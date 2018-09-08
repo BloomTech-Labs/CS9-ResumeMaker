@@ -24,10 +24,15 @@
     border: 1px solid black; 
 }
 .resume-button {
+    width: 10rem;
+    height: 3rem;
+    margin: 1rem;
+}
+.save-button {
     height: min-content; 
     align-self: center;
-    
 }
+
 .template.title-div {
     display: flex; 
     flex-direction: row; 
