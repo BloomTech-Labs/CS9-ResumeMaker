@@ -14,3 +14,7 @@ img {
 .container-div {
     padding: 1rem;
   }
+.skillsSection {
+    display: flex;
+    width: 100%;
+}

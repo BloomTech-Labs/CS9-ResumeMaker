@@ -6,7 +6,7 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import "../Templates/template1.css";
 import PDF from "../PDF/PDF";
-import "./resume.css"
+import "./resume.css";
 
 export class ResumeOne extends Component {
   componentWillMount() {
@@ -55,8 +55,13 @@ export class ResumeOne extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="resume title-div">
-              <h5 className="resume page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Traditional</h5>
-            <PDF />
+              <h5
+                className="resume page-header"
+                style={{ fontSize: "1.5rem", paddingTop: "0" }}
+              >
+                Traditional
+              </h5>
+              <PDF />
             </div>
             <form className="template1" onSubmit={this.handleSubmit}>
               <Container textAlign="center" className="titleSection">
@@ -65,7 +70,9 @@ export class ResumeOne extends Component {
                 </h2>
                 {userInfo.title.map((item, index) => {
                   return resumes[resumes.length - 1].title[index].value ? (
-                    <p key={item._id}>{item.content}</p>
+                    <p style={{ fontSize: "1.5rem" }} key={item._id}>
+                      {item.content}
+                    </p>
                   ) : null;
                 })}
               </Container>
@@ -111,14 +118,14 @@ export class ResumeOne extends Component {
 
               {skillsLength.length > 0 ? (
                 <div>
+                  <h3>Skills</h3>
                   <Container textAlign="center" className="skillsSection">
-                    <h3>Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return resumes[resumes.length - 1].sections.skills[index]
                         .value ? (
-                        <div key={index}>
-                          <p>{content.content}</p>
-                        </div>
+                        <React.Fragment key={index}>
+                          <p style={{ marginRight:"1%" }} >{content.content}</p>
+                        </React.Fragment>
                       ) : null;
                     })}
                   </Container>

@@ -119,13 +119,6 @@
   min-height: 1rem;
 }
 
-.skills-containment-div .skillgroup {
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  padding: 1% 5%;
-}
-
 .skillgroup-input {
   display: flex;
   justify-content: space-around;
