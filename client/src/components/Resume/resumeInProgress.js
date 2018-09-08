@@ -39,19 +39,10 @@ class RIP extends Component {
     );
     if (index === -1) index = 0;
     this.setState({ index: index });
-
-    // if (this.props.context.userInfo.auth)
-    // this.props.context.actions.expandResumeIDs(
-    //   this.props.context.userInfo.currentResume
-    // );
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    // if (this.props.context.userInfo.auth)
-    //   this.props.context.actions.expandResumeIDs(
-    //     this.props.context.userInfo.currentResume
-    //   );
   }
 
   handleCreate = () => {
