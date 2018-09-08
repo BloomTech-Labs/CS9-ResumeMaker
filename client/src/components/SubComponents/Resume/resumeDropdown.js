@@ -52,7 +52,7 @@ class ResumeDropdown extends Component {
     ));
 
     return (
-      <div className="template-card card card-body m-0">
+      <div className="template-card card dropdown m-0">
         <div className="container">
           <p>{selected}</p>
         </div>

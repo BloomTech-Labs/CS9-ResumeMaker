@@ -68,7 +68,7 @@ class SummaryDropdown extends Component {
     ));
 
     return (
-      <div className="template-card card card-card card-body mb-3">
+      <div className="template-card card card-card dropdown mb-3">
         {/* <div className="jumbotron"> */}
         <div className="container">
           <p>{selected}</p>
