@@ -20,7 +20,6 @@ i {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,
     "AppleGothic", sans-serif;
   align-items: start;
-  max-width: 50rem;
   display: flex;
   align-self: start;
   flex-direction: row;
