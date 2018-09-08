@@ -79,21 +79,25 @@ export class ResumeOne extends Component {
               <Divider className="divider-div" />
               <Container textAlign="center" className="contactSection">
                 <h3>Contact Details</h3>
-                <a href={`mailto:${userInfo.email}`}>
-                  <p> {userInfo.email}</p>
-                </a>
-                <p>{userInfo.location}</p>
-                <p>{userInfo.phonenumber}</p>
-                <div>
-                  {resumes[resumes.length - 1].links.linkedin ? (
-                    <p>{userInfo.links.linkedin}</p>
-                  ) : null}
-                  {resumes[resumes.length - 1].links.github ? (
-                    <p>{userInfo.links.github}</p>
-                  ) : null}
-                  {resumes[resumes.length - 1].links.portfolio ? (
-                    <p>{userInfo.links.portfolio}</p>
-                  ) : null}
+                <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                  <div>
+                    <a href={`mailto:${userInfo.email}`}>
+                      <p> {userInfo.email}</p>
+                    </a>
+                    <p>{userInfo.location}</p>
+                    <p>{userInfo.phonenumber}</p>
+                  </div>
+                  <div>
+                    {resumes[resumes.length - 1].links.linkedin ? (
+                      <p>{userInfo.links.linkedin}</p>
+                    ) : null}
+                    {resumes[resumes.length - 1].links.github ? (
+                      <p>{userInfo.links.github}</p>
+                    ) : null}
+                    {resumes[resumes.length - 1].links.portfolio ? (
+                      <p>{userInfo.links.portfolio}</p>
+                    ) : null}
+                  </div>
                 </div>
               </Container>
               <Divider className="divider-div" />
@@ -124,7 +128,7 @@ export class ResumeOne extends Component {
                       return resumes[resumes.length - 1].sections.skills[index]
                         .value ? (
                         <React.Fragment key={index}>
-                          <p style={{ marginRight:"1%" }} >{content.content}</p>
+                          <p style={{ marginRight: "1%" }}>{content.content}</p>
                         </React.Fragment>
                       ) : null;
                     })}
