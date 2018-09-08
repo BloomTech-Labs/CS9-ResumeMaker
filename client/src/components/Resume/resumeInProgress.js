@@ -376,3 +376,33 @@ class RIP extends Component {
 }
 
 export default RIP;
+
+{/* <div className="entire-page">
+        <Navbar context={this.props.context} />
+        <div className="overall-component-div row">
+          <Sidebar context={this.props.context} />
+          <div className="page-div">
+            <div className="title-div templates">
+            <h4>TEMPLATES</h4>
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  width: "100%"
+                }}
+              >
+               {" "}
+                Enter information into each section on the sidebar. Then choose
+                a template below to complete your RESUME.
+              </p>
+              </div>
+            <div className="containers-div">
+              {this.props.context.userInfo.name.firstname ? (
+                <h1>Hi {this.props.context.userInfo.name.firstname}</h1>
+              ) : (
+                <h1>Hi</h1>
+              )}
+            </div>
+              <ResumeDropdown
+                className="dropdown"
+                context={this.props.context} */}
