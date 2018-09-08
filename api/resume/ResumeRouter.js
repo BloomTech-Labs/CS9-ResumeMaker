@@ -15,6 +15,7 @@ router.get(
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
+    console.log("RESUME GET req:", req.body)
 
     Resume.findById(id)
       .then(resume => {
@@ -35,6 +36,7 @@ router.post(
   "/",
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("RESUME POST req:", req.body)
     const newResume = new Resume(req.body);
     const { user } = req.body;
     // const email = req.user.email;

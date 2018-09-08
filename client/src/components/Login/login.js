@@ -11,6 +11,12 @@ import axios from "axios";
 import "./login.css";
 const urls = require("../../config/config.json");
 
+const resumePopulateTester = {
+  email: "resumePopulateTester@gmail.com",
+  password: "scrinch1G!",
+  invalidCredentials: false
+}
+
 const cheese = {
   email: "cheese23@gmail.com",
   password: "Cheese123!",
@@ -33,7 +39,7 @@ const bobbert = {
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = scrinch;
+    this.state = resumePopulateTester;
   }
 
   validateForm() {
