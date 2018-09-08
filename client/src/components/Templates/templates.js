@@ -33,53 +33,79 @@ class Templates extends Component {
   render() {
     return (
       <div className="entire-page">
-      <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="title-div templates">
-               <h4>TEMPLATES</h4>
-               <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", width: "100%"}}> Enter information into each section on the sidebar. Then choose a template below to complete your RESUME.</p>
+              <h4>TEMPLATES</h4>
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  width: "100%"
+                }}
+              >
+                {" "}
+                Enter information into each section on the sidebar. Then choose
+                a template below to complete your RESUME.
+              </p>
             </div>
             <div className="containers-div">
-              <div className="d-inline-flex container-div">
-                <Link
-                  style={{
-                    color: "black",
-                    padding: "0.5rem"
-                  }}
-                  to={{
-                    pathname: "/templates/template-1", // component being Linked to
-                    state: { templateIndex: -1 } // Setting Index passed to template- false means new
-                  }}
-                >
-                  <img
-                    src={require("./tempTemplate1.png")} //import pics
-                    alt=""
-                  />
-                  <h6 className="link" style={{padding: ".5rem"}}> TRADITIONAL </h6>
-                </Link>
-              </div>
-              <div className="d-inline-flex container-div">
-                <Link
-                  style={{
-                    color: "black",
-                    padding: "0.5rem"
-                  }}
-                  to={{
-                    pathname: "/templates/template-2", // component being Linked to
-                    state: { templateIndex: -1 } // Setting Index passed to template- false means new
-                  }}
-                >
-                  <img
-                    src={require("./tempTemplate2.png")} //import pics
-                    alt=""
-                  />
-                  <h6 className="link" style={{padding: ".5rem"}}> MODERN </h6>
-                </Link>
-              </div>
-              <div className="d-inline-flex container-div">
-                <Link
+              {this.props.context.userInfo.name.firstname ? (
+                <h1>Hi {this.props.context.userInfo.name.firstname}</h1>
+              ) : (
+                <h1>Hi</h1>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Templates;
+
+{
+  /* <div className="d-inline-flex container-div">
+<Link
+  style={{
+    color: "black",
+    padding: "0.5rem"
+  }}
+  to={{
+    pathname: "/templates/template-1", // component being Linked to
+    state: { templateIndex: -1 } // Setting Index passed to template- false means new
+  }}
+>
+  <img
+    src={require("./tempTemplate1.png")} //import pics
+    alt=""
+  />
+  <h6 className="link" style={{padding: ".5rem"}}> TRADITIONAL </h6>
+</Link>
+</div>
+<div className="d-inline-flex container-div">
+<Link
+  style={{
+    color: "black",
+    padding: "0.5rem"
+  }}
+  to={{
+    pathname: "/templates/template-2", // component being Linked to
+    state: { templateIndex: -1 } // Setting Index passed to template- false means new
+  }}
+>
+  <img
+    src={require("./tempTemplate2.png")} //import pics
+    alt=""
+  />
+  <h6 className="link" style={{padding: ".5rem"}}> MODERN </h6>
+</Link>
+</div>
+<div className="d-inline-flex container-div">
+<Link
                   style={{
                     color: "black",
                     padding: "0.5rem"
@@ -95,13 +121,5 @@ class Templates extends Component {
                   />
                   <h6 className="link" style={{padding: ".5rem"}}> ELEGANT </h6>
                 </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+              </div> */
 }
-
-export default Templates;

@@ -59,7 +59,7 @@ class Sidebar extends Component {
             fontWeight: "0"
           }}
         >
-          {/* <Link
+          <Link
             to="/templates"
             className={classnames({
               active: window.location.pathname.includes("/templates")
@@ -68,7 +68,7 @@ class Sidebar extends Component {
             {" "}
             <div className="fa fa-copy sm" style={{ color: "white" }} />{" "}
             TEMPLATES
-          </Link> */}
+          </Link>
           <Link
             to="/resumes"
             className={classnames({
