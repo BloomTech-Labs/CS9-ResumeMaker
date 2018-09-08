@@ -61,7 +61,7 @@ class Skills extends Component {
         groupname: this.state.newSkill
       });
     } else if (action === "edit") {
-      this.props.context.actions.setEntireElement("skills", this.state.skills);
+      this.props.context.actions.setSingleElement("skills", this.state.skills);
     }
 
     this.setState({ newSkill: "" });
@@ -138,7 +138,6 @@ class Skills extends Component {
                           id={`skills`}
                           name="groupname"
                           placeholder="Group Name"
-                          type="submit"
                           // size="sm"
                           value={this.state.skills[index].groupname}
                           onChange={e => this.handleChange(e, index)}

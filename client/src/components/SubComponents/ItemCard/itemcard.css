@@ -105,8 +105,7 @@
   text-overflow: ellipsis;
 }
 
-.titles-containment-div,
-.skills-containment-div {
+.titles-containment-div {
   display: flex;
   flex-flow: row wrap;
   max-width: 50rem;
@@ -118,17 +117,6 @@
   min-height: 1rem;
 }
 
-.skills-containment-div .skillgroup {
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  padding: 1% 5%;
-}
-
-.skillgroup-input {
-  display: flex;
-  justify-content: space-around;
-}
 .card-body {
   font-size: 0.7rem;
   width: 15rem;
