@@ -4,8 +4,12 @@
 }
 .page-div {
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
 }
+.page-div.page-container-div{
+    max-width: 1200px !important;
+}
+
 .page-header {
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 2rem;
