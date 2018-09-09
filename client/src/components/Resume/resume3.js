@@ -71,12 +71,12 @@ export class ResumeThree extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h4 className="page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Elegant</h4>
+              <h4 className="resume page-header" style={{fontSize: "1.5rem", paddingTop: "0"}}>Elegant</h4>
             <PDF />
             </div>
-            <div className="template1" onSubmit={this.handleSubmit}>
+            <div className="template1">
               <div className="row">
-                <div className="left-column">
+                <div className="col-3 left-column">
                   {/* <a
                     href="https://www.freeiconspng.com/img/37126"
                     title="Image from freeiconspng.com"

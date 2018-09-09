@@ -80,7 +80,7 @@ export class ResumeTwo extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h3 className="resume page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Modern</h3>
+              <h3 className="resume page-header" style={{fontSize: "1.5rem", paddingTop: "0"}}>Modern</h3>
             <PDF />
             </div>
             <div className="template1">
