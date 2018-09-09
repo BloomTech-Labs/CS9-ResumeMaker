@@ -38,9 +38,9 @@
   flex-flow: wrap;
   width: 100%;
   justify-content: center;
+  margin-top: 2%;
 }
 
 .bill-btn {
-  width: 40%;
-  margin: 5% 3% 3% 5%;
+  margin: 2% 1%;
 }
