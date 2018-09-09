@@ -482,7 +482,9 @@ img {
   background: #707f8c;
 }
 .static-sidebar a .fa {
-  margin-right: 0.3rem;
+  width: 1rem;
+  display: inline-flex;
+  justify-content: center;
 }
 .static-sidebar .active {
   border-left: 1rem solid #d9d9d9;

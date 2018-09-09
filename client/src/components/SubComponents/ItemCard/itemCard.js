@@ -63,6 +63,7 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
+        console.log("response", response);
         this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {

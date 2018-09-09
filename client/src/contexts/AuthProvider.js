@@ -238,22 +238,23 @@ class AuthProvider extends Component {
           }
         )
         .then(response => {
-          axios
-            .put(
-              `${urls[urls.basePath]}/users/info/${this.state.id}`,
-              { currentresume: response.data.resume._id },
-              {
-                headers: {
-                  Authorization: "Bearer " + localStorage.getItem("token")
-                }
-              }
-            )
-            .then(response => {
-              this.setState({ success: true });
-            })
-            .catch(err => {
-              console.log("err", err);
-            });
+          // axios
+          //   .put(
+          //     `${urls[urls.basePath]}/users/info/${this.state.id}`,
+          //     { currentresume: response.data.resume._id },
+          //     {
+          //       headers: {
+          //         Authorization: "Bearer " + localStorage.getItem("token")
+          //       }
+          //     }
+          //   )
+          //   .then(response => {
+          //     this.setState({ success: true });
+          //   })
+          //   .catch(err => {
+          //     console.log("err", err);
+          //   });
+          console.log("response", response);
         })
         .catch(err => {
           console.log("err", err);
