@@ -74,7 +74,6 @@ class RIP extends Component {
         }
       })
       .then(response => {
-        console.log(response.data);
         this.props.context.actions.setSingleElement(
           "currentresume",
           response.data.Resume._id
@@ -102,7 +101,6 @@ class RIP extends Component {
           }
         )
         .then(response => {
-          console.log(response.data.resume._id);
           axios
             .put(
               `${urls[urls.basePath]}/users/info/${
@@ -117,7 +115,6 @@ class RIP extends Component {
             )
             .then(response => {
               this.setState({ success: true });
-              console.log("Response: ", response.data.user.currentresume);
             })
             .catch(err => {
               console.log("err", err);
@@ -189,14 +186,6 @@ class RIP extends Component {
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
-                {console.log(
-                  "The Resume to RIP",
-                  resumes,
-                  "Index",
-                  this.state.index,
-                  "length",
-                  resumes.length
-                )}
                 <TitleDropdown
                   className="dropdown"
                   context={this.props.context}
@@ -275,10 +264,6 @@ class RIP extends Component {
                     <div key={index}>
                       <p>
                         {" "}
-                        {console.log(
-                          index,
-                          resumes[this.state.index].sections.skills[index]
-                        )}
                         <CheckBox
                           context={this.props.context}
                           id={content._id}
@@ -376,3 +361,35 @@ class RIP extends Component {
 }
 
 export default RIP;
+
+{
+  /* <div className="entire-page">
+        <Navbar context={this.props.context} />
+        <div className="overall-component-div row">
+          <Sidebar context={this.props.context} />
+          <div className="page-div">
+            <div className="title-div templates">
+            <h4>TEMPLATES</h4>
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  width: "100%"
+                }}
+              >
+               {" "}
+                Enter information into each section on the sidebar. Then choose
+                a template below to complete your RESUME.
+              </p>
+              </div>
+            <div className="containers-div">
+              {this.props.context.userInfo.name.firstname ? (
+                <h1>Hi {this.props.context.userInfo.name.firstname}</h1>
+              ) : (
+                <h1>Hi</h1>
+              )}
+            </div>
+              <ResumeDropdown
+                className="dropdown"
+                context={this.props.context} */
+}

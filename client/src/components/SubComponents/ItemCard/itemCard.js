@@ -65,7 +65,6 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        console.log(response);
         this.props.context.actions.setLogin(response.data.user);
       })
       .catch(err => {
@@ -98,62 +97,8 @@ class ItemCard extends Component {
       });
   };
 
-  handleNestedDelete = () => {
-    this.props.context.actions.removeNestedElement(
-      this.props.skillGroupIndex,
-      this.props.skillIndex,
-      "skillgroups",
-      "skills"
-    );
-    const putPath = this.props.putPath;
-    const tempObj = {
-      [putPath]: this.props.context.userInfo.skillgroups
-    };
-    axios
-      .put(
-        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
-        tempObj,
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-        }
-      )
-      .then(response => {
-        this.props.context.actions.setLogin(response.data.user);
-      })
-      .catch(err => {
-        console.log("err", err);
-      });
-  };
-
   render() {
-    if (this.props.elementName === "skills") {
-      return (
-        <Card className="item-card row-card oneline">
-          <button
-            className="close"
-            aria-label="Delete"
-            onClick={() => this.handleNestedDelete()}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-
-          <CardBody>
-            <Link
-              className="item-card-link"
-              to={{
-                pathname: `${this.props.linkTo}/create`, // component being Linked to
-                state: {
-                  skillIndex: this.props.skillIndex,
-                  skillGroupIndex: this.props.skillGroupIndex
-                } // index passed into the create component
-              }}
-            >
-              <CardText>{ellipsify(this.props.content, 150)}</CardText>
-            </Link>
-          </CardBody>
-        </Card>
-      );
-    } else if (this.props.elementName === "experience") {
+    if (this.props.elementName === "experience") {
       return (
         <Card className="item-card">
           <button
@@ -167,10 +112,10 @@ class ItemCard extends Component {
             className="item-card-link"
             to={{
               pathname: `${this.props.linkTo}/create`, // component being Linked to
-              state: { index: this.props.index }
+              state: { index: this.props.index } // Setting Index passed into summaryCreate component
             }}
           >
-            <CardBody>
+            <CardBody className="experience">
               <CardTitle>{this.props.element.title}</CardTitle>
               <CardTitle>{this.props.element.company}</CardTitle>
               <CardText>
@@ -199,7 +144,7 @@ class ItemCard extends Component {
             className="item-card-link"
             to={{
               pathname: `${this.props.linkTo}/create`, // component being Linked to
-              state: { index: this.props.index } 
+              state: { index: this.props.index } // Setting Index passed into summaryCreate component
             }}
           >
             <CardBody>
@@ -227,17 +172,19 @@ class ItemCard extends Component {
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          <Link
-            className="item-card-link"
-            to={{
-              pathname: `${this.props.linkTo}/create`, // component being Linked to
-              state: { index: this.props.index } // Setting Index passed into summaryCreate component
-            }}
-          >
-            <CardBody>
-              <CardText>{ellipsify(this.props.content, 150)}</CardText>
-            </CardBody>
-          </Link>
+          <CardBody>
+            <CardText>
+              <Link
+                className="item-card-link"
+                to={{
+                  pathname: `${this.props.linkTo}/create`, // component being Linked to
+                  state: { index: this.props.index } // Setting Index passed into summaryCreate component
+                }}
+              >
+                {ellipsify(this.props.content, 150)}
+              </Link>
+            </CardText>
+          </CardBody>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );

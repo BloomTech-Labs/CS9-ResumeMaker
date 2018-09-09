@@ -72,6 +72,7 @@ class JobTitleCreate extends Component {
     const tempObj = {
       title: this.props.context.userInfo.title
     };
+    
     axios
       .put(
         `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,

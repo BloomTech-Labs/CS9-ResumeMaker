@@ -30,17 +30,34 @@ class Resumes extends Component {
         });
     }
   }
+
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    );
+  }
+
   render() {
     return (
       <div>
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="title-div">
-              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>        <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
-      This is your resume page</p>
+              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>{" "}
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  borderTop: "1px solid black",
+                  width: "100%"
+                }}
+              >
+                This is your resume page
+              </p>
             </div>
+
             <div className="d-inline-flex containers-div">
               <div className="d-inline-flex container-div">
                 <Link
@@ -60,7 +77,7 @@ class Resumes extends Component {
                   <h5 className="link">RESUME 1</h5>
                 </Link>
               </div>
-              {/* <div className="d-inline-flex container-div">
+              <div className="d-inline-flex container-div">
                 <Link
                   style={{
                     color: "black"
@@ -94,23 +111,12 @@ class Resumes extends Component {
                     height="100rem"
                   />
                   <h5 className="link">RESUME 3</h5>
-                </Link> */}
-                <Link
-                  style={{
-                    color: "black"
-                  }}
-                  to={{
-                    pathname: "/rip", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
-                  }}
-                >
-                  <h5 style={{ margin: "5rem" }}className="link">RIP</h5>
                 </Link>
               </div>
             </div>
           </div>
         </div>
-      // </div>
+      </div>
     );
   }
 }

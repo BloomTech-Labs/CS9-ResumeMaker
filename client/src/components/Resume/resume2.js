@@ -10,38 +10,78 @@ import PDF from "../PDF/PDF";
 import "./resume.css"
 
 export class ResumeTwo extends Component {
-  componentWillMount() {
-    if (this.props.context.userInfo.auth !== true)
-      this.props.history.push("/resumes");
-    else
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0,
+      success: false
+    };
   }
+
+    componentWillMount() {
+      function findWithAttr(array, attr, value) {
+        for (var i = 0; i < array.length; i += 1) {
+          if (array[i][attr] === value) {
+            return i;
+          }
+        }
+        return -1;
+      }
+    
+        let index = findWithAttr(
+          this.props.context.userInfo.resumes,
+          "_id",
+          this.props.context.userInfo.currentresume
+        );
+        if (index === -1) index = 0;
+        this.setState({ index: index });
+      }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
+  componentWillUnmount() {
+    this.props.context.actions.expandResumeIDs(
+      this.props.context.userInfo.currentResume
+    )
+  }
+
   render() {
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;
+    }    
+    if (
+      !this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null
+    ) {
+      return <h1>Loading...</h1>;
     }
+    if (
+      !this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null
+    ) {
+      console.log(
+        "You probably had an error, which redirected you instead of crashing."
+      );
+      return <Redirect to="/resumes" />;
+    }
+
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
     const summaryLength = userInfo.summary.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.summary[index].value;
+      return resumes[this.state.index].sections.summary[index].value;
     });
     const skillsLength = userInfo.skills.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.skills[index].value;
+      return resumes[this.state.index].sections.skills[index].value;
     });
     const educationLength = userInfo.education.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.education[index].value;
+      return resumes[this.state.index].sections.education[index].value;
     });
     const experienceLength = userInfo.experience.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.experience[index].value;
+      return resumes[this.state.index].sections.experience[index].value;
     });
 
     return (
@@ -60,7 +100,7 @@ export class ResumeTwo extends Component {
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 {userInfo.title.map((item, index) => {
-                  return resumes[resumes.length - 1].title[index].value ? (
+                  return resumes[this.state.index].title[index].value ? (
                     <p key={item._id}>{item.content}</p>
                   ) : null;
                 })}
@@ -75,7 +115,7 @@ export class ResumeTwo extends Component {
                   <Divider className="divider-div" />
                   <h3 className="subtitle">Summary</h3>
                   {userInfo.summary.map((item, index) => {
-                    return resumes[resumes.length - 1].sections.summary[index]
+                    return resumes[this.state.index].sections.summary[index]
                       .value ? (
                       <p key={item._id}>{item.content}</p>
                     ) : null;
@@ -93,13 +133,13 @@ export class ResumeTwo extends Component {
                     </a>
                     <p>{userInfo.location}</p>
                     <p>{userInfo.phonenumber}</p>
-                    {resumes[resumes.length - 1].links.linkedin ? (
+                    {resumes[this.state.index].links.linkedin ? (
                       <p>{userInfo.links.linkedin}</p>
                     ) : null}
-                    {resumes[resumes.length - 1].links.github ? (
+                    {resumes[this.state.index].links.github ? (
                       <p>{userInfo.links.github}</p>
                     ) : null}
-                    {resumes[resumes.length - 1].links.portfolio ? (
+                    {resumes[this.state.index].links.portfolio ? (
                       <p>{userInfo.links.portfolio}</p>
                     ) : null}
                   </FormGroup>
@@ -111,7 +151,7 @@ export class ResumeTwo extends Component {
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
-                        return resumes[resumes.length - 1].sections.education[
+                        return resumes[this.state.index].sections.education[
                           index
                         ].value ? (
                           <div key={index}>
@@ -137,7 +177,7 @@ export class ResumeTwo extends Component {
                     <FormGroup textalign="center" className="skillsSection">
                       <h3 className="subtitle">Skills</h3>
                       {userInfo.skills.map((content, index) => {
-                        return resumes[resumes.length - 1].sections.skills[
+                        return resumes[this.state.index].sections.skills[
                           index
                         ].value ? (
                           <div key={index}>
@@ -155,7 +195,7 @@ export class ResumeTwo extends Component {
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
-                        return resumes[resumes.length - 1].sections.experience[
+                        return resumes[this.state.index].sections.experience[
                           index
                         ].value ? (
                           <div key={index}>
