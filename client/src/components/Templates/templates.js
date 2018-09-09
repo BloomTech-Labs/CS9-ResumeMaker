@@ -22,7 +22,8 @@ class Templates extends Component {
   }
 
   findWithAttr = (array, attr, value) => {
-      for (var i = 0; i < array.length; i += 1) {
+      for (var i = 0; i < array.length; i++) {
+        console.log("arrayI", array[i][attr], "value compared to", value)
         if (array[i][attr] === value) {
           return i;
         }
@@ -72,7 +73,7 @@ class Templates extends Component {
         })
       }
     };
-
+    tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -96,6 +97,9 @@ class Templates extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
+    console.log("TEMPOBJ:", tempObj);
+    // tempObj.resumes = this.props.context.userInfo.resumes;
+    tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
     if (tempObj._id) {
       axios
@@ -160,8 +164,6 @@ class Templates extends Component {
     // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
       !resumes[this.state.index] ||
-      this.props.context.userInfo.auth === false ||
-      this.props.context.userInfo.currentresume === null ||
       this.state.index === null
     ) {
       return (
@@ -169,11 +171,6 @@ class Templates extends Component {
           <Sidebar context={this.props.context} />
         </div>
       );
-
-      // console.log(
-      //   "You probably had an error, which redirected you instead of crashing."
-      // );
-      // return <Redirect to="/login" />;
     }
 
     const userInfo = this.props.context.userInfo;

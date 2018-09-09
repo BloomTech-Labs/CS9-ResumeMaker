@@ -77,9 +77,11 @@ class AuthProvider extends Component {
 
   setResume = resumeData => {
     console.log("resdata is,", resumeData)
+    if(this.state.auth !== true){
+      return;
+    }
     if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
-      this.setState({ resumes: [], currentresume: null });
       this.createResume(true);
     } else if (resumeData[0] !== null && this.state.currentresume === null){
       console.log("dont set res 1")
@@ -122,8 +124,8 @@ class AuthProvider extends Component {
       tempState = [];
       tempState.push(tempObj);
     } else tempState.push(tempObj);
-    this.setState({ resumes: tempState });
-
+    tempObj["resumes"] = tempState.map((resume) => resume._id);
+    // this.setState({ resumes: tempState });
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -131,12 +133,13 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
-        if(this.state.resumes.length <= 1){
-          console.log("setResume replaced index 0 resume");
-          this.setState({ resumes: [response.data.Resume], currentresume: response.data.Resume._id });
-        } else {
-          this.setState({ currentresume: response.data.Resume._id });
-        }
+        this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
+        // if(this.state.resumes.length <= 1){
+        //   console.log("setResume replaced index 0 resume", response.data);
+        //   this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
+        // } else {
+        //   this.setState({ resumes: tempState, currentresume: response.data.Resume._id });
+        // }
       })
       .catch(err => {
         console.log("err", err);
@@ -241,6 +244,7 @@ class AuthProvider extends Component {
     const tempResume = this.state.resumes[index];
 
     if (!tempResume["user"]) tempResume["user"] = this.state.id;
+    tempObj["resumes"] = this.state.resumes.map((resume) => resume._id);
     if (tempResume._id) {
       axios
         .put(

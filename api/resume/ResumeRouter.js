@@ -46,10 +46,11 @@ router.post(
       .then(resume => {
         User.findById(user)
           .then(user => {
+            user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
             user.resumes.push(resume);
             user.currentresume = resume._id;
             user.save();
-            res.status(201).json({ Resume: resume });
+            res.status(201).json({ Resume: resume, resumes: user.resumes });
           })
           .catch(err => {
             res.status(400).json({ Error: err });
@@ -70,12 +71,24 @@ router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("RESUME PUT req:", req.body)
     const { id } = req.params;
     const updatedResume = req.body;
+    const user = req.user;
+    updatedResume.user = user._id;
 
     Resume.findByIdAndUpdate(id, updatedResume)
       .then(resume => {
-        res.status(200).json({ resume });
+        User.findById(user)
+          .then(user => {
+            user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
+            user.currentresume = resume._id;
+            user.save();
+            res.status(200).json({ resume });
+          })
+          .catch(err => {
+            res.status(400).json({ Error: err });
+          });
       })
       .catch(err => {
         res.status(400).json({ Error: err });

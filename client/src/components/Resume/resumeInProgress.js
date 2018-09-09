@@ -65,7 +65,7 @@ class RIP extends Component {
         })
       }
     };
-
+    tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -87,6 +87,7 @@ class RIP extends Component {
     event.preventDefault();
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
+    tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
     if (tempObj._id) {
       axios
         .put(
