@@ -31,13 +31,45 @@ class Templates extends Component {
       return -1;
     }
 
-    let index = findWithAttr(
-      this.props.context.userInfo.resumes,
-      "_id",
-      this.props.context.userInfo.currentresume
-    );
-    if (index === -1) index = 0;
-    this.setState({ index: index });
+    // If there are no resumes saved yet, this if statement
+    // will prevent crashing.
+    let resumePromise;
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      (!this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null)
+    ) {
+      // tempThis is needed to allow the promise to use the correct "this"
+      const tempThis = this;
+      resumePromise = new Promise(function(resolve, reject) {
+        console.log("full promise called")
+        console.log("THISIS", tempThis)
+        console.log(tempThis.handleCreate());
+        if(tempThis.handleCreate() === true){
+          resolve("New resume created!")
+        } else {
+          reject("Resume could not be created.")
+        }
+      });
+    } else {
+      resumePromise = new Promise(function(resolve, reject) {
+        console.log("emptypromisecalled")
+        resolve('Success!')
+      });
+    }
+
+    console.log("PROMISE", resumePromise)
+
+    resumePromise.then(() => {
+      let index = findWithAttr(
+        this.props.context.userInfo.resumes,
+        "_id",
+        this.props.context.userInfo.currentresume
+      );
+      if (index === -1) index = 0;
+      this.setState({ index: index });
+    })
   }
 
   componentDidMount() {
@@ -51,23 +83,24 @@ class Templates extends Component {
   // }
 
   handleCreate = () => {
+    console.log("handle create called")
     const tempObj = {
-      links: { linkedin: false, github: false, portfolio: false },
+      links: { linkedin: true, github: true, portfolio: true },
       title: this.props.context.userInfo.title.map(item => {
-        return { _id: item._id, value: false };
+        return { _id: item._id, value: true };
       }),
       sections: {
         experience: this.props.context.userInfo.experience.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         }),
         education: this.props.context.userInfo.education.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         }),
         summary: this.props.context.userInfo.summary.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         }),
         skills: this.props.context.userInfo.skills.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         })
       }
     };
@@ -83,14 +116,19 @@ class Templates extends Component {
           "currentresume",
           response.data.Resume._id
         );
+        return true;
       })
       .catch(err => {
         console.log("err", err);
+        return false;
       });
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    console.log("HANDLESUBMITCALLED")
+    if(event){
+      event.preventDefault();
+    }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
     if (tempObj._id) {
@@ -155,10 +193,11 @@ class Templates extends Component {
       !this.props.context.userInfo.resumes.length ||
       this.props.context.userInfo.resumes[0] === null
     ) {
-      console.log(
-        "You probably had an error, which redirected you instead of crashing."
-      );
-      return <Redirect to="/login" />;
+      return <div>Loading...</div>
+      // console.log(
+      //   "You probably had an error, which redirected you instead of crashing."
+      // );
+      // return <Redirect to="/login" />;
     }
 
     const userInfo = this.props.context.userInfo;
