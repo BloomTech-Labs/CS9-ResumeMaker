@@ -8,7 +8,6 @@ import {
   Label
 } from "reactstrap";
 import axios from "axios";
-import "./login.css";
 const urls = require("../../config/config.json");
 
 const resumePopulateTester = {

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { Elements, StripeProvider } from "react-stripe-elements";
 
-import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
 import Sidebar from "./components/SubComponents/Sidebar/sidebar";
 import LandingPage from "./components/LandingPage/landingPage";

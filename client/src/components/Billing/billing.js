@@ -5,7 +5,6 @@ import CheckoutForm from "./checkoutForm";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Loading from "./Loading";
-import "./billing.css";
 const urls = require("../../config/config.json");
 
 class Billing extends Component {

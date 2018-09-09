@@ -14,8 +14,6 @@ import moment from "moment";
 
 import urls from "../../../config/config.json";
 
-import "./itemcard.css";
-
 function ellipsify(str, length) {
   if (str) {
     if (str.length > length) {

@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import classnames from "classnames";
-import "./sidebar.css";
 const urls = require("../../../config/config.json");
 
 class Sidebar extends Component {

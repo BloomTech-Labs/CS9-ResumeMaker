@@ -14,8 +14,6 @@ import {
   Input,
   Label
 } from "reactstrap";
-import "../CSS/component-general.css";
-import "./skills.css";
 
 import axios from "axios";
 const urls = require("../../config/config.json");

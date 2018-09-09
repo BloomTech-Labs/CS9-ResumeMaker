@@ -3,7 +3,6 @@ import axios from "axios";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
-import "../CSS/component-general.css";
 
 const urls = require("../../config/config.json");
 

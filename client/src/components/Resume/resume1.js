@@ -4,9 +4,7 @@ import moment from "moment";
 import { Redirect } from "react-router-dom";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import "../Templates/template1.css";
 import PDF from "../PDF/PDF";
-import "./resume.css";
 
 export class ResumeOne extends Component {
   constructor(props) {

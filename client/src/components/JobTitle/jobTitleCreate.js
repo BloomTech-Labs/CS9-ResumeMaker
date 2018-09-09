@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
-import "../CSS/component-general.css";
 const urls = require("../../config/config.json");
 
 class JobTitleCreate extends Component {

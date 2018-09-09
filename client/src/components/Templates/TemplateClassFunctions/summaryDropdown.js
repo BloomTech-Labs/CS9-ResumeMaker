@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./classFunction.css";
 
 class SummaryDropdown extends Component {
   // Adding default state as a placeholder

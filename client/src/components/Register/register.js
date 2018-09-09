@@ -7,7 +7,6 @@ import {
     Input,
     Label
 } from "reactstrap";
-import "../Login/login.css";
 import axios from "axios";
 
 const urls = require("../../config/config.json");

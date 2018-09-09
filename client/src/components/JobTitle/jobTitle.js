@@ -3,7 +3,6 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
-import "../CSS/component-general.css";
 
 class JobTitle extends Component {
   componentDidMount() {

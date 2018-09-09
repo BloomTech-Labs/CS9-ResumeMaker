@@ -6,7 +6,6 @@ import axios from "axios";
 
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import "../Templates/template1.css";
 import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
 import TitleDropdown from "../Templates/TemplateClassFunctions/titleDropdown";
 import ResumeDropdown from "../SubComponents/Resume/resumeDropdown";

@@ -14,7 +14,6 @@ import {
 } from "reactstrap";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import "./settings.css";
 
 const urls = require("../../config/config.json");
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../../Templates/TemplateClassFunctions/classFunction.css";
 
 class ResumeDropdown extends Component {
   // Adding default state as a placeholder
