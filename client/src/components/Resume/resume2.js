@@ -100,7 +100,7 @@ export class ResumeTwo extends Component {
                 })}
               </div>
 
-              {summaryLength.length > 0 ? (
+              {summaryLength > 0 ? (
                 <Container
                   textalign="center"
                   id="summary"
@@ -138,7 +138,7 @@ export class ResumeTwo extends Component {
                     ) : null}
                   </FormGroup>
 
-                  {educationLength.length > 0 ? (
+                  {educationLength > 0 ? (
                     <FormGroup textalign="center" className="educationSection">
                       <Divider className="divider-div" />
                       <h3 className="subtitle">Education</h3>
@@ -167,7 +167,7 @@ export class ResumeTwo extends Component {
 
                 <Divider className="divider-div" />
                 <div className="col">
-                  {skillsLength.length > 0 ? (
+                  {skillsLength > 0 ? (
                     <FormGroup textalign="center" className="skillsSection">
                       <h3 className="subtitle">Skills</h3>
                       {userInfo.skills.map((content, index) => {
@@ -183,7 +183,7 @@ export class ResumeTwo extends Component {
                     </FormGroup>
                   ) : null}
 
-                  {experienceLength.length > 0 ? (
+                  {experienceLength > 0 ? (
                     <FormGroup textalign="center" className="experienceSection">
                       <h3 className="subtitle">Experience</h3>
                       {experience.map((content, index) => {

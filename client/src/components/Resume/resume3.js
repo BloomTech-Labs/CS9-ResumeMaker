@@ -128,7 +128,7 @@ export class ResumeThree extends Component {
                     })}
                   </div>
                   <Divider className="divider-div" />
-                  {summaryLength.length > 0 ? (
+                  {summaryLength > 0 ? (
                     <FormGroup
                       textalign="center"
                       id="summary"
@@ -145,7 +145,7 @@ export class ResumeThree extends Component {
                       <Divider className="divider-div" />
                     </FormGroup>
                   ) : null}
-                  {skillsLength.length > 0 ? (
+                  {skillsLength > 0 ? (
                     <FormGroup textalign="center" className="skillsSection">
                       <h5 className="subtitle">Skills</h5>
                       {userInfo.skills.map((content, index) => {
@@ -160,7 +160,7 @@ export class ResumeThree extends Component {
                       <Divider className="divider-div" />
                     </FormGroup>
                   ) : null}
-                  {experienceLength.length > 0 ? (
+                  {experienceLength > 0 ? (
                     <FormGroup textalign="center" className="experienceSection" >
                       <h5 className="subtitle">Experience</h5>
                       {experience.map((content, index) => {
@@ -185,7 +185,7 @@ export class ResumeThree extends Component {
                       <Divider className="divider-div" />
                     </FormGroup>
                   ) : null}
-                  {educationLength.length > 0 ? (
+                  {educationLength > 0 ? (
                     <FormGroup textalign="center" className="educationSection">
                       <h5 className="subtitle">Education</h5>
                       {education.map((content, index) => {

@@ -9,7 +9,7 @@ const Resume = new Schema({
   },
   template: {
     type: String,
-    default: "Traditional",
+    default: "traditional",
     required: true
   },
   title: [
