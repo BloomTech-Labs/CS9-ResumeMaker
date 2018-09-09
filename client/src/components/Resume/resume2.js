@@ -175,6 +175,7 @@ export class ResumeTwo extends Component {
                             index
                           ].value ? (
                             <div key={content._id}>
+                              <b>{content.groupname}</b>
                               <p>{content.content}</p>
                             </div>
                           ) : null;
