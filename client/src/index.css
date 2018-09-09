@@ -136,6 +136,16 @@ i {
   color: black;
   font-size: 2rem;
 }
+.fa.fa-pencil {
+  padding: 0.5rem;
+}
+.fa.fa-pencil:hover {
+  color: #777;
+}
+.fa.fa-pencil:active {
+  font-size: 1rem;
+  color: #777;
+}
 .title-div.resumes h4 {
   width: 100%;
   border-bottom: 1px solid black;
@@ -154,16 +164,6 @@ i {
   display: flex;
   flex-direction: column;
   max-width: 600px;
-}
-.fa.fa-pencil {
-  padding: 0.5rem;
-}
-.fa.fa-pencil:hover {
-  color: #777;
-}
-.fa.fa-pencil:active {
-  font-size: 1rem;
-  color: #777;
 }
 form {
   font-size: 0.7rem;
@@ -413,8 +413,6 @@ form {
 img {
   height: 12rem;
   width: 10rem;
-  height: 13rem;
-  width: 9.5rem;
 }
 .container-div {
   padding: 1rem;
@@ -515,10 +513,10 @@ img {
   background: #C8C8C8;
 }
 .page-div {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  width: 100%;
 }
 .page-div.page-container-div {
   max-width: 1200px !important;
@@ -532,18 +530,18 @@ img {
   text-rendering: optimizeLegibility;
 }
 .template1 {
-  background: white;
   border: 1px solid black;
   padding: 50px;
   margin: 1rem;
+  background: white;
 }
 .divider-div {
   border: 1px solid black;
 }
 .resume-button {
+  width: 10rem;
   height: 3rem;
   margin: 1rem;
-  width: 10rem;
 }
 .save-button {
   height: min-content;
@@ -554,7 +552,6 @@ img {
 }
 .subtitle {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold';
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .titleSection {
   background-color: lightgray;
