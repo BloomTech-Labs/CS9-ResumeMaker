@@ -80,7 +80,7 @@ export class ResumeTwo extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h4 className="resume page-header" style={{fontSize: "1.5rem", paddingTop: "0"}}>Modern</h4>
+              <h4 className="resume page-header">Modern</h4>
             <PDF />
             </div>
             <div className="template2">
@@ -147,7 +147,7 @@ export class ResumeTwo extends Component {
                         return resumes[this.state.index].sections.education[
                           index
                         ].value ? (
-                          <div key={index}>
+                          <div key={content._id}>
                             <h5>
                               {content.degree} in {content.fieldofstudy}{" "}
                             </h5>
@@ -172,7 +172,7 @@ export class ResumeTwo extends Component {
                           return resumes[this.state.index].sections.skills[
                             index
                           ].value ? (
-                            <div key={index}>
+                            <div key={content._id}>
                               <p>{content.content}</p>
                             </div>
                           ) : null;

@@ -299,7 +299,7 @@ class Templates extends Component {
             <h3>Skills</h3>
             {userInfo.skills.map((content, index) => {
               return (
-                <div key={index}>
+                <div key={content._id}>
                   <p>
                     {" "}
                     <CheckBox
@@ -325,7 +325,7 @@ class Templates extends Component {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return (
-                    <div key={index}>
+                    <div key={content._id}>
                       <h5>
                         {" "}
                         <CheckBox
@@ -362,7 +362,7 @@ class Templates extends Component {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return (
-                    <div key={index}>
+                    <div key={content._id}>
                       <h5>
                         <CheckBox
                           context={this.props.context}

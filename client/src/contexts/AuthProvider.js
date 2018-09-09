@@ -103,7 +103,7 @@ class AuthProvider extends Component {
       value: true,
       links: { linkedin: true, github: true, portfolio: true },
       title: this.state.title.map(item => {
-        return { _id: item._id, value: true };
+        return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.state.experience.map(item => {
@@ -113,7 +113,7 @@ class AuthProvider extends Component {
           return { _id: item._id, value: true };
         }),
         summary: this.state.summary.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         skills: this.state.skills.map(item => {
           return { _id: item._id, value: true };

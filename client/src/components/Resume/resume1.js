@@ -84,7 +84,6 @@ export class ResumeOne extends Component {
             <div className="resume title-div">
               <h4
                 className="resume page-header"
-                style={{ fontSize: "1.5rem", paddingTop: "0" }}
               >
                 Traditional
               </h4>
@@ -158,7 +157,7 @@ export class ResumeOne extends Component {
                     {userInfo.skills.map((content, index) => {
                       return resumes[this.state.index].sections.skills[index]
                         .value ? (
-                        <React.Fragment key={index}>
+                        <React.Fragment key={content._id}>
                           <div>
                             <b style={{ marginRight: "1%" }}>{content.groupname}</b>
                             <p style={{ marginRight: "1%" }}>{content.content}</p>
@@ -181,7 +180,7 @@ export class ResumeOne extends Component {
                       return resumes[this.state.index].sections.experience[
                         index
                       ].value ? (
-                        <div key={index}>
+                        <div key={content._id}>
                           <h5>{content.company} </h5>
                           <p>
                             {content.title}
@@ -207,7 +206,7 @@ export class ResumeOne extends Component {
                     let to = moment(content.to).format("MMM YYYY");
                     return resumes[this.state.index].sections.education[index]
                       .value ? (
-                      <div key={index}>
+                      <div key={content._id}>
                         <h5>
                           {content.degree} in {content.fieldofstudy}{" "}
                         </h5>

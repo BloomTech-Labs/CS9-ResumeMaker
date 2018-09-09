@@ -11,23 +11,23 @@ class Resumes extends Component {
     window.scrollTo(0, 0);
 
     // adding Axios call to update IDs before we begin comparing them
-    if (localStorage.getItem("token")) {
-      axios
-        .get(`${urls[urls.basePath]}/users/currentuser/`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        .then(response => {
-          const userData = response.data.user;
-          const resumeData = response.data.resumes;
-          this.props.context.actions.setLogin(userData);
-          this.props.context.actions.setResume(resumeData);
-        })
-        .catch(err => {
-          console.log("Server Error: ", err);
-        });
-    }
+    // if (localStorage.getItem("token")) {
+    //   axios
+    //     .get(`${urls[urls.basePath]}/users/currentuser/`, {
+    //       headers: {
+    //         Authorization: "Bearer " + localStorage.getItem("token")
+    //       }
+    //     })
+    //     .then(response => {
+    //       const userData = response.data.user;
+    //       const resumeData = response.data.resumes;
+    //       this.props.context.actions.setLogin(userData);
+    //       this.props.context.actions.setResume(resumeData);
+    //     })
+    //     .catch(err => {
+    //       console.log("Server Error: ", err);
+    //     });
+    // }
   }
 
   // componentWillUnmount() {

@@ -71,7 +71,7 @@ export class ResumeThree extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h4 className="resume page-header" style={{fontSize: "1.5rem", paddingTop: "0"}}>Elegant</h4>
+              <h4 className="resume page-header">Elegant</h4>
             <PDF />
             </div>
             <div className="template3">
@@ -90,21 +90,21 @@ export class ResumeThree extends Component {
                   <Container textalign="center" className="contactSection">
                     <h5 className="subtitle" style={{paddingTop: "1rem"}}>Contact Details</h5>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p className="contact-section"  style={{fontSize: "0.6rem"}}>  {userInfo.email}</p>
+                      <p className="contact-section">  {userInfo.email}</p>
                     </a>
-                    <p className="contact-section"  style={{fontSize: "0.6rem"}}>{userInfo.location}</p>
-                    <p className="contact-section"  style={{fontSize: "0.6rem"}}>{userInfo.phonenumber}</p>
-                    <div className="contact-section" style={{fontSize: "0.55rem"}}>
+                    <p className="contact-section">{userInfo.location}</p>
+                    <p className="contact-section">{userInfo.phonenumber}</p>
+                    <div className="contact-section">
                       {resumes[this.state.index].links.linkedin ? (
                         <p>{userInfo.links.linkedin}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section"  style={{fontSize: "0.55rem"}}>
+                    <div className="contact-section">
                       {resumes[this.state.index].links.github ? (
                         <p>{userInfo.links.github}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section"  style={{fontSize: "0.55rem"}}>
+                    <div className="contact-section">
                       {resumes[this.state.index].links.portfolio ? (
                         <p>{userInfo.links.portfolio}</p>
                       ) : null}
@@ -112,7 +112,7 @@ export class ResumeThree extends Component {
                   </Container>
                 </div>
                 <div className="col-9">
-                  <div style={{ textAlign: "center" }} className="titleSection">
+                  <div className="titleSection">
                     <h4>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h4>
@@ -138,7 +138,7 @@ export class ResumeThree extends Component {
                         return resumes[this.state.index].sections.summary[
                           index
                         ].value ? (
-                          <p key={item._id}  style={{fontSize: "0.6rem"}}>{item.content}</p>
+                          <p key={item._id}>{item.content}</p>
                         ) : null;
                       })}
                       <Divider className="divider-div" />
@@ -151,8 +151,8 @@ export class ResumeThree extends Component {
                         return resumes[this.state.index].sections.skills[
                           index
                         ].value ? (
-                          <div key={index} >
-                            <p style={{margin: "0.5rem", fontSize: "0.6rem"}}>{content.content}</p>
+                          <div key={content._id} >
+                            <p>{content.content}</p>
                           </div>
                         ) : null;
                       })}
@@ -168,7 +168,7 @@ export class ResumeThree extends Component {
                         return resumes[this.state.index].sections.experience[
                           index
                         ].value ? (
-                          <div key={index}  style={{fontSize: "0.6rem"}}>
+                          <div key={content._id}>
                             <h6>{content.company} </h6>
                             <p>
                               {content.title}
@@ -193,7 +193,7 @@ export class ResumeThree extends Component {
                         return resumes[this.state.index].sections.education[
                           index
                         ].value ? (
-                          <div key={index}  style={{fontSize: "0.6rem"}}>
+                          <div key={content._id}>
                             <h6>
                               {content.degree} in {content.fieldofstudy}{" "}
                             </h6>
