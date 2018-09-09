@@ -244,7 +244,7 @@ class AuthProvider extends Component {
     const tempResume = this.state.resumes[index];
 
     if (!tempResume["user"]) tempResume["user"] = this.state.id;
-    tempObj["resumes"] = this.state.resumes.map((resume) => resume._id);
+    tempResume["resumes"] = this.state.resumes.map((resume) => resume._id);
     if (tempResume._id) {
       axios
         .put(
