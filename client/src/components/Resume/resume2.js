@@ -100,6 +100,7 @@ export class ResumeTwo extends Component {
               </div>
 
               {summaryLength > 0 ? (
+                <div>
                 <Container
                   textalign="center"
                   id="summary"
@@ -114,6 +115,7 @@ export class ResumeTwo extends Component {
                     ) : null;
                   })}
                 </Container>
+                </div>
               ) : null}
 
               <Divider className="divider-div" />

@@ -7,6 +7,27 @@ import { Link } from "react-router-dom";
 const urls = require("../../config/config.json");
 
 class Resumes extends Component {
+  findWithAttr = (array, attr, value) => {
+    for (var i = 0; i < array.length; i++) {
+      console.log("arrayI", array[i][attr], "value compared to", value)
+      if (array[i][attr] === value) {
+        return i;
+      }
+    }
+  return -1;
+  }
+
+  componentWillMount() {
+    let index = this.findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+  }
+
+
   componentDidMount() {
     window.scrollTo(0, 0);
 
@@ -65,7 +86,7 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume1", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                    state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
@@ -83,7 +104,7 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume2", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                    state: { index:  this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
@@ -101,7 +122,7 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume3", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                    state: { index:  this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img

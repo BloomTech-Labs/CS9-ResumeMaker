@@ -56,7 +56,7 @@ class Templates extends Component {
     const tempObj = {
       links: { linkedin: true, github: true, portfolio: true },
       title: this.props.context.userInfo.title.map(item => {
-        return { _id: item._id, value: true };
+        return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.props.context.userInfo.experience.map(item => {
@@ -66,7 +66,7 @@ class Templates extends Component {
           return { _id: item._id, value: true };
         }),
         summary: this.props.context.userInfo.summary.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         skills: this.props.context.userInfo.skills.map(item => {
           return { _id: item._id, value: true };

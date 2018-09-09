@@ -128,21 +128,23 @@ export class ResumeThree extends Component {
                   </div>
                   <Divider className="divider-div" />
                   {summaryLength > 0 ? (
-                    <Container
-                      textalign="center"
-                      id="summary"
-                      className="summarySection"
-                    >
-                      <h5 className="subtitle" >Summary</h5>
-                      {userInfo.summary.map((item, index) => {
-                        return resumes[this.state.index].sections.summary[
-                          index
-                        ].value ? (
-                          <p key={item._id}>{item.content}</p>
-                        ) : null;
-                      })}
-                      <Divider className="divider-div" />
-                    </Container>
+                    <div>
+                      <Container
+                        textalign="center"
+                        id="summary"
+                        className="summarySection"
+                      >
+                        <h5 className="subtitle" >Summary</h5>
+                        {userInfo.summary.map((item, index) => {
+                          return resumes[this.state.index].sections.summary[
+                            index
+                          ].value ? (
+                            <p key={item._id}>{item.content}</p>
+                          ) : null;
+                        })}
+                        <Divider className="divider-div" />
+                      </Container>
+                    </div>
                   ) : null}
                   {skillsLength > 0 ? (
                     <Container textalign="center" className="skillsSection">
