@@ -62,17 +62,10 @@ i {
   color: #777;
 }
 
-.card-body.card-text.card {
-  text-decoration-color: black;
-}
 form {
   font-size: 0.7rem;
 }
 
 .form-control {
   font-size: 0.7rem;
-}
-
-.card-body.experience {
-  padding: 0.5rem;
 }

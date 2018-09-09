@@ -115,7 +115,7 @@ class ItemCard extends Component {
               state: { index: this.props.index } // Setting Index passed into summaryCreate component
             }}
           >
-            <CardBody className="experience">
+            <CardBody>
               <CardTitle>{this.props.element.title}</CardTitle>
               <CardTitle>{this.props.element.company}</CardTitle>
               <CardText>

@@ -122,15 +122,21 @@
   min-height: 1rem;
 }
 
-.card-body {
+.experience-containment-div .card-body,
+.education-containment-div .card-body {
+  padding: 1.25rem;
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
-  height: 11rem;
 }
 
-.card-body h5 {
+.experience-containment-div .card-body h5,
+.education-containment-div .card-body h5 {
   font-size: 1rem;
+}
+
+.card-body.card-text.card {
+  text-decoration-color: black;
 }
 
 .item-card.row-card .card-body {
