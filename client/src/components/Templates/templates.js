@@ -46,7 +46,7 @@ class Templates extends Component {
       (!this.props.context.userInfo.resumes.length ||
       this.props.context.userInfo.resumes[0] === null)
     ) {
-      this.props.context.actions.setResume();
+      this.props.context.actions.setResume([]);
     } else {
       let index = this.findWithAttr(
         this.props.context.userInfo.resumes,
@@ -167,17 +167,25 @@ class Templates extends Component {
   };
 
   render() {
-    if (!this.props.context.userInfo.auth) {
+    if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
     if (this.state.success) {
       return <Redirect to="/resumes" />;
     }
+    const resumes = this.props.context.userInfo.resumes;
     if (
+      !resumes[this.state.index] ||
+      this.props.context.userInfo.auth === false ||
       this.props.context.userInfo.currentresume === null ||
       this.state.index === null
     ) {
-      return <div>Loading...</div>
+      return (
+        <div style={{display: "none"}}>
+          <Sidebar context={this.props.context} />
+        </div>
+      );
+
       // console.log(
       //   "You probably had an error, which redirected you instead of crashing."
       // );
@@ -187,7 +195,6 @@ class Templates extends Component {
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
-    const resumes = this.props.context.userInfo.resumes;
     return (
       <div className="entire-page">
         <Navbar context={this.props.context} />

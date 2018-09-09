@@ -77,10 +77,11 @@ class AuthProvider extends Component {
 
   setResume = resumeData => {
     console.log("resdata is,", resumeData)
-    if (!(resumeData.length > 0)) {
+    if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
+      this.setState({ resumes: [], currentresume: null });
       this.createResume(true);
-    } else if (this.state.currentresume === null){
+    } else if (resumeData[0] !== null && this.state.currentresume === null){
       console.log("dont set res 1")
       this.setState({
         resumes: resumeData,
@@ -89,7 +90,7 @@ class AuthProvider extends Component {
     } else {
       console.log("dont set res 2")
       this.setState({
-        resumes: resumeData,
+        resumes: resumeData
       })
     }
   };
@@ -97,23 +98,23 @@ class AuthProvider extends Component {
   createResume = newResume => {
     let tempState = this.state.resumes;
     const tempObj = {
-      value: false,
-      links: { linkedin: false, github: false, portfolio: false },
+      value: true,
+      links: { linkedin: true, github: true, portfolio: true },
       title: this.state.title.map(item => {
-        return { _id: item._id, value: false };
+        return { _id: item._id, value: true };
       }),
       sections: {
         experience: this.state.experience.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         }),
         education: this.state.education.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         }),
         summary: this.state.summary.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         }),
         skills: this.state.skills.map(item => {
-          return { _id: item._id, value: false };
+          return { _id: item._id, value: true };
         })
       }
     };
@@ -130,7 +131,12 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
-        this.setState({ currentresume: response.data.Resume._id });
+        if(this.state.resumes.length <= 1){
+          console.log("setResume replaced index 0 resume");
+          this.setState({ resumes: [response.data.Resume], currentresume: response.data.Resume._id });
+        } else {
+          this.setState({ currentresume: response.data.Resume._id });
+        }
       })
       .catch(err => {
         console.log("err", err);
@@ -138,10 +144,10 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = resumeId => {
+    console.log("expandResumeIDs called with resumeId:", resumeId);
     // Index was being passed as the number 0, when according to other areas of code
     // currentresume is supposed to be the id of a resume.
     // Now currentresume is a string id referencing the Resume model
-
     let index = 0;
     // The index is now found based on the passed in resumeId, and the loop breaks once it is found.
     for(let i = 0; i < this.state.resumes.length; i++){
@@ -247,22 +253,22 @@ class AuthProvider extends Component {
           }
         )
         .then(response => {
-          // axios
-          //   .put(
-          //     `${urls[urls.basePath]}/users/info/${this.state.id}`,
-          //     { currentresume: response.data.resume._id },
-          //     {
-          //       headers: {
-          //         Authorization: "Bearer " + localStorage.getItem("token")
-          //       }
-          //     }
-          //   )
-          //   .then(response => {
-          //     this.setState({ success: true });
-          //   })
-          //   .catch(err => {
-          //     console.log("err", err);
-          //   });
+          axios
+            .put(
+              `${urls[urls.basePath]}/users/info/${this.state.id}`,
+              { currentresume: response.data.resume._id },
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token")
+                }
+              }
+            )
+            .then(response => {
+              this.setState({ success: true });
+            })
+            .catch(err => {
+              console.log("err", err);
+            });
           console.log("response", response);
         })
         .catch(err => {

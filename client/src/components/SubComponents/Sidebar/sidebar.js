@@ -13,7 +13,7 @@ class Sidebar extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (localStorage.getItem("token") && this.props.context.auth !== true) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
@@ -22,6 +22,7 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
+          console.log("Sidebar DidMounted and called setLogin and setResume with:", response.data)
           this.props.context.actions.setLogin(response.data.user);
           this.props.context.actions.setResume(response.data.resumes);
         })

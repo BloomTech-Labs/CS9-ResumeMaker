@@ -181,11 +181,11 @@ class App extends Component {
                     <TemplateThree {...props} context={context} />
                   )}
                 /> */}
-                <Route
+                {/* <Route
                   exact
                   path="/sidebar"
                   render={props => <Sidebar {...props} context={context} />}
-                />
+                /> */}
               </React.Fragment>
             )}
           </AuthContext.Consumer>
