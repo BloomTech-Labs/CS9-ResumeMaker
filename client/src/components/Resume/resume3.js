@@ -74,7 +74,7 @@ export class ResumeThree extends Component {
               <h4 className="resume page-header" style={{fontSize: "1.5rem", paddingTop: "0"}}>Elegant</h4>
             <PDF />
             </div>
-            <div className="template1">
+            <div className="template3">
               <div className="row">
                 <div className="col-3 left-column">
                   {/* <a

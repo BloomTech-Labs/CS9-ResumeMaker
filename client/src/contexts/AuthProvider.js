@@ -83,10 +83,10 @@ class AuthProvider extends Component {
     if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
       this.createResume(true);
-    } else if (resumeData[0] !== null && this.state.currentresume === null){
+    } else if (resumeData.length === 1 && this.state.currentresume === null){
       console.log("dont set res 1")
       this.setState({
-        // resumes: resumeData,
+        resumes: resumeData,
         currentresume: resumeData[0]._id
       });
     } else {

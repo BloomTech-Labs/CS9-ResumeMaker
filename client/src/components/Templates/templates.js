@@ -28,8 +28,8 @@ class Templates extends Component {
           return i;
         }
       }
-      return -1;
-    }
+    return -1;
+  }
 
   componentWillMount() {
     let index = this.findWithAttr(
