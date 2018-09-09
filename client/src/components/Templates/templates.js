@@ -31,31 +31,13 @@ class Templates extends Component {
     }
 
   componentWillMount() {
-    // function findWithAttr(array, attr, value) {
-    //   for (var i = 0; i < array.length; i += 1) {
-    //     if (array[i][attr] === value) {
-    //       return i;
-    //     }
-    //   }
-    //   return -1;
-    // }
-
-    // If there are no resumes saved yet, this if statement will prevent crashing.
-    if (
-      this.props.context.userInfo.auth === true &&
-      (!this.props.context.userInfo.resumes.length ||
-      this.props.context.userInfo.resumes[0] === null)
-    ) {
-      this.props.context.actions.setResume([]);
-    } else {
-      let index = this.findWithAttr(
-        this.props.context.userInfo.resumes,
-        "_id",
-        this.props.context.userInfo.currentresume
-      );
-      if (index === -1) index = 0;
-      this.setState({ index: index });
-    }
+    let index = this.findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
   }
 
   componentDidMount() {
@@ -174,6 +156,8 @@ class Templates extends Component {
       return <Redirect to="/resumes" />;
     }
     const resumes = this.props.context.userInfo.resumes;
+    // The following if statement prevents crashes if resumes aren't loaded or don't exist yet.
+    // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
       !resumes[this.state.index] ||
       this.props.context.userInfo.auth === false ||
