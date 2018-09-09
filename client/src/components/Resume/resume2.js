@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { FormGroup } from "reactstrap";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
 import Navbar from "../SubComponents/Navbar/navbar";
@@ -79,12 +78,12 @@ export class ResumeTwo extends Component {
         <Navbar context={this.props.context}/>
         <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div col">
+          <div className="page-div page-container-div">
             <div className="resume title-div">
               <h3 className="resume page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Modern</h3>
             <PDF />
             </div>
-            <form className="template1" onSubmit={this.handleSubmit}>
+            <div className="template1">
               <div style={{ textAlign: "center" }} className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
@@ -120,7 +119,7 @@ export class ResumeTwo extends Component {
               <Divider className="divider-div" />
               <div className="row">
                 <div className="col">
-                  <FormGroup textalign="center" className="contactSection">
+                  <Container textalign="center" className="contactSection">
                     <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
                       <p> {userInfo.email}</p>
@@ -136,10 +135,10 @@ export class ResumeTwo extends Component {
                     {resumes[this.state.index].links.portfolio ? (
                       <p>{userInfo.links.portfolio}</p>
                     ) : null}
-                  </FormGroup>
+                  </Container>
 
                   {educationLength > 0 ? (
-                    <FormGroup textalign="center" className="educationSection">
+                    <Container textalign="center" className="educationSection">
                       <Divider className="divider-div" />
                       <h3 className="subtitle">Education</h3>
                       {education.map((content, index) => {
@@ -161,14 +160,14 @@ export class ResumeTwo extends Component {
                           </div>
                         ) : null;
                       })}
-                    </FormGroup>
+                    </Container>
                   ) : null}
                 </div>
 
                 <Divider className="divider-div" />
                 <div className="col">
                   {skillsLength > 0 ? (
-                    <FormGroup textalign="center" className="skillsSection">
+                    <Container textalign="center" className="skillsSection">
                       <h3 className="subtitle">Skills</h3>
                       {userInfo.skills.map((content, index) => {
                         return resumes[this.state.index].sections.skills[
@@ -180,11 +179,11 @@ export class ResumeTwo extends Component {
                         ) : null;
                       })}
                       <Divider className="divider-div" />
-                    </FormGroup>
+                    </Container>
                   ) : null}
 
                   {experienceLength > 0 ? (
-                    <FormGroup textalign="center" className="experienceSection">
+                    <Container textalign="center" className="experienceSection">
                       <h3 className="subtitle">Experience</h3>
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
@@ -205,11 +204,11 @@ export class ResumeTwo extends Component {
                           </div>
                         ) : null;
                       })}
-                    </FormGroup>
+                    </Container>
                   ) : null}
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

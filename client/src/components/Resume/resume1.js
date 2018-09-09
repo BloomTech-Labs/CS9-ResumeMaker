@@ -90,7 +90,7 @@ export class ResumeOne extends Component {
               </h5>
               <PDF />
             </div>
-            <form className="template1" onSubmit={this.handleSubmit}>
+            <div className="template1">
               <Container textAlign="center" className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
@@ -222,7 +222,7 @@ export class ResumeOne extends Component {
                   })}
                 </Container>
               ) : null}
-            </form>
+            </div>
           </div>
         </div>
       </div>
