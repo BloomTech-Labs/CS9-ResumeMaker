@@ -52,7 +52,7 @@ class Summary extends Component {
                     elementName="summary"
                     putPath="sections.summary"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     content={element.content}
                     context={this.props.context}
                   />

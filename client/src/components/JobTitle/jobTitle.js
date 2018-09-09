@@ -45,7 +45,7 @@ class JobTitle extends Component {
                     elementName="title"
                     putPath="title"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     content={element.content}
                     context={this.props.context}
                   />

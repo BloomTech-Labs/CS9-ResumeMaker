@@ -45,7 +45,7 @@ class Experience extends Component {
                     elementName="experience"
                     putPath="sections.experience"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     element={element}
                     context={this.props.context}
                   />

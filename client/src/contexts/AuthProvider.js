@@ -86,7 +86,7 @@ class AuthProvider extends Component {
     } else if (resumeData[0] !== null && this.state.currentresume === null){
       console.log("dont set res 1")
       this.setState({
-        resumes: resumeData,
+        // resumes: resumeData,
         currentresume: resumeData[0]._id
       });
     } else {

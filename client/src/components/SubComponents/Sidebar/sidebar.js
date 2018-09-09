@@ -25,6 +25,14 @@ class Sidebar extends Component {
           console.log("Sidebar DidMounted and called setLogin and setResume with:", response.data)
           this.props.context.actions.setLogin(response.data.user);
           this.props.context.actions.setResume(response.data.resumes);
+          if(response.data.resumes.length >= 1){
+            for(let i = 0; i < response.data.resumes.length; i++){
+              this.props.context.actions.expandResumeIDs(response.data.resumes[i]._id)
+            }
+          }
+          // if(response.data.user.currentresume._id){
+          //   this.props.context.actions.expandResumeIDs(response.data.user.currentresume._id);
+          // }
         })
         .catch(err => {
           console.log("Server Error: ", err);

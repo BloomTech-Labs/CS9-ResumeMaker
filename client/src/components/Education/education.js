@@ -45,7 +45,7 @@ class Education extends Component {
                     elementName="education"
                     putPath="sections.education"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     element={element}
                     context={this.props.context}
                   />
