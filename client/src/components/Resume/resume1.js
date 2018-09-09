@@ -82,12 +82,12 @@ export class ResumeOne extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h5
+              <h4
                 className="resume page-header"
                 style={{ fontSize: "1.5rem", paddingTop: "0" }}
               >
                 Traditional
-              </h5>
+              </h4>
               <PDF />
             </div>
             <div className="template1">
@@ -160,7 +160,7 @@ export class ResumeOne extends Component {
                         .value ? (
                         <React.Fragment key={index}>
                           <div>
-                            <p style={{ marginRight: "1%" }}>{content.groupname}</p>
+                            <b style={{ marginRight: "1%" }}>{content.groupname}</b>
                             <p style={{ marginRight: "1%" }}>{content.content}</p>
                           </div>
                         </React.Fragment>

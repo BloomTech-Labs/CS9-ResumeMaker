@@ -394,6 +394,13 @@ form {
   justify-content: space-between;
   padding: 1rem 2rem 0;
 }
+.resume.title-div h4 {
+  width: 100%;
+  border-bottom: 1px solid black;
+  text-align: start;
+  padding: 0.5rem;
+  margin-right: 5%;
+}
 img {
   height: 12rem;
   width: 10rem;
@@ -517,6 +524,7 @@ img {
   padding: 50px;
   margin: 1rem;
   background: white;
+  text-align: left;
 }
 .template2 {
   border: 1px solid black;

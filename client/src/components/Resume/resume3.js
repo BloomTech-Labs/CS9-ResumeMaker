@@ -111,7 +111,7 @@ export class ResumeThree extends Component {
                     </div>
                   </Container>
                 </div>
-                <div className="col">
+                <div className="col-9">
                   <div style={{ textAlign: "center" }} className="titleSection">
                     <h4>
                       {userInfo.name.firstname} {userInfo.name.lastname}
