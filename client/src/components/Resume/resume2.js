@@ -164,7 +164,7 @@ export class ResumeTwo extends Component {
                   ) : null}
                   </div>
                   <Divider className="divider-div" />
-                  <div className="col">
+                  <div className="col-7">
                     {skillsLength > 0 ? (
                       <Container textalign="center" className="skillsSection">
                         <h3 className="subtitle">Skills</h3>

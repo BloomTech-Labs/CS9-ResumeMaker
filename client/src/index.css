@@ -527,6 +527,9 @@ img {
 .template2 .row {
   flex-wrap: unset;
 }
+.template2 p {
+  word-break: break-word;
+}
 .template3 {
   border: 1px solid black;
   padding: 50px;
