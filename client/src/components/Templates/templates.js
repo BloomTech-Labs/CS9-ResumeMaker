@@ -16,13 +16,12 @@ class Templates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
+      index: null,
       success: false
     };
   }
 
-  componentWillMount() {
-    function findWithAttr(array, attr, value) {
+  findWithAttr = (array, attr, value) => {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
           return i;
@@ -31,45 +30,32 @@ class Templates extends Component {
       return -1;
     }
 
-    // If there are no resumes saved yet, this if statement
-    // will prevent crashing.
-    let resumePromise;
+  componentWillMount() {
+    // function findWithAttr(array, attr, value) {
+    //   for (var i = 0; i < array.length; i += 1) {
+    //     if (array[i][attr] === value) {
+    //       return i;
+    //     }
+    //   }
+    //   return -1;
+    // }
 
+    // If there are no resumes saved yet, this if statement will prevent crashing.
     if (
       this.props.context.userInfo.auth === true &&
       (!this.props.context.userInfo.resumes.length ||
       this.props.context.userInfo.resumes[0] === null)
     ) {
-      // tempThis is needed to allow the promise to use the correct "this"
-      const tempThis = this;
-      resumePromise = new Promise(function(resolve, reject) {
-        console.log("full promise called")
-        console.log("THISIS", tempThis)
-        console.log(tempThis.handleCreate());
-        if(tempThis.handleCreate() === true){
-          resolve("New resume created!")
-        } else {
-          reject("Resume could not be created.")
-        }
-      });
+      this.props.context.actions.setResume();
     } else {
-      resumePromise = new Promise(function(resolve, reject) {
-        console.log("emptypromisecalled")
-        resolve('Success!')
-      });
-    }
-
-    console.log("PROMISE", resumePromise)
-
-    resumePromise.then(() => {
-      let index = findWithAttr(
+      let index = this.findWithAttr(
         this.props.context.userInfo.resumes,
         "_id",
         this.props.context.userInfo.currentresume
       );
       if (index === -1) index = 0;
       this.setState({ index: index });
-    })
+    }
   }
 
   componentDidMount() {
@@ -78,7 +64,7 @@ class Templates extends Component {
 
   // componentWillUnmount() {
   //   this.props.context.actions.expandResumeIDs(
-  //     this.props.context.userInfo.currentResume
+  //     this.props.context.userInfo.currentresume
   //   );
   // }
 
@@ -116,11 +102,9 @@ class Templates extends Component {
           "currentresume",
           response.data.Resume._id
         );
-        return true;
       })
       .catch(err => {
         console.log("err", err);
-        return false;
       });
   };
 
@@ -190,8 +174,8 @@ class Templates extends Component {
       return <Redirect to="/resumes" />;
     }
     if (
-      !this.props.context.userInfo.resumes.length ||
-      this.props.context.userInfo.resumes[0] === null
+      this.props.context.userInfo.currentresume === null ||
+      this.state.index === null
     ) {
       return <div>Loading...</div>
       // console.log(

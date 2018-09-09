@@ -47,6 +47,7 @@ router.post(
         User.findById(user)
           .then(user => {
             user.resumes.push(resume);
+            user.currentresume = resume._id;
             user.save();
             res.status(201).json({ Resume: resume });
           })

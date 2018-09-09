@@ -24,11 +24,6 @@ class Sidebar extends Component {
         .then(response => {
           this.props.context.actions.setLogin(response.data.user);
           this.props.context.actions.setResume(response.data.resumes);
-          if (
-            !this.props.context.userInfo.resumes.length ||
-            this.props.context.userInfo.resumes[0] === null
-          )
-            this.props.context.actions.createResume();
         })
         .catch(err => {
           console.log("Server Error: ", err);

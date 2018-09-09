@@ -164,7 +164,7 @@ class App extends Component {
                   path="/templates"
                   render={props => <Templates {...props} context={context} />}
                 />
-                <Route
+                {/* <Route
                   exact
                   path="/templates/template-1"
                   render={props => <TemplateOne {...props} context={context} />}
@@ -180,7 +180,7 @@ class App extends Component {
                   render={props => (
                     <TemplateThree {...props} context={context} />
                   )}
-                />
+                /> */}
                 <Route
                   exact
                   path="/sidebar"

@@ -23,7 +23,7 @@ class AuthProvider extends Component {
     skills: [],
     summary: [],
     resumes: [],
-    currentResume: 0,
+    currentresume: null,
     membership: false
   };
 
@@ -31,7 +31,7 @@ class AuthProvider extends Component {
     localStorage.removeItem("token");
     this.setState({
       auth: false,
-      currentResume: 0,
+      currentresume: null,
       username: "",
       email: "",
       name: {
@@ -52,7 +52,7 @@ class AuthProvider extends Component {
   setLogin = userData => {
     this.setState({
       auth: true,
-      currentResume: userData.currentresume ? userData.currentresume : 0,
+      currentresume: userData.currentresume ? userData.currentresume : null,
       email: userData.email ? userData.email : "",
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
@@ -76,12 +76,21 @@ class AuthProvider extends Component {
   };
 
   setResume = resumeData => {
-    if (!resumeData.length && resumeData[0] === null) {
+    console.log("resdata is,", resumeData)
+    if (!(resumeData.length > 0)) {
+      console.log("SET REZ BOI")
       this.createResume(true);
-    } else {
+    } else if (this.state.currentresume === null){
+      console.log("dont set res 1")
       this.setState({
-        resumes: resumeData
+        resumes: resumeData,
+        currentresume: resumeData[0]._id
       });
+    } else {
+      console.log("dont set res 2")
+      this.setState({
+        resumes: resumeData,
+      })
     }
   };
 
