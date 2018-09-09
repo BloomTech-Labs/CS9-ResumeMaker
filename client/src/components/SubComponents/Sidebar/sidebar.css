@@ -1,7 +1,6 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  /* padding: 20px; */
   min-width: 10rem;
   /* align-items: start; */
   min-height: 100vh !important;
@@ -13,11 +12,9 @@
   background: #162238;
   justify-content: space-between;
   margin-right: 1px;
-  
 }
 
 .static-sidebar {
-  /* border-right: 1px solid black; */
   /* min-width: 10rem; */
   /* min-height: 100vh !important; */
   padding: 0 !important;
@@ -45,7 +42,6 @@
 .static-sidebar .active {
   border-left: 1rem solid #d9d9d9;
   background: #324359;
-  /* border-bottom: 1px solid #162238; */
 }
 
 /* Stops icons next to section titles on sidebar from jutting up against the titles */
@@ -57,5 +53,4 @@
   color: #c5c6c7;
   text-shadow: 1px 1px black;
   margin-top: 25px;
-  /* border-bottom: 1px solid white;  */
 }

@@ -76,8 +76,6 @@
 .experience-containment-div,
 .education-containment-div {
   display: flex;
-  /* justify-content: center; */
-  /* max-width: 800px; */
   flex-wrap: wrap;
   min-width: 100%;
 }
