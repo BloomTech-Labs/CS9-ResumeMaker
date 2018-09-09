@@ -309,6 +309,7 @@ router.put(
   "/info/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("request body:", req.body)
     const id = req.params.id;
     if (id === req.user.id) {
       delete req.body.username;

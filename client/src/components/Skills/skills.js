@@ -125,7 +125,7 @@ class Skills extends Component {
               {this.state.skills.map((element, index) => {
                 return (
                   <Form
-                    onSubmit={() => this.handleSubmit("edit")}
+                    // onSubmit={() => this.handleSubmit("edit")}
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
                   >
@@ -139,6 +139,13 @@ class Skills extends Component {
                           // size="sm"
                           value={this.state.skills[index].groupname}
                           onChange={e => this.handleChange(e, index)}
+                          onKeyDown={event => {
+                            if (event.key === "Enter") {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              this.handleSubmit("edit");
+                            }
+                          }}
                         />
                       </Col>
                     </FormGroup>
@@ -153,16 +160,22 @@ class Skills extends Component {
                           // size="sm"
                           value={this.state.skills[index].content}
                           onChange={e => this.handleChange(e, index)}
+                          onKeyDown={event => {
+                            if (event.key === "Enter") {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              this.handleSubmit("edit");
+                            }
+                          }}
                         />
                       </Col>
                     </FormGroup>
-                    {/* <button type="submit"></button> */}
                   </Form>
                 );
               })}
-              {/* <Button color="primary" onClick={() => this.handleSubmit("edit")}>
+              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
                 Submit
-              </Button> */}
+              </Button>
               <div className="skillgroup-input">
                 <FormGroup>
                   <Label>New Skill Group</Label>
