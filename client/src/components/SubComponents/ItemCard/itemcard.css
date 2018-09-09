@@ -15,26 +15,26 @@
 .item-card.row-card {
   flex-direction: row;
   margin: 1%;
-  white-space: nowrap;
 }
 
 /* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
 .item-card.row-card .card-body {
   padding: 0 0.5rem 0 0;
+  overflow: hidden;
 }
 
 /* This keeps the red delete X from jutting up against the left side on single line row cards */
 .item-card.row-card .close {
   padding: 0 0.3rem;
+  position: relative;
+  align-self: center;
 }
 
 .item-card.row-card p {
   padding: 0;
-}
-
-.item-card.row-card .close {
-  position: relative;
-  align-self: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item-card .btn {
@@ -137,20 +137,6 @@
 
 .card-body.card-text.card {
   text-decoration-color: black;
-}
-
-.item-card.row-card .card-body {
-  min-width: 1rem;
-  max-width: 8rem;
-  margin: 0 1rem 1rem 0.1rem;
-  padding: 0.3rem;
-  width: 7rem;
-  height: 3rem;
-  overflow: hidden;
-}
-
-.item-card.row-card .card-body {
-  height: 2rem;
 }
 
 /* a:hover {
