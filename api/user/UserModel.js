@@ -159,7 +159,7 @@ const User = new mongoose.Schema(
         ref: "Resume"
       }
     ],
-    currentresume: Number
+    currentresume: { type: ObjectId, ref: "Resume" }
   },
   { timestamps: true }
 );

@@ -128,7 +128,20 @@ class AuthProvider extends Component {
       });
   };
 
-  expandResumeIDs = index => {
+  expandResumeIDs = resumeId => {
+    // Index was being passed as the number 0, when according to other areas of code
+    // currentresume is supposed to be the id of a resume.
+    // Now currentresume is a string id referencing the Resume model
+
+    let index = 0;
+    // The index is now found based on the passed in resumeId, and the loop breaks once it is found.
+    for(let i = 0; i < this.state.resumes.length; i++){
+      if(this.state.resumes[i]._id === resumeId){
+        index = i;
+        break;
+      }
+    }
+
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -143,6 +156,9 @@ class AuthProvider extends Component {
       // no .sections portion
       if (!resumeSection) {
         for (let item of this.state[section]) {
+          console.log("WHATWEGOT", this.state.resumes);
+          console.log("INDEX IS", index)
+          console.log("WHATWEGOTINDEX", this.state.resumes[index]);
           let current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );

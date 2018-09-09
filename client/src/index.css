@@ -49,10 +49,10 @@ a {
   width: 100%;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   align-items: start;
+  display: flex;
   align-self: start;
   flex-direction: row;
   text-align: start;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0.5rem 0 0 0;
