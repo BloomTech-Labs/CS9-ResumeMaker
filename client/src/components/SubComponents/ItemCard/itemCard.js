@@ -215,7 +215,7 @@ class ItemCard extends Component {
       );
     } else
       return (
-        <Card className="item-card row-card oneline">
+        <Card className="item-card row-card">
           <button
             className="close"
             aria-label="Delete"
