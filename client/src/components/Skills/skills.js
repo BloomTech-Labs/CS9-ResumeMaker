@@ -3,10 +3,8 @@ import React, { Component } from "react";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
-import ItemCard from "../SubComponents/ItemCard/itemCard";
 import {
   Container,
-  Row,
   Col,
   Button,
   Form,
@@ -41,7 +39,6 @@ class Skills extends Component {
   };
 
   handleChange = (e, index) => {
-    // this.setState({ [e.target.id]: e.target.value });
     const eName = e.target.name;
     const value = e.target.value;
     let newState = this.state.skills;
@@ -100,15 +97,6 @@ class Skills extends Component {
           <div className="title-div col">
             <div className="link-hide">
               <h4>SKILLS </h4>
-              <Link
-                to={{
-                  pathname: "/skills/create", // component being Linked to
-                  state: { index: false } // Setting Index passed into educationCreate component - false means new
-                }}
-              >
-                {" "}
-                <i className="fa fa-pencil fa-lg" />
-              </Link>
             </div>
             <p
               style={{
@@ -125,7 +113,6 @@ class Skills extends Component {
               {this.state.skills.map((element, index) => {
                 return (
                   <Form
-                    // onSubmit={() => this.handleSubmit("edit")}
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
                   >

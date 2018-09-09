@@ -10,7 +10,6 @@ import SummaryCreate from "./components/Summary/summaryCreate";
 import Education from "./components/Education/education";
 import EducationCreate from "./components/Education/educationCreate";
 import Skills from "./components/Skills/skills";
-import SkillsCreate from "./components/Skills/skillsCreate";
 import JobTitle from "./components/JobTitle/jobTitle";
 import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import Experience from "./components/Experience/experience";
@@ -85,13 +84,6 @@ class App extends Component {
                   exact
                   path="/skills"
                   render={props => <Skills {...props} context={context} />}
-                />
-                <Route
-                  exact
-                  path="/skills/create"
-                  render={props => (
-                    <SkillsCreate {...props} context={context} />
-                  )}
                 />
                 <Route
                   exact
