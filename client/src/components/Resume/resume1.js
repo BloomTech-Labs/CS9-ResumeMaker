@@ -34,11 +34,11 @@ export class ResumeOne extends Component {
     this.setState({ index: index });
   }
 
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
+  // componentWillUnmount() {
+  //   this.props.context.actions.expandResumeIDs(
+  //     this.props.context.userInfo.currentResume
+  //   );
+  // }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -68,19 +68,13 @@ export class ResumeOne extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    const summaryLength = userInfo.summary.filter((item, index) => {
-      return resumes[this.state.index].sections.summary[index].value;
-    });
-    const skillsLength = userInfo.skills.filter((item, index) => {
-      return resumes[this.state.index].sections.skills[index].value;
-    });
-    const educationLength = userInfo.education.filter((item, index) => {
-      return resumes[this.state.index].sections.education[index].value;
-    });
-    const experienceLength = userInfo.experience.filter((item, index) => {
-      return resumes[this.state.index].sections.experience[index].value;
-    });
+    const summaryLength = resumes[this.state.index].sections.summary.length;
+    const skillsLength = resumes[this.state.index].sections.skills.length;
+    const educationLength = resumes[this.state.index].sections.education.length;
+    const experienceLength = resumes[this.state.index].sections.experience.length;
 
+    console.log("Summary, skills, education and experience lengths:", summaryLength, skillsLength, educationLength, experienceLength)
+    
     return (
       <div>
         <Navbar context={this.props.context} />
@@ -102,11 +96,13 @@ export class ResumeOne extends Component {
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 {userInfo.title.map((item, index) => {
-                  return resumes[this.state.index].title[index].value ? (
-                    <p style={{ fontSize: "1.5rem" }} key={item._id}>
-                      {item.content}
-                    </p>
-                  ) : null;
+                  if(resumes[this.state.index].title[index]){
+                    return (
+                      <p style={{ fontSize: "1.5rem" }} key={item._id}>
+                        {item.content}
+                      </p>
+                    )
+                  } else return null;
                 })}
               </Container>
               <Divider className="divider-div" />
@@ -136,7 +132,7 @@ export class ResumeOne extends Component {
                 </div>
               </Container>
               <Divider className="divider-div" />
-              {summaryLength.length > 0 ? (
+              {summaryLength > 0 ? (
                 <div>
                   <Container
                     textAlign="center"
@@ -155,7 +151,7 @@ export class ResumeOne extends Component {
                 </div>
               ) : null}
 
-              {skillsLength.length > 0 ? (
+              {skillsLength > 0 ? (
                 <div>
                   <h3>Skills</h3>
                   <Container textAlign="center" className="skillsSection">
@@ -163,7 +159,10 @@ export class ResumeOne extends Component {
                       return resumes[this.state.index].sections.skills[index]
                         .value ? (
                         <React.Fragment key={index}>
-                          <p style={{ marginRight: "1%" }}>{content.content}</p>
+                          <div>
+                            <p style={{ marginRight: "1%" }}>{content.groupname}</p>
+                            <p style={{ marginRight: "1%" }}>{content.content}</p>
+                          </div>
                         </React.Fragment>
                       ) : null;
                     })}
@@ -172,7 +171,7 @@ export class ResumeOne extends Component {
                 </div>
               ) : null}
 
-              {experienceLength.length > 0 ? (
+              {experienceLength > 0 ? (
                 <div>
                   <Container textAlign="center" className="experienceSection">
                     <h3>Experience</h3>
@@ -200,7 +199,7 @@ export class ResumeOne extends Component {
                 </div>
               ) : null}
 
-              {educationLength.length > 0 ? (
+              {educationLength > 0 ? (
                 <Container textAlign="center" className="educationSection">
                   <h3>Education</h3>
                   {education.map((content, index) => {

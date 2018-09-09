@@ -63,11 +63,11 @@ class ExperienceCreate extends Component {
       });
   }
 
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
+  // componentWillUnmount() {
+  //   this.props.context.actions.expandResumeIDs(
+  //     this.props.context.userInfo.currentResume
+  //   );
+  // }
 
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });

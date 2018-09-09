@@ -44,11 +44,11 @@ class Templates extends Component {
     window.scrollTo(0, 0);
   }
 
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
+  // componentWillUnmount() {
+  //   this.props.context.actions.expandResumeIDs(
+  //     this.props.context.userInfo.currentResume
+  //   );
+  // }
 
   handleCreate = () => {
     const tempObj = {
@@ -217,9 +217,9 @@ class Templates extends Component {
               className="dropdown"
               context={this.props.context}
               data={userInfo}
-              value={resumes[this.state.index].title.filter(
+              value={resumes[this.state.index] ? resumes[this.state.index].title.filter(
                 title => title.value === true
-              )}
+              ): null}
               index={this.state.index}
             />
             {/* </Container> */}
@@ -242,7 +242,7 @@ class Templates extends Component {
                 context={this.props.context}
                 index={this.state.index}
                 name="linkedin"
-                value={resumes[this.state.index].links.linkedin}
+                value={resumes[this.state.index] ? resumes[this.state.index].links.linkedin : null}
               />
               <div className={"fa fa-linkedin fa-sm"} />
               {userInfo.links.linkedin}
@@ -252,7 +252,7 @@ class Templates extends Component {
                 context={this.props.context}
                 index={this.state.index}
                 name="github"
-                value={resumes[this.state.index].links.github}
+                value={resumes[this.state.index] ? resumes[this.state.index].links.github : null}
               />{" "}
               <div className="fa fa-github" aria-hidden="true" />
               {userInfo.links.github}
@@ -262,7 +262,7 @@ class Templates extends Component {
                 context={this.props.context}
                 index={this.state.index}
                 name="portfolio"
-                value={resumes[this.state.index].links.portfolio}
+                value={resumes[this.state.index] ? resumes[this.state.index].links.portfolio : null}
               />{" "}
               {userInfo.links.portfolio}
             </p>
@@ -277,9 +277,9 @@ class Templates extends Component {
             <SummaryDropdown
               context={this.props.context}
               data={userInfo}
-              value={resumes[this.state.index].sections.summary.filter(
+              value={resumes[this.state.index] ? resumes[this.state.index].sections.summary.filter(
                 summary => summary.value === true
-              )}
+              ) : null}
               index={this.state.index}
             />
             {/* </Container> */}
@@ -296,7 +296,7 @@ class Templates extends Component {
                       id={content._id}
                       name="skills"
                       value={
-                        resumes[this.state.index].sections.skills[index].value
+                        resumes[this.state.index].sections.skills[index] ? resumes[this.state.index].sections.skills[index].value : null
                       }
                       index={this.state.index}
                     />
@@ -322,8 +322,8 @@ class Templates extends Component {
                           id={content._id}
                           name="experience"
                           value={
-                            resumes[this.state.index].sections.experience[index]
-                              .value
+                            resumes[this.state.index].sections.experience[index] ? resumes[this.state.index].sections.experience[index]
+                              .value : null
                           }
                           index={this.state.index}
                         />{" "}
@@ -358,8 +358,8 @@ class Templates extends Component {
                           id={content._id}
                           name="education"
                           value={
-                            resumes[this.state.index].sections.education[index]
-                              .value
+                            resumes[this.state.index].sections.education[index] ? resumes[this.state.index].sections.education[index]
+                              .value : null
                           }
                           index={this.state.index}
                         />

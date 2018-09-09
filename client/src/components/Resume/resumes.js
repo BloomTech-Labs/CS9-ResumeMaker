@@ -30,11 +30,11 @@ class Resumes extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
+  // componentWillUnmount() {
+  //   this.props.context.actions.expandResumeIDs(
+  //     this.props.context.userInfo.currentResume
+  //   );
+  // }
 
   render() {
     return (

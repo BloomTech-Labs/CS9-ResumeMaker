@@ -9,11 +9,11 @@ class JobTitle extends Component {
     window.scrollTo(0, 0);
   }
 
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    )
-  }
+  // componentWillUnmount() {
+  //   this.props.context.actions.expandResumeIDs(
+  //     this.props.context.userInfo.currentResume
+  //   )
+  // }
 
   render() {
     return (
