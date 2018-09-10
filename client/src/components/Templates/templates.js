@@ -36,18 +36,18 @@ class Templates extends Component {
     this.setState({ index: newIndex });
   }
 
-  componentWillMount() {
-    console.log("template componentWillMount");
-    let index = this.findWithAttr(
-      this.props.context.userInfo.resumes,
-      "_id",
-      this.props.context.userInfo.currentresume
-    );
-    console.log(this.props.context.userInfo.currentresume)
-    console.log("index from findWithAttr is:", index);
-    if (index === -1) index = 0;
-    this.setState({ index: index });
-  }
+  // componentWillMount() {
+  //   console.log("template componentWillMount");
+  //   let index = this.findWithAttr(
+  //     this.props.context.userInfo.resumes,
+  //     "_id",
+  //     this.props.context.userInfo.currentresume
+  //   );
+  //   console.log(this.props.context.userInfo.currentresume)
+  //   console.log("index from findWithAttr is:", index);
+  //   if (index === -1) index = 0;
+  //   this.setState({ index: index });
+  // }
 
   componentDidMount() {
     console.log("template componentDidMount");

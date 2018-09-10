@@ -167,11 +167,10 @@ class AuthProvider extends Component {
     }
 
     const tempResume = [];
-
   
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-      const tempObj = this.state.resumes[index];
+      let tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
           let current = this.state.resumes[index][section].filter(
@@ -228,45 +227,13 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      this.setState({ ["resumes"[index]]: tempObj });
-      tempResume.push(this.state.resumes[index]);
-
-    // if (!tempResume["user"]) tempResume["user"] = this.state.id;
-    // if (tempResume[index]._id) {
-    //   axios
-    //     .put(
-    //       `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
-    //       tempResume[index],
-    //       {
-    //         headers: {
-    //           Authorization: "Bearer " + localStorage.getItem("token")
-    //         }
-    //       }
-    //     )
-    //     .then(response => {
-    //       // axios
-    //       //   .put(
-    //       //     `${urls[urls.basePath]}/users/info/${this.state.id}`,
-    //       //     { currentresume: response.data.resume._id },
-    //       //     {
-    //       //       headers: {
-    //       //         Authorization: "Bearer " + localStorage.getItem("token")
-    //       //       }
-    //       //     }
-    //       //   )
-    //       //   .then(response => {
-    //       //     this.setState({ success: true });
-    //       //   })
-    //       //   .catch(err => {
-    //       //     console.log("err", err);
-    //       //   });
-    //       console.log("response", response);
-    //     })
-    //     .catch(err => {
-    //       console.log("err", err);
-    //     });
-    //   }
+      // this.setState({ ["resumes"[index]]: tempObj });
+      tempResume.push(tempObj);
   };
+
+  // Using promises means the state is only set a single name, rather than for each
+  // subattribute changed or once for each resume that is updated.
+  let resumePromises = [];
 
   // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
@@ -276,7 +243,7 @@ class AuthProvider extends Component {
       expandSection("summary", true, index);
       expandSection("skills", true, index);
       console.log("EXPANDIDS IS DOING AN AXIOS M80");
-      axios
+      const resumePromise = axios
       .put(
         `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
         tempResume[index],
@@ -288,11 +255,21 @@ class AuthProvider extends Component {
       )
       .then(response => {
         console.log("response", response);
+        return response.data.resume;
       })
       .catch(err => {
         console.log("err", err);
       });
+      resumePromises.push(resumePromise);
     });
+
+    // console.log("OUR PROMISES", resumePromises);
+    // Once every request is finished state updates once.
+    Promise.all(resumePromises).then(updatedResumes => {
+      // console.log("promise me ned", updatedResumes);
+      this.setState({ resumes: updatedResumes})
+    })
+
   };
 
 
