@@ -663,19 +663,16 @@ router.put("/forgotpassword", (req, res) => {
               }
             });
             let mailOptions = {
-              from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
-              to: `${req.user.email}`,
-              subject: `Confirm your account email change for ${websiteName}!`,
-              text: `Please go to this link to make this your new account email address: ${
+              from: `"Fredegar Fu 👻" <forgotpassword@${websiteName}>`,
+              to: `${user.email}`,
+              subject: `Confirm your password change for ${websiteName}!`,
+              text: `Please go to this link to reset your password: ${
                 req.body.path
-              }?/users/changeemail/${
-                newEmailConfirmation.hash
-              }`,
+              }?/users/resetpassword/${newEmailConfirmation.hash}`,
               html: `Please click this <a href=${
                 req.body.path
-              }?/users/changeemail/${
-                newEmailConfirmation.hash
-              }>link</a> to make this your new account email address..`
+              }?/users/resetpassword/${newEmailConfirmation.hash}
+              }>link</a> to reset your password.`
             };
 
             transporter.sendMail(mailOptions, (err, info) => {
