@@ -22,7 +22,10 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          console.log("Sidebar DidMounted and called setLogin and setResume with:", response.data)
+          console.log(
+            "Sidebar DidMounted and called setLogin and setResume with:",
+            response.data
+          );
           this.props.context.actions.setLogin(response.data);
           // this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
@@ -41,7 +44,7 @@ class Sidebar extends Component {
     } else {
       console.log("Sidebar detected no token and/or auth === false");
     }
-  }
+  };
 
   onSetSidebarOpen = open => {
     this.setState({ sidebarOpen: open });
@@ -69,8 +72,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-copy sm" style={{ color: "white" }} />{" "}
-            TEMPLATES
+            <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
           </Link>
           <Link
             to="/resumes"
@@ -83,7 +85,7 @@ class Sidebar extends Component {
               className="fa fa-file-alt sm"
               style={{ color: "white" }}
             />{" "}
-            RESUMES
+            TEMPLATES
           </Link>
           <Link
             to="/jobtitle"
