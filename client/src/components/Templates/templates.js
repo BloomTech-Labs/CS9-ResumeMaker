@@ -211,8 +211,7 @@ class Templates extends Component {
                 }}
               >
                 {" "}
-                Enter information into each section on the sidebar. Then choose
-                a template below to complete your RESUME.
+                Enter information into each section: JOB TITLE, SUMMARY, SKILLS, EXPERIENCE, EDUCATION. 
               </p>
             </div>
             <div className="containers-div">
@@ -225,7 +224,7 @@ class Templates extends Component {
                   <h1>Welcome! </h1>
                   <p>
                     Please go to the SETTINGS page and fill in your information
-                    to get started, and then to SKILLS, SUMMARY, EDUCATION, EXPERIENCE{" "}
+                    to get started!
                   </p>
                 </React.Fragment>
               )}
