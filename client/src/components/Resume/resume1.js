@@ -152,8 +152,8 @@ export class ResumeOne extends Component {
 
               {skillsLength > 0 ? (
                 <div>
-                  <h3>Skills</h3>
                   <Container textAlign="center" className="skillsSection">
+                    <h3>Skills</h3>
                     {userInfo.skills.map((content, index) => {
                       return resumes[this.state.index].sections.skills[index]
                         .value ? (
