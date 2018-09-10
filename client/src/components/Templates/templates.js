@@ -346,45 +346,50 @@ class Templates extends Component {
               <Container className="summary-section">
                 <h3>Summary</h3>
                 <Container className="summarySection">
-                <SummaryDropdown
-                  context={this.props.context}
-                  data={userInfo}
-                  value={
-                    resumes[this.state.index]
-                      ? resumes[this.state.index].sections.summary.filter(
-                          summary => summary.value === true
-                        )
-                      : null
-                  }
-                  index={this.state.index}
-                />
-                                </Container>
+                  <SummaryDropdown
+                    context={this.props.context}
+                    data={userInfo}
+                    value={
+                      resumes[this.state.index]
+                        ? resumes[this.state.index].sections.summary.filter(
+                            summary => summary.value === true
+                          )
+                        : null
+                    }
+                    index={this.state.index}
+                  />
+                </Container>
               </Container>
 
-              <h3>Skills</h3>
-              {userInfo.skills.map((content, index) => {
-                return (
-                  <div key={content._id}>
-                    <p>
-                      {" "}
-                      <CheckBox
-                        context={this.props.context}
-                        id={content._id}
-                        name="skills"
-                        value={
-                          resumes[this.state.index].sections.skills[index]
-                            ? resumes[this.state.index].sections.skills[index]
-                                .value
-                            : null
-                        }
-                        index={this.state.index}
-                      />
-                      {content.content}
-                    </p>
-                  </div>
-                );
-              })}
-              {/* </Container> */}
+              <Container className="skills-section">
+                <h3>Skills</h3>
+                <Container className="skillsSection">
+                  {userInfo.skills.map((content, index) => {
+                    return (
+                      <div key={content._id}>
+                        <p>
+                          {" "}
+                          <CheckBox
+                            context={this.props.context}
+                            id={content._id}
+                            name="skills"
+                            value={
+                              resumes[this.state.index].sections.skills[index]
+                                ? resumes[this.state.index].sections.skills[
+                                    index
+                                  ].value
+                                : null
+                            }
+                            index={this.state.index}
+                          />
+                          {content.content}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </Container>
+              </Container>
+
               {/* <Divider className="divider-div" /> */}
               {/* <Container textAlign="center" className="experienceSection"> */}
               <h3>Experience</h3>
