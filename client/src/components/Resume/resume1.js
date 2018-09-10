@@ -62,13 +62,27 @@ export class ResumeOne extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    const summaryLength = resumes[this.state.index].sections.summary.length;
-    const skillsLength = resumes[this.state.index].sections.skills.length;
-    const educationLength = resumes[this.state.index].sections.education.length;
-    const experienceLength = resumes[this.state.index].sections.experience.length;
+    const summaryLength = userInfo.summary.filter((item, index) => {
+      return resumes[this.state.index].sections.summary[index].value;
+    });
+    const skillsLength = userInfo.skills.filter((item, index) => {
+      return resumes[this.state.index].sections.skills[index].value;
+    });
+    const educationLength = userInfo.education.filter((item, index) => {
+      return resumes[this.state.index].sections.education[index].value;
+    });
+    const experienceLength = userInfo.experience.filter((item, index) => {
+      return resumes[this.state.index].sections.experience[index].value;
+    });
 
-    console.log("Summary, skills, education and experience lengths:", summaryLength, skillsLength, educationLength, experienceLength)
-    
+    console.log(
+      "Summary, skills, education and experience lengths:",
+      summaryLength,
+      skillsLength,
+      educationLength,
+      experienceLength
+    );
+
     return (
       <div>
         <Navbar context={this.props.context} />
@@ -76,11 +90,7 @@ export class ResumeOne extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h4
-                className="resume page-header"
-              >
-                Traditional
-              </h4>
+              <h4 className="resume page-header">Traditional</h4>
               <PDF />
             </div>
             <div className="template1">
@@ -89,12 +99,12 @@ export class ResumeOne extends Component {
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 {userInfo.title.map((item, index) => {
-                  if(resumes[this.state.index].title[index].value === true){
+                  if (resumes[this.state.index].title[index].value === true) {
                     return (
                       <p style={{ fontSize: "1.5rem" }} key={item._id}>
                         {item.content}
                       </p>
-                    )
+                    );
                   } else return null;
                 })}
               </Container>
@@ -125,7 +135,7 @@ export class ResumeOne extends Component {
                 </div>
               </Container>
               <Divider className="divider-div" />
-              {summaryLength > 0 ? (
+              {summaryLength.length > 0 ? (
                 <div>
                   <Container
                     textAlign="center"
@@ -144,7 +154,7 @@ export class ResumeOne extends Component {
                 </div>
               ) : null}
 
-              {skillsLength > 0 ? (
+              {skillsLength.length > 0 ? (
                 <div>
                   <Container textAlign="center" className="skillsSection">
                     <h3>Skills</h3>
@@ -153,8 +163,12 @@ export class ResumeOne extends Component {
                         .value ? (
                         <React.Fragment key={content._id}>
                           <div>
-                            <b style={{ marginRight: "1%" }}>{content.groupname}</b>
-                            <p style={{ marginRight: "1%" }}>{content.content}</p>
+                            <b style={{ marginRight: "1%" }}>
+                              {content.groupname}
+                            </b>
+                            <p style={{ marginRight: "1%" }}>
+                              {content.content}
+                            </p>
                           </div>
                         </React.Fragment>
                       ) : null;
@@ -164,7 +178,7 @@ export class ResumeOne extends Component {
                 </div>
               ) : null}
 
-              {experienceLength > 0 ? (
+              {experienceLength.length > 0 ? (
                 <div>
                   <Container textAlign="center" className="experienceSection">
                     <h3>Experience</h3>
@@ -192,7 +206,7 @@ export class ResumeOne extends Component {
                 </div>
               ) : null}
 
-              {educationLength > 0 ? (
+              {educationLength.length > 0 ? (
                 <Container textAlign="center" className="educationSection">
                   <h3>Education</h3>
                   {education.map((content, index) => {

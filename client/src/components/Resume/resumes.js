@@ -83,7 +83,7 @@ class Resumes extends Component {
                   }}
                 >
                   <img
-                    src={require("../Templates/tempTemplate1.png")} //import pics
+                    src={require("../Templates/tempTemplate2.png")} //import pics
                     alt=""
                     height="100rem"
                   />
@@ -101,7 +101,7 @@ class Resumes extends Component {
                   }}
                 >
                   <img
-                    src={require("../Templates/tempTemplate2.png")} //import pics
+                    src={require("../Templates/tempTemplate3.png")} //import pics
                     alt=""
                     height="100rem"
                   />
