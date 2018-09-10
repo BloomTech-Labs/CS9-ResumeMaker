@@ -22,19 +22,19 @@ class Templates extends Component {
   }
 
   findWithAttr = (array, attr, value) => {
-      for (var i = 0; i < array.length; i++) {
-        console.log("arrayI", array[i][attr], "value compared to", value)
-        if (array[i][attr] === value) {
-          return i;
-        }
+    for (var i = 0; i < array.length; i++) {
+      console.log("arrayI", array[i][attr], "value compared to", value);
+      if (array[i][attr] === value) {
+        return i;
       }
+    }
     return -1;
-  }
+  };
 
-  updateResumeIndex = (newIndex) => {
+  updateResumeIndex = newIndex => {
     console.log("UPDATERESUMEINDEX CALD", newIndex);
     this.setState({ index: newIndex });
-  }
+  };
 
   // componentWillMount() {
   //   console.log("template componentWillMount");
@@ -62,7 +62,7 @@ class Templates extends Component {
   }
 
   handleCreate = () => {
-    console.log("handle create called")
+    console.log("handle create called");
     const tempObj = {
       links: { linkedin: true, github: true, portfolio: true },
       title: this.props.context.userInfo.title.map(item => {
@@ -83,7 +83,9 @@ class Templates extends Component {
         })
       }
     };
-    tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
+    tempObj["resumes"] = this.props.context.userInfo.resumes.map(
+      resume => resume._id
+    );
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -100,12 +102,14 @@ class Templates extends Component {
   };
 
   handleSubmit = event => {
-    console.log("HANDLESUBMITCALLED")
-    if(event){
+    console.log("HANDLESUBMITCALLED");
+    if (event) {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
+    tempObj["resumes"] = this.props.context.userInfo.resumes.map(
+      resume => resume._id
+    );
     if (tempObj._id) {
       axios
         .put(
@@ -161,7 +165,10 @@ class Templates extends Component {
 
   render() {
     console.log("TEMPLATE RESUMES", this.props.context.userInfo.resumes);
-    console.log("TEMPLATE CURRENTREZ", this.props.context.userInfo.currentresume);
+    console.log(
+      "TEMPLATE CURRENTREZ",
+      this.props.context.userInfo.currentresume
+    );
     console.log("TEMPLATE STATE INDEX", this.state.index);
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -178,7 +185,7 @@ class Templates extends Component {
       !resumes[this.state.index]
     ) {
       return (
-        <div style={{display: "none"}}>
+        <div style={{ display: "none" }}>
           <Sidebar context={this.props.context} />
         </div>
       );
@@ -213,18 +220,21 @@ class Templates extends Component {
               ) : (
                 <h1>Hi</h1>
               )}
-              <ResumeDropdown
-                updateResumeIndex={this.updateResumeIndex}
-                index={this.state.index}
-                className="dropdown"
-                context={this.props.context}
-                data={userInfo}
-              />
               {this.props.context.userInfo.membership ? (
-                <button className="resume-button" onClick={this.handleCreate}>
-                  {" "}
-                  Create Resume
-                </button>
+                <React.Fragment>
+                  <ResumeDropdown
+                    updateResumeIndex={this.updateResumeIndex}
+                    index={this.state.index}
+                    className="dropdown"
+                    context={this.props.context}
+                    data={userInfo}
+                  />
+
+                  <button className="resume-button" onClick={this.handleCreate}>
+                    {" "}
+                    Create Resume
+                  </button>
+                </React.Fragment>
               ) : null}
               <button className="resume-button" onClick={this.handleSubmit}>
                 {" "}
@@ -241,9 +251,13 @@ class Templates extends Component {
               className="dropdown"
               context={this.props.context}
               data={userInfo}
-              value={resumes[this.state.index] ? resumes[this.state.index].title.filter(
-                title => title.value === true
-              ): null}
+              value={
+                resumes[this.state.index]
+                  ? resumes[this.state.index].title.filter(
+                      title => title.value === true
+                    )
+                  : null
+              }
               index={this.state.index}
             />
             {/* </Container> */}
@@ -266,7 +280,11 @@ class Templates extends Component {
                 context={this.props.context}
                 index={this.state.index}
                 name="linkedin"
-                value={resumes[this.state.index] ? resumes[this.state.index].links.linkedin : null}
+                value={
+                  resumes[this.state.index]
+                    ? resumes[this.state.index].links.linkedin
+                    : null
+                }
               />
               <div className={"fa fa-linkedin fa-sm"} />
               {userInfo.links.linkedin}
@@ -276,7 +294,11 @@ class Templates extends Component {
                 context={this.props.context}
                 index={this.state.index}
                 name="github"
-                value={resumes[this.state.index] ? resumes[this.state.index].links.github : null}
+                value={
+                  resumes[this.state.index]
+                    ? resumes[this.state.index].links.github
+                    : null
+                }
               />{" "}
               <div className="fa fa-github" aria-hidden="true" />
               {userInfo.links.github}
@@ -286,7 +308,11 @@ class Templates extends Component {
                 context={this.props.context}
                 index={this.state.index}
                 name="portfolio"
-                value={resumes[this.state.index] ? resumes[this.state.index].links.portfolio : null}
+                value={
+                  resumes[this.state.index]
+                    ? resumes[this.state.index].links.portfolio
+                    : null
+                }
               />{" "}
               {userInfo.links.portfolio}
             </p>
@@ -301,9 +327,13 @@ class Templates extends Component {
             <SummaryDropdown
               context={this.props.context}
               data={userInfo}
-              value={resumes[this.state.index] ? resumes[this.state.index].sections.summary.filter(
-                summary => summary.value === true
-              ) : null}
+              value={
+                resumes[this.state.index]
+                  ? resumes[this.state.index].sections.summary.filter(
+                      summary => summary.value === true
+                    )
+                  : null
+              }
               index={this.state.index}
             />
             {/* </Container> */}
@@ -320,7 +350,10 @@ class Templates extends Component {
                       id={content._id}
                       name="skills"
                       value={
-                        resumes[this.state.index].sections.skills[index] ? resumes[this.state.index].sections.skills[index].value : null
+                        resumes[this.state.index].sections.skills[index]
+                          ? resumes[this.state.index].sections.skills[index]
+                              .value
+                          : null
                       }
                       index={this.state.index}
                     />
@@ -346,8 +379,11 @@ class Templates extends Component {
                           id={content._id}
                           name="experience"
                           value={
-                            resumes[this.state.index].sections.experience[index] ? resumes[this.state.index].sections.experience[index]
-                              .value : null
+                            resumes[this.state.index].sections.experience[index]
+                              ? resumes[this.state.index].sections.experience[
+                                  index
+                                ].value
+                              : null
                           }
                           index={this.state.index}
                         />{" "}
@@ -382,8 +418,11 @@ class Templates extends Component {
                           id={content._id}
                           name="education"
                           value={
-                            resumes[this.state.index].sections.education[index] ? resumes[this.state.index].sections.education[index]
-                              .value : null
+                            resumes[this.state.index].sections.education[index]
+                              ? resumes[this.state.index].sections.education[
+                                  index
+                                ].value
+                              : null
                           }
                           index={this.state.index}
                         />
