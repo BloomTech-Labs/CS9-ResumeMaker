@@ -91,10 +91,6 @@ class Templates extends Component {
         }
       })
       .then(response => {
-        this.props.context.actions.setSingleElement(
-          "currentresume",
-          response.data.Resume._id
-        );
         this.props.context.actions.pushResumes(response.data.Resume);
         console.log("RESPONSE TO CREATE TEMPLATE", response);
       })
@@ -110,7 +106,6 @@ class Templates extends Component {
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
     tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
-    if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
     if (tempObj._id) {
       axios
         .put(
@@ -138,6 +133,7 @@ class Templates extends Component {
             )
             .then(response => {
               this.setState({ success: true });
+              this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
               console.log("err", err);
@@ -147,32 +143,21 @@ class Templates extends Component {
           console.log("err", err);
         });
     } else {
+      if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
       axios
         .post(`${urls[urls.basePath]}/resume/`, tempObj, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
         })
-        .then(() => {
-          this.setState({ success: true });
+        .then(response => {
+          this.props.context.actions.pushResumes(response.data.Resume);
         })
         .catch(err => {
           console.log("err", err);
         });
     }
   };
-
-  // componentDidUpdate = () => {
-  //   if(this.props.context.userInfo.auth === true){
-  //     if(this.props.context.userInfo.currentresume._id !== this.props.context.userInfo.resumes[this.state.index]._id){
-  //       let newIndex =this.findWithAttr(this.props.context.userInfo.resumes, "_id", this.props.context.userInfo.currentresume._id);
-  //       if(newIndex === -1){
-  //         newIndex = 0;
-  //       }
-  //       // this.setState({ index: newIndex });
-  //     }
-  //   }
-  // }
 
   render() {
     console.log("TEMPLATE RESUMES", this.props.context.userInfo.resumes);

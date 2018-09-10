@@ -86,19 +86,15 @@ class AuthProvider extends Component {
     console.log("resdata is,", resumeData)
     if(this.state.auth !== true){
       return;
-    }
-
-    if(!(this.state.resumes.length > 0) && resumeData.length > 0){
-      return this.setState({ resumes: resumeData });
-    }
-
-    if (!(resumeData.length > 0) || resumeData[0] === null) {
+    } else if(!(this.state.resumes.length > 0) && resumeData.length > 0){
+      this.setState({ resumes: resumeData });
+    } else if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
-      return this.createResume(true);
+      this.createResume(true);
+    } else {
+      this.expandResumeIDs();
     }
-
-    this.expandResumeIDs();
-
+    return;
 
     // else if (resumeData.length === 1 && this.state.currentresume === null){
     //   console.log("dont set res 1")
@@ -115,9 +111,11 @@ class AuthProvider extends Component {
   };
 
   pushResumes = newResume => {
+    console.log("pushResumes called, current state:", this.state.resumes);
+    console.log("pushResumes called:", newResume);
     let newState = this.state.resumes;
     newState.push(newResume);
-    this.setState({ resumes: newState });
+    this.setState({ resumes: newState, currentresume: newResume });
   }
 
   createResume = newResume => {
@@ -186,9 +184,16 @@ class AuthProvider extends Component {
   
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
+      console.log("expandSection called:");
+      console.log("section:", section);
+      console.log("resumeSection:", resumeSection);
+      console.log("index:", index);
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
+        console.log("!resumeSection");
+        console.log(this.state[section])
         for (let item of this.state[section]) {
+          console.log("forloop", this.state[section])
           let current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
@@ -259,10 +264,13 @@ class AuthProvider extends Component {
       expandSection("summary", true, index);
       expandSection("skills", true, index);
       console.log("EXPANDIDS IS DOING AN AXIOS M80");
+    });
+
+    for(let i = 0; i < this.state.resumes.length; i++){
       const resumePromise = axios
       .put(
-        `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
-        tempResume[index],
+        `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
+        tempResume[i],
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -277,7 +285,7 @@ class AuthProvider extends Component {
         console.log("err", err);
       });
       resumePromises.push(resumePromise);
-    });
+    }
 
     // console.log("OUR PROMISES", resumePromises);
     // Once every request is finished state updates once.
