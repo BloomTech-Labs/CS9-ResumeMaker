@@ -79,7 +79,9 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    this.setResume(dataFromUser.resumes)
+    if(dataFromUser.resumes){
+      this.setResume(dataFromUser.resumes)
+    }
   };
 
   setResume = resumeData => {
@@ -91,7 +93,7 @@ class AuthProvider extends Component {
     } else if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
       this.createResume(true);
-    } else if (this.state.resumes.length > 0 && resumeData.length === this.state.resumes.length) {
+    } else if (this.state.resumes.length && resumeData.length === this.state.resumes.length) {
       this.expandResumeIDs();
     } else {
       return;
