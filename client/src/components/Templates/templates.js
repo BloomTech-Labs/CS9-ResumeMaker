@@ -32,6 +32,21 @@ class Templates extends Component {
   }
 
   componentWillMount() {
+    console.log("template componentWillMount");
+    let index = this.findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    console.log(this.props.context.userInfo.currentresume)
+    console.log("index from findWithAttr is:", index);
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+  }
+
+  componentDidMount() {
+    console.log("template componentDidMount");
+    window.scrollTo(0, 0);
     let index = this.findWithAttr(
       this.props.context.userInfo.resumes,
       "_id",
@@ -39,10 +54,6 @@ class Templates extends Component {
     );
     if (index === -1) index = 0;
     this.setState({ index: index });
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
   }
 
   // componentWillUnmount() {
@@ -154,9 +165,22 @@ class Templates extends Component {
     }
   };
 
+  // componentDidUpdate = () => {
+  //   if(this.props.context.userInfo.auth === true){
+  //     if(this.props.context.userInfo.currentresume._id !== this.props.context.userInfo.resumes[this.state.index]._id){
+  //       let newIndex =this.findWithAttr(this.props.context.userInfo.resumes, "_id", this.props.context.userInfo.currentresume._id);
+  //       if(newIndex === -1){
+  //         newIndex = 0;
+  //       }
+  //       // this.setState({ index: newIndex });
+  //     }
+  //   }
+  // }
+
   render() {
-    console.log("TEMPLATE PROPS", this.props.context.userInfo.resumes);
-    console.log("TEMPLATE STATE", this.state.resumes);
+    console.log("TEMPLATE RESUMES", this.props.context.userInfo.resumes);
+    console.log("TEMPLATE CURRENTREZ", this.props.context.userInfo.currentresume);
+    console.log("TEMPLATE STATE INDEX", this.state.index);
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }

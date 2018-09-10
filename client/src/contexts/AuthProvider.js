@@ -31,7 +31,6 @@ class AuthProvider extends Component {
     localStorage.removeItem("token");
     this.setState({
       auth: false,
-      currentresume: null,
       username: "",
       email: "",
       name: {
@@ -45,7 +44,10 @@ class AuthProvider extends Component {
       education: [],
       experience: [],
       skills: [],
-      summary: []
+      summary: [],
+      resumes: [],
+      currentresume: null,
+      membership: false
     });
   };
 
@@ -266,6 +268,8 @@ class AuthProvider extends Component {
       }
   };
 
+
+  // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
       expandSection("title", false, index);
       expandSection("experience", true, index);
@@ -277,6 +281,7 @@ class AuthProvider extends Component {
 
 
   setResumeItemState = (index, name, id) => {
+    console.log("SETRESUMEITEMSTATE", index, name, id, this.state.currentresume)
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -321,6 +326,7 @@ class AuthProvider extends Component {
   };
 
   setSingleElement = (elementName, elementValue) => {
+    console.log("Set single element was called");
     this.setState({ [elementName]: elementValue });
   };
 
