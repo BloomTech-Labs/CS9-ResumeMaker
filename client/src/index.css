@@ -228,6 +228,16 @@ form {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.summary-containment-div .card-body {
+  padding: 1.25rem;
+  font-size: 0.7rem;
+  width: 15rem;
+  height: 233px;
+  border: 1.5rem;
+}
+.summary-containment-div .card-body h5 {
+  font-size: 1rem;
+}
 .experience-containment-div {
   display: flex;
   flex-wrap: wrap;
@@ -251,6 +261,7 @@ form {
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
+  height: 233px;
 }
 .experience-containment-div .card-body h5 {
   font-size: 1rem;
@@ -283,6 +294,7 @@ form {
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
+  height: 233px;
 }
 .education-containment-div .card-body h5 {
   font-size: 1rem;
