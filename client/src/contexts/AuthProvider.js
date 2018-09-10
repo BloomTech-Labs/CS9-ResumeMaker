@@ -79,7 +79,7 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if(dataFromUser.resumes.length && dataFromUser.resumes[0] != null){
+    if(dataFromUser.resumes && dataFromUser.resumes.length && dataFromUser.resumes[0] != null){
       this.setResume(dataFromUser.resumes)
     }
   };
