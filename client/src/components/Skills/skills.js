@@ -168,7 +168,7 @@ class Skills extends Component {
                   <Label>New Skill Group</Label>
                   <Input
                     id="newSkill"
-                    size="sm"
+                    bsSize="sm"
                     value={this.state.newSkill}
                     onChange={this.newSkillChange}
                   />

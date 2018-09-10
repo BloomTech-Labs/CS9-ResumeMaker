@@ -227,7 +227,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="name.firstname"
                   maxLength={20}
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.name.firstname}
                   onChange={this.handleChange}
                 />
@@ -238,7 +238,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="name.middlename"
                   maxLength={20}
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.name.middlename}
                   onChange={this.handleChange}
                 />
@@ -249,7 +249,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="name.lastname"
                   maxLength={20}
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.name.lastname}
                   onChange={this.handleChange}
                 />
@@ -260,7 +260,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="phonenumber"
                   maxLength={20}
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.phonenumber}
                   onChange={this.handleChange}
                 />
@@ -270,7 +270,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="location"
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.location}
                   onChange={this.handleChange}
                 />
@@ -280,7 +280,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="links.linkedin"
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.links.linkedin}
                   onChange={this.handleChange}
                 />
@@ -290,7 +290,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="links.github"
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.links.github}
                   onChange={this.handleChange}
                 />
@@ -300,7 +300,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="links.portfolio"
-                  size="sm"
+                  bsSize="sm"
                   value={this.state.links.portfolio}
                   onChange={this.handleChange}
                 />
@@ -315,7 +315,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="email"
                   invalid={this.state.emailInvalid}
-                  size="sm"
+                  bsSize="sm"
                   type="email"
                   value={this.state.email}
                   onChange={this.handleChange}
@@ -341,7 +341,7 @@ export class PersonalInfo extends Component {
                     this.state.oldpassword !== ""
                   }
                   id="oldpassword"
-                  size="sm"
+                  bsSize="sm"
                   type="password"
                   value={this.state.oldpassword}
                   onChange={this.handleChange}
@@ -364,7 +364,7 @@ export class PersonalInfo extends Component {
                     this.state.newpassword !== ""
                   }
                   id="newpassword"
-                  size="sm"
+                  bsSize="sm"
                   type="password"
                   value={this.state.newpassword}
                   onChange={e => {
@@ -389,7 +389,7 @@ export class PersonalInfo extends Component {
                     this.state.newpassword !== this.state.newconfirmpassword
                   }
                   id="newconfirmpassword"
-                  size="sm"
+                  bsSize="sm"
                   type="password"
                   value={this.state.newconfirmpassword}
                   onChange={this.handleChange}

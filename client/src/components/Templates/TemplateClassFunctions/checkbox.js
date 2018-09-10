@@ -17,7 +17,7 @@ class CheckBox extends Component {
   };
 
   render() {
-    console.log("CHECKBOX INDEX BOI", this.props.index);
+    // console.log("CHECKBOX INDEX BOI", this.props.index);
     return (
       <input
         type="checkbox"

@@ -232,42 +232,41 @@ class AuthProvider extends Component {
       tempResume.push(this.state.resumes[index]);
 
     // if (!tempResume["user"]) tempResume["user"] = this.state.id;
-    if (tempResume[index]._id) {
-      axios
-        .put(
-          `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
-          tempResume[index],
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            }
-          }
-        )
-        .then(response => {
-          // axios
-          //   .put(
-          //     `${urls[urls.basePath]}/users/info/${this.state.id}`,
-          //     { currentresume: response.data.resume._id },
-          //     {
-          //       headers: {
-          //         Authorization: "Bearer " + localStorage.getItem("token")
-          //       }
-          //     }
-          //   )
-          //   .then(response => {
-          //     this.setState({ success: true });
-          //   })
-          //   .catch(err => {
-          //     console.log("err", err);
-          //   });
-          console.log("response", response);
-        })
-        .catch(err => {
-          console.log("err", err);
-        });
-      }
+    // if (tempResume[index]._id) {
+    //   axios
+    //     .put(
+    //       `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
+    //       tempResume[index],
+    //       {
+    //         headers: {
+    //           Authorization: "Bearer " + localStorage.getItem("token")
+    //         }
+    //       }
+    //     )
+    //     .then(response => {
+    //       // axios
+    //       //   .put(
+    //       //     `${urls[urls.basePath]}/users/info/${this.state.id}`,
+    //       //     { currentresume: response.data.resume._id },
+    //       //     {
+    //       //       headers: {
+    //       //         Authorization: "Bearer " + localStorage.getItem("token")
+    //       //       }
+    //       //     }
+    //       //   )
+    //       //   .then(response => {
+    //       //     this.setState({ success: true });
+    //       //   })
+    //       //   .catch(err => {
+    //       //     console.log("err", err);
+    //       //   });
+    //       console.log("response", response);
+    //     })
+    //     .catch(err => {
+    //       console.log("err", err);
+    //     });
+    //   }
   };
-
 
   // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
@@ -276,6 +275,22 @@ class AuthProvider extends Component {
       expandSection("education", true, index);
       expandSection("summary", true, index);
       expandSection("skills", true, index);
+      axios
+      .put(
+        `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
+        tempResume[index],
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        }
+      )
+      .then(response => {
+        console.log("response", response);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
     });
   };
 

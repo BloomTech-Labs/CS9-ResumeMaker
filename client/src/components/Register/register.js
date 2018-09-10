@@ -215,7 +215,7 @@ class Register extends Component {
             <Button
              style={{fontSize: ".8rem", height: "2rem"}} 
               block
-              size="lg"
+              bsSize="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
