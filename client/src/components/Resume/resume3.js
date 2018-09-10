@@ -99,21 +99,21 @@ export class ResumeThree extends Component {
                       Contact Details
                     </h5>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p className="contact-section"> {userInfo.email}</p>
+                      <p className="contact-resume3-section"> {userInfo.email}</p>
                     </a>
-                    <p className="contact-section">{userInfo.location}</p>
-                    <p className="contact-section">{userInfo.phonenumber}</p>
-                    <div className="contact-section">
+                    <p className="contact-resume3-section">{userInfo.location}</p>
+                    <p className="contact-resume3-section">{userInfo.phonenumber}</p>
+                    <div className="contact-resume3-section">
                       {resumes[this.state.index].links.linkedin ? (
                         <p>{userInfo.links.linkedin}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section">
+                    <div className="contact-resume3-section">
                       {resumes[this.state.index].links.github ? (
                         <p>{userInfo.links.github}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section">
+                    <div className="contact-resume3-section">
                       {resumes[this.state.index].links.portfolio ? (
                         <p>{userInfo.links.portfolio}</p>
                       ) : null}
