@@ -57,7 +57,7 @@ router.get(
     const { user } = req;
     user.password = null;
     // !fix later
-    if (user.membership || !user.membership) {
+    if (user.membership) {
       const query = Resume.find({ user: user.id });
       query.then(resumes => {
         res.json({ user, resumes });

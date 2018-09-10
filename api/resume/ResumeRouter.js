@@ -44,17 +44,18 @@ router.post(
     newResume
       .save()
       .then(resume => {
-        User.findById(user)
-          .then(user => {
-            user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
-            user.resumes.push(resume);
-            user.currentresume = resume._id;
-            user.save();
-            res.status(201).json({ Resume: resume, resumes: user.resumes });
-          })
-          .catch(err => {
-            res.status(400).json({ Error: err });
-          });
+        // User.findById(user)
+        //   .then(user => {
+        //     // user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
+        //     // user.resumes.push(resume);
+        //     user.currentresume = resume._id;
+        //     user.save();
+        //     res.status(201).json({ Resume: resume, resumes: user.resumes });
+        //   })
+        //   .catch(err => {
+        //     res.status(400).json({ Error: err });
+        //   });
+        res.status(201).json({ Resume: resume });
       })
       .catch(err => {
         res.status(400).json({ Error: err });
@@ -79,16 +80,17 @@ router.put(
 
     Resume.findByIdAndUpdate(id, updatedResume)
       .then(resume => {
-        User.findById(user)
-          .then(user => {
-            user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
-            user.currentresume = resume._id;
-            user.save();
-            res.status(200).json({ resume });
-          })
-          .catch(err => {
-            res.status(400).json({ Error: err });
-          });
+        // User.findById(user)
+        //   .then(user => {
+        //     user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
+        //     user.currentresume = resume._id;
+        //     user.save();
+        //     res.status(200).json({ resume });
+        //   })
+        //   .catch(err => {
+        //     res.status(400).json({ Error: err });
+        //   });
+        res.status(200).json({ resume });
       })
       .catch(err => {
         res.status(400).json({ Error: err });
