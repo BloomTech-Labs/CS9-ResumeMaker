@@ -100,7 +100,7 @@ class Skills extends Component {
                 width: "100%"
               }}
             >
-              Click the pencil to enter your work related skills.
+              Please enter your skills under skills under skill group headers. On the bottom you can add new skill groups.
             </p>
 
             <Container className="skills-containment-div">
@@ -159,12 +159,11 @@ class Skills extends Component {
               {/* <Button color="primary" onClick={() => this.handleSubmit("edit")}>
                 Submit
               </Button> */}
-              <div className="skillgroup-input">
-                <FormGroup>
+              <div className="groupname-input skillgroup skillgroup-input">
+                <FormGroup className="">
                   <Label>New Skill Group</Label>
                   <Input
                     id="newSkill"
-                    bsSize="sm"
                     value={this.state.newSkill}
                     onChange={this.newSkillChange}
                   />

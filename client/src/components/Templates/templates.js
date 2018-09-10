@@ -49,6 +49,10 @@ class Templates extends Component {
   //   this.setState({ index: index });
   // }
 
+  // componentWillMount = () => {
+  //   if (!this.props.context.userInfo.resumes.length) this.props.context.actions.createResume();
+  // }
+
   componentDidMount() {
     console.log("template componentDidMount");
     window.scrollTo(0, 0);
@@ -173,8 +177,10 @@ class Templates extends Component {
     // The following if statement prevents crashes if resumes aren't loaded or don't exist yet.
     // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
-      this.state.index === null ||
-      this.props.context.userInfo.currentresume === null ||
+      resumes == undefined ||
+      resumes == null ||
+      this.state.index == null ||
+      this.props.context.userInfo.currentresume == null ||
       !resumes[this.state.index]
     ) {
       return (
