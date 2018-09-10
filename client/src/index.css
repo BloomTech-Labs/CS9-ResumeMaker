@@ -685,3 +685,7 @@ img {
   border-left: 2px solid black;
   max-width: 800px;
 }
+a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+}

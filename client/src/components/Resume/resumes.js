@@ -40,7 +40,7 @@ class Resumes extends Component {
           <Sidebar context={this.props.context} />
           <div className="title-div col">
             <div className="title-div">
-              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>{" "}
+              <h4 style={{ paddingLeft: ".6rem" }}>TEMPLATES</h4>{" "}
               <p
                 style={{
                   fontSize: "0.7rem",
@@ -69,7 +69,7 @@ class Resumes extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5 className="link">RESUME 1</h5>
+                  <h5 className="link">TRADITIONAL</h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -87,7 +87,7 @@ class Resumes extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5 className="link">RESUME 2</h5>
+                  <h5 className="link">MODERN</h5>
                 </Link>
               </div>
               <div className="d-inline-flex container-div">
@@ -105,7 +105,7 @@ class Resumes extends Component {
                     alt=""
                     height="100rem"
                   />
-                  <h5 className="link">RESUME 3</h5>
+                  <h5 className="link">ELEGANT</h5>
                 </Link>
               </div>
             </div>

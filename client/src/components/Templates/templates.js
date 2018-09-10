@@ -166,12 +166,7 @@ class Templates extends Component {
   };
 
   render() {
-    console.log("TEMPLATE RESUMES", this.props.context.userInfo.resumes);
-    console.log(
-      "TEMPLATE CURRENTREZ",
-      this.props.context.userInfo.currentresume
-    );
-    console.log("TEMPLATE STATE INDEX", this.state.index);
+
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
@@ -203,7 +198,7 @@ class Templates extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="title-div templates">
-              <h4>RESUME</h4>
+              <h4>RESUMES</h4>
               <p
                 style={{
                   fontSize: "0.7rem",
