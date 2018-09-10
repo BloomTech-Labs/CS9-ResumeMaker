@@ -89,7 +89,7 @@ export class ResumeOne extends Component {
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 {userInfo.title.map((item, index) => {
-                  if(resumes[this.state.index].title[index]){
+                  if(resumes[this.state.index].title[index].value === true){
                     return (
                       <p style={{ fontSize: "1.5rem" }} key={item._id}>
                         {item.content}
