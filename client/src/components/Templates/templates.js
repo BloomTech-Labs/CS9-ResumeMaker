@@ -239,7 +239,6 @@ class Templates extends Component {
                     context={this.props.context}
                     data={userInfo}
                   />
-
                   <button className="resume-button" onClick={this.handleCreate}>
                     {" "}
                     Create Resume
@@ -251,7 +250,6 @@ class Templates extends Component {
                 Save Resume
               </button>
             </div>
-
             <Container className="resumePage">
               <Container className="contact-section">
                 <h3>Contact Details</h3>
@@ -287,12 +285,10 @@ class Templates extends Component {
                           resumes[this.state.index]
                             ? resumes[this.state.index].links.linkedin
                             : null
-                          }
+                        }
                       />
-
-                      {" " + userInfo.links.linkedin}
-                          {" "}<div className={"fa fa-linkedin fa-sm"} />
-
+                      {" " + userInfo.links.linkedin}{" "}
+                      <div className={"fa fa-linkedin fa-sm"} />
                       <div>
                         <CheckBox
                           context={this.props.context}
@@ -304,9 +300,8 @@ class Templates extends Component {
                               : null
                           }
                         />
-
-                        {" " + userInfo.links.github}
-                        {" "}<div className="fa fa-github" aria-hidden="true" />
+                        {" " + userInfo.links.github}{" "}
+                        <div className="fa fa-github" aria-hidden="true" />
                       </div>
                       <p>
                         <CheckBox
@@ -325,7 +320,6 @@ class Templates extends Component {
                   </Container>
                 </Container>
               </Container>
-
               <Container className="title-section">
                 <Container className="titleHolder">
                   <h3>Titles</h3>
@@ -345,10 +339,8 @@ class Templates extends Component {
                   />
                 </Container>
               </Container>
-
               <Container className="summary-section">
                 <div className="summaryHolder">
-
                   <h3>Summary</h3>
                 </div>
                 <Container className="summarySection">
@@ -366,12 +358,10 @@ class Templates extends Component {
                   />
                 </Container>
               </Container>
-
               <Container className="skills-section">
                 <div className="skillsHolder">
                   <h3>Skills</h3>
                 </div>
-
                 <Container className="skillsSection">
                   {userInfo.skills.map((content, index) => {
                     return (
@@ -397,7 +387,6 @@ class Templates extends Component {
                   })}
                 </Container>
               </Container>
-
               <Container className="experience-section">
                 <div className="experienceHolder">
                   <h3>Experience</h3>
@@ -441,7 +430,6 @@ class Templates extends Component {
                   })}
                 </Container>
               </Container>
-
               <Container className="education-section">
                 <div className="educationHolder">
                   <h3>Education</h3>
