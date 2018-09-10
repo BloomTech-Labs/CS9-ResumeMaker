@@ -15,7 +15,7 @@ router.get(
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
-    console.log("RESUME GET req:", req.body)
+    // console.log("RESUME GET req:", req.body)
 
     Resume.findById(id)
       .then(resume => {
@@ -36,7 +36,7 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("RESUME POST req:", req.body)
+    // console.log("RESUME POST req:", req.body)
     const newResume = new Resume(req.body);
     const user = req.user;
     newResume.user = user._id;
@@ -72,11 +72,13 @@ router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("RESUME PUT req:", req.body)
     const { id } = req.params;
+    // if you put the _id in the update body errors will happen, so remove it
+    delete req.body._id;
+    console.log("RESUME PUT req:", req.body)
     const updatedResume = req.body;
-    const user = req.user;
-    updatedResume.user = user._id;
+    // const user = req.user;
+    // updatedResume.user = user._id;
 
     Resume.findByIdAndUpdate(id, updatedResume)
       .then(resume => {
@@ -93,6 +95,7 @@ router.put(
         res.status(200).json({ resume });
       })
       .catch(err => {
+        console.log("THERE IS AN ERROR IN THE ROUTER ", err);
         res.status(400).json({ Error: err });
       });
   }

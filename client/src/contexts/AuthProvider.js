@@ -275,6 +275,7 @@ class AuthProvider extends Component {
       expandSection("education", true, index);
       expandSection("summary", true, index);
       expandSection("skills", true, index);
+      console.log("EXPANDIDS IS DOING AN AXIOS M80");
       axios
       .put(
         `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
