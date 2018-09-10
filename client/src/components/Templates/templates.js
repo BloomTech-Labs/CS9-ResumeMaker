@@ -271,11 +271,11 @@ class Templates extends Component {
                       </a>
                       <div>
                         <div className="fa fa-globe" aria-hidden="true" />
-                        {userInfo.location}
+                        {" " + userInfo.location}
                       </div>
                       <div>
                         <div className="fa fa-mobile" aria-hidden="true" />
-                        {userInfo.phonenumber}
+                        {" " + userInfo.phonenumber}
                       </div>
                     </Container>
                     <Container className="contactTwo">
@@ -287,10 +287,11 @@ class Templates extends Component {
                           resumes[this.state.index]
                             ? resumes[this.state.index].links.linkedin
                             : null
-                        }
+                          }
                       />
-                      <div className={"fa fa-linkedin fa-sm"} />
-                      {userInfo.links.linkedin}
+
+                      {" " + userInfo.links.linkedin}
+                          {" "}<div className={"fa fa-linkedin fa-sm"} />
 
                       <div>
                         <CheckBox
@@ -302,9 +303,10 @@ class Templates extends Component {
                               ? resumes[this.state.index].links.github
                               : null
                           }
-                        />{" "}
-                        <div className="fa fa-github" aria-hidden="true" />
-                        {userInfo.links.github}
+                        />
+
+                        {" " + userInfo.links.github}
+                        {" "}<div className="fa fa-github" aria-hidden="true" />
                       </div>
                       <p>
                         <CheckBox
@@ -317,7 +319,7 @@ class Templates extends Component {
                               : null
                           }
                         />{" "}
-                        {userInfo.links.portfolio}
+                        {" " + userInfo.links.portfolio}
                       </p>
                     </Container>
                   </Container>
@@ -346,6 +348,7 @@ class Templates extends Component {
 
               <Container className="summary-section">
                 <div className="summaryHolder">
+
                   <h3>Summary</h3>
                 </div>
                 <Container className="summarySection">
@@ -374,7 +377,6 @@ class Templates extends Component {
                     return (
                       <div key={content._id}>
                         <p>
-                          {" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
@@ -388,7 +390,7 @@ class Templates extends Component {
                             }
                             index={this.state.index}
                           />
-                          {content.content}
+                          {" " + content.content}
                         </p>
                       </div>
                     );
@@ -466,7 +468,7 @@ class Templates extends Component {
                             }
                             index={this.state.index}
                           />
-                          {content.degree} in {content.fieldofstudy}{" "}
+                          {" " + content.degree} in {content.fieldofstudy}{" "}
                         </h5>
                         <p>{content.location}</p>
                         <p>
