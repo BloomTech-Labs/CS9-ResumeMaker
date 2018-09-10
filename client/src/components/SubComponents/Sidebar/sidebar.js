@@ -24,7 +24,10 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          console.log("Sidebar DidMounted and called setLogin and setResume with:", response.data)
+          console.log(
+            "Sidebar DidMounted and called setLogin and setResume with:",
+            response.data
+          );
           this.props.context.actions.setLogin(response.data);
           // this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
@@ -42,8 +45,12 @@ class Sidebar extends Component {
         });
     } else {
       console.log("Sidebar detected no token and/or auth === false");
+      if(this.props.context.userInfo.resumes[0] && !this.props.context.userInfo.currentresume){
+        console.log("set currentresume")
+        this.props.context.actions.setSingleElement("currentresume", this.props.context.userInfo.resumes[0]);
+      }
     }
-  }
+  };
 
   onSetSidebarOpen = open => {
     this.setState({ sidebarOpen: open });
@@ -65,19 +72,18 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/templates"
-            className={classnames({
-              active: window.location.pathname.includes("/templates")
-            })}
-          >
-            {" "}
-            <div className="fa fa-copy sm" style={{ color: "white" }} />{" "}
-            TEMPLATES
-          </Link>
-          <Link
             to="/resumes"
             className={classnames({
               active: window.location.pathname.includes("/resumes")
+            })}
+          >
+            {" "}
+            <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
+          </Link>
+          <Link
+            to="/templates"
+            className={classnames({
+              active: window.location.pathname.includes("/templates")
             })}
           >
             {" "}
@@ -85,7 +91,7 @@ class Sidebar extends Component {
               className="fa fa-file-alt sm"
               style={{ color: "white" }}
             />{" "}
-            RESUMES
+            TEMPLATES
           </Link>
           <Link
             to="/jobtitle"

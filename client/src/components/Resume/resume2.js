@@ -15,24 +15,24 @@ export class ResumeTwo extends Component {
     };
   }
 
-    componentWillMount() {
-      function findWithAttr(array, attr, value) {
-        for (var i = 0; i < array.length; i += 1) {
-          if (array[i][attr] === value) {
-            return i;
-          }
+  componentWillMount() {
+    function findWithAttr(array, attr, value) {
+      for (var i = 0; i < array.length; i += 1) {
+        if (array[i][attr] === value) {
+          return i;
         }
-        return -1;
       }
-    
-        let index = findWithAttr(
-          this.props.context.userInfo.resumes,
-          "_id",
-          this.props.context.userInfo.currentresume
-        );
-        if (index === -1) index = 0;
-        this.setState({ index: index });
-      }
+      return -1;
+    }
+
+    let index = findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -41,7 +41,7 @@ export class ResumeTwo extends Component {
   render() {
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;
-    }    
+    }
     if (
       !this.props.context.userInfo.resumes.length ||
       this.props.context.userInfo.resumes[0] === null
@@ -62,20 +62,28 @@ export class ResumeTwo extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    const summaryLength = resumes[this.state.index].sections.summary.length;
-    const skillsLength = resumes[this.state.index].sections.skills.length;
-    const educationLength = resumes[this.state.index].sections.education.length;
-    const experienceLength = resumes[this.state.index].sections.experience.length;
+    const summaryLength = userInfo.summary.filter((item, index) => {
+      return resumes[this.state.index].sections.summary[index].value;
+    });
+    const skillsLength = userInfo.skills.filter((item, index) => {
+      return resumes[this.state.index].sections.skills[index].value;
+    });
+    const educationLength = userInfo.education.filter((item, index) => {
+      return resumes[this.state.index].sections.education[index].value;
+    });
+    const experienceLength = userInfo.experience.filter((item, index) => {
+      return resumes[this.state.index].sections.experience[index].value;
+    });
 
     return (
       <div>
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
               <h4 className="resume page-header">Modern</h4>
-            <PDF />
+              <PDF name="template2"/>
             </div>
             <div className="template2">
               <div style={{ textAlign: "center" }} className="titleSection">
@@ -83,17 +91,13 @@ export class ResumeTwo extends Component {
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 {userInfo.title.map((item, index) => {
-                  if(resumes[this.state.index].title[index].value === true){
-                    return (
-                      <p key={item._id}>
-                        {item.content}
-                      </p>
-                    )
+                  if (resumes[this.state.index].title[index].value === true) {
+                    return <p key={item._id}>{item.content}</p>;
                   } else return null;
                 })}
               </div>
 
-              {summaryLength > 0 ? (
+               {summaryLength.length > 0 ? (
                 <div>
                 <Container
                   textalign="center"
@@ -132,7 +136,7 @@ export class ResumeTwo extends Component {
                     ) : null}
                   </Container>
 
-                  {educationLength > 0 ? (
+                  {educationLength.length > 0 ? (
                     <Container textalign="center" className="educationSection">
                       <Divider className="divider-div" />
                       <h3 className="subtitle">Education</h3>
@@ -173,36 +177,36 @@ export class ResumeTwo extends Component {
                       </Container>
                     ) : null}
 
-                    {experienceLength > 0 ? (
-                      <Container textalign="center" className="experienceSection">
-                        <h3 className="subtitle">Experience</h3>
-                        {experience.map((content, index) => {
-                          let from = moment(content.from).format("MMM YYYY");
-                          let to = moment(content.to).format("MMM YYYY");
-                          return resumes[this.state.index].sections.experience[
-                            index
-                          ].value ? (
-                            <div key={index}>
-                              <h5>{content.company} </h5>
-                              <p>
-                                {content.title}
-                                <br />
-                                {content.location}
-                                <br />
-                                {from} - {to}
-                              </p>
-                              <p>{content.description} </p>
-                            </div>
-                          ) : null;
-                        })}
-                      </Container>
-                    ) : null}
-                  </div>
+                  {experienceLength.length > 0 ? (
+                    <Container textalign="center" className="experienceSection">
+                      <h3 className="subtitle">Experience</h3>
+                      {experience.map((content, index) => {
+                        let from = moment(content.from).format("MMM YYYY");
+                        let to = moment(content.to).format("MMM YYYY");
+                        return resumes[this.state.index].sections.experience[
+                          index
+                        ].value ? (
+                          <div key={index}>
+                            <h5>{content.company} </h5>
+                            <p>
+                              {content.title}
+                              <br />
+                              {content.location}
+                              <br />
+                              {from} - {to}
+                            </p>
+                            <p>{content.description} </p>
+                          </div>
+                        ) : null;
+                      })}
+                    </Container>
+                  ) : null}
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     );
   }
 }

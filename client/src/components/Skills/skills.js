@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import { Link } from "react-router-dom";
 import {
   Container,
   Col,

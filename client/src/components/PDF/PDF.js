@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 
 class PDF extends Component {
   pdfDocument = () => {
-    let input = document.getElementsByClassName("template1");
+    let input = document.getElementsByClassName(this.props.name);
     html2canvas(input[0])
       .then(canvas => {
         const imgData = canvas.toDataURL("image/png");
@@ -20,7 +20,9 @@ class PDF extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.pdfDocument} style={{fontSize:".7rem"}}>Export PDF</button>
+        <button onClick={this.pdfDocument} style={{ fontSize: ".7rem" }}>
+          Export PDF
+        </button>
       </div>
     );
   }

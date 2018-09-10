@@ -7,7 +7,7 @@ const urls = require("../../config/config.json");
 class LandingPage extends Component {
   componentDidMount() {
     if (this.props.context.userInfo.auth === true) {
-      this.props.history.push("/templates");
+      this.props.history.push("/resumes");
     } //if user has data on context already
     else if (localStorage.getItem("token")) {
       axios
@@ -18,7 +18,7 @@ class LandingPage extends Component {
         })
         .then(response => {
           this.props.context.actions.setLogin(response.data);
-          this.props.history.push("/templates");
+          this.props.history.push("/resumes");
         })
         .catch(err => {
           console.log("err", err);

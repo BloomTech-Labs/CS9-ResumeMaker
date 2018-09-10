@@ -24,15 +24,15 @@ export class ResumeThree extends Component {
       }
       return -1;
     }
-  
-      let index = findWithAttr(
-        this.props.context.userInfo.resumes,
-        "_id",
-        this.props.context.userInfo.currentresume
-      );
-      if (index === -1) index = 0;
-      this.setState({ index: index });
-    }
+
+    let index = findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+  }
 
   render() {
     if (!this.props.context.userInfo.auth) {
@@ -58,21 +58,28 @@ export class ResumeThree extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    const summaryLength = resumes[this.state.index].sections.summary.length;
-    const skillsLength = resumes[this.state.index].sections.skills.length;
-    const educationLength = resumes[this.state.index].sections.education.length;
-    const experienceLength = resumes[this.state.index].sections.experience.length;
+    const summaryLength = userInfo.summary.filter((item, index) => {
+      return resumes[this.state.index].sections.summary[index].value;
+    });
+    const skillsLength = userInfo.skills.filter((item, index) => {
+      return resumes[this.state.index].sections.skills[index].value;
+    });
+    const educationLength = userInfo.education.filter((item, index) => {
+      return resumes[this.state.index].sections.education[index].value;
+    });
+    const experienceLength = userInfo.experience.filter((item, index) => {
+      return resumes[this.state.index].sections.experience[index].value;
+    });
 
     return (
       <div>
-
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div page-container-div">
             <div className="resume title-div">
               <h4 className="resume page-header">Elegant</h4>
-            <PDF />
+              <PDF name="template3" />
             </div>
             <div className="template3">
               <div className="row">
@@ -88,23 +95,25 @@ export class ResumeThree extends Component {
                     />
                   </a> */}
                   <Container textalign="center" className="contactSection">
-                    <h5 className="subtitle" style={{paddingTop: "1rem"}}>Contact Details</h5>
+                    <h5 className="subtitle" style={{ paddingTop: "1rem" }}>
+                      Contact Details
+                    </h5>
                     <a href={`mailto:${userInfo.email}`}>
-                      <p className="contact-section">  {userInfo.email}</p>
+                      <p className="contact-resume3-section"> {userInfo.email}</p>
                     </a>
-                    <p className="contact-section">{userInfo.location}</p>
-                    <p className="contact-section">{userInfo.phonenumber}</p>
-                    <div className="contact-section">
+                    <p className="contact-resume3-section">{userInfo.location}</p>
+                    <p className="contact-resume3-section">{userInfo.phonenumber}</p>
+                    <div className="contact-resume3-section">
                       {resumes[this.state.index].links.linkedin ? (
                         <p>{userInfo.links.linkedin}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section">
+                    <div className="contact-resume3-section">
                       {resumes[this.state.index].links.github ? (
                         <p>{userInfo.links.github}</p>
                       ) : null}
                     </div>
-                    <div className="contact-section">
+                    <div className="contact-resume3-section">
                       {resumes[this.state.index].links.portfolio ? (
                         <p>{userInfo.links.portfolio}</p>
                       ) : null}
@@ -117,24 +126,22 @@ export class ResumeThree extends Component {
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h4>
                     {userInfo.title.map((item, index) => {
-                      if(resumes[this.state.index] && resumes[this.state.index].title[index] && resumes[this.state.index].title[index].value === true){
-                        return (
-                          <p key={item._id}>
-                            {item.content}
-                          </p>
-                        )
+                      if (
+                        resumes[this.state.index].title[index].value === true
+                      ) {
+                        return <p key={item._id}>{item.content}</p>;
                       } else return null;
                     })}
                   </div>
                   <Divider className="divider-div" />
-                  {summaryLength > 0 ? (
+                  {summaryLength.length > 0 ? (
                     <div>
                       <Container
                         textalign="center"
                         id="summary"
                         className="summarySection"
                       >
-                        <h5 className="subtitle" >Summary</h5>
+                        <h5 className="subtitle">Summary</h5>
                         {userInfo.summary.map((item, index) => {
                           return resumes[this.state.index].sections.summary[index].value ? (
                             <p key={item._id}>{item.content}</p>
@@ -144,7 +151,7 @@ export class ResumeThree extends Component {
                       </Container>
                     </div>
                   ) : null}
-                  {skillsLength > 0 ? (
+                  {skillsLength.length > 0 ? (
                     <Container textalign="center" className="skillsSection">
                       <h5 className="subtitle">Skills</h5>
                       {userInfo.skills.map((content, index) => {
@@ -158,8 +165,8 @@ export class ResumeThree extends Component {
                       <Divider className="divider-div" />
                     </Container>
                   ) : null}
-                  {experienceLength > 0 ? (
-                    <Container textalign="center" className="experienceSection" >
+                  {experienceLength.length > 0 ? (
+                    <Container textalign="center" className="experienceSection">
                       <h5 className="subtitle">Experience</h5>
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
@@ -181,7 +188,7 @@ export class ResumeThree extends Component {
                       <Divider className="divider-div" />
                     </Container>
                   ) : null}
-                  {educationLength > 0 ? (
+                  {educationLength.length > 0 ? (
                     <Container textalign="center" className="educationSection">
                       <h5 className="subtitle">Education</h5>
                       {education.map((content, index) => {

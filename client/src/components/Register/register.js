@@ -4,8 +4,7 @@ import {
     Form,
     FormGroup,
     FormFeedback,
-    Input,
-    Label
+    Input
 } from "reactstrap";
 import axios from "axios";
 

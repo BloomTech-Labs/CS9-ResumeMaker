@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   Card,
   CardTitle,
-  CardSubtitle,
   CardHeader,
   CardBody,
   CardText,
@@ -171,19 +170,18 @@ class ItemCard extends Component {
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          <CardBody>
-            <CardText>
-              <Link
-                className="item-card-link"
-                to={{
-                  pathname: `${this.props.linkTo}/create`, // component being Linked to
-                  state: { index: this.props.index } // Setting Index passed into summaryCreate component
-                }}
-              >
-                {ellipsify(this.props.content, 150)}
-              </Link>
-            </CardText>
-          </CardBody>
+
+          <Link
+            className="item-card-link"
+            to={{
+              pathname: `${this.props.linkTo}/create`, // component being Linked to
+              state: { index: this.props.index } // Setting Index passed into summaryCreate component
+            }}
+          >
+            <CardBody>
+              <CardText>{ellipsify(this.props.content, 150)}</CardText>
+            </CardBody>
+          </Link>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
         </Card>
       );
