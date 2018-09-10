@@ -59,7 +59,13 @@ class Resumes extends Component {
       "_id",
       this.props.context.userInfo.currentresume
     );
-    if (index === -1) index = 0;
+    if (index === -1) {
+      index = 0;
+      console.log("cant u see, me cryin'", this.props.context.userInfo.resumes[0], this.props.context.userInfo.currentresume)
+      if(this.props.context.userInfo.resumes[0] && !this.props.context.userInfo.currentresume){
+        this.props.context.actions.setSingleElement("currentresume", this.props.context.userInfo.resumes[0]._id);
+      }
+    }
     this.setState({ index: index });
   }
 
@@ -176,8 +182,10 @@ class Resumes extends Component {
     // The following if statement prevents crashes if resumes aren't loaded or don't exist yet.
     // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
-      this.state.index === null ||
-      this.props.context.userInfo.currentresume === null ||
+      !this.state.index ||
+      !this.props.context.userInfo ||
+      !this.props.context.userInfo.currentresume ||
+      !resumes ||
       !resumes[this.state.index]
     ) {
       return (
@@ -276,7 +284,7 @@ class Resumes extends Component {
                         index={this.state.index}
                         name="linkedin"
                         value={
-                          resumes[this.state.index]
+                          resumes[this.state.index] && resumes[this.state.index].links
                             ? resumes[this.state.index].links.linkedin
                             : null
                         }
@@ -289,7 +297,7 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="github"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] && resumes[this.state.index].links
                               ? resumes[this.state.index].links.github
                               : null
                           }
@@ -303,7 +311,7 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="portfolio"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] && resumes[this.state.index].links
                               ? resumes[this.state.index].links.portfolio
                               : null
                           }
@@ -342,7 +350,7 @@ class Resumes extends Component {
                     context={this.props.context}
                     data={userInfo}
                     value={
-                      resumes[this.state.index]
+                      resumes[this.state.index] && resumes[this.state.index].sections
                         ? resumes[this.state.index].sections.summary.filter(
                             summary => summary.value === true
                           )
@@ -366,6 +374,7 @@ class Resumes extends Component {
                             id={content._id}
                             name="skills"
                             value={
+                              resumes[this.state.index].sections &&
                               resumes[this.state.index].sections.skills[index]
                                 ? resumes[this.state.index].sections.skills[
                                     index
@@ -398,6 +407,7 @@ class Resumes extends Component {
                             id={content._id}
                             name="experience"
                             value={
+                              resumes[this.state.index].sections &&
                               resumes[this.state.index].sections.experience[
                                 index
                               ]
@@ -440,6 +450,7 @@ class Resumes extends Component {
                             id={content._id}
                             name="education"
                             value={
+                              resumes[this.state.index].sections &&
                               resumes[this.state.index].sections.education[
                                 index
                               ]

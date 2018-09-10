@@ -23,17 +23,39 @@ class Skills extends Component {
       skills: []
     };
   }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    } else {
+      // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
+      this.setState(
+        this.augmentObject(this.state.skills, this.props.context.userInfo.skills)
+      );
+    }
+  };
+
+  augmentObject = (initObj, modObj) => {
+    for (let prop in initObj) {
+      if (modObj[prop]) {
+        let val = modObj[prop];
+        if (typeof val === "object" && typeof initObj[prop] === "object")
+          this.augmentObject(initObj[prop], val);
+        else initObj[prop] = val;
+      }
+    }
+    return initObj;
   };
 
   componentDidUpdate = () => {
     console.log("ComponentDidUpdate");
+    console.log(this.state.skills + "=?" + this.props.context.userInfo.skills)
     if (
       this.state.skills !== this.props.context.userInfo.skills &&
       this.props.context.userInfo.auth === true
     ) {
-      this.setState({ skills: this.props.context.userInfo.skills });
+      this.componentDidMount();
     }
   };
 

@@ -52,6 +52,10 @@ class AuthProvider extends Component {
   };
 
   setLogin = dataFromUser => {
+    // if(dataFromUser == null){
+    //   this.setState({ rerender: true });
+    //   return;
+    // }
     console.log("SETLOGIN, userdata:", dataFromUser);
     const userData = dataFromUser.user;
     this.setState({
@@ -94,7 +98,7 @@ class AuthProvider extends Component {
 
     if(this.state.auth !== true){
       return;
-    } else if(!this.state.resumes.length && resumeData.length > 0){
+    } else if(!this.state.resumes.length && resumeData.length && resumeData.length > 0){
       this.setState({ resumes: resumeData });
     } else if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
