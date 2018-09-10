@@ -91,7 +91,7 @@ export class ResumeOne extends Component {
           <div className="page-div page-container-div">
             <div className="resume title-div">
               <h4 className="resume page-header">Traditional</h4>
-              <PDF />
+              <PDF name="template1"/>
             </div>
             <div className="template1">
               <Container textAlign="center" className="titleSection">
