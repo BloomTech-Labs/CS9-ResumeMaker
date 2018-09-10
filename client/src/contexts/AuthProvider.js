@@ -258,7 +258,7 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      this.setState({ ["resumes"[index]]: tempObj });
+      this.setState({ ["resumes"[index]]: tempObj, fetchData: false });
       // tempResumes.push(tempObj);
   };
 
@@ -277,10 +277,11 @@ class AuthProvider extends Component {
       // this.setState({ ["resumes"[index]]: tempResume[index] });
     });
 
+    const resumePromises = [];
+
     for(let i = 0; i < this.state.resumes.length; i++){
       console.log("EXPANDIDS IS DOING AN AXIOS M80");
-      // const resumePromise = 
-      axios
+      const resumePromise = axios
       .put(
         `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
         this.state.resumes[i],
@@ -298,15 +299,16 @@ class AuthProvider extends Component {
         console.log("err", err);
         // return err;
       });
-      // resumePromises.push(resumePromise);
+      resumePromises.push(resumePromise);
     }
 
     // console.log("OUR PROMISES", resumePromises);
     // Once every request is finished state updates once.
-    // Promise.all(resumePromises).then(updatedResumes => {
-    //   // console.log("promise me ned", updatedResumes);
-    //   this.setState({ resumes: updatedResumes})
-    // })
+    Promise.all(resumePromises).then(updatedResumes => {
+      console.log("promise me ned", updatedResumes);
+      this.setState({ fetchData: true });
+      // this.setState({ resumes: updatedResumes})
+    })
   };
 
 

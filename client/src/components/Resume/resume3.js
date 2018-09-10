@@ -117,7 +117,7 @@ export class ResumeThree extends Component {
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h4>
                     {userInfo.title.map((item, index) => {
-                      if(resumes[this.state.index].title[index].value === true){
+                      if(resumes[this.state.index] && resumes[this.state.index].title[index] && resumes[this.state.index].title[index].value === true){
                         return (
                           <p key={item._id}>
                             {item.content}
@@ -136,9 +136,7 @@ export class ResumeThree extends Component {
                       >
                         <h5 className="subtitle" >Summary</h5>
                         {userInfo.summary.map((item, index) => {
-                          return resumes[this.state.index].sections.summary[
-                            index
-                          ].value ? (
+                          return resumes[this.state.index].sections.summary[index].value ? (
                             <p key={item._id}>{item.content}</p>
                           ) : null;
                         })}
@@ -150,9 +148,7 @@ export class ResumeThree extends Component {
                     <Container textalign="center" className="skillsSection">
                       <h5 className="subtitle">Skills</h5>
                       {userInfo.skills.map((content, index) => {
-                        return resumes[this.state.index].sections.skills[
-                          index
-                        ].value ? (
+                        return resumes[this.state.index].sections.skills[index].value ? (
                           <div key={content._id}>
                             <b>{content.groupname}</b>
                             <p>{content.content}</p>
@@ -168,9 +164,7 @@ export class ResumeThree extends Component {
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
-                        return resumes[this.state.index].sections.experience[
-                          index
-                        ].value ? (
+                        return resumes[this.state.index].sections.experience[index].value ? (
                           <div key={content._id}>
                             <h6>{content.company} </h6>
                             <p>
@@ -193,9 +187,7 @@ export class ResumeThree extends Component {
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
-                        return resumes[this.state.index].sections.education[
-                          index
-                        ].value ? (
+                        return resumes[this.state.index].sections.education[index].value ? (
                           <div key={content._id}>
                             <h6>
                               {content.degree} in {content.fieldofstudy}{" "}
