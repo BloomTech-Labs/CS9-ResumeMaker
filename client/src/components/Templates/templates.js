@@ -253,58 +253,63 @@ class Templates extends Component {
             </div>
 
             <Container className="resumePage">
-              <Container className="contactSection">
+              <Container className="contact-page">
                 <h3>Contact Details</h3>
-                {this.props.context.userInfo.name.firstname &&
-                this.props.context.userInfo.name.lastname ? (
-                  <h2>
-                    {userInfo.name.firstname} {userInfo.name.lastname}
-                  </h2>
-                ) : (
-                  <h2>Please enter your full name in the SETTINGS page</h2>
-                )}
-                <a href={`mailto:${userInfo.email}`}>
-                  <p> {userInfo.email}</p>
-                </a>
-                <div>
-                  <div className="fa fa-globe" aria-hidden="true" />
-                  {userInfo.location}
-                </div>
-                <div>
-                  <div className="fa fa-mobile" aria-hidden="true" />
-                  {userInfo.phonenumber}
-                </div>
+                <Container className="contactSection">
+                  {this.props.context.userInfo.name.firstname &&
+                  this.props.context.userInfo.name.lastname ? (
+                    <h2>
+                      {userInfo.name.firstname} {userInfo.name.lastname}
+                    </h2>
+                  ) : (
+                    <h2>Please enter your full name in the SETTINGS page</h2>
+                  )}
+                  <a href={`mailto:${userInfo.email}`}>
+                    <p> {userInfo.email}</p>
+                  </a>
+                  <div>
+                    <div className="fa fa-globe" aria-hidden="true" />
+                    {userInfo.location}
+                  </div>
+                  <div>
+                    <div className="fa fa-mobile" aria-hidden="true" />
+                    {userInfo.phonenumber}
+                  </div>
+                </Container>
               </Container>
-              <div>
-                <TitleDropdown
-                  className="dropdown"
-                  context={this.props.context}
-                  data={userInfo}
-                  value={
-                    resumes[this.state.index]
-                      ? resumes[this.state.index].title.filter(
-                          title => title.value === true
-                        )
-                      : null
-                  }
-                  index={this.state.index}
-                />
-                {/* <Divider className="divider-div" /> */}
-                {/* <Container textAlign="center" className="contactSection"> */}
 
-                <CheckBox
-                  context={this.props.context}
-                  index={this.state.index}
-                  name="linkedin"
-                  value={
-                    resumes[this.state.index]
-                      ? resumes[this.state.index].links.linkedin
-                      : null
-                  }
-                />
-                <div className={"fa fa-linkedin fa-sm"} />
-                {userInfo.links.linkedin}
-              </div>
+              <Container className="title-page">
+                <h3>Titles</h3>
+                <Container className="titleSection">
+                  <TitleDropdown
+                    className="dropdown"
+                    context={this.props.context}
+                    data={userInfo}
+                    value={
+                      resumes[this.state.index]
+                        ? resumes[this.state.index].title.filter(
+                            title => title.value === true
+                          )
+                        : null
+                    }
+                    index={this.state.index}
+                  />
+                </Container>
+              </Container>
+
+              <CheckBox
+                context={this.props.context}
+                index={this.state.index}
+                name="linkedin"
+                value={
+                  resumes[this.state.index]
+                    ? resumes[this.state.index].links.linkedin
+                    : null
+                }
+              />
+              <div className={"fa fa-linkedin fa-sm"} />
+              {userInfo.links.linkedin}
+
               <div>
                 <CheckBox
                   context={this.props.context}

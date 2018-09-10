@@ -385,7 +385,7 @@ form {
   word-break: break;
 }
 .navbar {
-  background-color: #707F8C;
+  background-color: #707f8c;
   border-bottom: 2px solid darkslategray;
 }
 .resume.title-div {
@@ -504,7 +504,7 @@ img {
 }
 .component-div {
   display: flex;
-  background: #C8C8C8;
+  background: #c8c8c8;
 }
 .page-div {
   display: flex;
@@ -564,7 +564,7 @@ img {
   display: flex;
 }
 .subtitle {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold';
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold";
 }
 .titleSection {
   background-color: lightgray;
@@ -583,6 +583,29 @@ img {
   height: 10rem;
   padding: 1rem;
 }
-.contact-section {
-  font-size: 0.7rem;
+.contact-page {
+  border: 2px solid black;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.contact-page .contactSection {
+  display: flex;
+  flex-flow: column wrap;
+  border-left: 2px solid black;
+}
+.title-page {
+  margin: 10%;
+  border: 2px solid black;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.title-page .titleSection {
+  display: flex;
+  flex-flow: column wrap;
+  border-left: 2px solid black;
+  max-width: 800px;
 }
