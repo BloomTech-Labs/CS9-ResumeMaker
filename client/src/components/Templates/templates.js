@@ -133,7 +133,7 @@ class Templates extends Component {
             )
             .then(response => {
               this.setState({ success: true });
-              this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
+              // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
               console.log("err", err);
@@ -173,9 +173,9 @@ class Templates extends Component {
     // The following if statement prevents crashes if resumes aren't loaded or don't exist yet.
     // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
-      !resumes[this.state.index] ||
       this.state.index === null ||
-      this.props.context.userInfo.currentresume === null
+      this.props.context.userInfo.currentresume === null ||
+      !resumes[this.state.index]
     ) {
       return (
         <div style={{display: "none"}}>

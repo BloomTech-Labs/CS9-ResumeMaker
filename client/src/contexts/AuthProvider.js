@@ -91,10 +91,11 @@ class AuthProvider extends Component {
     } else if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
       this.createResume(true);
-    } else {
+    } else if (this.state.resumes.length > 0 && resumeData.length === this.state.resumes.length) {
       this.expandResumeIDs();
+    } else {
+      return;
     }
-    return;
 
     // else if (resumeData.length === 1 && this.state.currentresume === null){
     //   console.log("dont set res 1")
@@ -156,6 +157,7 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
+        console.log("resume post response.data:", response.data);
         this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
         // if(this.state.resumes.length <= 1){
         //   console.log("setResume replaced index 0 resume", response.data);
@@ -283,6 +285,7 @@ class AuthProvider extends Component {
       })
       .catch(err => {
         console.log("err", err);
+        return err;
       });
       resumePromises.push(resumePromise);
     }
