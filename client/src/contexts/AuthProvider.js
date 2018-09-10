@@ -100,23 +100,23 @@ class AuthProvider extends Component {
   createResume = newResume => {
     let tempState = this.state.resumes;
     const tempObj = {
-      value: true,
-      links: { linkedin: true, github: true, portfolio: true },
+      value: false,
+      links: { linkedin: false, github: false, portfolio: false },
       title: this.state.title.map(item => {
         return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.state.experience.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         education: this.state.education.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         summary: this.state.summary.map(item => {
           return { _id: item._id, value: false };
         }),
         skills: this.state.skills.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         })
       }
     };
@@ -125,7 +125,9 @@ class AuthProvider extends Component {
       tempState.push(tempObj);
     } else tempState.push(tempObj);
     tempObj["resumes"] = tempState.map((resume) => resume._id);
-    // this.setState({ resumes: tempState });
+    // !fix below setstate maybe
+    this.setState({ resumes: tempState });
+    
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -146,20 +148,7 @@ class AuthProvider extends Component {
       });
   };
 
-  expandResumeIDs = resumeId => {
-    console.log("expandResumeIDs called with resumeId:", resumeId);
-    // Index was being passed as the number 0, when according to other areas of code
-    // currentresume is supposed to be the id of a resume.
-    // Now currentresume is a string id referencing the Resume model
-    let index = 0;
-    // The index is now found based on the passed in resumeId, and the loop breaks once it is found.
-    for(let i = 0; i < this.state.resumes.length; i++){
-      if(this.state.resumes[i]._id === resumeId){
-        index = i;
-        break;
-      }
-    }
-
+  expandResumeIDs = () => {
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -168,24 +157,24 @@ class AuthProvider extends Component {
       }
       return -1;
     }
-    const tempObj = this.state.resumes[index];
 
-    const expandSection = (section, resumeSection) => {
+    const tempResume = [];
+
+  
+    const expandSection = (section, resumeSection, index) => {
       // no .sections portion
+      const tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
-          console.log("WHATWEGOT", this.state.resumes);
-          console.log("INDEX IS", index)
-          console.log("WHATWEGOTINDEX", this.state.resumes[index]);
           let current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
           current.length === 0
-            ? tempObj[section].push({
-                _id: item._id,
-                value: false
-              })
-            : console.log();
+          ? tempObj[section].push({
+            _id: item._id,
+            value: false
+          })
+          : console.log();
         } // All items in context now have a resume counterpart
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
@@ -231,25 +220,15 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-    };
-    this.state.resumes.forEach(() => {
-      expandSection("title", false);
-      expandSection("experience", true);
-      expandSection("education", true);
-      expandSection("summary", true);
-      expandSection("skills", true);
-    });
+      this.setState({ ["resumes"[index]]: tempObj });
+      tempResume.push(this.state.resumes[index]);
 
-    this.setState({ ["resumes"[index]]: tempObj });
-    const tempResume = this.state.resumes[index];
-
-    if (!tempResume["user"]) tempResume["user"] = this.state.id;
-    tempResume["resumes"] = this.state.resumes.map((resume) => resume._id);
-    if (tempResume._id) {
+    // if (!tempResume["user"]) tempResume["user"] = this.state.id;
+    if (tempResume[index]._id) {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
-          tempResume,
+          tempResume[index],
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token")
@@ -273,26 +252,22 @@ class AuthProvider extends Component {
             .catch(err => {
               console.log("err", err);
             });
-          console.log("response", response);
         })
         .catch(err => {
           console.log("err", err);
         });
-    } else {
-      axios
-        .post(`${urls[urls.basePath]}/resume/`, tempResume, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        .then(() => {
-          console.log("Success on updating resumes");
-        })
-        .catch(err => {
-          console.log("err", err);
-        });
-    }
+      }
   };
+
+    this.state.resumes.forEach((item, index) => {
+      expandSection("title", false, index);
+      expandSection("experience", true, index);
+      expandSection("education", true, index);
+      expandSection("summary", true, index);
+      expandSection("skills", true, index);
+    });
+  };
+
 
   setResumeItemState = (index, name, id) => {
     const tempState = this.state;
