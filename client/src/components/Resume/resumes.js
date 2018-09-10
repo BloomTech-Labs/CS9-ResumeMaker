@@ -171,7 +171,7 @@ class Resumes extends Component {
       return <Redirect to="/login" />;
     }
     if (this.state.success) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     const resumes = this.props.context.userInfo.resumes;
     // The following if statement prevents crashes if resumes aren't loaded or don't exist yet.
