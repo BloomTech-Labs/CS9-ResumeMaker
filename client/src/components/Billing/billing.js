@@ -189,7 +189,7 @@ class Billing extends Component {
                   </div>
                 )}
                 {this.state.gone ? (
-                  <p style={{ textAlign: "center" }}>
+                  <p style={{ textAlign: "center", marginTop: "7%" }}>
                     Thank you for your business. We hope to work with you again
                     soon!
                   </p>
