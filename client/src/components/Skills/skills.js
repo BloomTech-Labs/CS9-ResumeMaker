@@ -50,7 +50,7 @@ class Skills extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  handleSubmit = action => {
+  handleSubmit = (action) => {
     if (action === "add") {
       this.props.context.actions.addElement("skills", {
         groupname: this.state.newSkill
@@ -122,6 +122,7 @@ class Skills extends Component {
                           onChange={e => this.handleChange(e, index)}
                           onKeyDown={event => {
                             if (event.key === "Enter") {
+                              event.target.blur();
                               event.preventDefault();
                               event.stopPropagation();
                               this.handleSubmit("edit");
@@ -143,6 +144,7 @@ class Skills extends Component {
                           onChange={e => this.handleChange(e, index)}
                           onKeyDown={event => {
                             if (event.key === "Enter") {
+                              event.target.blur();
                               event.preventDefault();
                               event.stopPropagation();
                               this.handleSubmit("edit");
@@ -154,9 +156,9 @@ class Skills extends Component {
                   </Form>
                 );
               })}
-              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
+              {/* <Button color="primary" onClick={() => this.handleSubmit("edit")}>
                 Submit
-              </Button>
+              </Button> */}
               <div className="skillgroup-input">
                 <FormGroup>
                   <Label>New Skill Group</Label>
