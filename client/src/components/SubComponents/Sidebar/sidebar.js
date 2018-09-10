@@ -66,18 +66,18 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/templates"
+            to="/resumes"
             className={classnames({
-              active: window.location.pathname.includes("/templates")
+              active: window.location.pathname.includes("/resumes")
             })}
           >
             {" "}
             <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
           </Link>
           <Link
-            to="/resumes"
+            to="/templates"
             className={classnames({
-              active: window.location.pathname.includes("/resumes")
+              active: window.location.pathname.includes("/templates")
             })}
           >
             {" "}
