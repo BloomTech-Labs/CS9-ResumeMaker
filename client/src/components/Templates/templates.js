@@ -61,12 +61,6 @@ class Templates extends Component {
     this.setState({ index: index });
   }
 
-  // componentWillUnmount() {
-  //   this.props.context.actions.expandResumeIDs(
-  //     this.props.context.userInfo.currentresume
-  //   );
-  // }
-
   handleCreate = () => {
     console.log("handle create called")
     const tempObj = {
@@ -115,8 +109,6 @@ class Templates extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    console.log("TEMPOBJ:", tempObj);
-    // tempObj.resumes = this.props.context.userInfo.resumes;
     tempObj["resumes"] = this.props.context.userInfo.resumes.map((resume) => resume._id);
     if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
     if (tempObj._id) {

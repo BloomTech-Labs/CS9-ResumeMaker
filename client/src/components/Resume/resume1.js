@@ -34,12 +34,6 @@ export class ResumeOne extends Component {
     this.setState({ index: index });
   }
 
-  // componentWillUnmount() {
-  //   this.props.context.actions.expandResumeIDs(
-  //     this.props.context.userInfo.currentResume
-  //   );
-  // }
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
