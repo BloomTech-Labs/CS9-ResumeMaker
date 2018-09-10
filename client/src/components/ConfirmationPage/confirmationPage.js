@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  FormFeedback,
-  Input,
-  Label
-} from "reactstrap";
+import { Button } from "reactstrap";
 import axios from "axios";
 
 const urls = require("../../config/config.json");

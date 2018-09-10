@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 
-const urls = require("../../config/config.json");
-
 class Resumes extends Component {
   findWithAttr = (array, attr, value) => {
     for (var i = 0; i < array.length; i++) {
-      console.log("arrayI", array[i][attr], "value compared to", value);
       if (array[i][attr] === value) {
         return i;
       }
