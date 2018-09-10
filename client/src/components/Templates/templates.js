@@ -23,6 +23,7 @@ class Templates extends Component {
   }
 
   componentWillMount() {
+    if (!this.props.context.userInfo.resumes.length) this.props.context.actions.createResume();
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
