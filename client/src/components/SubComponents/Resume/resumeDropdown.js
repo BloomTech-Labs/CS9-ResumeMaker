@@ -10,10 +10,6 @@ class ResumeDropdown extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.setState({ selected: this.fillState() });
-  }
-
   fillState = () => {
     if (this.props.context.userInfo.resumes.length !== 0) {
       const temp = this.props.context.userInfo.resumes.filter(resume => {
@@ -23,6 +19,10 @@ class ResumeDropdown extends Component {
       else return "Select a Resume";
     } else return "Select a Resume";
   };
+
+  componentDidMount = () => {
+    this.setState({ selected: this.fillState() });
+  }
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
@@ -56,10 +56,11 @@ class ResumeDropdown extends Component {
       </li>
     ));
 
+    const displayIndex = this.props.index + 1;
     return (
       <div className="template-card card dropdown m-0">
         <div className="container">
-          <p>{selected}</p>
+          <p>{selected ? selected : "Resume " + displayIndex}</p>
         </div>
         <h6>
           Choose an option:{" "}

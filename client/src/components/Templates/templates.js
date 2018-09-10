@@ -238,6 +238,7 @@ class Templates extends Component {
               )}
               <ResumeDropdown
                 updateResumeIndex={this.updateResumeIndex}
+                index={this.state.index}
                 className="dropdown"
                 context={this.props.context}
                 data={userInfo}
