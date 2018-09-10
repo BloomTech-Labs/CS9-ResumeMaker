@@ -24,6 +24,7 @@ class Templates extends Component {
 
   componentWillMount() {
     if (!this.props.context.userInfo.resumes.length) this.props.context.actions.createResume();
+
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -47,9 +48,7 @@ class Templates extends Component {
   }
 
   componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
+    this.props.context.actions.expandResumeIDs();
   }
 
   handleCreate = () => {
@@ -163,10 +162,10 @@ class Templates extends Component {
       return <Redirect to="/login" />;
     }
 
-    const userInfo = this.props.context.userInfo;
-    const education = this.props.context.userInfo.education;
-    const experience = this.props.context.userInfo.experience;
-    const resumes = this.props.context.userInfo.resumes;
+    let userInfo = this.props.context.userInfo;
+    let education = this.props.context.userInfo.education;
+    let experience = this.props.context.userInfo.experience;
+    let resumes = this.props.context.userInfo.resumes;
     return (
       <div className="entire-page">
         <Navbar context={this.props.context} />
@@ -196,7 +195,7 @@ class Templates extends Component {
               <ResumeDropdown
                 className="dropdown"
                 context={this.props.context}
-                data={userInfo}
+                data={this.props.context.userInfo}
               />
               {this.props.context.userInfo.membership ? (
                 <button className="resume-button" onClick={this.handleCreate}>
@@ -212,14 +211,14 @@ class Templates extends Component {
 
             {/* <Container textAlign="center" className="titleSection"> */}
             <h2>
-              {userInfo.name.firstname} {userInfo.name.lastname}
+              {this.props.context.userInfo.name.firstname} {this.props.context.userInfo.name.lastname}
             </h2>
 
             <TitleDropdown
               className="dropdown"
               context={this.props.context}
-              data={userInfo}
-              value={resumes[this.state.index].title.filter(
+              data={this.props.context.userInfo}
+              value={this.props.context.userInfo.resumes[this.state.index].title.filter(
                 title => title.value === true
               )}
               index={this.state.index}
@@ -228,45 +227,45 @@ class Templates extends Component {
             {/* <Divider className="divider-div" /> */}
             {/* <Container textAlign="center" className="contactSection"> */}
             <h3>Contact Details</h3>
-            <a href={`mailto:${userInfo.email}`}>
-              <p> {userInfo.email}</p>
+            <a href={`mailto:${this.props.context.userInfo.email}`}>
+              <p> {this.props.context.userInfo.email}</p>
             </a>
             <div>
               <div className="fa fa-globe" aria-hidden="true" />
-              {userInfo.location}
+              {this.props.context.userInfo.location}
             </div>
             <div>
               <div className="fa fa-mobile" aria-hidden="true" />
-              {userInfo.phonenumber}
+              {this.props.context.userInfo.phonenumber}
             </div>
             <div>
               <CheckBox
                 context={this.props.context}
                 index={this.state.index}
                 name="linkedin"
-                value={resumes[this.state.index].links.linkedin}
+                value={this.props.context.userInfo.resumes[this.state.index].links.linkedin}
               />
               <div className={"fa fa-linkedin fa-sm"} />
-              {userInfo.links.linkedin}
+              {this.props.context.userInfo.links.linkedin}
             </div>
             <div>
               <CheckBox
                 context={this.props.context}
                 index={this.state.index}
                 name="github"
-                value={resumes[this.state.index].links.github}
+                value={this.props.context.userInfo.resumes[this.state.index].links.github}
               />{" "}
               <div className="fa fa-github" aria-hidden="true" />
-              {userInfo.links.github}
+              {this.props.context.userInfo.links.github}
             </div>
             <p>
               <CheckBox
                 context={this.props.context}
                 index={this.state.index}
                 name="portfolio"
-                value={resumes[this.state.index].links.portfolio}
+                value={this.props.context.userInfo.resumes[this.state.index].links.portfolio}
               />{" "}
-              {userInfo.links.portfolio}
+              {this.props.context.userInfo.links.portfolio}
             </p>
             {/* </Container> */}
             {/* <Divider className="divider-div" /> */}
@@ -278,8 +277,8 @@ class Templates extends Component {
             <h3>Summary</h3>
             <SummaryDropdown
               context={this.props.context}
-              data={userInfo}
-              value={resumes[this.state.index].sections.summary.filter(
+              data={this.props.context.userInfo}
+              value={this.props.context.userInfo.resumes[this.state.index].sections.summary.filter(
                 summary => summary.value === true
               )}
               index={this.state.index}
@@ -288,17 +287,18 @@ class Templates extends Component {
             {/* <Divider className="divider-div" /> */}
             {/* <Container textAlign="center" className="skillsSection"> */}
             <h3>Skills</h3>
-            {userInfo.skills.map((content, index) => {
+            {this.props.context.userInfo.skills.length > 0 ? this.props.context.userInfo.skills.map((content, index) => {
               return (
                 <div key={index}>
                   <p>
                     {" "}
+                    {console.log(this.props.context.userInfo.resumes[this.state.index].sections.skills.length, index)}
                     <CheckBox
                       context={this.props.context}
                       id={content._id}
                       name="skills"
                       value={
-                        resumes[this.state.index].sections.skills[index].value
+                        this.props.context.userInfo.resumes[this.state.index].sections.skills[index].value
                       }
                       index={this.state.index}
                     />
@@ -306,13 +306,13 @@ class Templates extends Component {
                   </p>
                 </div>
               );
-            })}
+            }) : null}
             {/* </Container> */}
             {/* <Divider className="divider-div" /> */}
             {/* <Container textAlign="center" className="experienceSection"> */}
             <h3>Experience</h3>
-            {experience.length > 0
-              ? experience.map((content, index) => {
+            {this.props.context.userInfo.experience.length > 0
+              ? this.props.context.userInfo.experience.map((content, index) => {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return (
@@ -324,7 +324,7 @@ class Templates extends Component {
                           id={content._id}
                           name="experience"
                           value={
-                            resumes[this.state.index].sections.experience[index]
+                            this.props.context.userInfo.resumes[this.state.index].sections.experience[index]
                               .value
                           }
                           index={this.state.index}
@@ -348,8 +348,8 @@ class Templates extends Component {
             {/* <Divider className="divider-div" /> */}
             {/* <Container textAlign="center" className="educationSection"> */}
             <h3>Education</h3>
-            {education.length > 0
-              ? education.map((content, index) => {
+            {this.props.context.userInfo.education.length > 0
+              ? this.props.context.userInfo.education.map((content, index) => {
                   let from = moment(content.from).format("MMM YYYY");
                   let to = moment(content.to).format("MMM YYYY");
                   return (
@@ -360,7 +360,7 @@ class Templates extends Component {
                           id={content._id}
                           name="education"
                           value={
-                            resumes[this.state.index].sections.education[index]
+                            this.props.context.userInfo.resumes[this.state.index].sections.education[index]
                               .value
                           }
                           index={this.state.index}

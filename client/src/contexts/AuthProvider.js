@@ -23,7 +23,7 @@ class AuthProvider extends Component {
     skills: [],
     summary: [],
     resumes: [],
-    currentResume: 0,
+    currentResume: "",
     membership: false
   };
 
@@ -31,7 +31,7 @@ class AuthProvider extends Component {
     localStorage.removeItem("token");
     this.setState({
       auth: false,
-      currentResume: 0,
+      currentResume: "",
       username: "",
       email: "",
       name: {
@@ -52,7 +52,7 @@ class AuthProvider extends Component {
   setLogin = userData => {
     this.setState({
       auth: true,
-      currentResume: userData.currentresume ? userData.currentresume : 0,
+      currentResume: userData.currentresume ? userData.currentresume : "",
       email: userData.email ? userData.email : "",
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
@@ -128,9 +128,7 @@ class AuthProvider extends Component {
       });
   };
 
-  expandResumeIDs = index => {
-
-    // if 
+  expandResumeIDs = () => {
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -139,21 +137,24 @@ class AuthProvider extends Component {
       }
       return -1;
     }
-    const tempObj = this.state.resumes[index];
-
-    const expandSection = (section, resumeSection) => {
+    console.log(this.state.resumes)
+    // const index = findWithAttr(this.state.resumes, "_id", this.state.currentResume)
+    const tempResume = [];
+    
+    const expandSection = (section, resumeSection, index) => {
       // no .sections portion
+      const tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
           let current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
           current.length === 0
-            ? tempObj[section].push({
-                _id: item._id,
-                value: false
-              })
-            : console.log();
+          ? tempObj[section].push({
+            _id: item._id,
+            value: false
+          })
+          : console.log();
         } // All items in context now have a resume counterpart
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
@@ -199,24 +200,15 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-    };
-    this.state.resumes.forEach(() => {
-      expandSection("title", false);
-      expandSection("experience", true);
-      expandSection("education", true);
-      expandSection("summary", true);
-      expandSection("skills", true);
-    });
+      this.setState({ ["resumes"[index]]: tempObj });
+      tempResume.push(this.state.resumes[index]);
 
-    this.setState({ ["resumes"[index]]: tempObj });
-    const tempResume = this.state.resumes[index];
-
-    if (!tempResume["user"]) tempResume["user"] = this.state.id;
-    if (tempResume._id) {
+    // if (!tempResume["user"]) tempResume["user"] = this.state.id;
+    if (tempResume[index]._id) {
       axios
         .put(
           `${urls[urls.basePath]}/resume/` + this.state.resumes[index]._id,
-          tempResume,
+          tempResume[index],
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token")
@@ -244,20 +236,16 @@ class AuthProvider extends Component {
         .catch(err => {
           console.log("err", err);
         });
-    } else {
-      axios
-        .post(`${urls[urls.basePath]}/resume/`, tempResume, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        .then(() => {
-          console.log("Success on updating resumes");
-        })
-        .catch(err => {
-          console.log("err", err);
-        });
-    }
+      }
+  };
+
+    this.state.resumes.forEach((item, index) => {
+      expandSection("title", false, index);
+      expandSection("experience", true, index);
+      expandSection("education", true, index);
+      expandSection("summary", true, index);
+      expandSection("skills", true, index);
+    });
   };
 
   setResumeItemState = (index, name, id) => {

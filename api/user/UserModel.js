@@ -155,7 +155,7 @@ const User = new mongoose.Schema(
         ref: "Resume"
       }
     ],
-    currentresume: Number
+    currentresume: ObjectId
   },
   { timestamps: true }
 );
