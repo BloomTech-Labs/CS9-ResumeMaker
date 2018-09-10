@@ -264,17 +264,63 @@ class Templates extends Component {
                   ) : (
                     <h2>Please enter your full name in the SETTINGS page</h2>
                   )}
-                  <a href={`mailto:${userInfo.email}`}>
-                    <p> {userInfo.email}</p>
-                  </a>
-                  <div>
-                    <div className="fa fa-globe" aria-hidden="true" />
-                    {userInfo.location}
-                  </div>
-                  <div>
-                    <div className="fa fa-mobile" aria-hidden="true" />
-                    {userInfo.phonenumber}
-                  </div>
+                  <Container className="contactHolder">
+                    <Container className="contactOne">
+                      <a href={`mailto:${userInfo.email}`}>
+                        <div> {userInfo.email}</div>
+                      </a>
+                      <div>
+                        <div className="fa fa-globe" aria-hidden="true" />
+                        {userInfo.location}
+                      </div>
+                      <div>
+                        <div className="fa fa-mobile" aria-hidden="true" />
+                        {userInfo.phonenumber}
+                      </div>
+                    </Container>
+                    <Container className="contactTwo">
+                      <CheckBox
+                        context={this.props.context}
+                        index={this.state.index}
+                        name="linkedin"
+                        value={
+                          resumes[this.state.index]
+                            ? resumes[this.state.index].links.linkedin
+                            : null
+                        }
+                      />
+                      <div className={"fa fa-linkedin fa-sm"} />
+                      {userInfo.links.linkedin}
+
+                      <div>
+                        <CheckBox
+                          context={this.props.context}
+                          index={this.state.index}
+                          name="github"
+                          value={
+                            resumes[this.state.index]
+                              ? resumes[this.state.index].links.github
+                              : null
+                          }
+                        />{" "}
+                        <div className="fa fa-github" aria-hidden="true" />
+                        {userInfo.links.github}
+                      </div>
+                      <p>
+                        <CheckBox
+                          context={this.props.context}
+                          index={this.state.index}
+                          name="portfolio"
+                          value={
+                            resumes[this.state.index]
+                              ? resumes[this.state.index].links.portfolio
+                              : null
+                          }
+                        />{" "}
+                        {userInfo.links.portfolio}
+                      </p>
+                    </Container>
+                  </Container>
                 </Container>
               </Container>
 
@@ -297,46 +343,6 @@ class Templates extends Component {
                 </Container>
               </Container>
 
-              <CheckBox
-                context={this.props.context}
-                index={this.state.index}
-                name="linkedin"
-                value={
-                  resumes[this.state.index]
-                    ? resumes[this.state.index].links.linkedin
-                    : null
-                }
-              />
-              <div className={"fa fa-linkedin fa-sm"} />
-              {userInfo.links.linkedin}
-
-              <div>
-                <CheckBox
-                  context={this.props.context}
-                  index={this.state.index}
-                  name="github"
-                  value={
-                    resumes[this.state.index]
-                      ? resumes[this.state.index].links.github
-                      : null
-                  }
-                />{" "}
-                <div className="fa fa-github" aria-hidden="true" />
-                {userInfo.links.github}
-              </div>
-              <p>
-                <CheckBox
-                  context={this.props.context}
-                  index={this.state.index}
-                  name="portfolio"
-                  value={
-                    resumes[this.state.index]
-                      ? resumes[this.state.index].links.portfolio
-                      : null
-                  }
-                />{" "}
-                {userInfo.links.portfolio}
-              </p>
               {/* </Container> */}
               {/* <Divider className="divider-div" /> */}
               {/* <Container

@@ -595,6 +595,9 @@ img {
   flex-flow: column wrap;
   border-left: 2px solid black;
 }
+.contact-page .contactHolder {
+  display: flex;
+}
 .title-page {
   margin: 10%;
   border: 2px solid black;
