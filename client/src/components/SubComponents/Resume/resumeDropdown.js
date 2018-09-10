@@ -2,12 +2,15 @@ import React, { Component } from "react";
 
 class ResumeDropdown extends Component {
   // Adding default state as a placeholder
-  state = {
-    toggled: false,
-    selected: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggled: false,
+      selected: ""
+    };
+  }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ selected: this.fillState() });
   }
 
@@ -30,7 +33,7 @@ class ResumeDropdown extends Component {
 
   // Allows us to select an li and set our state with the given value
   handleClick = (data, index) => {
-    console.log("HANDEL KLICK on it boi", data._id, index, this.props.context);
+    console.log("HANDEL KLICK on it boi", data._id, index);
     this.setState({
       selected: "Resume " + (index + 1),
       toggled: false

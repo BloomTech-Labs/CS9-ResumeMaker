@@ -192,7 +192,8 @@ class Templates extends Component {
     // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
       !resumes[this.state.index] ||
-      this.state.index === null
+      this.state.index === null,
+      this.props.context.userInfo.currentresume === null
     ) {
       return (
         <div style={{display: "none"}}>
