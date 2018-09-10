@@ -79,7 +79,7 @@ export class ResumeThree extends Component {
           <div className="page-div page-container-div">
             <div className="resume title-div">
               <h4 className="resume page-header">Elegant</h4>
-              <PDF />
+              <PDF name="template3" />
             </div>
             <div className="template3">
               <div className="row">
