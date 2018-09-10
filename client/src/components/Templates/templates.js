@@ -85,6 +85,8 @@ class Templates extends Component {
           "currentresume",
           response.data.Resume._id
         );
+        this.props.context.actions.pushResumes(response.data.Resume);
+        console.log("RESPONSE TO CREATE TEMPLATE", response);
       })
       .catch(err => {
         console.log("err", err);
@@ -153,6 +155,8 @@ class Templates extends Component {
   };
 
   render() {
+    console.log("TEMPLATE PROPS", this.props.context.userInfo.resumes);
+    console.log("TEMPLATE STATE", this.state.resumes);
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }

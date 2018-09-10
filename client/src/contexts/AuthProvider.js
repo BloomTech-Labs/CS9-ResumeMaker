@@ -97,6 +97,12 @@ class AuthProvider extends Component {
     }
   };
 
+  pushResumes = newResume => {
+    let newState = this.state.resumes;
+    newState.push(newResume);
+    this.setState({ resumes: newState });
+  }
+
   createResume = newResume => {
     let tempState = this.state.resumes;
     const tempObj = {
@@ -348,7 +354,8 @@ class AuthProvider extends Component {
             setElement: this.setElement,
             addElement: this.addElement,
             removeElement: this.removeElement,
-            setSingleElement: this.setSingleElement
+            setSingleElement: this.setSingleElement,
+            pushResumes: this.pushResumes
           }
         }}
       >
