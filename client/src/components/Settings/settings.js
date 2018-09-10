@@ -208,7 +208,7 @@ export class PersonalInfo extends Component {
         response.data.user.changesSaved = true;
         this.setState(response.data.user);
         // This updates context with the new user info from server
-        this.props.context.actions.setLogin(response.data.user);
+        this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
         this.setState({ changesSaved: false });

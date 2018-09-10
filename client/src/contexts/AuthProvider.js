@@ -87,21 +87,31 @@ class AuthProvider extends Component {
     if(this.state.auth !== true){
       return;
     }
+
+    if(!(this.state.resumes.length > 0) && resumeData.length > 0){
+      return this.setState({ resumes: resumeData });
+    }
+
     if (!(resumeData.length > 0) || resumeData[0] === null) {
       console.log("SET REZ BOI")
-      this.createResume(true);
-    } else if (resumeData.length === 1 && this.state.currentresume === null){
-      console.log("dont set res 1")
-      this.setState({
-        resumes: resumeData,
-        currentresume: resumeData[0]._id
-      });
-    } else {
-      console.log("dont set res 2")
-      this.setState({
-        resumes: resumeData
-      })
+      return this.createResume(true);
     }
+
+    this.expandResumeIDs();
+
+
+    // else if (resumeData.length === 1 && this.state.currentresume === null){
+    //   console.log("dont set res 1")
+    //   this.setState({
+    //     resumes: resumeData,
+    //     currentresume: resumeData[0]._id
+    //   });
+    // } else {
+    //   console.log("dont set res 2")
+    //   this.setState({
+    //     resumes: resumeData
+    //   })
+    // }
   };
 
   pushResumes = newResume => {
@@ -162,6 +172,7 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
+    console.log("expandResumeIDs called")
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {

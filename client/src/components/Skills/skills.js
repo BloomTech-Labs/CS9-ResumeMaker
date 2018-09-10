@@ -75,7 +75,7 @@ class Skills extends Component {
       )
       .then(response => {
         // This updates context with the new user info from server
-        this.props.context.actions.setLogin(response.data.user);
+        this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
         console.log("oops", err.message);

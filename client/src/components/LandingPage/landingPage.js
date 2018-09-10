@@ -17,8 +17,7 @@ class LandingPage extends Component {
           }
         })
         .then(response => {
-          const userData = response.data;
-          this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setLogin(response.data);
           this.props.history.push("/templates");
         })
         .catch(err => {

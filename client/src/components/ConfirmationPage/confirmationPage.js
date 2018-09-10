@@ -28,7 +28,7 @@ class ConfirmationPage extends Component {
           this.setState({ message: response.data.errorMessage });
         } else if (response.data.token) {
           localStorage.setItem("token", response.data.token);
-          this.props.context.actions.setLogin(response.data.user);
+          this.props.context.actions.setLogin(response.data);
           this.props.history.push("/templates");
         } else {
           this.setState({

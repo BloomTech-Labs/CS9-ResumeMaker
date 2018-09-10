@@ -61,12 +61,8 @@ class Login extends Component {
       })
       .then(response => {
         if (response.data.token) {
-          const userData = response.data.user;
-          const resumeData = response.data.resumes;
           localStorage.setItem("token", response.data.token);
-          this.props.context.actions.setLogin(userData);
-          this.props.context.actions.setResume(resumeData);
-
+          this.props.context.actions.setLogin(response.data);
           this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
