@@ -153,12 +153,12 @@ const User = new mongoose.Schema(
       default: false
     },
     subscription: String,
-    resumes: [
-      {
-        type: ObjectId,
-        ref: "Resume"
-      }
-    ],
+    // resumes: [
+    //   {
+    //     type: ObjectId,
+    //     ref: "Resume"
+    //   }
+    // ],
     currentresume: { type: ObjectId, ref: "Resume" }
   },
   { timestamps: true }

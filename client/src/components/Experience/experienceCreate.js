@@ -129,6 +129,7 @@ class ExperienceCreate extends Component {
       )
       .then(response => {
         console.log(response);
+        this.props.context.actions.setLogin(response.data.user);
         this.setState({ success: true });
       })
       .catch(err => {

@@ -6,10 +6,10 @@ import axios from "axios";
 
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import SummaryDropdown from "../Templates/TemplateClassFunctions/summaryDropdown";
-import TitleDropdown from "../Templates/TemplateClassFunctions/titleDropdown";
-import ResumeDropdown from "../SubComponents/Resume/resumeDropdown";
-import CheckBox from "../Templates/TemplateClassFunctions/checkbox";
+import SummaryDropdown from "./TemplateClassFunctions/summaryDropdown";
+import TitleDropdown from "./TemplateClassFunctions/titleDropdown";
+import ResumeDropdown from "./TemplateClassFunctions/resumeDropdown";
+import CheckBox from "./TemplateClassFunctions/checkbox";
 const urls = require("../../config/config.json");
 
 class Templates extends Component {

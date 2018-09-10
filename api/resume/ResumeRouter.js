@@ -73,12 +73,16 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
-    // if you put the _id in the update body errors will happen, so remove it
-    delete req.body._id;
+    // if you put the _id in the update body errors will happen, so remove it and
+    // also remove the unnecessary uploading of edit/creation date to keep correct edit times
     console.log("RESUME PUT req:", req.body)
-    const updatedResume = req.body;
-    // const user = req.user;
-    // updatedResume.user = user._id;
+    const { template, title, links, sections } = req.body;
+    const updatedResume = {
+      template: template,
+      title: title,
+      links: links,
+      sections: sections
+    }
 
     Resume.findByIdAndUpdate(id, updatedResume)
       .then(resume => {

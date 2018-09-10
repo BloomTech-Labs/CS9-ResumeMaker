@@ -51,7 +51,9 @@ class AuthProvider extends Component {
     });
   };
 
-  setLogin = userData => {
+  setLogin = dataFromUser => {
+    console.log("SETLOGIN, userdata:", dataFromUser);
+    const userData = dataFromUser.user;
     this.setState({
       auth: true,
       currentresume: userData.currentresume ? userData.currentresume : null,
@@ -75,6 +77,9 @@ class AuthProvider extends Component {
       id: userData._id ? userData._id : null,
       membership: userData.membership ? userData.membership : false
     });
+    // Every time setLogin is called due to changing user data in database,
+    // setLogin is called which then updates the resumes.
+    this.setResume(dataFromUser.resumes)
   };
 
   setResume = resumeData => {
