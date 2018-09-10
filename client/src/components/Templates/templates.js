@@ -36,7 +36,8 @@ class Templates extends Component {
     this.setState({ index: newIndex });
   };
 
-  // componentWillMount() {
+  componentWillMount() {
+    if (!this.props.context.userInfo.resumes.length) this.props.context.actions.createResume();
   //   console.log("template componentWillMount");
   //   let index = this.findWithAttr(
   //     this.props.context.userInfo.resumes,
@@ -47,7 +48,7 @@ class Templates extends Component {
   //   console.log("index from findWithAttr is:", index);
   //   if (index === -1) index = 0;
   //   this.setState({ index: index });
-  // }
+  }
 
   componentDidMount() {
     console.log("template componentDidMount");
@@ -216,9 +217,17 @@ class Templates extends Component {
             </div>
             <div className="containers-div">
               {this.props.context.userInfo.name.firstname ? (
-                <h1>Hi {this.props.context.userInfo.name.firstname}</h1>
+                <h1>
+                  Greetings, {this.props.context.userInfo.name.firstname}!
+                </h1>
               ) : (
-                <h1>Hi</h1>
+                <React.Fragment>
+                  <h1>Welcome! </h1>
+                  <p>
+                    Please go to the SETTINGS page and fill in your information
+                    to get started, and then to SKILLS, SUMMARY, EDUCATION, EXPERIENCE{" "}
+                  </p>
+                </React.Fragment>
               )}
               {this.props.context.userInfo.membership ? (
                 <React.Fragment>
