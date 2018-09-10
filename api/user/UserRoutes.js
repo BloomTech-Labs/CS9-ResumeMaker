@@ -150,13 +150,12 @@ router.post("/register", (req, res) => {
                 from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
                 to: `${userData.email}`,
                 subject: `Confirm your registration to ${websiteName}!`,
-                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
-                html: `Thank you for signing up! Please click this <a href=${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
-                }>link</a>.`
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${
+                  req.body.path
+                }?/users/confirmemail/${newEmailConfirmation.hash}`,
+                html: `Thank you for signing up! Please click this <a href=${
+                  req.body.path
+                }?/users/confirmemail/${newEmailConfirmation.hash}>link</a>.`
               };
 
               transporter.sendMail(mailOptions, (err, info) => {
@@ -393,17 +392,16 @@ router.put(
                                     from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
                                     to: `${req.user.email}`,
                                     subject: `Confirm your account email change for ${websiteName}!`,
-                                    text: `Please go to this link to make this your new account email address: ${req.get(
-                                      "host"
-                                    )}${req.baseUrl}/changeemail/${
+                                    text: `Please go to this link to make this your new account email address: ${
+                                      req.body.path
+                                    }?/users/changeemail/${
                                       newEmailConfirmation.hash
                                     }`,
-                                    html: `Please click this <a href=${req.get(
-                                      "host"
-                                    )}${req.baseUrl}/changeemail/${
+                                    html: `Please click this <a href=${
+                                      req.body.path
+                                    }?/users/changeemail/${
                                       newEmailConfirmation.hash
-                                    }
-                    }>link</a> to make this your new account email address.`
+                                    }>link</a> to make this your new account email address..`
                                   };
 
                                   transporter.sendMail(
@@ -668,13 +666,13 @@ router.put("/forgotpassword", (req, res) => {
               from: `"Fredegar Fu 👻" <forgotpassword@${websiteName}>`,
               to: `${user.email}`,
               subject: `Confirm your password change for ${websiteName}!`,
-              text: `Please go to this link to reset your password: ${req.get(
-                "host"
-              )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
-              html: `Please click this <a href=${req.get("host")}${
-                req.baseUrl
-              }/resetpassword/${newEmailConfirmation.hash}
-          }>link</a> to reset your password.`
+              text: `Please go to this link to reset your password: ${
+                req.body.path
+              }?/users/resetpassword/${newEmailConfirmation.hash}`,
+              html: `Please click this <a href=${
+                req.body.path
+              }?/users/resetpassword/${newEmailConfirmation.hash}
+              }>link</a> to reset your password.`
             };
 
             transporter.sendMail(mailOptions, (err, info) => {
