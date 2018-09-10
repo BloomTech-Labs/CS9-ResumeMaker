@@ -135,7 +135,7 @@ export class ResumeOne extends Component {
                 </div>
               </Container>
               <Divider className="divider-div" />
-              {summaryLength > 0 ? (
+              {summaryLength.length > 0 ? (
                 <div>
                   <Container
                     textAlign="center"
