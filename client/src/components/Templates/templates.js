@@ -9,13 +9,13 @@ const urls = require("../../config/config.json");
 class Resumes extends Component {
   findWithAttr = (array, attr, value) => {
     for (var i = 0; i < array.length; i++) {
-      console.log("arrayI", array[i][attr], "value compared to", value)
+      console.log("arrayI", array[i][attr], "value compared to", value);
       if (array[i][attr] === value) {
         return i;
       }
     }
-  return -1;
-  }
+    return -1;
+  };
 
   componentWillMount() {
     let index = this.findWithAttr(
@@ -26,7 +26,6 @@ class Resumes extends Component {
     if (index === -1) index = 0;
     this.setState({ index: index });
   }
-
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -65,6 +64,7 @@ class Resumes extends Component {
                   }}
                 >
                   <img
+                    className="template-img"
                     src={require("../Templates/tempTemplate1.png")} //import pics
                     alt=""
                     height="100rem"
@@ -79,10 +79,11 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume2", // component being Linked to
-                    state: { index:  this.state.index } // Setting Index passed to template- false means new
+                    state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
+                    className="template-img"
                     src={require("../Templates/tempTemplate2.png")} //import pics
                     alt=""
                     height="100rem"
@@ -97,10 +98,11 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume3", // component being Linked to
-                    state: { index:  this.state.index } // Setting Index passed to template- false means new
+                    state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
+                    className="template-img"
                     src={require("../Templates/tempTemplate3.png")} //import pics
                     alt=""
                     height="100rem"
