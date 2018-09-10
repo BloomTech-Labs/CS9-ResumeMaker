@@ -253,7 +253,7 @@ class Templates extends Component {
             </div>
 
             <Container className="resumePage">
-              <Container className="contact-page">
+              <Container className="contact-section">
                 <h3>Contact Details</h3>
                 <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
@@ -324,7 +324,7 @@ class Templates extends Component {
                 </Container>
               </Container>
 
-              <Container className="title-page">
+              <Container className="title-section">
                 <h3>Titles</h3>
                 <Container className="titleSection">
                   <TitleDropdown
@@ -343,29 +343,24 @@ class Templates extends Component {
                 </Container>
               </Container>
 
-              {/* </Container> */}
-              {/* <Divider className="divider-div" /> */}
-              {/* <Container
-              textAlign="center"
-              id="summary"
-              className="summarySection"
-            > */}
-              <h3>Summary</h3>
-              <SummaryDropdown
-                context={this.props.context}
-                data={userInfo}
-                value={
-                  resumes[this.state.index]
-                    ? resumes[this.state.index].sections.summary.filter(
-                        summary => summary.value === true
-                      )
-                    : null
-                }
-                index={this.state.index}
-              />
-              {/* </Container> */}
-              {/* <Divider className="divider-div" /> */}
-              {/* <Container textAlign="center" className="skillsSection"> */}
+              <Container className="summary-section">
+                <h3>Summary</h3>
+                <Container className="summarySection">
+                <SummaryDropdown
+                  context={this.props.context}
+                  data={userInfo}
+                  value={
+                    resumes[this.state.index]
+                      ? resumes[this.state.index].sections.summary.filter(
+                          summary => summary.value === true
+                        )
+                      : null
+                  }
+                  index={this.state.index}
+                />
+                                </Container>
+              </Container>
+
               <h3>Skills</h3>
               {userInfo.skills.map((content, index) => {
                 return (

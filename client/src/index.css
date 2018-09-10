@@ -583,22 +583,22 @@ img {
   height: 10rem;
   padding: 1rem;
 }
-.contact-page {
+.contact-section {
   border: 2px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
 }
-.contact-page .contactSection {
+.contact-section .contactSection {
   display: flex;
   flex-flow: column wrap;
   border-left: 2px solid black;
 }
-.contact-page .contactHolder {
+.contact-section .contactHolder {
   display: flex;
 }
-.title-page {
+.title-section {
   margin: 10%;
   border: 2px solid black;
   display: flex;
@@ -606,7 +606,21 @@ img {
   align-items: center;
   justify-content: center;
 }
-.title-page .titleSection {
+.title-section .titleSection {
+  display: flex;
+  flex-flow: column wrap;
+  border-left: 2px solid black;
+  max-width: 800px;
+}
+.summary-section {
+  margin: 10%;
+  border: 2px solid black;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.summary-section .summarySection {
   display: flex;
   flex-flow: column wrap;
   border-left: 2px solid black;
