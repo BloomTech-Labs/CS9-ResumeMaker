@@ -3,44 +3,57 @@ import axios from "axios";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
-import "../CSS/component-general.css";
 
 const urls = require("../../config/config.json");
 
 class Resumes extends Component {
+  findWithAttr = (array, attr, value) => {
+    for (var i = 0; i < array.length; i++) {
+      console.log("arrayI", array[i][attr], "value compared to", value)
+      if (array[i][attr] === value) {
+        return i;
+      }
+    }
+  return -1;
+  }
+
+  componentWillMount() {
+    let index = this.findWithAttr(
+      this.props.context.userInfo.resumes,
+      "_id",
+      this.props.context.userInfo.currentresume
+    );
+    if (index === -1) index = 0;
+    this.setState({ index: index });
+  }
+
+
   componentDidMount() {
     window.scrollTo(0, 0);
-
-    // adding Axios call to update IDs before we begin comparing them
-    if (localStorage.getItem("token")) {
-      axios
-        .get(`${urls[urls.basePath]}/users/currentuser/`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        .then(response => {
-          const userData = response.data.user;
-          const resumeData = response.data.resumes;
-          this.props.context.actions.setLogin(userData);
-          this.props.context.actions.setResume(resumeData);
-        })
-        .catch(err => {
-          console.log("Server Error: ", err);
-        });
-    }
   }
+
   render() {
     return (
       <div>
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div col">
-            <div className="d-block justify-content-center title-div">
-              <h1 style={{ fontWeight: "600" }}>RESUMES</h1>
+          <div className="title-div col">
+            <div className="title-div">
+              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>{" "}
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  borderTop: "1px solid black",
+                  width: "100%"
+                }}
+              >
+                This is your resume page
+              </p>
             </div>
-            <div className="containers-div">
+
+            <div className="d-inline-flex containers-div">
               <div className="d-inline-flex container-div">
                 <Link
                   style={{
@@ -48,7 +61,7 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume1", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                    state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
@@ -59,14 +72,14 @@ class Resumes extends Component {
                   <h5 className="link">RESUME 1</h5>
                 </Link>
               </div>
-              {/* <div className="d-inline-flex container-div">
+              <div className="d-inline-flex container-div">
                 <Link
                   style={{
                     color: "black"
                   }}
                   to={{
                     pathname: "/resume2", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                    state: { index:  this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
@@ -84,7 +97,7 @@ class Resumes extends Component {
                   }}
                   to={{
                     pathname: "/resume3", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
+                    state: { index:  this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
                   <img
@@ -93,23 +106,12 @@ class Resumes extends Component {
                     height="100rem"
                   />
                   <h5 className="link">RESUME 3</h5>
-                </Link> */}
-                <Link
-                  style={{
-                    color: "black"
-                  }}
-                  to={{
-                    pathname: "/rip", // component being Linked to
-                    state: { templateIndex: false } // Setting Index passed to template- false means new
-                  }}
-                >
-                  <h5 className="link">RIP</h5>
                 </Link>
               </div>
             </div>
           </div>
         </div>
-      // </div>
+      </div>
     );
   }
 }

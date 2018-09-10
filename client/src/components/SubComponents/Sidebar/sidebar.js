@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import classnames from "classnames";
-import "./sidebar.css";
 const urls = require("../../../config/config.json");
 
 class Sidebar extends Component {
@@ -14,7 +13,7 @@ class Sidebar extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (localStorage.getItem("token") && this.props.context.auth !== true) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
@@ -23,13 +22,17 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          this.props.context.actions.setLogin(response.data.user);
-          this.props.context.actions.setResume(response.data.resumes);
-          if (
-            !this.props.context.userInfo.resumes.length ||
-            this.props.context.userInfo.resumes[0] === null
-          )
-            this.props.context.actions.createResume();
+          console.log("Sidebar DidMounted and called setLogin and setResume with:", response.data)
+          this.props.context.actions.setLogin(response.data);
+          // this.props.context.actions.expandResumeIDs();
+          // if(response.data.resumes.length >= 1){
+          //   for(let i = 0; i < response.data.resumes.length; i++){
+          //     this.props.context.actions.expandResumeIDs(response.data.resumes[i]._id)
+          //   }
+          // }
+          // if(response.data.user.currentresume._id){
+          //   this.props.context.actions.expandResumeIDs(response.data.user.currentresume._id);
+          // }
         })
         .catch(err => {
           console.log("Server Error: ", err);

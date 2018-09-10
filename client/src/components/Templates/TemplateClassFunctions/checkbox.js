@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
 class CheckBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: this.props.value
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     checked: this.props.value
+  //   };
+  // }
 
   toggle = () => {
     this.props.context.actions.setResumeItemState(
@@ -17,6 +17,7 @@ class CheckBox extends Component {
   };
 
   render() {
+    // console.log("CHECKBOX INDEX BOI", this.props.index);
     return (
       <input
         type="checkbox"

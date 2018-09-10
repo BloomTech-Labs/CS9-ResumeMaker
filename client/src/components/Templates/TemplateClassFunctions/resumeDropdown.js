@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import "../../Templates/TemplateClassFunctions/classFunction.css";
 
 class ResumeDropdown extends Component {
   // Adding default state as a placeholder
-  state = {
-    toggled: false,
-    selected: ""
-  };
-
-  componentDidMount() {
-    this.setState({ selected: this.fillState() });
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggled: false,
+      selected: ""
+    };
   }
 
   fillState = () => {
@@ -22,6 +20,10 @@ class ResumeDropdown extends Component {
     } else return "Select a Resume";
   };
 
+  componentDidMount = () => {
+    this.setState({ selected: this.fillState() });
+  }
+
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
     this.setState({
@@ -31,10 +33,13 @@ class ResumeDropdown extends Component {
 
   // Allows us to select an li and set our state with the given value
   handleClick = (data, index) => {
+    console.log("HANDEL KLICK on it boi", data._id, index);
     this.setState({
       selected: "Resume " + (index + 1),
       toggled: false
     });
+    // this updates template page index
+    this.props.updateResumeIndex(index);
     this.props.context.actions.setSingleElement("currentresume", data._id);
   };
 
@@ -51,10 +56,11 @@ class ResumeDropdown extends Component {
       </li>
     ));
 
+    const displayIndex = this.props.index + 1;
     return (
-      <div className="template-card card card-body m-0">
+      <div className="template-card card dropdown m-0">
         <div className="container">
-          <p>{selected}</p>
+          <p>{selected ? selected : "Resume " + displayIndex}</p>
         </div>
         <h6>
           Choose an option:{" "}

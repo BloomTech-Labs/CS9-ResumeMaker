@@ -33,12 +33,6 @@ class SummaryCreate extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
-  }
-
   onInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -82,6 +76,7 @@ class SummaryCreate extends Component {
       )
       .then(response => {
         console.log(response);
+        this.props.context.actions.setLogin(response.data);
         this.setState({ success: true });
       })
       .catch(err => {

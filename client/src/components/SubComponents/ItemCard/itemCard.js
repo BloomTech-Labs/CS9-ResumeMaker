@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardTitle, CardSubtitle, CardHeader, CardBody, CardText, Button } from "reactstrap";
+import {
+  Card,
+  CardTitle,
+  CardSubtitle,
+  CardHeader,
+  CardBody,
+  CardText,
+  Button
+} from "reactstrap";
 import axios from "axios";
 import moment from "moment";
 
 import urls from "../../../config/config.json";
-
-import "./itemcard.css";
 
 function ellipsify(str, length) {
   if (str) {
@@ -57,8 +63,8 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        console.log(response);
-        this.props.context.actions.setLogin(response.data.user);
+        console.log("response", response);
+        this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
         console.log("err", err);
@@ -83,67 +89,15 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data.user);
+        this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
         console.log("err", err);
       });
   };
 
-  handleNestedDelete = () => {
-    this.props.context.actions.removeNestedElement(
-      this.props.skillGroupIndex,
-      this.props.skillIndex,
-      "skillgroups",
-      "skills"
-    );
-    const putPath = this.props.putPath;
-    const tempObj = {
-      [putPath]: this.props.context.userInfo.skillgroups
-    };
-    axios
-      .put(
-        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
-        tempObj,
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-        }
-      )
-      .then(response => {
-        this.props.context.actions.setLogin(response.data.user);
-      })
-      .catch(err => {
-        console.log("err", err);
-      });
-  }
-
   render() {
-    if(this.props.elementName === "skills") {
-      return (
-        <Card className="item-card row-card">
-          <button
-            className="close"
-            aria-label="Delete"
-            onClick={() => this.handleNestedDelete()}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-
-          <CardBody>
-            <Link
-              className="item-card-link"
-              to={{
-                pathname: `${this.props.linkTo}/create`, // component being Linked to
-                state: { skillIndex: this.props.skillIndex, skillGroupIndex: this.props.skillGroupIndex } // index passed into the create component
-              }}
-            >
-              <CardText>{ellipsify(this.props.content, 150)}</CardText>
-            </Link>
-          </CardBody>
-        </Card>
-      );
-    }
-    else if (this.props.elementName === "experience") {
+    if (this.props.elementName === "experience") {
       return (
         <Card className="item-card">
           <button
@@ -154,17 +108,18 @@ class ItemCard extends Component {
             <span aria-hidden="true">&times;</span>
           </button>
           <Link
-                className="item-card-link"
-                to={{
-                  pathname: `${this.props.linkTo}/create`, // component being Linked to
-                  state: { index: this.props.index } // Setting Index passed into summaryCreate component
-                }}
-              >
+            className="item-card-link"
+            to={{
+              pathname: `${this.props.linkTo}/create`, // component being Linked to
+              state: { index: this.props.index } // Setting Index passed into summaryCreate component
+            }}
+          >
             <CardBody>
               <CardTitle>{this.props.element.title}</CardTitle>
               <CardTitle>{this.props.element.company}</CardTitle>
               <CardText>
-                {moment(this.props.element.from).format("MMM YYYY")} - {moment(this.props.element.to).format("MMM YYYY")}
+                {moment(this.props.element.from).format("MMM YYYY")} -{" "}
+                {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
               <CardText>
                 {ellipsify(this.props.element.description, 150)}
@@ -193,14 +148,13 @@ class ItemCard extends Component {
           >
             <CardBody>
               <CardTitle>{ellipsify(this.props.element.school, 50)}</CardTitle>
-              <CardText>
-                {ellipsify(this.props.element.degree, 150)}
-              </CardText>
+              <CardText>{ellipsify(this.props.element.degree, 150)}</CardText>
               <CardText>
                 {ellipsify(this.props.element.fieldofstudy, 150)}
               </CardText>
               <CardText>
-                {moment(this.props.element.from).format("MMM YYYY")} - {moment(this.props.element.to).format("MMM YYYY")}
+                {moment(this.props.element.from).format("MMM YYYY")} -{" "}
+                {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
             </CardBody>
           </Link>

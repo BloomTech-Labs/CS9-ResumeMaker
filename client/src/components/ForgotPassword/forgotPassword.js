@@ -8,7 +8,6 @@ import {
   Label
 } from "reactstrap";
 import axios from "axios";
-import "../Login/login.css";
 
 const urls = require("../../config/config.json");
 
@@ -70,7 +69,7 @@ class ForgotPassword extends Component {
             <Button
             style={{fontSize: ".7rem", height: "2rem"}}
               block
-              size="lg"
+              bsSize="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.handleSubmit()}

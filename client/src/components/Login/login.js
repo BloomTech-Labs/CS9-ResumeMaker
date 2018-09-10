@@ -8,22 +8,27 @@ import {
   Label
 } from "reactstrap";
 import axios from "axios";
-import "./login.css";
 const urls = require("../../config/config.json");
 
-// const user = {
-//   email: "cheese23@gmail.com",
-//   password: "Cheese123!",
-//   invalidCredentials: false
-// };
+const resumePopulateTester = {
+  email: "resumePopulateTester@gmail.com",
+  password: "scrinch1G!",
+  invalidCredentials: false
+};
 
-// const user = {
+const cheese = {
+  email: "cheese23@gmail.com",
+  password: "Cheese123!",
+  invalidCredentials: false
+};
+
+// const scrinch = {
 //   email: "scrinch@gmail.com",
 //   password: "tacobell1!G",
 //   invalidCredentials: false
 // };
 
-const user = {
+const bobbert = {
   email: "bobbert@gmail.com",
   password:
     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
@@ -33,7 +38,7 @@ const user = {
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = user;
+    this.state = resumePopulateTester;
   }
 
   validateForm() {
@@ -56,13 +61,8 @@ class Login extends Component {
       })
       .then(response => {
         if (response.data.token) {
-          const userData = response.data.user;
-          const resumeData = response.data.resumes;
           localStorage.setItem("token", response.data.token);
-          this.props.context.actions.setLogin(userData);
-          this.props.context.actions.setResume(resumeData);
-
-          // console.log(this.props.context.userInfo);
+          this.props.context.actions.setLogin(response.data);
           this.props.history.push("/templates");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
@@ -80,7 +80,7 @@ class Login extends Component {
           <FormGroup>
             <h5>Email</h5>
             <Input
-             style={{fontSize: ".7rem", height: "2rem"}} 
+              style={{ fontSize: ".7rem", height: "2rem" }}
               autoFocus
               id="email"
               invalid={this.state.invalidCredentials}
@@ -93,7 +93,7 @@ class Login extends Component {
           <FormGroup>
             <h5>Password</h5>
             <Input
-             style={{fontSize: ".7rem", height: "2rem"}} 
+              style={{ fontSize: ".7rem", height: "2rem" }}
               id="password"
               invalid={this.state.invalidCredentials}
               value={this.state.password}
@@ -106,9 +106,9 @@ class Login extends Component {
             </FormFeedback>
           </FormGroup>
           <Button
-           style={{fontSize: ".8rem", height: "2rem"}} 
+            style={{ fontSize: ".8rem", height: "2rem" }}
             block
-            size="lg"
+            bsSize="lg"
             color="primary"
             disabled={!this.validateForm()}
             type="submit"
@@ -117,14 +117,14 @@ class Login extends Component {
           </Button>
           <div className="bottom-buttons">
             <Button
-             style={{fontSize: ".7rem", height: "2rem"}} 
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/register")}
             >
               Register
             </Button>
             <Button
-             style={{fontSize: ".7rem", height: "2rem"}} 
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/forgotpassword")}
             >

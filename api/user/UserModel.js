@@ -137,6 +137,10 @@ const User = new mongoose.Schema(
       skills: [
         {
           id: ObjectId,
+          groupname: {
+            type: String,
+            default: ""
+          },
           content: {
             type: String,
             default: ""
@@ -149,13 +153,13 @@ const User = new mongoose.Schema(
       default: false
     },
     subscription: String,
-    resumes: [
-      {
-        type: ObjectId,
-        ref: "Resume"
-      }
-    ],
-    currentresume: Number
+    // resumes: [
+    //   {
+    //     type: ObjectId,
+    //     ref: "Resume"
+    //   }
+    // ],
+    currentresume: { type: ObjectId, ref: "Resume" }
   },
   { timestamps: true }
 );

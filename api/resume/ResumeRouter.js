@@ -15,6 +15,7 @@ router.get(
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
+    // console.log("RESUME GET req:", req.body)
 
     Resume.findById(id)
       .then(resume => {
@@ -35,6 +36,7 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    // console.log("RESUME POST req:", req.body)
     const newResume = new Resume(req.body);
     const user = req.user;
     newResume.user = user._id;
@@ -42,15 +44,18 @@ router.post(
     newResume
       .save()
       .then(resume => {
-        User.findById(user)
-          .then(user => {
-            user.resumes.push(resume);
-            user.save();
-            res.status(201).json({ Resume: resume });
-          })
-          .catch(err => {
-            res.status(400).json({ Error: err });
-          });
+        // User.findById(user)
+        //   .then(user => {
+        //     // user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
+        //     // user.resumes.push(resume);
+        //     user.currentresume = resume._id;
+        //     user.save();
+        //     res.status(201).json({ Resume: resume, resumes: user.resumes });
+        //   })
+        //   .catch(err => {
+        //     res.status(400).json({ Error: err });
+        //   });
+        res.status(201).json({ Resume: resume });
       })
       .catch(err => {
         res.status(400).json({ Error: err });
@@ -68,13 +73,33 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
-    const updatedResume = req.body;
+    // if you put the _id in the update body errors will happen, so remove it and
+    // also remove the unnecessary uploading of edit/creation date to keep correct edit times
+    console.log("RESUME PUT req:", req.body)
+    const { template, title, links, sections } = req.body;
+    const updatedResume = {
+      template: template,
+      title: title,
+      links: links,
+      sections: sections
+    }
 
     Resume.findByIdAndUpdate(id, updatedResume)
       .then(resume => {
+        // User.findById(user)
+        //   .then(user => {
+        //     user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
+        //     user.currentresume = resume._id;
+        //     user.save();
+        //     res.status(200).json({ resume });
+        //   })
+        //   .catch(err => {
+        //     res.status(400).json({ Error: err });
+        //   });
         res.status(200).json({ resume });
       })
       .catch(err => {
+        console.log("THERE IS AN ERROR IN THE ROUTER ", err);
         res.status(400).json({ Error: err });
       });
   }

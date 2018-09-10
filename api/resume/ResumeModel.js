@@ -7,6 +7,11 @@ const Resume = new Schema({
     type: ObjectId,
     ref: "User"
   },
+  template: {
+    type: String,
+    default: "traditional",
+    required: true
+  },
   title: [
     {
       id: Number,
@@ -43,7 +48,9 @@ const Resume = new Schema({
         value: Boolean
       }
     ]
-  }
-});
+    }
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Resume", Resume);

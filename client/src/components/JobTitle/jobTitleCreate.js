@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import axios from "axios";
-import "../CSS/component-general.css";
 const urls = require("../../config/config.json");
 
 class JobTitleCreate extends Component {
@@ -31,12 +30,6 @@ class JobTitleCreate extends Component {
           ._id
       });
     }
-  }
-
-  componentWillUnmount() {
-    this.props.context.actions.expandResumeIDs(
-      this.props.context.userInfo.currentResume
-    );
   }
 
   onInputChange = e => {
@@ -72,6 +65,7 @@ class JobTitleCreate extends Component {
     const tempObj = {
       title: this.props.context.userInfo.title
     };
+    
     axios
       .put(
         `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
@@ -82,6 +76,7 @@ class JobTitleCreate extends Component {
       )
       .then(response => {
         console.log(response);
+        this.props.context.actions.setLogin(response.data);
         this.setState({ success: true });
       })
       .catch(err => {

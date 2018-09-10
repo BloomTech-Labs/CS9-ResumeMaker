@@ -2,23 +2,20 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { Elements, StripeProvider } from "react-stripe-elements";
 
-import "./App.css";
 import AuthProvider, { AuthContext } from "./contexts/AuthProvider";
-import Sidebar from "./components/SubComponents/Sidebar/sidebar";
 import LandingPage from "./components/LandingPage/landingPage";
 import Summaries from "./components/Summary/summary";
 import SummaryCreate from "./components/Summary/summaryCreate";
 import Education from "./components/Education/education";
 import EducationCreate from "./components/Education/educationCreate";
 import Skills from "./components/Skills/skills";
-import SkillsCreate from "./components/Skills/skillsCreate";
 import JobTitle from "./components/JobTitle/jobTitle";
 import JobTitleCreate from "./components/JobTitle/jobTitleCreate";
 import Experience from "./components/Experience/experience";
 import ExperienceCreate from "./components/Experience/experienceCreate";
 import Billing from "./components/Billing/billing";
 import Resumes from "./components/Resume/resumes";
-import RIP from "./components/Resume/resumeInProgress";
+// import RIP from "./components/Resume/resumeInProgress";
 import ResumeOne from "./components/Resume/resume1";
 import ResumeTwo from "./components/Resume/resume2";
 import ResumeThree from "./components/Resume/resume3";
@@ -28,9 +25,7 @@ import Register from "./components/Register/register";
 import ConfirmationPage from "./components/ConfirmationPage/confirmationPage";
 import ForgotPassword from "./components/ForgotPassword/forgotPassword";
 import Templates from "./components/Templates/templates";
-import TemplateOne from "./components/Templates/template1";
-import TemplateTwo from "./components/Templates/template2";
-import TemplateThree from "./components/Templates/template3";
+
 const publish_key = require("./config/keys.json").publish;
 
 class App extends Component {
@@ -89,13 +84,6 @@ class App extends Component {
                 />
                 <Route
                   exact
-                  path="/skills/create"
-                  render={props => (
-                    <SkillsCreate {...props} context={context} />
-                  )}
-                />
-                <Route
-                  exact
                   path="/jobtitle"
                   render={props => <JobTitle {...props} context={context} />}
                 />
@@ -106,11 +94,11 @@ class App extends Component {
                     <JobTitleCreate {...props} context={context} />
                   )}
                 />
-                <Route
+                {/* <Route
                   exact
                   path="/rip"
                   render={props => <RIP {...props} context={context} />}
-                />
+                /> */}
                 <Route
                   exact
                   path="/resumes"
@@ -172,28 +160,6 @@ class App extends Component {
                   exact
                   path="/templates"
                   render={props => <Templates {...props} context={context} />}
-                />
-                <Route
-                  exact
-                  path="/templates/template-1"
-                  render={props => <TemplateOne {...props} context={context} />}
-                />
-                <Route
-                  exact
-                  path="/templates/template-2"
-                  render={props => <TemplateTwo {...props} context={context} />}
-                />
-                <Route
-                  exact
-                  path="/templates/template-3"
-                  render={props => (
-                    <TemplateThree {...props} context={context} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/sidebar"
-                  render={props => <Sidebar {...props} context={context} />}
                 />
               </React.Fragment>
             )}

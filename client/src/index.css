@@ -1,14 +1,588 @@
+/* the row card variants are for small one line cards */
+/* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
+/* This keeps the red delete X from jutting up against the left side on single line row cards */
+/* a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+} */
+/* .land-btn:hover {
+  font-weight: 500; 
+} */
+/* Stops icons next to section titles on sidebar from jutting up against the titles */
+/* .skills-containment-div .skillgroup {
+  display: flex;
+  padding: 2rem;
+} */
 html {
   font-size: 1.4rem;
 }
-
 html body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 a {
-  color: black; 
+  color: black;
+}
+.App {
+  text-align: center;
+}
+.App.container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  overflow-x: hidden;
+}
+.overall-component-div {
+  display: flex;
+}
+.overall-component-div .title-div {
+  display: flex;
+  justify-content: flex-start;
+}
+.title-div {
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100%;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  align-items: start;
+  display: flex;
+  align-self: start;
+  flex-direction: row;
+  text-align: start;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem 0 0 0;
+}
+.title-div h4 {
+  text-align: start;
+}
+.title-div p {
+  text-align: start;
+}
+textarea {
+  height: auto;
+}
+.stripe {
+  margin-left: 20%;
+  width: 100%;
+}
+.stripe-form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #707f8c;
+  height: 320px;
+  width: 60%;
+  padding: 3%;
+  margin-top: 3%;
+}
+.stripe-pay {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.card-element {
+  width: 50%;
+  background-color: white;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+  padding: 1%;
+}
+.btn-group {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  justify-content: center;
+  margin-top: 2%;
+}
+.bill-btn {
+  margin: 2% 1%;
+}
+.template-card {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0;
+}
+.template-card card dropdown {
+  font-size: 0.7rem;
+  width: 15rem;
+}
+.list-group {
+  max-height: 175px;
+  overflow: auto;
+  overflow-y: auto;
+}
+.list-group-item {
+  background-color: lightgrey !important;
+}
+.link-hide {
+  max-width: 50rem;
+  display: flex;
+  align-self: start;
+  flex-direction: row;
+  padding: 0.5rem 0 0 0.5rem;
+  text-align: start;
+}
+i {
+  color: black;
+  font-size: 2rem;
+}
+.fa.fa-pencil {
+  padding: 0.5rem;
+}
+.fa.fa-pencil:hover {
+  color: #777;
+}
+.fa.fa-pencil:active {
+  font-size: 1rem;
+  color: #777;
+}
+.title-div.templates h4 {
+  width: 100%;
+  border-bottom: 1px solid black;
+  text-align: start;
+  padding: 0.5rem;
+  margin: 0;
+}
+.div-for-links {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+form {
+  font-size: 0.7rem;
+}
+.form-control {
+  font-size: 0.7rem;
+}
+.item-card {
+  margin: 1%;
+  max-width: 20rem;
+  text-align: left;
+  justify-content: space-between;
+}
+.item-card .btn {
+  background-color: #707f8c;
+  border-radius: unset;
+  padding: 0;
+}
+.item-card .close {
+  color: red;
+  position: absolute;
+  padding: 0 0.3rem 0 0;
+  top: 0;
+  width: min-content;
+  height: min-content;
+  align-self: flex-end;
+}
+.item-card .close:hover {
+  color: red !important;
+}
+.item-card .close:focus {
+  color: red !important;
+}
+.item-card .card-header {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 5rem;
+}
+.item-card.row-card {
+  flex-direction: row;
+  margin: 1%;
+}
+.item-card.row-card .card-body {
+  padding: 0 0.5rem 0 0;
+  overflow: hidden;
+}
+.item-card.row-card .close {
+  padding: 0 0.3rem;
+  position: relative;
+  align-self: center;
+}
+.item-card.row-card p {
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item-card-link {
+  color: inherit;
+}
+.summary-containment-div {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 100%;
+}
+.summary-containment-div .item-card.card {
+  min-height: 12rem;
+}
+.summary-containment-div .card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.experience-containment-div {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 100%;
+}
+.experience-containment-div .item-card.card {
+  min-height: 12rem;
+}
+.experience-containment-div .card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.experience-containment-div .card-subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.experience-containment-div .card-body {
+  padding: 1.25rem;
+  font-size: 0.7rem;
+  width: 15rem;
+  border: 1.5rem;
+}
+.experience-containment-div .card-body h5 {
+  font-size: 1rem;
+}
+.education-containment-div {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 100%;
+}
+.education-containment-div .item-card.card {
+  min-height: 12rem;
+}
+.education-containment-div .card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.education-containment-div .card-subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.education-containment-div .card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.education-containment-div .card-body {
+  padding: 1.25rem;
+  font-size: 0.7rem;
+  width: 15rem;
+  border: 1.5rem;
+}
+.education-containment-div .card-body h5 {
+  font-size: 1rem;
+}
+.titles-containment-div {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 50rem;
+  width: 80%;
+}
+.titles-containment-div .item-card.card {
+  min-width: 1rem;
+  min-height: 1rem;
+}
+.card-body.card-text.card {
+  text-decoration-color: black;
+}
+.landing-button {
+  padding: 1px;
+}
+.landing-button:active {
+  font-size: 0.8rem;
+  border: none;
+}
+.LandingPage {
+  height: 100vh;
+  width: 100%;
+  background-image: url(images/Buildings.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-top: 30vh;
+}
+.Header {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  padding: 1.5rem;
+  text-shadow: 1px 1px white;
+  margin: 0;
+}
+.land-btn {
+  background: transparent;
+  font-size: 1rem;
+  font-family: Cambria;
+}
+.landing-box {
+  width: 100%;
+  padding: 0.2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.fa-angle-left {
+  height: 0.5rem !important;
+}
+.Login {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(images/Buildings.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.Login form {
+  align-self: center;
+  background: #fff;
+  padding: 2rem 1rem;
+}
+.Login form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 20rem;
+  justify-content: center;
+}
+.Login form .form-group label {
+  margin: 0;
+}
+.Login form .form-group .help-block {
+  margin: 0;
+}
+.Login form .btn {
+  margin-top: 2rem;
+}
+.Login .bottom-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.Login .message {
+  display: flex;
+  max-width: 30%;
+  align-self: center;
+  background: #fff;
+  border-radius: 0.25rem;
+  flex-direction: column;
+  padding: 2rem;
+}
+.Login .message p {
+  word-break: break;
+}
+.navbar {
+  background-color: #707F8C;
+  border-bottom: 2px solid darkslategray;
+}
+.resume.title-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2rem 0;
+}
+.resume.title-div h4 {
+  width: 100%;
+  border-bottom: 1px solid black;
+  text-align: start;
+  padding: 0.5rem;
+  margin-right: 5%;
+}
+.resume.page-header {
+  font-size: 1.5rem;
+  padding-top: 0;
+}
+img {
+  height: 12rem;
+  width: 10rem;
+}
+.container-div {
+  padding: 1rem;
+}
+.Settings form .form-group {
+  max-width: 20rem;
+}
+.Settings form .form-group label {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.Settings form .form-group .help-block {
+  margin: 0;
+}
+.Settings .btn {
+  display: flex;
+}
+.Settings .settings-footer {
+  display: flex;
+  align-items: center;
+}
+.Settings .saved-status {
+  margin-left: 3rem;
+}
+.Settings .modal {
+  position: absolute;
+  top: 25%;
+  bottom: 10%;
+}
+.Settings .modal-footer {
+  justify-content: center;
+}
+.Settings.container {
+  margin-left: 0;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 10rem;
+  min-height: 100vh !important;
+  background: #162238;
+  justify-content: space-between;
+  margin-right: 1px;
+}
+.static-sidebar {
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  background: #162238;
+  border-top: 1px solid #d9d9d9;
+}
+.static-sidebar a {
+  color: #f2f2f0;
+  padding: 10% 0;
+  border-bottom: 1px solid #d9d9d9;
+  text-align: left;
+  padding-left: 20%;
+}
+.static-sidebar a:hover {
+  color: #f2f2f0;
+  text-decoration: none;
+  border-left: 1rem solid #d9d9d9;
+  background: #707f8c;
+}
+.static-sidebar a .fa {
+  width: 1rem;
+  display: inline-flex;
+  justify-content: center;
+}
+.static-sidebar .active {
+  border-left: 1rem solid #d9d9d9;
+  background: #324359;
+}
+.sidebar-button {
+  color: #c5c6c7;
+  text-shadow: 1px 1px black;
+  margin-top: 25px;
+}
+.skills-containment-div.container {
+  max-width: 100%;
+}
+.skills-containment-div label {
+  text-align: right;
+}
+.skills-containment-div .skillgroup {
+  padding: 0 6% 0 5%;
+}
+.skills-containment-div .skills-input {
+  border-radius: unset;
+}
+.skills-containment-div .groupname-input {
+  font-size: 1.8rem;
+}
+.component-div {
+  display: flex;
+  background: #C8C8C8;
+}
+.page-div {
+  display: flex;
+  flex-direction: column;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  width: 100%;
+}
+.page-div.page-container-div {
+  max-width: 1200px !important;
+}
+.page-header {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-size: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+}
+.template1 {
+  border: 1px solid black;
+  padding: 50px;
+  margin: 1rem;
+  background: white;
+  text-align: left;
+}
+.template2 {
+  border: 1px solid black;
+  padding: 50px;
+  margin: 1rem;
+  background: white;
+}
+.template2 .row {
+  flex-wrap: unset;
+}
+.template2 p {
+  word-break: break-word;
+}
+.template3 {
+  border: 1px solid black;
+  padding: 50px;
+  margin: 1rem;
+  background: white;
+}
+.divider-div {
+  border: 1px solid black;
+}
+.resume-button {
+  width: 10rem;
+  height: 3rem;
+  margin: 1rem;
+}
+.save-button {
+  height: min-content;
+  align-self: center;
+}
+.template.page-header {
+  display: flex;
+}
+.subtitle {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold';
+}
+.titleSection {
+  background-color: lightgray;
+}
+.template.title-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 2rem 0;
+}
+.left-column {
+  background-color: blanchedalmond;
+}
+.logo {
+  width: 10rem;
+  height: 10rem;
+  padding: 1rem;
+}
+.contact-section {
+  font-size: 0.7rem;
 }

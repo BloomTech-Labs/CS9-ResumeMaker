@@ -3,13 +3,12 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
-import "../CSS/component-general.css";
 
 class Experience extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  
+
   render() {
     return (
       <div>
@@ -40,7 +39,7 @@ class Experience extends Component {
                     elementName="experience"
                     putPath="sections.experience"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     element={element}
                     context={this.props.context}
                   />

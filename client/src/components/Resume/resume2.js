@@ -1,23 +1,38 @@
 import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
-import { FormGroup } from "reactstrap";
 import moment from "moment";
 import { Redirect } from "react-router-dom";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import "../Templates/template2.css";
 import PDF from "../PDF/PDF";
-import "./resume.css"
 
 export class ResumeTwo extends Component {
-  componentWillMount() {
-    if (this.props.context.userInfo.auth !== true)
-      this.props.history.push("/resumes");
-    else
-      this.props.context.actions.expandResumeIDs(
-        this.props.context.userInfo.currentResume
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0,
+      success: false
+    };
   }
+
+    componentWillMount() {
+      function findWithAttr(array, attr, value) {
+        for (var i = 0; i < array.length; i += 1) {
+          if (array[i][attr] === value) {
+            return i;
+          }
+        }
+        return -1;
+      }
+    
+        let index = findWithAttr(
+          this.props.context.userInfo.resumes,
+          "_id",
+          this.props.context.userInfo.currentresume
+        );
+        if (index === -1) index = 0;
+        this.setState({ index: index });
+      }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -26,47 +41,60 @@ export class ResumeTwo extends Component {
   render() {
     if (!this.props.context.userInfo.auth) {
       return <Redirect to="/resumes" />;
+    }    
+    if (
+      !this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null
+    ) {
+      return <h1>Loading...</h1>;
     }
+    if (
+      !this.props.context.userInfo.resumes.length ||
+      this.props.context.userInfo.resumes[0] === null
+    ) {
+      console.log(
+        "You probably had an error, which redirected you instead of crashing."
+      );
+      return <Redirect to="/resumes" />;
+    }
+
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    const summaryLength = userInfo.summary.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.summary[index].value;
-    });
-    const skillsLength = userInfo.skills.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.skills[index].value;
-    });
-    const educationLength = userInfo.education.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.education[index].value;
-    });
-    const experienceLength = userInfo.experience.filter((item, index) => {
-      return resumes[resumes.length - 1].sections.experience[index].value;
-    });
+    const summaryLength = resumes[this.state.index].sections.summary.length;
+    const skillsLength = resumes[this.state.index].sections.skills.length;
+    const educationLength = resumes[this.state.index].sections.education.length;
+    const experienceLength = resumes[this.state.index].sections.experience.length;
 
     return (
       <div>
         <Navbar context={this.props.context}/>
         <div className="component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div col">
+          <div className="page-div page-container-div">
             <div className="resume title-div">
-              <h3 className="resume page-header"style={{fontSize: "1.5rem", paddingTop: "0"}}>Modern</h3>
+              <h4 className="resume page-header">Modern</h4>
             <PDF />
             </div>
-            <form className="template1" onSubmit={this.handleSubmit}>
+            <div className="template2">
               <div style={{ textAlign: "center" }} className="titleSection">
                 <h2>
                   {userInfo.name.firstname} {userInfo.name.lastname}
                 </h2>
                 {userInfo.title.map((item, index) => {
-                  return resumes[resumes.length - 1].title[index].value ? (
-                    <p key={item._id}>{item.content}</p>
-                  ) : null;
+                  if(resumes[this.state.index].title[index].value === true){
+                    return (
+                      <p key={item._id}>
+                        {item.content}
+                      </p>
+                    )
+                  } else return null;
                 })}
               </div>
 
-              {summaryLength.length > 0 ? (
+              {summaryLength > 0 ? (
+                <div>
                 <Container
                   textalign="center"
                   id="summary"
@@ -75,46 +103,47 @@ export class ResumeTwo extends Component {
                   <Divider className="divider-div" />
                   <h3 className="subtitle">Summary</h3>
                   {userInfo.summary.map((item, index) => {
-                    return resumes[resumes.length - 1].sections.summary[index]
+                    return resumes[this.state.index].sections.summary[index]
                       .value ? (
                       <p key={item._id}>{item.content}</p>
                     ) : null;
                   })}
                 </Container>
+                </div>
               ) : null}
 
               <Divider className="divider-div" />
               <div className="row">
-                <div className="col">
-                  <FormGroup textalign="center" className="contactSection">
+                <div className="col-5">
+                  <Container textalign="center" className="contactSection">
                     <h3 className="subtitle">Contact Details</h3>
                     <a href={`mailto:${userInfo.email}`}>
                       <p> {userInfo.email}</p>
                     </a>
                     <p>{userInfo.location}</p>
                     <p>{userInfo.phonenumber}</p>
-                    {resumes[resumes.length - 1].links.linkedin ? (
+                    {resumes[this.state.index].links.linkedin ? (
                       <p>{userInfo.links.linkedin}</p>
                     ) : null}
-                    {resumes[resumes.length - 1].links.github ? (
+                    {resumes[this.state.index].links.github ? (
                       <p>{userInfo.links.github}</p>
                     ) : null}
-                    {resumes[resumes.length - 1].links.portfolio ? (
+                    {resumes[this.state.index].links.portfolio ? (
                       <p>{userInfo.links.portfolio}</p>
                     ) : null}
-                  </FormGroup>
+                  </Container>
 
-                  {educationLength.length > 0 ? (
-                    <FormGroup textalign="center" className="educationSection">
+                  {educationLength > 0 ? (
+                    <Container textalign="center" className="educationSection">
                       <Divider className="divider-div" />
                       <h3 className="subtitle">Education</h3>
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
-                        return resumes[resumes.length - 1].sections.education[
+                        return resumes[this.state.index].sections.education[
                           index
                         ].value ? (
-                          <div key={index}>
+                          <div key={content._id}>
                             <h5>
                               {content.degree} in {content.fieldofstudy}{" "}
                             </h5>
@@ -127,58 +156,58 @@ export class ResumeTwo extends Component {
                           </div>
                         ) : null;
                       })}
-                    </FormGroup>
+                    </Container>
                   ) : null}
-                </div>
+                  </div>
+                  <Divider className="divider-div" />
+                  <div className="col-7">
+                    {skillsLength > 0 ? (
+                      <Container textalign="center" className="skillsSection">
+                        <h3 className="subtitle">Skills</h3>
+                        {userInfo.skills.map((content, index) => {
+                          return resumes[this.state.index].sections.skills[
+                            index
+                          ].value ? (
+                            <div key={content._id}>
+                              <b>{content.groupname}</b>
+                              <p>{content.content}</p>
+                            </div>
+                          ) : null;
+                        })}
+                        <Divider className="divider-div" />
+                      </Container>
+                    ) : null}
 
-                <Divider className="divider-div" />
-                <div className="col">
-                  {skillsLength.length > 0 ? (
-                    <FormGroup textalign="center" className="skillsSection">
-                      <h3 className="subtitle">Skills</h3>
-                      {userInfo.skills.map((content, index) => {
-                        return resumes[resumes.length - 1].sections.skills[
-                          index
-                        ].value ? (
-                          <div key={index}>
-                            <p>{content.content}</p>
-                          </div>
-                        ) : null;
-                      })}
-                      <Divider className="divider-div" />
-                    </FormGroup>
-                  ) : null}
-
-                  {experienceLength.length > 0 ? (
-                    <FormGroup textalign="center" className="experienceSection">
-                      <h3 className="subtitle">Experience</h3>
-                      {experience.map((content, index) => {
-                        let from = moment(content.from).format("MMM YYYY");
-                        let to = moment(content.to).format("MMM YYYY");
-                        return resumes[resumes.length - 1].sections.experience[
-                          index
-                        ].value ? (
-                          <div key={index}>
-                            <h5>{content.company} </h5>
-                            <p>
-                              {content.title}
-                              <br />
-                              {content.location}
-                              <br />
-                              {from} - {to}
-                            </p>
-                            <p>{content.description} </p>
-                          </div>
-                        ) : null;
-                      })}
-                    </FormGroup>
-                  ) : null}
+                    {experienceLength > 0 ? (
+                      <Container textalign="center" className="experienceSection">
+                        <h3 className="subtitle">Experience</h3>
+                        {experience.map((content, index) => {
+                          let from = moment(content.from).format("MMM YYYY");
+                          let to = moment(content.to).format("MMM YYYY");
+                          return resumes[this.state.index].sections.experience[
+                            index
+                          ].value ? (
+                            <div key={index}>
+                              <h5>{content.company} </h5>
+                              <p>
+                                {content.title}
+                                <br />
+                                {content.location}
+                                <br />
+                                {from} - {to}
+                              </p>
+                              <p>{content.description} </p>
+                            </div>
+                          ) : null;
+                        })}
+                      </Container>
+                    ) : null}
+                  </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 }

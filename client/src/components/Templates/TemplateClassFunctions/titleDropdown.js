@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./classFunction.css";
 
 class TitleDropdown extends Component {
   // Adding default state as a placeholder
@@ -64,7 +63,7 @@ class TitleDropdown extends Component {
     ));
 
     return (
-      <div className="template-card card card-body m-0">
+      <div className="template-card card dropdown m-0">
         <div className="container">
           <p>{selected}</p>
         </div>

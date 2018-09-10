@@ -7,7 +7,6 @@ import {
     Input,
     Label
 } from "reactstrap";
-import "../Login/login.css";
 import axios from "axios";
 
 const urls = require("../../config/config.json");
@@ -70,7 +69,6 @@ class Register extends Component {
         const usernamePromise = axios
             .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
             .then(response => {
-                console.log(response);
                 this.setState({ usernameInvalid: true });
             })
             .catch(err => {
@@ -79,7 +77,6 @@ class Register extends Component {
         const emailPromise = axios
             .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
             .then(response => {
-                console.log(response);
                 this.setState({ emailInvalid: true });
             })
             .catch(err => {
@@ -95,7 +92,6 @@ class Register extends Component {
         // If all fields are valid and the confirm password matches password,
         // then account info is submitted and the user redirected to a modal with a link to the login page
         Promise.all([usernamePromise, emailPromise]).then(values => {
-            console.log("The current state:", this.state);
             if (
                 this.state.usernameInvalid === false &&
                 this.state.emailInvalid === false &&
@@ -114,7 +110,6 @@ class Register extends Component {
     };
 
     handleSubmit = () => {
-        console.log("handleSubmit called");
         // Putting the set state here allows the submit modal to show before
         // the email is sent. If the response gives an error the submittedError property
         // will override the submitted modal and show there was an error.
@@ -127,7 +122,6 @@ class Register extends Component {
             })
             .then(response => {
                 this.setState({ submitted: true, submittedError: false });
-                console.log(response);
             })
             .catch(err => {
                 console.log("err", err);
@@ -221,7 +215,7 @@ class Register extends Component {
             <Button
              style={{fontSize: ".8rem", height: "2rem"}} 
               block
-              size="lg"
+              bsSize="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}

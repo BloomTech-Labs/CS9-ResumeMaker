@@ -1,7 +1,6 @@
 // register, login, nav bar, landing page component
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./landingpage.css";
 import axios from "axios";
 const urls = require("../../config/config.json");
 
@@ -18,8 +17,7 @@ class LandingPage extends Component {
           }
         })
         .then(response => {
-          const userData = response.data;
-          this.props.context.actions.setLogin(userData);
+          this.props.context.actions.setLogin(response.data);
           this.props.history.push("/templates");
         })
         .catch(err => {

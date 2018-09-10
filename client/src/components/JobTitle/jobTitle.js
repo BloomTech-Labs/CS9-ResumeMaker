@@ -3,12 +3,12 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
-import "../CSS/component-general.css";
 
 class JobTitle extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+
   render() {
     return (
       <div>
@@ -31,7 +31,7 @@ class JobTitle extends Component {
               Click the pencil to enter a Title for the Job Position you are seeking. 
             </p>
 
-            <div className="titles-containment-div" style={{paddingTop: "1rem"}}>
+            <div className="titles-containment-div" >
               {this.props.context.userInfo.title.map((element, index) => {
                 return (
                   <ItemCard
@@ -39,7 +39,7 @@ class JobTitle extends Component {
                     elementName="title"
                     putPath="title"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     content={element.content}
                     context={this.props.context}
                   />

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./classFunction.css";
 
 class SummaryDropdown extends Component {
   // Adding default state as a placeholder
@@ -48,8 +47,6 @@ class SummaryDropdown extends Component {
   };
 
   render() {
-    // console.log(this.props.context.userInfo.summary.map(item => item));
-
     const { summary } = this.props.data;
     const { toggled, selected } = this.state;
     const list = summary.map(data => (
@@ -68,7 +65,7 @@ class SummaryDropdown extends Component {
     ));
 
     return (
-      <div className="template-card card card-card card-body mb-3">
+      <div className="template-card card card-card dropdown mb-3">
         {/* <div className="jumbotron"> */}
         <div className="container">
           <p>{selected}</p>
