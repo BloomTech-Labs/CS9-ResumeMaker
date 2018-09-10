@@ -14,7 +14,7 @@ class Sidebar extends Component {
   }
 
   componentDidMount = () => {
-    if (localStorage.getItem("token") && this.props.context.auth !== true) {
+    if (localStorage.getItem("token") && this.props.context.userInfo.auth !== true) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -43,6 +43,10 @@ class Sidebar extends Component {
         });
     } else {
       console.log("Sidebar detected no token and/or auth === false");
+      if(this.props.context.userInfo.resumes[0] && !this.props.context.userInfo.currentresume){
+        console.log("set currentresume")
+        this.props.context.actions.setSingleElement("currentresume", this.props.context.userInfo.resumes[0]);
+      }
     }
   };
 
@@ -66,18 +70,18 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/templates"
+            to="/resumes"
             className={classnames({
-              active: window.location.pathname.includes("/templates")
+              active: window.location.pathname.includes("/resumes")
             })}
           >
             {" "}
             <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
           </Link>
           <Link
-            to="/resumes"
+            to="/templates"
             className={classnames({
-              active: window.location.pathname.includes("/resumes")
+              active: window.location.pathname.includes("/templates")
             })}
           >
             {" "}

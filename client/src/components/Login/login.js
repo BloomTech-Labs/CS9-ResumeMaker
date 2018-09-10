@@ -4,31 +4,30 @@ import {
   Form,
   FormGroup,
   FormFeedback,
-  Input,
-  Label
+  Input
 } from "reactstrap";
 import axios from "axios";
 const urls = require("../../config/config.json");
 
-const resumePopulateTester = {
-  email: "resumePopulateTester@gmail.com",
-  password: "scrinch1G!",
-  invalidCredentials: false
-};
+// const user= {
+//   email: "resumePopulateTester@gmail.com",
+//   password: "scrinch1G!",
+//   invalidCredentials: false
+// };
 
-const cheese = {
-  email: "cheese23@gmail.com",
-  password: "Cheese123!",
-  invalidCredentials: false
-};
+// const user = {
+//   email: "cheese23@gmail.com",
+//   password: "Cheese123!",
+//   invalidCredentials: false
+// };
 
-// const scrinch = {
+// const user = {
 //   email: "scrinch@gmail.com",
 //   password: "tacobell1!G",
 //   invalidCredentials: false
 // };
 
-const bobbert = {
+const user = {
   email: "bobbert@gmail.com",
   password:
     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
@@ -38,7 +37,7 @@ const bobbert = {
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = resumePopulateTester;
+    this.state = user;
   }
 
   validateForm() {
@@ -63,7 +62,7 @@ class Login extends Component {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(response.data);
-          this.props.history.push("/templates");
+          this.props.history.push("/resumes");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {

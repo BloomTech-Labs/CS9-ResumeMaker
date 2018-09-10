@@ -83,7 +83,7 @@ export class ResumeTwo extends Component {
           <div className="page-div page-container-div">
             <div className="resume title-div">
               <h4 className="resume page-header">Modern</h4>
-              <PDF />
+              <PDF name="template2"/>
             </div>
             <div className="template2">
               <div style={{ textAlign: "center" }} className="titleSection">

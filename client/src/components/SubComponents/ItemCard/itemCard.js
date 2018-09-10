@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   Card,
   CardTitle,
-  CardSubtitle,
   CardHeader,
   CardBody,
   CardText,
@@ -122,7 +121,7 @@ class ItemCard extends Component {
                 {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
               <CardText>
-                {ellipsify(this.props.element.description, 150)}
+                {ellipsify(this.props.element.description, 240)}
               </CardText>
             </CardBody>
           </Link>
@@ -180,7 +179,7 @@ class ItemCard extends Component {
             }}
           >
             <CardBody>
-              <CardText>{ellipsify(this.props.content, 150)}</CardText>
+              <CardText>{ellipsify(this.props.content, 280)}</CardText>
             </CardBody>
           </Link>
           <Button onClick={() => this.handleCopy()}>Copy</Button>
