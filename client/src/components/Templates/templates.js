@@ -31,6 +31,11 @@ class Templates extends Component {
     return -1;
   }
 
+  updateResumeIndex = (newIndex) => {
+    console.log("UPDATERESUMEINDEX CALD", newIndex);
+    this.setState({ index: newIndex });
+  }
+
   componentWillMount() {
     console.log("template componentWillMount");
     let index = this.findWithAttr(
@@ -232,6 +237,7 @@ class Templates extends Component {
                 <h1>Hi</h1>
               )}
               <ResumeDropdown
+                updateResumeIndex={this.updateResumeIndex}
                 className="dropdown"
                 context={this.props.context}
                 data={userInfo}

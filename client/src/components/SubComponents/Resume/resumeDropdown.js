@@ -38,6 +38,8 @@ class ResumeDropdown extends Component {
       selected: "Resume " + (index + 1),
       toggled: false
     });
+    // this updates template page index
+    this.props.updateResumeIndex(index);
     this.props.context.actions.setSingleElement("currentresume", data._id);
   };
 
