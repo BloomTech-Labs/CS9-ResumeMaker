@@ -182,8 +182,8 @@ class AuthProvider extends Component {
       return -1;
     }
 
-    const tempResume = [];
-  
+    // const tempResumes = [];
+    
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
       console.log("expandSection called:");
@@ -250,13 +250,13 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      // this.setState({ ["resumes"[index]]: tempObj });
-      tempResume.push(tempObj);
+      this.setState({ ["resumes"[index]]: tempObj });
+      // tempResumes.push(tempObj);
   };
 
   // Using promises means the state is only set a single name, rather than for each
   // subattribute changed or once for each resume that is updated.
-  let resumePromises = [];
+  // let resumePromises = [];
 
   // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
@@ -265,14 +265,17 @@ class AuthProvider extends Component {
       expandSection("education", true, index);
       expandSection("summary", true, index);
       expandSection("skills", true, index);
-      console.log("EXPANDIDS IS DOING AN AXIOS M80");
+      // console.log("TEMPRESUME", tempResume)
+      // this.setState({ ["resumes"[index]]: tempResume[index] });
     });
 
     for(let i = 0; i < this.state.resumes.length; i++){
-      const resumePromise = axios
+      console.log("EXPANDIDS IS DOING AN AXIOS M80");
+      // const resumePromise = 
+      axios
       .put(
         `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
-        tempResume[i],
+        this.state.resumes[i],
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -281,22 +284,21 @@ class AuthProvider extends Component {
       )
       .then(response => {
         console.log("response", response);
-        return response.data.resume;
+        // return response.data.resume;
       })
       .catch(err => {
         console.log("err", err);
-        return err;
+        // return err;
       });
-      resumePromises.push(resumePromise);
+      // resumePromises.push(resumePromise);
     }
 
     // console.log("OUR PROMISES", resumePromises);
     // Once every request is finished state updates once.
-    Promise.all(resumePromises).then(updatedResumes => {
-      // console.log("promise me ned", updatedResumes);
-      this.setState({ resumes: updatedResumes})
-    })
-
+    // Promise.all(resumePromises).then(updatedResumes => {
+    //   // console.log("promise me ned", updatedResumes);
+    //   this.setState({ resumes: updatedResumes})
+    // })
   };
 
 
