@@ -203,7 +203,7 @@ class Templates extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="title-div templates">
-              <h4>TEMPLATES</h4>
+              <h4>RESUME</h4>
               <p
                 style={{
                   fontSize: "0.7rem",
@@ -325,10 +325,11 @@ class Templates extends Component {
               </Container>
 
               <Container className="title-section">
-                <h3>Titles</h3>
+                <Container className="titleHolder">
+                  <h3>Titles</h3>
+                </Container>
                 <Container className="titleSection">
                   <TitleDropdown
-                    className="dropdown"
                     context={this.props.context}
                     data={userInfo}
                     value={
@@ -344,7 +345,9 @@ class Templates extends Component {
               </Container>
 
               <Container className="summary-section">
-                <h3>Summary</h3>
+                <div className="summaryHolder">
+                  <h3>Summary</h3>
+                </div>
                 <Container className="summarySection">
                   <SummaryDropdown
                     context={this.props.context}
@@ -362,7 +365,10 @@ class Templates extends Component {
               </Container>
 
               <Container className="skills-section">
-                <h3>Skills</h3>
+                <div className="skillsHolder">
+                  <h3>Skills</h3>
+                </div>
+
                 <Container className="skillsSection">
                   {userInfo.skills.map((content, index) => {
                     return (
@@ -391,7 +397,9 @@ class Templates extends Component {
               </Container>
 
               <Container className="experience-section">
-                <h3>Experience</h3>
+                <div className="experienceHolder">
+                  <h3>Experience</h3>
+                </div>
                 <Container className="experienceSection">
                   {experience.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
@@ -433,7 +441,9 @@ class Templates extends Component {
               </Container>
 
               <Container className="education-section">
-                <h3>Education</h3>
+                <div className="educationHolder">
+                  <h3>Education</h3>
+                </div>
                 <Container className="educationSection">
                   {education.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");

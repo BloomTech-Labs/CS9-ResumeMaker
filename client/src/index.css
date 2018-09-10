@@ -566,9 +566,6 @@ img {
 .subtitle {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold";
 }
-.titleSection {
-  background-color: lightgray;
-}
 .template.title-div {
   display: flex;
   flex-direction: row;
@@ -599,12 +596,16 @@ img {
   display: flex;
 }
 .title-section {
-  margin: 10% 0 0 0;
+  margin: 5% 0 0 0;
   border: 2px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+.title-section .titleHolder {
+  min-width: 100px;
+  width: 100px;
 }
 .title-section .titleSection {
   display: flex;
@@ -613,12 +614,16 @@ img {
   max-width: 800px;
 }
 .summary-section {
-  margin: 10% 0 0 0;
+  margin: 5% 0 0 0;
   border: 2px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+.summary-section .summaryHolder {
+  min-width: 100px;
+  width: 190px;
 }
 .summary-section .summarySection {
   display: flex;
@@ -627,12 +632,16 @@ img {
   max-width: 800px;
 }
 .skills-section {
-  margin: 10% 0 0 0;
+  margin: 5% 0 0 0;
   border: 2px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+.skills-section .skillsHolder {
+  min-width: 100px;
+  width: 190px;
 }
 .skills-section .skillsSection {
   display: flex;
@@ -641,12 +650,16 @@ img {
   max-width: 800px;
 }
 .experience-section {
-  margin: 10% 0 0 0;
+  margin: 5% 0 0 0;
   border: 2px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+.experience-section .experienceHolder {
+  min-width: 100px;
+  width: 190px;
 }
 .experience-section .experienceSection {
   display: flex;
@@ -655,12 +668,16 @@ img {
   max-width: 800px;
 }
 .education-section {
-  margin: 10% 0 0 0;
+  margin: 5% 0 0 0;
   border: 2px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+.education-section .educationHolder {
+  min-width: 100px;
+  width: 190px;
 }
 .education-section .educationSection {
   display: flex;
