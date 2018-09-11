@@ -30,6 +30,9 @@ class Sidebar extends Component {
             response.data
           );
           this.props.context.actions.setLogin(response.data);
+          // if(this.props.setLogin === true){
+          //   this.props.reRender();
+          // }
           // this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
           //   for(let i = 0; i < response.data.resumes.length; i++){
@@ -58,6 +61,7 @@ class Sidebar extends Component {
   };
 
   render() {
+    console.log("DOES THE DATA GET RERENDUH", this.props.context.userInfo)
     // If there is no token, then going to any page will result in a redirect to login
     if (!localStorage.getItem("token")) {
       return <Redirect to="/login" />;

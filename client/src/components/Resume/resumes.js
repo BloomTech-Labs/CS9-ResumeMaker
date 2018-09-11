@@ -36,23 +36,24 @@ class Resumes extends Component {
     this.setState({ index: newIndex });
   };
 
-  // componentWillMount() {
-  //   if (!this.props.context.userInfo.resumes.length)
-  //     this.props.context.actions.createResume();
-  //   //   console.log("template componentWillMount");
-  //   //   let index = this.findWithAttr(
-  //   //     this.props.context.userInfo.resumes,
-  //   //     "_id",
-  //   //     this.props.context.userInfo.currentresume
-  //   //   );
-  //   //   console.log(this.props.context.userInfo.currentresume)
-  //   //   console.log("index from findWithAttr is:", index);
-  //   //   if (index === -1) index = 0;
-  //   //   this.setState({ index: index });
-  // }
+  componentWillMount() {
+    // if (!this.props.context.userInfo.resumes.length)
+    //   this.props.context.actions.createResume();
+      console.log("template componentWillMount");
+      let index = this.findWithAttr(
+        this.props.context.userInfo.resumes,
+        "_id",
+        this.props.context.userInfo.currentresume
+      );
+      console.log(this.props.context.userInfo.currentresume)
+      console.log("index from findWithAttr is:", index);
+      if (index === -1) index = 0;
+      this.setState({ index: index });
+  }
 
   componentDidMount = () => {
     console.log("template componentDidMount");
+    console.log("DIDMOUNT FUCKIN PROPS AND STATE", this.state, this.props.context.userInfo);
     window.scrollTo(0, 0);
     let index = this.findWithAttr(
       this.props.context.userInfo.resumes,
@@ -68,6 +69,16 @@ class Resumes extends Component {
     }
     this.setState({ index: index });
   }
+
+  // reRender = () => {
+  //   console.log("RERENDH RUNNH")
+  //   console.log("GIVE ME INFO", this.props.context.userInfo)
+
+  //   this.componentDidMount();
+  //   // if(!(this.props.context.userInfo.email.length > 1)){
+  //   //   this.reRender();
+  //   // }
+  // }
 
   handleCreate = () => {
     console.log("handle create called");
@@ -179,8 +190,8 @@ class Resumes extends Component {
   // }
 
   render() {
-    // console.log("RENDER CALLED", this.state)
-    // console.log("RENDUH called props", this.props.context.userInfo)
+    console.log("RENDER CALLED", this.state)
+    console.log("RENDUH called props", this.props.context.userInfo)
 
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -200,11 +211,11 @@ class Resumes extends Component {
     ) {
       return (
         <div style={{ display: "none" }}>
-          <Sidebar setLogin={true} context={this.props.context} />
+          <Sidebar setLogin={true} reRender={this.reRender} context={this.props.context} />
+                    {/* <Sidebar setLogin={true} context={this.props.context} />
                     <Sidebar setLogin={true} context={this.props.context} />
                     <Sidebar setLogin={true} context={this.props.context} />
-                    <Sidebar setLogin={true} context={this.props.context} />
-                    <Sidebar setLogin={true} context={this.props.context} />
+                    <Sidebar setLogin={true} context={this.props.context} /> */}
 
         </div>
       );
