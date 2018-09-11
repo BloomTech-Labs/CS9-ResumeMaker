@@ -207,7 +207,7 @@ class Resumes extends Component {
               >
                 {" "}
                 Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, & EDUCATION. Then scroll down the page below to check the information you would like displayed on your final resume, and click SAVE once completed.
+                EXPERIENCE, & EDUCATION. Then scroll down this page to check the information you would like displayed on your final resume. Click SAVE once completed.
               </p>
             </div>
             <div className="containers-div">
