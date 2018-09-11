@@ -29,26 +29,25 @@ class Resumes extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
-            <div className="title-div">
+          <div className="page-div col">
+            <div className="title-div templates" style={{paddingRight: "1rem"}}>
               <h4 style={{ paddingLeft: ".6rem" }}>TEMPLATES</h4>{" "}
               <p
                 style={{
                   fontSize: "0.7rem",
                   paddingLeft: ".6rem",
-                  borderTop: "1px solid black",
                   width: "100%"
                 }}
               >
-                This is your resume page
+                Select a Template to render your Resume: 
               </p>
             </div>
 
-            <div className="d-inline-flex containers-div">
+            <div className="containers-div">
               <div className="d-inline-flex container-div">
                 <Link
                   style={{
@@ -111,7 +110,6 @@ class Resumes extends Component {
         </div>
       </div>
     );
-  }
-}
+  }}
 
 export default Resumes;

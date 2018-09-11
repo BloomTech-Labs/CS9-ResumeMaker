@@ -52,7 +52,6 @@ class AuthProvider extends Component {
   };
 
   setLogin = dataFromUser => {
-    console.log("SETLOGIN, userdata:", dataFromUser);
     const userData = dataFromUser.user;
     this.setState({
       auth: true,
@@ -79,47 +78,34 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if(dataFromUser.resumes){
-      this.setResume(dataFromUser.resumes)
+    if (dataFromUser.resumes) {
+      this.setResume(dataFromUser.resumes);
     }
   };
 
   setResume = resumeData => {
-    console.log("resdata is,", resumeData)
-    if(this.state.auth !== true){
+    if (this.state.auth !== true) {
       return;
-    } else if(!(this.state.resumes.length > 0) && resumeData.length > 0){
+    } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
     } else if (!(resumeData.length > 0) || resumeData[0] === null) {
-      console.log("SET REZ BOI")
+    
       this.createResume(true);
-    } else if (this.state.resumes.length && resumeData.length === this.state.resumes.length) {
+    } else if (
+      this.state.resumes.length &&
+      resumeData.length === this.state.resumes.length
+    ) {
       this.expandResumeIDs();
     } else {
       return;
     }
-
-    // else if (resumeData.length === 1 && this.state.currentresume === null){
-    //   console.log("dont set res 1")
-    //   this.setState({
-    //     resumes: resumeData,
-    //     currentresume: resumeData[0]._id
-    //   });
-    // } else {
-    //   console.log("dont set res 2")
-    //   this.setState({
-    //     resumes: resumeData
-    //   })
-    // }
   };
 
   pushResumes = newResume => {
-    console.log("pushResumes called, current state:", this.state.resumes);
-    console.log("pushResumes called:", newResume);
     let newState = this.state.resumes;
     newState.push(newResume);
     this.setState({ resumes: newState, currentresume: newResume });
-  }
+  };
 
   createResume = newResume => {
     let tempState = this.state.resumes;
@@ -148,10 +134,10 @@ class AuthProvider extends Component {
       tempState = [];
       tempState.push(tempObj);
     } else tempState.push(tempObj);
-    tempObj["resumes"] = tempState.map((resume) => resume._id);
+    tempObj["resumes"] = tempState.map(resume => resume._id);
     // !fix below setstate maybe
     this.setState({ resumes: tempState });
-    
+
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -159,8 +145,12 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
-        console.log("resume post response.data:", response.data);
-        this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
+        let tempState = this.state.resumes;
+        tempState.push(response.data.Resume);
+        this.setState({
+          resumes: tempState,
+          currentresume: response.data.Resume._id
+        });
         // if(this.state.resumes.length <= 1){
         //   console.log("setResume replaced index 0 resume", response.data);
         //   this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
@@ -174,7 +164,6 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
-    console.log("expandResumeIDs called")
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -185,28 +174,22 @@ class AuthProvider extends Component {
     }
 
     // const tempResumes = [];
-    
+
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-      console.log("expandSection called:");
-      console.log("section:", section);
-      console.log("resumeSection:", resumeSection);
-      console.log("index:", index);
+  
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
-        console.log("!resumeSection");
-        console.log(this.state[section])
         for (let item of this.state[section]) {
-          console.log("forloop", this.state[section])
           let current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
           current.length === 0
-          ? tempObj[section].push({
-            _id: item._id,
-            value: false
-          })
-          : console.log();
+            ? tempObj[section].push({
+                _id: item._id,
+                value: false
+              })
+            : console.log();
         } // All items in context now have a resume counterpart
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
@@ -254,44 +237,40 @@ class AuthProvider extends Component {
       }
       this.setState({ ["resumes"[index]]: tempObj });
       // tempResumes.push(tempObj);
-  };
+    };
 
-  // Using promises means the state is only set a single name, rather than for each
-  // subattribute changed or once for each resume that is updated.
-  // let resumePromises = [];
+    // Using promises means the state is only set a single name, rather than for each
+    // subattribute changed or once for each resume that is updated.
+    // let resumePromises = [];
 
-  // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
+    // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
       expandSection("title", false, index);
       expandSection("experience", true, index);
       expandSection("education", true, index);
       expandSection("summary", true, index);
       expandSection("skills", true, index);
-      // console.log("TEMPRESUME", tempResume)
-      // this.setState({ ["resumes"[index]]: tempResume[index] });
     });
 
-    for(let i = 0; i < this.state.resumes.length; i++){
-      console.log("EXPANDIDS IS DOING AN AXIOS M80");
-      // const resumePromise = 
+    for (let i = 0; i < this.state.resumes.length; i++) {
       axios
-      .put(
-        `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
-        this.state.resumes[i],
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
+        .put(
+          `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
+          this.state.resumes[i],
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
           }
-        }
-      )
-      .then(response => {
-        console.log("response", response);
-        // return response.data.resume;
-      })
-      .catch(err => {
-        console.log("err", err);
-        // return err;
-      });
+        )
+        .then(response => {
+          console.log("response", response);
+          // return response.data.resume;
+        })
+        .catch(err => {
+          console.log("err", err);
+          // return err;
+        });
       // resumePromises.push(resumePromise);
     }
 
@@ -303,9 +282,7 @@ class AuthProvider extends Component {
     // })
   };
 
-
   setResumeItemState = (index, name, id) => {
-    console.log("SETRESUMEITEMSTATE", index, name, id, this.state.currentresume)
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -350,7 +327,6 @@ class AuthProvider extends Component {
   };
 
   setSingleElement = (elementName, elementValue) => {
-    console.log("Set single element was called");
     this.setState({ [elementName]: elementValue });
   };
 

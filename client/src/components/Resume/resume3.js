@@ -72,11 +72,11 @@ export class ResumeThree extends Component {
     });
 
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="component-div row">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div page-container-div">
+          <div className="page-div col">
             <div className="resume title-div">
               <h4 className="resume page-header">Elegant</h4>
               <PDF name="template3" />
@@ -95,7 +95,7 @@ export class ResumeThree extends Component {
                     />
                   </a> */}
                   <Container textalign="center" className="contactSection">
-                    <h5 className="subtitle" style={{ paddingTop: "1rem" }}>
+                    <h5 className="subtitle" style={{ paddingTop: "3rem" }}>
                       Contact Details
                     </h5>
                     <a href={`mailto:${userInfo.email}`}>
@@ -122,14 +122,14 @@ export class ResumeThree extends Component {
                 </div>
                 <div className="col-9">
                   <div className="titleSection">
-                    <h4>
+                    <h3>
                       {userInfo.name.firstname} {userInfo.name.lastname}
-                    </h4>
+                    </h3>
                     {userInfo.title.map((item, index) => {
                       if (
                         resumes[this.state.index].title[index].value === true
                       ) {
-                        return <p key={item._id}>{item.content}</p>;
+                        return <h5 key={item._id}  style={{textTransform: "uppercase"}}>{item.content}</h5>;
                       } else return null;
                     })}
                   </div>
@@ -141,7 +141,7 @@ export class ResumeThree extends Component {
                         id="summary"
                         className="summarySection"
                       >
-                        <h5 className="subtitle">Summary</h5>
+                        {/* <h5 className="subtitle">Summary</h5> */}
                         {userInfo.summary.map((item, index) => {
                           return resumes[this.state.index].sections.summary[
                             index
@@ -155,12 +155,12 @@ export class ResumeThree extends Component {
                   ) : null}
                   {skillsLength.length > 0 ? (
                     <Container textalign="center" className="skillsSection">
-                      <h5 className="subtitle">Skills</h5>
+                      <h5 className="subtitle" >Skills</h5>
                       {userInfo.skills.map((content, index) => {
                         return resumes[this.state.index].sections.skills[index]
                           .value ? (
                           <div key={content._id}>
-                            <b>{content.groupname}</b>
+                            <h6 style={{textTransform: "uppercase"}}>{content.groupname}:</h6>
                             <p>{content.content}</p>
                           </div>
                         ) : null;
@@ -170,7 +170,7 @@ export class ResumeThree extends Component {
                   ) : null}
                   {experienceLength.length > 0 ? (
                     <Container textalign="center" className="experienceSection">
-                      <h5 className="subtitle">Experience</h5>
+                      <h5 className="subtitle"  >Experience</h5>
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
@@ -178,9 +178,9 @@ export class ResumeThree extends Component {
                           index
                         ].value ? (
                           <div key={content._id}>
-                            <h6>{content.company} </h6>
+                            <h5 style={{textTransform: "uppercase"}}>{content.title} </h5>
                             <p>
-                              {content.title}
+                              {content.company}
                               <br />
                               {content.location}
                               <br />
@@ -195,7 +195,7 @@ export class ResumeThree extends Component {
                   ) : null}
                   {educationLength.length > 0 ? (
                     <Container textalign="center" className="educationSection">
-                      <h5 className="subtitle">Education</h5>
+                      <h5 className="subtitle" >Education</h5>
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
@@ -203,9 +203,9 @@ export class ResumeThree extends Component {
                           index
                         ].value ? (
                           <div key={content._id}>
-                            <h6>
+                            <h5  style={{textTransform: "uppercase"}}>
                               {content.degree} in {content.fieldofstudy}{" "}
-                            </h6>
+                            </h5>
                             <p>{content.location}</p>
                             <p>
                               {content.school}

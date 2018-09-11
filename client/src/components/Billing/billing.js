@@ -136,7 +136,7 @@ class Billing extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" style={{paddingRight: "1rem"}}>
             <div className="title-div" style={{ paddingLeft: "0.5rem" }}>
               <h4>BILLING</h4>
             </div>
@@ -188,22 +188,21 @@ class Billing extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.complete ?
-                  (<button
+                {this.state.gone ? (
+                  <p style={{ textAlign: "center" }}>
+                    Thank you for your business. We hope to work with you again
+                    soon!
+                  </p>
+                ) : (
+                  <button
                     style={{ marginLeft: "0%", marginTop: "4%" }}
                     className="bill-btn"
                     onClick={this.unsubscribe}
                   >
                     Unsubscribe
                   </button>
-                ) : null}
+                )}
               </div>
-              {this.state.gone ? (
-                  <p>
-                    Thank you for your business. We hope to work with you again
-                    soon!
-                  </p>
-                ) : null}
             </div>
           </div>
         </div>

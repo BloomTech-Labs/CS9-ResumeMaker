@@ -34,7 +34,6 @@ class ForgotPassword extends Component {
         path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
-        console.log(response);
         this.setState({ submitted: true, submittedError: false });
       })
       .catch(err => {
@@ -60,7 +59,7 @@ class ForgotPassword extends Component {
                 onChange={this.handleChange}
                 autoComplete="username"
               />
-              <FormFeedback invalid>
+              <FormFeedback>
                 The email your entered is not associated with a user or there
                 was an error contacting the server.
               </FormFeedback>
@@ -68,7 +67,7 @@ class ForgotPassword extends Component {
             <Button
             style={{fontSize: ".7rem", height: "2rem"}}
               block
-              bsSize="lg"
+              bssize="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.handleSubmit()}

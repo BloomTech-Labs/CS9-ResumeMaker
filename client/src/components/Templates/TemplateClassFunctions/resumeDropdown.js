@@ -33,7 +33,6 @@ class ResumeDropdown extends Component {
 
   // Allows us to select an li and set our state with the given value
   handleClick = (data, index) => {
-    console.log("HANDEL KLICK on it boi", data._id, index);
     this.setState({
       selected: "Resume " + (index + 1),
       toggled: false
@@ -60,9 +59,9 @@ class ResumeDropdown extends Component {
     return (
       <div className="template-card card dropdown m-0">
         <div className="container">
-          <p>{selected ? selected : "Resume " + displayIndex}</p>
+          <p style={{fontWeight: "550"}}>{selected ? selected : "RESUME: " + displayIndex}</p>
         </div>
-        <h6>
+        <h6 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled

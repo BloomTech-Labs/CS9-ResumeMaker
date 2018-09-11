@@ -14,7 +14,10 @@ class Sidebar extends Component {
   }
 
   componentDidMount = () => {
-    if (localStorage.getItem("token") && this.props.context.userInfo.auth !== true) {
+    if (
+      localStorage.getItem("token") &&
+      this.props.context.userInfo.auth !== true
+    ) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -22,10 +25,6 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          console.log(
-            "Sidebar DidMounted and called setLogin and setResume with:",
-            response.data
-          );
           this.props.context.actions.setLogin(response.data);
           // this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
@@ -38,14 +37,17 @@ class Sidebar extends Component {
           // }
         })
         .catch(err => {
-          console.log("Server Error: ", err);
           this.props.context.actions.setLogout();
         });
     } else {
-      console.log("Sidebar detected no token and/or auth === false");
-      if(this.props.context.userInfo.resumes[0] && !this.props.context.userInfo.currentresume){
-        console.log("set currentresume")
-        this.props.context.actions.setSingleElement("currentresume", this.props.context.userInfo.resumes[0]);
+      if (
+        this.props.context.userInfo.resumes[0] &&
+        !this.props.context.userInfo.currentresume
+      ) {
+        this.props.context.actions.setSingleElement(
+          "currentresume",
+          this.props.context.userInfo.resumes[0]
+        );
       }
     }
   };
@@ -76,7 +78,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
+            <div className="fa fa-check-square sm" style={{ color: "white" }} /> DASHBOARD
           </Link>
           <Link
             to="/templates"

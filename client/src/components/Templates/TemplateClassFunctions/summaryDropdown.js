@@ -71,7 +71,7 @@ class SummaryDropdown extends Component {
           <p>{selected}</p>
         </div>
         {/* </div> */}
-        <h6>
+        <h6 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled

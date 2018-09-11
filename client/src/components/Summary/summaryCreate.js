@@ -75,7 +75,6 @@ class SummaryCreate extends Component {
         }
       )
       .then(response => {
-        console.log(response);
         this.props.context.actions.setLogin(response.data);
         this.setState({ success: true });
       })
@@ -85,7 +84,7 @@ class SummaryCreate extends Component {
   };
 
   render() {
-    return [
+    return (
       // <Prompt
       //   key="block-nav"
       //   when={
@@ -97,19 +96,26 @@ class SummaryCreate extends Component {
       // />,
       <div>
         {this.state.success ? <Redirect to="/summary" /> : null}
-        <Navbar context={this.props.context}/>
-      <div className="overall-component-div row">
+        <Navbar context={this.props.context} />
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" style={{paddingRight: "1rem"}}>
             <h4>Personal Summary</h4>
-            <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
+            <p
+              style={{
+                fontSize: "0.7rem",
+                fontStyle: "Italic",
+                borderTop: "1px solid black",
+                width: "100%"
+              }}
+            >
               “Make the most of yourself....for that is all there is of you.” ―
               Ralph Waldo Emerson
             </p>
-            <form style={{fontSize: ".7rem", width: "100%"}}>
+            <form style={{ fontSize: ".7rem", width: "100%" }}>
               <div className="form-group">
                 <textarea
-                style={{fontSize: ".7rem", width: "60%"}}
+                  style={{ fontSize: ".7rem", width: "60%" }}
                   rows={10}
                   value={this.state.content}
                   onChange={this.onInputChange}
@@ -118,15 +124,17 @@ class SummaryCreate extends Component {
                   placeholder="Input your summary"
                 />
               </div>
-            <button onClick={e => this.handleSubmit(e)}>Submit</button>
-            {this.props.location.state.index !== false ? (
-              <button onClick={e => this.handleSubmit(e, true)}>Delete</button>
-            ) : null}
+              <button onClick={e => this.handleSubmit(e)}>Submit</button>
+              {this.props.location.state.index !== false ? (
+                <button onClick={e => this.handleSubmit(e, true)}>
+                  Delete
+                </button>
+              ) : null}
             </form>
           </div>
         </div>
       </div>
-    ];
+    );
   }
 }
 

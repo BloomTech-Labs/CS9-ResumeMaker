@@ -221,7 +221,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="name.firstname"
                   maxLength={20}
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.name.firstname}
                   onChange={this.handleChange}
                 />
@@ -232,7 +232,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="name.middlename"
                   maxLength={20}
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.name.middlename}
                   onChange={this.handleChange}
                 />
@@ -243,7 +243,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="name.lastname"
                   maxLength={20}
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.name.lastname}
                   onChange={this.handleChange}
                 />
@@ -254,7 +254,7 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="phonenumber"
                   maxLength={20}
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.phonenumber}
                   onChange={this.handleChange}
                 />
@@ -264,7 +264,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="location"
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.location}
                   onChange={this.handleChange}
                 />
@@ -274,7 +274,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="links.linkedin"
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.links.linkedin}
                   onChange={this.handleChange}
                 />
@@ -284,7 +284,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="links.github"
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.links.github}
                   onChange={this.handleChange}
                 />
@@ -294,7 +294,7 @@ export class PersonalInfo extends Component {
                 <Input
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="links.portfolio"
-                  bsSize="sm"
+                  bssize="sm"
                   value={this.state.links.portfolio}
                   onChange={this.handleChange}
                 />
@@ -309,12 +309,12 @@ export class PersonalInfo extends Component {
                   style={{ fontSize: ".7rem", height: "1.5rem" }}
                   id="email"
                   invalid={this.state.emailInvalid}
-                  bsSize="sm"
+                  bssize="sm"
                   type="email"
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <FormFeedback invalid style={{ fontSize: ".7rem" }}>
+                <FormFeedback style={{ fontSize: ".7rem" }}>
                   Please enter an unused valid email.
                 </FormFeedback>
               </FormGroup>
@@ -335,12 +335,12 @@ export class PersonalInfo extends Component {
                     this.state.oldpassword !== ""
                   }
                   id="oldpassword"
-                  bsSize="sm"
+                  bssize="sm"
                   type="password"
                   value={this.state.oldpassword}
                   onChange={this.handleChange}
                 />
-                <FormFeedback invalid style={{ fontSize: ".7rem" }}>
+                <FormFeedback style={{ fontSize: ".7rem" }}>
                   Please enter your current password to change your email or
                   password.
                 </FormFeedback>
@@ -358,7 +358,7 @@ export class PersonalInfo extends Component {
                     this.state.newpassword !== ""
                   }
                   id="newpassword"
-                  bsSize="sm"
+                  bssize="sm"
                   type="password"
                   value={this.state.newpassword}
                   onChange={e => {
@@ -366,7 +366,7 @@ export class PersonalInfo extends Component {
                     this.checkPasswordStrength(e.target.value);
                   }}
                 />
-                <FormFeedback invalid style={{ fontSize: ".7rem" }}>
+                <FormFeedback style={{ fontSize: ".7rem" }}>
                   Please use a complex password at least 8 characters long.
                 </FormFeedback>
               </FormGroup>
@@ -383,12 +383,12 @@ export class PersonalInfo extends Component {
                     this.state.newpassword !== this.state.newconfirmpassword
                   }
                   id="newconfirmpassword"
-                  bsSize="sm"
+                  bssize="sm"
                   type="password"
                   value={this.state.newconfirmpassword}
                   onChange={this.handleChange}
                 />
-                <FormFeedback invalid style={{ fontSize: ".7rem" }}>
+                <FormFeedback style={{ fontSize: ".7rem" }}>
                   Please make this match your new password.
                 </FormFeedback>
               </FormGroup>
@@ -440,7 +440,7 @@ class Settings extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col"  style={{paddingRight: "1rem"}}>
             <div className="title-div" style={{ paddingLeft: "0.5rem" }}>
               <h4>SETTINGS</h4>
             </div>
