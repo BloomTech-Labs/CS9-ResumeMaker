@@ -34,8 +34,8 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="title-div templates">
-              <h4 style={{ paddingLeft: ".6rem" }}>TEMPLATES</h4>{" "}
+            <div className="title-div templates" style={{paddingRight: "1rem"}}>
+              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>{" "}
               <p
                 style={{
                   fontSize: "0.7rem",
@@ -44,7 +44,7 @@ class Resumes extends Component {
                   width: "100%"
                 }}
               >
-                This is your resume page
+                Select a Template to render your Resume: 
               </p>
             </div>
 

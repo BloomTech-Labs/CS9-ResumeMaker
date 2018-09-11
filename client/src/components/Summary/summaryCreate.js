@@ -100,7 +100,7 @@ class SummaryCreate extends Component {
         <Navbar context={this.props.context}/>
       <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" style={{paddingRight: "1rem"}}>
             <h4>Personal Summary</h4>
             <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “Make the most of yourself....for that is all there is of you.” ―

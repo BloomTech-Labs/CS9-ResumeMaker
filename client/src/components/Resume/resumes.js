@@ -196,8 +196,20 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="title-div templates">
-              <h4>DASHBOARD</h4>
+            <div className="title-div templates"  style={{paddingRight: "1rem"}}>
+            {this.props.context.userInfo.name.firstname ? (
+                <h4>
+                  Greetings, {this.props.context.userInfo.name.firstname}!
+                </h4>
+              ) : (
+                <React.Fragment>
+                  <h4>Welcome! </h4>
+                  <p>
+                    Please go to the SETTINGS page and fill in your information
+                    to get started!
+                  </p>
+                </React.Fragment>
+              )}
               <p
                 style={{
                   fontSize: "0.7rem",
@@ -212,19 +224,7 @@ class Resumes extends Component {
               </p>
             </div>
             <div className="containers-div">
-              {this.props.context.userInfo.name.firstname ? (
-                <h4>
-                  Greetings, {this.props.context.userInfo.name.firstname}!
-                </h4>
-              ) : (
-                <React.Fragment>
-                  <h4>Welcome! </h4>
-                  <p>
-                    Please go to the SETTINGS page and fill in your information
-                    to get started!
-                  </p>
-                </React.Fragment>
-              )}
+
               {this.props.context.userInfo.membership ? (
                 <React.Fragment>
                   <ResumeDropdown

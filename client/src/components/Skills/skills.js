@@ -111,7 +111,7 @@ class Skills extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col"  style={{paddingRight: "1rem"}}>
             <div className="link-hide">
               <h4>SKILLS </h4>
             </div>
@@ -123,7 +123,8 @@ class Skills extends Component {
                 width: "100%"
               }}
             >
-             Enter a Skills Group Header and then your associated skills. 
+             Enter a Skill Group Header, press ENTER, and then your associated skills. 
+             Press ENTER to save any changes. New Skill Groups can be added and deleted as needed. 
             </p>
 
             <Container className="skills-containment-div">
@@ -134,6 +135,7 @@ class Skills extends Component {
                     key={element._id ? element._id : element.groupname + index}
                   >
                     <button
+                    
                       className="close"
                       aria-label="Delete"
                       onClick={() => this.handleDelete(index, "skills")}
@@ -143,6 +145,7 @@ class Skills extends Component {
                     <FormGroup row>
                       <Col>
                         <Input
+                        style={{height: "2rem", fontSize: ".85rem", fontWeight: "550"}}
                           className="groupname-input"
                           id={`skills`}
                           name="groupname"
@@ -163,6 +166,7 @@ class Skills extends Component {
                     <FormGroup row>
                       <Col>
                         <Input
+                        style={{height: "2rem", fontSize: ".85rem"}}
                           className="skills-input"
                           id={`skills`}
                           name="content"
@@ -186,7 +190,8 @@ class Skills extends Component {
               })}
               <div className="skillgroup-input">
                 <FormGroup>
-                  <Label>New Skill Group</Label>
+                  <Label style={{
+                fontSize: "0.8rem"}}>Add a  New Skill Group:</Label>
                   <Input
                     id="newSkill"
                     bsSize="sm"
