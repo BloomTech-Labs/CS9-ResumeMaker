@@ -60,7 +60,7 @@ class ResumeDropdown extends Component {
     return (
       <div className="template-card card dropdown m-0">
         <div className="container">
-          <p>{selected ? selected : "Resume " + displayIndex}</p>
+          <p style={{fontWeight: "550"}}>{selected ? selected : "RESUME: " + displayIndex}</p>
         </div>
         <h7 style={{fontWeight: "550"}}>
           Choose an option:{" "}
