@@ -51,7 +51,7 @@ class Resumes extends Component {
   //   //   this.setState({ index: index });
   // }
 
-  componentWillMount() {
+  componentDidMount = () => {
     console.log("template componentDidMount");
     window.scrollTo(0, 0);
     let index = this.findWithAttr(
@@ -184,13 +184,13 @@ class Resumes extends Component {
     if (
       !this.state.index ||
       !this.props.context.userInfo ||
-      !this.props.context.userInfo.currentresume ||
-      !resumes ||
-      !resumes[this.state.index]
+      !this.props.context.userInfo.currentresume
+      // !resumes ||
+      // !resumes[this.state.index]
     ) {
       return (
         <div style={{ display: "none" }}>
-          <Sidebar context={this.props.context} />
+          <Sidebar setLogin={true} context={this.props.context} />
         </div>
       );
     }
