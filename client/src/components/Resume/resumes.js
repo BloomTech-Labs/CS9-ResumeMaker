@@ -23,7 +23,6 @@ class Resumes extends Component {
 
   findWithAttr = (array, attr, value) => {
     for (var i = 0; i < array.length; i++) {
-      console.log("arrayI", array[i][attr], "value compared to", value);
       if (array[i][attr] === value) {
         return i;
       }
@@ -32,7 +31,6 @@ class Resumes extends Component {
   };
 
   updateResumeIndex = newIndex => {
-    console.log("UPDATERESUMEINDEX CALD", newIndex);
     this.setState({ index: newIndex });
   };
 
@@ -52,7 +50,6 @@ class Resumes extends Component {
   }
 
   componentDidMount() {
-    console.log("template componentDidMount");
     window.scrollTo(0, 0);
     let index = this.findWithAttr(
       this.props.context.userInfo.resumes,
@@ -64,7 +61,6 @@ class Resumes extends Component {
   }
 
   handleCreate = () => {
-    console.log("handle create called");
     const tempObj = {
       links: { linkedin: true, github: true, portfolio: true },
       title: this.props.context.userInfo.title.map(item => {
@@ -96,7 +92,6 @@ class Resumes extends Component {
       })
       .then(response => {
         this.props.context.actions.pushResumes(response.data.Resume);
-        console.log("RESPONSE TO CREATE TEMPLATE", response);
       })
       .catch(err => {
         console.log("err", err);

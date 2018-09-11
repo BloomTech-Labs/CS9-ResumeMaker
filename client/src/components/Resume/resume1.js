@@ -75,14 +75,6 @@ export class ResumeOne extends Component {
       return resumes[this.state.index].sections.experience[index].value;
     });
 
-    console.log(
-      "Summary, skills, education and experience lengths:",
-      summaryLength,
-      skillsLength,
-      educationLength,
-      experienceLength
-    );
-
     return (
       <div>
         <Navbar context={this.props.context} />

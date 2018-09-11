@@ -33,7 +33,6 @@ class ResumeDropdown extends Component {
 
   // Allows us to select an li and set our state with the given value
   handleClick = (data, index) => {
-    console.log("HANDEL KLICK on it boi", data._id, index);
     this.setState({
       selected: "Resume " + (index + 1),
       toggled: false
