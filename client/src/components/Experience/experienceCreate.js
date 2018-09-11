@@ -138,7 +138,7 @@ class ExperienceCreate extends Component {
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col"  style={{paddingRight: "1rem"}}>
             <h4>EXPERIENCE</h4>
             <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “Far and away the best prize that life offers is the chance to

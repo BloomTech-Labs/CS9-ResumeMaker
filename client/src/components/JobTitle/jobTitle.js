@@ -16,7 +16,7 @@ class JobTitle extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="title-div col">
-            <div className="link-hide">
+            <div className="link-hide"  style={{paddingRight: "1rem"}}>
               <h4>JOB TITLE{" "}</h4>
                 <Link
                   to={{
