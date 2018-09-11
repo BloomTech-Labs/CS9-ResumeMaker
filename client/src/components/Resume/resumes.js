@@ -271,7 +271,7 @@ class Resumes extends Component {
                         index={this.state.index}
                         name="linkedin"
                         value={
-                          resumes[this.state.index]
+                          resumes[this.state.index] && resumes[this.state.index].links
                             ? resumes[this.state.index].links.linkedin
                             : null
                         }
@@ -284,7 +284,7 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="github"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] && resumes[this.state.index].links
                               ? resumes[this.state.index].links.github
                               : null
                           }
@@ -298,7 +298,7 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="portfolio"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] && resumes[this.state.index].links
                               ? resumes[this.state.index].links.portfolio
                               : null
                           }
