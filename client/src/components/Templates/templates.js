@@ -35,12 +35,11 @@ class Resumes extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="title-div templates" style={{paddingRight: "1rem"}}>
-              <h4 style={{ paddingLeft: ".6rem" }}>RESUMES</h4>{" "}
+              <h4 style={{ paddingLeft: ".6rem" }}>TEMPLATES</h4>{" "}
               <p
                 style={{
                   fontSize: "0.7rem",
                   paddingLeft: ".6rem",
-                  borderTop: "1px solid black",
                   width: "100%"
                 }}
               >

@@ -91,7 +91,7 @@ class Sidebar extends Component {
               className="fa fa-file-alt sm"
               style={{ color: "white" }}
             />{" "}
-            RESUMES
+            TEMPLATES
           </Link>
           <Link
             to="/jobtitle"

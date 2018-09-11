@@ -214,7 +214,7 @@ class Resumes extends Component {
                 {" "}
                 Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
                 EXPERIENCE, & EDUCATION. Next, scroll down this page to check the information you would like displayed on your final resume. Once completed, 
-                SAVE your changes and go to TEMPLATES to choose your layout. You can also CREATE multiple Resumes with a subscription. 
+                SAVE your changes and go to TEMPLATES to choose your layout. You can also CREATE multiple RESUMES with a subscription. 
               </p>
             </div>
             <div className="containers-div">
@@ -228,21 +228,23 @@ class Resumes extends Component {
                     context={this.props.context}
                     data={userInfo}
                   />
-                  <button className="resume-button" onClick={this.handleCreate} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem", float: "right"}}>
+                  <button className="resume-button" onClick={this.handleCreate} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem"}}>
                     {" "}
                     Create Resume
                   </button>
                 </React.Fragment>
               ) : null}
-              <button className="resume-button" onClick={this.handleSubmit} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem", float: "left"}}>
+              <button className="resume-button" onClick={this.handleSubmit} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem"}}>
                 {" "}
                 Save Changes
               </button>
             </div>
             <Container className="resumePage">
               <Container className="contact-section">
-                <h6 style={{fontWeight:"550"}}>Contact Details</h6>
-                <Container className="contactSection" style={{fontSize: ".75rem"}}>
+              <Container className="contact-holder">
+                <h6 >Contact Details</h6>
+                </Container>
+                <Container className="contactSection" >
                   {this.props.context.userInfo.name.firstname &&
                   this.props.context.userInfo.name.lastname ? (
                     <h5>
@@ -311,9 +313,9 @@ class Resumes extends Component {
               </Container>
               <Container className="title-section" >
                 <Container className="titleHolder">
-                  <h6 style={{fontWeight:"550"}}>Titles</h6>
+                  <h6>Titles</h6>
                 </Container>
-                <Container className="titleSection" style={{fontSize: ".8rem"}}>
+                <Container className="titleSection">
                   <TitleDropdown
                     context={this.props.context}
                     data={userInfo}
@@ -330,9 +332,9 @@ class Resumes extends Component {
               </Container>
               <Container className="summary-section" >
                 <div className="summaryHolder">
-                  <h6 style={{fontWeight:"550"}}>Summary</h6>
+                  <h6 >Summary</h6>
                 </div>
-                <Container className="summarySection" style={{fontSize: ".75rem"}}>
+                <Container className="summarySection">
                   <SummaryDropdown
                     context={this.props.context}
                     data={userInfo}
@@ -349,7 +351,7 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                  <h6 style={{fontWeight:"550"}}>Skills</h6>
+                  <h6 >Skills</h6>
                 </div>
                 <Container className="skillsSection" style={{fontSize: ".8rem"}}>
                   {userInfo.skills.map((content, index) => {
@@ -378,7 +380,7 @@ class Resumes extends Component {
               </Container>
               <Container className="experience-section">
                 <div className="experienceHolder" >
-                  <h6 style={{fontWeight:"550"}}>Experience</h6>
+                  <h6 >Experience</h6>
                 </div>
                 <Container className="experienceSection" style={{fontSize: ".75rem"}}>
                   {experience.map((content, index) => {
@@ -421,7 +423,7 @@ class Resumes extends Component {
               </Container>
               <Container className="education-section">
                 <div className="educationHolder">
-                  <h6 style={{fontWeight:"550"}}>Education</h6>
+                  <h6 >Education</h6>
                 </div>
                 <Container className="educationSection" style={{fontSize: ".75rem"}}>
                   {education.map((content, index) => {

@@ -55,6 +55,7 @@ a {
   padding: 0.5rem 0 0 0;
 }
 .title-div h4 {
+  width: 100%;
   text-align: start;
 }
 .title-div p {
@@ -144,6 +145,7 @@ i {
   color: #777;
 }
 .title-div.templates h4 {
+  width: 100%;
   border-bottom: 1px solid black;
   text-align: start;
   padding: 0.5rem;
@@ -394,7 +396,7 @@ form {
   padding: 2rem;
 }
 .Login .message p {
-  word-break: break;
+  word-break: break-word;
 }
 .navbar {
   background-color: #707f8c;
@@ -408,7 +410,6 @@ form {
 }
 .resume.title-div h4 {
   width: 100%;
-  border-bottom: 1px solid black;
   text-align: start;
   padding: 0.5rem;
   margin-right: 5%;
@@ -579,7 +580,7 @@ img {
   display: flex;
 }
 .subtitle {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold";
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 .template.title-div {
   display: flex;
@@ -600,7 +601,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 .contact-section {
   border: 2px solid black;
@@ -616,6 +617,10 @@ img {
 }
 .contact-section .contactHolder {
   display: flex;
+}
+.contact-section .contact-holder {
+  min-width: 100px;
+  width: 264px;
 }
 .title-section {
   margin: 5% 0 0 0;
