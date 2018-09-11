@@ -172,7 +172,7 @@ export class ResumeTwo extends Component {
                         return resumes[this.state.index].sections.skills[index]
                           .value ? (
                           <div key={content._id}>
-                            <b>{content.groupname}</b>
+                            <p>{content.groupname}:</p>
                             <p>{content.content}</p>
                           </div>
                         ) : null;

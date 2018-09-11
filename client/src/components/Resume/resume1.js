@@ -97,7 +97,7 @@ export class ResumeOne extends Component {
                 {userInfo.title.map((item, index) => {
                   if (resumes[this.state.index].title[index].value === true) {
                     return (
-                      <p style={{ fontSize: "1.5rem" }} key={item._id}>
+                      <p style={{ fontSize: "1.5rem",textTransform: "uppercase"}} key={item._id}>
                         {item.content}
                       </p>
                     );
@@ -159,9 +159,9 @@ export class ResumeOne extends Component {
                         .value ? (
                         <React.Fragment key={content._id}>
                           <div>
-                            <b style={{ marginRight: "1%" }}>
-                              {content.groupname}
-                            </b>
+                            <p style={{ marginRight: "1%" }}>
+                              {content.groupname}:
+                            </p>
                             <p style={{ marginRight: "1%" }}>
                               {content.content}
                             </p>
@@ -185,9 +185,9 @@ export class ResumeOne extends Component {
                         index
                       ].value ? (
                         <div key={content._id}>
-                          <h5>{content.company} </h5>
+                          <h5>{content.title} </h5>
                           <p>
-                            {content.title}
+                            {content.company}
                             <br />
                             {content.location}
                             <br />
