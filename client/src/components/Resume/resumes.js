@@ -160,7 +160,6 @@ class Resumes extends Component {
   };
 
   render() {
-
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
