@@ -144,7 +144,6 @@ i {
   color: #777;
 }
 .title-div.templates h4 {
-  width: 100%;
   border-bottom: 1px solid black;
   text-align: start;
   padding: 0.5rem;
@@ -419,8 +418,8 @@ form {
   padding-top: 0;
 }
 img {
-  height: 20rem;
-  width: 15rem;
+  height: 18rem;
+  width: 13.9rem;
 }
 .template-img {
   border: 1px black solid;

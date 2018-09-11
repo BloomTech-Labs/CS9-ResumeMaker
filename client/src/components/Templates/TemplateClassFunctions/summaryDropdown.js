@@ -71,7 +71,7 @@ class SummaryDropdown extends Component {
           <p>{selected}</p>
         </div>
         {/* </div> */}
-        <h6>
+        <h7 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled
@@ -81,7 +81,7 @@ class SummaryDropdown extends Component {
             style={{ cursor: "pointer" }}
             onClick={this.handleToggle}
           />
-        </h6>
+        </h7>
         {toggled ? <ul className="list-group">{list}</ul> : null}
       </div>
     );
