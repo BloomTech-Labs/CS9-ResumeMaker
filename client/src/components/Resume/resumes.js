@@ -34,20 +34,20 @@ class Resumes extends Component {
     this.setState({ index: newIndex });
   };
 
-  componentWillMount() {
-    if (!this.props.context.userInfo.resumes.length)
-      this.props.context.actions.createResume();
-    //   console.log("template componentWillMount");
-    //   let index = this.findWithAttr(
-    //     this.props.context.userInfo.resumes,
-    //     "_id",
-    //     this.props.context.userInfo.currentresume
-    //   );
-    //   console.log(this.props.context.userInfo.currentresume)
-    //   console.log("index from findWithAttr is:", index);
-    //   if (index === -1) index = 0;
-    //   this.setState({ index: index });
-  }
+  // componentWillMount() {
+  //   if (!this.props.context.userInfo.resumes.length)
+  //     this.props.context.actions.createResume();
+  //   //   console.log("template componentWillMount");
+  //   //   let index = this.findWithAttr(
+  //   //     this.props.context.userInfo.resumes,
+  //   //     "_id",
+  //   //     this.props.context.userInfo.currentresume
+  //   //   );
+  //   //   console.log(this.props.context.userInfo.currentresume)
+  //   //   console.log("index from findWithAttr is:", index);
+  //   //   if (index === -1) index = 0;
+  //   //   this.setState({ index: index });
+  // }
 
   componentDidMount() {
     window.scrollTo(0, 0);
