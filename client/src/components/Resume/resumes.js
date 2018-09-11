@@ -206,18 +206,18 @@ class Resumes extends Component {
                 }}
               >
                 {" "}
-                Enter information into each section: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, EDUCATION.
+                Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
+                EXPERIENCE, & EDUCATION. Then scroll down this page to check the information you would like displayed on your final resume. 
               </p>
             </div>
             <div className="containers-div">
               {this.props.context.userInfo.name.firstname ? (
-                <h1>
+                <h3>
                   Greetings, {this.props.context.userInfo.name.firstname}!
-                </h1>
+                </h3>
               ) : (
                 <React.Fragment>
-                  <h1>Welcome! </h1>
+                  <h3>Welcome! </h3>
                   <p>
                     Please go to the SETTINGS page and fill in your information
                     to get started!
