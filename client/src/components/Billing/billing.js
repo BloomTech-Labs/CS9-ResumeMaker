@@ -188,22 +188,21 @@ class Billing extends Component {
                     </div>
                   </div>
                 )}
-                {this.state.complete ?
-                  (<button
+                {this.state.gone ? (
+                  <p style={{ textAlign: "center" }}>
+                    Thank you for your business. We hope to work with you again
+                    soon!
+                  </p>
+                ) : (
+                  <button
                     style={{ marginLeft: "0%", marginTop: "4%" }}
                     className="bill-btn"
                     onClick={this.unsubscribe}
                   >
                     Unsubscribe
                   </button>
-                ) : null}
+                )}
               </div>
-              {this.state.gone ? (
-                  <p>
-                    Thank you for your business. We hope to work with you again
-                    soon!
-                  </p>
-                ) : null}
             </div>
           </div>
         </div>
