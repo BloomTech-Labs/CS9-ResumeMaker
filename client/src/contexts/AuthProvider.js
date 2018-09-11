@@ -89,7 +89,6 @@ class AuthProvider extends Component {
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
     } else if (!(resumeData.length > 0) || resumeData[0] === null) {
-    
       this.createResume(true);
     } else if (
       this.state.resumes.length &&
@@ -145,8 +144,10 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
+        let tempState = this.state.resumes;
+        tempState.push(response.data.Resume);
         this.setState({
-          resumes: response.data.resumes,
+          resumes: tempState,
           currentresume: response.data.Resume._id
         });
         // if(this.state.resumes.length <= 1){
@@ -175,7 +176,7 @@ class AuthProvider extends Component {
 
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-  
+
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
