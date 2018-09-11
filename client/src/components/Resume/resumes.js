@@ -36,33 +36,6 @@ class Resumes extends Component {
     this.setState({ index: newIndex });
   };
 
-  componentWillMount() {
-    if (!this.props.context.userInfo.resumes.length)
-      this.props.context.actions.createResume();
-    //   console.log("template componentWillMount");
-    //   let index = this.findWithAttr(
-    //     this.props.context.userInfo.resumes,
-    //     "_id",
-    //     this.props.context.userInfo.currentresume
-    //   );
-    //   console.log(this.props.context.userInfo.currentresume)
-    //   console.log("index from findWithAttr is:", index);
-    //   if (index === -1) index = 0;
-    //   this.setState({ index: index });
-  }
-
-  componentDidMount() {
-    console.log("template componentDidMount");
-    window.scrollTo(0, 0);
-    let index = this.findWithAttr(
-      this.props.context.userInfo.resumes,
-      "_id",
-      this.props.context.userInfo.currentresume
-    );
-    if (index === -1) index = 0;
-    this.setState({ index: index });
-  }
-
   handleCreate = () => {
     console.log("handle create called");
     const tempObj = {
@@ -165,6 +138,8 @@ class Resumes extends Component {
   };
 
   render() {
+    console.log("RENDER CALLED", this.state)
+    console.log("RENDUH called props", this.props.context.userInfo)
 
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -176,13 +151,15 @@ class Resumes extends Component {
     // The following if statement prevents crashes if resumes aren't loaded or don't exist yet.
     // Sidebar will either retrieve the resumes or will use setResume to make a default one for the user
     if (
-      this.state.index === null ||
-      this.props.context.userInfo.currentresume === null ||
-      !resumes[this.state.index]
+      !this.state.index ||
+      !this.props.context.userInfo ||
+      !this.props.context.userInfo.currentresume
+      // !resumes ||
+      // !resumes[this.state.index]
     ) {
       return (
         <div style={{ display: "none" }}>
-          <Sidebar context={this.props.context} />
+          <Sidebar setLogin={true} reRender={this.reRender} context={this.props.context} />
         </div>
       );
     }
@@ -197,7 +174,7 @@ class Resumes extends Component {
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="title-div templates">
-              <h4>RESUMES</h4>
+              <h4>DASHBOARD</h4>
               <p
                 style={{
                   fontSize: "0.7rem",
@@ -207,7 +184,8 @@ class Resumes extends Component {
               >
                 {" "}
                 Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, & EDUCATION. Then scroll down this page to check the information you would like displayed on your final resume. Click SAVE once completed.
+                EXPERIENCE, & EDUCATION. Next, scroll down this page to check the information you would like displayed on your final resume. Once completed, 
+                SAVE your changes and go to TEMPLATES to choose your layout. You can also CREATE multiple Resumes with a subscription. 
               </p>
             </div>
             <div className="containers-div">
@@ -233,15 +211,15 @@ class Resumes extends Component {
                     context={this.props.context}
                     data={userInfo}
                   />
-                  <button className="resume-button" onClick={this.handleCreate}>
+                  <button className="resume-button" onClick={this.handleCreate} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem", float: "right"}}>
                     {" "}
                     Create Resume
                   </button>
                 </React.Fragment>
               ) : null}
-              <button className="resume-button" onClick={this.handleSubmit} style={{width: "3rem", height: "1.5rem", fontSize: ".7rem", float: "right"}}>
+              <button className="resume-button" onClick={this.handleSubmit} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem", float: "left"}}>
                 {" "}
-                Save
+                Save Changes
               </button>
             </div>
             <Container className="resumePage">
@@ -276,7 +254,7 @@ class Resumes extends Component {
                         index={this.state.index}
                         name="linkedin"
                         value={
-                          resumes[this.state.index]
+                          resumes[this.state.index] && resumes[this.state.index].links
                             ? resumes[this.state.index].links.linkedin
                             : null
                         }
@@ -289,7 +267,7 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="github"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] && resumes[this.state.index].links
                               ? resumes[this.state.index].links.github
                               : null
                           }
@@ -303,7 +281,7 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="portfolio"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] && resumes[this.state.index].links
                               ? resumes[this.state.index].links.portfolio
                               : null
                           }
@@ -318,7 +296,7 @@ class Resumes extends Component {
                 <Container className="titleHolder">
                   <h6 style={{fontWeight:"550"}}>Titles</h6>
                 </Container>
-                <Container className="titleSection" style={{fontSize: ".75rem"}}>
+                <Container className="titleSection" style={{fontSize: ".8rem"}}>
                   <TitleDropdown
                     context={this.props.context}
                     data={userInfo}
@@ -342,7 +320,7 @@ class Resumes extends Component {
                     context={this.props.context}
                     data={userInfo}
                     value={
-                      resumes[this.state.index]
+                      resumes[this.state.index] && resumes[this.state.index].sections
                         ? resumes[this.state.index].sections.summary.filter(
                             summary => summary.value === true
                           )
@@ -366,6 +344,7 @@ class Resumes extends Component {
                             id={content._id}
                             name="skills"
                             value={
+                              resumes[this.state.index].sections &&
                               resumes[this.state.index].sections.skills[index]
                                 ? resumes[this.state.index].sections.skills[
                                     index
@@ -391,13 +370,14 @@ class Resumes extends Component {
                     let to = moment(content.to).format("MMM YYYY");
                     return (
                       <div key={content._id}>
-                        <h5>
+                        <h6>
                           {" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
                             name="experience"
                             value={
+                              resumes[this.state.index].sections &&
                               resumes[this.state.index].sections.experience[
                                 index
                               ]
@@ -409,7 +389,7 @@ class Resumes extends Component {
                             index={this.state.index}
                           />{" "}
                           {content.company}{" "}
-                        </h5>
+                        </h6>
                         <p>
                           {" "}
                           {content.title}
@@ -440,6 +420,7 @@ class Resumes extends Component {
                             id={content._id}
                             name="education"
                             value={
+                              resumes[this.state.index].sections &&
                               resumes[this.state.index].sections.education[
                                 index
                               ]

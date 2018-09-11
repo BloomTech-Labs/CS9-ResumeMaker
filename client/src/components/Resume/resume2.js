@@ -99,20 +99,19 @@ export class ResumeTwo extends Component {
 
                {summaryLength.length > 0 ? (
                 <div>
-                  <Container
-                    textalign="center"
-                    id="summary"
-                    className="summarySection"
-                  >
-                    <Divider className="divider-div" />
-                    <h3 className="subtitle">Summary</h3>
-                    {userInfo.summary.map((item, index) => {
-                      return resumes[this.state.index].sections.summary[index]
-                        .value ? (
-                        <p key={item._id}>{item.content}</p>
-                      ) : null;
-                    })}
-                  </Container>
+                <Container
+                  textalign="center"
+                  id="summary"
+                  className="summarySection"
+                >
+                  <Divider className="divider-div" />
+                  <h3 className="subtitle">Summary</h3>
+                  {userInfo.summary.map((item, index) => {
+                    return resumes[this.state.index].sections.summary[index].value ? (
+                      <p key={item._id}>{item.content}</p>
+                    ) : null;
+                  })}
+                </Container>
                 </div>
               ) : null}
 
@@ -144,9 +143,7 @@ export class ResumeTwo extends Component {
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
-                        return resumes[this.state.index].sections.education[
-                          index
-                        ].value ? (
+                        return resumes[this.state.index].sections.education[index].value ? (
                           <div key={content._id}>
                             <h5>
                               {content.degree} in {content.fieldofstudy}{" "}
@@ -162,24 +159,23 @@ export class ResumeTwo extends Component {
                       })}
                     </Container>
                   ) : null}
-                </div>
-                <Divider className="divider-div" />
-                <div className="col-7">
-                  {skillsLength.length > 0 ? (
-                    <Container textalign="center" className="skillsSection">
-                      <h3 className="subtitle">Skills</h3>
-                      {userInfo.skills.map((content, index) => {
-                        return resumes[this.state.index].sections.skills[index]
-                          .value ? (
-                          <div key={content._id}>
-                            <b>{content.groupname}</b>
-                            <p>{content.content}</p>
-                          </div>
-                        ) : null;
-                      })}
-                      <Divider className="divider-div" />
-                    </Container>
-                  ) : null}
+                  </div>
+                  <Divider className="divider-div" />
+                  <div className="col-7">
+                    {skillsLength > 0 ? (
+                      <Container textalign="center" className="skillsSection">
+                        <h3 className="subtitle">Skills</h3>
+                        {userInfo.skills.map((content, index) => {
+                          return resumes[this.state.index].sections.skills[index].value ? (
+                            <div key={content._id}>
+                              <b>{content.groupname}</b>
+                              <p>{content.content}</p>
+                            </div>
+                          ) : null;
+                        })}
+                        <Divider className="divider-div" />
+                      </Container>
+                    ) : null}
 
                   {experienceLength.length > 0 ? (
                     <Container textalign="center" className="experienceSection">

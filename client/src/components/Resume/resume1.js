@@ -144,8 +144,7 @@ export class ResumeOne extends Component {
                   >
                     <h3>Summary</h3>
                     {userInfo.summary.map((item, index) => {
-                      return resumes[this.state.index].sections.summary[index]
-                        .value ? (
+                      return resumes[this.state.index].sections.summary[index].value ? (
                         <p key={item._id}>{item.content}</p>
                       ) : null;
                     })}
@@ -159,8 +158,7 @@ export class ResumeOne extends Component {
                   <Container textAlign="center" className="skillsSection">
                     <h3>Skills</h3>
                     {userInfo.skills.map((content, index) => {
-                      return resumes[this.state.index].sections.skills[index]
-                        .value ? (
+                      return resumes[this.state.index].sections.skills[index].value ? (
                         <React.Fragment key={content._id}>
                           <div>
                             <b style={{ marginRight: "1%" }}>

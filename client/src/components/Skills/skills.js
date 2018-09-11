@@ -23,17 +23,39 @@ class Skills extends Component {
       skills: []
     };
   }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    } else {
+      // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
+      this.setState(
+        this.augmentObject(this.state.skills, this.props.context.userInfo.skills)
+      );
+    }
+  };
+
+  augmentObject = (initObj, modObj) => {
+    for (let prop in initObj) {
+      if (modObj[prop]) {
+        let val = modObj[prop];
+        if (typeof val === "object" && typeof initObj[prop] === "object")
+          this.augmentObject(initObj[prop], val);
+        else initObj[prop] = val;
+      }
+    }
+    return initObj;
   };
 
   componentDidUpdate = () => {
     console.log("ComponentDidUpdate");
+    console.log(this.state.skills + "=?" + this.props.context.userInfo.skills)
     if (
       this.state.skills !== this.props.context.userInfo.skills &&
       this.props.context.userInfo.auth === true
     ) {
-      this.setState({ skills: this.props.context.userInfo.skills });
+      this.componentDidMount();
     }
   };
 
@@ -47,6 +69,30 @@ class Skills extends Component {
 
   newSkillChange = e => {
     this.setState({ [e.target.id]: e.target.value });
+  };
+
+  handleDelete = (index, elementName) => {
+    this.props.context.actions.removeElement(
+      index,
+      elementName
+    );
+    const tempObj = {
+      "sections.skills": this.props.context.userInfo.skills
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        this.props.context.actions.setLogin(response.data);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
   };
 
   handleSubmit = action => {
@@ -99,7 +145,7 @@ class Skills extends Component {
                 width: "100%"
               }}
             >
-              Click the pencil to enter your work related skills.
+             Enter a Skills Group Header and then your associated skills. 
             </p>
 
             <Container className="skills-containment-div">
@@ -109,6 +155,13 @@ class Skills extends Component {
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
                   >
+                    <button
+                      className="close"
+                      aria-label="Delete"
+                      onClick={() => this.handleDelete(index, "skills")}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                     <FormGroup row>
                       <Col>
                         <Input
@@ -116,11 +169,11 @@ class Skills extends Component {
                           id={`skills`}
                           name="groupname"
                           placeholder="Group Name"
-                          // size="sm"
                           value={this.state.skills[index].groupname}
                           onChange={e => this.handleChange(e, index)}
                           onKeyDown={event => {
                             if (event.key === "Enter") {
+                              event.target.blur();
                               event.preventDefault();
                               event.stopPropagation();
                               this.handleSubmit("edit");
@@ -137,11 +190,11 @@ class Skills extends Component {
                           name="content"
                           placeholder="Skill 1, skill 2, skill 3..."
                           type="textarea submit"
-                          // size="sm"
                           value={this.state.skills[index].content}
                           onChange={e => this.handleChange(e, index)}
                           onKeyDown={event => {
                             if (event.key === "Enter") {
+                              event.target.blur();
                               event.preventDefault();
                               event.stopPropagation();
                               this.handleSubmit("edit");
@@ -153,25 +206,23 @@ class Skills extends Component {
                   </Form>
                 );
               })}
-              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
-                Submit
-              </Button>
               <div className="skillgroup-input">
                 <FormGroup>
                   <Label>New Skill Group</Label>
                   <Input
                     id="newSkill"
-                    bsSize="sm"
                     value={this.state.newSkill}
                     onChange={this.newSkillChange}
+                    onKeyDown={event => {
+                      if (event.key === "Enter") {
+                        event.target.blur();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.handleSubmit("add");
+                      }
+                    }}
                   />
                 </FormGroup>
-                <Button
-                  color="primary"
-                  onClick={() => this.handleSubmit("add")}
-                >
-                  Submit
-                </Button>
               </div>
             </Container>
           </div>
