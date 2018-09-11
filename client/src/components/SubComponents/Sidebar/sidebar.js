@@ -14,9 +14,9 @@ class Sidebar extends Component {
   }
 
   componentDidMount = () => {
-    // console.log("SIDEBAR", this.props.setLogin === true);
-    if (this.props.setLogin === true || (localStorage.getItem("token") && this.props.context.userInfo.auth !== true)
-    // && this.props.context.fetchData === true
+    if (
+      localStorage.getItem("token") &&
+      this.props.context.userInfo.auth !== true
     ) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
@@ -25,14 +25,7 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          console.log(
-            "Sidebar DidMounted and called setLogin and setResume with:",
-            response.data
-          );
           this.props.context.actions.setLogin(response.data);
-          // if(this.props.setLogin === true){
-          //   this.props.reRender();
-          // }
           // this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
           //   for(let i = 0; i < response.data.resumes.length; i++){
@@ -44,14 +37,17 @@ class Sidebar extends Component {
           // }
         })
         .catch(err => {
-          console.log("Server Error: ", err);
           this.props.context.actions.setLogout();
         });
     } else {
-      console.log("Sidebar detected no token and/or auth === false");
-      if(this.props.context.userInfo.resumes[0] && !this.props.context.userInfo.currentresume){
-        console.log("set currentresume")
-        this.props.context.actions.setSingleElement("currentresume", this.props.context.userInfo.resumes[0]);
+      if (
+        this.props.context.userInfo.resumes[0] &&
+        !this.props.context.userInfo.currentresume
+      ) {
+        this.props.context.actions.setSingleElement(
+          "currentresume",
+          this.props.context.userInfo.resumes[0]
+        );
       }
     }
   };
@@ -61,7 +57,6 @@ class Sidebar extends Component {
   };
 
   render() {
-    console.log("DOES THE DATA GET RERENDUH", this.props.context.userInfo)
     // If there is no token, then going to any page will result in a redirect to login
     if (!localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -83,7 +78,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-check-square sm" style={{ color: "white" }} /> DASHBOARD
+            <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
           </Link>
           <Link
             to="/templates"
@@ -96,7 +91,7 @@ class Sidebar extends Component {
               className="fa fa-file-alt sm"
               style={{ color: "white" }}
             />{" "}
-            RESUMES
+            TEMPLATES
           </Link>
           <Link
             to="/jobtitle"

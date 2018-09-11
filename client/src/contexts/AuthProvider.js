@@ -52,11 +52,6 @@ class AuthProvider extends Component {
   };
 
   setLogin = dataFromUser => {
-    // if(dataFromUser == null){
-    //   this.setState({ rerender: true });
-    //   return;
-    // }
-    console.log("SETLOGIN, userdata:", dataFromUser);
     const userData = dataFromUser.user;
     let newCurrentResume = dataFromUser.user.currentresume;
     console.log("PRE RES ATTEMPT", newCurrentResume);
@@ -102,34 +97,10 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    
-    if(dataFromUser.resumes
-      //  && dataFromUser.resumes.length && dataFromUser.resumes[0] != null
-      ){
-      this.setResume(dataFromUser.resumes)
+    if (dataFromUser.resumes) {
+      this.setResume(dataFromUser.resumes);
     }
   };
-
-  // setResume = resumeData => {
-  //   console.log("resdata is,", resumeData)
-  //   if(this.state.currentresume == null && this.state.resumes[0] != null){
-  //     this.setState({ currentresume: this.state.resumes[0]._id })
-  //   } else if(this.state.currentresume == null && resumeData[0]){
-  //     this.setState({ currentresume: resumeData[0]._id});
-  //   }
-
-  //   if(this.state.auth !== true){
-  //     return;
-  //   } else if(!this.state.resumes.length && resumeData.length && resumeData.length > 0){
-  //     this.setState({ resumes: resumeData });
-  //   } else if (!(resumeData.length > 0) || resumeData[0] === null) {
-  //     console.log("SET REZ BOI")
-  //     this.createResume(true);
-  //   } else if (this.state.resumes.length && resumeData.length === this.state.resumes.length && resumeData.length > 0) {
-  //     this.expandResumeIDs();
-  //   } else {
-  //     return;
-  //   }
 
   setResume = resumeData => {
     if (this.state.auth !== true) {
@@ -146,30 +117,13 @@ class AuthProvider extends Component {
     } else {
       return;
     }
-  
-  
-
-    // else if (resumeData.length === 1 && this.state.currentresume === null){
-    //   console.log("dont set res 1")
-    //   this.setState({
-    //     resumes: resumeData,
-    //     currentresume: resumeData[0]._id
-    //   });
-    // } else {
-    //   console.log("dont set res 2")
-    //   this.setState({
-    //     resumes: resumeData
-    //   })
-    // }
   };
 
   pushResumes = newResume => {
-    console.log("pushResumes called, current state:", this.state.resumes);
-    console.log("pushResumes called:", newResume);
     let newState = this.state.resumes;
     newState.push(newResume);
     this.setState({ resumes: newState, currentresume: newResume });
-  }
+  };
 
   createResume = newResume => {
     let tempState = this.state.resumes;
@@ -198,7 +152,7 @@ class AuthProvider extends Component {
       tempState = [];
       tempState.push(tempObj);
     } else tempState.push(tempObj);
-    tempObj["resumes"] = tempState.map((resume) => resume._id);
+    tempObj["resumes"] = tempState.map(resume => resume._id);
     // !fix below setstate maybe
     this.setState({ resumes: tempState });
     
@@ -209,8 +163,10 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
-        console.log("resume post response.data:", response.data);
-        this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
+        this.setState({
+          resumes: response.data.resumes,
+          currentresume: response.data.Resume._id
+        });
         // if(this.state.resumes.length <= 1){
         //   console.log("setResume replaced index 0 resume", response.data);
         //   this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
@@ -224,7 +180,6 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
-    console.log("expandResumeIDs called")
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -238,16 +193,10 @@ class AuthProvider extends Component {
     
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-      console.log("expandSection called:");
-      console.log("section:", section);
-      console.log("resumeSection:", resumeSection);
-      console.log("index:", index);
+  
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
-        console.log("!resumeSection");
-        console.log(this.state[section])
         for (let item of this.state[section]) {
-          console.log("forloop", this.state[section])
           let current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
@@ -302,7 +251,7 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      this.setState({ ["resumes"[index]]: tempObj, fetchData: false });
+      this.setState({ ["resumes"[index]]: tempObj });
       // tempResumes.push(tempObj);
   };
 
@@ -317,15 +266,10 @@ class AuthProvider extends Component {
       expandSection("education", true, index);
       expandSection("summary", true, index);
       expandSection("skills", true, index);
-      // console.log("TEMPRESUME", tempResume)
-      // this.setState({ ["resumes"[index]]: tempResume[index] });
     });
 
-    const resumePromises = [];
-
-    for(let i = 0; i < this.state.resumes.length; i++){
-      console.log("EXPANDIDS IS DOING AN AXIOS M80");
-      const resumePromise = axios
+    for (let i = 0; i < this.state.resumes.length; i++) {
+      axios
       .put(
         `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
         this.state.resumes[i],
@@ -343,21 +287,18 @@ class AuthProvider extends Component {
         console.log("err", err);
         // return err;
       });
-      resumePromises.push(resumePromise);
+      // resumePromises.push(resumePromise);
     }
 
     // console.log("OUR PROMISES", resumePromises);
     // Once every request is finished state updates once.
-    Promise.all(resumePromises).then(updatedResumes => {
-      console.log("promise me ned", updatedResumes);
-      this.setState({ fetchData: true });
-      // this.setState({ resumes: updatedResumes})
-    })
+    // Promise.all(resumePromises).then(updatedResumes => {
+    //   // console.log("promise me ned", updatedResumes);
+    //   this.setState({ resumes: updatedResumes})
+    // })
   };
 
-
   setResumeItemState = (index, name, id) => {
-    console.log("SETRESUMEITEMSTATE", index, name, id, this.state.currentresume)
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -402,7 +343,6 @@ class AuthProvider extends Component {
   };
 
   setSingleElement = (elementName, elementValue) => {
-    console.log("Set single element was called");
     this.setState({ [elementName]: elementValue });
   };
 
