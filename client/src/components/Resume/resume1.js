@@ -84,11 +84,11 @@ export class ResumeOne extends Component {
     );
 
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="component-div row">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div page-container-div">
+          <div className="page-div col">
             <div className="resume title-div">
               <h4 className="resume page-header">Traditional</h4>
               <PDF name="template1"/>

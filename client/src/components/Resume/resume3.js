@@ -72,11 +72,11 @@ export class ResumeThree extends Component {
     });
 
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="component-div row">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div page-container-div">
+          <div className="page-div col">
             <div className="resume title-div">
               <h4 className="resume page-header">Elegant</h4>
               <PDF name="template3" />
@@ -95,7 +95,7 @@ export class ResumeThree extends Component {
                     />
                   </a> */}
                   <Container textalign="center" className="contactSection">
-                    <h5 className="subtitle" style={{ paddingTop: "1rem" }}>
+                    <h5 className="subtitle" style={{ paddingTop: "3rem" }}>
                       Contact Details
                     </h5>
                     <a href={`mailto:${userInfo.email}`}>
@@ -129,7 +129,7 @@ export class ResumeThree extends Component {
                       if (
                         resumes[this.state.index].title[index].value === true
                       ) {
-                        return <p key={item._id}>{item.content}</p>;
+                        return <h4 key={item._id}  style={{textTransform: "uppercase"}}>{item.content}</h4>;
                       } else return null;
                     })}
                   </div>
