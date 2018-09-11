@@ -84,7 +84,7 @@ class SummaryCreate extends Component {
   };
 
   render() {
-    return [
+    return (
       // <Prompt
       //   key="block-nav"
       //   when={
@@ -134,7 +134,7 @@ class SummaryCreate extends Component {
           </div>
         </div>
       </div>
-    ];
+    );
   }
 }
 
