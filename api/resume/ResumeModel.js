@@ -7,11 +7,6 @@ const Resume = new Schema({
     type: ObjectId,
     ref: "User"
   },
-  template: {
-    type: String,
-    default: "traditional",
-    required: true
-  },
   title: [
     {
       id: Number,
