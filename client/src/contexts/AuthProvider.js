@@ -146,7 +146,7 @@ class AuthProvider extends Component {
     } else {
       return;
     }
-  }
+  
   
 
     // else if (resumeData.length === 1 && this.state.currentresume === null){
