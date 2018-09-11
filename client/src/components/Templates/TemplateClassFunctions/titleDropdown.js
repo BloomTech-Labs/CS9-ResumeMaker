@@ -67,7 +67,7 @@ class TitleDropdown extends Component {
         <div className="container">
           <h6>{selected}</h6>
         </div>
-        <h7 style={{fontWeight: "550"}}>
+        <h6 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled
@@ -77,7 +77,7 @@ class TitleDropdown extends Component {
             style={{ cursor: "pointer" }}
             onClick={this.handleToggle}
           />
-        </h7>
+        </h6>
         {toggled ? <ul className="list-group">{list}</ul> : null}
       </div>
     );

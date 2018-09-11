@@ -35,8 +35,8 @@ class Resumes extends Component {
   };
 
   componentWillMount() {
-    if (!this.props.context.userInfo.resumes.length)
-      this.props.context.actions.createResume();
+    // if (!this.props.context.userInfo.resumes.length)
+    //   this.props.context.actions.createResume();
     //   console.log("template componentWillMount");
     //   let index = this.findWithAttr(
     //     this.props.context.userInfo.resumes,

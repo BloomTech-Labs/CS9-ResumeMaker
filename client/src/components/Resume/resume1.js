@@ -62,9 +62,11 @@ export class ResumeOne extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    const summaryLength = userInfo.summary.filter((item, index) => {
-      return resumes[this.state.index].sections.summary[index].value;
-    });
+    console.log("RESUMES", resumes)
+    // const summaryLength = userInfo.summary.filter((item, index) => {
+    //   return resumes[this.state.index].sections.summary[index].value;
+    // });
+    const summaryLength = 0;
     const skillsLength = userInfo.skills.filter((item, index) => {
       return resumes[this.state.index].sections.skills[index].value;
     });

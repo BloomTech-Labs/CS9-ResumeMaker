@@ -145,8 +145,10 @@ class AuthProvider extends Component {
         }
       })
       .then(response => {
+        let tempState = this.state.resumes;
+        tempState.push(response.data.Resume);
         this.setState({
-          resumes: response.data.resumes,
+          resumes: tempState,
           currentresume: response.data.Resume._id
         });
         // if(this.state.resumes.length <= 1){
