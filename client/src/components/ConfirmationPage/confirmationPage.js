@@ -12,7 +12,6 @@ class ConfirmationPage extends Component {
 
   componentDidMount = () => {
     const serverPath = window.location.search.substring(1);
-    console.log("WE HAVE URL:", `${urls[urls.basePath]}${serverPath}`);
     axios
       .get(`${urls[urls.basePath]}${serverPath}`)
       .then(response => {

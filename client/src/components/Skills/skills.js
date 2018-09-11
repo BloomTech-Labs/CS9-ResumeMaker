@@ -28,7 +28,6 @@ class Skills extends Component {
   };
 
   componentDidUpdate = () => {
-    console.log("ComponentDidUpdate");
     if (
       this.state.skills !== this.props.context.userInfo.skills &&
       this.props.context.userInfo.auth === true
@@ -101,7 +100,7 @@ class Skills extends Component {
         this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
-        console.log("oops", err.message);
+        console.log("Error", err.message);
       });
   };
 
@@ -194,7 +193,7 @@ class Skills extends Component {
                 fontSize: "0.8rem"}}>Add a  New Skill Group:</Label>
                   <Input
                     id="newSkill"
-                    bsSize="sm"
+                    bssize="sm"
                     value={this.state.newSkill}
                     onChange={this.newSkillChange}
                     onKeyDown={event => {

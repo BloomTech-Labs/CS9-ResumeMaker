@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  FormFeedback,
-  Input
-} from "reactstrap";
+import { Button, Form, FormGroup, FormFeedback, Input } from "reactstrap";
 import axios from "axios";
 const urls = require("../../config/config.json");
 
@@ -100,14 +94,14 @@ class Login extends Component {
               type="password"
               autoComplete="current-password"
             />
-            <FormFeedback invalid>
+            <FormFeedback>
               The email or password you entered are incorrect.
             </FormFeedback>
           </FormGroup>
           <Button
             style={{ fontSize: ".8rem", height: "2rem" }}
             block
-            bsSize="lg"
+            bssize="lg"
             color="primary"
             disabled={!this.validateForm()}
             type="submit"

@@ -33,7 +33,6 @@ class ResumeDropdown extends Component {
 
   // Allows us to select an li and set our state with the given value
   handleClick = (data, index) => {
-    console.log("HANDEL KLICK on it boi", data._id, index);
     this.setState({
       selected: "Resume " + (index + 1),
       toggled: false
@@ -62,7 +61,7 @@ class ResumeDropdown extends Component {
         <div className="container">
           <p style={{fontWeight: "550"}}>{selected ? selected : "RESUME: " + displayIndex}</p>
         </div>
-        <h7 style={{fontWeight: "550"}}>
+        <h6 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled
@@ -72,7 +71,7 @@ class ResumeDropdown extends Component {
             style={{ cursor: "pointer" }}
             onClick={this.handleToggle}
           />
-        </h7>
+        </h6>
         {toggled ? <ul className="list-group">{list}</ul> : null}
       </div>
     );

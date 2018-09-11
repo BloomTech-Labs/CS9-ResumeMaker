@@ -62,7 +62,6 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        console.log("response", response);
         this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
@@ -121,7 +120,7 @@ class ItemCard extends Component {
                 {moment(this.props.element.to).format("MMM YYYY")}
               </CardText>
               <CardText>
-                {ellipsify(this.props.element.description, 240)}
+                {ellipsify(this.props.element.description, 180)}
               </CardText>
             </CardBody>
           </Link>
