@@ -207,17 +207,17 @@ class Resumes extends Component {
               >
                 {" "}
                 Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, & EDUCATION. Then scroll down this page to check the information you would like displayed on your final resume. 
+                EXPERIENCE, & EDUCATION. Then scroll down the page below to check the information you would like displayed on your final resume, and click SAVE once completed.
               </p>
             </div>
             <div className="containers-div">
               {this.props.context.userInfo.name.firstname ? (
-                <h3>
+                <h4>
                   Greetings, {this.props.context.userInfo.name.firstname}!
-                </h3>
+                </h4>
               ) : (
                 <React.Fragment>
-                  <h3>Welcome! </h3>
+                  <h4>Welcome! </h4>
                   <p>
                     Please go to the SETTINGS page and fill in your information
                     to get started!
@@ -239,20 +239,20 @@ class Resumes extends Component {
                   </button>
                 </React.Fragment>
               ) : null}
-              <button className="resume-button" onClick={this.handleSubmit}>
+              <button className="resume-button" onClick={this.handleSubmit} style={{width: "3rem", height: "1.5rem", fontSize: ".7rem", float: "right"}}>
                 {" "}
-                Save Resume
+                Save
               </button>
             </div>
             <Container className="resumePage">
               <Container className="contact-section">
-                <h3>Contact Details</h3>
-                <Container className="contactSection">
+                <h6 style={{fontWeight:"550"}}>Contact Details</h6>
+                <Container className="contactSection" style={{fontSize: ".75rem"}}>
                   {this.props.context.userInfo.name.firstname &&
                   this.props.context.userInfo.name.lastname ? (
-                    <h2>
+                    <h5>
                       {userInfo.name.firstname} {userInfo.name.lastname}
-                    </h2>
+                    </h5>
                   ) : (
                     <h2>Please enter your full name in the SETTINGS page</h2>
                   )}
@@ -314,11 +314,11 @@ class Resumes extends Component {
                   </Container>
                 </Container>
               </Container>
-              <Container className="title-section">
+              <Container className="title-section" >
                 <Container className="titleHolder">
-                  <h3>Titles</h3>
+                  <h6 style={{fontWeight:"550"}}>Titles</h6>
                 </Container>
-                <Container className="titleSection">
+                <Container className="titleSection" style={{fontSize: ".75rem"}}>
                   <TitleDropdown
                     context={this.props.context}
                     data={userInfo}
@@ -333,11 +333,11 @@ class Resumes extends Component {
                   />
                 </Container>
               </Container>
-              <Container className="summary-section">
+              <Container className="summary-section" >
                 <div className="summaryHolder">
-                  <h3>Summary</h3>
+                  <h6 style={{fontWeight:"550"}}>Summary</h6>
                 </div>
-                <Container className="summarySection">
+                <Container className="summarySection" style={{fontSize: ".75rem"}}>
                   <SummaryDropdown
                     context={this.props.context}
                     data={userInfo}
@@ -354,13 +354,13 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                  <h3>Skills</h3>
+                  <h6 style={{fontWeight:"550"}}>Skills</h6>
                 </div>
-                <Container className="skillsSection">
+                <Container className="skillsSection" style={{fontSize: ".8rem"}}>
                   {userInfo.skills.map((content, index) => {
                     return (
                       <div key={content._id}>
-                        <p>
+                        <p>{" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
@@ -382,10 +382,10 @@ class Resumes extends Component {
                 </Container>
               </Container>
               <Container className="experience-section">
-                <div className="experienceHolder">
-                  <h3>Experience</h3>
+                <div className="experienceHolder" >
+                  <h6 style={{fontWeight:"550"}}>Experience</h6>
                 </div>
-                <Container className="experienceSection">
+                <Container className="experienceSection" style={{fontSize: ".75rem"}}>
                   {experience.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
                     let to = moment(content.to).format("MMM YYYY");
@@ -426,15 +426,15 @@ class Resumes extends Component {
               </Container>
               <Container className="education-section">
                 <div className="educationHolder">
-                  <h3>Education</h3>
+                  <h6 style={{fontWeight:"550"}}>Education</h6>
                 </div>
-                <Container className="educationSection">
+                <Container className="educationSection" style={{fontSize: ".75rem"}}>
                   {education.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
                     let to = moment(content.to).format("MMM YYYY");
                     return (
                       <div key={content._id}>
-                        <h5>
+                        <h6>{" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
@@ -451,7 +451,7 @@ class Resumes extends Component {
                             index={this.state.index}
                           />
                           {" " + content.degree} in {content.fieldofstudy}{" "}
-                        </h5>
+                        </h6>
                         <p>{content.location}</p>
                         <p>
                           {content.school}
