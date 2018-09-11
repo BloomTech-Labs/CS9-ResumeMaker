@@ -58,9 +58,24 @@ class AuthProvider extends Component {
     // }
     console.log("SETLOGIN, userdata:", dataFromUser);
     const userData = dataFromUser.user;
+    let newCurrentResume = dataFromUser.user.currentresume;
+    console.log("PRE RES ATTEMPT", newCurrentResume);
+    if(dataFromUser.resumes && dataFromUser.resumes.length > 0 && dataFromUser.user && newCurrentResume){
+      console.log("ATTEMPT TO DO NEWCURNT RES SDONE")
+      for(let i = 0; i < dataFromUser.resumes.length; i++){
+        if(newCurrentResume === dataFromUser.resumes[i]._id){
+          console.log("newCurrentResume is equal to dataFromUser.resumes[i]._id")
+          return;
+        }
+      }
+      newCurrentResume = dataFromUser.resumes[0]._id;
+    } else {
+      newCurrentResume = null;
+    }
+    console.log("NEWCURRESIS", newCurrentResume);
     this.setState({
       auth: true,
-      currentresume: userData.currentresume ? userData.currentresume : null,
+      currentresume: newCurrentResume ? newCurrentResume : null,
       email: userData.email ? userData.email : "",
       name: {
         firstname: userData.name.firstname ? userData.name.firstname : "",
@@ -83,6 +98,7 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
+    
     if(dataFromUser.resumes && dataFromUser.resumes.length && dataFromUser.resumes[0] != null){
       this.setResume(dataFromUser.resumes)
     }
@@ -93,7 +109,7 @@ class AuthProvider extends Component {
     if(this.state.currentresume == null && this.state.resumes[0] != null){
       this.setState({ currentresume: this.state.resumes[0]._id })
     } else if(this.state.currentresume == null && resumeData[0]){
-      this.setState({ currentresume: resumeData[0]});
+      this.setState({ currentresume: resumeData[0]._id});
     }
 
     if(this.state.auth !== true){
