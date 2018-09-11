@@ -170,7 +170,17 @@ class Resumes extends Component {
     }
   };
 
+  // componentDidUpdate = () => {
+  //   console.log("COMPONENTDIDUPDATE")
+  //   if(this.state.index && this.props.context.userInfo.resumes[this.state.index] && this.props.context.userInfo.resumes[this.state.index]._id){
+  //     console.log("i got ya renda right heah")
+  //     this.render();
+  //   }
+  // }
+
   render() {
+    // console.log("RENDER CALLED", this.state)
+    // console.log("RENDUH called props", this.props.context.userInfo)
 
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -191,6 +201,11 @@ class Resumes extends Component {
       return (
         <div style={{ display: "none" }}>
           <Sidebar setLogin={true} context={this.props.context} />
+                    <Sidebar setLogin={true} context={this.props.context} />
+                    <Sidebar setLogin={true} context={this.props.context} />
+                    <Sidebar setLogin={true} context={this.props.context} />
+                    <Sidebar setLogin={true} context={this.props.context} />
+
         </div>
       );
     }

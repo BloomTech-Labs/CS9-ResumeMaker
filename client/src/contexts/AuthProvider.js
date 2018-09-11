@@ -60,15 +60,19 @@ class AuthProvider extends Component {
     const userData = dataFromUser.user;
     let newCurrentResume = dataFromUser.user.currentresume;
     console.log("PRE RES ATTEMPT", newCurrentResume);
-    if(dataFromUser.resumes && dataFromUser.resumes.length > 0 && dataFromUser.user && newCurrentResume){
+    console.log("WHAT IS UNDEFINED MOTHER FUCKER", dataFromUser);
+    if(dataFromUser.user && newCurrentResume && dataFromUser && dataFromUser.resumes && dataFromUser.resumes.length > 0){
       console.log("ATTEMPT TO DO NEWCURNT RES SDONE")
       for(let i = 0; i < dataFromUser.resumes.length; i++){
-        if(newCurrentResume === dataFromUser.resumes[i]._id){
+        if(dataFromUser.resumes[i] && newCurrentResume === dataFromUser.resumes[i]._id && dataFromUser.resumes[0]._id != null){
           console.log("newCurrentResume is equal to dataFromUser.resumes[i]._id")
           return;
         }
       }
-      newCurrentResume = dataFromUser.resumes[0]._id;
+      if(dataFromUser.resume[0] != null){
+        newCurrentResume = dataFromUser.resumes[0]._id;
+        this.setState({currentresume: newCurrentResume});
+      }
     } else {
       newCurrentResume = null;
     }
