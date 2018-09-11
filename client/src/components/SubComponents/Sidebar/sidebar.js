@@ -76,7 +76,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
+            <div className="fa fa-check-square sm" style={{ color: "white" }} /> DASHBOARD
           </Link>
           <Link
             to="/templates"
@@ -89,7 +89,7 @@ class Sidebar extends Component {
               className="fa fa-file-alt sm"
               style={{ color: "white" }}
             />{" "}
-            TEMPLATES
+            RESUMES
           </Link>
           <Link
             to="/jobtitle"
