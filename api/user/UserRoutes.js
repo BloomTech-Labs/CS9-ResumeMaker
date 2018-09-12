@@ -121,12 +121,15 @@ router.post("/register", (req, res) => {
           .save()
           .then(emailconfirmation => {
             // This is if ethereal doesn't work or you don't want to test with real emails
-            console.log(
-              "Link to activate account:\n",
-              `${req.get("host")}${req.baseUrl}/confirmemail/${
-                newEmailConfirmation.hash
-              }`
-            );
+            // console.log(
+            //   "Link to activate account:\n",
+            //   `${req.get("host")}${req.baseUrl}/confirmemail/${
+            //     newEmailConfirmation.hash
+            //   }`
+            // );
+            // res.send(`${req.get("host")}${req.baseUrl}/confirmemail/${
+            //   newEmailConfirmation.hash
+            // }`)
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
               if (err) {
@@ -595,7 +598,7 @@ router.get("/confirmemail/:hash", (req, res) => {
               expiresIn: "7d"
             });
             user.password = null;
-            res.status(201).json({ token, user });
+            res.status(201).send("<h1>You can now login with your registered email and password<h1>");
           })
           .catch(err => {
             res.status(500).json({
