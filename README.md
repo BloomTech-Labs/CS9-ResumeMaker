@@ -8,8 +8,6 @@ Login picture: https://www.pexels.com/
 
 Icons made by Nas Ztudio: www.flaticon.com
 
-Lion Head Icon: https://www.freeiconspng.com/img/37126
-
 Header: https://pixabay.com/en/photos/banner/
 
 Styling: http://mksht.crisnoble.com
