@@ -5,8 +5,7 @@ const urls = require("../../config/config.json");
 
 const user = {
   email: "bobbert@gmail.com",
-  password:
-    "Password123!",
+  password: "Password123!",
   invalidCredentials: false
 };
 

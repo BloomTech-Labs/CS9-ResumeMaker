@@ -63,7 +63,9 @@ class AuthProvider extends Component {
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
       title: userData.title ? userData.title : [],
-      links: userData.links ? userData.links : [],
+      linkedin: userData.links.linkedin ? userData.links.linkedin : "",
+      portfolio: userData.links.portfolio ? userData.links.portfolio : "",
+      github: userData.links.github ? userData.links.github : "",
       location: userData.location ? userData.location : "",
       phonenumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
@@ -74,22 +76,26 @@ class AuthProvider extends Component {
       summary: userData.sections.summary ? userData.sections.summary : [],
       username: userData.username ? userData.username : "",
       id: userData._id ? userData._id : null,
+      resumes: dataFromUser.resumes ? dataFromUser.resumes : [],
       membership: userData.membership ? userData.membership : false
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if (dataFromUser.resumes) {
-      const links = {
-        linkedin: "",
-        github: "",
-        portfolio: ""
-      };
-      dataFromUser.resumes = links;
-      this.setResume(dataFromUser.resumes);
-    }
+    // if (dataFromUser.resumes) {
+    //   // const links = {
+    //   //   github: false,
+    //   //   linkedin: false,
+    //   //   portfolio: false
+    //   // };
+    //   // dataFromUser.resumes.forEach(resume => {
+    //   //   resume.links = links;
+    //   // });
+    //   this.setResume(dataFromUser.resumes);
+    // }
   };
 
   setResume = resumeData => {
+    console.log("resumeData", resumeData);
     if (this.state.auth !== true) {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
