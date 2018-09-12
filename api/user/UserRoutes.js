@@ -127,9 +127,9 @@ router.post("/register", (req, res) => {
             //     newEmailConfirmation.hash
             //   }`
             // );
-            // res.send(`${req.get("host")}${req.baseUrl}/confirmemail/${
-            //   newEmailConfirmation.hash
-            // }`)
+            res.send(`${req.get("host")}${req.baseUrl}/confirmemail/${
+              newEmailConfirmation.hash
+            }`)
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
               if (err) {
@@ -177,9 +177,8 @@ router.post("/register", (req, res) => {
                   "Preview URL: %s",
                   nodemailer.getTestMessageUrl(info)
                 );
-                res.status(200).json({
-                  message: "Email confirmation saved and email sent."
-                });
+                res.status(200).json(
+                  nodemailer.getTestMessageUrl(info) );
               });
             });
           })
@@ -691,7 +690,7 @@ router.put("/forgotpassword", (req, res) => {
               );
               return res
                 .status(200)
-                .json({ message: "Email confirmation saved and email sent." });
+                .json();
             });
           });
         })
