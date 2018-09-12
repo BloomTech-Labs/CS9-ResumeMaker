@@ -64,18 +64,18 @@ const User = new mongoose.Schema(
     phonenumber: {
       type: String,
       default: "",
-      validate: [validatePhone, "Invalid Phone Number"]
+      // validate: [validatePhone, "Invalid Phone Number"]
     },
     links: {
       linkedin: {
         type: String,
         default: "",
-        validate: [validateLinkedIn, "Invalid Linkedin"]
+        // validate: [validateLinkedIn, "Invalid Linkedin"]
       },
       github: {
         type: String,
         default: "",
-        validate: [validateGithub, "Invalid GitHub"]
+        // validate: [validateGithub, "Invalid GitHub"]
       },
       portfolio: {
         type: String,
