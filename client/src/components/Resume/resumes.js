@@ -297,7 +297,7 @@ class Resumes extends Component {
                             : null
                         }
                       />
-                      {" " + userInfo.links.linkedin}{" "}
+                      {" " + userInfo.linkedin}{" "}
                       <div className={"fa fa-linkedin fa-sm"} />
                       <div>
                         <CheckBox
@@ -310,7 +310,7 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.links.github}{" "}
+                        {" " + userInfo.github}{" "}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
                       <p>
@@ -324,7 +324,7 @@ class Resumes extends Component {
                               : null
                           }
                         />{" "}
-                        {" " + userInfo.links.portfolio}
+                        {" " + userInfo.portfolio}
                       </p>
                     </Container>
                   </Container>
