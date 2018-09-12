@@ -14,7 +14,8 @@ class Register extends Component {
     submittedError: false,
     usernameInvalid: false,
     emailInvalid: false,
-    passwordInvalid: false
+    passwordInvalid: false,
+    validateMessage: ""
   };
 
   validateForm() {
@@ -114,6 +115,7 @@ class Register extends Component {
         path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
+        this.setState({ validateMessage: response.data });
         this.setState({ submitted: true, submittedError: false });
       })
       .catch(err => {
@@ -226,10 +228,12 @@ class Register extends Component {
       return (
         <div className="Login">
           <div className="message">
-            <p>
-              Please check your email within 30 minutes to confirm your
-              registration, then you can log in.
+            <p style={{ margin: "0" }}>
+              {/* Please check your email within 30 minutes to confirm your
+              registration, then you can log in. */}
+              Please ctrl(cmd for Mac) + click the following link to register your account:
             </p>
+              <a style={{ marginTop: "10px", marginBottom: "10px" }} href={this.state.validateMessage}>{"Register Your Account"}</a>
             <Button
               style={{ fontSize: ".7rem", height: "2rem" }}
               color="primary"
