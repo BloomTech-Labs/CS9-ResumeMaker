@@ -136,6 +136,7 @@ class Resumes extends Component {
           }
         })
         .then(response => {
+          this.setState({ success: true })
           this.props.context.actions.pushResumes(response.data.Resume);
         })
         .catch(err => {
