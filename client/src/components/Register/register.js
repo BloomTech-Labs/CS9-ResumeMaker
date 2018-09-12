@@ -6,10 +6,10 @@ const urls = require("../../config/config.json");
 
 class Register extends Component {
   state = {
-    email: "scrinch@gmail.com",
-    password: "scrinch1G!",
-    confirmPassword: "scrinch1G!",
-    username: "scrinch",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    username: "",
     submitted: false,
     submittedError: false,
     usernameInvalid: false,
