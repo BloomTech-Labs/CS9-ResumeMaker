@@ -20,7 +20,6 @@ class ConfirmationPage extends Component {
         } else if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(response.data);
-          this.props.history.push("/dashboard");
         } else {
           this.setState({
             message: response.data.message,
@@ -38,9 +37,6 @@ class ConfirmationPage extends Component {
       return (
         <div className="Login">
           <div className="message">
-            <p>
-              {this.state.message} Your password is now {this.state.password}
-            </p>
             <Button
               color="primary"
               onClick={() => {
@@ -56,7 +52,7 @@ class ConfirmationPage extends Component {
       return (
         <div className="Login">
           <div className="message">
-            <p>{this.state.message}</p>
+            <p>Please Login</p>
             <Button
               color="primary"
               onClick={() => {
