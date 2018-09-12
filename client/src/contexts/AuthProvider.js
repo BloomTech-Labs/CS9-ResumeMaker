@@ -53,7 +53,6 @@ class AuthProvider extends Component {
 
   setLogin = dataFromUser => {
     const userData = dataFromUser.user;
-    console.log("user", userData);
     this.setState({
       auth: true,
       currentresume: userData.currentresume ? userData.currentresume : null,
