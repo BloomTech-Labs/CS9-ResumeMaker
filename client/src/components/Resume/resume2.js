@@ -40,7 +40,7 @@ export class ResumeTwo extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     if (
       !this.props.context.userInfo.resumes.length ||
@@ -55,7 +55,7 @@ export class ResumeTwo extends Component {
       console.log(
         "You probably had an error, which redirected you instead of crashing."
       );
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
 
     const userInfo = this.props.context.userInfo;
@@ -76,11 +76,11 @@ export class ResumeTwo extends Component {
     });
 
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="component-div row">
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="page-div page-container-div">
+          <div className="page-div col">
             <div className="resume title-div">
               <h4 className="resume page-header">Modern</h4>
               <PDF name="template2"/>
@@ -92,7 +92,7 @@ export class ResumeTwo extends Component {
                 </h2>
                 {userInfo.title.map((item, index) => {
                   if (resumes[this.state.index].title[index].value === true) {
-                    return <p key={item._id}>{item.content}</p>;
+                    return <h4 key={item._id} style={{textTransform: "uppercase"}}>{item.content}</h4>;
                   } else return null;
                 })}
               </div>
@@ -103,9 +103,10 @@ export class ResumeTwo extends Component {
                     textalign="center"
                     id="summary"
                     className="summarySection"
+                    style={{padding: "0"}}
                   >
-                    <Divider className="divider-div" />
-                    <h3 className="subtitle">Summary</h3>
+                    <Divider className="divider-div" style={{padding: "0"}}/>
+                    {/* <h4 className="subtitle">Summary</h4> */}
                     {userInfo.summary.map((item, index) => {
                       return resumes[this.state.index].sections.summary[index]
                         .value ? (
@@ -120,7 +121,7 @@ export class ResumeTwo extends Component {
               <div className="row">
                 <div className="col-5">
                   <Container textalign="center" className="contactSection">
-                    <h3 className="subtitle">Contact Details</h3>
+                    <h4 className="subtitle">Contact Details</h4>
                     <a href={`mailto:${userInfo.email}`}>
                       <p> {userInfo.email}</p>
                     </a>
@@ -140,7 +141,7 @@ export class ResumeTwo extends Component {
                   {educationLength.length > 0 ? (
                     <Container textalign="center" className="educationSection">
                       <Divider className="divider-div" />
-                      <h3 className="subtitle">Education</h3>
+                      <h4 className="subtitle">Education</h4>
                       {education.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
@@ -148,9 +149,9 @@ export class ResumeTwo extends Component {
                           index
                         ].value ? (
                           <div key={content._id}>
-                            <h5>
+                            <h6 style={{textTransform: "uppercase"}}>
                               {content.degree} in {content.fieldofstudy}{" "}
-                            </h5>
+                            </h6>
                             <p>{content.location}</p>
                             <p>
                               {content.school}
@@ -167,12 +168,12 @@ export class ResumeTwo extends Component {
                 <div className="col-7">
                   {skillsLength.length > 0 ? (
                     <Container textalign="center" className="skillsSection">
-                      <h3 className="subtitle">Skills</h3>
+                      <h4 className="subtitle">Skills</h4>
                       {userInfo.skills.map((content, index) => {
                         return resumes[this.state.index].sections.skills[index]
                           .value ? (
                           <div key={content._id}>
-                            <b>{content.groupname}</b>
+                            <p>{content.groupname}:</p>
                             <p>{content.content}</p>
                           </div>
                         ) : null;
@@ -183,7 +184,7 @@ export class ResumeTwo extends Component {
 
                   {experienceLength.length > 0 ? (
                     <Container textalign="center" className="experienceSection">
-                      <h3 className="subtitle">Experience</h3>
+                      <h4 className="subtitle">Experience</h4>
                       {experience.map((content, index) => {
                         let from = moment(content.from).format("MMM YYYY");
                         let to = moment(content.to).format("MMM YYYY");
@@ -191,9 +192,9 @@ export class ResumeTwo extends Component {
                           index
                         ].value ? (
                           <div key={index}>
-                            <h5>{content.company} </h5>
+                            <h5 style={{textTransform: "uppercase"}}>{content.title} </h5>
                             <p>
-                              {content.title}
+                              {content.company}
                               <br />
                               {content.location}
                               <br />

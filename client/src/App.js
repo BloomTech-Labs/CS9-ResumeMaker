@@ -101,22 +101,22 @@ class App extends Component {
                 /> */}
                 <Route
                   exact
-                  path="/resumes"
+                  path="/dashboard"
                   render={props => <Resumes {...props} context={context} />}
                 />
                 <Route
                   exact
-                  path="/resume1"
+                  path="/templates/traditional"
                   render={props => <ResumeOne {...props} context={context} />}
                 />
                 <Route
                   exact
-                  path="/resume2"
+                  path="/templates/modern"
                   render={props => <ResumeTwo {...props} context={context} />}
                 />
                 <Route
                   exact
-                  path="/resume3"
+                  path="/templates/elegant"
                   render={props => <ResumeThree {...props} context={context} />}
                 />
                 <StripeProvider apiKey={publish_key}>

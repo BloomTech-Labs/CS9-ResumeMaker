@@ -26,7 +26,7 @@ class Sidebar extends Component {
         })
         .then(response => {
           this.props.context.actions.setLogin(response.data);
-          // this.props.context.actions.expandResumeIDs();
+          this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
           //   for(let i = 0; i < response.data.resumes.length; i++){
           //     this.props.context.actions.expandResumeIDs(response.data.resumes[i]._id)
@@ -72,9 +72,9 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/resumes"
+            to="/dashboard"
             className={classnames({
-              active: window.location.pathname.includes("/resumes")
+              active: window.location.pathname.includes("/dashboard")
             })}
           >
             {" "}
@@ -91,7 +91,7 @@ class Sidebar extends Component {
               className="fa fa-file-alt sm"
               style={{ color: "white" }}
             />{" "}
-            RESUMES
+            TEMPLATES
           </Link>
           <Link
             to="/jobtitle"
@@ -169,7 +169,7 @@ class Sidebar extends Component {
               className="fa fa-sliders-h sm"
               style={{ color: "white" }}
             />{" "}
-            SETTINGS
+            SETTING
           </Link>
         </div>
         {/* <Route

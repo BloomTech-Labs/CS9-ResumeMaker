@@ -3,28 +3,9 @@ import { Button, Form, FormGroup, FormFeedback, Input } from "reactstrap";
 import axios from "axios";
 const urls = require("../../config/config.json");
 
-// const user= {
-//   email: "resumePopulateTester@gmail.com",
-//   password: "scrinch1G!",
-//   invalidCredentials: false
-// };
-
-// const user = {
-//   email: "cheese23@gmail.com",
-//   password: "Cheese123!",
-//   invalidCredentials: false
-// };
-
-// const user = {
-//   email: "scrinch@gmail.com",
-//   password: "tacobell1!G",
-//   invalidCredentials: false
-// };
-
 const user = {
-  email: "bobbert@gmail.com",
-  password:
-    "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
+  email: "robert@gmail.com",
+  password: "Password123!",
   invalidCredentials: false
 };
 
@@ -56,7 +37,7 @@ class Login extends Component {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(response.data);
-          this.props.history.push("/resumes");
+          this.props.history.push("dashboard");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {

@@ -63,7 +63,9 @@ class AuthProvider extends Component {
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
       title: userData.title ? userData.title : [],
-      links: userData.links ? userData.links : [],
+      linkedin: userData.links.linkedin ? userData.links.linkedin : "",
+      portfolio: userData.links.portfolio ? userData.links.portfolio : "",
+      github: userData.links.github ? userData.links.github : "",
       location: userData.location ? userData.location : "",
       phonenumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
@@ -74,11 +76,20 @@ class AuthProvider extends Component {
       summary: userData.sections.summary ? userData.sections.summary : [],
       username: userData.username ? userData.username : "",
       id: userData._id ? userData._id : null,
+      resumes: dataFromUser.resumes ? dataFromUser.resumes : [],
       membership: userData.membership ? userData.membership : false
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if(dataFromUser.resumes && dataFromUser.resumes.length && dataFromUser.resumes[0] != null){
+    if (dataFromUser.resumes) {
+      const links = {
+        github: false,
+        linkedin: false,
+        portfolio: false
+      };
+      dataFromUser.resumes.forEach(resume => {
+        resume.links = links;
+      });
       this.setResume(dataFromUser.resumes);
     }
   };
@@ -88,8 +99,10 @@ class AuthProvider extends Component {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
-    } else if (!(resumeData.length > 0) || resumeData[0] === null) {
-    
+    } else if (
+      !(resumeData.length > 0 || resumeData[0] === null) &&
+      this.state.auth
+    ) {
       this.createResume(true);
     } else if (
       this.state.resumes.length &&
@@ -177,7 +190,7 @@ class AuthProvider extends Component {
 
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-  
+
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
@@ -264,7 +277,6 @@ class AuthProvider extends Component {
           }
         )
         .then(response => {
-          console.log("response", response);
           // return response.data.resume;
         })
         .catch(err => {

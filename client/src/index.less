@@ -85,6 +85,7 @@ a {
   justify-content: space-between;
   padding: 0.5rem 0 0 0;
   h4 {
+    width: 100%; 
     text-align: start;
   }
   p {
@@ -460,7 +461,6 @@ form {
   padding: 1rem 2rem 0;
   h4 {
     width: 100%;
-    border-bottom: 1px solid black;
     text-align: start;
     padding: 0.5rem;
     margin-right: 5%;
@@ -471,8 +471,8 @@ form {
   padding-top: 0;
 }
 img {
-  height: 20rem;
-  width: 15rem;
+  height: 18rem;
+  width: 13.9rem;
 }
 .template-img {
   border: 1px black solid;
@@ -646,7 +646,7 @@ img {
   display: flex;
 }
 .subtitle {
-  font-family: @font_family_4;
+  font-family: @font_family_2;
   // font-family: @font_family_5;
 }
 .template.title-div {
@@ -669,7 +669,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 
 .contact-section {
@@ -687,6 +687,11 @@ img {
 
   .contactHolder {
     display: flex;
+    
+  }
+  .contact-holder {
+    min-width: 100px;
+    width: 27%;
   }
 }
 
@@ -700,7 +705,7 @@ img {
 
   .titleHolder {
     min-width: 100px;
-    width: 100px;
+    width: 10%;
   }
 
   .titleSection {
@@ -717,11 +722,12 @@ img {
   display: flex;
   text-align: center;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
+
 
   .summaryHolder {
     min-width: 100px;
-    width: 190px;
+    width: 18%;
   }
 
   .summarySection {
@@ -730,7 +736,9 @@ img {
     border-left: 2px solid black;
     max-width: 800px;
   }
+
 }
+
 
 .skills-section {
   margin: 5% 0 0 0;
@@ -742,7 +750,7 @@ img {
 
   .skillsHolder {
     min-width: 100px;
-    width: 190px;
+    width: 18%;
   }
 
   .skillsSection {
@@ -763,7 +771,7 @@ img {
 
   .experienceHolder {
     min-width: 100px;
-    width: 190px;
+    width: 18%;
   }
 
   .experienceSection {
@@ -784,7 +792,7 @@ img {
 
   .educationHolder {
     min-width: 100px;
-    width: 190px;
+    width: 18%;
   }
 
   .educationSection {

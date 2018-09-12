@@ -59,9 +59,9 @@ class ResumeDropdown extends Component {
     return (
       <div className="template-card card dropdown m-0">
         <div className="container">
-          <p>{selected ? selected : "Resume " + displayIndex}</p>
+          <h4 style={{textTransform: "uppercase"}}>{selected ? selected : "RESUME: " + displayIndex}</h4>
         </div>
-        <h6 style={{fontWeight: "550"}}>
+        <h6 style={{textTransform: "uppercase"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled

@@ -34,17 +34,16 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="title-div templates">
+            <div className="title-div templates" style={{paddingRight: "1rem"}}>
               <h4 style={{ paddingLeft: ".6rem" }}>TEMPLATES</h4>{" "}
               <p
                 style={{
                   fontSize: "0.7rem",
                   paddingLeft: ".6rem",
-                  borderTop: "1px solid black",
                   width: "100%"
                 }}
               >
-                This is your resume page
+                Select a Template to render your Resume: 
               </p>
             </div>
 
@@ -55,7 +54,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume1", // component being Linked to
+                    pathname: "/templates/traditional", // component being Linked to
                     state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
@@ -74,7 +73,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume2", // component being Linked to
+                    pathname: "/templates/modern", // component being Linked to
                     state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
@@ -93,7 +92,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume3", // component being Linked to
+                    pathname: "/templates/elegant", // component being Linked to
                     state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
