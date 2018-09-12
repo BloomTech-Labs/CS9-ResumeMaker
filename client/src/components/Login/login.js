@@ -56,7 +56,7 @@ class Login extends Component {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           this.props.context.actions.setLogin(response.data);
-          this.props.history.push("/resumes");
+          this.props.history.push("dashboard");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {

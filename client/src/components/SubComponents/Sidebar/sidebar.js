@@ -72,9 +72,9 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/resumes"
+            to="/dashboard"
             className={classnames({
-              active: window.location.pathname.includes("/resumes")
+              active: window.location.pathname.includes("/dashboard")
             })}
           >
             {" "}

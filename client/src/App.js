@@ -101,7 +101,7 @@ class App extends Component {
                 /> */}
                 <Route
                   exact
-                  path="/resumes"
+                  path="/dashboard"
                   render={props => <Resumes {...props} context={context} />}
                 />
                 <Route
