@@ -169,7 +169,7 @@ class Sidebar extends Component {
               className="fa fa-sliders-h sm"
               style={{ color: "white" }}
             />{" "}
-            SETTINGS
+            SETTING
           </Link>
         </div>
         {/* <Route

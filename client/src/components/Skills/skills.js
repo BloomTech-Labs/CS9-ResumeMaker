@@ -139,7 +139,7 @@ class Skills extends Component {
                       aria-label="Delete"
                       onClick={() => this.handleDelete(index, "skills")}
                     >
-                      <span aria-hidden="true">&times;</span>
+                      <span aria-hidden="true" style={{color: "red"}}>&times;</span>
                     </button>
                     <FormGroup row>
                       <Col>

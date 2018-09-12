@@ -192,30 +192,34 @@ class Resumes extends Component {
           <div className="page-div col">
             <div className="title-div templates"  style={{paddingRight: "1rem"}}>
             {this.props.context.userInfo.name.firstname ? (
-                <h4>
-                  Greetings, {this.props.context.userInfo.name.firstname}!
+                <React.Fragment>
+               <h4>
+                  Welcome to your Dashboard, {this.props.context.userInfo.name.firstname}!
                 </h4>
+              <p
+              style={{
+                fontSize: "0.7rem",
+                paddingLeft: ".6rem",
+                width: "100%"
+              }}
+            >
+              {" "}
+              Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
+              EXPERIENCE, & EDUCATION. Next, scroll down this page to check the information you would like displayed on your final resume. Once completed, 
+              SAVE your changes and go to TEMPLATES to choose your layout. You can also CREATE multiple RESUMES with a subscription. 
+            </p>
+            </React.Fragment>
               ) : (
+                
                 <React.Fragment>
                   <h4>Welcome! </h4>
                   <p>
-                    Please go to the SETTINGS page and fill in your information
+                   {"  "} Please go to the SETTINGS page and fill in your information
                     to get started!
                   </p>
                 </React.Fragment>
               )}
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  paddingLeft: ".6rem",
-                  width: "100%"
-                }}
-              >
-                {" "}
-                Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, & EDUCATION. Next, scroll down this page to check the information you would like displayed on your final resume. Once completed, 
-                SAVE your changes and go to TEMPLATES to choose your layout. You can also CREATE multiple RESUMES with a subscription. 
-              </p>
+
             </div>
             <div className="containers-div">
 

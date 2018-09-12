@@ -103,8 +103,9 @@ export class ResumeTwo extends Component {
                     textalign="center"
                     id="summary"
                     className="summarySection"
+                    style={{padding: "0"}}
                   >
-                    <Divider className="divider-div" />
+                    <Divider className="divider-div" style={{padding: "0"}}/>
                     {/* <h4 className="subtitle">Summary</h4> */}
                     {userInfo.summary.map((item, index) => {
                       return resumes[this.state.index].sections.summary[index]
