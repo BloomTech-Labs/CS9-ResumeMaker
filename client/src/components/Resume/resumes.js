@@ -258,9 +258,16 @@ class Resumes extends Component {
                 <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
                   this.props.context.userInfo.name.lastname ? (
-                    <h5>
-                      {userInfo.name.firstname} {userInfo.name.middlename} {userInfo.name.lastname}
-                    </h5>
+                    this.props.context.userInfo.name.middlename ? (
+                      <h5>
+                        {userInfo.name.firstname} {userInfo.name.middlename}{" "}
+                        {userInfo.name.lastname}
+                      </h5>
+                    ) : (
+                      <h5>
+                        {userInfo.name.firstname} {userInfo.name.lastname}
+                      </h5>
+                    )
                   ) : (
                     <h4>Please enter your full name in the SETTINGS page</h4>
                   )}
