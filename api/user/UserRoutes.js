@@ -683,12 +683,12 @@ router.put("/forgotpassword", (req, res) => {
                   .status(500)
                   .json({ errorMessage: "Could not send email.", error: err });
               }
-              console.log("Message sent: %s", info.messageId);
-              console.log(
-                "Preview URL: %s",
-                nodemailer.getTestMessageUrl(info)
-              );
-              return res
+              // console.log("Message sent: %s", info.messageId);
+              // console.log(
+              //   "Preview URL: %s",
+              //   nodemailer.getTestMessageUrl(info)
+              // );
+            res
                 .status(200)
                 .json();
             });
