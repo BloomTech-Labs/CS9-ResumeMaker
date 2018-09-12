@@ -79,6 +79,12 @@ class AuthProvider extends Component {
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
     if (dataFromUser.resumes) {
+      const links = {
+        linkedin: "",
+        github: "",
+        portfolio: ""
+      };
+      dataFromUser.resumes = links;
       this.setResume(dataFromUser.resumes);
     }
   };
@@ -88,8 +94,10 @@ class AuthProvider extends Component {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
-    } else if (!(resumeData.length > 0 || resumeData[0] === null) && this.state.auth) {
-    
+    } else if (
+      !(resumeData.length > 0 || resumeData[0] === null) &&
+      this.state.auth
+    ) {
       this.createResume(true);
     } else if (
       this.state.resumes.length &&
@@ -177,7 +185,7 @@ class AuthProvider extends Component {
 
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-  
+
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
