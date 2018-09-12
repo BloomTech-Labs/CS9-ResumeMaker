@@ -716,3 +716,6 @@ a:hover {
   text-decoration: none !important;
   color: inherit !important;
 }
+.nav-header {
+  text-shadow: 1px 1px black;
+}
