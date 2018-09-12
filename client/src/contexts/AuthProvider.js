@@ -81,21 +81,20 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    // if (dataFromUser.resumes) {
-    //   // const links = {
-    //   //   github: false,
-    //   //   linkedin: false,
-    //   //   portfolio: false
-    //   // };
-    //   // dataFromUser.resumes.forEach(resume => {
-    //   //   resume.links = links;
-    //   // });
-    //   this.setResume(dataFromUser.resumes);
-    // }
+    if (dataFromUser.resumes) {
+      const links = {
+        github: false,
+        linkedin: false,
+        portfolio: false
+      };
+      dataFromUser.resumes.forEach(resume => {
+        resume.links = links;
+      });
+      this.setResume(dataFromUser.resumes);
+    }
   };
 
   setResume = resumeData => {
-    console.log("resumeData", resumeData);
     if (this.state.auth !== true) {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
