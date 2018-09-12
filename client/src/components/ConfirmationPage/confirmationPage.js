@@ -15,10 +15,12 @@ class ConfirmationPage extends Component {
     axios
       .get(`${urls[urls.basePath]}${serverPath}`)
       .then(response => {
+        console.log("response.data", response.data);
         if (response.data.errorMessage) {
           this.setState({ message: response.data.errorMessage });
         } else if (response.data.token) {
           localStorage.setItem("token", response.data.token);
+          this.setState({ message: response.data.message })
           this.props.context.actions.setLogin(response.data);
         } else {
           this.setState({
@@ -33,7 +35,8 @@ class ConfirmationPage extends Component {
   };
 
   render() {
-    if (this.state.password && this.state.message !== "Loading...") {
+    console.log("confirmationPage state/props", this.state);
+    if (this.state.password) {
       return (
         <div className="Login">
           <div className="message">
