@@ -36,7 +36,7 @@ export class ResumeThree extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     if (
       !this.props.context.userInfo.resumes.length ||
@@ -51,7 +51,7 @@ export class ResumeThree extends Component {
       console.log(
         "You probably had an error, which redirected you instead of crashing."
       );
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
 
     const userInfo = this.props.context.userInfo;
