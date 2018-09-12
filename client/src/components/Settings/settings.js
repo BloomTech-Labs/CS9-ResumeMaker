@@ -64,7 +64,7 @@ export class PersonalInfo extends Component {
       this.componentDidMount();
     }
   };
-  
+
   augmentObject = (initObj, modObj) => {
     for (let prop in initObj) {
       if (modObj[prop]) {
@@ -258,6 +258,7 @@ export class PersonalInfo extends Component {
                   value={this.state.phonenumber}
                   onChange={this.handleChange}
                 />
+                <p style={{ fontStyle : "italic", color: "grey" }}>Example: 123-456-7890</p>
               </FormGroup>
               <FormGroup>
                 <Label>Location</Label>
@@ -278,6 +279,14 @@ export class PersonalInfo extends Component {
                   value={this.state.links.linkedin}
                   onChange={this.handleChange}
                 />
+                {this.props.context.userInfo.name.firstname ? (
+                  <p style={{ fontStyle : "italic", color: "grey" }}>
+                    Example: linkedin.com/in/
+                    {this.props.context.userInfo.name.firstname.toLowerCase()}/
+                  </p>
+                ) : (
+                  <p style={{ fontStyle : "italic", color: "grey" }}>Example: linkedin.com/in/test/</p>
+                )}
               </FormGroup>
               <FormGroup>
                 <Label>Github</Label>
@@ -288,6 +297,14 @@ export class PersonalInfo extends Component {
                   value={this.state.links.github}
                   onChange={this.handleChange}
                 />
+                {this.props.context.userInfo.name.firstname ? (
+                  <p style={{ fontStyle : "italic", color: "grey" }}>
+                    Example: github.com/
+                    {this.props.context.userInfo.name.firstname.toLowerCase()}/
+                  </p>
+                ) : (
+                  <p style={{ fontStyle : "italic", color: "grey" }}>Example: github.com/test/</p>
+                )}
               </FormGroup>
               <FormGroup>
                 <Label>Portfolio</Label>
@@ -440,7 +457,7 @@ class Settings extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col"  style={{paddingRight: "1rem"}}>
+          <div className="title-div col" style={{ paddingRight: "1rem" }}>
             <div className="title-div" style={{ paddingLeft: "0.5rem" }}>
               <h4>SETTINGS</h4>
             </div>
