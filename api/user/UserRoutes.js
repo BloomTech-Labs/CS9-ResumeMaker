@@ -127,9 +127,9 @@ router.post("/register", (req, res) => {
             //     newEmailConfirmation.hash
             //   }`
             // );
-            res.send(`${req.get("host")}${req.baseUrl}/confirmemail/${
-              newEmailConfirmation.hash
-            }`)
+            res.send(`${
+              req.body.path
+            }?/users/confirmemail/${newEmailConfirmation.hash}`)
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
               if (err) {
@@ -597,7 +597,8 @@ router.get("/confirmemail/:hash", (req, res) => {
               expiresIn: "7d"
             });
             user.password = null;
-            res.status(201).send("<h1>You can now login with your registered email and password<h1>");
+            res.status(201).json({ token, user });
+            // res.status(201).send("<h1>You can now login with your registered email and password<h1>");
           })
           .catch(err => {
             res.status(500).json({
@@ -690,7 +691,7 @@ router.put("/forgotpassword", (req, res) => {
               // );
             res
                 .status(200)
-                .json();
+                .json({ message: "Email confirmation saved and email sent." });
             });
           });
         })

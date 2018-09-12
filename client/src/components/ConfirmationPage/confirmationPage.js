@@ -37,6 +37,9 @@ class ConfirmationPage extends Component {
       return (
         <div className="Login">
           <div className="message">
+            <p>
+              {this.state.message} Your password is now {this.state.password}
+            </p>
             <Button
               color="primary"
               onClick={() => {
@@ -52,7 +55,7 @@ class ConfirmationPage extends Component {
       return (
         <div className="Login">
           <div className="message">
-            <p>Please Login</p>
+            <p>{this.state.message}</p>
             <Button
               color="primary"
               onClick={() => {

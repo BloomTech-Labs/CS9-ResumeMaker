@@ -63,9 +63,11 @@ class AuthProvider extends Component {
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
       title: userData.title ? userData.title : [],
-      linkedin: userData.links.linkedin ? userData.links.linkedin : "",
-      portfolio: userData.links.portfolio ? userData.links.portfolio : "",
-      github: userData.links.github ? userData.links.github : "",
+      links: {
+        linkedin: userData.links.linkedin ? userData.links.linkedin : "",
+        portfolio: userData.links.portfolio ? userData.links.portfolio : "",
+        github: userData.links.github ? userData.links.github : ""
+      },
       location: userData.location ? userData.location : "",
       phonenumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
@@ -82,14 +84,14 @@ class AuthProvider extends Component {
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
     if (dataFromUser.resumes) {
-      const links = {
-        github: false,
-        linkedin: false,
-        portfolio: false
-      };
-      dataFromUser.resumes.forEach(resume => {
-        resume.links = links;
-      });
+      // const links = {
+      //   github: false,
+      //   linkedin: false,
+      //   portfolio: false
+      // };
+      // dataFromUser.resumes.forEach(resume => {
+      //   resume.links = links;
+      // });
       this.setResume(dataFromUser.resumes);
     }
   };

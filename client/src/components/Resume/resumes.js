@@ -146,6 +146,7 @@ class Resumes extends Component {
   };
 
   render() {
+    console.log("resumes render props", this.props.context.userInfo)
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
@@ -297,7 +298,7 @@ class Resumes extends Component {
                             : null
                         }
                       />
-                      {" " + userInfo.linkedin}{" "}
+                      {" " + userInfo.links.linkedin}{" "}
                       <div className={"fa fa-linkedin fa-sm"} />
                       <div>
                         <CheckBox
@@ -310,7 +311,7 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.github}{" "}
+                        {" " + userInfo.links.github}{" "}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
                       <p>
@@ -324,7 +325,7 @@ class Resumes extends Component {
                               : null
                           }
                         />{" "}
-                        {" " + userInfo.portfolio}
+                        {" " + userInfo.links.portfolio}
                       </p>
                     </Container>
                   </Container>
