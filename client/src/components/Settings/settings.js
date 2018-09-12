@@ -300,10 +300,10 @@ export class PersonalInfo extends Component {
                 {this.props.context.userInfo.name.firstname ? (
                   <p style={{ fontStyle : "italic", color: "grey" }}>
                     Example: github.com/
-                    {this.props.context.userInfo.name.firstname.toLowerCase()}/
+                    {this.props.context.userInfo.name.firstname.toLowerCase()}
                   </p>
                 ) : (
-                  <p style={{ fontStyle : "italic", color: "grey" }}>Example: github.com/test/</p>
+                  <p style={{ fontStyle : "italic", color: "grey" }}>Example: github.com/test</p>
                 )}
               </FormGroup>
               <FormGroup>
