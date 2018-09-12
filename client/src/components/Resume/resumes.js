@@ -258,7 +258,7 @@ class Resumes extends Component {
                   {this.props.context.userInfo.name.firstname &&
                   this.props.context.userInfo.name.lastname ? (
                     <h5>
-                      {userInfo.name.firstname} {userInfo.name.lastname}
+                      {userInfo.name.firstname} {userInfo.name.middlename} {userInfo.name.lastname}
                     </h5>
                   ) : (
                     <h4>Please enter your full name in the SETTINGS page</h4>
