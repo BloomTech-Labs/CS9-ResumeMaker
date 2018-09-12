@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  FormFeedback,
-  Input,
-  Label
-} from "reactstrap";
-import "../Login/login.css";
+import { Button, Form, FormGroup, FormFeedback, Input } from "reactstrap";
 import axios from "axios";
 
 const urls = require("../../config/config.json");
@@ -41,6 +33,7 @@ class Register extends Component {
   };
 
   validateEmail = email => {
+    // eslint-disable-next-line
     const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email);
   };
@@ -54,6 +47,7 @@ class Register extends Component {
     if (!password.match(/[A-Z]/)) return false;
     if (!password.match(/[a-z]/)) return false;
     if (!password.match(/\d/)) return false;
+    // eslint-disable-next-line
     if (!password.match(/[`~!@#$%^&*\(\)_\-\+=\[{\]}\|\\:;"'<,>\.\?\/]/))
       return false;
     return true;
@@ -68,7 +62,6 @@ class Register extends Component {
     const usernamePromise = axios
       .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
       .then(response => {
-        console.log(response);
         this.setState({ usernameInvalid: true });
       })
       .catch(err => {
@@ -77,7 +70,6 @@ class Register extends Component {
     const emailPromise = axios
       .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
       .then(response => {
-        console.log(response);
         this.setState({ emailInvalid: true });
       })
       .catch(err => {
@@ -93,7 +85,6 @@ class Register extends Component {
     // If all fields are valid and the confirm password matches password,
     // then account info is submitted and the user redirected to a modal with a link to the login page
     Promise.all([usernamePromise, emailPromise]).then(values => {
-      console.log("The current state:", this.state);
       if (
         this.state.usernameInvalid === false &&
         this.state.emailInvalid === false &&
@@ -112,7 +103,6 @@ class Register extends Component {
   };
 
   handleSubmit = () => {
-    console.log("handleSubmit called");
     // Putting the set state here allows the submit modal to show before
     // the email is sent. If the response gives an error the submittedError property
     // will override the submitted modal and show there was an error.
@@ -125,7 +115,6 @@ class Register extends Component {
       })
       .then(response => {
         this.setState({ submitted: true, submittedError: false });
-        console.log(response);
       })
       .catch(err => {
         console.log("err", err);
@@ -162,8 +151,9 @@ class Register extends Component {
         <div className="Login">
           <Form>
             <FormGroup>
-              <Label>Username</Label>
+              <h6>Username</h6>
               <Input
+                style={{ fontSize: ".7rem", height: "2rem" }}
                 autoFocus
                 invalid={this.state.usernameInvalid}
                 id="username"
@@ -171,40 +161,40 @@ class Register extends Component {
                 value={this.state.username}
                 onChange={this.handleChange}
               />
-              <FormFeedback invalid>
-                This username is already in use.
-              </FormFeedback>
+              <FormFeedback>This username is already in use.</FormFeedback>
             </FormGroup>
 
             <FormGroup>
-              <Label>Email</Label>
+              <h6>Email</h6>
               <Input
+                style={{ fontSize: ".7rem", height: "2rem" }}
                 id="email"
                 invalid={this.state.emailInvalid}
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              <FormFeedback invalid>
-                Please enter an unused valid email.
-              </FormFeedback>
+              <FormFeedback>Please enter an unused valid email.</FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label>Password</Label>
+              <h6>Password</h6>
               <Input
+                style={{ fontSize: ".7rem", height: "2rem" }}
                 id="password"
                 invalid={this.state.passwordInvalid}
                 type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              <FormFeedback invalid>
-                Please use a complex password at least 8 characters long.
+              <FormFeedback>
+                Please use a complex password at least 8 characters long. It
+                must include 1 character, 1 number, and a capital letter.
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label>Confirm password</Label>
+              <h6>Confirm password</h6>
               <Input
+                style={{ fontSize: ".7rem", height: "2rem" }}
                 id="confirmPassword"
                 invalid={this.state.passwordInvalid}
                 type="password"
@@ -213,8 +203,9 @@ class Register extends Component {
               />
             </FormGroup>
             <Button
+              style={{ fontSize: ".8rem", height: "2rem" }}
               block
-              size="lg"
+              bssize="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.checkInputValidity()}
@@ -222,6 +213,7 @@ class Register extends Component {
               Register
             </Button>
             <Button
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/login")}
             >
@@ -239,6 +231,7 @@ class Register extends Component {
               registration, then you can log in.
             </p>
             <Button
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="primary"
               onClick={() => {
                 this.props.history.push("/login");

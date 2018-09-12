@@ -43,7 +43,9 @@ const Resume = new Schema({
         value: Boolean
       }
     ]
-  }
-});
+    }
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Resume", Resume);

@@ -15,7 +15,6 @@ router.get(
   // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
-
     Resume.findById(id)
       .then(resume => {
         res.status(200).json(resume);
@@ -33,23 +32,26 @@ router.get(
 */
 router.post(
   "/",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newResume = new Resume(req.body);
-    const { user } = req.body;
-    // const email = req.user.email;
+    const user = req.user;
+    newResume.user = user._id;
 
     newResume
       .save()
       .then(resume => {
-        User.findById(user)
-          .then(user => {
-            user.resumes.push(resume);
-            user.save();
-          })
-          .catch(err => {
-            res.status(400).json({ Error: err });
-          });
+        // User.findById(user)
+        //   .then(user => {
+        //     // user.resumes = user.resumes.filter(userResume => userResume._id === resume._id);
+        //     // user.resumes.push(resume);
+        //     user.currentresume = resume._id;
+        //     user.save();
+        //     res.status(201).json({ Resume: resume, resumes: user.resumes });
+        //   })
+        //   .catch(err => {
+        //     res.status(400).json({ Error: err });
+        //   });
         res.status(201).json({ Resume: resume });
       })
       .catch(err => {
@@ -68,6 +70,8 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
+    // if you put the _id in the update body errors will happen, so remove it and
+    // also remove the unnecessary uploading of edit/creation date to keep correct edit times
     const updatedResume = req.body;
 
     Resume.findByIdAndUpdate(id, updatedResume)

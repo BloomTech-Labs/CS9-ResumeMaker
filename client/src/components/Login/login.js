@@ -1,39 +1,37 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  FormFeedback,
-  Input,
-  Label
-} from "reactstrap";
+import { Button, Form, FormGroup, FormFeedback, Input } from "reactstrap";
 import axios from "axios";
-import "./login.css";
 const urls = require("../../config/config.json");
 
-const cheese = {
-  email: "cheese23@gmail.com",
-  password: "Cheese123!",
-  invalidCredentials: false
-};
+// const user= {
+//   email: "resumePopulateTester@gmail.com",
+//   password: "scrinch1G!",
+//   invalidCredentials: false
+// };
 
-const scrinch = {
-  email: "scrinch@gmail.com",
-  password: "tacobell1!G",
-  invalidCredentials: false
-};
+// const user = {
+//   email: "cheese23@gmail.com",
+//   password: "Cheese123!",
+//   invalidCredentials: false
+// };
 
-const bobbert = {
+// const user = {
+//   email: "scrinch@gmail.com",
+//   password: "tacobell1!G",
+//   invalidCredentials: false
+// };
+
+const user = {
   email: "bobbert@gmail.com",
   password:
     "NGVmNjllOTVhOGRlNDU0Y2ZkYzA2MmViYTUyNTYyNTk5OTVmOTdhZjBiZjNhMjRlYWNiNTEzZGVjM2ViY2Y1ZA!",
   invalidCredentials: false
 };
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = scrinch;
+    this.state = user;
   }
 
   validateForm() {
@@ -56,14 +54,9 @@ export default class Login extends Component {
       })
       .then(response => {
         if (response.data.token) {
-          const userData = response.data.user;
-          const resumeData = response.data.resumes;
           localStorage.setItem("token", response.data.token);
-          this.props.context.actions.setLogin(userData);
-          this.props.context.actions.setResume(resumeData);
-
-          // console.log(this.props.context.userInfo);
-          this.props.history.push("/templates");
+          this.props.context.actions.setLogin(response.data);
+          this.props.history.push("/resumes");
         } else this.setState({ invalidCredentials: true, password: "" });
       })
       .catch(err => {
@@ -78,8 +71,9 @@ export default class Login extends Component {
       <div className="Login">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label>Email</Label>
+            <h5>Email</h5>
             <Input
+              style={{ fontSize: ".7rem", height: "2rem" }}
               autoFocus
               id="email"
               invalid={this.state.invalidCredentials}
@@ -90,8 +84,9 @@ export default class Login extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label>Password</Label>
+            <h5>Password</h5>
             <Input
+              style={{ fontSize: ".7rem", height: "2rem" }}
               id="password"
               invalid={this.state.invalidCredentials}
               value={this.state.password}
@@ -99,13 +94,14 @@ export default class Login extends Component {
               type="password"
               autoComplete="current-password"
             />
-            <FormFeedback invalid>
+            <FormFeedback>
               The email or password you entered are incorrect.
             </FormFeedback>
           </FormGroup>
           <Button
+            style={{ fontSize: ".8rem", height: "2rem" }}
             block
-            size="lg"
+            bssize="lg"
             color="primary"
             disabled={!this.validateForm()}
             type="submit"
@@ -114,12 +110,14 @@ export default class Login extends Component {
           </Button>
           <div className="bottom-buttons">
             <Button
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/register")}
             >
               Register
             </Button>
             <Button
+              style={{ fontSize: ".7rem", height: "2rem" }}
               color="danger"
               onClick={() => this.props.history.push("/forgotpassword")}
             >
@@ -131,3 +129,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;

@@ -1,14 +1,6 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  FormFeedback,
-  Input,
-  Label
-} from "reactstrap";
+import { Button } from "reactstrap";
 import axios from "axios";
-import "../Login/login.css";
 
 const urls = require("../../config/config.json");
 
@@ -20,7 +12,6 @@ class ConfirmationPage extends Component {
 
   componentDidMount = () => {
     const serverPath = window.location.search.substring(1);
-    console.log("WE HAVE URL:", `${urls[urls.basePath]}${serverPath}`);
     axios
       .get(`${urls[urls.basePath]}${serverPath}`)
       .then(response => {
@@ -29,8 +20,8 @@ class ConfirmationPage extends Component {
           this.setState({ message: response.data.errorMessage });
         } else if (response.data.token) {
           localStorage.setItem("token", response.data.token);
-          this.props.context.actions.setLogin(response.data.user);
-          this.props.history.push("/templates");
+          this.props.context.actions.setLogin(response.data);
+          this.props.history.push("/resumes");
         } else {
           this.setState({
             message: response.data.message,

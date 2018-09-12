@@ -3,20 +3,19 @@ import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import { Link } from "react-router-dom";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
-import "../CSS/component-general.css";
 
 class Education extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  
+
   render() {
     return (
       <div>
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col"  style={{paddingRight: "1rem"}}>
             <div className="link-hide">
               <h4>
                 EDUCATION HISTORY{" "}</h4>
@@ -29,7 +28,7 @@ class Education extends Component {
                   <i className="fa fa-pencil fa-lg" />
                 </Link>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
+            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
               Click the pencil to enter previous schools attended and degrees or certificates obtained.
             </p>
             <div className="education-containment-div">
@@ -40,7 +39,7 @@ class Education extends Component {
                     elementName="education"
                     putPath="sections.education"
                     index={index}
-                    key={index}
+                    key={element._id ? element._id : index}
                     element={element}
                     context={this.props.context}
                   />

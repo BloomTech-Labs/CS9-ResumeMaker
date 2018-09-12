@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import classnames from "classnames";
-import "./sidebar.css";
 const urls = require("../../../config/config.json");
 
 class Sidebar extends Component {
@@ -14,9 +13,11 @@ class Sidebar extends Component {
     };
   }
 
-  componentDidMount() {
-    if (localStorage.getItem("token") && this.props.context.auth !== true) {
-      console.log("ComponentDidMount on sidebar called for new user info");
+  componentDidMount = () => {
+    if (
+      localStorage.getItem("token") &&
+      this.props.context.userInfo.auth !== true
+    ) {
       axios
         .get(`${urls[urls.basePath]}/users/currentuser/`, {
           headers: {
@@ -24,20 +25,32 @@ class Sidebar extends Component {
           }
         })
         .then(response => {
-          console.log("sidebar get response for currentuser:", response);
-          const userData = response.data.user;
-          const resumeData = response.data.resumes;
-          this.props.context.actions.setLogin(userData);
-          this.props.context.actions.setResume(resumeData);
+          this.props.context.actions.setLogin(response.data);
+          // this.props.context.actions.expandResumeIDs();
+          // if(response.data.resumes.length >= 1){
+          //   for(let i = 0; i < response.data.resumes.length; i++){
+          //     this.props.context.actions.expandResumeIDs(response.data.resumes[i]._id)
+          //   }
+          // }
+          // if(response.data.user.currentresume._id){
+          //   this.props.context.actions.expandResumeIDs(response.data.user.currentresume._id);
+          // }
         })
         .catch(err => {
-          console.log("Server Error: ", err);
           this.props.context.actions.setLogout();
         });
     } else {
-      console.log("Sidebar detected no token and/or auth === false");
+      if (
+        this.props.context.userInfo.resumes[0] &&
+        !this.props.context.userInfo.currentresume
+      ) {
+        this.props.context.actions.setSingleElement(
+          "currentresume",
+          this.props.context.userInfo.resumes[0]
+        );
+      }
     }
-  }
+  };
 
   onSetSidebarOpen = open => {
     this.setState({ sidebarOpen: open });
@@ -59,22 +72,26 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/templates"
-            className={classnames({
-              active: window.location.pathname.includes("/templates")
-            })}
-          >
-            {" "}
-            <div className="fa fa-copy sm" style={{ color: "white" }} /> {" "} TEMPLATES
-          </Link>
-          <Link
             to="/resumes"
             className={classnames({
               active: window.location.pathname.includes("/resumes")
             })}
           >
             {" "}
-            <div className="fa fa-file-alt sm" style={{ color: "white" }} /> {" "} RESUMES
+            <div className="fa fa-check-square sm" style={{ color: "white" }} /> DASHBOARD
+          </Link>
+          <Link
+            to="/templates"
+            className={classnames({
+              active: window.location.pathname.includes("/templates")
+            })}
+          >
+            {" "}
+            <div
+              className="fa fa-file-alt sm"
+              style={{ color: "white" }}
+            />{" "}
+            TEMPLATES
           </Link>
           <Link
             to="/jobtitle"
@@ -82,7 +99,8 @@ class Sidebar extends Component {
               active: window.location.pathname.includes("/jobtitle")
             })}
           >
-            <div className="fa fa-briefcase sm" style={{ color: "white" }} /> {" "}JOB TITLE
+            <div className="fa fa-briefcase sm" style={{ color: "white" }} />{" "}
+            JOB TITLE
           </Link>
           <Link
             to="/summary"
@@ -91,7 +109,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-edit sm" style={{ color: "white" }} /> {" "} SUMMARY
+            <div className="fa fa-edit sm" style={{ color: "white" }} /> SUMMARY
           </Link>
           <Link
             to="/skills"
@@ -100,7 +118,7 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-wrench" style={{ color: "white" }} /> {" "} SKILLS
+            <div className="fa fa-wrench" style={{ color: "white" }} /> SKILLS
           </Link>
           <Link
             to="/experience"
@@ -109,7 +127,11 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-lightbulb sm" style={{ color: "white" }} /> {" "} EXPERIENCE
+            <div
+              className="fa fa-lightbulb sm"
+              style={{ color: "white" }}
+            />{" "}
+            EXPERIENCE
           </Link>
           <Link
             to="/education"
@@ -120,8 +142,8 @@ class Sidebar extends Component {
             <div
               className="fa fa-graduation-cap sm"
               style={{ color: "white" }}
-            />
-             {" "}EDUCATION
+            />{" "}
+            EDUCATION
           </Link>
           <Link
             to="/billing"
@@ -130,7 +152,11 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-credit-card sm" style={{ color: "white" }} /> {" "} BILLING
+            <div
+              className="fa fa-credit-card sm"
+              style={{ color: "white" }}
+            />{" "}
+            BILLING
           </Link>
           <Link
             to="/settings"
@@ -139,7 +165,11 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-sliders-h sm" style={{ color: "white" }} /> {" "}SETTINGS
+            <div
+              className="fa fa-sliders-h sm"
+              style={{ color: "white" }}
+            />{" "}
+            SETTING
           </Link>
         </div>
         {/* <Route

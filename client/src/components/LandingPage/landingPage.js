@@ -1,14 +1,13 @@
 // register, login, nav bar, landing page component
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./landingpage.css";
 import axios from "axios";
 const urls = require("../../config/config.json");
 
 class LandingPage extends Component {
   componentDidMount() {
     if (this.props.context.userInfo.auth === true) {
-      this.props.history.push("/templates");
+      this.props.history.push("/resumes");
     } //if user has data on context already
     else if (localStorage.getItem("token")) {
       axios
@@ -18,9 +17,8 @@ class LandingPage extends Component {
           }
         })
         .then(response => {
-          const userData = response.data;
-          this.props.context.actions.setLogin(userData);
-          this.props.history.push("/templates");
+          this.props.context.actions.setLogin(response.data);
+          this.props.history.push("/resumes");
         })
         .catch(err => {
           console.log("err", err);

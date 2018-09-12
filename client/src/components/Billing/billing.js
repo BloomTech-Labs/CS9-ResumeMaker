@@ -5,20 +5,20 @@ import CheckoutForm from "./checkoutForm";
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
 import Loading from "./Loading";
-import "./billing.css";
 const urls = require("../../config/config.json");
 
 class Billing extends Component {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
   state = {
-    complete: false,
+    complete: this.props.context.userInfo.membership,
     gone: false,
     loading: false,
     sub_err: false,
     unsub_err: false
   };
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   tokenCreator = async () => {
     let { token } = await this.props.stripe.createToken({
@@ -133,44 +133,76 @@ class Billing extends Component {
   render() {
     return (
       <div>
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
-            <h5>BILLING</h5>
-            <p>Become a Member:</p>
-            <div className="stripe">
-              <div className="card-element">
-                <CheckoutForm />
-              </div>
+          <div className="title-div col" style={{paddingRight: "1rem"}}>
+            <div className="title-div" style={{ paddingLeft: "0.5rem" }}>
+              <h4>BILLING</h4>
             </div>
-            <div className="buttons">
-              <button className="bill-btn" onClick={this.monthly}>
-                Monthly Subscriptions - $0.99
-              </button>
-              <button className="bill-btn" onClick={this.yearly}>
-                Yearly Subscriptions - $9.99
-              </button><br/>
-              <button onClick={this.unsubscribe}>Unsubscribe</button>
-            </div>
-            <div style={{ marginTop: "10px" }}>
+
+            <p
+              style={{
+                fontSize: "0.7rem",
+                paddingLeft: ".6rem",
+                borderTop: "1px solid black",
+                width: "100%"
+              }}
+            >
+              Become a Member:
+            </p>
+
+            <div>
               {this.state.loading ? <Loading /> : null}
-              {this.state.complete ? <h3>Thank you for subscribing!</h3> : null}
-              {this.state.gone ? (
-                <h3>
-                  Thank you for your business. We hope to work with you again
-                  soon!
-                </h3>
-              ) : null}
               {this.state.sub_err ? (
-                <h3>
+                <p>
                   You are unable to complete subscribe if you are already a
                   member or your payment is invalid!
-                </h3>
+                </p>
               ) : null}
               {this.state.unsub_err ? (
-                <h3>You do not have an active subscription!</h3>
+                <p>You do not have an active subscription!</p>
               ) : null}
+            </div>
+
+            <div className="stripe">
+              <div className="stripe-form">
+                {this.state.complete ? (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <h1 style={{ textAlign: "center", marginTop: "6%" }}>
+                      Thank You For Becoming A Member!
+                    </h1>
+                  </div>
+                ) : (
+                  <div className="stripe-pay">
+                    <div className="card-element">
+                      <CheckoutForm />
+                    </div>
+                    <div className="btn-group">
+                      <button className="bill-btn" onClick={this.monthly}>
+                        Monthly Subscriptions - $0.99
+                      </button>
+                      <button className="bill-btn" onClick={this.yearly}>
+                        Yearly Subscriptions - $9.99
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {this.state.gone ? (
+                  <p style={{ textAlign: "center" }}>
+                    Thank you for your business. We hope to work with you again
+                    soon!
+                  </p>
+                ) : (
+                  <button
+                    style={{ marginLeft: "0%", marginTop: "4%" }}
+                    className="bill-btn"
+                    onClick={this.unsubscribe}
+                  >
+                    Unsubscribe
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

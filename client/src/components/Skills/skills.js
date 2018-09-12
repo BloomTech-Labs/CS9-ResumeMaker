@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 
-import Navbar from "../SubComponents/Navbar/navbar";import Sidebar from "../SubComponents/Sidebar/sidebar";
-import { Link } from "react-router-dom";
-import ItemCard from "../SubComponents/ItemCard/itemCard";
+import Navbar from "../SubComponents/Navbar/navbar";
+import Sidebar from "../SubComponents/Sidebar/sidebar";
 import {
+  Container,
+  Col,
   Button,
   Form,
   FormGroup,
   Input,
   Label
 } from "reactstrap";
-import "../CSS/component-general.css";
 
 import axios from "axios";
 const urls = require("../../config/config.json");
@@ -25,128 +25,189 @@ class Skills extends Component {
   }
   componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   componentDidUpdate = () => {
-    console.log("ComponentDidUpdate");
-    if (this.state.skills !== this.props.context.userInfo.skills && this.props.context.userInfo.auth === true) {
-      this.setState({ skills: this.props.context.userInfo.skills});
+    if (
+      this.state.skills !== this.props.context.userInfo.skills &&
+      this.props.context.userInfo.auth === true
+    ) {
+      this.setState({ skills: this.props.context.userInfo.skills });
     }
   };
 
   handleChange = (e, index) => {
-    // this.setState({ [e.target.id]: e.target.value });
     const eName = e.target.name;
     const value = e.target.value;
     let newState = this.state.skills;
     newState[index][eName] = value;
-    this.setState({ skills: newState })
+    this.setState({ skills: newState });
   };
 
   newSkillChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  handleSubmit = (action) => {
-    if(action === "add"){
-      this.props.context.actions.addElement("skills", { "groupname": this.state.newSkill });
-    } else if(action === "edit"){
-      this.props.context.actions.setEntireElement("skills", this.state.skills);
+  handleDelete = (index, elementName) => {
+    this.props.context.actions.removeElement(
+      index,
+      elementName
+    );
+    const tempObj = {
+      "sections.skills": this.props.context.userInfo.skills
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        this.props.context.actions.setLogin(response.data);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  };
+
+  handleSubmit = action => {
+    if (action === "add") {
+      this.props.context.actions.addElement("skills", {
+        groupname: this.state.newSkill
+      });
+    } else if (action === "edit") {
+      this.props.context.actions.setSingleElement("skills", this.state.skills);
     }
 
-    this.setState({ newSkill: "" })
-
+    this.setState({ newSkill: "" });
 
     const tempObj = {
       "sections.skills": this.props.context.userInfo.skills
     };
-    
+
     axios
       .put(
-        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id, tempObj,
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         }
       )
       .then(response => {
         // This updates context with the new user info from server
-        this.props.context.actions.setLogin(response.data.user);
+        this.props.context.actions.setLogin(response.data);
       })
       .catch(err => {
-        console.log("oops", err.message);
+        console.log("Error", err.message);
       });
   };
 
   render() {
     return (
       <div>
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col"  style={{paddingRight: "1rem"}}>
             <div className="link-hide">
-              <h4>
-                SKILLS{" "}</h4>
-                <Link
-                  to={{
-                    pathname: "/skills/create", // component being Linked to
-                    state: { index: false } // Setting Index passed into educationCreate component - false means new
-                  }}
-                >{" "}
-                  <i className="fa fa-pencil fa-lg" />
-                </Link>
+              <h4>SKILLS </h4>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem"}}>
-              Click the pencil to enter your work related skills.
+            <p
+              style={{
+                fontSize: "0.7rem",
+                paddingLeft: ".6rem",
+                borderTop: "1px solid black",
+                width: "100%"
+              }}
+            >
+             Enter a Skill Group Header, press ENTER, and then your associated skills. 
+             Press ENTER to save any changes. New Skill Groups can be added and deleted as needed. 
             </p>
 
-            <div className="skills-containment-div">
+            <Container className="skills-containment-div">
               {this.state.skills.map((element, index) => {
                 return (
-                  <div className="skillgroup" key={element._id ? element._id : element.groupname + index}>
-                    <FormGroup>
-                      <Label>Groupname</Label>
-                      <Input
-                        id={`skills`}
-                        name="groupname"
-                        placeholder="Group Name"
-                        size="sm"
-                        value={this.state.skills[index].groupname}
-                        onChange={(e) => this.handleChange(e, index)}
-                      />
+                  <Form
+                    className="skillgroup"
+                    key={element._id ? element._id : element.groupname + index}
+                  >
+                    <button
+                    
+                      className="close"
+                      aria-label="Delete"
+                      onClick={() => this.handleDelete(index, "skills")}
+                    >
+                      <span aria-hidden="true" style={{color: "red"}}>&times;</span>
+                    </button>
+                    <FormGroup row>
+                      <Col>
+                        <Input
+                        style={{height: "2rem", fontSize: ".85rem", fontWeight: "550"}}
+                          className="groupname-input"
+                          id={`skills`}
+                          name="groupname"
+                          placeholder="Group Name"
+                          value={this.state.skills[index].groupname}
+                          onChange={e => this.handleChange(e, index)}
+                          onKeyDown={event => {
+                            if (event.key === "Enter") {
+                              event.target.blur();
+                              event.preventDefault();
+                              event.stopPropagation();
+                              this.handleSubmit("edit");
+                            }
+                          }}
+                        />
+                      </Col>
                     </FormGroup>
-                    <FormGroup>
-                      <Label>Skills</Label>
-                      <Input
-                        id={`skills`}
-                        name="content"
-                        placeholder="Skill 1, skill 2, skill 3..."
-                        size="sm"
-                        value={this.state.skills[index].content}
-                        onChange={(e) => this.handleChange(e, index)}
-                      />
+                    <FormGroup row>
+                      <Col>
+                        <Input
+                        style={{height: "2rem", fontSize: ".85rem"}}
+                          className="skills-input"
+                          id={`skills`}
+                          name="content"
+                          placeholder="Skill 1, skill 2, skill 3..."
+                          type="textarea submit"
+                          value={this.state.skills[index].content}
+                          onChange={e => this.handleChange(e, index)}
+                          onKeyDown={event => {
+                            if (event.key === "Enter") {
+                              event.target.blur();
+                              event.preventDefault();
+                              event.stopPropagation();
+                              this.handleSubmit("edit");
+                            }
+                          }}
+                        />
+                      </Col>
                     </FormGroup>
-                  </div>
-                )
+                  </Form>
+                );
               })}
-              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
-                Submit
-              </Button>
               <div className="skillgroup-input">
                 <FormGroup>
-                  <Label>New Skill Group</Label>
+                  <Label style={{
+                fontSize: "0.8rem"}}>Add a  New Skill Group:</Label>
                   <Input
                     id="newSkill"
-                    size="sm"
+                    bssize="sm"
                     value={this.state.newSkill}
                     onChange={this.newSkillChange}
+                    onKeyDown={event => {
+                      if (event.key === "Enter") {
+                        event.target.blur();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.handleSubmit("add");
+                      }
+                    }}
                   />
                 </FormGroup>
-                <Button color="primary" onClick={() => this.handleSubmit("add")}>
-                  Submit
-                </Button>
               </div>
-            </div>
+            </Container>
           </div>
         </div>
       </div>

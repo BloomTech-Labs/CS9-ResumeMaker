@@ -4,11 +4,9 @@ import {
   Form,
   FormGroup,
   FormFeedback,
-  Input,
-  Label
+  Input
 } from "reactstrap";
 import axios from "axios";
-import "../Login/login.css";
 
 const urls = require("../../config/config.json");
 
@@ -36,7 +34,6 @@ class ForgotPassword extends Component {
         path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
-        console.log(response);
         this.setState({ submitted: true, submittedError: false });
       })
       .catch(err => {
@@ -51,8 +48,9 @@ class ForgotPassword extends Component {
         <div className="Login">
           <Form>
             <FormGroup>
-              <Label>Email</Label>
+              <h5>Email</h5>
               <Input
+              style={{fontSize: ".7rem", height: "2rem"}}
                 autoFocus
                 id="email"
                 invalid={this.state.submittedError}
@@ -61,14 +59,15 @@ class ForgotPassword extends Component {
                 onChange={this.handleChange}
                 autoComplete="username"
               />
-              <FormFeedback invalid>
+              <FormFeedback>
                 The email your entered is not associated with a user or there
                 was an error contacting the server.
               </FormFeedback>
             </FormGroup>
             <Button
+            style={{fontSize: ".7rem", height: "2rem"}}
               block
-              size="lg"
+              bssize="lg"
               color="primary"
               disabled={!this.validateForm()}
               onClick={() => this.handleSubmit()}
@@ -77,12 +76,14 @@ class ForgotPassword extends Component {
             </Button>
             <div className="bottom-buttons">
               <Button
+              style={{fontSize: ".7rem", height: "2rem"}}
                 color="danger"
                 onClick={() => this.props.history.push("/login")}
               >
                 Login
               </Button>
               <Button
+              style={{fontSize: ".7rem", height: "2rem"}}
                 color="danger"
                 onClick={() => this.props.history.push("/register")}
               >
@@ -100,6 +101,7 @@ class ForgotPassword extends Component {
               Please check your email within 30 minutes to reset your password.
             </p>
             <Button
+            style={{fontSize: ".7rem", height: "2rem"}}
               color="primary"
               onClick={() => {
                 this.props.history.push("/login");

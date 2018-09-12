@@ -153,17 +153,18 @@ const User = new mongoose.Schema(
       default: false
     },
     subscription: String,
-    resumes: [
-      {
-        type: ObjectId,
-        ref: "Resume"
-      }
-    ]
+    // resumes: [
+    //   {
+    //     type: ObjectId,
+    //     ref: "Resume"
+    //   }
+    // ],
+    currentresume: { type: ObjectId, ref: "Resume" }
   },
   { timestamps: true }
 );
 
-User.pre("save", function(next) {
+User.pre("save", function (next) {
   if (!this.isModified("password")) return next();
   bcrypt.hash(this.password, 11, (err, hash) => {
     if (err) return next(err);
@@ -172,7 +173,7 @@ User.pre("save", function(next) {
   });
 });
 
-User.methods.checkPassword = function(passwordGuess) {
+User.methods.checkPassword = function (passwordGuess) {
   return bcrypt.compare(passwordGuess, this.password);
 };
 

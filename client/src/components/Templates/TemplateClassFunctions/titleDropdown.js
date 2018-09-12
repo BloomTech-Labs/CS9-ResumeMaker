@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./classFunction.css";
 
 class TitleDropdown extends Component {
   // Adding default state as a placeholder
@@ -64,11 +63,11 @@ class TitleDropdown extends Component {
     ));
 
     return (
-      <div className="template-card card card-body m-0">
+      <div className="template-card card card-card dropdown mb-3">
         <div className="container">
-          <p>{selected}</p>
+          <h6>{selected}</h6>
         </div>
-        <h6>
+        <h6 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled
