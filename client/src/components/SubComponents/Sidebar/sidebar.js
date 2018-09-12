@@ -26,7 +26,7 @@ class Sidebar extends Component {
         })
         .then(response => {
           this.props.context.actions.setLogin(response.data);
-          // this.props.context.actions.expandResumeIDs();
+          this.props.context.actions.expandResumeIDs();
           // if(response.data.resumes.length >= 1){
           //   for(let i = 0; i < response.data.resumes.length; i++){
           //     this.props.context.actions.expandResumeIDs(response.data.resumes[i]._id)

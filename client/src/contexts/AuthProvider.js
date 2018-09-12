@@ -88,7 +88,7 @@ class AuthProvider extends Component {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
-    } else if (!(resumeData.length > 0) || resumeData[0] === null) {
+    } else if (!(resumeData.length > 0 || resumeData[0] === null) && this.state.auth) {
     
       this.createResume(true);
     } else if (
@@ -252,26 +252,26 @@ class AuthProvider extends Component {
       expandSection("skills", true, index);
     });
 
-    // for (let i = 0; i < this.state.resumes.length; i++) {
-    //   axios
-    //     .put(
-    //       `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
-    //       this.state.resumes[i],
-    //       {
-    //         headers: {
-    //           Authorization: "Bearer " + localStorage.getItem("token")
-    //         }
-    //       }
-    //     )
-    //     .then(response => {
-    //       // return response.data.resume;
-    //     })
-    //     .catch(err => {
-    //       console.log("err", err);
-    //       // return err;
-    //     });
-    //   // resumePromises.push(resumePromise);
-    // }
+    for (let i = 0; i < this.state.resumes.length; i++) {
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
+          this.state.resumes[i],
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          // return response.data.resume;
+        })
+        .catch(err => {
+          console.log("err", err);
+          // return err;
+        });
+      // resumePromises.push(resumePromise);
+    }
 
     // console.log("OUR PROMISES", resumePromises);
     // Once every request is finished state updates once.

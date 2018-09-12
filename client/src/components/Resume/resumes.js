@@ -47,22 +47,22 @@ class Resumes extends Component {
 
   handleCreate = () => {
     const tempObj = {
-      links: { linkedin: true, github: true, portfolio: true },
+      links: { linkedin: false, github: false, portfolio: false },
       title: this.props.context.userInfo.title.map(item => {
         return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.props.context.userInfo.experience.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         education: this.props.context.userInfo.education.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         summary: this.props.context.userInfo.summary.map(item => {
           return { _id: item._id, value: false };
         }),
         skills: this.props.context.userInfo.skills.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         })
       }
     };
@@ -159,6 +159,7 @@ class Resumes extends Component {
       this.props.context.userInfo.currentresume === null ||
       !resumes[this.state.index]
     ) {
+      // {resumes.length ? this.handleCreate() : null}
       return (
         <div style={{ display: "none" }}>
           <Sidebar context={this.props.context} />
