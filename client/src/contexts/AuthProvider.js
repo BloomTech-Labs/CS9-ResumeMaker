@@ -358,6 +358,7 @@ class AuthProvider extends Component {
 
   render() {
     const userInfo = this.state;
+    console.log("USERINFO on authprovider:", userInfo);
     return (
       <AuthContext.Provider
         value={{
