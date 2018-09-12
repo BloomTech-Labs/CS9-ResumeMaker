@@ -88,7 +88,7 @@ class AuthProvider extends Component {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
-    } else if (!(resumeData.length > 0) || resumeData[0] === null) {
+    } else if (!(resumeData.length > 0 || resumeData[0] === null) && this.state.auth) {
     
       this.createResume(true);
     } else if (
@@ -264,7 +264,6 @@ class AuthProvider extends Component {
           }
         )
         .then(response => {
-          console.log("response", response);
           // return response.data.resume;
         })
         .catch(err => {

@@ -34,21 +34,6 @@ class Resumes extends Component {
     this.setState({ index: newIndex });
   };
 
-  componentWillMount() {
-    // if (!this.props.context.userInfo.resumes.length)
-    //   this.props.context.actions.createResume();
-    //   console.log("template componentWillMount");
-    //   let index = this.findWithAttr(
-    //     this.props.context.userInfo.resumes,
-    //     "_id",
-    //     this.props.context.userInfo.currentresume
-    //   );
-    //   console.log(this.props.context.userInfo.currentresume)
-    //   console.log("index from findWithAttr is:", index);
-    //   if (index === -1) index = 0;
-    //   this.setState({ index: index });
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
     let index = this.findWithAttr(
@@ -62,22 +47,22 @@ class Resumes extends Component {
 
   handleCreate = () => {
     const tempObj = {
-      links: { linkedin: true, github: true, portfolio: true },
+      links: { linkedin: false, github: false, portfolio: false },
       title: this.props.context.userInfo.title.map(item => {
         return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.props.context.userInfo.experience.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         education: this.props.context.userInfo.education.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         summary: this.props.context.userInfo.summary.map(item => {
           return { _id: item._id, value: false };
         }),
         skills: this.props.context.userInfo.skills.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         })
       }
     };
@@ -151,6 +136,7 @@ class Resumes extends Component {
           }
         })
         .then(response => {
+          this.setState({ success: true })
           this.props.context.actions.pushResumes(response.data.Resume);
         })
         .catch(err => {
@@ -174,6 +160,7 @@ class Resumes extends Component {
       this.props.context.userInfo.currentresume === null ||
       !resumes[this.state.index]
     ) {
+      // {resumes.length ? this.handleCreate() : null}
       return (
         <div style={{ display: "none" }}>
           <Sidebar context={this.props.context} />
@@ -190,35 +177,48 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="title-div templates"  style={{paddingRight: "1rem"}}>
-            {this.props.context.userInfo.name.firstname ? (
-                <h4>
-                  Greetings, {this.props.context.userInfo.name.firstname}!
-                </h4>
+            <div
+              className="title-div templates"
+              style={{ paddingRight: "1rem" }}
+            >
+              {this.props.context.userInfo.name.firstname ? (
+                <React.Fragment>
+                  <h4>
+                    Welcome to your Dashboard,{" "}
+                    {this.props.context.userInfo.name.firstname}!
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      paddingLeft: ".6rem"
+                    }}
+                  >
+                    {" "}
+                    Click each tab on the left to enter your information and
+                    populate each section on the resume form below: JOB TITLE,
+                    SUMMARY, SKILLS, EXPERIENCE, & EDUCATION. Next, scroll down
+                    this page to check the information you would like displayed
+                    on your final resume. Once completed, SAVE your changes and
+                    go to TEMPLATES to choose your layout. You can also CREATE
+                    multiple RESUMES with a subscription.
+                  </p>
+                </React.Fragment>
               ) : (
                 <React.Fragment>
                   <h4>Welcome! </h4>
-                  <p>
-                    Please go to the SETTINGS page and fill in your information
-                    to get started!
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      paddingLeft: ".6rem"
+                    }}
+                  >
+                    {"  "} Please go to the SETTINGS page and fill in your
+                    information to get started!
                   </p>
                 </React.Fragment>
               )}
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  paddingLeft: ".6rem",
-                  width: "100%"
-                }}
-              >
-                {" "}
-                Click each tab on the left to enter your information and populate each section on the resume form below: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, & EDUCATION. Next, scroll down this page to check the information you would like displayed on your final resume. Once completed, 
-                SAVE your changes and go to TEMPLATES to choose your layout. You can also CREATE multiple RESUMES with a subscription. 
-              </p>
             </div>
             <div className="containers-div">
-
               {this.props.context.userInfo.membership ? (
                 <React.Fragment>
                   <ResumeDropdown
@@ -228,30 +228,49 @@ class Resumes extends Component {
                     context={this.props.context}
                     data={userInfo}
                   />
-                  <button className="resume-button" onClick={this.handleCreate} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem"}}>
+                  <button
+                    className="resume-button"
+                    onClick={this.handleCreate}
+                    style={{
+                      width: "6rem",
+                      height: "1.5rem",
+                      fontSize: ".7rem"
+                    }}
+                  >
                     {" "}
                     Create Resume
                   </button>
                 </React.Fragment>
               ) : null}
-              <button className="resume-button" onClick={this.handleSubmit} style={{width: "6rem", height: "1.5rem", fontSize: ".7rem"}}>
+              <button
+                className="resume-button"
+                onClick={this.handleSubmit}
+                style={{ width: "6rem", height: "1.5rem", fontSize: ".7rem" }}
+              >
                 {" "}
                 Save Changes
               </button>
             </div>
             <Container className="resumePage">
               <Container className="contact-section">
-              <Container className="contact-holder">
-                <h6 >Contact Details</h6>
+                <Container className="contact-holder">
+                  <h6>Contact Details</h6>
                 </Container>
-                <Container className="contactSection" >
+                <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
                   this.props.context.userInfo.name.lastname ? (
-                    <h5>
-                      {userInfo.name.firstname} {userInfo.name.lastname}
-                    </h5>
+                    this.props.context.userInfo.name.middlename ? (
+                      <h5>
+                        {userInfo.name.firstname} {userInfo.name.middlename}{" "}
+                        {userInfo.name.lastname}
+                      </h5>
+                    ) : (
+                      <h5>
+                        {userInfo.name.firstname} {userInfo.name.lastname}
+                      </h5>
+                    )
                   ) : (
-                    <h2>Please enter your full name in the SETTINGS page</h2>
+                    <h4>Please enter your full name in the SETTINGS page</h4>
                   )}
                   <Container className="contactHolder">
                     <Container className="contactOne">
@@ -311,7 +330,7 @@ class Resumes extends Component {
                   </Container>
                 </Container>
               </Container>
-              <Container className="title-section" >
+              <Container className="title-section">
                 <Container className="titleHolder">
                   <h6>Titles</h6>
                 </Container>
@@ -330,9 +349,9 @@ class Resumes extends Component {
                   />
                 </Container>
               </Container>
-              <Container className="summary-section" >
+              <Container className="summary-section">
                 <div className="summaryHolder">
-                  <h6 >Summary</h6>
+                  <h6>Summary</h6>
                 </div>
                 <Container className="summarySection">
                   <SummaryDropdown
@@ -351,13 +370,17 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                  <h6 >Skills</h6>
+                  <h6>Skills</h6>
                 </div>
-                <Container className="skillsSection" style={{fontSize: ".8rem"}}>
+                <Container
+                  className="skillsSection"
+                  style={{ fontSize: ".8rem" }}
+                >
                   {userInfo.skills.map((content, index) => {
                     return (
                       <div key={content._id}>
-                        <p>{" "}
+                        <p>
+                          {" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
@@ -379,10 +402,13 @@ class Resumes extends Component {
                 </Container>
               </Container>
               <Container className="experience-section">
-                <div className="experienceHolder" >
-                  <h6 >Experience</h6>
+                <div className="experienceHolder">
+                  <h6>Experience</h6>
                 </div>
-                <Container className="experienceSection" style={{fontSize: ".75rem"}}>
+                <Container
+                  className="experienceSection"
+                  style={{ fontSize: ".75rem" }}
+                >
                   {experience.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
                     let to = moment(content.to).format("MMM YYYY");
@@ -423,15 +449,19 @@ class Resumes extends Component {
               </Container>
               <Container className="education-section">
                 <div className="educationHolder">
-                  <h6 >Education</h6>
+                  <h6>Education</h6>
                 </div>
-                <Container className="educationSection" style={{fontSize: ".75rem"}}>
+                <Container
+                  className="educationSection"
+                  style={{ fontSize: ".75rem" }}
+                >
                   {education.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
                     let to = moment(content.to).format("MMM YYYY");
                     return (
                       <div key={content._id}>
-                        <h6>{" "}
+                        <h6>
+                          {" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}

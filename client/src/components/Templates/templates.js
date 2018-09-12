@@ -54,7 +54,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume1", // component being Linked to
+                    pathname: "/templates/traditional", // component being Linked to
                     state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
@@ -73,7 +73,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume2", // component being Linked to
+                    pathname: "/templates/modern", // component being Linked to
                     state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >
@@ -92,7 +92,7 @@ class Resumes extends Component {
                     color: "black"
                   }}
                   to={{
-                    pathname: "/resume3", // component being Linked to
+                    pathname: "/templates/elegant", // component being Linked to
                     state: { index: this.state.index } // Setting Index passed to template- false means new
                   }}
                 >

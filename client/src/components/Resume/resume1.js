@@ -40,7 +40,7 @@ export class ResumeOne extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     if (
       !this.props.context.userInfo.resumes.length ||
@@ -55,14 +55,13 @@ export class ResumeOne extends Component {
       console.log(
         "You probably had an error, which redirected you instead of crashing."
       );
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
 
     const userInfo = this.props.context.userInfo;
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    console.log("RESUMES", resumes)
     // const summaryLength = userInfo.summary.filter((item, index) => {
     //   return resumes[this.state.index].sections.summary[index].value;
     // });
@@ -87,7 +86,7 @@ export class ResumeOne extends Component {
           <div className="page-div col">
             <div className="resume title-div">
               <h4 className="resume page-header">Traditional</h4>
-              <PDF name="template1"/>
+              <PDF name="template1" />
             </div>
             <div className="template1">
               <Container textAlign="center" className="titleSection">
@@ -97,7 +96,13 @@ export class ResumeOne extends Component {
                 {userInfo.title.map((item, index) => {
                   if (resumes[this.state.index].title[index].value === true) {
                     return (
-                      <p style={{ fontSize: "1.5rem",textTransform: "uppercase"}} key={item._id}>
+                      <p
+                        style={{
+                          fontSize: "1.5rem",
+                          textTransform: "uppercase"
+                        }}
+                        key={item._id}
+                      >
                         {item.content}
                       </p>
                     );

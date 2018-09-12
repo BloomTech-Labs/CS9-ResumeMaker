@@ -620,7 +620,7 @@ img {
 }
 .contact-section .contact-holder {
   min-width: 100px;
-  width: 264px;
+  width: 27%;
 }
 .title-section {
   margin: 5% 0 0 0;
@@ -632,7 +632,7 @@ img {
 }
 .title-section .titleHolder {
   min-width: 100px;
-  width: 100px;
+  width: 10%;
 }
 .title-section .titleSection {
   display: flex;
@@ -650,7 +650,7 @@ img {
 }
 .summary-section .summaryHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .summary-section .summarySection {
   display: flex;
@@ -668,7 +668,7 @@ img {
 }
 .skills-section .skillsHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .skills-section .skillsSection {
   display: flex;
@@ -686,7 +686,7 @@ img {
 }
 .experience-section .experienceHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .experience-section .experienceSection {
   display: flex;
@@ -704,7 +704,7 @@ img {
 }
 .education-section .educationHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .education-section .educationSection {
   display: flex;

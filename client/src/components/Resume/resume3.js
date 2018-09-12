@@ -36,7 +36,7 @@ export class ResumeThree extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     if (
       !this.props.context.userInfo.resumes.length ||
@@ -51,7 +51,7 @@ export class ResumeThree extends Component {
       console.log(
         "You probably had an error, which redirected you instead of crashing."
       );
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
 
     const userInfo = this.props.context.userInfo;
@@ -121,7 +121,7 @@ export class ResumeThree extends Component {
                   </Container>
                 </div>
                 <div className="col-9">
-                  <div className="titleSection">
+                  <div className="titleSection" style={{padding: ".6rem"}}>
                     <h3>
                       {userInfo.name.firstname} {userInfo.name.lastname}
                     </h3>
@@ -132,8 +132,9 @@ export class ResumeThree extends Component {
                         return <h5 key={item._id}  style={{textTransform: "uppercase"}}>{item.content}</h5>;
                       } else return null;
                     })}
-                  </div>
+            
                   <Divider className="divider-div" />
+                  </div>
                   {summaryLength.length > 0 ? (
                     <div>
                       <Container

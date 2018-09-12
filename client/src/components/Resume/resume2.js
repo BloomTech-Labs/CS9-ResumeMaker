@@ -40,7 +40,7 @@ export class ResumeTwo extends Component {
 
   render() {
     if (!this.props.context.userInfo.auth) {
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
     if (
       !this.props.context.userInfo.resumes.length ||
@@ -55,7 +55,7 @@ export class ResumeTwo extends Component {
       console.log(
         "You probably had an error, which redirected you instead of crashing."
       );
-      return <Redirect to="/resumes" />;
+      return <Redirect to="/templates" />;
     }
 
     const userInfo = this.props.context.userInfo;
@@ -103,8 +103,9 @@ export class ResumeTwo extends Component {
                     textalign="center"
                     id="summary"
                     className="summarySection"
+                    style={{padding: "0"}}
                   >
-                    <Divider className="divider-div" />
+                    <Divider className="divider-div" style={{padding: "0"}}/>
                     {/* <h4 className="subtitle">Summary</h4> */}
                     {userInfo.summary.map((item, index) => {
                       return resumes[this.state.index].sections.summary[index]
