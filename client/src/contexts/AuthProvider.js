@@ -252,27 +252,26 @@ class AuthProvider extends Component {
       expandSection("skills", true, index);
     });
 
-    for (let i = 0; i < this.state.resumes.length; i++) {
-      axios
-        .put(
-          `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
-          this.state.resumes[i],
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            }
-          }
-        )
-        .then(response => {
-          console.log("response", response);
-          // return response.data.resume;
-        })
-        .catch(err => {
-          console.log("err", err);
-          // return err;
-        });
-      // resumePromises.push(resumePromise);
-    }
+    // for (let i = 0; i < this.state.resumes.length; i++) {
+    //   axios
+    //     .put(
+    //       `${urls[urls.basePath]}/resume/` + this.state.resumes[i]._id,
+    //       this.state.resumes[i],
+    //       {
+    //         headers: {
+    //           Authorization: "Bearer " + localStorage.getItem("token")
+    //         }
+    //       }
+    //     )
+    //     .then(response => {
+    //       // return response.data.resume;
+    //     })
+    //     .catch(err => {
+    //       console.log("err", err);
+    //       // return err;
+    //     });
+    //   // resumePromises.push(resumePromise);
+    // }
 
     // console.log("OUR PROMISES", resumePromises);
     // Once every request is finished state updates once.

@@ -2,14 +2,7 @@ import React, { Component } from "react";
 
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import {
-  Container,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label
-} from "reactstrap";
+import { Container, Col, Form, FormGroup, Input, Label } from "reactstrap";
 
 import axios from "axios";
 const urls = require("../../config/config.json");
@@ -48,10 +41,7 @@ class Skills extends Component {
   };
 
   handleDelete = (index, elementName) => {
-    this.props.context.actions.removeElement(
-      index,
-      elementName
-    );
+    this.props.context.actions.removeElement(index, elementName);
     const tempObj = {
       "sections.skills": this.props.context.userInfo.skills
     };
@@ -109,7 +99,7 @@ class Skills extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col"  style={{paddingRight: "1rem"}}>
+          <div className="title-div col" style={{ paddingRight: "1rem" }}>
             <div className="link-hide">
               <h4>SKILLS </h4>
             </div>
@@ -121,8 +111,9 @@ class Skills extends Component {
                 width: "100%"
               }}
             >
-             Enter a Skill Group Header, press ENTER, and then your associated skills. 
-             Press ENTER to save any changes. New Skill Groups can be added and deleted as needed. 
+              Enter a Skill Group Header, press ENTER, and then your associated
+              skills. Press ENTER to save any changes. New Skill Groups can be
+              added and deleted as needed.
             </p>
 
             <Container className="skills-containment-div">
@@ -133,17 +124,22 @@ class Skills extends Component {
                     key={element._id ? element._id : element.groupname + index}
                   >
                     <button
-                    
                       className="close"
                       aria-label="Delete"
                       onClick={() => this.handleDelete(index, "skills")}
                     >
-                      <span aria-hidden="true" style={{color: "red"}}>&times;</span>
+                      <span aria-hidden="true" style={{ color: "red" }}>
+                        &times;
+                      </span>
                     </button>
                     <FormGroup row>
                       <Col>
                         <Input
-                        style={{height: "2rem", fontSize: ".85rem", fontWeight: "550"}}
+                          style={{
+                            height: "2rem",
+                            fontSize: ".85rem",
+                            fontWeight: "550"
+                          }}
                           className="groupname-input"
                           id={`skills`}
                           name="groupname"
@@ -164,7 +160,7 @@ class Skills extends Component {
                     <FormGroup row>
                       <Col>
                         <Input
-                        style={{height: "2rem", fontSize: ".85rem"}}
+                          style={{ height: "2rem", fontSize: ".85rem" }}
                           className="skills-input"
                           id={`skills`}
                           name="content"
@@ -188,8 +184,13 @@ class Skills extends Component {
               })}
               <div className="skillgroup-input">
                 <FormGroup>
-                  <Label style={{
-                fontSize: "0.8rem"}}>Add a  New Skill Group:</Label>
+                  <Label
+                    style={{
+                      fontSize: "0.8rem"
+                    }}
+                  >
+                    Add a New Skill Group:
+                  </Label>
                   <Input
                     id="newSkill"
                     bssize="sm"

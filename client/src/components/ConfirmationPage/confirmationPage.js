@@ -15,7 +15,6 @@ class ConfirmationPage extends Component {
     axios
       .get(`${urls[urls.basePath]}${serverPath}`)
       .then(response => {
-        console.log(response);
         if (response.data.errorMessage) {
           this.setState({ message: response.data.errorMessage });
         } else if (response.data.token) {
