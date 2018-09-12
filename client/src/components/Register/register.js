@@ -115,8 +115,6 @@ class Register extends Component {
         path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
-  
-        console.log("email", response)
         this.setState({ submitted: true, submittedError: false, validateMessage: response.data });
       })
       .catch(err => {
@@ -233,7 +231,6 @@ class Register extends Component {
         </div>
       );
     } else {
-      console.log(this.state.validateMessage)
       return (
         <div className="Login">
           <div className="message">
