@@ -35,10 +35,21 @@ class Resumes extends Component {
     return -1;
   };
 
+  updateResumeName = newIndex => {
+    // console.log("updateResumeName: newIndex = ", newIndex)
+    if(this.props.context.userInfo.resumes.length > 0){
+      if(newIndex >= 0){
+        this.setState({ resumeName: this.props.context.userInfo.resumes[newIndex].name })
+      } else if(this.state.index >= 0 && this.props.context.userInfo.resumes[this.state.index]){
+        this.setState({ resumeName: this.props.context.userInfo.resumes[this.state.index].name })
+      }
+    }
+  }
+
   updateResumeIndex = newIndex => {
     // console.log("IS THIS RUN UPDATE", newIndex)
     if(newIndex >= 0){
-      console.log("NEWINDEX", newIndex)
+      // console.log("NEWINDEX", newIndex)
       // console.log("updateResumeIndex, newIndex", newIndex)
       this.setState({ index: newIndex });
     } else {
@@ -52,8 +63,7 @@ class Resumes extends Component {
     }
 
     if(this.props.context.userInfo.resumes[0]){
-      console.log("RESUMENAME")
-      this.setState({ resumeName: this.props.context.userInfo.resumes[this.state.index ? this.state.index : 0].name })
+      this.updateResumeName(newIndex);
     }
 
     if(this.props.context.userInfo.auth === true && this.props.context.userInfo.resumes.length === 0){
@@ -223,6 +233,13 @@ class Resumes extends Component {
         });
     }
   };
+
+  componentDidUpdate = () => {
+    if(this.props.context.userInfo.resumes[0] && this.state.resumeName === "" && this.state.index !== null){
+      console.log("DIDUPDATE")
+      this.updateResumeName(this.state.index)
+    }
+  }
 
   render() {
     console.log("resumes render props resumes", this.props.context.userInfo.resumes)
