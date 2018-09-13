@@ -535,6 +535,12 @@ img {
 .skills-containment-div .form-group {
   margin-bottom: 0.5rem;
 }
+.groupname-input {
+  border-radius: unset !important;
+}
+.groupname {
+  width: fit-content;
+}
 .component-div {
   display: flex;
   background: #c8c8c8;

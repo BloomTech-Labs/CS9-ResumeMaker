@@ -159,7 +159,6 @@ class Skills extends Component {
                   }}
                   className="groupname-input"
                   id="newSkill"
-                  bssize="sm"
                   value={this.state.newSkill}
                   onChange={this.newSkillChange}
                   onKeyDown={event => {
@@ -184,14 +183,13 @@ class Skills extends Component {
                         element._id ? element._id : element.groupname + index
                       }
                     >
-                      <FormGroup row>
+                      <FormGroup row className="groupname">
                         <Col>
                           <Input
                             style={{
                               height: "2rem",
                               fontSize: ".85rem",
                               fontWeight: "550",
-                              width: "25%"
                             }}
                             className="groupname-input"
                             id={`skills`}
