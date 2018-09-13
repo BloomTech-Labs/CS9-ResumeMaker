@@ -31,18 +31,22 @@ class Resumes extends Component {
   };
 
   updateResumeIndex = newIndex => {
-    this.setState({ index: newIndex });
+    if(newIndex){
+      this.setState({ index: newIndex });
+    } else {
+      let index = this.findWithAttr(
+        this.props.context.userInfo.resumes,
+        "_id",
+        this.props.context.userInfo.currentresume
+      );
+      if (index === -1) index = 0;
+      this.setState({ index: index });
+    }
   };
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    let index = this.findWithAttr(
-      this.props.context.userInfo.resumes,
-      "_id",
-      this.props.context.userInfo.currentresume
-    );
-    if (index === -1) index = 0;
-    this.setState({ index: index });
+    this.updateResumeIndex();
   }
 
   handleCreate = () => {
@@ -145,8 +149,56 @@ class Resumes extends Component {
     }
   };
 
+  
+  handleDelete = event => {
+    if (event) {
+      event.preventDefault();
+    }
+    const tempObj = this.props.context.userInfo.resumes[this.state.index];
+    console.log("TEMP OBJ", tempObj)
+    if (tempObj._id) {
+      axios
+        .delete(
+          `${urls[urls.basePath]}/resume/delete/` +
+          tempObj._id,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log("DELETE RESPONSE");
+          this.props.context.actions.removeElement(this.state.index, "resumes");
+          this.props.context.actions.setCurrentResume();
+          this.updateResumeIndex();
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    } else {
+      if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
+      axios
+        .post(`${urls[urls.basePath]}/resume/`, tempObj, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          this.setState({ success: true });
+          this.props.context.actions.pushResumes(response.data.Resume);
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
+
   render() {
-    console.log("resumes render props", this.props.context.userInfo)
+    console.log("resumes render props resumes", this.props.context.userInfo.resumes)
+    console.log("resumes render state index", this.state.index)
+    console.log("resumes render currentres props", this.props.context.userInfo.currentresume)
+
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
@@ -240,6 +292,18 @@ class Resumes extends Component {
                   >
                     {" "}
                     Create Resume
+                  </button>
+                  <button
+                    className="resume-button"
+                    onClick={this.handleDelete}
+                    style={{
+                      width: "6rem",
+                      height: "1.5rem",
+                      fontSize: ".7rem"
+                    }}
+                  >
+                    {" "}
+                    Delete Resume
                   </button>
                 </React.Fragment>
               ) : null}

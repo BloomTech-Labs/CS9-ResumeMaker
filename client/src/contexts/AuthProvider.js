@@ -96,6 +96,31 @@ class AuthProvider extends Component {
     }
   };
 
+  setCurrentResume = (resume) => {
+    if(this.state.resumes.length > 0){
+      const newCurrentResume = resume ? resume: this.state.resumes[0]._id;
+      this.setState({ currentresume: newCurrentResume })
+      axios
+        .put(
+          `${urls[urls.basePath]}/users/info/${
+            this.state.id
+          }`,
+          { currentresume: newCurrentResume },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log("setCurrentResume response", response);
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  }
+
   setResume = resumeData => {
     if (this.state.auth !== true) {
       return;
@@ -376,7 +401,8 @@ class AuthProvider extends Component {
             addElement: this.addElement,
             removeElement: this.removeElement,
             setSingleElement: this.setSingleElement,
-            pushResumes: this.pushResumes
+            pushResumes: this.pushResumes,
+            setCurrentResume: this.setCurrentResume
           }
         }}
       >
