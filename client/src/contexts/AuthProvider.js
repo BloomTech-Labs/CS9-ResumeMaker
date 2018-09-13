@@ -225,26 +225,25 @@ class AuthProvider extends Component {
       let tempObj = this.state.resumes[index];
       if (!resumeSection) {
         for (let item of this.state[section]) {
-          let current = this.state.resumes[index][section].filter(
+          const current = this.state.resumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
-          current.length === 0
-            ? tempObj[section].push({
-                _id: item._id,
-                value: false
-              })
-            : console.log();
+          if(current.length === 0){
+            tempObj[section].push({
+              _id: item._id,
+              value: false
+            })
+          }
         } // All items in context now have a resume counterpart
         let loopVar = this.state.resumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
-            findWithAttr(
+            !(findWithAttr(
               this.state[section],
               "_id",
               this.state.resumes[index][section][i]._id
-            ) > -1
+            ) > -1)
           ) {
-          } else {
             tempObj[section].splice(i, 1);
             loopVar--;
             i--;
@@ -253,33 +252,33 @@ class AuthProvider extends Component {
       } else {
         //.sections portion
         for (let item of this.state[section]) {
-          let current = this.state.resumes[index].sections[section].filter(
+          const current = this.state.resumes[index].sections[section].filter(
             resumeItem => resumeItem._id === item._id
           );
-          current.length === 0
-            ? tempObj.sections[section].push({
-                _id: item._id,
-                value: false
-              })
-            : console.log();
+          if(current.length === 0){
+            tempObj.sections[section].push({
+              _id: item._id,
+              value: false
+            })
+          }
         } // All items in context now have a resume counterpart
         let loopVar = this.state.resumes[index].sections[section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
-            findWithAttr(
+            !(findWithAttr(
               this.state[section],
               "_id",
               this.state.resumes[index].sections[section][i]._id
-            ) > -1
+            ) > -1)
           ) {
-          } else {
             tempObj.sections[section].splice(i, 1);
             loopVar--;
             i--;
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      this.setState({ ["resumes"[index]]: tempObj });
+      console.log("WE are pushing (index) (tempObj)", section, index, resumeSection, tempObj)
+      this.setState({ ["resumes"[index][section]]: tempObj });
       // tempResumes.push(tempObj);
     };
 
@@ -289,7 +288,7 @@ class AuthProvider extends Component {
 
     // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
-      expandSection("title", false, index);
+      // expandSection("title", false, index);
       expandSection("experience", true, index);
       expandSection("education", true, index);
       expandSection("summary", true, index);
@@ -326,6 +325,7 @@ class AuthProvider extends Component {
   };
 
   setResumeItemState = (index, name, id) => {
+    console.log("setResumeItemState:", index, name, id);
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -342,6 +342,7 @@ class AuthProvider extends Component {
   }; //Checkboxes
 
   setResumeItemDropdown = (index, name, id) => {
+    console.log("setResumeItemDropdown:", index, name, id);
     const tempState = this.state;
     if (name === "title") {
       tempState.resumes[index][name].forEach(field => {
