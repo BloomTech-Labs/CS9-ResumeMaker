@@ -15,10 +15,19 @@ class Skills extends Component {
       skills: []
     };
   }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    } else {
+      // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
+      this.setState(
+        this.augmentObject(this.state.skills, this.props.context.userInfo.skills)
+      );
+    }
   };
-
+  
   componentDidUpdate = () => {
     if (
       this.state.skills !== this.props.context.userInfo.skills &&
@@ -26,6 +35,18 @@ class Skills extends Component {
     ) {
       this.setState({ skills: this.props.context.userInfo.skills });
     }
+  };
+
+  augmentObject = (initObj, modObj) => {
+    for (let prop in initObj) {
+      if (modObj[prop]) {
+        let val = modObj[prop];
+        if (typeof val === "object" && typeof initObj[prop] === "object")
+          this.augmentObject(initObj[prop], val);
+        else initObj[prop] = val;
+      }
+    }
+    return initObj;
   };
 
   handleChange = (e, index) => {
@@ -123,15 +144,6 @@ class Skills extends Component {
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
                   >
-                    <button
-                      className="close"
-                      aria-label="Delete"
-                      onClick={() => this.handleDelete(index, "skills")}
-                    >
-                      <span aria-hidden="true" style={{ color: "red" }}>
-                        &times;
-                      </span>
-                    </button>
                     <FormGroup row>
                       <Col>
                         <Input
@@ -156,6 +168,15 @@ class Skills extends Component {
                           }}
                         />
                       </Col>
+                      <button
+                        className="close"
+                        aria-label="Delete"
+                        onClick={() => this.handleDelete(index, "skills")}
+                        >
+                        <span aria-hidden="true" style={{ color: "red" }}>
+                          &times;
+                        </span>
+                      </button>
                     </FormGroup>
                     <FormGroup row>
                       <Col>
@@ -182,7 +203,7 @@ class Skills extends Component {
                   </Form>
                 );
               })}
-              <div className="skillgroup-input">
+              <Form className="skillgroup">
                 <FormGroup>
                   <Label
                     style={{
@@ -192,6 +213,12 @@ class Skills extends Component {
                     Add a New Skill Group:
                   </Label>
                   <Input
+                    style={{
+                      height: "2rem",
+                      fontSize: ".85rem",
+                      fontWeight: "550"
+                    }}
+                    className="groupname-input"
                     id="newSkill"
                     bssize="sm"
                     value={this.state.newSkill}
@@ -206,7 +233,7 @@ class Skills extends Component {
                     }}
                   />
                 </FormGroup>
-              </div>
+              </Form>
             </Container>
           </div>
         </div>

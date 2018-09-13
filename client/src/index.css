@@ -530,6 +530,10 @@ img {
 }
 .skills-containment-div .groupname-input {
   font-size: 1.8rem;
+  border-radius: unset;
+}
+.skills-containment-div .form-group {
+  margin-bottom: 0.5rem;
 }
 .component-div {
   display: flex;

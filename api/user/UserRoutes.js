@@ -16,7 +16,7 @@ const { changeStatus } = require("../helpers/Stripe");
 let websiteName = "";
 if (process.env.SITE_NAME) {
   websiteName = process.env.SITE_NAME;
-} else websiteName = "easy-resume.com";
+} else websiteName = "rezRight.com";
 
 // GET users/:username
 // Route to find if a username is already in use
