@@ -3,25 +3,7 @@ import React, { Component } from "react";
 class TitleDropdown extends Component {
   // Adding default state as a placeholder
   state = {
-    toggled: false,
-    selected: ""
-  };
-
-  componentDidMount() {
-    this.setState({ selected: this.fillState() });
-  }
-
-  fillState = () => {
-    if (
-      this.props.value.length !== 0 &&
-      this.props.context.userInfo.title.length !== 0
-    ) {
-      const temp = this.props.context.userInfo.title.filter(title => {
-        return this.props.value[0]._id === title._id;
-      });
-      if (temp.length > 0) return temp[0].content;
-      else return "Select a Title";
-    } else return "Select a Title";
+    toggled: false
   };
 
   // Toggles the drop down menu to appear based on the boolean value of state
@@ -45,29 +27,35 @@ class TitleDropdown extends Component {
   };
 
   render() {
-    const { title } = this.props.data;
-    const { toggled, selected } = this.state;
-    const list = title.map(data => (
+    const { toggled } = this.state;
+    let selectedTitle = null;
+    const list = this.props.context.userInfo.resumes[this.props.index].title.map((data, index) => {
+      if(data.value === true){
+        selectedTitle = this.props.context.userInfo.title[index].content;
+      }
+      return (
       <li
         className="list-group-item"
         key={data._id}
-        name={data.content}
+        name={this.props.context.userInfo.title[index].content}
         // Bound the this context for scoping due to having a function for each iteration
         // onClick={this.handleClick.bind(this, data.name)}
         /* Another option is to simply use this callback syntax as long as the function isn't being passed as props to another component. */
         onClick={() => this.handleClick(data)}
         style={{ cursor: "pointer" }}
       >
-        {data.content}
+        {this.props.context.userInfo.title[index].content}
       </li>
-    ));
+      )
+    }
+  );
 
     return (
       <div className="template-card card card-card dropdown mb-3">
         <div className="container">
-          <p>{selected}</p>
+          <h6>{selectedTitle ? selectedTitle : "Select a title"}</h6>
         </div>
-        <h6>
+        <h6 style={{fontWeight: "550"}}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled

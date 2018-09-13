@@ -84,4 +84,51 @@ router.put(
   }
 );
 
+/*
+  @route  resume/:id
+  @desc   Delete a resume by id
+  @access Private (Production) | Public (Development)
+*/
+router.delete(
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log("req", req.body);
+    const { id } = req.params;
+    Resume.findById(id)
+      .then(resume => {
+        console.log("RESUME", resume.user)
+        console.log("req.user", req.user.id)
+        console.log(resume.user == req.user.id)
+        // the following won't work if it has 3 equal signs!
+        if (resume.user == req.user.id) {
+          resume
+            .remove()
+            .then(resume => {
+              console.log(resume);
+              res.status(200).json({ message: "Resume successfully deleted." });
+            })
+            .catch(err => {
+              console.log("ERROR", err)
+              res.status(404).json({
+                errorMessage: "Could not find and delete resume.",
+                error: err
+              });
+            });
+        } else {
+          res
+            .status(500)
+            .json({ errorMessage: "You do not have access to this resume!" });
+        }
+      })
+      .catch(err => {
+        console.log("ERROR", err)
+        res.status(404).json({
+          errorMessage: "Could not find and delete resume.",
+          error: err
+        });
+      });
+  }
+);
+
 module.exports = router;

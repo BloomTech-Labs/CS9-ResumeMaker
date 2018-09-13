@@ -55,6 +55,7 @@ a {
   padding: 0.5rem 0 0 0;
 }
 .title-div h4 {
+  width: 100%;
   text-align: start;
 }
 .title-div p {
@@ -232,7 +233,6 @@ form {
   padding: 1.25rem;
   font-size: 0.7rem;
   width: 15rem;
-  height: 233px;
   border: 1.5rem;
 }
 .summary-containment-div .card-body h5 {
@@ -265,7 +265,6 @@ form {
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
-  height: 233px;
 }
 .experience-containment-div .card-body h5 {
   font-size: 1rem;
@@ -298,7 +297,6 @@ form {
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
-  height: 233px;
 }
 .education-containment-div .card-body h5 {
   font-size: 1rem;
@@ -398,7 +396,7 @@ form {
   padding: 2rem;
 }
 .Login .message p {
-  word-break: break;
+  word-break: break-word;
 }
 .navbar {
   background-color: #707f8c;
@@ -412,7 +410,6 @@ form {
 }
 .resume.title-div h4 {
   width: 100%;
-  border-bottom: 1px solid black;
   text-align: start;
   padding: 0.5rem;
   margin-right: 5%;
@@ -422,8 +419,8 @@ form {
   padding-top: 0;
 }
 img {
-  height: 20rem;
-  width: 15rem;
+  height: 18rem;
+  width: 13.9rem;
 }
 .template-img {
   border: 1px black solid;
@@ -583,7 +580,7 @@ img {
   display: flex;
 }
 .subtitle {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold";
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 .template.title-div {
   display: flex;
@@ -604,7 +601,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 .contact-section {
   border: 2px solid black;
@@ -621,6 +618,10 @@ img {
 .contact-section .contactHolder {
   display: flex;
 }
+.contact-section .contact-holder {
+  min-width: 100px;
+  width: 27%;
+}
 .title-section {
   margin: 5% 0 0 0;
   border: 2px solid black;
@@ -631,7 +632,7 @@ img {
 }
 .title-section .titleHolder {
   min-width: 100px;
-  width: 100px;
+  width: 10%;
 }
 .title-section .titleSection {
   display: flex;
@@ -649,7 +650,7 @@ img {
 }
 .summary-section .summaryHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .summary-section .summarySection {
   display: flex;
@@ -667,7 +668,7 @@ img {
 }
 .skills-section .skillsHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .skills-section .skillsSection {
   display: flex;
@@ -685,7 +686,7 @@ img {
 }
 .experience-section .experienceHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .experience-section .experienceSection {
   display: flex;
@@ -703,7 +704,7 @@ img {
 }
 .education-section .educationHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .education-section .educationSection {
   display: flex;
@@ -714,4 +715,7 @@ img {
 a:hover {
   text-decoration: none !important;
   color: inherit !important;
+}
+.nav-header {
+  text-shadow: 1px 1px black;
 }

@@ -2,15 +2,7 @@ import React, { Component } from "react";
 
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import {
-  Container,
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  Input,
-  Label
-} from "reactstrap";
+import { Container, Col, Form, FormGroup, Input, Label } from "reactstrap";
 
 import axios from "axios";
 const urls = require("../../config/config.json");
@@ -48,6 +40,27 @@ class Skills extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  handleDelete = (index, elementName) => {
+    this.props.context.actions.removeElement(index, elementName);
+    const tempObj = {
+      "sections.skills": this.props.context.userInfo.skills
+    };
+    axios
+      .put(
+        `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,
+        tempObj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
+      .then(response => {
+        this.props.context.actions.setLogin(response.data, true);
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
+  };
+
   handleSubmit = action => {
     if (action === "add") {
       this.props.context.actions.addElement("skills", {
@@ -73,7 +86,7 @@ class Skills extends Component {
       )
       .then(response => {
         // This updates context with the new user info from server
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
       })
       .catch(err => {
         console.log("Error", err.message);
@@ -86,7 +99,7 @@ class Skills extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" style={{ paddingRight: "1rem" }}>
             <div className="link-hide">
               <h4>SKILLS </h4>
             </div>
@@ -98,7 +111,9 @@ class Skills extends Component {
                 width: "100%"
               }}
             >
-              Click the pencil to enter your work related skills.
+              Enter a Skill Group Header, press ENTER, and then your associated
+              skills. Press ENTER to save any changes. New Skill Groups can be
+              added and deleted as needed.
             </p>
 
             <Container className="skills-containment-div">
@@ -108,18 +123,32 @@ class Skills extends Component {
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
                   >
+                    <button
+                      className="close"
+                      aria-label="Delete"
+                      onClick={() => this.handleDelete(index, "skills")}
+                    >
+                      <span aria-hidden="true" style={{ color: "red" }}>
+                        &times;
+                      </span>
+                    </button>
                     <FormGroup row>
                       <Col>
                         <Input
+                          style={{
+                            height: "2rem",
+                            fontSize: ".85rem",
+                            fontWeight: "550"
+                          }}
                           className="groupname-input"
                           id={`skills`}
                           name="groupname"
                           placeholder="Group Name"
-                          // size="sm"
                           value={this.state.skills[index].groupname}
                           onChange={e => this.handleChange(e, index)}
                           onKeyDown={event => {
                             if (event.key === "Enter") {
+                              event.target.blur();
                               event.preventDefault();
                               event.stopPropagation();
                               this.handleSubmit("edit");
@@ -131,16 +160,17 @@ class Skills extends Component {
                     <FormGroup row>
                       <Col>
                         <Input
+                          style={{ height: "2rem", fontSize: ".85rem" }}
                           className="skills-input"
                           id={`skills`}
                           name="content"
                           placeholder="Skill 1, skill 2, skill 3..."
                           type="textarea submit"
-                          // size="sm"
                           value={this.state.skills[index].content}
                           onChange={e => this.handleChange(e, index)}
                           onKeyDown={event => {
                             if (event.key === "Enter") {
+                              event.target.blur();
                               event.preventDefault();
                               event.stopPropagation();
                               this.handleSubmit("edit");
@@ -152,25 +182,30 @@ class Skills extends Component {
                   </Form>
                 );
               })}
-              <Button color="primary" onClick={() => this.handleSubmit("edit")}>
-                Submit
-              </Button>
               <div className="skillgroup-input">
                 <FormGroup>
-                  <Label>New Skill Group</Label>
+                  <Label
+                    style={{
+                      fontSize: "0.8rem"
+                    }}
+                  >
+                    Add a New Skill Group:
+                  </Label>
                   <Input
                     id="newSkill"
                     bssize="sm"
                     value={this.state.newSkill}
                     onChange={this.newSkillChange}
+                    onKeyDown={event => {
+                      if (event.key === "Enter") {
+                        event.target.blur();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.handleSubmit("add");
+                      }
+                    }}
                   />
                 </FormGroup>
-                <Button
-                  color="primary"
-                  onClick={() => this.handleSubmit("add")}
-                >
-                  Submit
-                </Button>
               </div>
             </Container>
           </div>

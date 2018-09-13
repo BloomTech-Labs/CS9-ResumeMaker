@@ -46,7 +46,7 @@ class Sidebar extends Component {
       ) {
         this.props.context.actions.setSingleElement(
           "currentresume",
-          this.props.context.userInfo.resumes[0]
+          this.props.context.userInfo.resumes[0]._id
         );
       }
     }
@@ -72,13 +72,13 @@ class Sidebar extends Component {
           }}
         >
           <Link
-            to="/resumes"
+            to="/dashboard"
             className={classnames({
-              active: window.location.pathname.includes("/resumes")
+              active: window.location.pathname.includes("/dashboard")
             })}
           >
             {" "}
-            <div className="fa fa-copy sm" style={{ color: "white" }} /> RESUMES
+            <div className="fa fa-check-square sm" style={{ color: "white" }} /> DASHBOARD
           </Link>
           <Link
             to="/templates"
@@ -169,7 +169,7 @@ class Sidebar extends Component {
               className="fa fa-sliders-h sm"
               style={{ color: "white" }}
             />{" "}
-            SETTINGS
+            SETTING
           </Link>
         </div>
         {/* <Route

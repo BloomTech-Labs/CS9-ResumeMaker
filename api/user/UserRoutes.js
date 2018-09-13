@@ -121,12 +121,15 @@ router.post("/register", (req, res) => {
           .save()
           .then(emailconfirmation => {
             // This is if ethereal doesn't work or you don't want to test with real emails
-            console.log(
-              "Link to activate account:\n",
-              `${req.get("host")}${req.baseUrl}/confirmemail/${
-                newEmailConfirmation.hash
-              }`
-            );
+            // console.log(
+            //   "Link to activate account:\n",
+            //   `${req.get("host")}${req.baseUrl}/confirmemail/${
+            //     newEmailConfirmation.hash
+            //   }`
+            // );
+            res.send(`${
+              req.body.path
+            }?/users/confirmemail/${newEmailConfirmation.hash}`)
             // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
             nodemailer.createTestAccount((err, account) => {
               if (err) {
@@ -150,13 +153,12 @@ router.post("/register", (req, res) => {
                 from: `"Fredegar Fu 👻" <signup@${websiteName}>`,
                 to: `${userData.email}`,
                 subject: `Confirm your registration to ${websiteName}!`,
-                text: `Thank you for signing up! Please go to this address to confirm your registration: ${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}`,
-                html: `Thank you for signing up! Please click this <a href=${req.get(
-                  "host"
-                )}${req.baseUrl}/confirmemail/${newEmailConfirmation.hash}
-                }>link</a>.`
+                text: `Thank you for signing up! Please go to this address to confirm your registration: ${
+                  req.body.path
+                }?/users/confirmemail/${newEmailConfirmation.hash}`,
+                html: `Thank you for signing up! Please click this <a href=${
+                  req.body.path
+                }?/users/confirmemail/${newEmailConfirmation.hash}>link</a>.`
               };
 
               transporter.sendMail(mailOptions, (err, info) => {
@@ -175,9 +177,8 @@ router.post("/register", (req, res) => {
                   "Preview URL: %s",
                   nodemailer.getTestMessageUrl(info)
                 );
-                res.status(200).json({
-                  message: "Email confirmation saved and email sent."
-                });
+                res.status(200).json(
+                  nodemailer.getTestMessageUrl(info) );
               });
             });
           })
@@ -373,9 +374,11 @@ router.put(
                                 // This is if ethereal doesn't work or you don't want to test with real emails
                                 console.log(
                                   "Link to change email:\n",
-                                  `${req.get("host")}${
-                                    req.baseUrl
-                                  }/changeemail/${newEmailConfirmation.hash}`
+                                  `${
+                                    req.body.path
+                                  }?/users/changeemail/${
+                                    newEmailConfirmation.hash
+                                  }`
                                 );
                                 // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
                                 nodemailer.createTestAccount((err, account) => {
@@ -393,17 +396,16 @@ router.put(
                                     from: `"Fredegar Fu 👻" <changemail@${websiteName}>`,
                                     to: `${req.user.email}`,
                                     subject: `Confirm your account email change for ${websiteName}!`,
-                                    text: `Please go to this link to make this your new account email address: ${req.get(
-                                      "host"
-                                    )}${req.baseUrl}/changeemail/${
+                                    text: `Please go to this link to make this your new account email address: ${
+                                      req.body.path
+                                    }?/users/changeemail/${
                                       newEmailConfirmation.hash
                                     }`,
-                                    html: `Please click this <a href=${req.get(
-                                      "host"
-                                    )}${req.baseUrl}/changeemail/${
+                                    html: `Please click this <a href=${
+                                      req.body.path
+                                    }?/users/changeemail/${
                                       newEmailConfirmation.hash
-                                    }
-                    }>link</a> to make this your new account email address.`
+                                    }>link</a> to make this your new account email address..`
                                   };
 
                                   transporter.sendMail(
@@ -539,26 +541,26 @@ router.get("/changeemail/:hash", (req, res) => {
                 email: emailconfirmation.oldemail
               });
             } else
-              res.status(404).json({
+              res.status(200).json({
                 errorMessage:
                   "Your email could not be changed for some reason. Please try again."
               });
           })
           .catch(err => {
-            res.status(500).json({
+            res.status(200).json({
               errorMessage:
                 "Your email could not be changed for some reason. Please try again.",
               error: err
             });
           });
       } else
-        res.status(500).json({
+        res.status(200).json({
           errorMessage:
             "Your email could not be changed for some reason. Please try again."
         });
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(200).json({
         errorMessage:
           "Email confirmation could not be found. Please try again.",
         error: err
@@ -597,23 +599,24 @@ router.get("/confirmemail/:hash", (req, res) => {
               expiresIn: "7d"
             });
             user.password = null;
-            res.status(201).json({ token, user });
+            // res.status(201).json({ token, user });
+            res.status(201).send({message: "You can now login with your registered email and password.", token, user});
           })
           .catch(err => {
-            res.status(500).json({
+            res.status(200).json({
               errorMessage:
                 "There was an error in account creation, please try again.",
               error: err
             });
           });
       } else
-        res.status(404).json({
+        res.status(200).json({
           errorMessage:
             "Your account has already been activated or does not exist."
         });
     })
     .catch(err =>
-      res.status(404).json({
+      res.status(200).json({
         errorMessage: "Could not find email confirmation in database.",
         error: err
       })
@@ -648,9 +651,7 @@ router.put("/forgotpassword", (req, res) => {
           // This is if ethereal doesn't work or you don't want to test with real emails
           console.log(
             "Link to reset password:\n",
-            `${req.get("host")}${req.baseUrl}/resetpassword/${
-              newEmailConfirmation.hash
-            }`
+            `${req.body.path}?/users/resetpassword/${newEmailConfirmation.hash}`
           );
           // This sends a test email that can set user.active to true, thus allowing them to use the sites functions.
           nodemailer.createTestAccount((err, account) => {
@@ -668,13 +669,13 @@ router.put("/forgotpassword", (req, res) => {
               from: `"Fredegar Fu 👻" <forgotpassword@${websiteName}>`,
               to: `${user.email}`,
               subject: `Confirm your password change for ${websiteName}!`,
-              text: `Please go to this link to reset your password: ${req.get(
-                "host"
-              )}${req.baseUrl}/resetpassword/${newEmailConfirmation.hash}`,
-              html: `Please click this <a href=${req.get("host")}${
-                req.baseUrl
-              }/resetpassword/${newEmailConfirmation.hash}
-          }>link</a> to reset your password.`
+              text: `Please go to this link to reset your password: ${
+                req.body.path
+              }?/users/resetpassword/${newEmailConfirmation.hash}`,
+              html: `Please click this <a href=${
+                req.body.path
+              }?/users/resetpassword/${newEmailConfirmation.hash}
+              }>link</a> to reset your password.`
             };
 
             transporter.sendMail(mailOptions, (err, info) => {
@@ -683,12 +684,12 @@ router.put("/forgotpassword", (req, res) => {
                   .status(500)
                   .json({ errorMessage: "Could not send email.", error: err });
               }
-              console.log("Message sent: %s", info.messageId);
-              console.log(
-                "Preview URL: %s",
-                nodemailer.getTestMessageUrl(info)
-              );
-              return res
+              // console.log("Message sent: %s", info.messageId);
+              // console.log(
+              //   "Preview URL: %s",
+              //   nodemailer.getTestMessageUrl(info)
+              // );
+            res
                 .status(200)
                 .json({ message: "Email confirmation saved and email sent." });
             });
@@ -732,7 +733,7 @@ router.get("/resetpassword/:hash", (req, res) => {
               user.active = true;
               user.save(function(err) {
                 if (err) {
-                  res.status(500).json({
+                  res.status(200).json({
                     errorMessage:
                       "There was an error setting the temporary password.",
                     error: err
@@ -740,26 +741,26 @@ router.get("/resetpassword/:hash", (req, res) => {
                 } else res.status(200).json({ message: "Temporary password set successfully!", password: newPassword });
               });
             } else
-              res.status(404).json({
+              res.status(200).json({
                 errorMessage:
                   "You took too long to confirm your email. Please register again and confirm your email within 30 minutes."
               });
           })
           .catch(err => {
-            res.status(500).json({
+            res.status(200).json({
               errorMessage:
                 "Your account has already been activated or does not exist.",
               error: err
             });
           });
       } else
-        res.status(500).json({
+        res.status(200).json({
           errorMessage:
             "Your account has already been activated or does not exist."
         });
     })
     .catch(err => {
-      res.status(500).json({
+      res.status(200).json({
         errorMessage: "Your password could not be reset for some reason.",
         error: err
       });
