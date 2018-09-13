@@ -430,7 +430,10 @@ class Resumes extends Component {
                         aria-hidden="true"
                       >
                         <a href={`mailto:${userInfo.email}`}>
-                          <div style={{ marginLeft: "4%" }}> {userInfo.email}</div>
+                          <div style={{ marginLeft: "4%" }}>
+                            {" "}
+                            {userInfo.email}
+                          </div>
                         </a>
                       </div>
                       <div>
@@ -443,20 +446,20 @@ class Resumes extends Component {
                       </div>
                     </Container>
                     <Container className="contactTwo">
-                    <div>
-                      <CheckBox
-                        context={this.props.context}
-                        index={this.state.index}
-                        name="linkedin"
-                        value={
-                          resumes[this.state.index] &&
-                          resumes[this.state.index].links
-                            ? resumes[this.state.index].links.linkedin
-                            : null
-                        }
-                      />
-                      {" " + userInfo.links.linkedin + " "}
-                      <div className={"fa fa-linkedin fa-sm"} />
+                      <div>
+                        <CheckBox
+                          context={this.props.context}
+                          index={this.state.index}
+                          name="linkedin"
+                          value={
+                            resumes[this.state.index] &&
+                            resumes[this.state.index].links
+                              ? resumes[this.state.index].links.linkedin
+                              : null
+                          }
+                        />
+                        {" " + userInfo.links.linkedin + " "}
+                        <div className={"fa fa-linkedin fa-sm"} />
                       </div>
                       <div>
                         <CheckBox
