@@ -517,6 +517,7 @@ img {
 }
 .skills-containment-div .groupname-input {
   font-size: 1.8rem;
+  border-radius: unset;
 }
 .component-div {
   display: flex;

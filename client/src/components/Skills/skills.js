@@ -203,7 +203,7 @@ class Skills extends Component {
                   </Form>
                 );
               })}
-              <div className="skillgroup-input">
+              <Form className="skillgroup">
                 <FormGroup>
                   <Label
                     style={{
@@ -213,6 +213,7 @@ class Skills extends Component {
                     Add a New Skill Group:
                   </Label>
                   <Input
+                    className="groupname-input"
                     id="newSkill"
                     bssize="sm"
                     value={this.state.newSkill}
@@ -227,7 +228,7 @@ class Skills extends Component {
                     }}
                   />
                 </FormGroup>
-              </div>
+              </Form>
             </Container>
           </div>
         </div>
