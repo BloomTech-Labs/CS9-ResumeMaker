@@ -681,7 +681,7 @@ img {
 }
 .skills-section .skillsHolder {
   min-width: 100px;
-  height: 154px;
+  min-height: 118px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -703,7 +703,7 @@ img {
 }
 .experience-section .experienceHolder {
   min-width: 100px;
-  height: 154px;
+  min-height: 118px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -724,7 +724,7 @@ img {
   justify-content: center;
 }
 .education-section .educationHolder {
-  height: 154px;
+  min-height: 118px;
   display: flex;
   align-items: center;
   justify-content: center;
