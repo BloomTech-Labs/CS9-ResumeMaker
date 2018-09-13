@@ -9,7 +9,7 @@ const urls = require("../../config/config.json");
 
 class Billing extends Component {
   state = {
-    complete: this.props.context.userInfo.membership,
+    complete: false,
     gone: false,
     loading: false,
     sub_err: false,
@@ -18,6 +18,12 @@ class Billing extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+  }
+
+  componentDidUpdate = () => {
+    if(this.props.context.userInfo.auth === true && this.props.context.userInfo.membership !== this.state.complete){
+      this.setState({ complete: this.props.context.userInfo.membership });
+    }
   }
 
   tokenCreator = async () => {
