@@ -121,12 +121,12 @@ class Resumes extends Component {
       });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    tempObj.name = this.state.resumeName;
+    tempObj.name = this.props.resumeName;
     // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
     //   resume => resume._id
     // );
@@ -156,7 +156,7 @@ class Resumes extends Component {
               }
             )
             .then(response => {
-              this.setState({ success: true });
+             this.setState({ success: true });
               // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
