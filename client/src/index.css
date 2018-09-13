@@ -144,6 +144,16 @@ i {
   font-size: 1rem;
   color: #777;
 }
+.fa.fa-check {
+  padding: 0.5rem;
+}
+.fa.fa-check:hover {
+  color: #777;
+}
+.fa.fa-check:active {
+  font-size: 1rem;
+  color: #777;
+}
 .title-div.templates h4 {
   width: 100%;
   border-bottom: 1px solid black;
@@ -161,6 +171,9 @@ form {
 }
 .form-control {
   font-size: 0.7rem;
+}
+.edit-name {
+  max-width: 200px;
 }
 .item-card {
   margin: 1%;
@@ -718,4 +731,8 @@ a:hover {
 }
 .nav-header {
   text-shadow: 1px 1px black;
+}
+.container.resume-name {
+  display: flex;
+  justify-content: center;
 }
