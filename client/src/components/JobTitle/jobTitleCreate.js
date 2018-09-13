@@ -75,7 +75,7 @@ class JobTitleCreate extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
         this.setState({ success: true });
       })
       .catch(err => {

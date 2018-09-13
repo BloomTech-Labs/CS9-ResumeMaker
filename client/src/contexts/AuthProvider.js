@@ -51,7 +51,8 @@ class AuthProvider extends Component {
     });
   };
 
-  setLogin = dataFromUser => {
+  setLogin = (dataFromUser, expandResumes) => {
+    console.log("setLogin called", dataFromUser);
     const userData = dataFromUser.user;
     this.setState({
       auth: true,
@@ -78,12 +79,13 @@ class AuthProvider extends Component {
       summary: userData.sections.summary ? userData.sections.summary : [],
       username: userData.username ? userData.username : "",
       id: userData._id ? userData._id : null,
-      resumes: dataFromUser.resumes ? dataFromUser.resumes : [],
       membership: userData.membership ? userData.membership : false
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if (dataFromUser.resumes) {
+    if(expandResumes === true){
+      this.expandResumeIDs();
+    } else if (dataFromUser.resumes) {
       // const links = {
       //   github: false,
       //   linkedin: false,
@@ -122,20 +124,21 @@ class AuthProvider extends Component {
   }
 
   setResume = resumeData => {
+    console.log("setResume called with:", resumeData);
     if (this.state.auth !== true) {
       return;
-    } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
+    } else if (!(this.state.resumes.length > 0) && resumeData && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
     } else if (
       !(resumeData.length > 0 || resumeData[0] === null) &&
       this.state.auth
     ) {
       this.createResume(true);
-    } else if (
-      this.state.resumes.length &&
-      resumeData.length === this.state.resumes.length
-    ) {
-      this.expandResumeIDs();
+    // } else if (
+    //   this.state.resumes.length &&
+    //   resumeData.length === this.state.resumes.length
+    // ) {
+    //   this.expandResumeIDs();
     } else {
       return;
     }
@@ -204,6 +207,7 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
+    console.log("expandResumeIDs called");
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {

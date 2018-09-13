@@ -62,7 +62,7 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
       })
       .catch(err => {
         console.log("err", err);
@@ -87,7 +87,7 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
       })
       .catch(err => {
         console.log("err", err);

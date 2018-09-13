@@ -38,7 +38,9 @@ class ResumeDropdown extends Component {
       toggled: false
     });
     // this updates template page index
+    // console.log("handleClick UpdateResumeIndex(newIndex: " + index + ")")
     this.props.updateResumeIndex(index);
+    // console.log("resumedropdown newcurrentres", data._id);
     this.props.context.actions.setSingleElement("currentresume", data._id);
   };
 

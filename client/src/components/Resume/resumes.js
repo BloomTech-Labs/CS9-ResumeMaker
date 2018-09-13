@@ -31,7 +31,9 @@ class Resumes extends Component {
   };
 
   updateResumeIndex = newIndex => {
-    if(newIndex){
+    // console.log("IS THIS RUN UPDATE", newIndex)
+    if(newIndex >= 0){
+      // console.log("updateResumeIndex, newIndex", newIndex)
       this.setState({ index: newIndex });
     } else {
       let index = this.findWithAttr(
