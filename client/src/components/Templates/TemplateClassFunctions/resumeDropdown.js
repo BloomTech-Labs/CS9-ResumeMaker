@@ -48,7 +48,7 @@ class ResumeDropdown extends Component {
     let selectedResume = null;
     const list = this.props.context.userInfo.resumes.map((data, index) => {
       console.log("RENDERED so go thorugh", this.props.context.userInfo.resumes[index].name)
-      if(data._id == this.props.context.userInfo.currentresume){
+      if(data._id === this.props.context.userInfo.currentresume){
         selectedResume = data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;
       }
       return (
@@ -64,7 +64,6 @@ class ResumeDropdown extends Component {
     }
   );
 
-    const displayIndex = this.props.index + 1;
     return (
       <div className="template-card card dropdown m-0">
         <div className="container">
