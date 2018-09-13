@@ -18,9 +18,13 @@ class Resumes extends Component {
     this.state = {
       index: null,
       success: false,
-      resumeName: null
+      resumeName: ""
     };
   }
+
+  onInputChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
 
   findWithAttr = (array, attr, value) => {
     for (var i = 0; i < array.length; i++) {
@@ -301,6 +305,8 @@ class Resumes extends Component {
                 <React.Fragment>
                   <ResumeDropdown
                     updateResumeIndex={this.updateResumeIndex}
+                    onInputChange={this.onInputChange}
+                    resumeName={this.state.resumeName}
                     index={this.state.index}
                     className="dropdown"
                     context={this.props.context}

@@ -66,7 +66,16 @@ class ResumeDropdown extends Component {
     return (
       <div className="template-card card dropdown m-0">
         <div className="container">
-          <h4 style={{textTransform: "uppercase"}}>{selectedResume ? selectedResume : "RESUME: " + displayIndex}</h4>
+          {/* <h4 style={{textTransform: "uppercase"}}>{selectedResume ? selectedResume : "RESUME: " + displayIndex}</h4> */}
+          <h4 style={{textTransform: "uppercase"}}>{selectedResume}</h4>
+          <input
+            id="resumeName"
+            type="text"
+            value={this.props.resumeName}
+            onChange={this.props.onInputChange}
+            className="form-control"
+            placeholder={selectedResume}
+          />
         </div>
         <h6 style={{textTransform: "uppercase"}}>
           Choose an option:{" "}
