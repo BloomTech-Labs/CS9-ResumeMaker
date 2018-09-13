@@ -637,7 +637,6 @@ img {
 .contact-section .contactSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
 }
 .contact-section .contactHolder {
   display: flex;
@@ -661,7 +660,6 @@ img {
 .title-section .titleSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .summary-section {
@@ -679,7 +677,6 @@ img {
 .summary-section .summarySection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .skills-section {
@@ -701,7 +698,6 @@ img {
 .skills-section .skillsSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .experience-section {
@@ -723,7 +719,6 @@ img {
 .experience-section .experienceSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .education-section {
@@ -744,7 +739,6 @@ img {
 .education-section .educationSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 a:hover {
