@@ -68,7 +68,10 @@ class Resumes extends Component {
       );
       if (index >= 0) {
         this.setState({ index: index });
-      } else if (this.props.context.userInfo.membership === false && this.props.context.userInfo.membership.auth === true){
+      } else if (
+        this.props.context.userInfo.membership === false &&
+        this.props.context.userInfo.membership.auth === true
+      ) {
         this.setState({ index: 0 });
       }
     }
@@ -82,12 +85,24 @@ class Resumes extends Component {
       this.props.context.userInfo.resumes.length === 0
     ) {
       this.handleCreate();
-    } else if(newIndex >= 0 && this.props.context.userInfo.resumes.length > 0){
-      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[newIndex]._id);
-    } else if(this.props.context.userInfo.resumes.length > 0 && this.state.index){
-      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[this.state.index]._id);
-    } else if(this.props.context.userInfo.resumes.length === 1){
-      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[0]._id);
+    } else if (
+      newIndex >= 0 &&
+      this.props.context.userInfo.resumes.length > 0
+    ) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[newIndex]._id
+      );
+    } else if (
+      this.props.context.userInfo.resumes.length > 0 &&
+      this.state.index
+    ) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[this.state.index]._id
+      );
+    } else if (this.props.context.userInfo.resumes.length === 1) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[0]._id
+      );
     }
   };
 
@@ -246,11 +261,11 @@ class Resumes extends Component {
   };
 
   componentDidUpdate = () => {
-    if(this.props.context.userInfo.resumes[0]){
-      if(this.state.resumeName === null || this.state.index === null){
-        this.updateResumeIndex()
-      // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
-      //   this.updateResumeName(this.state.index);
+    if (this.props.context.userInfo.resumes[0]) {
+      if (this.state.resumeName === null || this.state.index === null) {
+        this.updateResumeIndex();
+        // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
+        //   this.updateResumeName(this.state.index);
       }
     }
   };
@@ -409,9 +424,15 @@ class Resumes extends Component {
                   )}
                   <Container className="contactHolder">
                     <Container className="contactOne">
-                      <a href={`mailto:${userInfo.email}`}>
-                        <div> {userInfo.email}</div>
-                      </a>
+                      <div
+                        className="fas fa-envelope"
+                        style={{ display: "flex", justifyContent: "center" }}
+                        aria-hidden="true"
+                      >
+                        <a href={`mailto:${userInfo.email}`}>
+                          <div style={{ marginLeft: "4%" }}> {userInfo.email}</div>
+                        </a>
+                      </div>
                       <div>
                         <div className="fa fa-globe" aria-hidden="true" />
                         {" " + userInfo.location}
@@ -433,7 +454,7 @@ class Resumes extends Component {
                             : null
                         }
                       />
-                      {" " + userInfo.links.linkedin}
+                      {" " + userInfo.links.linkedin + " "}
                       <div className={"fa fa-linkedin fa-sm"} />
                       <div>
                         <CheckBox
@@ -447,7 +468,7 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.links.github}
+                        {" " + userInfo.links.github + " "}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
                       <div>
@@ -463,7 +484,8 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.links.portfolio}
+                        {" " + userInfo.links.portfolio + " "}
+                        <div className="fa fa-folder-open" aria-hidden="true" />
                       </div>
                     </Container>
                   </Container>
