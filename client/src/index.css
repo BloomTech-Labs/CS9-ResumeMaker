@@ -608,7 +608,7 @@ img {
   font-size: 0.7rem;
 }
 .contact-section {
-  border: 2px solid black;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -617,7 +617,7 @@ img {
 .contact-section .contactSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
 }
 .contact-section .contactHolder {
   display: flex;
@@ -627,8 +627,8 @@ img {
   width: 27%;
 }
 .title-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -641,12 +641,12 @@ img {
 .title-section .titleSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .summary-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -659,12 +659,12 @@ img {
 .summary-section .summarySection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .skills-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -677,12 +677,12 @@ img {
 .skills-section .skillsSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .experience-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -695,12 +695,12 @@ img {
 .experience-section .experienceSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .education-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -713,7 +713,7 @@ img {
 .education-section .educationSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 a:hover {
@@ -722,4 +722,7 @@ a:hover {
 }
 .nav-header {
   text-shadow: 1px 1px black;
+}
+#resumeName {
+  border-radius: unset;
 }

@@ -419,7 +419,7 @@ class Resumes extends Component {
                             : null
                         }
                       />
-                      {" " + userInfo.links.linkedin}{" "}
+                      {" " + userInfo.links.linkedin}
                       <div className={"fa fa-linkedin fa-sm"} />
                       <div>
                         <CheckBox
@@ -432,10 +432,10 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.links.github}{" "}
+                        {" " + userInfo.links.github}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
-                      <p>
+                      <div>
                         <CheckBox
                           context={this.props.context}
                           index={this.state.index}
@@ -445,9 +445,9 @@ class Resumes extends Component {
                               ? resumes[this.state.index].links.portfolio
                               : null
                           }
-                        />{" "}
+                        />
                         {" " + userInfo.links.portfolio}
-                      </p>
+                      </div>
                     </Container>
                   </Container>
                 </Container>
