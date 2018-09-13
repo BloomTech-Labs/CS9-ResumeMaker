@@ -588,6 +588,7 @@ img {
   width: 10rem;
   height: 3rem;
   margin: 1rem;
+  white-space: nowrap;
 }
 .save-button {
   height: min-content;
