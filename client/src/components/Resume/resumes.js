@@ -68,6 +68,11 @@ class Resumes extends Component {
       );
       if (index >= 0) {
         this.setState({ index: index });
+      } else if (
+        this.props.context.userInfo.membership === false &&
+        this.props.context.userInfo.membership.auth === true
+      ) {
+        this.setState({ index: 0 });
       }
     }
 
@@ -93,6 +98,10 @@ class Resumes extends Component {
     ) {
       this.props.context.actions.setCurrentResume(
         this.props.context.userInfo.resumes[this.state.index]._id
+      );
+    } else if (this.props.context.userInfo.resumes.length === 1) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[0]._id
       );
     }
   };
@@ -253,9 +262,7 @@ class Resumes extends Component {
 
   componentDidUpdate = () => {
     if (this.props.context.userInfo.resumes[0]) {
-      console.log("DIDUPDATE");
-      if (this.state.resumeName === null) {
-        console.log("NULL ME BABY");
+      if (this.state.resumeName === null || this.state.index === null) {
         this.updateResumeIndex();
         // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
         //   this.updateResumeName(this.state.index);
@@ -397,7 +404,7 @@ class Resumes extends Component {
             <Container className="resumePage">
               <Container className="contact-section">
                 <Container className="contact-holder">
-                  <h6>Contact Details</h6>
+                <h6 style={{ fontWeight: "bold" }}>Contact Details:</h6>
                 </Container>
                 <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
@@ -417,9 +424,18 @@ class Resumes extends Component {
                   )}
                   <Container className="contactHolder">
                     <Container className="contactOne">
-                      <a href={`mailto:${userInfo.email}`}>
-                        <div> {userInfo.email}</div>
-                      </a>
+                      <div
+                        className="fas fa-envelope"
+                        style={{ display: "flex", justifyContent: "center" }}
+                        aria-hidden="true"
+                      >
+                        <a href={`mailto:${userInfo.email}`}>
+                          <div style={{ marginLeft: "4%" }}>
+                            {" "}
+                            {userInfo.email}
+                          </div>
+                        </a>
+                      </div>
                       <div>
                         <div className="fa fa-globe" aria-hidden="true" />
                         {" " + userInfo.location}
@@ -430,19 +446,21 @@ class Resumes extends Component {
                       </div>
                     </Container>
                     <Container className="contactTwo">
-                      <CheckBox
-                        context={this.props.context}
-                        index={this.state.index}
-                        name="linkedin"
-                        value={
-                          resumes[this.state.index] &&
-                          resumes[this.state.index].links
-                            ? resumes[this.state.index].links.linkedin
-                            : null
-                        }
-                      />
-                      {" " + userInfo.links.linkedin}
-                      <div className={"fa fa-linkedin fa-sm"} />
+                      <div>
+                        <CheckBox
+                          context={this.props.context}
+                          index={this.state.index}
+                          name="linkedin"
+                          value={
+                            resumes[this.state.index] &&
+                            resumes[this.state.index].links
+                              ? resumes[this.state.index].links.linkedin
+                              : null
+                          }
+                        />
+                        {" " + userInfo.links.linkedin + " "}
+                        <div className={"fa fa-linkedin fa-sm"} />
+                      </div>
                       <div>
                         <CheckBox
                           context={this.props.context}
@@ -455,7 +473,7 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.links.github}
+                        {" " + userInfo.links.github + " "}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
                       <div>
@@ -471,7 +489,8 @@ class Resumes extends Component {
                               : null
                           }
                         />
-                        {" " + userInfo.links.portfolio}
+                        {" " + userInfo.links.portfolio + " "}
+                        <div className="fa fa-folder-open" aria-hidden="true" />
                       </div>
                     </Container>
                   </Container>
@@ -479,7 +498,7 @@ class Resumes extends Component {
               </Container>
               <Container className="title-section">
                 <Container className="titleHolder">
-                  <h6>Titles</h6>
+                <h6 style={{ fontWeight: "bold" }}>Titles:</h6>
                 </Container>
                 <Container className="titleSection">
                   <TitleDropdown
@@ -498,7 +517,7 @@ class Resumes extends Component {
               </Container>
               <Container className="summary-section">
                 <div className="summaryHolder">
-                  <h6>Summary</h6>
+                <h6 style={{ fontWeight: "bold" }}>Summary:</h6>
                 </div>
                 <Container className="summarySection">
                   <SummaryDropdown
@@ -517,7 +536,7 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                  <h6>Skills</h6>
+                <h6 style={{ fontWeight: "bold" }}>Skills:</h6>
                 </div>
                 <Container
                   className="skillsSection"
@@ -550,7 +569,7 @@ class Resumes extends Component {
               </Container>
               <Container className="experience-section">
                 <div className="experienceHolder">
-                  <h6>Experience</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Experience:</h6>
                 </div>
                 <Container
                   className="experienceSection"
@@ -596,7 +615,7 @@ class Resumes extends Component {
               </Container>
               <Container className="education-section">
                 <div className="educationHolder">
-                  <h6>Education</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Education:</h6>
                 </div>
                 <Container
                   className="educationSection"

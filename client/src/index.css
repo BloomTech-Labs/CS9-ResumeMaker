@@ -72,11 +72,10 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
   background-color: #707f8c;
   height: 320px;
   width: 60%;
-  padding: 3%;
+  padding: 2%;
   margin-top: 3%;
 }
 .stripe-pay {
@@ -104,6 +103,9 @@ textarea {
 }
 .bill-btn {
   margin: 2% 1%;
+}
+.unsubscribe {
+  max-width: 30%;
 }
 .template-card {
   background-color: transparent !important;
@@ -535,6 +537,12 @@ img {
 .skills-containment-div .form-group {
   margin-bottom: 0.5rem;
 }
+.groupname-input {
+  border-radius: unset !important;
+}
+.groupname {
+  width: fit-content;
+}
 .component-div {
   display: flex;
   background: #c8c8c8;
@@ -588,6 +596,7 @@ img {
   width: 10rem;
   height: 3rem;
   margin: 1rem;
+  white-space: nowrap;
 }
 .save-button {
   height: min-content;
@@ -630,7 +639,6 @@ img {
 .contact-section .contactSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
 }
 .contact-section .contactHolder {
   display: flex;
@@ -654,7 +662,6 @@ img {
 .title-section .titleSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .summary-section {
@@ -672,7 +679,6 @@ img {
 .summary-section .summarySection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .skills-section {
@@ -694,7 +700,6 @@ img {
 .skills-section .skillsSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .experience-section {
@@ -716,7 +721,6 @@ img {
 .experience-section .experienceSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 .education-section {
@@ -737,7 +741,6 @@ img {
 .education-section .educationSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 1px solid black;
   max-width: 800px;
 }
 a:hover {

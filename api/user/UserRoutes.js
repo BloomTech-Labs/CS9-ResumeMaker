@@ -322,6 +322,7 @@ router.put(
       delete req.body.active;
       // Delete this to ensure the password isn't changed manually
       delete req.body.password;
+      delete req.body.membership;
 
       const changes = req.body;
       const options = {

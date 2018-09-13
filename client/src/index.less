@@ -105,11 +105,10 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
   background-color: @background_color_1;
   height: 320px;
   width: 60%;
-  padding: 3%;
+  padding: 2%;
   margin-top: 3%;
 }
 .stripe-pay {
@@ -137,6 +136,9 @@ textarea {
 }
 .bill-btn {
   margin: 2% 1%;
+}
+.unsubscribe {
+  max-width: 30%;
 }
 
 // classFunction.css
@@ -599,6 +601,12 @@ img {
     margin-bottom: 0.5rem;
   }
 }
+.groupname-input {
+  border-radius: unset !important;
+}
+.groupname {
+  width: fit-content;
+}
 
 // templates.css, template1.css, template2.css, template3.css
 .component-div {
@@ -654,6 +662,7 @@ img {
   width: 10rem;
   height: 3rem;
   margin: 1rem;
+  white-space: nowrap;
 }
 .save-button {
   height: min-content;
@@ -699,7 +708,6 @@ img {
   .contactSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 1px solid black;
   }
 
   .contactHolder {
@@ -727,7 +735,6 @@ img {
   .titleSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 1px solid black;
     max-width: 800px;
   }
 }
@@ -748,7 +755,6 @@ img {
   .summarySection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 1px solid black;
     max-width: 800px;
   }
 }
@@ -768,13 +774,11 @@ img {
     align-items: center;
     justify-content: center;
     width: 18%;
-
   }
 
   .skillsSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 1px solid black;
     max-width: 800px;
   }
 }
@@ -799,7 +803,6 @@ img {
   .experienceSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 1px solid black;
     max-width: 800px;
   }
 }
@@ -823,7 +826,6 @@ img {
   .educationSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 1px solid black;
     max-width: 800px;
   }
 }
@@ -833,7 +835,7 @@ a:hover {
   color: inherit !important;
 }
 .nav-header {
-  text-shadow: 1px 1px black; 
+  text-shadow: 1px 1px black;
 }
 #resumeName {
   border-radius: unset;

@@ -19,9 +19,21 @@ const Resume = new Schema({
     }
   ],
   links: {
-    linkedin: Boolean,
-    github: Boolean,
-    portfolio: Boolean
+    linkedin: {
+      type: Boolean,
+      default: false,
+      required: true
+    },
+    github: {
+      type: Boolean,
+      default: false,
+      required: true
+    },
+    portfolio: {
+      type: Boolean,
+      default: false,
+      required: true
+    }
   },
   sections: {
     experience: [
