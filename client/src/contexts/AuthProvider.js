@@ -99,6 +99,7 @@ class AuthProvider extends Component {
   };
 
   setCurrentResume = (resume) => {
+    console.log("setCurrentResume called with", resume)
     if(this.state.resumes.length > 0){
       const newCurrentResume = resume ? resume: this.state.resumes[0]._id;
       this.setState({ currentresume: newCurrentResume })
@@ -129,17 +130,19 @@ class AuthProvider extends Component {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
-    } else if (
-      !(resumeData.length > 0 || resumeData[0] === null) &&
-      this.state.auth
-    ) {
-      this.createResume(true);
-    // } else if (
-    //   this.state.resumes.length &&
-    //   resumeData.length === this.state.resumes.length
+    } 
+    // else if (
+    //   !(resumeData.length > 0 || resumeData[0] === null) &&
+    //   this.state.auth
     // ) {
-    //   this.expandResumeIDs();
-    } else {
+    //   this.createResume(true);
+    // // } else if (
+    // //   this.state.resumes.length &&
+    // //   resumeData.length === this.state.resumes.length
+    // // ) {
+    // //   this.expandResumeIDs();
+    // } 
+    else {
       return;
     }
   };

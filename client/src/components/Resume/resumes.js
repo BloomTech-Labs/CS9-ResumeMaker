@@ -44,6 +44,14 @@ class Resumes extends Component {
       if (index === -1) index = 0;
       this.setState({ index: index });
     }
+
+    if(this.props.context.userInfo.auth === true && this.props.context.userInfo.resumes.length === 0){
+      this.handleCreate();
+    } else if(newIndex >= 0 && this.props.context.userInfo.resumes.length > 0){
+      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[newIndex]._id);
+    } else if(this.props.context.userInfo.resumes.length > 0 && this.state.index){
+      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[this.state.index]._id);
+    }
   };
 
   componentDidMount() {
@@ -72,9 +80,9 @@ class Resumes extends Component {
         })
       }
     };
-    tempObj["resumes"] = this.props.context.userInfo.resumes.map(
-      resume => resume._id
-    );
+    // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
+    //   resume => resume._id
+    // );
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -83,6 +91,7 @@ class Resumes extends Component {
       })
       .then(response => {
         this.props.context.actions.pushResumes(response.data.Resume);
+        this.updateResumeIndex(this.props.context.userInfo.resumes.length - 1);
       })
       .catch(err => {
         console.log("err", err);
@@ -142,7 +151,7 @@ class Resumes extends Component {
           }
         })
         .then(response => {
-          this.setState({ success: true });
+          // this.setState({ success: true });
           this.props.context.actions.pushResumes(response.data.Resume);
         })
         .catch(err => {
@@ -172,8 +181,15 @@ class Resumes extends Component {
         .then(response => {
           console.log("DELETE RESPONSE");
           this.props.context.actions.removeElement(this.state.index, "resumes");
-          this.props.context.actions.setCurrentResume();
-          this.updateResumeIndex();
+          // this.props.context.actions.setSingleElement("currentresume", )
+          if(this.state.index > 0){
+            // this.props.context.actions.setCurrentResume(this.state.index - 1);
+            this.updateResumeIndex(this.state.index - 1);
+          } else this.updateResumeIndex(this.state.index);
+          // else if(this.props.context.userInfo.resumes[this.state.index + 1]){
+          //   // this.props.context.actions.setCurrentResume(this.state.index + 1);
+          //   this.updateResumeIndex(this.state.index + 1);
+          // }
         })
         .catch(err => {
           console.log("err", err);

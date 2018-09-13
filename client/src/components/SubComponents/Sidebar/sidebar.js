@@ -46,7 +46,7 @@ class Sidebar extends Component {
       ) {
         this.props.context.actions.setSingleElement(
           "currentresume",
-          this.props.context.userInfo.resumes[0]
+          this.props.context.userInfo.resumes[0]._id
         );
       }
     }
