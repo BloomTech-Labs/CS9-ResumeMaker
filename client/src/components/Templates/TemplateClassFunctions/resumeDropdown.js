@@ -96,9 +96,9 @@ class ResumeDropdown extends Component {
               }}
             />
           ) : (
-            <h4 style={{ textTransform: "uppercase" }}>{selectedResume}</h4>
+            <h4 style={{ textTransform: "uppercase", marginRight: "1%" }}>{selectedResume}</h4>
           )}
-          <button onClick={this.handleEdit}>Edit</button>
+           <i onClick = {this.handleEdit} className="fa fa-pencil fa-lg"/>
         </div>
         <h6 style={{ textTransform: "uppercase" }}>
           Choose an option:{" "}
