@@ -443,6 +443,7 @@ class Resumes extends Component {
                       </div>
                     </Container>
                     <Container className="contactTwo">
+                    <div>
                       <CheckBox
                         context={this.props.context}
                         index={this.state.index}
@@ -456,6 +457,7 @@ class Resumes extends Component {
                       />
                       {" " + userInfo.links.linkedin + " "}
                       <div className={"fa fa-linkedin fa-sm"} />
+                      </div>
                       <div>
                         <CheckBox
                           context={this.props.context}
