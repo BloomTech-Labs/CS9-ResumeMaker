@@ -139,7 +139,7 @@ class Skills extends Component {
               skills. Press ENTER to save any changes. New Skill Groups can be
               added and deleted as needed.
             </p>
-            <Form className="skillgroup" style={{ marginLeft: "15px" }}>
+            <Form className="skillgroup" style={{ marginLeft: "1%" }}>
               <FormGroup
                 style={{
                   borderBottom: "1px black solid",
@@ -154,7 +154,7 @@ class Skills extends Component {
                     height: "2rem",
                     fontSize: ".85rem",
                     fontWeight: "550",
-                    marginLeft: "15%",
+                    marginLeft: "12%",
                     width: "70%"
                   }}
                   className="groupname-input"
