@@ -681,6 +681,10 @@ img {
 }
 .skills-section .skillsHolder {
   min-width: 100px;
+  height: 154px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18%;
 }
 .skills-section .skillsSection {
@@ -699,6 +703,10 @@ img {
 }
 .experience-section .experienceHolder {
   min-width: 100px;
+  height: 154px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18%;
 }
 .experience-section .experienceSection {
@@ -716,7 +724,10 @@ img {
   justify-content: center;
 }
 .education-section .educationHolder {
-  min-width: 100px;
+  height: 154px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18%;
 }
 .education-section .educationSection {
