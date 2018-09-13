@@ -46,6 +46,7 @@ class ResumeDropdown extends Component {
     const { toggled } = this.state;
     let selectedResume = null;
     const list = this.props.context.userInfo.resumes.map((data, index) => {
+      console.log("RENDERED so go thorugh", this.props.context.userInfo.resumes[index].name)
       if(data._id == this.props.context.userInfo.currentresume){
         selectedResume = data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;
       }
@@ -75,6 +76,14 @@ class ResumeDropdown extends Component {
             onChange={this.props.onInputChange}
             className="form-control"
             placeholder={selectedResume}
+            onKeyDown={event => {
+              if (event.key === "Enter") {
+                event.target.blur();
+                event.preventDefault();
+                event.stopPropagation();
+                this.props.handleSubmit();
+              }
+            }}
           />
         </div>
         <h6 style={{textTransform: "uppercase"}}>

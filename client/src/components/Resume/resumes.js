@@ -114,9 +114,10 @@ class Resumes extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    tempObj["resumes"] = this.props.context.userInfo.resumes.map(
-      resume => resume._id
-    );
+    tempObj.name = this.state.resumeName;
+    // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
+    //   resume => resume._id
+    // );
     if (tempObj._id) {
       axios
         .put(
@@ -306,6 +307,7 @@ class Resumes extends Component {
                   <ResumeDropdown
                     updateResumeIndex={this.updateResumeIndex}
                     onInputChange={this.onInputChange}
+                    handleSubmit={this.handleSubmit}
                     resumeName={this.state.resumeName}
                     index={this.state.index}
                     className="dropdown"
