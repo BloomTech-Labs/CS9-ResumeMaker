@@ -28,7 +28,7 @@ class ResumeDropdown extends Component {
   // }
 
   handleEdit = editToggle => {
-    if (editToggle) this.setState({ edit: !this.state.toggle });
+    if (editToggle === "toggle") this.setState({ edit: !this.state.toggled });
     else {
       const tempObj = this.props.context.userInfo.resumes[this.props.index];
       tempObj.name = this.props.resumeName;
@@ -134,6 +134,7 @@ class ResumeDropdown extends Component {
                     event.target.blur();
                     event.preventDefault();
                     event.stopPropagation();
+                    //!fix
                     this.handleEdit();
                   }
                 }}
