@@ -59,8 +59,9 @@ class Resumes extends Component {
         "_id",
         this.props.context.userInfo.currentresume
       );
-      if (index === -1) index = 0;
-      this.setState({ index: index });
+      if (index >= 0){
+        this.setState({ index: index });
+      }
     }
 
     if(this.props.context.userInfo.resumes[0]){
@@ -236,13 +237,13 @@ class Resumes extends Component {
   };
 
   componentDidUpdate = () => {
-    if(this.props.context.userInfo.resumes[0] && this.state.index !== null){
+    if(this.props.context.userInfo.resumes[0]){
       console.log("DIDUPDATE")
       if(this.state.resumeName === null){
         console.log("NULL ME BABY")
-        this.updateResumeName(this.state.index)
-      } else if(this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
-        // this.updateResumeName(this.state.index);
+        this.updateResumeIndex()
+      // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
+      //   this.updateResumeName(this.state.index);
       }
     }
   }
