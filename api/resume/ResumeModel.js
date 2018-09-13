@@ -7,6 +7,11 @@ const Resume = new Schema({
     type: ObjectId,
     ref: "User"
   },
+  name: {
+    type: String,
+    default: "Untitled",
+    required: true
+  },
   title: [
     {
       id: Number,

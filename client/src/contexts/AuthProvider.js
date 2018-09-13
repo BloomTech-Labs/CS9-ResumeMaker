@@ -51,7 +51,8 @@ class AuthProvider extends Component {
     });
   };
 
-  setLogin = dataFromUser => {
+  setLogin = (dataFromUser, expandResumes) => {
+    console.log("setLogin called", dataFromUser);
     const userData = dataFromUser.user;
     this.setState({
       auth: true,
@@ -63,7 +64,11 @@ class AuthProvider extends Component {
         lastname: userData.name.lastname ? userData.name.lastname : ""
       },
       title: userData.title ? userData.title : [],
-      links: userData.links ? userData.links : [],
+      links: {
+        linkedin: userData.links.linkedin ? userData.links.linkedin : "",
+        portfolio: userData.links.portfolio ? userData.links.portfolio : "",
+        github: userData.links.github ? userData.links.github : ""
+      },
       location: userData.location ? userData.location : "",
       phonenumber: userData.phonenumber ? userData.phonenumber : "",
       education: userData.sections.education ? userData.sections.education : [],
@@ -78,25 +83,66 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if (dataFromUser.resumes) {
+    if(expandResumes === true){
+      this.expandResumeIDs();
+    } else if (dataFromUser.resumes) {
+      // const links = {
+      //   github: false,
+      //   linkedin: false,
+      //   portfolio: false
+      // };
+      // dataFromUser.resumes.forEach(resume => {
+      //   resume.links = links;
+      // });
       this.setResume(dataFromUser.resumes);
     }
   };
 
+  setCurrentResume = (resume) => {
+    console.log("setCurrentResume called with", resume)
+    if(this.state.resumes.length > 0){
+      const newCurrentResume = resume ? resume: this.state.resumes[0]._id;
+      this.setState({ currentresume: newCurrentResume })
+      axios
+        .put(
+          `${urls[urls.basePath]}/users/info/${
+            this.state.id
+          }`,
+          { currentresume: newCurrentResume },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          console.log("setCurrentResume response", response);
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  }
+
   setResume = resumeData => {
+    console.log("setResume called with:", resumeData);
     if (this.state.auth !== true) {
       return;
-    } else if (!(this.state.resumes.length > 0) && resumeData.length > 0) {
+    } else if (!(this.state.resumes.length > 0) && resumeData && resumeData.length > 0) {
       this.setState({ resumes: resumeData });
-    } else if (!(resumeData.length > 0 || resumeData[0] === null) && this.state.auth) {
-    
-      this.createResume(true);
-    } else if (
-      this.state.resumes.length &&
-      resumeData.length === this.state.resumes.length
-    ) {
-      this.expandResumeIDs();
-    } else {
+    } 
+    // else if (
+    //   !(resumeData.length > 0 || resumeData[0] === null) &&
+    //   this.state.auth
+    // ) {
+    //   this.createResume(true);
+    // // } else if (
+    // //   this.state.resumes.length &&
+    // //   resumeData.length === this.state.resumes.length
+    // // ) {
+    // //   this.expandResumeIDs();
+    // } 
+    else {
       return;
     }
   };
@@ -164,6 +210,7 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
+    console.log("expandResumeIDs called");
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -174,68 +221,74 @@ class AuthProvider extends Component {
     }
 
     // const tempResumes = [];
+    const tempResumes = this.state.resumes;
 
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
-  
-      let tempObj = this.state.resumes[index];
+
+      let tempObj;
       if (!resumeSection) {
+        tempObj = tempResumes[index][section];
         for (let item of this.state[section]) {
-          let current = this.state.resumes[index][section].filter(
+          const current = tempResumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
-          current.length === 0
-            ? tempObj[section].push({
-                _id: item._id,
-                value: false
-              })
-            : console.log();
+          if(current.length === 0){
+            tempObj.push({
+              _id: item._id,
+              value: false
+            })
+          }
         } // All items in context now have a resume counterpart
-        let loopVar = this.state.resumes[index][section].length;
+        let loopVar = tempResumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
-            findWithAttr(
+            !(findWithAttr(
               this.state[section],
               "_id",
-              this.state.resumes[index][section][i]._id
-            ) > -1
+              tempResumes[index][section][i]._id
+            ) > -1)
           ) {
-          } else {
-            tempObj[section].splice(i, 1);
+            tempObj.splice(i, 1);
             loopVar--;
             i--;
           }
         } // All items in resume that are not in context were deleted from resume
       } else {
+        tempObj = tempResumes[index].sections[section];
         //.sections portion
         for (let item of this.state[section]) {
-          let current = this.state.resumes[index].sections[section].filter(
+          const current = tempResumes[index].sections[section].filter(
             resumeItem => resumeItem._id === item._id
           );
-          current.length === 0
-            ? tempObj.sections[section].push({
-                _id: item._id,
-                value: false
-              })
-            : console.log();
+          if(current.length === 0){
+            tempObj.push({
+              _id: item._id,
+              value: false
+            })
+          }
         } // All items in context now have a resume counterpart
-        let loopVar = this.state.resumes[index].sections[section].length;
+        let loopVar = tempResumes[index].sections[section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
-            findWithAttr(
+            !(findWithAttr(
               this.state[section],
               "_id",
-              this.state.resumes[index].sections[section][i]._id
-            ) > -1
+              tempResumes[index].sections[section][i]._id
+            ) > -1)
           ) {
-          } else {
-            tempObj.sections[section].splice(i, 1);
+            tempObj.splice(i, 1);
             loopVar--;
             i--;
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      this.setState({ ["resumes"[index]]: tempObj });
+      console.log("Expand res return temp object", tempObj);
+      return tempObj;
+      // console.log("WE are pushing (index) (tempObj)", section, index, resumeSection, tempObj)
+      // tempResumes[index][section] = tempObj;
+      // console.log("tempRes", tempResumes[index][section], tempObj);
+      // this.setState({ ["resumes"[index][section]]: tempObj });
       // tempResumes.push(tempObj);
     };
 
@@ -245,12 +298,21 @@ class AuthProvider extends Component {
 
     // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
-      expandSection("title", false, index);
-      expandSection("experience", true, index);
-      expandSection("education", true, index);
-      expandSection("summary", true, index);
-      expandSection("skills", true, index);
+      const newTitle = expandSection("title", false, index);
+      const newExperience = expandSection("experience", true, index);
+      const newEducation = expandSection("education", true, index);
+      const newSummary = expandSection("summary", true, index);
+      const newSkills = expandSection("skills", true, index);
+      tempResumes[index].title = newTitle;
+      tempResumes[index].sections.experience = newExperience;
+      tempResumes[index].sections.education = newEducation;
+      tempResumes[index].sections.summary = newSummary;
+      tempResumes[index].sections.skills = newSkills;
     });
+
+    console.log("now we set state to tempresumes, here are old ones", this.state.resumes);
+    console.log("now we set state to tempresumes", tempResumes);
+    this.setState({ resumes: tempResumes });
 
     for (let i = 0; i < this.state.resumes.length; i++) {
       axios
@@ -282,6 +344,7 @@ class AuthProvider extends Component {
   };
 
   setResumeItemState = (index, name, id) => {
+    console.log("setResumeItemState:", index, name, id);
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -298,6 +361,7 @@ class AuthProvider extends Component {
   }; //Checkboxes
 
   setResumeItemDropdown = (index, name, id) => {
+    console.log("setResumeItemDropdown:", index, name, id);
     const tempState = this.state;
     if (name === "title") {
       tempState.resumes[index][name].forEach(field => {
@@ -343,6 +407,7 @@ class AuthProvider extends Component {
 
   render() {
     const userInfo = this.state;
+    console.log("USERINFO on authprovider:", userInfo);
     return (
       <AuthContext.Provider
         value={{
@@ -360,7 +425,8 @@ class AuthProvider extends Component {
             addElement: this.addElement,
             removeElement: this.removeElement,
             setSingleElement: this.setSingleElement,
-            pushResumes: this.pushResumes
+            pushResumes: this.pushResumes,
+            setCurrentResume: this.setCurrentResume
           }
         }}
       >
