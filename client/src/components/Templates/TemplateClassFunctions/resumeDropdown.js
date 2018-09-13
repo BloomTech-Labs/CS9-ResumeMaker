@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+const urls = require("../../../config/config.json");
 
 class ResumeDropdown extends Component {
   // Adding default state as a placeholder
@@ -24,10 +27,49 @@ class ResumeDropdown extends Component {
   //   this.setState({ selected: this.fillState() });
   // }
 
-
-  handleEdit = e => {
-    this.setState({ edit: !this.state.edit })
-  }
+  handleEdit = editToggle => {
+    if (editToggle) this.setState({ edit: !this.state.toggle });
+    else {
+      const tempObj = this.props.context.userInfo.resumes[this.props.index];
+      tempObj.name = this.props.resumeName;
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` +
+            this.props.context.userInfo.resumes[this.props.index]._id,
+          tempObj,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          axios
+            .put(
+              `${urls[urls.basePath]}/users/info/${
+                this.props.context.userInfo.id
+              }`,
+              { currentresume: response.data.resume._id },
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token")
+                }
+              }
+            )
+            .then(response => {
+              console.log("success");
+              this.setState({ edit: !this.state.edit });
+              // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
+            })
+            .catch(err => {
+              console.log("err", err);
+            });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
@@ -77,28 +119,38 @@ class ResumeDropdown extends Component {
       <div className="template-card card dropdown m-0">
         <div className="container resume-name">
           {this.state.edit ? (
-            <input
-              id="resumeName"
-              type="text"
-              value={
-                this.props.resumeName !== null ? this.props.resumeName : ""
-              }
-              onChange={this.props.onInputChange}
-              className="form-control"
-              placeholder={selectedResume}
-              onKeyDown={event => {
-                if (event.key === "Enter") {
-                  event.target.blur();
-                  event.preventDefault();
-                  event.stopPropagation();
-                  this.props.handleSubmit();
+            <React.Fragment>
+              <input
+                id="resumeName"
+                type="text"
+                value={
+                  this.props.resumeName !== null ? this.props.resumeName : ""
                 }
-              }}
-            />
+                onChange={this.props.onInputChange}
+                className="form-control edit-name"
+                placeholder={selectedResume}
+                onKeyDown={event => {
+                  if (event.key === "Enter") {
+                    event.target.blur();
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.props.handleSubmit();
+                  }
+                }}
+              />
+              <i onClick={() => this.handleEdit("")} className="fa fa-check fa-lg" />
+            </React.Fragment>
           ) : (
-            <h4 style={{ textTransform: "uppercase", marginRight: "1%" }}>{selectedResume}</h4>
+            <React.Fragment>
+              <h4 style={{ marginRight: "1%" }}>
+                {selectedResume}
+              </h4>
+              <i
+                onClick={() => this.handleEdit("toggle")}
+                className="fa fa-pencil fa-lg"
+              />
+            </React.Fragment>
           )}
-           <i onClick = {this.handleEdit} className="fa fa-pencil fa-lg"/>
         </div>
         <h6 style={{ textTransform: "uppercase" }}>
           Choose an option:{" "}
