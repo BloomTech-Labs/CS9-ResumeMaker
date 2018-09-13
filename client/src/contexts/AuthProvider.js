@@ -218,67 +218,74 @@ class AuthProvider extends Component {
     }
 
     // const tempResumes = [];
+    const tempResumes = this.state.resumes;
 
     const expandSection = (section, resumeSection, index) => {
       // no .sections portion
 
-      let tempObj = this.state.resumes[index];
+      let tempObj;
       if (!resumeSection) {
+        tempObj = tempResumes[index][section];
         for (let item of this.state[section]) {
-          const current = this.state.resumes[index][section].filter(
+          const current = tempResumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
           if(current.length === 0){
-            tempObj[section].push({
+            tempObj.push({
               _id: item._id,
               value: false
             })
           }
         } // All items in context now have a resume counterpart
-        let loopVar = this.state.resumes[index][section].length;
+        let loopVar = tempResumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
             !(findWithAttr(
               this.state[section],
               "_id",
-              this.state.resumes[index][section][i]._id
+              tempResumes[index][section][i]._id
             ) > -1)
           ) {
-            tempObj[section].splice(i, 1);
+            tempObj.splice(i, 1);
             loopVar--;
             i--;
           }
         } // All items in resume that are not in context were deleted from resume
       } else {
+        tempObj = tempResumes[index].sections[section];
         //.sections portion
         for (let item of this.state[section]) {
-          const current = this.state.resumes[index].sections[section].filter(
+          const current = tempResumes[index].sections[section].filter(
             resumeItem => resumeItem._id === item._id
           );
           if(current.length === 0){
-            tempObj.sections[section].push({
+            tempObj.push({
               _id: item._id,
               value: false
             })
           }
         } // All items in context now have a resume counterpart
-        let loopVar = this.state.resumes[index].sections[section].length;
+        let loopVar = tempResumes[index].sections[section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
             !(findWithAttr(
               this.state[section],
               "_id",
-              this.state.resumes[index].sections[section][i]._id
+              tempResumes[index].sections[section][i]._id
             ) > -1)
           ) {
-            tempObj.sections[section].splice(i, 1);
+            tempObj.splice(i, 1);
             loopVar--;
             i--;
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      console.log("WE are pushing (index) (tempObj)", section, index, resumeSection, tempObj)
-      this.setState({ ["resumes"[index][section]]: tempObj });
+      console.log("Expand res return temp object", tempObj);
+      return tempObj;
+      // console.log("WE are pushing (index) (tempObj)", section, index, resumeSection, tempObj)
+      // tempResumes[index][section] = tempObj;
+      // console.log("tempRes", tempResumes[index][section], tempObj);
+      // this.setState({ ["resumes"[index][section]]: tempObj });
       // tempResumes.push(tempObj);
     };
 
@@ -288,12 +295,21 @@ class AuthProvider extends Component {
 
     // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
-      // expandSection("title", false, index);
-      expandSection("experience", true, index);
-      expandSection("education", true, index);
-      expandSection("summary", true, index);
-      expandSection("skills", true, index);
+      const newTitle = expandSection("title", false, index);
+      const newExperience = expandSection("experience", true, index);
+      const newEducation = expandSection("education", true, index);
+      const newSummary = expandSection("summary", true, index);
+      const newSkills = expandSection("skills", true, index);
+      tempResumes[index].title = newTitle;
+      tempResumes[index].sections.experience = newExperience;
+      tempResumes[index].sections.education = newEducation;
+      tempResumes[index].sections.summary = newSummary;
+      tempResumes[index].sections.skills = newSkills;
     });
+
+    console.log("now we set state to tempresumes, here are old ones", this.state.resumes);
+    console.log("now we set state to tempresumes", tempResumes);
+    this.setState({ resumes: tempResumes });
 
     for (let i = 0; i < this.state.resumes.length; i++) {
       axios
