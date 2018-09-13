@@ -144,15 +144,6 @@ class Skills extends Component {
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
                   >
-                    <button
-                      className="close"
-                      aria-label="Delete"
-                      onClick={() => this.handleDelete(index, "skills")}
-                    >
-                      <span aria-hidden="true" style={{ color: "red" }}>
-                        &times;
-                      </span>
-                    </button>
                     <FormGroup row>
                       <Col>
                         <Input
@@ -177,6 +168,15 @@ class Skills extends Component {
                           }}
                         />
                       </Col>
+                      <button
+                        className="close"
+                        aria-label="Delete"
+                        onClick={() => this.handleDelete(index, "skills")}
+                        >
+                        <span aria-hidden="true" style={{ color: "red" }}>
+                          &times;
+                        </span>
+                      </button>
                     </FormGroup>
                     <FormGroup row>
                       <Col>
@@ -213,6 +213,11 @@ class Skills extends Component {
                     Add a New Skill Group:
                   </Label>
                   <Input
+                    style={{
+                      height: "2rem",
+                      fontSize: ".85rem",
+                      fontWeight: "550"
+                    }}
                     className="groupname-input"
                     id="newSkill"
                     bssize="sm"
