@@ -404,7 +404,7 @@ class Resumes extends Component {
             <Container className="resumePage">
               <Container className="contact-section">
                 <Container className="contact-holder">
-                  <h6>Contact Details</h6>
+                <h6 style={{ fontWeight: "bold" }}>Contact Details:</h6>
                 </Container>
                 <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
@@ -498,7 +498,7 @@ class Resumes extends Component {
               </Container>
               <Container className="title-section">
                 <Container className="titleHolder">
-                  <h6>Titles</h6>
+                <h6 style={{ fontWeight: "bold" }}>Titles:</h6>
                 </Container>
                 <Container className="titleSection">
                   <TitleDropdown
@@ -517,7 +517,7 @@ class Resumes extends Component {
               </Container>
               <Container className="summary-section">
                 <div className="summaryHolder">
-                  <h6>Summary</h6>
+                <h6 style={{ fontWeight: "bold" }}>Summary:</h6>
                 </div>
                 <Container className="summarySection">
                   <SummaryDropdown
@@ -536,7 +536,7 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                  <h6>Skills</h6>
+                <h6 style={{ fontWeight: "bold" }}>Skills:</h6>
                 </div>
                 <Container
                   className="skillsSection"
@@ -569,7 +569,7 @@ class Resumes extends Component {
               </Container>
               <Container className="experience-section">
                 <div className="experienceHolder">
-                  <h6>Experience</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Experience:</h6>
                 </div>
                 <Container
                   className="experienceSection"
@@ -615,7 +615,7 @@ class Resumes extends Component {
               </Container>
               <Container className="education-section">
                 <div className="educationHolder">
-                  <h6>Education</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Education:</h6>
                 </div>
                 <Container
                   className="educationSection"
