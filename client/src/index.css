@@ -72,11 +72,10 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
   background-color: #707f8c;
   height: 320px;
   width: 60%;
-  padding: 3%;
+  padding: 2%;
   margin-top: 3%;
 }
 .stripe-pay {
@@ -99,11 +98,14 @@ textarea {
   display: flex;
   flex-flow: wrap;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 2%;
 }
 .bill-btn {
   margin: 2% 1%;
+}
+.unsubscribe {
+  max-width: 30%;
 }
 .template-card {
   background-color: transparent !important;

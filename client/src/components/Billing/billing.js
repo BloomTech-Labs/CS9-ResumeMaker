@@ -218,8 +218,8 @@ class Billing extends Component {
                   </p>
                 ) : (
                   <button
-                    style={{ marginLeft: "0%", marginTop: "4%" }}
-                    className="bill-btn"
+                    style={{ marginLeft: "35%", marginTop: "4%" }}
+                    className="bill-btn unsubscribe"
                     onClick={this.unsubscribe}
                   >
                     Unsubscribe
