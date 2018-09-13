@@ -134,17 +134,19 @@ class ResumeDropdown extends Component {
                     event.target.blur();
                     event.preventDefault();
                     event.stopPropagation();
-                    this.props.handleSubmit();
+                    this.handleEdit();
                   }
                 }}
+                autoFocus
               />
-              <i onClick={() => this.handleEdit("")} className="fa fa-check fa-lg" />
+              <i
+                onClick={() => this.handleEdit()}
+                className="fa fa-check fa-lg"
+              />
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <h4 style={{ marginRight: "1%" }}>
-                {selectedResume}
-              </h4>
+              <h4 style={{ marginRight: "1%" }}>{selectedResume}</h4>
               <i
                 onClick={() => this.handleEdit("toggle")}
                 className="fa fa-pencil fa-lg"
