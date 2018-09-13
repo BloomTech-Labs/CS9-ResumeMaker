@@ -38,7 +38,11 @@ class Billing extends Component {
     this.tokenCreator()
       .then(token => {
         axios
-          .post(`${urls[urls.basePath]}/pay/monthly`, token)
+          .post(`${urls[urls.basePath]}/pay/monthly`, token,
+            {
+              headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+            }
+          )
           .then(res => {
             this.setState({
               complete: true,
@@ -47,6 +51,10 @@ class Billing extends Component {
               sub_err: false,
               unsub_err: false
             });
+            this.props.context.actions.setSingleElement("membership", true);
+            if(res.data.resumes.length > 1){
+              this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+            }
           })
           .catch(err => {
             this.setState({
@@ -74,7 +82,11 @@ class Billing extends Component {
     this.tokenCreator()
       .then(token => {
         axios
-          .post(`${urls[urls.basePath]}/pay/yearly`, token)
+          .post(`${urls[urls.basePath]}/pay/yearly`, token,
+            {
+              headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+            }
+          )
           .then(res => {
             this.setState({
               complete: true,
@@ -82,6 +94,10 @@ class Billing extends Component {
               sub_err: false,
               gone: false
             });
+            this.props.context.actions.setSingleElement("membership", true);
+            if(res.data.resumes.length > 1){
+              this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+            }
           })
           .catch(err => {
             this.setState({
@@ -109,7 +125,11 @@ class Billing extends Component {
     axios
       .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
         email: this.props.context.userInfo.email
-      })
+        },
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+      )
       .then(res => {
         this.setState({
           gone: true,
@@ -118,6 +138,9 @@ class Billing extends Component {
           sub_err: false,
           unsub_err: false
         });
+        this.props.context.actions.setSingleElement("membership", false);
+        this.props.context.actions.setSingleElement("resumes", [this.props.context.userInfo.resumes[0]]);
+        this.props.context.actions.setCurrentResume();
       })
       .catch(err => {
         this.setState({
