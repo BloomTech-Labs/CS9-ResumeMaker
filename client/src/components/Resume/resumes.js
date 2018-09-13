@@ -17,7 +17,8 @@ class Resumes extends Component {
     super(props);
     this.state = {
       index: null,
-      success: false
+      success: false,
+      resumeName: null
     };
   }
 
@@ -33,6 +34,7 @@ class Resumes extends Component {
   updateResumeIndex = newIndex => {
     // console.log("IS THIS RUN UPDATE", newIndex)
     if(newIndex >= 0){
+      console.log("NEWINDEX", newIndex)
       // console.log("updateResumeIndex, newIndex", newIndex)
       this.setState({ index: newIndex });
     } else {
@@ -43,6 +45,11 @@ class Resumes extends Component {
       );
       if (index === -1) index = 0;
       this.setState({ index: index });
+    }
+
+    if(this.props.context.userInfo.resumes[0]){
+      console.log("RESUMENAME")
+      this.setState({ resumeName: this.props.context.userInfo.resumes[this.state.index ? this.state.index : 0].name })
     }
 
     if(this.props.context.userInfo.auth === true && this.props.context.userInfo.resumes.length === 0){
