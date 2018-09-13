@@ -18,7 +18,7 @@ class Resumes extends Component {
     this.state = {
       index: null,
       success: false,
-      resumeName: ""
+      resumeName: null
     };
   }
 
@@ -36,6 +36,7 @@ class Resumes extends Component {
   };
 
   updateResumeName = newIndex => {
+    console.log("NULL ME BABY", newIndex)
     // console.log("updateResumeName: newIndex = ", newIndex)
     if(this.props.context.userInfo.resumes.length > 0){
       if(newIndex >= 0){
@@ -235,9 +236,14 @@ class Resumes extends Component {
   };
 
   componentDidUpdate = () => {
-    if(this.props.context.userInfo.resumes[0] && this.state.resumeName === "" && this.state.index !== null){
+    if(this.props.context.userInfo.resumes[0] && this.state.index !== null){
       console.log("DIDUPDATE")
-      this.updateResumeName(this.state.index)
+      if(this.state.resumeName === null){
+        console.log("NULL ME BABY")
+        this.updateResumeName(this.state.index)
+      } else if(this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
+        // this.updateResumeName(this.state.index);
+      }
     }
   }
 

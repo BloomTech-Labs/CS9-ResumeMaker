@@ -73,7 +73,7 @@ class ResumeDropdown extends Component {
           <input
             id="resumeName"
             type="text"
-            value={this.props.resumeName}
+            value={this.props.resumeName !== null ? this.props.resumeName : ""}
             onChange={this.props.onInputChange}
             className="form-control"
             placeholder={selectedResume}
