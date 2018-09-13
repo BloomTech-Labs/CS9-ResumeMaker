@@ -61,6 +61,8 @@ class Resumes extends Component {
       );
       if (index >= 0){
         this.setState({ index: index });
+      } else if (this.props.context.userInfo.membership === false && this.props.context.userInfo.membership.auth === true){
+        this.setState({ index: 0 });
       }
     }
 
@@ -74,6 +76,8 @@ class Resumes extends Component {
       this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[newIndex]._id);
     } else if(this.props.context.userInfo.resumes.length > 0 && this.state.index){
       this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[this.state.index]._id);
+    } else if(this.props.context.userInfo.resumes.length === 1){
+      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[0]._id);
     }
   };
 
@@ -238,9 +242,7 @@ class Resumes extends Component {
 
   componentDidUpdate = () => {
     if(this.props.context.userInfo.resumes[0]){
-      console.log("DIDUPDATE")
-      if(this.state.resumeName === null){
-        console.log("NULL ME BABY")
+      if(this.state.resumeName === null || this.state.index === null){
         this.updateResumeIndex()
       // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
       //   this.updateResumeName(this.state.index);
