@@ -36,20 +36,27 @@ class Resumes extends Component {
   };
 
   updateResumeName = newIndex => {
-    console.log("NULL ME BABY", newIndex)
+    console.log("NULL ME BABY", newIndex);
     // console.log("updateResumeName: newIndex = ", newIndex)
-    if(this.props.context.userInfo.resumes.length > 0){
-      if(newIndex >= 0){
-        this.setState({ resumeName: this.props.context.userInfo.resumes[newIndex].name })
-      } else if(this.state.index >= 0 && this.props.context.userInfo.resumes[this.state.index]){
-        this.setState({ resumeName: this.props.context.userInfo.resumes[this.state.index].name })
+    if (this.props.context.userInfo.resumes.length > 0) {
+      if (newIndex >= 0) {
+        this.setState({
+          resumeName: this.props.context.userInfo.resumes[newIndex].name
+        });
+      } else if (
+        this.state.index >= 0 &&
+        this.props.context.userInfo.resumes[this.state.index]
+      ) {
+        this.setState({
+          resumeName: this.props.context.userInfo.resumes[this.state.index].name
+        });
       }
     }
-  }
+  };
 
   updateResumeIndex = newIndex => {
     // console.log("IS THIS RUN UPDATE", newIndex)
-    if(newIndex >= 0){
+    if (newIndex >= 0) {
       // console.log("NEWINDEX", newIndex)
       // console.log("updateResumeIndex, newIndex", newIndex)
       this.setState({ index: newIndex });
@@ -59,21 +66,34 @@ class Resumes extends Component {
         "_id",
         this.props.context.userInfo.currentresume
       );
-      if (index >= 0){
+      if (index >= 0) {
         this.setState({ index: index });
       }
     }
 
-    if(this.props.context.userInfo.resumes[0]){
+    if (this.props.context.userInfo.resumes[0]) {
       this.updateResumeName(newIndex);
     }
 
-    if(this.props.context.userInfo.auth === true && this.props.context.userInfo.resumes.length === 0){
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.context.userInfo.resumes.length === 0
+    ) {
       this.handleCreate();
-    } else if(newIndex >= 0 && this.props.context.userInfo.resumes.length > 0){
-      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[newIndex]._id);
-    } else if(this.props.context.userInfo.resumes.length > 0 && this.state.index){
-      this.props.context.actions.setCurrentResume(this.props.context.userInfo.resumes[this.state.index]._id);
+    } else if (
+      newIndex >= 0 &&
+      this.props.context.userInfo.resumes.length > 0
+    ) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[newIndex]._id
+      );
+    } else if (
+      this.props.context.userInfo.resumes.length > 0 &&
+      this.state.index
+    ) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[this.state.index]._id
+      );
     }
   };
 
@@ -121,7 +141,7 @@ class Resumes extends Component {
       });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     if (event) {
       event.preventDefault();
     }
@@ -156,7 +176,7 @@ class Resumes extends Component {
               }
             )
             .then(response => {
-             this.setState({ success: true });
+              this.setState({ success: true });
               // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
@@ -184,29 +204,24 @@ class Resumes extends Component {
     }
   };
 
-  
   handleDelete = event => {
     if (event) {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    console.log("TEMP OBJ", tempObj)
+    console.log("TEMP OBJ", tempObj);
     if (tempObj._id) {
       axios
-        .delete(
-          `${urls[urls.basePath]}/resume/delete/` +
-          tempObj._id,
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
-            }
+        .delete(`${urls[urls.basePath]}/resume/delete/` + tempObj._id, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
           }
-        )
+        })
         .then(response => {
           console.log("DELETE RESPONSE");
           this.props.context.actions.removeElement(this.state.index, "resumes");
           // this.props.context.actions.setSingleElement("currentresume", )
-          if(this.state.index > 0){
+          if (this.state.index > 0) {
             // this.props.context.actions.setCurrentResume(this.state.index - 1);
             this.updateResumeIndex(this.state.index - 1);
           } else this.updateResumeIndex(this.state.index);
@@ -237,21 +252,27 @@ class Resumes extends Component {
   };
 
   componentDidUpdate = () => {
-    if(this.props.context.userInfo.resumes[0]){
-      console.log("DIDUPDATE")
-      if(this.state.resumeName === null){
-        console.log("NULL ME BABY")
-        this.updateResumeIndex()
-      // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
-      //   this.updateResumeName(this.state.index);
+    if (this.props.context.userInfo.resumes[0]) {
+      console.log("DIDUPDATE");
+      if (this.state.resumeName === null) {
+        console.log("NULL ME BABY");
+        this.updateResumeIndex();
+        // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
+        //   this.updateResumeName(this.state.index);
       }
     }
-  }
+  };
 
   render() {
-    console.log("resumes render props resumes", this.props.context.userInfo.resumes)
-    console.log("resumes render state index", this.state.index)
-    console.log("resumes render currentres props", this.props.context.userInfo.currentresume)
+    console.log(
+      "resumes render props resumes",
+      this.props.context.userInfo.resumes
+    );
+    console.log("resumes render state index", this.state.index);
+    console.log(
+      "resumes render currentres props",
+      this.props.context.userInfo.currentresume
+    );
 
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
@@ -414,7 +435,8 @@ class Resumes extends Component {
                         index={this.state.index}
                         name="linkedin"
                         value={
-                          resumes[this.state.index] && resumes[this.state.index].links
+                          resumes[this.state.index] &&
+                          resumes[this.state.index].links
                             ? resumes[this.state.index].links.linkedin
                             : null
                         }
@@ -427,7 +449,8 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="github"
                           value={
-                            resumes[this.state.index] && resumes[this.state.index].links
+                            resumes[this.state.index] &&
+                            resumes[this.state.index].links
                               ? resumes[this.state.index].links.github
                               : null
                           }
@@ -435,19 +458,21 @@ class Resumes extends Component {
                         {" " + userInfo.links.github}{" "}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
-                      <p>
+                      <div>
                         <CheckBox
+                          style={{ marginRight: "1%" }}
                           context={this.props.context}
                           index={this.state.index}
                           name="portfolio"
                           value={
-                            resumes[this.state.index] && resumes[this.state.index].links
+                            resumes[this.state.index] &&
+                            resumes[this.state.index].links
                               ? resumes[this.state.index].links.portfolio
                               : null
                           }
                         />{" "}
-                        {" " + userInfo.links.portfolio}
-                      </p>
+                        {"  " + userInfo.links.portfolio}
+                      </div>
                     </Container>
                   </Container>
                 </Container>

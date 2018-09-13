@@ -274,7 +274,7 @@ form {
   text-overflow: ellipsis;
 }
 .experience-containment-div .card-body {
-  padding: .8rem;
+  padding: 0.8rem;
   font-size: 0.7rem;
   width: 15rem;
   border: 1.5rem;
