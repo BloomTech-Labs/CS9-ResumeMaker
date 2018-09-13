@@ -140,6 +140,8 @@ class Skills extends Component {
             <Container className="skills-containment-div">
               {this.state.skills.map((element, index) => {
                 return (
+                  <React.Fragment>
+                  <h5>Skill Group - {this.state.skills[index].groupname} </h5>
                   <Form
                     className="skillgroup"
                     key={element._id ? element._id : element.groupname + index}
@@ -150,7 +152,8 @@ class Skills extends Component {
                           style={{
                             height: "2rem",
                             fontSize: ".85rem",
-                            fontWeight: "550"
+                            fontWeight: "550",
+                            width: "20%"
                           }}
                           className="groupname-input"
                           id={`skills`}
@@ -167,6 +170,7 @@ class Skills extends Component {
                             }
                           }}
                         />
+                        
                       </Col>
                       <button
                         className="close"
@@ -181,7 +185,7 @@ class Skills extends Component {
                     <FormGroup row>
                       <Col>
                         <Input
-                          style={{ height: "2rem", fontSize: ".85rem" }}
+                          style={{ height: "2rem", fontSize: ".85rem", width: "80%" }}
                           className="skills-input"
                           id={`skills`}
                           name="content"
@@ -201,6 +205,7 @@ class Skills extends Component {
                       </Col>
                     </FormGroup>
                   </Form>
+              </React.Fragment>
                 );
               })}
               <Form className="skillgroup">
