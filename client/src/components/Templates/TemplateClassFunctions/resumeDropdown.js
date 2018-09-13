@@ -47,7 +47,7 @@ class ResumeDropdown extends Component {
     let selectedResume = null;
     const list = this.props.context.userInfo.resumes.map((data, index) => {
       if(data._id == this.props.context.userInfo.currentresume){
-        selectedResume = data._id;
+        selectedResume = data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;
       }
       return (
         <li
@@ -56,7 +56,7 @@ class ResumeDropdown extends Component {
           onClick={() => this.handleClick(data, index)}
           style={{ cursor: "pointer" }}
         >
-          {"Resume " + (index + 1)}
+          {data.name === "Untitled" ? "Untitled " + (index + 1) : data.name}
         </li>
       )
     }
