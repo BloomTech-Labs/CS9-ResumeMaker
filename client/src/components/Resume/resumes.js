@@ -17,9 +17,14 @@ class Resumes extends Component {
     super(props);
     this.state = {
       index: null,
-      success: false
+      success: false,
+      resumeName: null
     };
   }
+
+  onInputChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
 
   findWithAttr = (array, attr, value) => {
     for (var i = 0; i < array.length; i++) {
@@ -30,60 +35,97 @@ class Resumes extends Component {
     return -1;
   };
 
-  updateResumeIndex = newIndex => {
-    this.setState({ index: newIndex });
+  updateResumeName = newIndex => {
+    console.log("NULL ME BABY", newIndex);
+    // console.log("updateResumeName: newIndex = ", newIndex)
+    if (this.props.context.userInfo.resumes.length > 0) {
+      if (newIndex >= 0) {
+        this.setState({
+          resumeName: this.props.context.userInfo.resumes[newIndex].name
+        });
+      } else if (
+        this.state.index >= 0 &&
+        this.props.context.userInfo.resumes[this.state.index]
+      ) {
+        this.setState({
+          resumeName: this.props.context.userInfo.resumes[this.state.index].name
+        });
+      }
+    }
   };
 
-  componentWillMount() {
-    if (!this.props.context.userInfo.resumes.length)
-      this.props.context.actions.createResume();
-    //   console.log("template componentWillMount");
-    //   let index = this.findWithAttr(
-    //     this.props.context.userInfo.resumes,
-    //     "_id",
-    //     this.props.context.userInfo.currentresume
-    //   );
-    //   console.log(this.props.context.userInfo.currentresume)
-    //   console.log("index from findWithAttr is:", index);
-    //   if (index === -1) index = 0;
-    //   this.setState({ index: index });
-  }
+  updateResumeIndex = newIndex => {
+    // console.log("IS THIS RUN UPDATE", newIndex)
+    if (newIndex >= 0) {
+      // console.log("NEWINDEX", newIndex)
+      // console.log("updateResumeIndex, newIndex", newIndex)
+      this.setState({ index: newIndex });
+    } else {
+      let index = this.findWithAttr(
+        this.props.context.userInfo.resumes,
+        "_id",
+        this.props.context.userInfo.currentresume
+      );
+      if (index >= 0) {
+        this.setState({ index: index });
+      }
+    }
+
+    if (this.props.context.userInfo.resumes[0]) {
+      this.updateResumeName(newIndex);
+    }
+
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.context.userInfo.resumes.length === 0
+    ) {
+      this.handleCreate();
+    } else if (
+      newIndex >= 0 &&
+      this.props.context.userInfo.resumes.length > 0
+    ) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[newIndex]._id
+      );
+    } else if (
+      this.props.context.userInfo.resumes.length > 0 &&
+      this.state.index
+    ) {
+      this.props.context.actions.setCurrentResume(
+        this.props.context.userInfo.resumes[this.state.index]._id
+      );
+    }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    let index = this.findWithAttr(
-      this.props.context.userInfo.resumes,
-      "_id",
-      this.props.context.userInfo.currentresume
-    );
-    if (index === -1) index = 0;
-    this.setState({ index: index });
+    this.updateResumeIndex();
   }
 
   handleCreate = () => {
     const tempObj = {
-      links: { linkedin: true, github: true, portfolio: true },
+      links: { linkedin: false, github: false, portfolio: false },
       title: this.props.context.userInfo.title.map(item => {
         return { _id: item._id, value: false };
       }),
       sections: {
         experience: this.props.context.userInfo.experience.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         education: this.props.context.userInfo.education.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         }),
         summary: this.props.context.userInfo.summary.map(item => {
           return { _id: item._id, value: false };
         }),
         skills: this.props.context.userInfo.skills.map(item => {
-          return { _id: item._id, value: true };
+          return { _id: item._id, value: false };
         })
       }
     };
-    tempObj["resumes"] = this.props.context.userInfo.resumes.map(
-      resume => resume._id
-    );
+    // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
+    //   resume => resume._id
+    // );
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -92,6 +134,7 @@ class Resumes extends Component {
       })
       .then(response => {
         this.props.context.actions.pushResumes(response.data.Resume);
+        this.updateResumeIndex(this.props.context.userInfo.resumes.length - 1);
       })
       .catch(err => {
         console.log("err", err);
@@ -103,9 +146,10 @@ class Resumes extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    tempObj["resumes"] = this.props.context.userInfo.resumes.map(
-      resume => resume._id
-    );
+    tempObj.name = this.props.resumeName;
+    // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
+    //   resume => resume._id
+    // );
     if (tempObj._id) {
       axios
         .put(
@@ -151,6 +195,7 @@ class Resumes extends Component {
           }
         })
         .then(response => {
+          // this.setState({ success: true });
           this.props.context.actions.pushResumes(response.data.Resume);
         })
         .catch(err => {
@@ -159,7 +204,76 @@ class Resumes extends Component {
     }
   };
 
+  handleDelete = event => {
+    if (event) {
+      event.preventDefault();
+    }
+    const tempObj = this.props.context.userInfo.resumes[this.state.index];
+    console.log("TEMP OBJ", tempObj);
+    if (tempObj._id) {
+      axios
+        .delete(`${urls[urls.basePath]}/resume/delete/` + tempObj._id, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          console.log("DELETE RESPONSE");
+          this.props.context.actions.removeElement(this.state.index, "resumes");
+          // this.props.context.actions.setSingleElement("currentresume", )
+          if (this.state.index > 0) {
+            // this.props.context.actions.setCurrentResume(this.state.index - 1);
+            this.updateResumeIndex(this.state.index - 1);
+          } else this.updateResumeIndex(this.state.index);
+          // else if(this.props.context.userInfo.resumes[this.state.index + 1]){
+          //   // this.props.context.actions.setCurrentResume(this.state.index + 1);
+          //   this.updateResumeIndex(this.state.index + 1);
+          // }
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    } else {
+      if (!tempObj["user"]) tempObj["user"] = this.props.context.userInfo.id;
+      axios
+        .post(`${urls[urls.basePath]}/resume/`, tempObj, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => {
+          this.setState({ success: true });
+          this.props.context.actions.pushResumes(response.data.Resume);
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
+
+  componentDidUpdate = () => {
+    if (this.props.context.userInfo.resumes[0]) {
+      console.log("DIDUPDATE");
+      if (this.state.resumeName === null) {
+        console.log("NULL ME BABY");
+        this.updateResumeIndex();
+        // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
+        //   this.updateResumeName(this.state.index);
+      }
+    }
+  };
+
   render() {
+    console.log(
+      "resumes render props resumes",
+      this.props.context.userInfo.resumes
+    );
+    console.log("resumes render state index", this.state.index);
+    console.log(
+      "resumes render currentres props",
+      this.props.context.userInfo.currentresume
+    );
+
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
@@ -174,6 +288,7 @@ class Resumes extends Component {
       this.props.context.userInfo.currentresume === null ||
       !resumes[this.state.index]
     ) {
+      // {resumes.length ? this.handleCreate() : null}
       return (
         <div style={{ display: "none" }}>
           <Sidebar context={this.props.context} />
@@ -190,65 +305,115 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="title-div templates">
-              <h4>RESUMES</h4>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  paddingLeft: ".6rem",
-                  width: "100%"
-                }}
-              >
-                {" "}
-                Enter information into each section: JOB TITLE, SUMMARY, SKILLS,
-                EXPERIENCE, EDUCATION.
-              </p>
-            </div>
-            <div className="containers-div">
+            <div
+              className="title-div templates"
+              style={{ paddingRight: "1rem" }}
+            >
               {this.props.context.userInfo.name.firstname ? (
-                <h1>
-                  Greetings, {this.props.context.userInfo.name.firstname}!
-                </h1>
+                <React.Fragment>
+                  <h4>
+                    Welcome to your Dashboard,{" "}
+                    {this.props.context.userInfo.name.firstname}!
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      paddingLeft: ".6rem"
+                    }}
+                  >
+                    {" "}
+                    Click each tab on the left to enter your information and
+                    populate each section on the resume form below: JOB TITLE,
+                    SUMMARY, SKILLS, EXPERIENCE, & EDUCATION. Next, scroll down
+                    this page to check the information you would like displayed
+                    on your final resume. Once completed, SAVE your changes and
+                    go to TEMPLATES to choose your layout. You can also CREATE
+                    multiple RESUMES with a subscription.
+                  </p>
+                </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <h1>Welcome! </h1>
-                  <p>
-                    Please go to the SETTINGS page and fill in your information
-                    to get started!
+                  <h4>Welcome! </h4>
+                  <p
+                    style={{
+                      fontSize: "0.7rem",
+                      paddingLeft: ".6rem"
+                    }}
+                  >
+                    {"  "} Please go to the SETTINGS page and fill in your
+                    information to get started!
                   </p>
                 </React.Fragment>
               )}
+            </div>
+            <div className="containers-div">
               {this.props.context.userInfo.membership ? (
                 <React.Fragment>
                   <ResumeDropdown
                     updateResumeIndex={this.updateResumeIndex}
+                    onInputChange={this.onInputChange}
+                    handleSubmit={this.handleSubmit}
+                    resumeName={this.state.resumeName}
                     index={this.state.index}
                     className="dropdown"
                     context={this.props.context}
                     data={userInfo}
                   />
-                  <button className="resume-button" onClick={this.handleCreate}>
+                  <button
+                    className="resume-button"
+                    onClick={this.handleCreate}
+                    style={{
+                      width: "6rem",
+                      height: "1.5rem",
+                      fontSize: ".7rem"
+                    }}
+                  >
                     {" "}
                     Create Resume
                   </button>
+                  <button
+                    className="resume-button"
+                    onClick={this.handleDelete}
+                    style={{
+                      width: "6rem",
+                      height: "1.5rem",
+                      fontSize: ".7rem"
+                    }}
+                  >
+                    {" "}
+                    Delete Resume
+                  </button>
                 </React.Fragment>
               ) : null}
-              <button className="resume-button" onClick={this.handleSubmit}>
+              <button
+                className="resume-button"
+                onClick={this.handleSubmit}
+                style={{ width: "6rem", height: "1.5rem", fontSize: ".7rem" }}
+              >
                 {" "}
-                Save Resume
+                Save Changes
               </button>
             </div>
             <Container className="resumePage">
               <Container className="contact-section">
-                <h3>Contact Details</h3>
+                <Container className="contact-holder">
+                  <h6>Contact Details</h6>
+                </Container>
                 <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
                   this.props.context.userInfo.name.lastname ? (
-                    <h2>
-                      {userInfo.name.firstname} {userInfo.name.lastname}
-                    </h2>
+                    this.props.context.userInfo.name.middlename ? (
+                      <h5>
+                        {userInfo.name.firstname} {userInfo.name.middlename}{" "}
+                        {userInfo.name.lastname}
+                      </h5>
+                    ) : (
+                      <h5>
+                        {userInfo.name.firstname} {userInfo.name.lastname}
+                      </h5>
+                    )
                   ) : (
-                    <h2>Please enter your full name in the SETTINGS page</h2>
+                    <h4>Please enter your full name in the SETTINGS page</h4>
                   )}
                   <Container className="contactHolder">
                     <Container className="contactOne">
@@ -270,12 +435,13 @@ class Resumes extends Component {
                         index={this.state.index}
                         name="linkedin"
                         value={
-                          resumes[this.state.index]
+                          resumes[this.state.index] &&
+                          resumes[this.state.index].links
                             ? resumes[this.state.index].links.linkedin
                             : null
                         }
                       />
-                      {" " + userInfo.links.linkedin}{" "}
+                      {" " + userInfo.links.linkedin}
                       <div className={"fa fa-linkedin fa-sm"} />
                       <div>
                         <CheckBox
@@ -283,34 +449,37 @@ class Resumes extends Component {
                           index={this.state.index}
                           name="github"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] &&
+                            resumes[this.state.index].links
                               ? resumes[this.state.index].links.github
                               : null
                           }
                         />
-                        {" " + userInfo.links.github}{" "}
+                        {" " + userInfo.links.github}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
-                      <p>
+                      <div>
                         <CheckBox
+                          style={{ marginRight: "1%" }}
                           context={this.props.context}
                           index={this.state.index}
                           name="portfolio"
                           value={
-                            resumes[this.state.index]
+                            resumes[this.state.index] &&
+                            resumes[this.state.index].links
                               ? resumes[this.state.index].links.portfolio
                               : null
                           }
-                        />{" "}
+                        />
                         {" " + userInfo.links.portfolio}
-                      </p>
+                      </div>
                     </Container>
                   </Container>
                 </Container>
               </Container>
               <Container className="title-section">
                 <Container className="titleHolder">
-                  <h3>Titles</h3>
+                  <h6>Titles</h6>
                 </Container>
                 <Container className="titleSection">
                   <TitleDropdown
@@ -329,7 +498,7 @@ class Resumes extends Component {
               </Container>
               <Container className="summary-section">
                 <div className="summaryHolder">
-                  <h3>Summary</h3>
+                  <h6>Summary</h6>
                 </div>
                 <Container className="summarySection">
                   <SummaryDropdown
@@ -348,13 +517,17 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                  <h3>Skills</h3>
+                  <h6>Skills</h6>
                 </div>
-                <Container className="skillsSection">
+                <Container
+                  className="skillsSection"
+                  style={{ fontSize: ".8rem" }}
+                >
                   {userInfo.skills.map((content, index) => {
                     return (
                       <div key={content._id}>
                         <p>
+                          {" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
@@ -377,15 +550,18 @@ class Resumes extends Component {
               </Container>
               <Container className="experience-section">
                 <div className="experienceHolder">
-                  <h3>Experience</h3>
+                  <h6>Experience</h6>
                 </div>
-                <Container className="experienceSection">
+                <Container
+                  className="experienceSection"
+                  style={{ fontSize: ".75rem" }}
+                >
                   {experience.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
                     let to = moment(content.to).format("MMM YYYY");
                     return (
                       <div key={content._id}>
-                        <h5>
+                        <h6>
                           {" "}
                           <CheckBox
                             context={this.props.context}
@@ -403,7 +579,7 @@ class Resumes extends Component {
                             index={this.state.index}
                           />{" "}
                           {content.company}{" "}
-                        </h5>
+                        </h6>
                         <p>
                           {" "}
                           {content.title}
@@ -420,15 +596,19 @@ class Resumes extends Component {
               </Container>
               <Container className="education-section">
                 <div className="educationHolder">
-                  <h3>Education</h3>
+                  <h6>Education</h6>
                 </div>
-                <Container className="educationSection">
+                <Container
+                  className="educationSection"
+                  style={{ fontSize: ".75rem" }}
+                >
                   {education.map((content, index) => {
                     let from = moment(content.from).format("MMM YYYY");
                     let to = moment(content.to).format("MMM YYYY");
                     return (
                       <div key={content._id}>
-                        <h5>
+                        <h6>
+                          {" "}
                           <CheckBox
                             context={this.props.context}
                             id={content._id}
@@ -445,7 +625,7 @@ class Resumes extends Component {
                             index={this.state.index}
                           />
                           {" " + content.degree} in {content.fieldofstudy}{" "}
-                        </h5>
+                        </h6>
                         <p>{content.location}</p>
                         <p>
                           {content.school}

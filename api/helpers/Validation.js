@@ -43,7 +43,7 @@ const validateLinkedIn = url => {
 };
 
 /*
-  GitHub example: github.com/test/ (allows some special characters)
+  GitHub example: github.com/test (allows some special characters)
 */
 const validateGithub = url => {
   const re = /^(github\.com\/[\w-!@#$%^&*]+)$/;

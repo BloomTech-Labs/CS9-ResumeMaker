@@ -62,7 +62,7 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
       })
       .catch(err => {
         console.log("err", err);
@@ -87,7 +87,7 @@ class ItemCard extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
       })
       .catch(err => {
         console.log("err", err);
@@ -114,7 +114,7 @@ class ItemCard extends Component {
           >
             <CardBody>
               <CardTitle>{this.props.element.title}</CardTitle>
-              <CardTitle>{this.props.element.company}</CardTitle>
+              <CardText>{this.props.element.company}</CardText>
               <CardText>
                 {moment(this.props.element.from).format("MMM YYYY")} -{" "}
                 {moment(this.props.element.to).format("MMM YYYY")}

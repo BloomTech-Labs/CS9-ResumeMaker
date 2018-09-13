@@ -15,8 +15,8 @@ class Summary extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
-            <div className="link-hide">
+          <div className="title-div col" style={{paddingRight: "1rem"}}>
+            <div className="link-hide" >
               <h4>PERSONAL SUMMARY </h4>
               <Link
                 to={{

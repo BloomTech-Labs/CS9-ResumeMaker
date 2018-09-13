@@ -75,7 +75,7 @@ class SummaryCreate extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
         this.setState({ success: true });
       })
       .catch(err => {
@@ -99,7 +99,7 @@ class SummaryCreate extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" style={{paddingRight: "1rem"}}>
             <h4>Personal Summary</h4>
             <p
               style={{

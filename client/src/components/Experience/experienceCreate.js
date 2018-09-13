@@ -122,7 +122,7 @@ class ExperienceCreate extends Component {
         }
       )
       .then(response => {
-        this.props.context.actions.setLogin(response.data);
+        this.props.context.actions.setLogin(response.data, true);
         this.setState({ success: true });
       })
       .catch(err => {
@@ -134,23 +134,32 @@ class ExperienceCreate extends Component {
     return (
       <div>
         {this.state.success ? <Redirect to="/experience" /> : null}
-        <Navbar context={this.props.context}/>
+        <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col">
+          <div className="title-div col" style={{ paddingRight: "1rem" }}>
             <h4>EXPERIENCE</h4>
-            <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
+            <p
+              style={{
+                fontSize: "0.7rem",
+                fontStyle: "Italic",
+                borderTop: "1px solid black",
+                width: "100%"
+              }}
+            >
               “Far and away the best prize that life offers is the chance to
               work hard at work worth doing.” –Theodore Roosevelt.
             </p>
-            <form style={{fontSize: ".7rem", width: "90%"}}>
+            <form
+              style={{ fontSize: ".7rem", width: "90%", paddingRight: "1rem" }}
+            >
               <div className="container">
                 <div className="row">
                   <div className="col">
-                    <div className="form-group" >
+                    <div className="form-group">
                       <label htmlFor="title">Title</label>
                       <input
-                       style={{fontSize: ".7rem", height: "1.7rem"}}
+                        style={{ fontSize: ".7rem", height: "1.7rem" }}
                         id="title"
                         value={this.state.title}
                         onChange={this.onInputChange}
@@ -162,7 +171,7 @@ class ExperienceCreate extends Component {
                     <div className="form-group">
                       <label htmlFor="company">Company</label>
                       <input
-                      style={{fontSize: ".7rem", height: "1.7rem"}}
+                        style={{ fontSize: ".7rem", height: "1.7rem" }}
                         id="company"
                         value={this.state.company}
                         onChange={this.onInputChange}
@@ -174,7 +183,7 @@ class ExperienceCreate extends Component {
                     <div className="form-group">
                       <label htmlFor="location">Location</label>
                       <input
-                      style={{fontSize: ".7rem", height: "1.7rem"}}
+                        style={{ fontSize: ".7rem", height: "1.7rem" }}
                         id="location"
                         value={this.state.location}
                         onChange={this.onInputChange}
@@ -186,7 +195,6 @@ class ExperienceCreate extends Component {
                     <div className="form-group">
                       <label htmlFor="from">Start date</label>
                       <DatePicker
-                    
                         selected={this.state.from}
                         onChange={this.fromChange}
                         placeholderText="Start Date"
@@ -207,7 +215,7 @@ class ExperienceCreate extends Component {
                     <div className="form-group">
                       <label htmlFor="description">Description</label>
                       <textarea
-                      style={{fontSize: ".7rem"}}
+                        style={{ fontSize: ".7rem" }}
                         rows={15}
                         id="description"
                         value={this.state.description}
@@ -219,13 +227,14 @@ class ExperienceCreate extends Component {
                     </div>
                   </div>
                 </div>
+
+                <button onClick={e => this.handleSubmit(e)}>Submit</button>
+                {this.props.location.state.index !== false ? (
+                  <button onClick={e => this.handleSubmit(e, true)}>
+                    Delete
+                  </button>
+                ) : null}
               </div>
-              <button onClick={e => this.handleSubmit(e)}>Submit</button>
-              {this.props.location.state.index !== false ? (
-                <button onClick={e => this.handleSubmit(e, true)}>
-                  Delete
-                </button>
-              ) : null}
             </form>
           </div>
         </div>

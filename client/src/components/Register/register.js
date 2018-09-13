@@ -6,15 +6,16 @@ const urls = require("../../config/config.json");
 
 class Register extends Component {
   state = {
-    email: "scrinch@gmail.com",
-    password: "scrinch1G!",
-    confirmPassword: "scrinch1G!",
-    username: "scrinch",
+    email: "scrinch32@gmail.com",
+    password: "Scrinch32!1",
+    confirmPassword: "Scrinch32!1",
+    username: "scrinch32",
     submitted: false,
     submittedError: false,
     usernameInvalid: false,
     emailInvalid: false,
-    passwordInvalid: false
+    passwordInvalid: false,
+    validateMessage: ""
   };
 
   validateForm() {
@@ -114,7 +115,7 @@ class Register extends Component {
         path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
-        this.setState({ submitted: true, submittedError: false });
+        this.setState({ submitted: true, submittedError: false, validateMessage: response.data });
       })
       .catch(err => {
         console.log("err", err);
@@ -127,6 +128,7 @@ class Register extends Component {
   };
 
   render() {
+    console.log("state", this.state);
     if (this.state.submittedError === true) {
       return (
         <div className="Login">
@@ -176,6 +178,14 @@ class Register extends Component {
               />
               <FormFeedback>Please enter an unused valid email.</FormFeedback>
             </FormGroup>
+            {/* <h6>Password</h6>
+            <div>Must be longer than 6 characters </div>
+            <div>Must have at least 1 uppercase</div>
+            <div>Must have at least 1 lowercase</div>
+            <div>Must have at least 1 special character</div>
+            <div style={{ marginBottom: "20px" }}>
+              Must have at least 1 digit
+            </div> */}
             <FormGroup>
               <h6>Password</h6>
               <Input
@@ -226,10 +236,19 @@ class Register extends Component {
       return (
         <div className="Login">
           <div className="message">
-            <p>
+            <p style={{ margin: "0" }}>
               Please check your email within 30 minutes to confirm your
               registration, then you can log in.
+              
+              Please ctrl(cmd for Mac) + click the following link to register
+              your account:
             </p>
+            <a
+              style={{ marginTop: "10px", marginBottom: "10px" }}
+              href={this.state.validateMessage}
+            >
+              {"Register Your Account"}
+            </a>
             <Button
               style={{ fontSize: ".7rem", height: "2rem" }}
               color="primary"

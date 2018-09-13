@@ -55,6 +55,7 @@ a {
   padding: 0.5rem 0 0 0;
 }
 .title-div h4 {
+  width: 100%;
   text-align: start;
 }
 .title-div p {
@@ -143,6 +144,16 @@ i {
   font-size: 1rem;
   color: #777;
 }
+.fa.fa-check {
+  padding: 0.5rem;
+}
+.fa.fa-check:hover {
+  color: #777;
+}
+.fa.fa-check:active {
+  font-size: 1rem;
+  color: #777;
+}
 .title-div.templates h4 {
   width: 100%;
   border-bottom: 1px solid black;
@@ -160,6 +171,9 @@ form {
 }
 .form-control {
   font-size: 0.7rem;
+}
+.edit-name {
+  max-width: 20%;
 }
 .item-card {
   margin: 1%;
@@ -395,7 +409,7 @@ form {
   padding: 2rem;
 }
 .Login .message p {
-  word-break: break;
+  word-break: break-word;
 }
 .navbar {
   background-color: #707f8c;
@@ -409,7 +423,6 @@ form {
 }
 .resume.title-div h4 {
   width: 100%;
-  border-bottom: 1px solid black;
   text-align: start;
   padding: 0.5rem;
   margin-right: 5%;
@@ -419,8 +432,8 @@ form {
   padding-top: 0;
 }
 img {
-  height: 20rem;
-  width: 15rem;
+  height: 18rem;
+  width: 13.9rem;
 }
 .template-img {
   border: 1px black solid;
@@ -517,6 +530,10 @@ img {
 }
 .skills-containment-div .groupname-input {
   font-size: 1.8rem;
+  border-radius: unset;
+}
+.skills-containment-div .form-group {
+  margin-bottom: 0.5rem;
 }
 .component-div {
   display: flex;
@@ -580,7 +597,7 @@ img {
   display: flex;
 }
 .subtitle {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold";
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 .template.title-div {
   display: flex;
@@ -601,10 +618,10 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 .contact-section {
-  border: 2px solid black;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -613,14 +630,18 @@ img {
 .contact-section .contactSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
 }
 .contact-section .contactHolder {
   display: flex;
 }
+.contact-section .contact-holder {
+  min-width: 100px;
+  width: 27%;
+}
 .title-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -628,17 +649,17 @@ img {
 }
 .title-section .titleHolder {
   min-width: 100px;
-  width: 100px;
+  width: 10%;
 }
 .title-section .titleSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .summary-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -646,17 +667,17 @@ img {
 }
 .summary-section .summaryHolder {
   min-width: 100px;
-  width: 190px;
+  width: 18%;
 }
 .summary-section .summarySection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .skills-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -664,17 +685,21 @@ img {
 }
 .skills-section .skillsHolder {
   min-width: 100px;
-  width: 190px;
+  min-height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18%;
 }
 .skills-section .skillsSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .experience-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -682,33 +707,50 @@ img {
 }
 .experience-section .experienceHolder {
   min-width: 100px;
-  width: 190px;
+  min-height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18%;
 }
 .experience-section .experienceSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 .education-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
 }
 .education-section .educationHolder {
-  min-width: 100px;
-  width: 190px;
+  min-height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18%;
 }
 .education-section .educationSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
   max-width: 800px;
 }
 a:hover {
   text-decoration: none !important;
   color: inherit !important;
+}
+.nav-header {
+  text-shadow: 1px 1px black;
+}
+#resumeName {
+  border-radius: unset;
+}
+.container.resume-name {
+  display: flex;
+  justify-content: center;
 }
