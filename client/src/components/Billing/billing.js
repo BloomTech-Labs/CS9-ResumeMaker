@@ -60,6 +60,7 @@ class Billing extends Component {
             this.props.context.actions.setSingleElement("membership", true);
             if(res.data.resumes.length > 1){
               this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+              this.props.context.actions.expandResumeIDs();
             }
           })
           .catch(err => {
@@ -103,6 +104,7 @@ class Billing extends Component {
             this.props.context.actions.setSingleElement("membership", true);
             if(res.data.resumes.length > 1){
               this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+              this.props.context.actions.expandResumeIDs();
             }
           })
           .catch(err => {
