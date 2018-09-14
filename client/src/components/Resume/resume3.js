@@ -205,7 +205,7 @@ export class ResumeThree extends Component {
                         ].value ? (
                           <div key={content._id}>
                             <h5  style={{textTransform: "uppercase"}}>
-                              {content.degree} in {content.fieldofstudy}{" "}
+                              {content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
                             </h5>
                             <p>{content.location}</p>
                             <p>

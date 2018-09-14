@@ -150,7 +150,7 @@ export class ResumeTwo extends Component {
                         ].value ? (
                           <div key={content._id}>
                             <h6 style={{textTransform: "uppercase"}}>
-                              {content.degree} in {content.fieldofstudy}{" "}
+                              {content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
                             </h6>
                             <p>{content.location}</p>
                             <p>

@@ -648,7 +648,7 @@ class Resumes extends Component {
                             }
                             index={this.state.index}
                           />
-                          {" " + content.degree} in {content.fieldofstudy}{" "}
+                          {" " + content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
                         </h6>
                         <p>{content.location}</p>
                         <p>
