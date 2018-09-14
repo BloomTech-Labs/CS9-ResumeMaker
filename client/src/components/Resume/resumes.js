@@ -551,7 +551,6 @@ class Resumes extends Component {
                   {userInfo.skills.map((content, index) => {
                     return (
                       <div key={content._id}>
-                        <p>
                           {" "}
                           <CheckBox
                             context={this.props.context}
@@ -566,8 +565,8 @@ class Resumes extends Component {
                             }
                             index={this.state.index}
                           />
-                          {" " + content.content}
-                        </p>
+                          <b>{" " + content.groupname}</b>
+                          <p>{content.content}</p>
                       </div>
                     );
                   })}

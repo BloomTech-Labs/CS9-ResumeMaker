@@ -699,7 +699,8 @@ img {
 }
 .skills-section .skillsSection {
   display: flex;
-  flex-flow: column wrap;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   max-width: 800px;
 }
 .experience-section {
