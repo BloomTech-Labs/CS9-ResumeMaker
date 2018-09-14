@@ -85,7 +85,7 @@ a {
   justify-content: space-between;
   padding: 0.5rem 0 0 0;
   h4 {
-    width: 100%; 
+    width: 100%;
     text-align: start;
   }
   p {
@@ -105,11 +105,10 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
   background-color: @background_color_1;
   height: 320px;
   width: 60%;
-  padding: 3%;
+  padding: 2%;
   margin-top: 3%;
 }
 .stripe-pay {
@@ -137,6 +136,9 @@ textarea {
 }
 .bill-btn {
   margin: 2% 1%;
+}
+.unsubscribe {
+  max-width: 30%;
 }
 
 // classFunction.css
@@ -184,6 +186,16 @@ i {
     color: @color_2;
   }
 }
+.fa.fa-check {
+  padding: 0.5rem;
+  &:hover {
+    color: @color_2;
+  }
+  &:active {
+    font-size: 1rem;
+    color: @color_2;
+  }
+}
 .title-div.templates {
   h4 {
     width: 100%;
@@ -203,6 +215,9 @@ form {
 }
 .form-control {
   font-size: 0.7rem;
+}
+.edit-name {
+  max-width: 20%;
 }
 
 // itemcard.css
@@ -304,7 +319,7 @@ form {
     text-overflow: ellipsis;
   }
   .card-body {
-    padding: .8rem;
+    padding: 0.8rem;
     font-size: 0.7rem;
     width: 15rem;
     border: 1.5rem;
@@ -580,7 +595,17 @@ img {
   }
   .groupname-input {
     font-size: 1.8rem;
+    border-radius: unset;
   }
+  .form-group {
+    margin-bottom: 0.5rem;
+  }
+}
+.groupname-input {
+  border-radius: unset !important;
+}
+.groupname {
+  width: fit-content;
 }
 
 // templates.css, template1.css, template2.css, template3.css
@@ -637,6 +662,7 @@ img {
   width: 10rem;
   height: 3rem;
   margin: 1rem;
+  white-space: nowrap;
 }
 .save-button {
   height: min-content;
@@ -673,7 +699,7 @@ img {
 }
 
 .contact-section {
-  border: 2px solid black;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -682,12 +708,10 @@ img {
   .contactSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 2px solid black;
   }
 
   .contactHolder {
     display: flex;
-    
   }
   .contact-holder {
     min-width: 100px;
@@ -696,8 +720,8 @@ img {
 }
 
 .title-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -711,19 +735,17 @@ img {
   .titleSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 2px solid black;
     max-width: 800px;
   }
 }
 
 .summary-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
-  justify-content: center; 
-
+  justify-content: center;
 
   .summaryHolder {
     min-width: 100px;
@@ -733,16 +755,13 @@ img {
   .summarySection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 2px solid black;
     max-width: 800px;
   }
-
 }
 
-
 .skills-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -750,20 +769,23 @@ img {
 
   .skillsHolder {
     min-width: 100px;
+    min-height: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 18%;
   }
 
   .skillsSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 2px solid black;
     max-width: 800px;
   }
 }
 
 .experience-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -771,34 +793,39 @@ img {
 
   .experienceHolder {
     min-width: 100px;
+    min-height: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 18%;
   }
 
   .experienceSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 2px solid black;
     max-width: 800px;
   }
 }
 
 .education-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
 
   .educationHolder {
-    min-width: 100px;
+    min-height: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 18%;
   }
 
   .educationSection {
     display: flex;
     flex-flow: column wrap;
-    border-left: 2px solid black;
     max-width: 800px;
   }
 }
@@ -808,5 +835,13 @@ a:hover {
   color: inherit !important;
 }
 .nav-header {
-  text-shadow: 1px 1px black; 
+  text-shadow: 1px 1px black;
+}
+#resumeName {
+  border-radius: unset;
+}
+
+.container.resume-name {
+  display: flex;
+  justify-content: center;
 }

@@ -72,11 +72,10 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
   background-color: #707f8c;
   height: 320px;
   width: 60%;
-  padding: 3%;
+  padding: 2%;
   margin-top: 3%;
 }
 .stripe-pay {
@@ -104,6 +103,9 @@ textarea {
 }
 .bill-btn {
   margin: 2% 1%;
+}
+.unsubscribe {
+  max-width: 30%;
 }
 .template-card {
   background-color: transparent !important;
@@ -144,6 +146,16 @@ i {
   font-size: 1rem;
   color: #777;
 }
+.fa.fa-check {
+  padding: 0.5rem;
+}
+.fa.fa-check:hover {
+  color: #777;
+}
+.fa.fa-check:active {
+  font-size: 1rem;
+  color: #777;
+}
 .title-div.templates h4 {
   width: 100%;
   border-bottom: 1px solid black;
@@ -161,6 +173,9 @@ form {
 }
 .form-control {
   font-size: 0.7rem;
+}
+.edit-name {
+  max-width: 20%;
 }
 .item-card {
   margin: 1%;
@@ -517,6 +532,16 @@ img {
 }
 .skills-containment-div .groupname-input {
   font-size: 1.8rem;
+  border-radius: unset;
+}
+.skills-containment-div .form-group {
+  margin-bottom: 0.5rem;
+}
+.groupname-input {
+  border-radius: unset !important;
+}
+.groupname {
+  width: fit-content;
 }
 .component-div {
   display: flex;
@@ -571,6 +596,7 @@ img {
   width: 10rem;
   height: 3rem;
   margin: 1rem;
+  white-space: nowrap;
 }
 .save-button {
   height: min-content;
@@ -604,7 +630,7 @@ img {
   font-size: 0.7rem;
 }
 .contact-section {
-  border: 2px solid black;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -613,7 +639,6 @@ img {
 .contact-section .contactSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
 }
 .contact-section .contactHolder {
   display: flex;
@@ -623,8 +648,8 @@ img {
   width: 27%;
 }
 .title-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -637,12 +662,11 @@ img {
 .title-section .titleSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
   max-width: 800px;
 }
 .summary-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -655,12 +679,11 @@ img {
 .summary-section .summarySection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
   max-width: 800px;
 }
 .skills-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -668,17 +691,20 @@ img {
 }
 .skills-section .skillsHolder {
   min-width: 100px;
+  min-height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18%;
 }
 .skills-section .skillsSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
   max-width: 800px;
 }
 .experience-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
@@ -686,30 +712,35 @@ img {
 }
 .experience-section .experienceHolder {
   min-width: 100px;
+  min-height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18%;
 }
 .experience-section .experienceSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
   max-width: 800px;
 }
 .education-section {
-  margin: 5% 0 0 0;
-  border: 2px solid black;
+  margin: 1% 0 0 0;
+  border: 1px solid black;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
 }
 .education-section .educationHolder {
-  min-width: 100px;
+  min-height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18%;
 }
 .education-section .educationSection {
   display: flex;
   flex-flow: column wrap;
-  border-left: 2px solid black;
   max-width: 800px;
 }
 a:hover {
@@ -718,4 +749,11 @@ a:hover {
 }
 .nav-header {
   text-shadow: 1px 1px black;
+}
+#resumeName {
+  border-radius: unset;
+}
+.container.resume-name {
+  display: flex;
+  justify-content: center;
 }

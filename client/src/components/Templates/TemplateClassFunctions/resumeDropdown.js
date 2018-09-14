@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+const urls = require("../../../config/config.json");
 
 class ResumeDropdown extends Component {
   // Adding default state as a placeholder
   constructor(props) {
     super(props);
     this.state = {
-      toggled: false
+      toggled: false,
+      edit: false
     };
   }
 
@@ -22,6 +26,50 @@ class ResumeDropdown extends Component {
   // componentDidMount = () => {
   //   this.setState({ selected: this.fillState() });
   // }
+
+  handleEdit = editToggle => {
+    if (editToggle === "toggle") this.setState({ edit: !this.state.toggled });
+    else {
+      const tempObj = this.props.context.userInfo.resumes[this.props.index];
+      tempObj.name = this.props.resumeName;
+      axios
+        .put(
+          `${urls[urls.basePath]}/resume/` +
+            this.props.context.userInfo.resumes[this.props.index]._id,
+          tempObj,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(response => {
+          axios
+            .put(
+              `${urls[urls.basePath]}/users/info/${
+                this.props.context.userInfo.id
+              }`,
+              { currentresume: response.data.resume._id },
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token")
+                }
+              }
+            )
+            .then(response => {
+              console.log("success");
+              this.setState({ edit: !this.state.edit });
+              // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
+            })
+            .catch(err => {
+              console.log("err", err);
+            });
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
 
   // Toggles the drop down menu to appear based on the boolean value of state
   handleToggle = () => {
@@ -47,9 +95,13 @@ class ResumeDropdown extends Component {
     const { toggled } = this.state;
     let selectedResume = null;
     const list = this.props.context.userInfo.resumes.map((data, index) => {
-      console.log("RENDERED so go thorugh", this.props.context.userInfo.resumes[index].name)
-      if(data._id == this.props.context.userInfo.currentresume){
-        selectedResume = data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;
+      console.log(
+        "RENDERED so go thorugh",
+        this.props.context.userInfo.resumes[index].name
+      );
+      if (data._id === this.props.context.userInfo.currentresume) {
+        selectedResume =
+          data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;
       }
       return (
         <li
@@ -60,34 +112,50 @@ class ResumeDropdown extends Component {
         >
           {data.name === "Untitled" ? "Untitled " + (index + 1) : data.name}
         </li>
-      )
-    }
-  );
+      );
+    });
 
-    const displayIndex = this.props.index + 1;
     return (
       <div className="template-card card dropdown m-0">
-        <div className="container">
-          {/* <h4 style={{textTransform: "uppercase"}}>{selectedResume ? selectedResume : "RESUME: " + displayIndex}</h4> */}
-          <h4 style={{textTransform: "uppercase"}}>{selectedResume}</h4>
-          <input
-            id="resumeName"
-            type="text"
-            value={this.props.resumeName !== null ? this.props.resumeName : ""}
-            onChange={this.props.onInputChange}
-            className="form-control"
-            placeholder={selectedResume}
-            onKeyDown={event => {
-              if (event.key === "Enter") {
-                event.target.blur();
-                event.preventDefault();
-                event.stopPropagation();
-                this.props.handleSubmit();
-              }
-            }}
-          />
+        <div className="container resume-name">
+          {this.state.edit ? (
+            <React.Fragment>
+              <input
+                id="resumeName"
+                type="text"
+                value={
+                  this.props.resumeName !== null ? this.props.resumeName : ""
+                }
+                onChange={this.props.onInputChange}
+                className="form-control edit-name"
+                placeholder={selectedResume}
+                onKeyDown={event => {
+                  if (event.key === "Enter") {
+                    event.target.blur();
+                    event.preventDefault();
+                    event.stopPropagation();
+                    //!fix
+                    this.handleEdit();
+                  }
+                }}
+                autoFocus
+              />
+              <i
+                onClick={() => this.handleEdit()}
+                className="fa fa-check fa-lg"
+              />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <h4 style={{ marginRight: "1%" }}>{selectedResume}</h4>
+              <i
+                onClick={() => this.handleEdit("toggle")}
+                className="fa fa-pencil fa-lg"
+              />
+            </React.Fragment>
+          )}
         </div>
-        <h6 style={{textTransform: "uppercase"}}>
+        <h6 style={{ textTransform: "uppercase" }}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled

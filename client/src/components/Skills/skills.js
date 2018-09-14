@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Navbar from "../SubComponents/Navbar/navbar";
 import Sidebar from "../SubComponents/Sidebar/sidebar";
-import { Container, Col, Form, FormGroup, Input, Label } from "reactstrap";
+import { Container, Col, Form, FormGroup, Input } from "reactstrap";
 
 import axios from "axios";
 const urls = require("../../config/config.json");
@@ -15,8 +15,20 @@ class Skills extends Component {
       skills: []
     };
   }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    if (this.props.context.userInfo.auth !== true) {
+      //future home of login automatically on refresh or revisit
+    } else {
+      // This automatically updates the state properties with userInfo ones, but they have to be in the same format/names as userInfo uses!
+      this.setState(
+        this.augmentObject(
+          this.state.skills,
+          this.props.context.userInfo.skills
+        )
+      );
+    }
   };
 
   componentDidUpdate = () => {
@@ -26,6 +38,18 @@ class Skills extends Component {
     ) {
       this.setState({ skills: this.props.context.userInfo.skills });
     }
+  };
+
+  augmentObject = (initObj, modObj) => {
+    for (let prop in initObj) {
+      if (modObj[prop]) {
+        let val = modObj[prop];
+        if (typeof val === "object" && typeof initObj[prop] === "object")
+          this.augmentObject(initObj[prop], val);
+        else initObj[prop] = val;
+      }
+    }
+    return initObj;
   };
 
   handleChange = (e, index) => {
@@ -115,98 +139,114 @@ class Skills extends Component {
               skills. Press ENTER to save any changes. New Skill Groups can be
               added and deleted as needed.
             </p>
-
+            <Form className="skillgroup" style={{ marginLeft: "1%" }}>
+              <FormGroup
+                style={{
+                  borderBottom: "1px black solid",
+                  paddingBottom: "20px",
+                  minWidth: "500px",
+                  width: "100%"
+                }}
+              >
+                <h4>Add a New Skill Group:</h4>
+                <Input
+                  style={{
+                    height: "2rem",
+                    fontSize: ".85rem",
+                    fontWeight: "550",
+                    marginLeft: "12%",
+                    width: "70%"
+                  }}
+                  className="groupname-input"
+                  id="newSkill"
+                  value={this.state.newSkill}
+                  onChange={this.newSkillChange}
+                  onKeyDown={event => {
+                    if (event.key === "Enter") {
+                      event.target.blur();
+                      event.preventDefault();
+                      event.stopPropagation();
+                      this.handleSubmit("add");
+                    }
+                  }}
+                />
+              </FormGroup>
+            </Form>
             <Container className="skills-containment-div">
               {this.state.skills.map((element, index) => {
                 return (
-                  <Form
-                    className="skillgroup"
-                    key={element._id ? element._id : element.groupname + index}
-                  >
-                    <button
-                      className="close"
-                      aria-label="Delete"
-                      onClick={() => this.handleDelete(index, "skills")}
+                  <React.Fragment key={index}>
+                    <h5>Skill Group - {this.state.skills[index].groupname} </h5>
+                    <Form
+                      className="skillgroup"
+                      key={
+                        element._id ? element._id : element.groupname + index
+                      }
                     >
-                      <span aria-hidden="true" style={{ color: "red" }}>
-                        &times;
-                      </span>
-                    </button>
-                    <FormGroup row>
-                      <Col>
-                        <Input
-                          style={{
-                            height: "2rem",
-                            fontSize: ".85rem",
-                            fontWeight: "550"
-                          }}
-                          className="groupname-input"
-                          id={`skills`}
-                          name="groupname"
-                          placeholder="Group Name"
-                          value={this.state.skills[index].groupname}
-                          onChange={e => this.handleChange(e, index)}
-                          onKeyDown={event => {
-                            if (event.key === "Enter") {
-                              event.target.blur();
-                              event.preventDefault();
-                              event.stopPropagation();
-                              this.handleSubmit("edit");
-                            }
-                          }}
-                        />
-                      </Col>
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col>
-                        <Input
-                          style={{ height: "2rem", fontSize: ".85rem" }}
-                          className="skills-input"
-                          id={`skills`}
-                          name="content"
-                          placeholder="Skill 1, skill 2, skill 3..."
-                          type="textarea submit"
-                          value={this.state.skills[index].content}
-                          onChange={e => this.handleChange(e, index)}
-                          onKeyDown={event => {
-                            if (event.key === "Enter") {
-                              event.target.blur();
-                              event.preventDefault();
-                              event.stopPropagation();
-                              this.handleSubmit("edit");
-                            }
-                          }}
-                        />
-                      </Col>
-                    </FormGroup>
-                  </Form>
+                      <FormGroup row className="groupname">
+                        <Col>
+                          <Input
+                            style={{
+                              height: "2rem",
+                              fontSize: ".85rem",
+                              fontWeight: "550",
+                            }}
+                            className="groupname-input"
+                            id={`skills`}
+                            name="groupname"
+                            placeholder="Group Name"
+                            value={this.state.skills[index].groupname}
+                            onChange={e => this.handleChange(e, index)}
+                            onKeyDown={event => {
+                              if (event.key === "Enter") {
+                                event.target.blur();
+                                event.preventDefault();
+                                event.stopPropagation();
+                                this.handleSubmit("edit");
+                              }
+                            }}
+                          />
+                        </Col>
+                        <button
+                          className="close"
+                          aria-label="Delete"
+                          onClick={() => this.handleDelete(index, "skills")}
+                        >
+                          <span aria-hidden="true" style={{ color: "red" }}>
+                            &times;
+                          </span>
+                        </button>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Col>
+                          <Input
+                            style={{
+                              height: "2rem",
+                              fontSize: ".85rem",
+                              width: "80%"
+                            }}
+                            className="skills-input"
+                            id={`skills`}
+                            name="content"
+                            placeholder="Skill 1, skill 2, skill 3..."
+                            type="textarea submit"
+                            value={this.state.skills[index].content}
+                            onChange={e => this.handleChange(e, index)}
+                            onKeyDown={event => {
+                              if (event.key === "Enter") {
+                                event.target.blur();
+                                event.preventDefault();
+                                event.stopPropagation();
+                                this.handleSubmit("edit");
+                              }
+                            }}
+                          />
+                        </Col>
+                      </FormGroup>
+                    </Form>
+                  </React.Fragment>
                 );
               })}
-              <div className="skillgroup-input">
-                <FormGroup>
-                  <Label
-                    style={{
-                      fontSize: "0.8rem"
-                    }}
-                  >
-                    Add a New Skill Group:
-                  </Label>
-                  <Input
-                    id="newSkill"
-                    bssize="sm"
-                    value={this.state.newSkill}
-                    onChange={this.newSkillChange}
-                    onKeyDown={event => {
-                      if (event.key === "Enter") {
-                        event.target.blur();
-                        event.preventDefault();
-                        event.stopPropagation();
-                        this.handleSubmit("add");
-                      }
-                    }}
-                  />
-                </FormGroup>
-              </div>
             </Container>
           </div>
         </div>
