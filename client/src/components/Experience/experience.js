@@ -11,12 +11,13 @@ class Experience extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col"  style={{paddingRight: "1rem"}}>
-            <div className="link-hide">
+          <div className="section title-div col"  style={{paddingRight: "1rem"}}>
+            <div className="section-title" style={{width: "95%"}}>
+            <div className="link-hide" style={{float: "left", padding: "0"}} >
             <h4>EXPERIENCE{" "}</h4>
               <Link
                 to={{
@@ -24,14 +25,16 @@ class Experience extends Component {
                   state: { index: false } // Setting Index passed into experienceCreate component - false means new
                 }}
               >
-                <i className="fa fa-pencil fa-lg" />
+                <i className="fa fa-pencil fa-lg"/>
               </Link>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
+     <div style={{width: "100%"}}>
+            <p style={{display: "inline-block", fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
               Click the pencil to add previous employment information to your work history.
             </p>
-
-            <div className="experience-containment-div">
+      </div>
+            </div>
+            <div className="experience-containment-div" style={{paddingLeft: "1rem"}} >
               {this.props.context.userInfo.experience.map((element, index) => {
                 return (
                   <ItemCard

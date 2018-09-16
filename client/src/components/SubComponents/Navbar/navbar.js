@@ -5,7 +5,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar sticky-top mb-0 d-flex " style={{padding:".3rem"}}>
-      <h5 className="nav-header" style={{float: "left", color: "white", margin: "0", paddingLeft: "1.5rem", fontWeight: "800"}}>rezRight</h5>
+      <h5 className="nav-header" style={{float: "left", color: "lightgray", margin: "0", paddingLeft: "1.5rem", fontWeight: "800", textShadow: "-1px -1px 1px black"}}>rezRight</h5>
         <Route 
           render={({ history }) => (
             <div

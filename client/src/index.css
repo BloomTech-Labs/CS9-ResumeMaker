@@ -43,7 +43,7 @@ a {
 .title-div {
   justify-content: center;
   padding: 2rem 0;
-  width: 100%;
+  width: 95%;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   align-items: start;
   display: flex;
@@ -55,7 +55,7 @@ a {
   padding: 0.5rem 0 0 0;
 }
 .title-div h4 {
-  width: 100%;
+  width: 95%;
   text-align: start;
 }
 .title-div p {
@@ -63,6 +63,34 @@ a {
 }
 textarea {
   height: auto;
+}
+.section.title-div.col {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: url(images/cup.jpg);
+  background-size: cover;
+  overflow: auto;
+}
+.section-title {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  margin: 0.8rem;
+  padding: 1rem;
+}
+.section-title p {
+  margin: 0;
+  padding: 0;
+}
+.billing.title-div.col {
+  background-image: url(images/abstract.jpg);
+  min-height: 100vh;
+  padding: 1.6rem;
+}
+.billing-page {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding-bottom: 3rem;
+  border-radius: 10px;
 }
 .stripe {
   margin-left: 20%;
@@ -153,6 +181,12 @@ i {
 .fa.fa-check:active {
   font-size: 1rem;
   color: #777;
+}
+.title-div.templates {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 1rem;
+  padding-left: 0.5rem;
+  border-radius: 10px;
 }
 .title-div.templates h4 {
   width: 100%;
@@ -430,6 +464,8 @@ form {
 .resume.page-header {
   font-size: 1.5rem;
   padding-top: 0;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: lightgray;
 }
 img {
   height: 18rem;
@@ -440,6 +476,14 @@ img {
 }
 .container-div {
   padding: 1rem;
+}
+.settings {
+  background-image: url(images/abstract.jpg);
+}
+.settings-page {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  margin: 1rem;
 }
 .Settings form .form-group {
   max-width: 20rem;
@@ -533,13 +577,14 @@ img {
 }
 .component-div {
   display: flex;
-  background: #c8c8c8;
 }
 .page-div {
   display: flex;
   flex-direction: column;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   width: 100%;
+  background-image: url('images/blank-paper.jpg');
+  background-size: cover;
 }
 .page-div.page-container-div {
   max-width: 1200px !important;
@@ -622,6 +667,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .contact-section .contactSection {
   display: flex;
@@ -642,6 +688,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .title-section .titleHolder {
   min-width: 100px;
@@ -660,6 +707,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .summary-section .summaryHolder {
   min-width: 100px;
@@ -678,6 +726,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .skills-section .skillsHolder {
   min-width: 100px;
@@ -700,6 +749,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .experience-section .experienceHolder {
   min-width: 100px;
@@ -722,6 +772,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .education-section .educationHolder {
   min-height: 118px;

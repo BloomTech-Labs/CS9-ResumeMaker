@@ -66,15 +66,15 @@ a {
   .title-div {
     display: flex;
     justify-content: flex-start;
+   
   }
 }
 .title-div {
   display: flex;
-  width: 100%;
   flex-direction: column;
   justify-content: center;
   padding: 2rem 0;
-  width: 100%;
+  width: 95%;
   font-family: @font_family_2;
   align-items: start;
   display: flex;
@@ -84,8 +84,9 @@ a {
   flex-direction: column;
   justify-content: space-between;
   padding: 0.5rem 0 0 0;
+ 
   h4 {
-    width: 100%;
+    width: 95%;
     text-align: start;
   }
   p {
@@ -95,8 +96,39 @@ a {
 textarea {
   height: auto;
 }
+.section.title-div.col {
+  display: flex; 
+  height: 100vh;  
+  width: 100vw; 
+  background: url(images/cup.jpg) ;
+  background-size: cover; 
+  overflow: auto;
+   
+}
+.section-title{
+  background-color:rgba(255,255,255, 0.6);
+  border-radius: 10px; 
+  margin: .8rem; 
+  padding: 1rem;
+  p {
+    margin: 0; 
+    padding: 0; 
+  } 
+}
 
 // billing.css
+.billing.title-div.col {
+  background-image: url(images/abstract.jpg);
+  min-height: 100vh;  
+  padding: 1.6rem; 
+   
+}
+.billing-page {
+  background-color:rgba(255,255,255, 0.6);
+  padding-bottom: 3rem; 
+  border-radius: 10px;
+  
+}
 .stripe {
   margin-left: 20%;
   width: 100%;
@@ -144,12 +176,15 @@ textarea {
   background-color: @background_color_3 !important;
   border: none !important;
   padding: 0;
+  // color: transparent; 
+  // text-shadow: -1px -1px 1px black;
   card {
     dropdown {
       font-size: 0.7rem;
       width: 15rem;
     }
   }
+
 }
 .list-group {
   max-height: 175px;
@@ -195,6 +230,12 @@ i {
   }
 }
 .title-div.templates {
+  background-color:rgba(255,255,255, 0.8);
+  margin: 1rem;
+  padding-left: .5rem;  
+  border-radius: 10px;
+ 
+
   h4 {
     width: 100%;
     border-bottom: 1px solid black;
@@ -482,6 +523,8 @@ form {
 .resume.page-header {
   font-size: 1.5rem;
   padding-top: 0;
+  -webkit-text-stroke-width: .5px;
+   -webkit-text-stroke-color: lightgray;
 }
 img {
   height: 18rem;
@@ -495,7 +538,17 @@ img {
 }
 
 // settings.css
+.settings {
+  background-image: url(images/abstract.jpg);
+ 
+}
+.settings-page {
+  background-color:rgba(255,255,255, 0.6);
+  border-radius: 10px;
+  margin: 1rem; 
+}
 .Settings {
+  
   form {
     .form-group {
       max-width: 20rem;
@@ -599,13 +652,18 @@ img {
 // templates.css, template1.css, template2.css, template3.css
 .component-div {
   display: flex;
-  background: #c8c8c8;
+  // background: #c8c8c8;
 }
+
 .page-div {
   display: flex;
   flex-direction: column;
   font-family: @font_family_2;
   width: 100%;
+  background-image: url('images/blank-paper.jpg');
+  background-size: cover;
+
+  
 }
 .page-div.page-container-div {
   max-width: 1200px !important;
@@ -691,6 +749,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color:rgba(255,255,255, 0.6);
 
   .contactSection {
     display: flex;
@@ -714,6 +773,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color:rgba(255,255,255, 0.6);
 
   .titleHolder {
     min-width: 100px;
@@ -735,6 +795,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color:rgba(255,255,255, 0.6);
 
   .summaryHolder {
     min-width: 100px;
@@ -756,6 +817,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color:rgba(255,255,255, 0.6);
 
   .skillsHolder {
     min-width: 100px;
@@ -782,6 +844,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color:rgba(255,255,255, 0.6);
 
   .experienceHolder {
     min-width: 100px;
@@ -807,6 +870,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color:rgba(255,255,255, 0.6);
 
   .educationHolder {
     min-height: 118px;
@@ -836,3 +900,4 @@ a:hover {
   display: flex;
   justify-content: center;
 }
+// #mastercontainer { overflow: hidden; }
