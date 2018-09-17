@@ -5,6 +5,7 @@ const passport = require("passport");
 const secretKey = require("../config/keys").secret_key;
 const stripe = require("stripe")(secretKey);
 
+const Resume = require("../resume/ResumeModel");
 const User = require("../user/UserModel");
 const {
   checkMembership,
@@ -20,7 +21,7 @@ const {
 */
 router.post(
   "/monthly",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const { email } = req.body;
     const token = req.body.id;
@@ -43,7 +44,12 @@ router.post(
               membership: true
             })
           ) {
-            res.status(201).json("Success");
+            const query = Resume.find({ user: req.user._id });
+            query.then(resumes => {
+              res.status(201).json({ resumes });
+            }).catch(err => {
+              res.status(201).json("Success")
+            })
           } else res.status(400).json("Error");
         }
       }
@@ -58,7 +64,7 @@ router.post(
 */
 router.post(
   "/yearly",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const { email } = req.body;
     const token = req.body.id;
@@ -80,9 +86,14 @@ router.post(
               subscription: newSubscription.id,
               membership: true
             })
-          )
-            res.status(201).json("Success");
-          else res.status(400).json("Error");
+          ){
+            const query = Resume.find({ user: req.user._id });
+            query.then(resumes => {
+              res.status(201).json({ resumes });
+            }).catch(err => {
+              res.status(201).json("Success")
+            })          
+          } else res.status(400).json("Error");
         }
       }
     }
@@ -96,7 +107,7 @@ router.post(
 */
 router.post(
   "/unsubscribe",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { email } = req.body;
     User.findOne({ email })

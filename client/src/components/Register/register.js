@@ -237,11 +237,12 @@ class Register extends Component {
         <div className="Login">
           <div className="message">
             <p style={{ margin: "0" }}>
-              Please check your email within 30 minutes to confirm your
+              {/* Please check your email within 30 minutes to confirm your
               registration, then you can log in.
               
-              Please ctrl(cmd for Mac) + click the following link to register
-              your account:
+              Please click the following link to register
+              your account: */}
+               Please click the link below to activate your account
             </p>
             <a
               style={{ marginTop: "10px", marginBottom: "10px" }}
