@@ -119,14 +119,17 @@ class Skills extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="overall-component-div row">
+        <div className="overall-component-div row" style={{height: "100vh"}}>
           <Sidebar context={this.props.context} />
-          <div className="title-div col" style={{ paddingRight: "1rem" }}>
-            <div className="link-hide">
+          <div
+            className="section title-div col"
+        
+          >
+            <div className="section-title">
               <h4>SKILLS </h4>
-            </div>
+            
             <p
               style={{
                 fontSize: "0.7rem",
@@ -139,6 +142,7 @@ class Skills extends Component {
               skills. Press ENTER to save any changes. New Skill Groups can be
               added and deleted as needed.
             </p>
+            </div>
             <Form className="skillgroup" style={{ marginLeft: "1%" }}>
               <FormGroup
                 style={{
@@ -248,9 +252,10 @@ class Skills extends Component {
                 );
               })}
             </Container>
+            </div>
           </div>
         </div>
-      </div>
+ 
     );
   }
 }

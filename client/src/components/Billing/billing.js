@@ -167,17 +167,17 @@ class Billing extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col" style={{paddingRight: "1rem"}}>
-            <div className="title-div" style={{ paddingLeft: "0.5rem" }}>
+          <div className="billing title-div col" style={{paddingRight: "1rem"}}>
+            <div className="billing-page title-div" style={{ paddingLeft: "0.5rem" }}>
               <h4>BILLING</h4>
-            </div>
+ 
 
             <p
               style={{
                 fontSize: "0.7rem",
                 paddingLeft: ".6rem",
                 borderTop: "1px solid black",
-                width: "100%"
+                width: "95%"
               }}
             >
               Become a Member:
@@ -194,15 +194,15 @@ class Billing extends Component {
               {this.state.unsub_err ? (
                 <p>You do not have an active subscription!</p>
               ) : null}
-            </div>
+ 
 
             <div className="stripe">
               <div className="stripe-form">
                 {this.state.complete ? (
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <h1 style={{ textAlign: "center", marginTop: "6%" }}>
+                    <h2 style={{ textAlign: "center", marginTop: "6%" }}>
                       Thank You For Becoming A Member!
-                    </h1>
+                    </h2>
                   </div>
                 ) : (
                   <div className="stripe-pay">
@@ -233,6 +233,8 @@ class Billing extends Component {
                     Unsubscribe
                   </button>
                 )}
+                </div>
+                </div>
               </div>
             </div>
           </div>

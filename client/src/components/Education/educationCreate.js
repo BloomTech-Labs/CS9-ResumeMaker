@@ -126,13 +126,14 @@ class EducationCreate extends Component {
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col"  style={{paddingRight: "1rem"}}>
+          <div className="section title-div col" style={{paddingRight: "1rem"}}>
+          <div className="section-title" style={{width: "95%"}}>
             <h4>EDUCATION HISTORY</h4>
             <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “Intelligence plus character-that is the goal of true education.”
               ― Martin Luther King Jr.
             </p>
-            <form  style={{ width: "60%", alignItems: "left"}}>
+            <form  style={{ width: "60%", alignItems: "left", paddingLeft: "1rem", paddingTop: "2rem" }}>
               <div className="form-group">
                 <label htmlFor="school">School</label>
                 <input
@@ -194,6 +195,7 @@ class EducationCreate extends Component {
                 </button>
               ) : null}
             </form>
+            </div>
           </div>
         </div>
       </div>

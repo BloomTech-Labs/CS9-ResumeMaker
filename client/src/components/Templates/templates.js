@@ -31,7 +31,7 @@ class Resumes extends Component {
     return (
       <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="overall-component-div row">
+        <div className="templates overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
             <div className="title-div templates" style={{paddingRight: "1rem"}}>
