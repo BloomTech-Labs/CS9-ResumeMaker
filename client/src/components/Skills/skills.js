@@ -129,7 +129,7 @@ class Skills extends Component {
           >
             <div className="section-title">
               <h4>SKILLS </h4>
-            </div>
+            
             <p
               style={{
                 fontSize: "0.7rem",
@@ -142,6 +142,7 @@ class Skills extends Component {
               skills. Press ENTER to save any changes. New Skill Groups can be
               added and deleted as needed.
             </p>
+            </div>
             <Form className="skillgroup" style={{ marginLeft: "1%" }}>
               <FormGroup
                 style={{
