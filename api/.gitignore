@@ -1,5 +1,5 @@
 /node_modules
+/config
 .DS_Store
 .env
 yarn-error.log
-/config

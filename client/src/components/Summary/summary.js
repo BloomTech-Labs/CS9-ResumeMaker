@@ -4,6 +4,7 @@ import Sidebar from "../SubComponents/Sidebar/sidebar";
 import ItemCard from "../SubComponents/ItemCard/itemCard";
 import { Link } from "react-router-dom";
 
+
 class Summary extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -11,12 +12,13 @@ class Summary extends Component {
   
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col" style={{paddingRight: "1rem"}}>
-            <div className="link-hide" >
+          <div className="section title-div col">
+          <div className="section-title">
+            <div className="link-hide" style={{float: "left", padding: "0"}} >
               <h4>PERSONAL SUMMARY </h4>
               <Link
                 to={{
@@ -27,8 +29,8 @@ class Summary extends Component {
                 <i className="fa fa-pencil fa-lg" />
               </Link>
             </div>
-            <p
-              style={{
+            <div style={{width: "100%"}}>
+            <p style={{display: "inline-block",
                 fontSize: "0.7rem",
                 paddingLeft: ".6rem",
                 borderTop: "1px solid black",
@@ -37,8 +39,9 @@ class Summary extends Component {
             >
               Click the pencil to add a Personal Summary.{" "}
             </p>
-
-            <div className="summary-containment-div">
+</div>
+</div>
+            <div className="summary-containment-div" style={{padding: "1rem"}} >
               {this.props.context.userInfo.summary.map((element, index) => {
                 return (
                   <ItemCard

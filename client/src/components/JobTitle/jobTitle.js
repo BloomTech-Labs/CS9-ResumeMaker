@@ -15,8 +15,9 @@ class JobTitle extends Component {
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col" style={{paddingRight: "1rem"}}>
-            <div className="link-hide"  >
+          <div className="section title-div col">
+          <div className="section-title">
+            <div className="link-hide" style={{float: "left", padding: "0"}} >
               <h4>JOB TITLE{" "}</h4>
                 <Link
                   to={{
@@ -27,11 +28,13 @@ class JobTitle extends Component {
                   <i className="fa fa-pencil fa-lg"/>
                 </Link>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
+            <div style={{width: "100%"}}>
+            <p style={{display: "inline-block", fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
               Click the pencil to enter a Title for the Job Position you are seeking. 
             </p>
-
-            <div className="titles-containment-div" >
+</div>
+</div>
+            <div className="titles-containment-div" style={{padding: "1rem"}} >
               {this.props.context.userInfo.title.map((element, index) => {
                 return (
                   <ItemCard

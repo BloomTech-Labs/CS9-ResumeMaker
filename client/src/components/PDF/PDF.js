@@ -20,7 +20,7 @@ class PDF extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.pdfDocument} style={{ fontSize: ".7rem" }}>
+        <button onClick={this.pdfDocument}>
           Export PDF
         </button>
       </div>

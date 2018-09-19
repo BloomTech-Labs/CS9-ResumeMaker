@@ -81,8 +81,8 @@ export class ResumeTwo extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="resume title-div">
-              <h4 className="resume page-header">Modern</h4>
+            <div className="resume section-title">
+              <h4>Modern</h4>
               <PDF name="template2"/>
             </div>
             <div className="template2">
@@ -150,7 +150,7 @@ export class ResumeTwo extends Component {
                         ].value ? (
                           <div key={content._id}>
                             <h6 style={{textTransform: "uppercase"}}>
-                              {content.degree} in {content.fieldofstudy}{" "}
+                              {content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
                             </h6>
                             <p>{content.location}</p>
                             <p>

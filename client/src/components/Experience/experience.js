@@ -11,26 +11,29 @@ class Experience extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col"  style={{paddingRight: "1rem"}}>
-            <div className="link-hide">
-            <h4>EXPERIENCE{" "}</h4>
-              <Link
-                to={{
-                  pathname: "/experience/create", // component being Linked to
-                  state: { index: false } // Setting Index passed into experienceCreate component - false means new
-                }}
-              >
-                <i className="fa fa-pencil fa-lg" />
-              </Link>
+          <div className="section title-div col">
+            <div className="section-title">
+              <div className="link-hide" style={{float: "left", padding: "0"}} >
+                <h4>EXPERIENCE</h4>
+                <Link
+                  to={{
+                    pathname: "/experience/create", // component being Linked to
+                    state: { index: false } // Setting Index passed into experienceCreate component - false means new
+                  }}
+                >
+                  <i className="fa fa-pencil fa-lg"/>
+                </Link>
+              </div>
+              <div style={{width: "100%"}}>
+                <p style={{display: "inline-block", fontSize: "0.7rem", paddingLeft: "0.6rem", borderTop: "1px solid black", width: "100%"}}>
+                  Click the pencil to add previous employment information to your work history.
+                </p>
+              </div>
             </div>
-            <p style={{fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
-              Click the pencil to add previous employment information to your work history.
-            </p>
-
             <div className="experience-containment-div">
               {this.props.context.userInfo.experience.map((element, index) => {
                 return (

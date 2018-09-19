@@ -84,8 +84,8 @@ export class ResumeOne extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="resume title-div">
-              <h4 className="resume page-header">Traditional</h4>
+            <div className="resume section-title">
+              <h4>Traditional</h4>
               <PDF name="template1" />
             </div>
             <div className="template1">
@@ -217,7 +217,7 @@ export class ResumeOne extends Component {
                       .value ? (
                       <div key={content._id}>
                         <h5>
-                          {content.degree} in {content.fieldofstudy}{" "}
+                          {content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
                         </h5>
                         <p>{content.location}</p>
                         <p>

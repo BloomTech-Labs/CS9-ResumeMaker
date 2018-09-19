@@ -34,19 +34,25 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="title-div templates" style={{paddingRight: "1rem"}}>
-              <h4 style={{ paddingLeft: ".6rem" }}>TEMPLATES</h4>{" "}
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  paddingLeft: ".6rem",
-                  width: "100%"
-                }}
-              >
-                Select a Template to render your Resume: 
-              </p>
+            <div className="templates section-title">
+              <div className="link-hide" style={{float: "left", padding: "0"}}>
+                <h4>TEMPLATES</h4>
+              </div>
+              <div style={{width: "100%"}}>
+                <p
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.7rem",
+                    paddingLeft: "0.6rem",
+                    borderTop: "1px solid black",
+                    width: "100%",
+                    textAlign: "left"
+                  }}
+                >
+                  Select a Template to render your Resume: 
+                </p>
+              </div>
             </div>
-
             <div className="containers-div">
               <div className="d-inline-flex container-div">
                 <Link

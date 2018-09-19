@@ -94,12 +94,13 @@ class SummaryCreate extends Component {
       //   }
       //   message="You have unsaved changes, are you sure you want to leave?"
       // />,
-      <div>
+      <div className="entire-page">
         {this.state.success ? <Redirect to="/summary" /> : null}
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col" style={{paddingRight: "1rem"}}>
+          <div className="section title-div col">
+          <div className="section-title">
             <h4>Personal Summary</h4>
             <p
               style={{
@@ -112,7 +113,7 @@ class SummaryCreate extends Component {
               “Make the most of yourself....for that is all there is of you.” ―
               Ralph Waldo Emerson
             </p>
-            <form style={{ fontSize: ".7rem", width: "100%" }}>
+            <form style={{ fontSize: ".7rem", width: "100%", paddingLeft: "1rem", paddingTop: "2rem" }}>
               <div className="form-group">
                 <textarea
                   style={{ fontSize: ".7rem", width: "60%" }}
@@ -131,6 +132,7 @@ class SummaryCreate extends Component {
                 </button>
               ) : null}
             </form>
+            </div>
           </div>
         </div>
       </div>

@@ -60,6 +60,7 @@ class Billing extends Component {
             this.props.context.actions.setSingleElement("membership", true);
             if(res.data.resumes.length > 1){
               this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+              this.props.context.actions.expandResumeIDs();
             }
           })
           .catch(err => {
@@ -103,6 +104,7 @@ class Billing extends Component {
             this.props.context.actions.setSingleElement("membership", true);
             if(res.data.resumes.length > 1){
               this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+              this.props.context.actions.expandResumeIDs();
             }
           })
           .catch(err => {
@@ -161,26 +163,29 @@ class Billing extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="title-div col" style={{paddingRight: "1rem"}}>
-            <div className="title-div" style={{ paddingLeft: "0.5rem" }}>
+          <div className="billing title-div col">
+            <div className="section-title">
+            <div className="link-hide" style={{float: "left", padding: "0"}}>
               <h4>BILLING</h4>
             </div>
-
-            <p
-              style={{
-                fontSize: "0.7rem",
-                paddingLeft: ".6rem",
-                borderTop: "1px solid black",
-                width: "100%"
-              }}
-            >
-              Become a Member:
-            </p>
-
+ 
+            <div style={{width: "100%"}}>
+              <p
+                style={{
+                  display: "inline-block",
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  borderTop: "1px solid black",
+                  width: "100%"
+                }}
+              >
+                Become a Member:
+              </p>
+            </div>
             <div>
               {this.state.loading ? <Loading /> : null}
               {this.state.sub_err ? (
@@ -192,15 +197,15 @@ class Billing extends Component {
               {this.state.unsub_err ? (
                 <p>You do not have an active subscription!</p>
               ) : null}
-            </div>
+ 
 
             <div className="stripe">
               <div className="stripe-form">
                 {this.state.complete ? (
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <h1 style={{ textAlign: "center", marginTop: "6%" }}>
+                    <h2>
                       Thank You For Becoming A Member!
-                    </h1>
+                    </h2>
                   </div>
                 ) : (
                   <div className="stripe-pay">
@@ -224,13 +229,14 @@ class Billing extends Component {
                   </p>
                 ) : (
                   <button
-                    style={{ marginLeft: "35%", marginTop: "4%" }}
                     className="bill-btn unsubscribe"
                     onClick={this.unsubscribe}
                   >
                     Unsubscribe
                   </button>
                 )}
+                </div>
+                </div>
               </div>
             </div>
           </div>

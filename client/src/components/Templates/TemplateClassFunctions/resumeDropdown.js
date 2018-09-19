@@ -147,7 +147,9 @@ class ResumeDropdown extends Component {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <h4 style={{ marginRight: "1%" }}>{selectedResume}</h4>
+              <h4 style={{ marginRight: "1%" , fontWeight: "600", textShadow: "-1px -1px 1px white", color: "black"}}>
+                {selectedResume}
+              </h4>
               <i
                 onClick={() => this.handleEdit("toggle")}
                 className="fa fa-pencil fa-lg"
@@ -155,7 +157,7 @@ class ResumeDropdown extends Component {
             </React.Fragment>
           )}
         </div>
-        <h6 style={{ textTransform: "uppercase" }}>
+        <h6 style={{ textTransform: "uppercase", fontWeight: "600" }}>
           Choose an option:{" "}
           <i
             // Dynamically assigns a classname based on the value of this.toggled

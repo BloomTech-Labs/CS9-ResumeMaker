@@ -50,7 +50,7 @@ class ForgotPassword extends Component {
             <FormGroup>
               <h5>Email</h5>
               <Input
-              style={{fontSize: ".7rem", height: "2rem"}}
+                style={{fontSize: ".7rem", height: "2rem"}}
                 autoFocus
                 id="email"
                 invalid={this.state.submittedError}

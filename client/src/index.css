@@ -41,21 +41,16 @@ a {
   justify-content: flex-start;
 }
 .title-div {
+  flex-direction: column;
   justify-content: center;
   padding: 2rem 0;
-  width: 100%;
+  width: 95%;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  align-items: start;
   display: flex;
-  align-self: start;
-  flex-direction: row;
   text-align: start;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 0.5rem 0 0 0;
 }
 .title-div h4 {
-  width: 100%;
   text-align: start;
 }
 .title-div p {
@@ -64,17 +59,41 @@ a {
 textarea {
   height: auto;
 }
+.section.title-div.col {
+  display: flex;
+  background: url(images/cup.jpg);
+  background-size: cover;
+}
+.title-div.col {
+  padding-right: 2rem;
+}
+.section-title {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  margin: 0.8rem;
+  padding: 1rem;
+}
+.section-title p {
+  margin: 0;
+  padding: 0;
+}
+.templates.section-title {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.billing.title-div.col {
+  background-image: url(images/abstract.jpg);
+  background-size: cover;
+  display: flex;
+}
 .stripe {
-  margin-left: 20%;
   width: 100%;
 }
 .stripe-form {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  background-color: #707f8c;
+  background-color: blanchedalmond;
   height: 320px;
-  width: 60%;
   padding: 2%;
   margin-top: 3%;
 }
@@ -90,8 +109,8 @@ textarea {
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
+  -webkit-transition: box-shadow 150ms ease;
   padding: 1%;
 }
 .btn-group {
@@ -102,10 +121,11 @@ textarea {
   margin-top: 2%;
 }
 .bill-btn {
-  margin: 2% 1%;
+  margin: 0.1rem;
 }
 .unsubscribe {
-  max-width: 30%;
+  width: fit-content;
+  align-self: center;
 }
 .template-card {
   background-color: transparent !important;
@@ -156,13 +176,6 @@ i {
   font-size: 1rem;
   color: #777;
 }
-.title-div.templates h4 {
-  width: 100%;
-  border-bottom: 1px solid black;
-  text-align: start;
-  padding: 0.5rem;
-  margin: 0;
-}
 .div-for-links {
   display: flex;
   flex-direction: column;
@@ -177,6 +190,15 @@ form {
 .edit-name {
   max-width: 20%;
 }
+button.close {
+  color: red;
+}
+button.close:hover {
+  color: red !important;
+}
+button.close:focus {
+  color: red !important;
+}
 .item-card {
   margin: 1%;
   max-width: 20rem;
@@ -189,7 +211,6 @@ form {
   padding: 0;
 }
 .item-card .close {
-  color: red;
   position: absolute;
   padding: 0 0.3rem 0 0;
   top: 0;
@@ -197,19 +218,18 @@ form {
   height: min-content;
   align-self: flex-end;
 }
-.item-card .close:hover {
-  color: red !important;
-}
-.item-card .close:focus {
-  color: red !important;
-}
 .item-card .card-header {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   min-height: 5rem;
 }
+.item-card.card {
+  border: unset;
+  border-radius: unset;
+}
 .item-card.row-card {
+  border-radius: 0.25rem;
   flex-direction: row;
   margin: 1%;
 }
@@ -233,6 +253,7 @@ form {
 }
 .summary-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
 }
@@ -255,6 +276,7 @@ form {
 }
 .experience-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
 }
@@ -268,7 +290,7 @@ form {
   margin: 0;
 }
 .experience-containment-div .card-text {
-  margin: 10px 0 0 0;
+  margin: 0.4rem 0 0 0;
 }
 .experience-containment-div .card-subtitle {
   white-space: nowrap;
@@ -286,6 +308,7 @@ form {
 }
 .education-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
 }
@@ -417,21 +440,15 @@ form {
   background-color: #707f8c;
   border-bottom: 2px solid darkslategray;
 }
-.resume.title-div {
+.resume.section-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 2rem 0;
+  align-items: center;
+  width: unset;
 }
-.resume.title-div h4 {
-  width: 100%;
-  text-align: start;
-  padding: 0.5rem;
-  margin-right: 5%;
-}
-.resume.page-header {
-  font-size: 1.5rem;
-  padding-top: 0;
+.resume.section-title h4 {
+  margin: 0;
 }
 img {
   height: 18rem;
@@ -443,8 +460,12 @@ img {
 .container-div {
   padding: 1rem;
 }
+.settings {
+  background-image: url(images/abstract.jpg);
+}
 .Settings form .form-group {
   max-width: 20rem;
+  margin-bottom: 0.15rem;
 }
 .Settings form .form-group label {
   display: flex;
@@ -474,6 +495,7 @@ img {
 }
 .Settings.container {
   margin-left: 0;
+  margin-top: 1rem;
 }
 .sidebar {
   display: flex;
@@ -519,6 +541,7 @@ img {
   margin-top: 25px;
 }
 .skills-containment-div.container {
+  margin-top: 1rem;
   max-width: 100%;
 }
 .skills-containment-div label {
@@ -545,13 +568,21 @@ img {
 }
 .component-div {
   display: flex;
-  background: #c8c8c8;
+}
+.resumePage {
+  padding-bottom: 5rem;
 }
 .page-div {
   display: flex;
   flex-direction: column;
+  padding: 0.5rem 0 0 0;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  width: 100%;
+  width: 95%;
+  background-image: url('images/blank-paper.jpg');
+  background-size: cover;
+}
+.page-div.col {
+  padding-right: 2rem;
 }
 .page-div.page-container-div {
   max-width: 1200px !important;
@@ -602,9 +633,6 @@ img {
   height: min-content;
   align-self: center;
 }
-.template.page-header {
-  display: flex;
-}
 .subtitle {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
@@ -635,6 +663,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .contact-section .contactSection {
   display: flex;
@@ -654,6 +683,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .title-section .titleHolder {
   min-width: 100px;
@@ -671,6 +701,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .summary-section .summaryHolder {
   min-width: 100px;
@@ -688,6 +719,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .skills-section .skillsHolder {
   min-width: 100px;
@@ -699,7 +731,8 @@ img {
 }
 .skills-section .skillsSection {
   display: flex;
-  flex-flow: column wrap;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   max-width: 800px;
 }
 .experience-section {
@@ -709,6 +742,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .experience-section .experienceHolder {
   min-width: 100px;
@@ -730,6 +764,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .education-section .educationHolder {
   min-height: 118px;
