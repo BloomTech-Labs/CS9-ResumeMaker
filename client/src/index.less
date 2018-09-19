@@ -21,7 +21,7 @@
 @background_color_7: #707f8c;
 @background_color_8: lightgray;
 @background_color_9: blanchedalmond;
-@transparent-white: rgba(255,255,255, 0.6);
+@transparent-white: rgba(255,255,255, 0.7);
 
 /* the row card variants are for small one line cards */
 /* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
@@ -158,8 +158,8 @@ textarea {
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
+  -webkit-transition: box-shadow 150ms ease;
   padding: 1%;
 }
 .btn-group {
@@ -235,7 +235,7 @@ i {
   }
 }
 .title-div.templates {
-  background-color:rgba(255,255,255, 0.8);
+  background-color: @transparent-white;
   margin: 1rem;
   padding-left: 0.5rem;
   padding-right: 1rem;
@@ -300,7 +300,12 @@ button.close {
     min-height: 5rem;
   }
 }
+.item-card.card {
+  border: unset;
+  border-radius: unset;
+}
 .item-card.row-card {
+  border-radius: 0.25rem;
   flex-direction: row;
   margin: 1%;
   .card-body {
@@ -540,10 +545,8 @@ img {
 // settings.css
 .settings {
   background-image: url(images/abstract.jpg);
- 
 }
 .Settings {
-  
   form {
     .form-group {
       max-width: 20rem;
@@ -578,6 +581,7 @@ img {
 }
 .Settings.container {
   margin-left: 0;
+  margin-top: 1rem;
 }
 
 // sidebar.css
@@ -627,6 +631,7 @@ img {
 
 // skills.css
 .skills-containment-div.container {
+  margin-top: 1rem;
   max-width: 100%;
 }
 .skills-containment-div {

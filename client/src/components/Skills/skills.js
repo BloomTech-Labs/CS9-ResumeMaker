@@ -12,6 +12,7 @@ class Skills extends Component {
     super(props);
     this.state = {
       newSkill: "",
+      newSkills: "",
       skills: []
     };
   }
@@ -88,13 +89,14 @@ class Skills extends Component {
   handleSubmit = action => {
     if (action === "add") {
       this.props.context.actions.addElement("skills", {
-        groupname: this.state.newSkill
+        groupname: this.state.newSkill,
+        content: this.state.newSkills
       });
     } else if (action === "edit") {
       this.props.context.actions.setSingleElement("skills", this.state.skills);
     }
 
-    this.setState({ newSkill: "" });
+    this.setState({ newSkill: "", newSkills: "" });
 
     const tempObj = {
       "sections.skills": this.props.context.userInfo.skills
@@ -142,43 +144,67 @@ class Skills extends Component {
                     width: "100%"
                   }}
                 >
-                  Enter a Skill Group Header, press ENTER, and then your associated
-                  skills. Press ENTER to save any changes. New Skill Groups can be
-                  added and deleted as needed.
+                  Enter a skillgroup name, and then your associated
+                  skills to create a new skillgroup. Press ENTER to save any changes.
                 </p>
               </div>
-            </div>
+            <Container className="skills-containment-div">
             <Form className="skillgroup">
-              <FormGroup>
-                <h4>Add a New Skill Group:</h4>
-                <Input
-                  style={{
-                    height: "2rem",
-                    fontSize: ".85rem",
-                    fontWeight: "550",
-                    marginLeft: "12%",
-                    width: "70%"
-                  }}
-                  className="groupname-input"
-                  id="newSkill"
-                  value={this.state.newSkill}
-                  onChange={this.newSkillChange}
-                  onKeyDown={event => {
-                    if (event.key === "Enter") {
-                      event.target.blur();
-                      event.preventDefault();
-                      event.stopPropagation();
-                      this.handleSubmit("add");
-                    }
-                  }}
-                />
+              <FormGroup row className="groupname">
+                <Col>
+                  {/* <h4>Add a New Skill Group:</h4> */}
+                  <Input
+                    style={{
+                      height: "2rem",
+                      fontSize: ".85rem",
+                      fontWeight: "550",
+                    }}
+                    className="groupname-input"
+                    id="newSkill"
+                    placeholder="New Group Name"
+                    value={this.state.newSkill}
+                    onChange={this.newSkillChange}
+                    onKeyDown={event => {
+                      if (event.key === "Enter") {
+                        event.target.blur();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.handleSubmit("add");
+                      }
+                    }}
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col>
+                  {/* <h4>Add a New Skill Group:</h4> */}
+                  <Input
+                    style={{
+                      height: "2rem",
+                      fontSize: ".85rem",
+                      width: "80%"
+                    }}
+                    className="skills-input"
+                    id="newSkills"
+                    placeholder="Skill 1, skill 2, skill 3..."
+                    value={this.state.newSkills}
+                    onChange={this.newSkillChange}
+                    onKeyDown={event => {
+                      if (event.key === "Enter") {
+                        event.target.blur();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.handleSubmit("add");
+                      }
+                    }}
+                  />
+                </Col>
               </FormGroup>
             </Form>
-            <Container className="skills-containment-div">
               {this.state.skills.map((element, index) => {
                 return (
                   <React.Fragment key={index}>
-                    <h5>Skill Group - {this.state.skills[index].groupname} </h5>
+                    {/* <h5>Skill Group - {this.state.skills[index].groupname} </h5> */}
                     <Form
                       className="skillgroup"
                       key={
@@ -253,7 +279,7 @@ class Skills extends Component {
             </div>
           </div>
         </div>
- 
+      </div>
     );
   }
 }

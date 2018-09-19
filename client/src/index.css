@@ -68,7 +68,7 @@ textarea {
   padding-right: 2rem;
 }
 .section-title {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
   width: 95%;
   border-radius: 10px;
   margin: 0.8rem;
@@ -84,7 +84,7 @@ textarea {
   padding: 1.6rem;
 }
 .billing-page {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
   padding-bottom: 3rem;
   border-radius: 10px;
 }
@@ -112,8 +112,8 @@ textarea {
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
+  -webkit-transition: box-shadow 150ms ease;
   padding: 1%;
 }
 .btn-group {
@@ -179,7 +179,7 @@ i {
   color: #777;
 }
 .title-div.templates {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.7);
   margin: 1rem;
   padding-left: 0.5rem;
   padding-right: 1rem;
@@ -240,7 +240,12 @@ button.close:focus {
   overflow: hidden;
   min-height: 5rem;
 }
+.item-card.card {
+  border: unset;
+  border-radius: unset;
+}
 .item-card.row-card {
+  border-radius: 0.25rem;
   flex-direction: row;
   margin: 1%;
 }
@@ -502,6 +507,7 @@ img {
 }
 .Settings.container {
   margin-left: 0;
+  margin-top: 1rem;
 }
 .sidebar {
   display: flex;
@@ -547,6 +553,7 @@ img {
   margin-top: 25px;
 }
 .skills-containment-div.container {
+  margin-top: 1rem;
   max-width: 100%;
 }
 .skills-containment-div label {
@@ -665,7 +672,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .contact-section .contactSection {
   display: flex;
@@ -685,7 +692,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .title-section .titleHolder {
   min-width: 100px;
@@ -703,7 +710,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .summary-section .summaryHolder {
   min-width: 100px;
@@ -721,7 +728,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .skills-section .skillsHolder {
   min-width: 100px;
@@ -744,7 +751,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .experience-section .experienceHolder {
   min-width: 100px;
@@ -766,7 +773,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .education-section .educationHolder {
   min-height: 118px;
