@@ -17,7 +17,11 @@ class AuthProvider extends Component {
     },
     title: [],
     phonenumber: "",
-    links: [],
+    links: {
+      linkedin: "",
+      portfolio: "",
+      github: ""
+    },
     education: [],
     experience: [],
     skills: [],
@@ -40,7 +44,11 @@ class AuthProvider extends Component {
       },
       title: [],
       phonenumber: "",
-      links: [],
+      links: {
+        linkedin: "",
+        portfolio: "",
+        github: ""
+      },
       education: [],
       experience: [],
       skills: [],
