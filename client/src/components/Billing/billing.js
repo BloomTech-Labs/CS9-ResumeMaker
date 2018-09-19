@@ -167,8 +167,8 @@ class Billing extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="billing title-div col" style={{paddingRight: "1rem"}}>
-            <div className="billing-page title-div" style={{ paddingLeft: "0.5rem" }}>
+          <div className="billing title-div col">
+            <div className="billing-page title-div">
               <h4>BILLING</h4>
  
 

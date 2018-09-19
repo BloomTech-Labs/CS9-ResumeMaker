@@ -41,21 +41,16 @@ a {
   justify-content: flex-start;
 }
 .title-div {
+  flex-direction: column;
   justify-content: center;
   padding: 2rem 0;
   width: 95%;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  align-items: start;
   display: flex;
-  align-self: start;
-  flex-direction: row;
   text-align: start;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 0.5rem 0 0 0;
 }
 .title-div h4 {
-  width: 95%;
   text-align: start;
 }
 .title-div p {
@@ -66,11 +61,8 @@ textarea {
 }
 .section.title-div.col {
   display: flex;
-  height: 100vh;
-  width: 100vw;
   background: url(images/cup.jpg);
   background-size: cover;
-  overflow: auto;
 }
 .section-title {
   background-color: rgba(255, 255, 255, 0.6);
@@ -93,7 +85,6 @@ textarea {
   border-radius: 10px;
 }
 .stripe {
-  margin-left: 20%;
   width: 100%;
 }
 .stripe-form {
@@ -301,7 +292,7 @@ form {
   margin: 0;
 }
 .experience-containment-div .card-text {
-  margin: 10px 0 0 0;
+  margin: 0.4rem 0 0 0;
 }
 .experience-containment-div .card-subtitle {
   white-space: nowrap;

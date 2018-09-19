@@ -11,15 +11,14 @@ class Education extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="section title-div col"  style={{paddingRight: "1rem"}}>
-          <div className="section-title" style={{width: "95%"}}>
-            <div className="link-hide" style={{float: "left", padding: "0"}} >
-              <h4>
-                EDUCATION HISTORY{" "}</h4>
+            <div className="section-title" style={{width: "95%"}}>
+              <div className="link-hide" style={{float: "left", padding: "0"}} >
+                <h4>EDUCATION HISTORY</h4>
                 <Link
                   to={{
                     pathname: "/education/create", // component being Linked to
@@ -28,14 +27,14 @@ class Education extends Component {
                 >
                   <i className="fa fa-pencil fa-lg" />
                 </Link>
+              </div>
+              <div style={{width: "100%"}}>
+                <p style={{display: "inline-block", fontSize: "0.7rem", paddingLeft: "0.6rem", borderTop: "1px solid black", width: "100%"}}>
+                  Click the pencil to enter previous schools attended and degrees or certificates obtained.
+                </p>
+              </div>
             </div>
-            <div style={{width: "100%"}}>
-            <p style={{display: "inline-block",fontSize: "0.7rem", paddingLeft: ".6rem", borderTop: "1px solid black", width: "100%"}}>
-              Click the pencil to enter previous schools attended and degrees or certificates obtained.
-            </p>
-            </div>
-            </div>
-            <div className="education-containment-div" style={{padding: "1rem"}} >
+            <div className="education-containment-div">
               {this.props.context.userInfo.education.map((element, index) => {
                 return (
                   <ItemCard

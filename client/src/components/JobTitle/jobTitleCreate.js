@@ -99,7 +99,7 @@ class JobTitleCreate extends Component {
             </p>
        
             <form>
-              <div className="form-group row" style={{paddingLeft: "1rem", paddingTop: "2rem"}}>
+              <div className="form-group row">
                 <input
                   style={{fontSize: ".7rem", width: "20rem", height: "1.5rem"}}
                   value={this.state.content}
