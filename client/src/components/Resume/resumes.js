@@ -318,44 +318,57 @@ class Resumes extends Component {
         <div className="templates overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div
-              className="title-div templates"
-              style={{ paddingRight: "1rem" }}
-            >
+            <div className="section-title">
               {this.props.context.userInfo.name.firstname ? (
                 <React.Fragment>
-                  <h4>
-                    Welcome to your Dashboard,{" "}
-                    {this.props.context.userInfo.name.firstname}!
-                  </h4>
-                  <p
-                    style={{
-                      fontSize: "0.7rem",
-                      paddingLeft: ".6rem"
-                    }}
-                  >
-                    {" "}
-                    Click each tab on the left to enter your information and
-                    populate each section on the resume form below: JOB TITLE,
-                    SUMMARY, SKILLS, EXPERIENCE, & EDUCATION. Next, scroll down
-                    this page to check the information you would like displayed
-                    on your final resume. Once completed, SAVE your changes and
-                    go to TEMPLATES to choose your layout. You can also CREATE
-                    multiple RESUMES with a subscription.
-                  </p>
+                  <div className="link-hide" style={{float: "left", padding: "0"}}>
+                    <h4>
+                      Welcome to your Dashboard,{" "}
+                      {this.props.context.userInfo.name.firstname}!
+                    </h4>
+                  </div>
+                  <div style = {{width: "100%"}}>
+                    <p
+                      style={{
+                        display: "inline-block",
+                        fontSize: "0.7rem",
+                        paddingLeft: "0.6rem",
+                        borderTop: "1px solid black",
+                        width: "100%",
+                        textAlign: "left"
+                      }}
+                    >
+                      {" "}
+                      Click each tab on the left to enter your information and
+                      populate each section on the resume form below: JOB TITLE,
+                      SUMMARY, SKILLS, EXPERIENCE, & EDUCATION. Next, scroll down
+                      this page to check the information you would like displayed
+                      on your final resume. Once completed, SAVE your changes and
+                      go to TEMPLATES to choose your layout. You can also CREATE
+                      multiple RESUMES with a subscription.
+                    </p>
+                  </div>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <h4>Welcome! </h4>
-                  <p
-                    style={{
-                      fontSize: "0.7rem",
-                      paddingLeft: ".6rem"
-                    }}
-                  >
-                    {"  "} Please go to the SETTINGS page and fill in your
-                    information to get started!
-                  </p>
+                  <div className="link-hide" style={{float: "left", padding: "0"}}>
+                    <h4>Welcome! </h4>
+                  </div>
+                  <div style={{width: "100%"}}>
+                    <p
+                      style={{
+                        display: "inline-block",
+                        fontSize: "0.7rem",
+                        paddingLeft: "0.6rem",
+                        borderTop: "1px solid black",
+                        width: "100%",
+                        textAlign: "left"
+                      }}
+                    >
+                      {"  "} Please go to the SETTINGS page and fill in your
+                      information to get started!
+                    </p>
+                  </div>
                 </React.Fragment>
               )}
             </div>

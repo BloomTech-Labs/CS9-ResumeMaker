@@ -585,10 +585,14 @@ img {
 .page-div {
   display: flex;
   flex-direction: column;
+  padding: 0.5rem 0 0 0;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  width: 100%;
+  width: 95%;
   background-image: url('images/blank-paper.jpg');
   background-size: cover;
+}
+.page-div.col {
+  padding-right: 2rem;
 }
 .page-div.page-container-div {
   max-width: 1200px !important;
