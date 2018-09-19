@@ -265,6 +265,15 @@ form {
 }
 
 // itemcard.css
+button.close {
+  color: @color_3;
+  &:hover {
+    color: @color_3 !important;
+  }
+  &:focus {
+    color: @color_3 !important;
+  }
+}
 .item-card {
   margin: 1%;
   max-width: 20rem;
@@ -276,19 +285,12 @@ form {
     padding: 0;
   }
   .close {
-    color: @color_3;
     position: absolute;
     padding: 0 0.3rem 0 0;
     top: 0;
     width: min-content;
     height: min-content;
     align-self: flex-end;
-    &:hover {
-      color: @color_3 !important;
-    }
-    &:focus {
-      color: @color_3 !important;
-    }
   }
   .card-header {
     text-overflow: ellipsis;

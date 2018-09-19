@@ -125,30 +125,31 @@ class Skills extends Component {
           <Sidebar context={this.props.context} />
           <div className="section title-div col">
             <div className="section-title">
-              <h4>SKILLS </h4>
-            
-            <p
-              style={{
-                fontSize: "0.7rem",
-                paddingLeft: ".6rem",
-                borderTop: "1px solid black",
-                width: "100%"
-              }}
-            >
-              Enter a Skill Group Header, press ENTER, and then your associated
-              skills. Press ENTER to save any changes. New Skill Groups can be
-              added and deleted as needed.
-            </p>
+              <div className="link-hide" style={{float: "left", padding: "0"}}>
+                <h4>SKILLS </h4>
+                {/* <span
+                  >
+                  <i className="fa fa-pencil fa-lg"/>
+                </span> */}
+              </div>
+              <div style={{width: "100%"}}>
+                <p
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.7rem",
+                    paddingLeft: "0.6rem",
+                    borderTop: "1px solid black",
+                    width: "100%"
+                  }}
+                >
+                  Enter a Skill Group Header, press ENTER, and then your associated
+                  skills. Press ENTER to save any changes. New Skill Groups can be
+                  added and deleted as needed.
+                </p>
+              </div>
             </div>
-            <Form className="skillgroup" style={{ marginLeft: "1%" }}>
-              <FormGroup
-                style={{
-                  borderBottom: "1px black solid",
-                  paddingBottom: "20px",
-                  minWidth: "500px",
-                  width: "100%"
-                }}
-              >
+            <Form className="skillgroup">
+              <FormGroup>
                 <h4>Add a New Skill Group:</h4>
                 <Input
                   style={{
@@ -213,7 +214,7 @@ class Skills extends Component {
                           aria-label="Delete"
                           onClick={() => this.handleDelete(index, "skills")}
                         >
-                          <span aria-hidden="true" style={{ color: "red" }}>
+                          <span aria-hidden="true">
                             &times;
                           </span>
                         </button>

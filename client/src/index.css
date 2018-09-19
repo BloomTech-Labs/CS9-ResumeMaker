@@ -206,6 +206,15 @@ form {
 .edit-name {
   max-width: 20%;
 }
+button.close {
+  color: red;
+}
+button.close:hover {
+  color: red !important;
+}
+button.close:focus {
+  color: red !important;
+}
 .item-card {
   margin: 1%;
   max-width: 20rem;
@@ -218,19 +227,12 @@ form {
   padding: 0;
 }
 .item-card .close {
-  color: red;
   position: absolute;
   padding: 0 0.3rem 0 0;
   top: 0;
   width: min-content;
   height: min-content;
   align-self: flex-end;
-}
-.item-card .close:hover {
-  color: red !important;
-}
-.item-card .close:focus {
-  color: red !important;
 }
 .item-card .card-header {
   text-overflow: ellipsis;
