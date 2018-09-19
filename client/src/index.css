@@ -569,6 +569,9 @@ img {
 .component-div {
   display: flex;
 }
+.resumePage {
+  padding-bottom: 5rem;
+}
 .page-div {
   display: flex;
   flex-direction: column;
