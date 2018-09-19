@@ -34,7 +34,7 @@ class Resumes extends Component {
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="section-title">
+            <div className="templates section-title">
               <div className="link-hide" style={{float: "left", padding: "0"}}>
                 <h4>TEMPLATES</h4>
               </div>

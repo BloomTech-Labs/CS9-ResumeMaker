@@ -69,7 +69,6 @@ textarea {
 }
 .section-title {
   background-color: rgba(255, 255, 255, 0.7);
-  width: 95%;
   border-radius: 10px;
   margin: 0.8rem;
   padding: 1rem;
@@ -77,6 +76,9 @@ textarea {
 .section-title p {
   margin: 0;
   padding: 0;
+}
+.templates.section-title {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .billing.title-div.col {
   background-image: url(images/abstract.jpg);
@@ -90,7 +92,7 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  background-color: #707f8c;
+  background-color: blanchedalmond;
   height: 320px;
   padding: 2%;
   margin-top: 3%;
@@ -251,6 +253,7 @@ button.close:focus {
 }
 .summary-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
 }
@@ -273,6 +276,7 @@ button.close:focus {
 }
 .experience-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
 }
@@ -304,6 +308,7 @@ button.close:focus {
 }
 .education-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
 }

@@ -22,6 +22,8 @@
 @background_color_8: lightgray;
 @background_color_9: blanchedalmond;
 @transparent-white: rgba(255,255,255, 0.7);
+@transparent-whiter: rgba(255,255,255, 0.9);
+
 
 /* the row card variants are for small one line cards */
 /* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
@@ -109,16 +111,18 @@ textarea {
 .title-div.col {
   padding-right: 2rem;
 }
-.section-title{
+.section-title {
   background-color: @transparent-white;
-  width: 95%;
   border-radius: 10px; 
-  margin: .8rem; 
+  margin: 0.8rem; 
   padding: 1rem;
   p {
     margin: 0; 
     padding: 0; 
   } 
+}
+.templates.section-title {
+  background-color: @transparent-whiter;
 }
 
 // billing.css
@@ -140,7 +144,7 @@ textarea {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  background-color: @background_color_1;
+  background-color: @background_color_9;
   height: 320px;
   padding: 2%;
   margin-top: 3%;
@@ -330,6 +334,7 @@ button.close {
 }
 .summary-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
   .item-card.card {
@@ -352,6 +357,7 @@ button.close {
 }
 .experience-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
   .item-card.card {
@@ -383,6 +389,7 @@ button.close {
 }
 .education-containment-div {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   min-width: 100%;
   .item-card.card {

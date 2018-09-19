@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "semantic-ui-react";
+import { Container } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
@@ -303,8 +303,10 @@ class Resumes extends Component {
     ) {
       // {resumes.length ? this.handleCreate() : null}
       return (
-        <div style={{ display: "none" }}>
-          <Sidebar context={this.props.context} />
+        <div>
+          <div style={{ display: "none" }}>
+            <Sidebar context={this.props.context} />
+          </div>
         </div>
       );
     }
@@ -318,7 +320,7 @@ class Resumes extends Component {
         <div className="templates overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="page-div col">
-            <div className="section-title">
+            <div className="templates section-title">
               {this.props.context.userInfo.name.firstname ? (
                 <React.Fragment>
                   <div className="link-hide" style={{float: "left", padding: "0"}}>
