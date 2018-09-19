@@ -459,17 +459,22 @@ class Settings extends Component {
           <Sidebar context={this.props.context} />
           <div className="settings title-div col">
             <div className="section-title">
-              <h4>SETTINGS</h4>
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  paddingLeft: ".6rem",
-                  borderTop: "1px solid black",
-                  width: "95%"
-                }}
-              >
-                Change Your User Information:
-              </p>
+              <div className="link-hide" style={{float: "left", padding: "0"}}>
+                <h4>SETTINGS</h4>
+              </div>              
+              <div style={{width: "100%"}}>
+                <p
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.7rem",
+                    paddingLeft: ".6rem",
+                    borderTop: "1px solid black",
+                    width: "100%"
+                  }}
+                >
+                  Change Your User Information:
+                </p>
+              </div>
               <PersonalInfo context={this.props.context} />
             </div>
           </div>

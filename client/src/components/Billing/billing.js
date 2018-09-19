@@ -163,26 +163,29 @@ class Billing extends Component {
 
   render() {
     return (
-      <div>
+      <div className="entire-page">
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
           <div className="billing title-div col">
-            <div className="billing-page title-div">
+            <div className="section-title">
+            <div className="link-hide" style={{float: "left", padding: "0"}}>
               <h4>BILLING</h4>
+            </div>
  
-
-            <p
-              style={{
-                fontSize: "0.7rem",
-                paddingLeft: ".6rem",
-                borderTop: "1px solid black",
-                width: "95%"
-              }}
-            >
-              Become a Member:
-            </p>
-
+            <div style={{width: "100%"}}>
+              <p
+                style={{
+                  display: "inline-block",
+                  fontSize: "0.7rem",
+                  paddingLeft: ".6rem",
+                  borderTop: "1px solid black",
+                  width: "100%"
+                }}
+              >
+                Become a Member:
+              </p>
+            </div>
             <div>
               {this.state.loading ? <Loading /> : null}
               {this.state.sub_err ? (
@@ -200,7 +203,7 @@ class Billing extends Component {
               <div className="stripe-form">
                 {this.state.complete ? (
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <h2 style={{ textAlign: "center", marginTop: "6%" }}>
+                    <h2>
                       Thank You For Becoming A Member!
                     </h2>
                   </div>
@@ -226,7 +229,6 @@ class Billing extends Component {
                   </p>
                 ) : (
                   <button
-                    style={{ marginLeft: "35%", marginTop: "4%" }}
                     className="bill-btn unsubscribe"
                     onClick={this.unsubscribe}
                   >

@@ -80,13 +80,8 @@ textarea {
 }
 .billing.title-div.col {
   background-image: url(images/abstract.jpg);
-  min-height: 100vh;
-  padding: 1.6rem;
-}
-.billing-page {
-  background-color: rgba(255, 255, 255, 0.7);
-  padding-bottom: 3rem;
-  border-radius: 10px;
+  background-size: cover;
+  display: flex;
 }
 .stripe {
   width: 100%;
@@ -124,10 +119,11 @@ textarea {
   margin-top: 2%;
 }
 .bill-btn {
-  margin: 2% 1%;
+  margin: 0.1rem;
 }
 .unsubscribe {
-  max-width: 30%;
+  width: fit-content;
+  align-self: center;
 }
 .template-card {
   background-color: transparent !important;
@@ -177,20 +173,6 @@ i {
 .fa.fa-check:active {
   font-size: 1rem;
   color: #777;
-}
-.title-div.templates {
-  background-color: rgba(255, 255, 255, 0.7);
-  margin: 1rem;
-  padding-left: 0.5rem;
-  padding-right: 1rem;
-  border-radius: 10px;
-}
-.title-div.templates h4 {
-  width: 100%;
-  border-bottom: 1px solid black;
-  text-align: start;
-  padding: 0.5rem;
-  margin: 0;
 }
 .div-for-links {
   display: flex;
@@ -478,6 +460,7 @@ img {
 }
 .Settings form .form-group {
   max-width: 20rem;
+  margin-bottom: 0.15rem;
 }
 .Settings form .form-group label {
   display: flex;
