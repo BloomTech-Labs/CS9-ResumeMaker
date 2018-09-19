@@ -448,23 +448,15 @@ button.close:focus {
   background-color: #707f8c;
   border-bottom: 2px solid darkslategray;
 }
-.resume.title-div {
+.resume.section-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 2rem 0;
+  align-items: center;
+  width: unset;
 }
-.resume.title-div h4 {
-  width: 100%;
-  text-align: start;
-  padding: 0.5rem;
-  margin-right: 5%;
-}
-.resume.page-header {
-  font-size: 1.5rem;
-  padding-top: 0;
-  -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: lightgray;
+.resume.section-title h4 {
+  margin: 0;
 }
 img {
   height: 18rem;
@@ -642,9 +634,6 @@ img {
 .save-button {
   height: min-content;
   align-self: center;
-}
-.template.page-header {
-  display: flex;
 }
 .subtitle {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;

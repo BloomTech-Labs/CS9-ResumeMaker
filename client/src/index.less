@@ -21,6 +21,7 @@
 @background_color_7: #707f8c;
 @background_color_8: lightgray;
 @background_color_9: blanchedalmond;
+@transparent-white: rgba(255,255,255, 0.6);
 
 /* the row card variants are for small one line cards */
 /* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
@@ -109,7 +110,7 @@ textarea {
   padding-right: 2rem;
 }
 .section-title{
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
   width: 95%;
   border-radius: 10px; 
   margin: .8rem; 
@@ -128,7 +129,7 @@ textarea {
    
 }
 .billing-page {
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
   padding-bottom: 3rem; 
   border-radius: 10px;
   
@@ -515,23 +516,15 @@ button.close {
 }
 
 // resume.css
-.resume.title-div {
+.resume.section-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 2rem 0;
+  align-items: center;
+  width: unset;
   h4 {
-    width: 100%;
-    text-align: start;
-    padding: 0.5rem;
-    margin-right: 5%;
+    margin: 0;
   }
-}
-.resume.page-header {
-  font-size: 1.5rem;
-  padding-top: 0;
-  -webkit-text-stroke-width: .5px;
-   -webkit-text-stroke-color: lightgray;
 }
 img {
   height: 18rem;
@@ -728,9 +721,6 @@ img {
   height: min-content;
   align-self: center;
 }
-.template.page-header {
-  display: flex;
-}
 .subtitle {
   font-family: @font_family_2;
   // font-family: @font_family_5;
@@ -764,7 +754,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
 
   .contactSection {
     display: flex;
@@ -787,7 +777,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
 
   .titleHolder {
     min-width: 100px;
@@ -808,7 +798,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
 
   .summaryHolder {
     min-width: 100px;
@@ -829,7 +819,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
 
   .skillsHolder {
     min-width: 100px;
@@ -855,7 +845,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
 
   .experienceHolder {
     min-width: 100px;
@@ -880,7 +870,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color:rgba(255,255,255, 0.6);
+  background-color: @transparent-white;
 
   .educationHolder {
     min-height: 118px;
