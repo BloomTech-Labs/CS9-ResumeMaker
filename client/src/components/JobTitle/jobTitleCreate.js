@@ -90,8 +90,8 @@ class JobTitleCreate extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="section title-div col"  style={{paddingRight: "1rem"}}>
-          <div className="section-title" style={{width: "95%"}}>
+          <div className="section title-div col">
+          <div className="section-title">
             <h5>JOB TITLE</h5>
             <p style={{fontSize: "0.7rem", fontStyle: "Italic", borderTop: "1px solid black", width: "100%"}}>
               “It is not titles that honour men, but men that honour titles.” ―

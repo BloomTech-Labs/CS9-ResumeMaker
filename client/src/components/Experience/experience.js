@@ -15,8 +15,8 @@ class Experience extends Component {
         <Navbar context={this.props.context}/>
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="section title-div col"  style={{paddingRight: "1rem"}}>
-            <div className="section-title" style={{width: "95%"}}>
+          <div className="section title-div col">
+            <div className="section-title">
               <div className="link-hide" style={{float: "left", padding: "0"}} >
                 <h4>EXPERIENCE</h4>
                 <Link

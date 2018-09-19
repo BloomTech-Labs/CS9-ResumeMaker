@@ -457,8 +457,8 @@ class Settings extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="settings title-div col" style={{ paddingRight: "1rem" }}>
-            <div className="settings-page title-div" style={{ paddingLeft: "0.5rem" }}>
+          <div className="settings title-div col">
+            <div className="settings-page title-div">
               <h4>SETTINGS</h4>
            
             <p

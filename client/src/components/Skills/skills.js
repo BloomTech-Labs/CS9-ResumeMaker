@@ -121,12 +121,9 @@ class Skills extends Component {
     return (
       <div className="entire-page">
         <Navbar context={this.props.context} />
-        <div className="overall-component-div row" style={{height: "100vh"}}>
+        <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div
-            className="section title-div col"
-        
-          >
+          <div className="section title-div col">
             <div className="section-title">
               <h4>SKILLS </h4>
             

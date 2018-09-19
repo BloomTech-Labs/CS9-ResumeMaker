@@ -137,7 +137,7 @@ class ExperienceCreate extends Component {
         <Navbar context={this.props.context} />
         <div className="overall-component-div row">
           <Sidebar context={this.props.context} />
-          <div className="section title-div col" style={{ paddingRight: "1rem" }}>
+          <div className="section title-div col">
             <div className="section-title">
             <h4>EXPERIENCE</h4>
             <p
