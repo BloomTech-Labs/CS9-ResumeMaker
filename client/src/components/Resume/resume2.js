@@ -98,8 +98,7 @@ export class ResumeTwo extends Component {
               </div>
 
                {summaryLength.length > 0 ? (
-                <div>
-                  <Container
+                  <div
                     textalign="center"
                     id="summary"
                     className="summarySection"
@@ -113,8 +112,7 @@ export class ResumeTwo extends Component {
                         <p key={item._id}>{item.content}</p>
                       ) : null;
                     })}
-                  </Container>
-                </div>
+                  </div>
               ) : null}
 
               <Divider className="divider-div" />
