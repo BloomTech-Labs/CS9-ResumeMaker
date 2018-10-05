@@ -40,6 +40,9 @@ a {
   display: flex;
   justify-content: flex-start;
 }
+.overall-component-div.row {
+  flex-wrap: unset;
+}
 .title-div {
   flex-direction: column;
   justify-content: center;
@@ -571,6 +574,11 @@ img {
 }
 .resumePage {
   padding-bottom: 5rem;
+}
+.checkbox-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .page-div {
   display: flex;

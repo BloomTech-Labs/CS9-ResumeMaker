@@ -467,7 +467,7 @@ class Resumes extends Component {
                       </div>
                     </Container>
                     <Container className="contactTwo">
-                      <div>
+                      <div className="checkbox-div">
                         <CheckBox
                           context={this.props.context}
                           index={this.state.index}
@@ -482,7 +482,7 @@ class Resumes extends Component {
                         {" " + userInfo.links.linkedin + " "}
                         <div className={"fa fa-linkedin fa-sm"} />
                       </div>
-                      <div>
+                      <div className="checkbox-div">
                         <CheckBox
                           context={this.props.context}
                           index={this.state.index}
@@ -497,7 +497,7 @@ class Resumes extends Component {
                         {" " + userInfo.links.github + " "}
                         <div className="fa fa-github" aria-hidden="true" />
                       </div>
-                      <div>
+                      <div className="checkbox-div">
                         <CheckBox
                           style={{ marginRight: "1%" }}
                           context={this.props.context}
