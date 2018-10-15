@@ -85,150 +85,153 @@ export class ResumeOne extends Component {
               <h4>Traditional</h4>
               <PDF name="template1" />
             </div>
-            <div className="template1">
-              <Container textAlign="center" className="titleSection">
-                <h2>
-                  {userInfo.name.firstname} {userInfo.name.lastname}
-                </h2>
-                {userInfo.title.map((item, index) => {
-                  if (resumes[this.state.index].title[index].value === true) {
-                    return (
-                      <p
-                        style={{
-                          fontSize: "1.5rem",
-                          textTransform: "uppercase"
-                        }}
-                        key={item._id}
-                      >
-                        {item.content}
-                      </p>
-                    );
-                  } else return null;
-                })}
-              </Container>
-              <Divider className="divider-div" />
-              <Container textAlign="center" className="contactSection">
-                <h3>Contact Details</h3>
-                <div
-                  style={{ display: "flex", justifyContent: "space-evenly" }}
-                >
-                  <div>
-                    <a href={`mailto:${userInfo.email}`}>
-                      <p> {userInfo.email}</p>
-                    </a>
-                    <p>{userInfo.location}</p>
-                    <p>{userInfo.phonenumber}</p>
-                  </div>
-                  <div>
-                    {resumes[this.state.index].links.linkedin ? (
-                      <p>{userInfo.links.linkedin}</p>
-                    ) : null}
-                    {resumes[this.state.index].links.github ? (
-                      <p>{userInfo.links.github}</p>
-                    ) : null}
-                    {resumes[this.state.index].links.portfolio ? (
-                      <p>{userInfo.links.portfolio}</p>
-                    ) : null}
-                  </div>
-                </div>
-              </Container>
-              <Divider className="divider-div" />
-              {summaryLength.length > 0 ? (
-                <div>
-                  <Container
-                    textAlign="center"
-                    id="summary"
-                    className="summarySection"
+              <div className="template1">
+                <Container textAlign="center" className="titleSection">
+                  <h2>
+                    {userInfo.name.firstname} {userInfo.name.lastname}
+                  </h2>
+                  {userInfo.title.map((item, index) => {
+                    if (resumes[this.state.index].title[index].value === true) {
+                      return (
+                        <p
+                          style={{
+                            fontSize: "1.5rem",
+                            textTransform: "uppercase"
+                          }}
+                          key={item._id}
+                        >
+                          {item.content}
+                        </p>
+                      );
+                    } else return null;
+                  })}
+                </Container>
+                <Divider className="divider-div" />
+                <Container textAlign="center" className="contactSection">
+                  <h3>Contact Details</h3>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-evenly" }}
                   >
-                    <h3>Summary</h3>
-                    {userInfo.summary.map((item, index) => {
-                      return resumes[this.state.index].sections.summary[index]
-                        .value ? (
-                        <p key={item._id}>{item.content}</p>
-                      ) : null;
-                    })}
-                  </Container>
-                  <Divider className="divider-div" />
-                </div>
-              ) : null}
+                    <div>
+                      <a href={`mailto:${userInfo.email}`}>
+                        <p> {userInfo.email}</p>
+                      </a>
+                      <p>{userInfo.location}</p>
+                      <p>{userInfo.phonenumber}</p>
+                    </div>
+                    <div>
+                      {resumes[this.state.index].links.linkedin ? (
+                        <p>{userInfo.links.linkedin}</p>
+                      ) : null}
+                      {resumes[this.state.index].links.github ? (
+                        <p>{userInfo.links.github}</p>
+                      ) : null}
+                      {resumes[this.state.index].links.portfolio ? (
+                        <p>{userInfo.links.portfolio}</p>
+                      ) : null}
+                    </div>
+                  </div>
+                </Container>
+                <Divider className="divider-div" />
+                {summaryLength.length > 0 ? (
+                  <div>
+                    <Container
+                      textAlign="center"
+                      id="summary"
+                      className="summarySection"
+                    >
+                      <h3>Summary</h3>
+                      {userInfo.summary.map((item, index) => {
+                        return resumes[this.state.index].sections.summary[index]
+                          .value ? (
+                          <p key={item._id}>{item.content}</p>
+                        ) : null;
+                      })}
+                    </Container>
+                    <Divider className="divider-div" />
+                  </div>
+                ) : null}
 
-              {skillsLength.length > 0 ? (
-                <div>
-                  <Container textAlign="center" className="skillsSection">
-                    <h3>Skills</h3>
-                    {userInfo.skills.map((content, index) => {
-                      return resumes[this.state.index].sections.skills[index]
-                        .value ? (
-                        <React.Fragment key={content._id}>
-                          <div>
-                            <p style={{ marginRight: "1%" }}>
-                              {content.groupname}:
+                {skillsLength.length > 0 ? (
+                  <div>
+                    <Container textAlign="center" className="skillsSection">
+                      <h3>Skills</h3>
+                      {userInfo.skills.map((content, index) => {
+                        return resumes[this.state.index].sections.skills[index]
+                          .value ? (
+                          <React.Fragment key={content._id}>
+                            <div>
+                              <p style={{ marginRight: "1%" }}>
+                                {content.groupname}:
+                              </p>
+                              <p style={{ marginRight: "1%" }}>
+                                {content.content}
+                              </p>
+                            </div>
+                          </React.Fragment>
+                        ) : null;
+                      })}
+                    </Container>
+                    <Divider className="divider-div" />
+                  </div>
+                ) : null}
+
+                {experienceLength.length > 0 ? (
+                  <div>
+                    <Container textAlign="center" className="experienceSection">
+                      <h3>Experience</h3>
+                      {experience.map((content, index) => {
+                        let from = moment(content.from).format("MMM YYYY");
+                        let to = moment(content.to).format("MMM YYYY");
+                        return resumes[this.state.index].sections.experience[
+                          index
+                        ].value ? (
+                          <div key={content._id}>
+                            <h5>{content.title} </h5>
+                            <p>
+                              {content.company}
+                              <br />
+                              {content.location}
+                              <br />
+                              {from} - {to}
                             </p>
-                            <p style={{ marginRight: "1%" }}>
-                              {content.content}
-                            </p>
+                            <p>{content.description} </p>
                           </div>
-                        </React.Fragment>
-                      ) : null;
-                    })}
-                  </Container>
-                  <Divider className="divider-div" />
-                </div>
-              ) : null}
+                        ) : null;
+                      })}
+                    </Container>
+                    <Divider className="divider-div" />
+                  </div>
+                ) : null}
 
-              {experienceLength.length > 0 ? (
-                <div>
-                  <Container textAlign="center" className="experienceSection">
-                    <h3>Experience</h3>
-                    {experience.map((content, index) => {
+                {educationLength.length > 0 ? (
+                  <Container textAlign="center" className="educationSection">
+                    <h3>Education</h3>
+                    {education.map((content, index) => {
                       let from = moment(content.from).format("MMM YYYY");
                       let to = moment(content.to).format("MMM YYYY");
-                      return resumes[this.state.index].sections.experience[
-                        index
-                      ].value ? (
+                      return resumes[this.state.index].sections.education[index]
+                        .value ? (
                         <div key={content._id}>
-                          <h5>{content.title} </h5>
+                          <h5>
+                            {content.degree}
+                            {content.fieldofstudy !== ""
+                              ? " in " + content.fieldofstudy
+                              : null}
+                          </h5>
+                          <p>{content.location}</p>
                           <p>
-                            {content.company}
-                            <br />
-                            {content.location}
+                            {content.school}
                             <br />
                             {from} - {to}
                           </p>
-                          <p>{content.description} </p>
                         </div>
                       ) : null;
                     })}
                   </Container>
-                  <Divider className="divider-div" />
-                </div>
-              ) : null}
-
-              {educationLength.length > 0 ? (
-                <Container textAlign="center" className="educationSection">
-                  <h3>Education</h3>
-                  {education.map((content, index) => {
-                    let from = moment(content.from).format("MMM YYYY");
-                    let to = moment(content.to).format("MMM YYYY");
-                    return resumes[this.state.index].sections.education[index]
-                      .value ? (
-                      <div key={content._id}>
-                        <h5>
-                          {content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
-                        </h5>
-                        <p>{content.location}</p>
-                        <p>
-                          {content.school}
-                          <br />
-                          {from} - {to}
-                        </p>
-                      </div>
-                    ) : null;
-                  })}
-                </Container>
-              ) : null}
+                ) : null}
+              </div>
             </div>
-          </div>
         </div>
       </div>
     );
