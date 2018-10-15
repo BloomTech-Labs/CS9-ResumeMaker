@@ -1,0 +1,20 @@
+.resume.section-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: unset;
+}
+.resume.section-title h4 {
+  margin: 0;
+}
+img {
+  height: 18rem;
+  width: 13.9rem;
+}
+.template-img {
+  border: 1px black solid;
+}
+.container-div {
+  padding: 1rem;
+}

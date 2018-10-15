@@ -1,0 +1,162 @@
+button.close {
+  color: @color_3;
+  &:hover {
+    color: @color_3 !important;
+  }
+  &:focus {
+    color: @color_3 !important;
+  }
+}
+.item-card {
+  margin: 1%;
+  max-width: 20rem;
+  text-align: left;
+  justify-content: space-between;
+  .btn {
+    background-color: @background_color_1;
+    border-radius: unset;
+    padding: 0;
+  }
+  .close {
+    position: absolute;
+    padding: 0 0.3rem 0 0;
+    top: 0;
+    width: min-content;
+    height: min-content;
+    align-self: flex-end;
+  }
+  .card-header {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-height: 5rem;
+  }
+}
+.item-card.card {
+  border: unset;
+  border-radius: unset;
+}
+.item-card.row-card {
+  border-radius: 0.25rem;
+  flex-direction: row;
+  margin: 1%;
+  .card-body {
+    padding: 0 0.5rem 0 0;
+    overflow: hidden;
+  }
+  .close {
+    padding: 0 0.3rem;
+    position: relative;
+    align-self: center;
+  }
+  p {
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.item-card-link {
+  color: @color_4;
+}
+.summary-containment-div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 100%;
+  .item-card.card {
+    min-height: 12rem;
+  }
+  .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-body {
+    padding: 1.25rem;
+    font-size: 0.7rem;
+    width: 15rem;
+    border: 1.5rem;
+    h5 {
+      font-size: 1rem;
+    }
+  }
+}
+.experience-containment-div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 100%;
+  .item-card.card {
+    min-height: 12rem;
+  }
+  .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+  .card-text {
+    margin: 0.4rem 0 0 0;
+  }
+  .card-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-body {
+    padding: 0.8rem;
+    font-size: 0.7rem;
+    width: 15rem;
+    border: 1.5rem;
+    h5 {
+      font-size: 1rem;
+    }
+  }
+}
+.education-containment-div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 100%;
+  .item-card.card {
+    min-height: 12rem;
+  }
+  .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-body {
+    padding: 1.25rem;
+    font-size: 0.7rem;
+    width: 15rem;
+    border: 1.5rem;
+    h5 {
+      font-size: 1rem;
+    }
+  }
+}
+.titles-containment-div {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 50rem;
+  width: 80%;
+  .item-card.card {
+    min-width: 1rem;
+    min-height: 1rem;
+  }
+}
+.card-body.card-text.card {
+  text-decoration-color: black;
+}

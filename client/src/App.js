@@ -15,7 +15,6 @@ import Experience from "./components/Experience/experience";
 import ExperienceCreate from "./components/Experience/experienceCreate";
 import Billing from "./components/Billing/billing";
 import Templates from "./components/Templates/templates";
-// import RIP from "./components/Resume/resumeInProgress";
 import ResumeOne from "./components/Resume/resume1";
 import ResumeTwo from "./components/Resume/resume2";
 import ResumeThree from "./components/Resume/resume3";

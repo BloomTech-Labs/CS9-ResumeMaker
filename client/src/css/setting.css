@@ -1,0 +1,37 @@
+.settings {
+  background-image: url(../images/abstract.jpg);
+}
+.Settings form .form-group {
+  max-width: 20rem;
+  margin-bottom: 0.15rem;
+}
+.Settings form .form-group label {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.Settings form .form-group .help-block {
+  margin: 0;
+}
+.Settings .btn {
+  display: flex;
+}
+.Settings .settings-footer {
+  display: flex;
+  align-items: center;
+}
+.Settings .saved-status {
+  margin-left: 3rem;
+}
+.Settings .modal {
+  position: absolute;
+  top: 25%;
+  bottom: 10%;
+}
+.Settings .modal-footer {
+  justify-content: center;
+}
+.Settings.container {
+  margin-left: 0;
+  margin-top: 1rem;
+}

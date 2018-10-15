@@ -1,0 +1,46 @@
+.Login {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url(../images/Buildings.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.Login form {
+  align-self: center;
+  background: #fff;
+  padding: 2rem 1rem;
+}
+.Login form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 20rem;
+  justify-content: center;
+}
+.Login form .form-group label {
+  margin: 0;
+}
+.Login form .form-group .help-block {
+  margin: 0;
+}
+.Login form .btn {
+  margin-top: 2rem;
+}
+.Login .bottom-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.Login .message {
+  display: flex;
+  max-width: 30%;
+  align-self: center;
+  background: #fff;
+  border-radius: 0.25rem;
+  flex-direction: column;
+  padding: 2rem;
+}
+.Login .message p {
+  word-break: break-word;
+}

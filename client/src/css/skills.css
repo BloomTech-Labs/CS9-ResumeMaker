@@ -1,0 +1,26 @@
+.skills-containment-div.container {
+  margin-top: 1rem;
+  max-width: 100%;
+}
+.skills-containment-div label {
+  text-align: right;
+}
+.skills-containment-div .skillgroup {
+  padding: 0 6% 0 5%;
+}
+.skills-containment-div .skills-input {
+  border-radius: unset;
+}
+.skills-containment-div .groupname-input {
+  font-size: 1.8rem;
+  border-radius: unset;
+}
+.skills-containment-div .form-group {
+  margin-bottom: 0.5rem;
+}
+.groupname-input {
+  border-radius: unset !important;
+}
+.groupname {
+  width: fit-content;
+}

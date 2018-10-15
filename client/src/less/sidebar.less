@@ -1,0 +1,44 @@
+// sidebar.css
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 10rem;
+  min-height: 100vh !important;
+  background: #162238;
+  justify-content: space-between;
+  margin-right: 1px;
+}
+.static-sidebar {
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  background: #162238;
+  border-top: 1px solid #d9d9d9;
+  a {
+    color: @color_5;
+    padding: 10% 0;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: left;
+    padding-left: 20%;
+    &:hover {
+      color: @color_5;
+      text-decoration: none;
+      border-left: 1rem solid #d9d9d9;
+      background: #707f8c;
+    }
+    .fa {
+      width: 1rem;
+      display: inline-flex;
+      justify-content: center;
+    }
+  }
+  .active {
+    border-left: 1rem solid #d9d9d9;
+    background: #324359;
+  }
+}
+.sidebar-button {
+  color: @color_6;
+  text-shadow: 1px 1px black;
+  margin-top: 25px;
+}
