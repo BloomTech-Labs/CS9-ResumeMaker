@@ -48,9 +48,6 @@ export class ResumeThree extends Component {
       !this.props.context.userInfo.resumes.length ||
       this.props.context.userInfo.resumes[0] === null
     ) {
-      console.log(
-        "You probably had an error, which redirected you instead of crashing."
-      );
       return <Redirect to="/templates" />;
     }
 

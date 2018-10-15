@@ -60,7 +60,6 @@ class AuthProvider extends Component {
   };
 
   setLogin = (dataFromUser, expandResumes) => {
-    console.log("setLogin called", dataFromUser);
     const userData = dataFromUser.user;
     this.setState({
       auth: true,
@@ -107,7 +106,6 @@ class AuthProvider extends Component {
   };
 
   setCurrentResume = (resume) => {
-    console.log("setCurrentResume called with", resume)
     if(this.state.resumes.length > 0){
       const newCurrentResume = resume ? resume: this.state.resumes[0]._id;
       this.setState({ currentresume: newCurrentResume })
@@ -124,7 +122,6 @@ class AuthProvider extends Component {
           }
         )
         .then(response => {
-          console.log("setCurrentResume response", response);
         })
         .catch(err => {
           console.log("err", err);
@@ -133,7 +130,6 @@ class AuthProvider extends Component {
   }
 
   setResume = resumeData => {
-    console.log("setResume called with:", resumeData);
     if (this.state.auth !== true) {
       return;
     } else if (!(this.state.resumes.length > 0) && resumeData && resumeData.length > 0) {
@@ -218,7 +214,6 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
-    console.log("expandResumeIDs called");
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -291,13 +286,7 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      console.log("Expand res return temp object", tempObj);
       return tempObj;
-      // console.log("WE are pushing (index) (tempObj)", section, index, resumeSection, tempObj)
-      // tempResumes[index][section] = tempObj;
-      // console.log("tempRes", tempResumes[index][section], tempObj);
-      // this.setState({ ["resumes"[index][section]]: tempObj });
-      // tempResumes.push(tempObj);
     };
 
     // Using promises means the state is only set a single name, rather than for each
@@ -317,9 +306,6 @@ class AuthProvider extends Component {
       tempResumes[index].sections.summary = newSummary;
       tempResumes[index].sections.skills = newSkills;
     });
-
-    console.log("now we set state to tempresumes, here are old ones", this.state.resumes);
-    console.log("now we set state to tempresumes", tempResumes);
     this.setState({ resumes: tempResumes });
 
     for (let i = 0; i < this.state.resumes.length; i++) {
@@ -342,17 +328,9 @@ class AuthProvider extends Component {
         });
       // resumePromises.push(resumePromise);
     }
-
-    // console.log("OUR PROMISES", resumePromises);
-    // Once every request is finished state updates once.
-    // Promise.all(resumePromises).then(updatedResumes => {
-    //   // console.log("promise me ned", updatedResumes);
-    //   this.setState({ resumes: updatedResumes})
-    // })
   };
 
   setResumeItemState = (index, name, id) => {
-    console.log("setResumeItemState:", index, name, id);
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -369,7 +347,6 @@ class AuthProvider extends Component {
   }; //Checkboxes
 
   setResumeItemDropdown = (index, name, id) => {
-    console.log("setResumeItemDropdown:", index, name, id);
     const tempState = this.state;
     if (name === "title") {
       tempState.resumes[index][name].forEach(field => {
@@ -415,7 +392,6 @@ class AuthProvider extends Component {
 
   render() {
     const userInfo = this.state;
-    console.log("USERINFO on authprovider:", userInfo);
     return (
       <AuthContext.Provider
         value={{

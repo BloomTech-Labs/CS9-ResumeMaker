@@ -36,8 +36,6 @@ class Resumes extends Component {
   };
 
   updateResumeName = newIndex => {
-    console.log("NULL ME BABY", newIndex);
-    // console.log("updateResumeName: newIndex = ", newIndex)
     if (this.props.context.userInfo.resumes.length > 0) {
       if (newIndex >= 0) {
         this.setState({
@@ -55,10 +53,7 @@ class Resumes extends Component {
   };
 
   updateResumeIndex = newIndex => {
-    // console.log("IS THIS RUN UPDATE", newIndex)
     if (newIndex >= 0) {
-      // console.log("NEWINDEX", newIndex)
-      // console.log("updateResumeIndex, newIndex", newIndex)
       this.setState({ index: newIndex });
     } else {
       let index = this.findWithAttr(
@@ -224,7 +219,6 @@ class Resumes extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    console.log("TEMP OBJ", tempObj);
     if (tempObj._id) {
       axios
         .delete(`${urls[urls.basePath]}/resume/delete/` + tempObj._id, {
@@ -233,7 +227,6 @@ class Resumes extends Component {
           }
         })
         .then(response => {
-          console.log("DELETE RESPONSE");
           this.props.context.actions.removeElement(this.state.index, "resumes");
           // this.props.context.actions.setSingleElement("currentresume", )
           if (this.state.index > 0) {
@@ -277,16 +270,6 @@ class Resumes extends Component {
   };
 
   render() {
-    console.log(
-      "resumes render props resumes",
-      this.props.context.userInfo.resumes
-    );
-    console.log("resumes render state index", this.state.index);
-    console.log(
-      "resumes render currentres props",
-      this.props.context.userInfo.currentresume
-    );
-
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }

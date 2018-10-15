@@ -57,9 +57,7 @@ class ResumeDropdown extends Component {
               }
             )
             .then(response => {
-              console.log("success");
               this.setState({ edit: !this.state.edit });
-              // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
               console.log("err", err);
@@ -85,20 +83,13 @@ class ResumeDropdown extends Component {
     });
     // this updates template page index
     this.props.context.actions.setSingleElement("currentresume", data._id);
-    // console.log("handleClick UpdateResumeIndex(newIndex: " + index + ")")
     this.props.updateResumeIndex(index);
-    // this.props.updateResumeName(index);
-    // console.log("resumedropdown newcurrentres", data._id);
   };
 
   render() {
     const { toggled } = this.state;
     let selectedResume = null;
     const list = this.props.context.userInfo.resumes.map((data, index) => {
-      console.log(
-        "RENDERED so go thorugh",
-        this.props.context.userInfo.resumes[index].name
-      );
       if (data._id === this.props.context.userInfo.currentresume) {
         selectedResume =
           data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;

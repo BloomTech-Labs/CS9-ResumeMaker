@@ -128,7 +128,6 @@ class Register extends Component {
   };
 
   render() {
-    console.log("state", this.state);
     if (this.state.submittedError === true) {
       return (
         <div className="Login">
