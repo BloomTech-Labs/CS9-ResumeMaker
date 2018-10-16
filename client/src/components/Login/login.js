@@ -4,8 +4,8 @@ import axios from "axios";
 const urls = require("../../config/config.json");
 
 const user = {
-  email: "testuser@gmail.com",
-  password: "Password123!",
+  email: "",
+  password: "",
   invalidCredentials: false
 };
 
