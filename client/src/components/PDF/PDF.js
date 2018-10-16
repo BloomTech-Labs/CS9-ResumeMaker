@@ -9,7 +9,7 @@ class PDF extends Component {
       .then(canvas => {
         const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF();
-        pdf.addImage(imgData, "JPEG", 0, 0, 210, 290);
+        pdf.addImage(imgData, "png", 0, 0, 210, 300, null, "FAST");
         pdf.save("resume.pdf");
       })
       .catch(err => {
